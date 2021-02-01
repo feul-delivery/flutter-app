@@ -1,18 +1,26 @@
 import 'package:feul_delivery/animations/FadeAnimation.dart';
 import 'package:flutter/material.dart';
 
+import 'maindrawer.dart';
+
 class StationProfilCl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: Text("Acceuil"),
+        backgroundColor: Colors.orange[900],
+      ),
+      drawer: Drawer(
+        child: MainDrawer(),
+      ),
       body: Stack(
         children: <Widget>[
           CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
                 expandedHeight: 450,
-                backgroundColor: Colors.black,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.pin,
                   background: Container(

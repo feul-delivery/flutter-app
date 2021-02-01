@@ -6,6 +6,7 @@ import 'package:feul_delivery/pages/client/Bottom_Navigation_Bar_Cl.dart';
 import 'package:feul_delivery/pages/client/drawer_Cl.dart';
 
 class Cl extends StatelessWidget {
+<<<<<<< HEAD
   final title = Center(
     heightFactor: 2.5,
     child: Text('Feul delivery',
@@ -16,6 +17,8 @@ class Cl extends StatelessWidget {
             color: Colors.black)),
   );
 
+=======
+>>>>>>> 586ab350b8d62e63540220685ff74a135dda0d2e
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -41,15 +44,25 @@ class Cl extends StatelessWidget {
             false;
       },
       child: Scaffold(
+<<<<<<< HEAD
         backgroundColor: Colors.white,
         appBar: AppBar(title:title,backgroundColor: Colors.orange[900],centerTitle: true,),
+=======
+        appBar: AppBar(
+          title: Text("Acceuil"),
+          backgroundColor: Colors.orange[900],
+        ),
+        drawer: Drawer(
+          child: MainDrawer(),
+        ),
+        backgroundColor: Colors.white,
+>>>>>>> 586ab350b8d62e63540220685ff74a135dda0d2e
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
             margin: const EdgeInsets.fromLTRB(25.0, 35.0, 25.0, 15.0),
             child: Column(
               children: <Widget>[
-                title,
                 // TODOSwitch case for bottom bar
                 BigStation(),
                 Divider(height: 55.0),
@@ -59,7 +72,10 @@ class Cl extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomNavigationBarCl(),
+<<<<<<< HEAD
         drawer: DrawerCL(),
+=======
+>>>>>>> 586ab350b8d62e63540220685ff74a135dda0d2e
       ),
     );
   }
