@@ -17,7 +17,7 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      color: Colors.black,
+      color: Colors.white,
       shape: CircularNotchedRectangle(),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 7.0),
