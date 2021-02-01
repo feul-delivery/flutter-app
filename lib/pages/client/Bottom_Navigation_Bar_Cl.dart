@@ -16,16 +16,10 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
       color: Colors.white,
-=======
       color: Colors.orange[900],
->>>>>>> Stashed changes
-=======
       color: Colors.orange[900],
->>>>>>> Stashed changes
-      shape: CircularNotchedRectangle(),
+     shape: CircularNotchedRectangle(),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 4.0),
         child: Row(
