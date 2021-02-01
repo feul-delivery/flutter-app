@@ -25,12 +25,24 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+<<<<<<< Updated upstream
         appBar: AppBar(
           title: Text(
             "My Profile",
             style: TextStyle(
               color: Colors.black,
               fontSize: 25,
+=======
+      appBar: AppBar(
+        title: Text("Profile"),
+        backgroundColor: Colors.orange[900],
+        elevation: 1,
+        actions: [
+          IconButton(
+            icon: Icon(
+              Icons.home,
+              color: Colors.white,
+>>>>>>> Stashed changes
             ),
           ),
           centerTitle: true,
@@ -82,7 +94,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               width: 4,
                               color: Theme.of(context).scaffoldBackgroundColor,
                             ),
-                            color: Colors.green,
+                            color: Colors.orange[900],
                           ),
                           child: Icon(
                             Icons.edit,
@@ -149,7 +161,17 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                     ],
                   ),
+<<<<<<< Updated upstream
                   Container(
+=======
+                  RaisedButton(
+                    onPressed: () {},
+                    color: Colors.orange[900],
+                    padding: EdgeInsets.symmetric(horizontal: 50),
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+>>>>>>> Stashed changes
                     child: Text(
                       'Lmkawi',
                       style:
@@ -314,6 +336,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     );
   }
 
+<<<<<<< Updated upstream
   GestureDetector buildAccountOptionRow(BuildContext context, String title) {
     return GestureDetector(
       onTap: () {
@@ -359,6 +382,37 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
           ],
         ),
+=======
+  Widget buildTextField(
+      String labelText, String placeholder, bool isPasswordTextField) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 35.0),
+      child: TextField(
+        obscureText: isPasswordTextField ? showPassword : false,
+        decoration: InputDecoration(
+            suffixIcon: isPasswordTextField
+                ? IconButton(
+                    onPressed: () {
+                      setState(() {
+                        showPassword = !showPassword;
+                      });
+                    },
+                    icon: Icon(
+                      Icons.remove_red_eye,
+                      color: Colors.orange[900],
+                    ),
+                  )
+                : null,
+            contentPadding: EdgeInsets.only(bottom: 3),
+            labelText: labelText,
+            floatingLabelBehavior: FloatingLabelBehavior.always,
+            hintText: placeholder,
+            hintStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            )),
+>>>>>>> Stashed changes
       ),
     );
   }

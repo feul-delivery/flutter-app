@@ -6,11 +6,6 @@ import 'package:feul_delivery/pages/client/Bottom_Navigation_Bar_Cl.dart';
 import 'package:feul_delivery/pages/client/maindrawer.dart';
 
 class Cl extends StatelessWidget {
-  final title = Center(
-    heightFactor: 2.5,
-    child: Text('Feul delivery', style: titleStyle),
-  );
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -36,14 +31,20 @@ class Cl extends StatelessWidget {
             false;
       },
       child: Scaffold(
-        backgroundColor: Colors.black,
+        appBar: AppBar(
+          title: Text("Acceuil"),
+          backgroundColor: Colors.orange[900],
+        ),
+        drawer: Drawer(
+          child: MainDrawer(),
+        ),
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
             margin: const EdgeInsets.fromLTRB(25.0, 35.0, 25.0, 15.0),
             child: Column(
               children: <Widget>[
-                title,
                 // TODOSwitch case for bottom bar
                 BigStation(),
                 Divider(height: 55.0),
@@ -53,13 +54,10 @@ class Cl extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomNavigationBarCl(),
-        drawer: MainDrawer(),
       ),
     );
   }
 }
-
-
 
 class SmallStation extends StatelessWidget {
   @override
