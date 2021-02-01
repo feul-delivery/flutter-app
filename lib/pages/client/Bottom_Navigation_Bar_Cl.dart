@@ -15,11 +15,10 @@ class BottomNavigationBarCl extends StatefulWidget {
 class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      color: Colors.white,
-      color: Colors.orange[900],
-      color: Colors.orange[900],
-     shape: CircularNotchedRectangle(),
+        return BottomAppBar(
+      color:Colors.white,
+      
+      shape: CircularNotchedRectangle(),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 4.0),
         child: Row(
