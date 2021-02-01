@@ -42,6 +42,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
             icon: Icon(
               Icons.home,
               color: Colors.white,
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             ),
           ),
