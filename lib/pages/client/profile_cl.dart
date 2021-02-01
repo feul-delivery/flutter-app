@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/client/Bottom_Navigation_Bar_Cl.dart';
-import 'index_cl.dart';
-import 'maindrawer.dart';
+import 'package:feul_delivery/pages/client/settings.dart';
+import 'drawer_Cl.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ProfileCl extends StatelessWidget {
   @override
@@ -33,12 +34,18 @@ class _EditProfilePageState extends State<EditProfilePage> {
               fontSize: 25,
             ),
           ),
+          leading: Builder(
+            builder: (context) => IconButton(
+              icon: Icon(Icons.menu_rounded),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          ),
           centerTitle: true,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,
           elevation: 1,
         ),
         bottomNavigationBar: BottomNavigationBarCl(),
-        drawer: MainDrawer(),
+        drawer: DrawerCL(),
         body: Container(
           padding: EdgeInsets.only(left: 16, top: 25, right: 16),
           child: GestureDetector(
@@ -172,6 +179,41 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
+                        "Sexe",
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Icon(
+                        Icons.edit,
+                        color: Colors.green,
+                      ),
+                    ],
+                  ),
+                  Container(
+                    child: Text(
+                      'inconu',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  )
+                ],
+              ),
+              Divider(
+                height: 15,
+                thickness: 2,
+              ),
+              SizedBox(
+                height: 35,
+              ),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
                         "email",
                         style: TextStyle(fontSize: 14),
                       ),
@@ -233,61 +275,52 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 thickness: 2,
               ),
               SizedBox(
-                height: 35,
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Prénom",
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Icon(
-                        Icons.edit,
-                        color: Colors.green,
-                      ),
-                    ],
-                  ),
-                  Container(
-                    child: Text(
-                      'imad',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  )
-                ],
-              ),
-              Divider(
-                height: 15,
-                thickness: 2,
-              ),
-              
-              SizedBox(
                 height: 40,
               ),
-              Center(
-                  child: Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50), color: Colors.red),
-                child: FlatButton(
-                  color: Colors.red,
-                  padding: EdgeInsets.symmetric(horizontal: 40),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20)),
-                  onPressed: () {},
-                  child: Text("SIGN OUT",
-                      style: TextStyle(
-                          fontSize: 16,
-                          letterSpacing: 2.2,
-                          color: Colors.white)),
-                ),
-              ))
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.yellow[800]),
+                    child: FlatButton(
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            PageTransition(
+                                type: PageTransitionType.fade,
+                                child: SettingCl()));
+                      },
+                      child: Text("Settings",
+                          style: TextStyle(
+                              fontSize: 16,
+                              letterSpacing: 2.2,
+                              color: Colors.white)),
+                    ),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.red),
+                    child: FlatButton(
+                      color: Colors.red,
+                      padding: EdgeInsets.symmetric(horizontal: 40),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20)),
+                      onPressed: () {},
+                      child: Text("SIGN OUT",
+                          style: TextStyle(
+                              fontSize: 16,
+                              letterSpacing: 2.2,
+                              color: Colors.white)),
+                    ),
+                  ),
+                ],
+              )
             ]),
           ),
         ));

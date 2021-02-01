@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:feul_delivery/styles/style_accueil_cl.dart';
 import 'package:feul_delivery/pages/client/station_profil_cl.dart';
 import 'package:feul_delivery/pages/client/Bottom_Navigation_Bar_Cl.dart';
-import 'package:feul_delivery/pages/client/maindrawer.dart';
+import 'package:feul_delivery/pages/client/drawer_Cl.dart';
 
 class Cl extends StatelessWidget {
   final title = Center(
     heightFactor: 2.5,
-    child: Text('Feul delivery', style: titleStyle),
+    child: Text('Feul delivery',
+        style: TextStyle(
+            fontSize: 23.0,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 2.5,
+            color: Colors.black)),
   );
 
   @override
@@ -36,7 +41,8 @@ class Cl extends StatelessWidget {
             false;
       },
       child: Scaffold(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
+        appBar: AppBar(title:title,backgroundColor: Colors.orange[900],centerTitle: true,),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
@@ -53,13 +59,11 @@ class Cl extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomNavigationBarCl(),
-        drawer: MainDrawer(),
+        drawer: DrawerCL(),
       ),
     );
   }
 }
-
-
 
 class SmallStation extends StatelessWidget {
   @override
