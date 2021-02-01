@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/client/List_Sation_Cl.dart';
 import 'package:feul_delivery/pages/client/index_cl.dart';
 import 'package:feul_delivery/pages/client/profile_cl.dart';
 
 class BottomNavigationBarCl extends StatefulWidget {
-  static const _iconSize = 30.0;
 
   @override
   _BottomNavigationBarClState createState() => _BottomNavigationBarClState();
