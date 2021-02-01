@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/StarterPage.dart';
 import 'package:feul_delivery/pages/singup.dart';
-import 'package:feul_delivery/pages/client/accueil_cl.dart';
+import 'package:feul_delivery/pages/client/index_cl.dart';
 
 class LoginPage extends StatelessWidget {
   @override

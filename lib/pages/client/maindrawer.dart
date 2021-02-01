@@ -52,7 +52,7 @@ class MainDrawer extends StatelessWidget {
       ListTile(
         onTap: () {
           Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => SettingsUI()));
+              builder: (BuildContext context) => ProfileCl()));
         },
         leading: Icon(
           Icons.person,
@@ -87,6 +87,9 @@ class MainDrawer extends StatelessWidget {
         ),
         title: Text("Settings"),
       ),
+
+
+      
     ]);
   }
 }

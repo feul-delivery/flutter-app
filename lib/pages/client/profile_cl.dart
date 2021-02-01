@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'accueil_cl.dart';
+import 'index_cl.dart';
 import 'maindrawer.dart';
 
-class SettingsUI extends StatelessWidget {
+class ProfileCl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
