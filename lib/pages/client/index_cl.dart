@@ -13,17 +13,17 @@ class Cl extends StatelessWidget {
         return showDialog(
               context: context,
               builder: (context) => new AlertDialog(
-                title: new Text('Etes-vous sur ?'),
-                content: new Text('Exit lapplication?'),
+                title: new Text('Etes-vous sur?'),
+                content: new Text("Quitter l'application?"),
                 actions: <Widget>[
                   new GestureDetector(
                     onTap: () => exit(0),
-                    child: Text('oui'),
+                    child: Text('OK'),
                   ),
                   SizedBox(height: 16),
                   new GestureDetector(
                     onTap: () => Navigator.of(context).pop(false),
-                    child: Text('no'),
+                    child: Text('Annuler'),
                   ),
                 ],
               ),
