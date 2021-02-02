@@ -25,7 +25,9 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
             IconButton(
               icon: Icon(
                 Icons.home,
-                color: Colors.white,
+                color: Colors.orange[900],
+                size: 30,
+
               ),
               onPressed: () {
                 setState(() {
@@ -39,7 +41,8 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
             IconButton(
               icon: Icon(
                 Icons.explore,
-                color: Colors.white,
+                color: Colors.orange[900],
+                size: 30,
               ),
               onPressed: () {
                 setState(() {
@@ -54,7 +57,9 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
             IconButton(
               icon: Icon(
                 Icons.person,
-                color: Colors.white,
+                color: Colors.orange[900],
+                size: 30,
+
               ),
               onPressed: () {
                 setState(() {
