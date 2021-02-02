@@ -26,7 +26,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "My Profile",
+            "Mon Profile",
           ),
           leading: Builder(
             builder: (context) => IconButton(
@@ -103,7 +103,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Prénom",
+                        "Prénom :",
                         style: TextStyle(fontSize: 14),
                       ),
                     ],
@@ -131,7 +131,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Nom",
+                        "Nom :",
                         style: TextStyle(fontSize: 14),
                       ),
                     ],
@@ -159,14 +159,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Sexe",
+                        "Tél :",
                         style: TextStyle(fontSize: 14),
                       ),
                     ],
                   ),
                   Container(
                     child: Text(
-                      'inconu',
+                      '+212601020304',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -187,14 +187,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "email",
+                        "Email :",
                         style: TextStyle(fontSize: 14),
                       ),
                     ],
                   ),
                   Container(
                     child: Text(
-                      'aya.w.hadi@hadik.com',
+                      'Contact@da7mad.com',
                       style:
                           TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
@@ -215,7 +215,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "CIN",
+                        "CIN :",
                         style: TextStyle(fontSize: 14),
                       ),
                     ],
