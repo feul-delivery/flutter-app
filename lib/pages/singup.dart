@@ -46,7 +46,7 @@ class SignupPage extends StatelessWidget {
                   FadeAnimation(
                       1,
                       Text(
-                        "Sign up",
+                        "Inscrivez-vous",
                         style: TextStyle(color: Colors.white, fontSize: 40),
                       )),
                   SizedBox(
@@ -55,7 +55,7 @@ class SignupPage extends StatelessWidget {
                   FadeAnimation(
                       1.3,
                       Text(
-                        "Create an account, It's free",
+                        "Créez un compte, c'est gratuit",
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       )),
                 ],
@@ -99,7 +99,7 @@ class SignupPage extends StatelessWidget {
                                                 color: Colors.grey[200]))),
                                     child: TextField(
                                       decoration: InputDecoration(
-                                          hintText: "Email or Phone number",
+                                          hintText: "Email",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -114,7 +114,7 @@ class SignupPage extends StatelessWidget {
                                     child: TextField(
                                       obscureText: true,
                                       decoration: InputDecoration(
-                                          hintText: "Password",
+                                          hintText: "Mot de passe",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -129,7 +129,7 @@ class SignupPage extends StatelessWidget {
                                     child: TextField(
                                       obscureText: true,
                                       decoration: InputDecoration(
-                                          hintText: "Confirm Password",
+                                          hintText: "Confirmation",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
@@ -159,7 +159,7 @@ class SignupPage extends StatelessWidget {
                                             child: ListSationCl()));
                                   },
                                   child: Text(
-                                    "Sign up",
+                                    "S'inscrire",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -175,15 +175,15 @@ class SignupPage extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text("Already have an account?"),
+                                Text("Vous avez déjà un compte?"),
                                 FlatButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text("Login",
+                                  child: Text("Se connecter",
                                       style: TextStyle(
                                           fontWeight: FontWeight.w600,
-                                          fontSize: 16)),
+                                          fontSize: 15)),
                                 ),
                               ],
                             ))

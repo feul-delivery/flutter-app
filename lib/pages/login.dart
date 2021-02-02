@@ -43,7 +43,6 @@ class LoginPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              
               Padding(
                 padding: EdgeInsets.all(15),
                 child: Column(
@@ -52,7 +51,7 @@ class LoginPage extends StatelessWidget {
                     FadeAnimation(
                         1,
                         Text(
-                          "Login",
+                          "Bonjour,",
                           style: TextStyle(color: Colors.white, fontSize: 40),
                         )),
                     SizedBox(
@@ -61,7 +60,7 @@ class LoginPage extends StatelessWidget {
                     FadeAnimation(
                         1.3,
                         Text(
-                          "Welcome Back",
+                          "Nous saluons le retour",
                           style: TextStyle(color: Colors.white, fontSize: 18),
                         )),
                   ],
@@ -106,7 +105,7 @@ class LoginPage extends StatelessWidget {
                                       child: TextField(
                                         controller: txtlogin,
                                         decoration: InputDecoration(
-                                            hintText: "Email or Phone number",
+                                            hintText: "Email",
                                             hintStyle:
                                                 TextStyle(color: Colors.grey),
                                             border: InputBorder.none),
@@ -122,7 +121,7 @@ class LoginPage extends StatelessWidget {
                                         controller: txtpassword,
                                         obscureText: true,
                                         decoration: InputDecoration(
-                                            hintText: "Password",
+                                            hintText: "Mot de passe",
                                             hintStyle:
                                                 TextStyle(color: Colors.grey),
                                             border: InputBorder.none),
@@ -137,7 +136,7 @@ class LoginPage extends StatelessWidget {
                           FadeAnimation(
                               1.5,
                               Text(
-                                "Forgot Password?",
+                                "mot de passe oublié?",
                                 style: TextStyle(color: Colors.grey),
                               )),
                           SizedBox(
@@ -166,22 +165,22 @@ class LoginPage extends StatelessWidget {
                                             context: context,
                                             builder: (context) =>
                                                 new AlertDialog(
-                                                  title: Text('Sorry'),
+                                                  title: Text('Erreur'),
                                                   content: Text(
-                                                      'login ou mot de passe est incorect'),
+                                                      'le login ou mot de passe sont incorects'),
                                                   actions: [
                                                     Padding(
                                                       padding:
                                                           const EdgeInsets.all(
                                                               28.0),
-                                                      child: Text('ok'),
+                                                      child: Text('Ok'),
                                                     )
                                                   ],
                                                 ));
                                       }
                                     },
                                     child: Text(
-                                      "Login",
+                                      "Se connecter",
                                       style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold),
@@ -195,7 +194,7 @@ class LoginPage extends StatelessWidget {
                           FadeAnimation(
                               1.7,
                               Text(
-                                "new member?",
+                                "vous êtes nouveau ici?",
                                 style: TextStyle(color: Colors.grey),
                               )),
                           SizedBox(
@@ -223,7 +222,7 @@ class LoginPage extends StatelessWidget {
                                                   child: SignupPage()));
                                         },
                                         child: Text(
-                                          "Singin",
+                                          "Créer un nouveau compte",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold,

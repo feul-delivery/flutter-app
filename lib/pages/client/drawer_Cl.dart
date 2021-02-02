@@ -107,8 +107,7 @@ class DrawerCL extends StatelessWidget {
                 onPressed: () {},
                 child: Text(
                   "Se déconnecter",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
+                  style: TextStyle(color: Colors.white),
                 ),
               ),
             ),

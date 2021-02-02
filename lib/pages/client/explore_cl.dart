@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:feul_delivery/pages/client/drawer_cl.dart';
-import 'package:feul_delivery/pages/client/station_cl.dart';
 import 'package:feul_delivery/pages/client/bbar_cl.dart';
 
 class ListSationCl extends StatefulWidget {
@@ -29,431 +27,114 @@ class _ListSationClState extends State<ListSationCl> {
       ),
       drawer: DrawerCL(),
       body: Container(
-        decoration: BoxDecoration(
-            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.orange[900],
-          Colors.orange[800],
-          Colors.orange[400]
-        ])),
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StationProfilCl()));
-                },
-                child: Container(
-                  child: new FittedBox(
-                    child: Material(
-                        color: Colors.white,
-                        elevation: 14.0,
-                        borderRadius: BorderRadius.circular(24.0),
-                        shadowColor: Color(0x802196F3),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 16.0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Container(
-                                          child: Text(
-                                        "Total",
-                                        style: TextStyle(
-                                            color: Color(0xffe6020a),
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 1.0),
-                                      child: Container(
-                                          child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          Container(
-                                              child: Text(
-                                            "32KM \u00B7 ",
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 18.0,
-                                            ),
-                                          )),
-                                          Container(
-                                              child: Text(
-                                            "443",
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 18.0,
-                                            ),
-                                          )),
-                                          Container(
-                                            child: Icon(
-                                              FontAwesomeIcons.solidStar,
-                                              color: Colors.amber,
-                                              size: 15.0,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                    ),
-                                    Container(
-                                        child: Text(
-                                      "Alwafae \u00B7 fes",
-                                      style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 200,
-                              height: 150,
-                              child: ClipRRect(
-                                borderRadius: new BorderRadius.circular(24.0),
-                                child: Image.asset(
-                                  'assets/Feuldelivery.png',
-                                  alignment: Alignment.centerRight,
-                                  fit: BoxFit.scaleDown,
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.width - 150,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                ),
+          color: Theme.of(context).scaffoldBackgroundColor,
+          child: Column(
+            children: [
+              Center(
+                child: createCard(),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StationProfilCl()));
-                },
-                child: Container(
-                  child: new FittedBox(
-                    child: Material(
-                        color: Colors.white,
-                        elevation: 14.0,
-                        borderRadius: BorderRadius.circular(24.0),
-                        shadowColor: Color(0x802196F3),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 16.0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Container(
-                                          child: Text(
-                                        "Afriqia",
-                                        style: TextStyle(
-                                            color: Color(0xffe6020a),
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 1.0),
-                                      child: Container(
-                                          child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          Container(
-                                              child: Text(
-                                            "22KM \u00B7 ",
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 18.0,
-                                            ),
-                                          )),
-                                          Container(
-                                              child: Text(
-                                            "243 ",
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 18.0,
-                                            ),
-                                          )),
-                                          Container(
-                                            child: Icon(
-                                              FontAwesomeIcons.solidStar,
-                                              color: Colors.amber,
-                                              size: 15.0,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                    ),
-                                    Container(
-                                        child: Text(
-                                      "sedrou \u00B7 fes",
-                                      style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 200,
-                              height: 150,
-                              child: ClipRRect(
-                                borderRadius: new BorderRadius.circular(24.0),
-                                child: Image.asset(
-                                  'assets/Feuldelivery.png',
-                                  alignment: Alignment.centerRight,
-                                  fit: BoxFit.fitHeight,
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.width - 150,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
+            ],
+          )),
+      bottomNavigationBar: BottomNavigationBarCl(),
+    );
+  }
+
+  Widget createCard() {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(10),
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: InkWell(
+            onTap: () {},
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Stack(
+                  alignment: Alignment.bottomLeft,
+                  children: [
+                    Ink.image(
+                      height: 100,
+                      image: AssetImage(
+                        'assets/emma.jpg',
+                      ),
+                      fit: BoxFit.fitWidth,
+                    )
+                  ],
                 ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StationProfilCl()));
-                },
-                child: Container(
-                  child: new FittedBox(
-                    child: Material(
-                        color: Colors.white,
-                        elevation: 14.0,
-                        borderRadius: BorderRadius.circular(24.0),
-                        shadowColor: Color(0x802196F3),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 16.0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Container(
-                                          child: Text(
-                                        "Total",
-                                        style: TextStyle(
-                                            color: Color(0xffe6020a),
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 1.0),
-                                      child: Container(
-                                          child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          Container(
-                                              child: Text(
-                                            "22KM \u00B7 ",
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 18.0,
-                                            ),
-                                          )),
-                                          Container(
-                                              child: Text(
-                                            "243 ",
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 18.0,
-                                            ),
-                                          )),
-                                          Container(
-                                            child: Icon(
-                                              FontAwesomeIcons.solidStar,
-                                              color: Colors.amber,
-                                              size: 15.0,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                    ),
-                                    Container(
-                                        child: Text(
-                                      "sedrou \u00B7 fes",
-                                      style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                  ],
-                                ),
+                Padding(
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      top: 16,
+                      right: 16,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          'Av. Mohammed V,Centre villed. Fès',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                        IconButton(
+                          onPressed: null,
+                          icon: Icon(
+                            Icons.phone_rounded,
+                            color: Colors.green,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: null,
+                          icon: Icon(Icons.chat),
+                        ),
+                      ],
+                    )),
+                ButtonBar(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.topCenter,
+                      child: FlatButton(
+                          onPressed: () {},
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.near_me,
+                                color: Colors.white,
                               ),
-                            ),
-                            Container(
-                              width: 200,
-                              height: 150,
-                              child: ClipRRect(
-                                borderRadius: new BorderRadius.circular(24.0),
-                                child: Image.asset(
-                                  'assets/Feuldelivery.png',
-                                  alignment: Alignment.centerRight,
-                                  fit: BoxFit.fitHeight,
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.width - 150,
-                                ),
+                              Text(
+                                'Commander',
+                                style: TextStyle(color: Colors.blue[800]),
                               ),
-                            ),
-                          ],
-                        )),
-                  ),
+                            ],
+                          )),
+                    ),
+                    Container(
+                      width: double.infinity,
+                      padding: EdgeInsets.all(20),
+                      alignment: Alignment.topCenter,
+                      child: FlatButton(
+                          onPressed: () {},
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.read_more,
+                              ),
+                              Text(
+                                'Details',
+                                style: TextStyle(color: Colors.green[800]),
+                              ),
+                            ],
+                          )),
+                    ),
+                  ],
                 ),
-              ),
+              ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StationProfilCl()));
-                },
-                child: Container(
-                  child: new FittedBox(
-                    child: Material(
-                        color: Colors.white,
-                        elevation: 14.0,
-                        borderRadius: BorderRadius.circular(24.0),
-                        shadowColor: Color(0x802196F3),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
-                            Container(
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 16.0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: <Widget>[
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Container(
-                                          child: Text(
-                                        "Total",
-                                        style: TextStyle(
-                                            color: Color(0xffe6020a),
-                                            fontSize: 24.0,
-                                            fontWeight: FontWeight.bold),
-                                      )),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 1.0),
-                                      child: Container(
-                                          child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: <Widget>[
-                                          Container(
-                                              child: Text(
-                                            "22KM \u00B7 ",
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 18.0,
-                                            ),
-                                          )),
-                                          Container(
-                                              child: Text(
-                                            "243 ",
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontSize: 18.0,
-                                            ),
-                                          )),
-                                          Container(
-                                            child: Icon(
-                                              FontAwesomeIcons.solidStar,
-                                              color: Colors.amber,
-                                              size: 15.0,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                    ),
-                                    Container(
-                                        child: Text(
-                                      "sedrou \u00B7 fes",
-                                      style: TextStyle(
-                                          color: Colors.black54,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.bold),
-                                    )),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            Container(
-                              width: 200,
-                              height: 150,
-                              child: ClipRRect(
-                                borderRadius: new BorderRadius.circular(24.0),
-                                child: Image.asset(
-                                  'assets/Feuldelivery.png',
-                                  alignment: Alignment.centerRight,
-                                  fit: BoxFit.fitHeight,
-                                  width: MediaQuery.of(context).size.width,
-                                  height:
-                                      MediaQuery.of(context).size.width - 150,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                ),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBarCl(),
     );
   }
 
