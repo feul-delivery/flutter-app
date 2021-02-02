@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feul_delivery/pages/client/Commande_detail_col.dart';
+import 'package:feul_delivery/pages/client/commande_cl.dart';
 
 class CommandeCl extends StatefulWidget {
   @override

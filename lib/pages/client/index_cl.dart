@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/styles/style_accueil_cl.dart';
-import 'package:feul_delivery/pages/client/station_profil_cl.dart';
-import 'package:feul_delivery/pages/client/Bottom_Navigation_Bar_Cl.dart';
-import 'package:feul_delivery/pages/client/drawer_Cl.dart';
+import 'package:feul_delivery/pages/client/station_cl.dart';
+import 'package:feul_delivery/pages/client/bbar_cl.dart';
+import 'package:feul_delivery/pages/client/drawer_cl.dart';
 
 class Cl extends StatelessWidget {
   @override
