@@ -28,10 +28,11 @@ class _SettingClState extends State<SettingCl> {
               FocusScope.of(context).unfocus();
             },
             child: ListView(children: [
-              buildAccountOptionRow(context, "Change password"),
-              buildAccountOptionRow(context, "Content settings"),
-              buildAccountOptionRow(context, "About us"),
+              buildChangePasswordRow(context, "Change password"),
+              buildRateUsRow(context, "Rate us"),
+              buildAboutUsRow(context, "About us"),
               buildAccountOptionRow(context, "Privacy and security"),
+              buildAccountOptionRow(context, "Delete Your account"),
               SizedBox(
                 height: 40,
               ),
@@ -41,25 +42,219 @@ class _SettingClState extends State<SettingCl> {
   }
 }
 
-Row buildNotificationOptionRow(String title, bool isActive) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    children: [
-      Text(
-        title,
-        style: TextStyle(
-            fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),
+GestureDetector buildChangePasswordRow(BuildContext context, String title) {
+  return GestureDetector(
+    onTap: () {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(title),
+              content: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(color: Colors.grey[200]))),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: "Old password",
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(color: Colors.grey[200]))),
+                      child: TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            hintText: "New Password",
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(color: Colors.grey[200]))),
+                      child: TextField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                            hintText: "Confirm New Password",
+                            hintStyle: TextStyle(color: Colors.grey),
+                            border: InputBorder.none),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              actions: [
+                Row(
+                  children: [
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("Close")),
+                    FlatButton(onPressed: () {}, child: Text("Change")),
+                  ],
+                ),
+              ],
+            );
+          });
+    },
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey[600],
+            ),
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.grey,
+          ),
+        ],
       ),
-      Transform.scale(
-          scale: 0.7,
-          child: CupertinoSwitch(
-            value: isActive,
-            onChanged: (bool val) {},
-          ))
-    ],
+    ),
   );
 }
 
+GestureDetector buildAboutUsRow(BuildContext context, String title) {
+  return GestureDetector(
+    onTap: () {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(title),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                      width: 60,
+                      height: 60,
+                      decoration: BoxDecoration(
+                          border: Border.all(
+                              width: 4,
+                              color: Theme.of(context).scaffoldBackgroundColor),
+                          boxShadow: [
+                            BoxShadow(
+                                spreadRadius: 2,
+                                blurRadius: 10,
+                                color: Colors.black.withOpacity(0.1),
+                                offset: Offset(0, 10))
+                          ],
+                          shape: BoxShape.circle,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage('assets/Feuldelivery.png'))),
+                    ),
+                Text('Build by Flutter framwork'),
+                Text('Devlopped by HS & iz'),
+
+
+
+                ],
+              ),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Close")),
+              ],
+            );
+          });
+    },
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey[600],
+            ),
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.grey,
+          ),
+        ],
+      ),
+    ),
+  );
+}
+GestureDetector buildRateUsRow(BuildContext context, String title) {
+  return GestureDetector(
+    onTap: () {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(title),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("Option 1"),
+                  Text("Option 2"),
+                  Text("Option 3"),
+                ],
+              ),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Close")),
+              ],
+            );
+          });
+    },
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              color: Colors.grey[600],
+            ),
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.grey,
+          ),
+        ],
+      ),
+    ),
+  );
+}
 GestureDetector buildAccountOptionRow(BuildContext context, String title) {
   return GestureDetector(
     onTap: () {
