@@ -119,7 +119,6 @@ GestureDetector buildChangePasswordRow(BuildContext context, String title) {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          
           Text(
             title,
             style: TextStyle(
@@ -150,29 +149,26 @@ GestureDetector buildAboutUsRow(BuildContext context, String title) {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Container(
-                      width: 60,
-                      height: 60,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor),
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.1),
-                                offset: Offset(0, 10))
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/Feuldelivery.png'))),
-                    ),
-                Text('Build by Flutter framwork'),
-                Text('Devlopped by HS & iz'),
-
-
-
+                    width: 60,
+                    height: 60,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            width: 4,
+                            color: Theme.of(context).scaffoldBackgroundColor),
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              color: Colors.black.withOpacity(0.1),
+                              offset: Offset(0, 10))
+                        ],
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image: AssetImage('assets/Feuldelivery.png'))),
+                  ),
+                  Text('Build by Flutter framwork'),
+                  Text('Devlopped by HS & iz'),
                 ],
               ),
               actions: [
@@ -207,6 +203,7 @@ GestureDetector buildAboutUsRow(BuildContext context, String title) {
     ),
   );
 }
+
 GestureDetector buildRateUsRow(BuildContext context, String title) {
   return GestureDetector(
     onTap: () {
@@ -218,17 +215,29 @@ GestureDetector buildRateUsRow(BuildContext context, String title) {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("Option 1"),
-                  Text("Option 2"),
-                  Text("Option 3"),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Icon(Icons.star_border_outlined),
+                      Icon(Icons.star),
+                      Icon(Icons.star),
+                      Icon(Icons.star),
+                      Icon(Icons.star),
+                    ],
+                  )
                 ],
               ),
               actions: [
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text("Close")),
+                Row(
+                  children: [
+                    FlatButton(onPressed: () {}, child: Text("Rate")),
+                    FlatButton(
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text("Close")),
+                  ],
+                ),
               ],
             );
           });
@@ -255,6 +264,7 @@ GestureDetector buildRateUsRow(BuildContext context, String title) {
     ),
   );
 }
+
 GestureDetector buildAccountOptionRow(BuildContext context, String title) {
   return GestureDetector(
     onTap: () {
