@@ -29,10 +29,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
         appBar: AppBar(
           title: Text(
             "My Profile",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 25,
-            ),
           ),
           leading: Builder(
             builder: (context) => IconButton(
@@ -41,7 +37,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
             ),
           ),
           centerTitle: true,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: Colors.orange[900],
           elevation: 1,
         ),
         bottomNavigationBar: BottomNavigationBarCl(),
@@ -89,7 +85,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                               width: 4,
                               color: Theme.of(context).scaffoldBackgroundColor,
                             ),
-                            color: Colors.green,
+                            color: Colors.orange[900],
                           ),
                           child: Icon(
                             Icons.edit,
@@ -117,7 +113,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       Icon(
                         Icons.edit,
-                        color: Colors.green,
+                        color: Colors.orange[900],
                       ),
                     ],
                   ),
@@ -152,7 +148,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       Icon(
                         Icons.edit,
-                        color: Colors.green,
+                        color: Colors.orange[900],
                       ),
                     ],
                   ),
@@ -187,7 +183,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       Icon(
                         Icons.edit,
-                        color: Colors.green,
+                        color: Colors.orange[900],
                       ),
                     ],
                   ),
@@ -222,7 +218,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       Icon(
                         Icons.edit,
-                        color: Colors.green,
+                        color: Colors.orange[900],
                       ),
                     ],
                   ),
@@ -257,7 +253,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       ),
                       Icon(
                         Icons.edit,
-                        color: Colors.green,
+                        color: Colors.orange[900],
                       ),
                     ],
                   ),
@@ -274,53 +270,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 height: 15,
                 thickness: 2,
               ),
-              SizedBox(
-                height: 40,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.yellow[800]),
-                    child: FlatButton(
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            PageTransition(
-                                type: PageTransitionType.fade,
-                                child: SettingCl()));
-                      },
-                      child: Text("Settings",
-                          style: TextStyle(
-                              fontSize: 16,
-                              letterSpacing: 2.2,
-                              color: Colors.white)),
-                    ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.red),
-                    child: FlatButton(
-                      color: Colors.red,
-                      padding: EdgeInsets.symmetric(horizontal: 40),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      onPressed: () {},
-                      child: Text("SIGN OUT",
-                          style: TextStyle(
-                              fontSize: 16,
-                              letterSpacing: 2.2,
-                              color: Colors.white)),
-                    ),
-                  ),
-                ],
-              )
             ]),
           ),
         ));

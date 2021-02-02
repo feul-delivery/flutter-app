@@ -8,7 +8,7 @@ class DrawerCL extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.orange[900],
+      color: Colors.white,
       width: 260,
       child: Column(children: [
         Container(
@@ -60,7 +60,7 @@ class DrawerCL extends StatelessWidget {
           },
           leading: Icon(
             Icons.person,
-            color: Colors.black,
+            color: Colors.orange[900],
           ),
           title: Text("Mon Profile"),
         ),
@@ -69,27 +69,28 @@ class DrawerCL extends StatelessWidget {
           onTap: () {},
           leading: Icon(
             Icons.inbox,
-            color: Colors.black,
+            color: Colors.orange[900],
           ),
-          title: Text("Notifucation"),
+          title: Text("Favourites"),
         ),
 
         ListTile(
           onTap: () {},
           leading: Icon(
             Icons.assessment,
-            color: Colors.black,
+            color: Colors.orange[900],
           ),
           title: Text("Your Commande"),
         ),
 
         ListTile(
-          onTap: () {Navigator.of(context).push(MaterialPageRoute(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => SettingCl()));
           },
           leading: Icon(
             Icons.settings,
-            color: Colors.black,
+            color: Colors.orange[900],
           ),
           title: Text("Settings"),
         ),

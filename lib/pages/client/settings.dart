@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'drawer_Cl.dart';
 
-
-
 class SettingCl extends StatefulWidget {
   SettingCl({Key key}) : super(key: key);
 
@@ -18,13 +16,10 @@ class _SettingClState extends State<SettingCl> {
         appBar: AppBar(
           title: Text(
             "Setting",
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 25,
-            ),
+            style: TextStyle(),
           ),
           centerTitle: true,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          backgroundColor: Colors.orange[900],
           elevation: 1,
         ),
         body: Container(
@@ -36,7 +31,7 @@ class _SettingClState extends State<SettingCl> {
             child: ListView(children: [
               buildAccountOptionRow(context, "Change password"),
               buildAccountOptionRow(context, "Content settings"),
-              buildAccountOptionRow(context, "about as"),
+              buildAccountOptionRow(context, "About us"),
               buildAccountOptionRow(context, "Privacy and security"),
               SizedBox(
                 height: 40,
@@ -46,72 +41,71 @@ class _SettingClState extends State<SettingCl> {
         ));
   }
 }
-  Row buildNotificationOptionRow(String title, bool isActive) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
+
+Row buildNotificationOptionRow(String title, bool isActive) {
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    children: [
+      Text(
+        title,
+        style: TextStyle(
+            fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),
+      ),
+      Transform.scale(
+          scale: 0.7,
+          child: CupertinoSwitch(
+            value: isActive,
+            onChanged: (bool val) {},
+          ))
+    ],
+  );
+}
+
+GestureDetector buildAccountOptionRow(BuildContext context, String title) {
+  return GestureDetector(
+    onTap: () {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text(title),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text("Option 1"),
+                  Text("Option 2"),
+                  Text("Option 3"),
+                ],
+              ),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Close")),
+              ],
+            );
+          });
+    },
+    child: Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
-              color: Colors.grey[600]),
-        ),
-        Transform.scale(
-            scale: 0.7,
-            child: CupertinoSwitch(
-              value: isActive,
-              onChanged: (bool val) {},
-            ))
-      ],
-    );
-  }
-
-  GestureDetector buildAccountOptionRow(BuildContext context, String title) {
-    return GestureDetector(
-      onTap: () {
-        showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return AlertDialog(
-                title: Text(title),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("Option 1"),
-                    Text("Option 2"),
-                    Text("Option 3"),
-                  ],
-                ),
-                actions: [
-                  FlatButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      child: Text("Close")),
-                ],
-              );
-            });
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              title,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                color: Colors.grey[600],
-              ),
+              color: Colors.grey[600],
             ),
-            Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.grey,
-            ),
-          ],
-        ),
+          ),
+          Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.grey,
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
+}
