@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/client/Bottom_Navigation_Bar_Cl.dart';
-import 'package:feul_delivery/pages/client/settings.dart';
 import 'drawer_Cl.dart';
-import 'package:page_transition/page_transition.dart';
 
 class ProfileCl extends StatelessWidget {
   @override

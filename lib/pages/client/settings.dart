@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'drawer_Cl.dart';
 
 class SettingCl extends StatefulWidget {
   SettingCl({Key key}) : super(key: key);
