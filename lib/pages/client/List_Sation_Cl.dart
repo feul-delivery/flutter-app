@@ -4,8 +4,6 @@ import 'package:feul_delivery/pages/client/drawer_Cl.dart';
 import 'package:feul_delivery/pages/client/station_profil_cl.dart';
 import 'package:feul_delivery/pages/client/Bottom_Navigation_Bar_Cl.dart';
 
-
-
 class ListSationCl extends StatefulWidget {
   @override
   _ListSationClState createState() => _ListSationClState();
@@ -13,7 +11,6 @@ class ListSationCl extends StatefulWidget {
 
 class _ListSationClState extends State<ListSationCl> {
   Icon _searchIcon = new Icon(Icons.search);
-
   Widget _appBarTitle = new Text('Search...');
 
   @override
@@ -28,8 +25,7 @@ class _ListSationClState extends State<ListSationCl> {
           onPressed: _searchPressed,
         ),
       ),
-        drawer: DrawerCL(),
-
+      drawer: DrawerCL(),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
