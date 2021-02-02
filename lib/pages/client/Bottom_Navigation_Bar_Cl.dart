@@ -16,7 +16,7 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
       color: Theme.of(context).scaffoldBackgroundColor,
       shape: CircularNotchedRectangle(),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 28.0, vertical: 2.0),
+        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 2.0),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[

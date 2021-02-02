@@ -11,21 +11,23 @@ class ListSationCl extends StatefulWidget {
 
 class _ListSationClState extends State<ListSationCl> {
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Search...');
+  Widget _appBarTitle = new Text('Explorer');
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: DrawerCL(),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.orange[900],
         title: _appBarTitle,
-        leading: new IconButton(
-          icon: new Icon(Icons.search),
-          onPressed: _searchPressed,
-        ),
+        actions: <Widget>[
+          IconButton(
+            icon: new Icon(Icons.search),
+            onPressed: _searchPressed,
+          ),
+        ],
       ),
+      drawer: DrawerCL(),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
@@ -461,11 +463,11 @@ class _ListSationClState extends State<ListSationCl> {
         this._searchIcon = new Icon(Icons.close);
         this._appBarTitle = new TextField(
           decoration: new InputDecoration(
-              prefixIcon: new Icon(Icons.search), hintText: 'Search...'),
+              prefixIcon: new Icon(Icons.search), hintText: 'Rechercher...'),
         );
       } else {
         this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text('Search Example');
+        this._appBarTitle = new Text('Explorer');
       }
     });
   }

@@ -92,26 +92,26 @@ class DrawerCL extends StatelessWidget {
           ),
           title: Text("Paramètres"),
         ),
-        Expanded(child: Align(
+        Expanded(
+            child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-                                height: 35,
-                                margin: EdgeInsets.symmetric(horizontal: 60,vertical: 25),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.orange[900]),
-                                child: Center(
-                                  child: FlatButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Logout",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ),
-                                ),
-                              ),
+            height: 35,
+            margin: EdgeInsets.symmetric(horizontal: 60, vertical: 25),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(50),
+                color: Colors.orange[900]),
+            child: Center(
+              child: FlatButton(
+                onPressed: () {},
+                child: Text(
+                  "Se déconnecter",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+          ),
         ))
       ]),
     );
