@@ -36,6 +36,9 @@ class Cl extends StatelessWidget {
           title: Text("Acceuil"),
           backgroundColor: Colors.orange[900],
           centerTitle: true,
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.favorite), onPressed: () {})
+          ],
         ),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
