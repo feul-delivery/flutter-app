@@ -53,7 +53,7 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
             ),
             IconButton(
               icon: Icon(
-                Icons.person,
+                Icons.account_circle,
                 color: Colors.orange[900],
                 size: 30,
               ),

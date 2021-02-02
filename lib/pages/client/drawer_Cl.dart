@@ -65,10 +65,10 @@ class DrawerCL extends StatelessWidget {
         ListTile(
           onTap: () {},
           leading: Icon(
-            Icons.favorite,
+            Icons.favorite_rounded,
             color: Colors.orange[900],
           ),
-          title: Text("Favourites"),
+          title: Text("Mes favoris"),
         ),
         ListTile(
           onTap: () {},
@@ -76,7 +76,7 @@ class DrawerCL extends StatelessWidget {
             Icons.receipt_rounded,
             color: Colors.orange[900],
           ),
-          title: Text("Your Commande"),
+          title: Text("Mes commandes"),
         ),
         ListTile(
           onTap: () {
@@ -87,7 +87,7 @@ class DrawerCL extends StatelessWidget {
             Icons.settings,
             color: Colors.orange[900],
           ),
-          title: Text("Settings"),
+          title: Text("Paramètres"),
         ),
       ]),
     );
