@@ -43,11 +43,9 @@ class LoginPage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(
-                height: 20,
-              ),
+              
               Padding(
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(15),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -69,7 +67,6 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 20),
               Expanded(
                 child: Container(
                   decoration: BoxDecoration(

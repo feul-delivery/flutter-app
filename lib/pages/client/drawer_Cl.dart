@@ -51,8 +51,6 @@ class DrawerCL extends StatelessWidget {
         SizedBox(
           height: 20.0,
         ),
-        //Now let's Add the button for the Menu
-        //and let's copy that and modify it
         ListTile(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
@@ -68,7 +66,7 @@ class DrawerCL extends StatelessWidget {
         ListTile(
           onTap: () {},
           leading: Icon(
-            Icons.inbox,
+            Icons.favorite,
             color: Colors.orange[900],
           ),
           title: Text("Favourites"),
@@ -77,7 +75,7 @@ class DrawerCL extends StatelessWidget {
         ListTile(
           onTap: () {},
           leading: Icon(
-            Icons.assessment,
+            Icons.work,
             color: Colors.orange[900],
           ),
           title: Text("Your Commande"),

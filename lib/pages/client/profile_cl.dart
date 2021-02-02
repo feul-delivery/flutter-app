@@ -106,13 +106,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         "Prénom",
                         style: TextStyle(fontSize: 14),
                       ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Icon(
-                        Icons.edit,
-                        color: Colors.orange[900],
-                      ),
                     ],
                   ),
                   Container(
@@ -129,7 +122,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 thickness: 2,
               ),
               SizedBox(
-                height: 35,
+                height: 15,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -140,13 +133,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       Text(
                         "Nom",
                         style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Icon(
-                        Icons.edit,
-                        color: Colors.orange[900],
                       ),
                     ],
                   ),
@@ -164,7 +150,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 thickness: 2,
               ),
               SizedBox(
-                height: 35,
+                height: 15,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -175,13 +161,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       Text(
                         "Sexe",
                         style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Icon(
-                        Icons.edit,
-                        color: Colors.orange[900],
                       ),
                     ],
                   ),
@@ -199,7 +178,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 thickness: 2,
               ),
               SizedBox(
-                height: 35,
+                height: 15,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -210,13 +189,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       Text(
                         "email",
                         style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Icon(
-                        Icons.edit,
-                        color: Colors.orange[900],
                       ),
                     ],
                   ),
@@ -234,7 +206,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 thickness: 2,
               ),
               SizedBox(
-                height: 35,
+                height: 15,
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -245,13 +217,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       Text(
                         "CIN",
                         style: TextStyle(fontSize: 14),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Icon(
-                        Icons.edit,
-                        color: Colors.orange[900],
                       ),
                     ],
                   ),
