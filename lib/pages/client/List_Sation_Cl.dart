@@ -16,6 +16,7 @@ class _ListSationClState extends State<ListSationCl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: DrawerCL(),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.orange[900],
@@ -25,7 +26,6 @@ class _ListSationClState extends State<ListSationCl> {
           onPressed: _searchPressed,
         ),
       ),
-      drawer: DrawerCL(),
       body: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
