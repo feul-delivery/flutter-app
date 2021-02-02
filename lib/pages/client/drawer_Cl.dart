@@ -62,7 +62,6 @@ class DrawerCL extends StatelessWidget {
           ),
           title: Text("Mon Profile"),
         ),
-
         ListTile(
           onTap: () {},
           leading: Icon(
@@ -71,16 +70,14 @@ class DrawerCL extends StatelessWidget {
           ),
           title: Text("Favourites"),
         ),
-
         ListTile(
           onTap: () {},
           leading: Icon(
-            Icons.work,
+            Icons.receipt_rounded,
             color: Colors.orange[900],
           ),
           title: Text("Your Commande"),
         ),
-
         ListTile(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
