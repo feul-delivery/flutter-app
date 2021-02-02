@@ -3,23 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/client/Bottom_Navigation_Bar_Cl.dart';
 import 'drawer_Cl.dart';
 
-class ProfileCl extends StatelessWidget {
+
+
+class ProfileCl extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: "Setting UI",
-      home: EditProfilePage(),
-    );
-  }
+  _ProfileClState createState() => _ProfileClState();
 }
 
-class EditProfilePage extends StatefulWidget {
-  @override
-  _EditProfilePageState createState() => _EditProfilePageState();
-}
-
-class _EditProfilePageState extends State<EditProfilePage> {
+class _ProfileClState extends State<ProfileCl> {
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {

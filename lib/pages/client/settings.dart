@@ -277,9 +277,7 @@ GestureDetector buildAccountOptionRow(BuildContext context, String title) {
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text("Option 1"),
-                  Text("Option 2"),
-                  Text("Option 3"),
+                  
                 ],
               ),
               actions: [

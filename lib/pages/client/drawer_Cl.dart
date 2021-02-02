@@ -1,5 +1,6 @@
 import 'package:feul_delivery/pages/client/profile_cl.dart';
 import 'package:feul_delivery/pages/client/settings.dart';
+import 'package:feul_delivery/pages/client/Commande_Histo_Cl.dart';
 import 'package:flutter/material.dart';
 
 class DrawerCL extends StatelessWidget {
@@ -71,7 +72,9 @@ class DrawerCL extends StatelessWidget {
           title: Text("Mes favoris"),
         ),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => CommandeCl()));},
           leading: Icon(
             Icons.receipt_rounded,
             color: Colors.orange[900],
