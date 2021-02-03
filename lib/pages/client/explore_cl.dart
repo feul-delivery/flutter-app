@@ -26,111 +26,101 @@ class _ListSationClState extends State<ListSationCl> {
         ],
       ),
       drawer: DrawerCL(),
-      body: Container(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          child: Column(
-            children: [
-              Container(
-                child: createCard(),
-              ),
-            ],
-          )),
+      body: createCard(),
       bottomNavigationBar: BottomNavigationBarCl(),
     );
   }
 
-  Center createCard() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          child: InkWell(
-            onTap: () {},
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Stack(
-                  alignment: Alignment.bottomLeft,
-                  children: [
-                    Ink.image(
-                      height: 100,
-                      image: AssetImage(
-                        'assets/emma.jpg',
+  Container createCard() {
+    return Container(
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(0),
+          child: Card(
+            clipBehavior: Clip.antiAlias,
+            child: InkWell(
+              onTap: () {},
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Stack(
+                    children: [
+                      Ink.image(
+                        height: 100,
+                        image: AssetImage(
+                          'assets/emma.jpg',
+                        ),
+                        fit: BoxFit.fitWidth,
+                      )
+                    ],
+                  ),
+                  Padding(
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        top: 16,
+                        right: 16,
                       ),
-                      fit: BoxFit.fitWidth,
-                    )
-                  ],
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(
-                      left: 16,
-                      top: 16,
-                      right: 16,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          'Av. Mohammed V,Centre villed. Fès',
-                          style: TextStyle(color: Colors.black54),
-                        ),
-                        IconButton(
-                          onPressed: null,
-                          icon: Icon(
-                            Icons.phone_rounded,
-                            color: Colors.green,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            'Av. Mohammed V,Centre villed. Fès',
+                            style: TextStyle(color: Colors.black54),
                           ),
-                        ),
-                        IconButton(
-                          onPressed: null,
-                          icon: Icon(Icons.chat),
-                        ),
-                      ],
-                    )),
-                ButtonBar(
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(20),
-                      alignment: Alignment.topCenter,
-                      child: FlatButton(
-                          onPressed: () {},
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.near_me,
-                                color: Colors.white,
-                              ),
-                              Text(
-                                'Commander',
-                                style: TextStyle(color: Colors.blue[800]),
-                              ),
-                            ],
-                          )),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      padding: EdgeInsets.all(20),
-                      alignment: Alignment.topCenter,
-                      child: FlatButton(
-                          onPressed: () {},
-                          child: Column(
-                            children: [
-                              Icon(
-                                Icons.read_more,
-                              ),
-                              Text(
-                                'Details',
-                                style: TextStyle(color: Colors.green[800]),
-                              ),
-                            ],
-                          )),
-                    ),
-                  ],
-                ),
-              ],
+                          IconButton(
+                            onPressed: null,
+                            icon: Icon(
+                              Icons.phone_rounded,
+                              color: Colors.green,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: null,
+                            icon: Icon(Icons.chat),
+                          ),
+                        ],
+                      )),
+                  ButtonBar(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(20),
+                        alignment: Alignment.topCenter,
+                        child: FlatButton(
+                            onPressed: () {},
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.near_me,
+                                  color: Colors.white,
+                                ),
+                                Text(
+                                  'Commander',
+                                  style: TextStyle(color: Colors.blue[800]),
+                                ),
+                              ],
+                            )),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(20),
+                        alignment: Alignment.topCenter,
+                        child: FlatButton(
+                            onPressed: () {},
+                            child: Column(
+                              children: [
+                                Icon(
+                                  Icons.read_more,
+                                ),
+                                Text(
+                                  'Details',
+                                  style: TextStyle(color: Colors.green[800]),
+                                ),
+                              ],
+                            )),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),
