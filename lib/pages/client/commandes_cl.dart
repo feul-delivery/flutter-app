@@ -200,7 +200,7 @@ class _CommandeClState extends State<CommandeCl> {
     {
       "id": 1,
       "code": "SSH081686",
-      "time": "11.00",
+      "time": "11:00",
       "date": "15/01/2021",
       "etat": "en cour",
       "volume": "43L",
@@ -213,7 +213,7 @@ class _CommandeClState extends State<CommandeCl> {
     {
       "id": 2,
       "code": "SSH023912",
-      "time": "16.00",
+      "time": "16:00",
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
@@ -226,7 +226,7 @@ class _CommandeClState extends State<CommandeCl> {
     {
       "id": 3,
       "code": "PC985170",
-      "time": "12.00",
+      "time": "12:00",
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
@@ -239,7 +239,7 @@ class _CommandeClState extends State<CommandeCl> {
     {
       "id": 4,
       "code": "PC980394",
-      "time": "17.00",
+      "time": "17:00",
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
@@ -252,7 +252,7 @@ class _CommandeClState extends State<CommandeCl> {
     {
       "id": 5,
       "code": "PC932721",
-      "time": "19.00",
+      "time": "19:00",
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
@@ -265,7 +265,7 @@ class _CommandeClState extends State<CommandeCl> {
     {
       "id": 6,
       "code": "PC900005",
-      "time": "06.00",
+      "time": "06:00",
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
