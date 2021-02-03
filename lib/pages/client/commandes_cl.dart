@@ -59,10 +59,15 @@ class _CommandeClState extends State<CommandeCl> {
           InkWell(
             onTap: () {
               Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => CommandeDetail(code: items[i]['code'],date: items[i]['date'],id: items[i]['id'],)));
-         
+                  builder: (BuildContext context) => CommandeDetail(
+                        code: items[i]['code'],
+                        date: items[i]['date'],
+                        id: items[i]['id'],
+                        time: items[i]['time'],
+                        
+                      )));
             },
-                      child: Container(
+            child: Container(
                 decoration: new BoxDecoration(
                     color: Colors.orange[900],
                     borderRadius: BorderRadius.circular(10),
@@ -163,12 +168,15 @@ class _CommandeClState extends State<CommandeCl> {
                                       child: Text(items[i]['etat'],
                                           style: titleStyle)),
                                 ),
-                                SizedBox(width: 60,),
+                                SizedBox(
+                                  width: 60,
+                                ),
                                 Container(
                                   child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(items[i]['volume'],
-                                          style: TextStyle(color: Colors.grey))),
+                                          style:
+                                              TextStyle(color: Colors.grey))),
                                 ),
                               ]),
                             ),
@@ -192,7 +200,6 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "en cour",
       "volume": "43L",
-
     },
     {
       "id": 2,
@@ -201,7 +208,6 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
-
     },
     {
       "id": 3,
@@ -210,7 +216,6 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
-
     },
     {
       "id": 4,
@@ -219,7 +224,6 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
-
     },
     {
       "id": 5,
@@ -228,7 +232,6 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
-
     },
     {
       "id": 6,
@@ -237,7 +240,6 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
-
     }
   ];
 }

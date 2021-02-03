@@ -4,10 +4,12 @@ class CommandeDetail extends StatefulWidget {
   final int id;
   final String code;
   final String date;
+  final String time;
   CommandeDetail({
     this.id,
     this.code,
     this.date,
+    this.time,
   });
   @override
   _CommandeDetailState createState() => _CommandeDetailState();
@@ -38,46 +40,75 @@ class _CommandeDetailState extends State<CommandeDetail> {
         ),
         Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
-          child: Row(
-            children: <Widget>[
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                "Code :",
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                "Commande N°:",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
               ),
               SizedBox(
-                width: 20,
+                height: 10,
               ),
-              Text(
-                widget.code,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-              )
+              Center(
+                child: Text(
+                  widget.code,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+              ),
             ],
           ),
         ),
         SizedBox(
           height: 20,
-        ),
-        Padding(
+        ),Padding(
           padding: const EdgeInsets.only(left: 20, right: 20),
-          child: Row(
-            children: <Widget>[
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                "date :",
-                style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                "Date commande :",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
               ),
               SizedBox(
-                width: 20,
+                height: 10,
               ),
+              Center(
+                child: Text(
+                  widget.date,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+          height: 20,
+        ),Padding(
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
               Text(
-                widget.date,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-              )
+                "l'heure de commande:",
+                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black54),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: Text(
+                  widget.time,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+              ),
             ],
           ),
         ),
         SizedBox(
           height: 20,
         ),
+        
       ],
     );
   }
