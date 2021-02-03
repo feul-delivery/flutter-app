@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class ProductDetailPage extends StatefulWidget {
   final int id;
   final String name;
@@ -33,214 +32,250 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       child: ListView(
         children: <Widget>[
           InkWell(
-            onTap: (){
+            onTap: () {
               Navigator.pop(context);
             },
-                      child: Padding(
+            child: Padding(
               padding: EdgeInsets.only(left: 20),
-                        child: Align(
-                alignment: Alignment.centerLeft,
-                child: Icon(Icons.arrow_back_ios)),
+              child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: Icon(Icons.arrow_back_ios)),
             ),
           ),
           Hero(
             tag: widget.id.toString(),
-                      child: Container(
-            width: 400,
-            height: 400,
-            decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage(widget.img),fit: BoxFit.cover)
-            ),
+            child: Container(
+              width: 400,
+              height: 400,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(widget.img), fit: BoxFit.cover)),
             ),
           ),
-          SizedBox(height: 50,),
+          SizedBox(
+            height: 50,
+          ),
           Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
               children: <Widget>[
-                Text("Name :",style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500
-                ),),
-                SizedBox(width: 20,),
-                Text(widget.name,style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500
-                ),)
-
+                Text(
+                  "Name :",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  widget.name,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                )
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
               children: <Widget>[
-                Text("Code :",style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500
-                ),),
-                SizedBox(width: 20,),
-                Text(widget.code,style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500
-                ),)
-
+                Text(
+                  "Code :",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Text(
+                  widget.code,
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                )
               ],
             ),
           ),
-          SizedBox(height: 20,),
+          SizedBox(
+            height: 20,
+          ),
           Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
               children: <Widget>[
-                Text("Price :",style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500
-                ),),
-                SizedBox(width: 20,),
+                Text(
+                  "Price :",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
                 Row(
                   children: <Widget>[
-                    Text(widget.pPromotionPrice+" USD",style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500
-                ),),
-                SizedBox(width: 20,),
-                Text(widget.pPrice+" USD",style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w500,
-                  color: Colors.red,
-                  decoration: TextDecoration.lineThrough
-                ),)
+                    Text(
+                      widget.pPromotionPrice + " USD",
+                      style:
+                          TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    Text(
+                      widget.pPrice + " USD",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.red,
+                          decoration: TextDecoration.lineThrough),
+                    )
                   ],
                 )
-
               ],
             ),
           ),
-          SizedBox(height: 25,),
+          SizedBox(
+            height: 25,
+          ),
           Padding(
-            padding: const EdgeInsets.only(left: 20,right: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Text("Colors :",style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w500
-                ),),
-                SizedBox(width: 20,),
+                Text(
+                  "Colors :",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
                 Flexible(
-                                  child: Wrap(
-                    children: List.generate(colors.length, (index) => 
-                    Padding(
-                      padding: const EdgeInsets.only(right: 15,bottom: 15),
-                      child: Container(
-                      height: 25,
-                      width: 25,
-                      decoration: BoxDecoration(
-                        color: colors[index],
-                        shape: BoxShape.circle
-                      ),
-                  ),
-                    )),
+                  child: Wrap(
+                    children: List.generate(
+                        colors.length,
+                        (index) => Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 15, bottom: 15),
+                              child: Container(
+                                height: 25,
+                                width: 25,
+                                decoration: BoxDecoration(
+                                    color: colors[index],
+                                    shape: BoxShape.circle),
+                              ),
+                            )),
                   ),
                 )
-
               ],
             ),
           ),
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Padding(
-            padding: const EdgeInsets.only(right: 20,left: 20),
+            padding: const EdgeInsets.only(right: 20, left: 20),
             child: Row(
               children: <Widget>[
-                Text("Qty :",style: TextStyle(
-                    fontSize: 17,
-                    fontWeight: FontWeight.w500
-                  ),),
-                  SizedBox(width: 20,),
-                  Row(
-                    children: <Widget>[
-                      InkWell(
-                        onTap: (){
-                          if(qty > 1){
-                           setState(() {
-                              qty = --qty;
-                            }); 
-                          }
-                          
-                          // minus here
-                        },
-                                              child: Container(
-                          width: 25,
-                          height: 25,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.black12),
-                            shape: BoxShape.circle
-                          ),
-                          child: Icon(Icons.ac_unit_rounded,size: 15,),
-                        ),
-                      ),
-                      SizedBox(width: 15,),
-                      Text(qty.toString(),style: TextStyle(
-                        fontSize: 16
-                      ),),
-                      SizedBox(width: 15,),
-                      InkWell(
-                        onTap: (){
+                Text(
+                  "Qty :",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  width: 20,
+                ),
+                Row(
+                  children: <Widget>[
+                    InkWell(
+                      onTap: () {
+                        if (qty > 1) {
                           setState(() {
-                            qty = ++qty;
+                            qty = --qty;
                           });
-                          // minus here
-                        },
-                                              child: Container(
-                          width: 25,
-                          height: 25,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.yellow),
-                            shape: BoxShape.circle
-                          ),
-                          child: Icon(Icons.ac_unit_rounded,size: 15,),
+                        }
+
+                        // minus here
+                      },
+                      child: Container(
+                        width: 25,
+                        height: 25,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.black12),
+                            shape: BoxShape.circle),
+                        child: Icon(
+                          Icons.ac_unit_rounded,
+                          size: 15,
                         ),
                       ),
-                      
-                    ],
-                  )
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Text(
+                      qty.toString(),
+                      style: TextStyle(fontSize: 16),
+                    ),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          qty = ++qty;
+                        });
+                        // minus here
+                      },
+                      child: Container(
+                        width: 25,
+                        height: 25,
+                        decoration: BoxDecoration(
+                            border: Border.all(color: Colors.yellow),
+                            shape: BoxShape.circle),
+                        child: Icon(
+                          Icons.ac_unit_rounded,
+                          size: 15,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
-          SizedBox(height: 50,),
+          SizedBox(
+            height: 50,
+          ),
           InkWell(
-            onTap: (){
+            onTap: () {
               // your add cart function here
             },
-                      child: Padding(padding: EdgeInsets.only(left: 20,right: 20),
-            child: Container(
-              height: 50,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.orangeAccent,
-                borderRadius: BorderRadius.circular(30)
+            child: Padding(
+              padding: EdgeInsets.only(left: 20, right: 20),
+              child: Container(
+                height: 50,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                    color: Colors.orangeAccent,
+                    borderRadius: BorderRadius.circular(30)),
+                child: Center(
+                  child: Text(
+                    "ADD TO CART",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                    ),
+                  ),
+                ),
               ),
-              child: Center(
-                child: Text("ADD TO CART",style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-
-                ),),
-              ),
-            ),),
+            ),
           )
         ],
       ),
     );
   }
+
   List colors = [
-  Colors.redAccent,
-  Colors.greenAccent,
-  Colors.cyanAccent,
-  Colors.orangeAccent,
-  Colors.purpleAccent,
-  Colors.blueAccent
-];
+    Colors.redAccent,
+    Colors.greenAccent,
+    Colors.cyanAccent,
+    Colors.orangeAccent,
+    Colors.purpleAccent,
+    Colors.blueAccent
+  ];
 }
