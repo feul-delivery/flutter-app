@@ -37,35 +37,51 @@ class _CommandeClState extends State<CommandeCl> {
         TextStyle(color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold);
     TextStyle titleStyle;
     IconData etaticon;
-    if (items[i]['etat'] == 'complet') {titleStyle = titleStylecomplet; etaticon = Icons.check;}
-    if (items[i]['etat'] != 'complet') {titleStyle = titleStyleencoure;etaticon = Icons.block;}
+    if (items[i]['etat'] == 'complet') {
+      titleStyle = titleStylecomplet;
+      etaticon = Icons.check;
+    }
+    if (items[i]['etat'] != 'complet') {
+      titleStyle = titleStyleencoure;
+      etaticon = Icons.block;
+    }
 
     return Container(
       child: Column(
         children: [
-          SizedBox(height: 10,),
+          SizedBox(
+            height: 10,
+          ),
           Container(
-            
               decoration: new BoxDecoration(
                   color: Colors.orange[900],
+                  borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3),
-                    ),
+                        color: Color.fromRGBO(225, 95, 27, .3),
+                        blurRadius: 20,
+                        offset: Offset(0, 10))
                   ]),
               alignment: Alignment.center,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Container(
+                    decoration: new BoxDecoration(
+                        color: Colors.orange[900],
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Color.fromRGBO(225, 95, 27, .3),
+                              blurRadius: 20,
+                              offset: Offset(0, 10))
+                        ]),
                     child: Expanded(
                       flex: 1,
                       child: Container(
                         decoration: new BoxDecoration(
                           color: Colors.orange[900],
+                          borderRadius: BorderRadius.circular(10),
                         ),
                         child: Container(
                           child: Row(
@@ -111,11 +127,11 @@ class _CommandeClState extends State<CommandeCl> {
                         children: <Widget>[
                           Container(
                             child: Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.all(5.0),
                               child: Text(
                                 "commande n° :" + items[i]['code'],
                                 style: TextStyle(
-                                    color: Colors.red,
+                                    color: Colors.black87,
                                     fontSize: 15,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -123,7 +139,6 @@ class _CommandeClState extends State<CommandeCl> {
                           ),
                           Container(
                             child: Row(children: <Widget>[
-                              
                               Container(
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -137,7 +152,15 @@ class _CommandeClState extends State<CommandeCl> {
                               Container(
                                 child: Padding(
                                     padding: const EdgeInsets.all(8.0),
-                                    child: Text(items[i]['etat'], style: titleStyle)),
+                                    child: Text(items[i]['etat'],
+                                        style: titleStyle)),
+                              ),
+                              SizedBox(width: 60,),
+                              Container(
+                                child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(items[i]['volume'],
+                                        style: TextStyle(color: Colors.grey))),
                               ),
                             ]),
                           ),
@@ -146,9 +169,7 @@ class _CommandeClState extends State<CommandeCl> {
                     ),
                   ),
                 ],
-              )
-              
-              ),
+              )),
         ],
       ),
     );
@@ -161,6 +182,8 @@ class _CommandeClState extends State<CommandeCl> {
       "time": "11.00",
       "date": "15/01/2021",
       "etat": "en cour",
+      "volume": "43L",
+
     },
     {
       "id": 2,
@@ -168,6 +191,8 @@ class _CommandeClState extends State<CommandeCl> {
       "time": "16.00",
       "date": "15/01/2021",
       "etat": "complet",
+      "volume": "43L",
+
     },
     {
       "id": 3,
@@ -175,6 +200,8 @@ class _CommandeClState extends State<CommandeCl> {
       "time": "12.00",
       "date": "15/01/2021",
       "etat": "complet",
+      "volume": "43L",
+
     },
     {
       "id": 4,
@@ -182,6 +209,8 @@ class _CommandeClState extends State<CommandeCl> {
       "time": "17.00",
       "date": "15/01/2021",
       "etat": "complet",
+      "volume": "43L",
+
     },
     {
       "id": 5,
@@ -189,6 +218,8 @@ class _CommandeClState extends State<CommandeCl> {
       "time": "19.00",
       "date": "15/01/2021",
       "etat": "complet",
+      "volume": "43L",
+
     },
     {
       "id": 6,
@@ -196,6 +227,8 @@ class _CommandeClState extends State<CommandeCl> {
       "time": "06.00",
       "date": "15/01/2021",
       "etat": "complet",
+      "volume": "43L",
+
     }
   ];
 }
