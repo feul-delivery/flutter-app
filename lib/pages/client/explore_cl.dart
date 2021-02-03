@@ -25,7 +25,7 @@ class _ListSationClState extends State<ListSationCl> {
           ),
         ],
       ),
-      drawer: DrawerCL(),
+      drawer: drawerCL(),
       body: createCard(),
       bottomNavigationBar: BottomNavigationBarCl(),
     );
@@ -33,6 +33,7 @@ class _ListSationClState extends State<ListSationCl> {
 
   Container createCard() {
     return Container(
+      height: 300,
       child: Center(
         child: Padding(
           padding: const EdgeInsets.all(0),
@@ -48,7 +49,7 @@ class _ListSationClState extends State<ListSationCl> {
                       Ink.image(
                         height: 100,
                         image: AssetImage(
-                          'assets/emma.jpg',
+                          'assets/Station3.png',
                         ),
                         fit: BoxFit.fitWidth,
                       )
@@ -56,13 +57,20 @@ class _ListSationClState extends State<ListSationCl> {
                   ),
                   Padding(
                       padding: const EdgeInsets.only(
-                        left: 16,
-                        top: 16,
-                        right: 16,
+                        left: 10,
+                        top: 10,
+                        right: 10,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
+                          Text(
+                            'Total - Centre ville',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                           Text(
                             'Av. Mohammed V,Centre villed. Fès',
                             style: TextStyle(color: Colors.black54),

@@ -62,7 +62,7 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
                   Navigator.push(
                       context,
                       PageTransition(
-                          type: PageTransitionType.fade, child: ProfileCl()));
+                          type: PageTransitionType.fade, child: profileCl()));
                 });
               },
             ),

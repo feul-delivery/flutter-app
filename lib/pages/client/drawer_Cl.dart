@@ -1,10 +1,11 @@
-import 'package:feul_delivery/pages/client/profile_cl.dart';
+import 'package:feul_delivery/pages/client/profile_mdf.dart';
 import 'package:feul_delivery/pages/client/settings.dart';
 import 'package:feul_delivery/pages/client/commandes_cl.dart';
 import 'package:flutter/material.dart';
 
-class DrawerCL extends StatelessWidget {
-  const DrawerCL({Key key}) : super(key: key);
+// ignore: camel_case_types
+class drawerCL extends StatelessWidget {
+  const drawerCL({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class DrawerCL extends StatelessWidget {
         ListTile(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => ProfileCl()));
+                builder: (BuildContext context) => profileCLModifier()));
           },
           leading: Icon(
             Icons.person,
@@ -98,9 +99,9 @@ class DrawerCL extends StatelessWidget {
           alignment: Alignment.bottomCenter,
           child: Container(
             height: 35,
-            margin: EdgeInsets.symmetric(horizontal: 60, vertical: 25),
+            margin: EdgeInsets.symmetric(horizontal: 65, vertical: 20),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(50),
+                borderRadius: BorderRadius.circular(10),
                 color: Colors.orange[900]),
             child: Center(
               child: FlatButton(

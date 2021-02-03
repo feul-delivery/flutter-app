@@ -148,7 +148,7 @@ class LoginPage extends StatelessWidget {
                                 height: 50,
                                 margin: EdgeInsets.symmetric(horizontal: 50),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
+                                    borderRadius: BorderRadius.circular(10),
                                     color: Colors.orange[900]),
                                 child: Center(
                                   child: FlatButton(
@@ -209,7 +209,7 @@ class LoginPage extends StatelessWidget {
                                       height: 50,
                                       decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(40),
+                                              BorderRadius.circular(10),
                                           color: Colors.blue),
                                       child: Center(
                                           child: FlatButton(

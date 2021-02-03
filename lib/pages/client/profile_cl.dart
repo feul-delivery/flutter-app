@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/client/bbar_cl.dart';
 import 'drawer_cl.dart';
 
-class ProfileCl extends StatefulWidget {
+// ignore: camel_case_types
+class profileCl extends StatefulWidget {
   @override
-  _ProfileClState createState() => _ProfileClState();
+  _profileClState createState() => _profileClState();
 }
 
-class _ProfileClState extends State<ProfileCl> {
+// ignore: camel_case_types
+class _profileClState extends State<profileCl> {
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class _ProfileClState extends State<ProfileCl> {
           elevation: 1,
         ),
         bottomNavigationBar: BottomNavigationBarCl(),
-        drawer: DrawerCL(),
+        drawer: drawerCL(),
         body: Container(
           padding: EdgeInsets.only(left: 16, top: 25, right: 16),
           child: GestureDetector(
@@ -40,8 +42,8 @@ class _ProfileClState extends State<ProfileCl> {
                 child: Stack(
                   children: [
                     Container(
-                      width: 130,
-                      height: 130,
+                      width: 140,
+                      height: 140,
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: 4,
@@ -60,25 +62,25 @@ class _ProfileClState extends State<ProfileCl> {
                                 "https://images.pexels.com/photos/3307758/pexels-photo-3307758.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=250",
                               ))),
                     ),
-                    Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: Container(
-                          height: 40,
-                          width: 40,
-                          decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(
-                              width: 4,
-                              color: Theme.of(context).scaffoldBackgroundColor,
-                            ),
-                            color: Colors.orange[900],
-                          ),
-                          child: Icon(
-                            Icons.edit,
-                            color: Colors.white,
-                          ),
-                        )),
+                    // Positioned(
+                    //     bottom: 0,
+                    //     right: 0,
+                    //     child: Container(
+                    //       height: 40,
+                    //       width: 40,
+                    //       decoration: BoxDecoration(
+                    //         shape: BoxShape.circle,
+                    //         border: Border.all(
+                    //           width: 4,
+                    //           color: Theme.of(context).scaffoldBackgroundColor,
+                    //         ),
+                    //         color: Colors.orange[900],
+                    //       ),
+                    //       child: Icon(
+                    //         Icons.edit,
+                    //         color: Colors.white,
+                    //       ),
+                    //     )),
                   ],
                 ),
               ),

@@ -72,7 +72,7 @@ class _StarterPageState extends State<StarterPage>
                   FadeAnimation(
                       .8,
                       Text(
-                        'Taking Order For Feul Delivery',
+                        'Fuel Delivery',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 50,
@@ -84,7 +84,7 @@ class _StarterPageState extends State<StarterPage>
                   FadeAnimation(
                       1,
                       Text(
-                        "See station nearby by \nadding location",
+                        "Vous n'avez pas d'essence?\nVous n'avez pas le temps? \nVous n'avez pas les deux? \nC'est pourquoi nous sommes ici.",
                         style: TextStyle(
                             color: Colors.white, height: 1.4, fontSize: 18),
                       )),
@@ -97,7 +97,7 @@ class _StarterPageState extends State<StarterPage>
                         scale: _animation,
                         child: Center(
                           child: Container(
-                            width: 150,
+                              width: 150,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.orange[900],
@@ -109,7 +109,7 @@ class _StarterPageState extends State<StarterPage>
                                   onPressed: () => _onTap(),
                                   minWidth: double.infinity,
                                   child: Text(
-                                    "Start",
+                                    "Commencer",
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
@@ -126,7 +126,7 @@ class _StarterPageState extends State<StarterPage>
                         duration: Duration(milliseconds: 50),
                         child: Align(
                           child: Text(
-                            "Now Deliver To Your Door 24/7",
+                            "Maintenant livrez à votre porte 24/7",
                             style:
                                 TextStyle(color: Colors.white70, fontSize: 15),
                           ),

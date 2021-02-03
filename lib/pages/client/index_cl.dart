@@ -55,7 +55,7 @@ class Cl extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomNavigationBarCl(),
-        drawer: DrawerCL(),
+        drawer: drawerCL(),
       ),
     );
   }
