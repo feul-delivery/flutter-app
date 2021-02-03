@@ -64,6 +64,10 @@ class _CommandeClState extends State<CommandeCl> {
                         date: items[i]['date'],
                         id: items[i]['id'],
                         time: items[i]['time'],
+                        couleur: items[i]['couleur'],
+                        address:items[i]['adresse'],
+                        matricule: items[i]['matricule'],
+                        type: items[i]['type'],
                         
                       )));
             },
@@ -200,6 +204,11 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "en cour",
       "volume": "43L",
+      "couleur" : "blue",
+      "matricule": "15-A-545454",
+      "type": "diesel",
+      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
+
     },
     {
       "id": 2,
@@ -208,6 +217,11 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
+      "couleur" : "blue",
+      "matricule": "15-A-545454",
+      "type": "diesel",
+      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
+
     },
     {
       "id": 3,
@@ -216,6 +230,11 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
+      "couleur" : "blue",
+      "matricule": "15-A-545454",
+      "type": "diesel",
+      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
+
     },
     {
       "id": 4,
@@ -224,6 +243,11 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
+      "couleur" : "blue",
+      "matricule": "15-A-545454",
+      "type": "diesel",
+      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
+
     },
     {
       "id": 5,
@@ -232,6 +256,11 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
+      "couleur" : "blue",
+      "matricule": "15-A-545454",
+      "type": "diesel",
+      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
+
     },
     {
       "id": 6,
@@ -240,6 +269,11 @@ class _CommandeClState extends State<CommandeCl> {
       "date": "15/01/2021",
       "etat": "complet",
       "volume": "43L",
+      "couleur" : "blue",
+      "matricule": "15-A-545454",
+      "type": "diesel",
+      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
+
     }
   ];
 }
