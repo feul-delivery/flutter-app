@@ -31,54 +31,124 @@ class _CommandeClState extends State<CommandeCl> {
   }
 
   Container cartcomd(int i) {
+    const titleStylecomplet = TextStyle(
+        color: Colors.green, fontSize: 15, fontWeight: FontWeight.bold);
+    const titleStyleencoure =
+        TextStyle(color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold);
+    TextStyle titleStyle;
+    IconData etaticon;
+    if (items[i]['etat'] == 'complet') {titleStyle = titleStylecomplet; etaticon = Icons.check;}
+    if (items[i]['etat'] != 'complet') {titleStyle = titleStyleencoure;etaticon = Icons.block;}
+
     return Container(
       child: Column(
         children: [
+          SizedBox(height: 10,),
           Container(
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+            
+              decoration: new BoxDecoration(
+                  color: Colors.orange[900],
                   boxShadow: [
                     BoxShadow(
-                        color: Color.fromRGBO(225, 95, 27, .3),
-                        blurRadius: 20,
-                        offset: Offset(0, 10))
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: Offset(0, 3),
+                    ),
                   ]),
-              child: Card(
-                child: Container(
-                  child: Row(
-                    children: <Widget>[
-                      SizedBox(
-                        width: 10,
-                        height: 80,
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  Container(
+                    child: Expanded(
+                      flex: 1,
+                      child: Container(
+                        decoration: new BoxDecoration(
+                          color: Colors.orange[900],
+                        ),
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                      child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      items[i]['time'],
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15),
+                                    ),
+                                  )),
+                                  Container(
+                                      child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      items[i]['date'],
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15),
+                                    ),
+                                  )),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      decoration: new BoxDecoration(
+                        color: Color(0xffffffff),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Text(
-                            "commande n° :" + items[i]['code'],
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w500),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Text(
-                            items[i]['time'],
-                            style: TextStyle(
-                              fontSize: 16,
+                          Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "commande n° :" + items[i]['code'],
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
-                          
+                          Container(
+                            child: Row(children: <Widget>[
+                              
+                              Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Icon(
+                                    etaticon,
+                                    color: Colors.amber,
+                                    size: 20,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(items[i]['etat'], style: titleStyle)),
+                              ),
+                            ]),
+                          ),
                         ],
                       ),
-                    ],
+                    ),
                   ),
-                ),
-              )),
-          SizedBox(
-            height: 10,
-          ),
+                ],
+              )
+              
+              ),
         ],
       ),
     );
@@ -88,33 +158,44 @@ class _CommandeClState extends State<CommandeCl> {
     {
       "id": 1,
       "code": "SSH081686",
-      "time": "11.00 14/01/2021",
+      "time": "11.00",
+      "date": "15/01/2021",
+      "etat": "en cour",
     },
     {
       "id": 2,
       "code": "SSH023912",
-      "time": "16.00 15/01/2021",
+      "time": "16.00",
+      "date": "15/01/2021",
+      "etat": "complet",
     },
     {
       "id": 3,
       "code": "PC985170",
-      "time": "12.00 15/01/2021",
+      "time": "12.00",
+      "date": "15/01/2021",
+      "etat": "complet",
     },
     {
       "id": 4,
       "code": "PC980394",
-      "time": "17.00 15/01/2021",
+      "time": "17.00",
+      "date": "15/01/2021",
+      "etat": "complet",
     },
     {
       "id": 5,
-      "name": "Command05",
       "code": "PC932721",
-      "time": "19.00 15/01/2021",
+      "time": "19.00",
+      "date": "15/01/2021",
+      "etat": "complet",
     },
     {
       "id": 6,
       "code": "PC900005",
-      "time": "06.00 15/01/2021",
+      "time": "06.00",
+      "date": "15/01/2021",
+      "etat": "complet",
     }
   ];
 }
