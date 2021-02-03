@@ -30,7 +30,7 @@ class _ListSationClState extends State<ListSationCl> {
           color: Theme.of(context).scaffoldBackgroundColor,
           child: Column(
             children: [
-              Center(
+              Container(
                 child: createCard(),
               ),
             ],
@@ -39,7 +39,7 @@ class _ListSationClState extends State<ListSationCl> {
     );
   }
 
-  Widget createCard() {
+  Center createCard() {
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(10),
