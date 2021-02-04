@@ -2,6 +2,7 @@ import 'package:feul_delivery/animations/FadeAnimation.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/StarterPage.dart';
+import 'package:feul_delivery/pages/station/index_st.dart';
 import 'package:feul_delivery/pages/singup.dart';
 import 'package:feul_delivery/pages/client/index_cl.dart';
 
@@ -161,22 +162,33 @@ class LoginPage extends StatelessWidget {
                                                 type: PageTransitionType.fade,
                                                 child: Cl()));
                                       } else {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) =>
-                                                new AlertDialog(
-                                                  title: Text('Erreur'),
-                                                  content: Text(
-                                                      'le login ou mot de passe sont incorects'),
-                                                  actions: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.all(
-                                                              28.0),
-                                                      child: Text('Ok'),
-                                                    )
-                                                  ],
-                                                ));
+                                        if (txtlogin.text == 'admin' &&
+                                            txtpassword.text == 'admin') {
+
+                                        Navigator.pushReplacement(
+                                            context,
+                                            PageTransition(
+                                                type: PageTransitionType.fade,
+                                                child: St()));
+
+                                        } else {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) =>
+                                                  new AlertDialog(
+                                                    title: Text('Erreur'),
+                                                    content: Text(
+                                                        'le login ou mot de passe sont incorects'),
+                                                    actions: [
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(28.0),
+                                                        child: Text('Ok'),
+                                                      )
+                                                    ],
+                                                  ));
+                                        }
                                       }
                                     },
                                     child: Text(
