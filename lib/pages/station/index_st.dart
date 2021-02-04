@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/station/drawer_st.dart';
 import 'package:feul_delivery/pages/station/bbar_st.dart';
 
-class St extends StatelessWidget {
+class St extends StatefulWidget {
+  @override
+  _StState createState() => _StState();
+}
+
+class _StState extends State<St> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

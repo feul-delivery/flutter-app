@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:feul_delivery/pages/client/explore_cl.dart';
 import 'package:feul_delivery/pages/station/index_st.dart';
-import 'package:feul_delivery/pages/client/profile_cl.dart';
 
 class BottomNavigationBarCl extends StatefulWidget {
   @override
