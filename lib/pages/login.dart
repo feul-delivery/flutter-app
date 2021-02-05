@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           brightness: Brightness.light,
-          backgroundColor: Colors.orange[900],
+          backgroundColor: Colors.orange[900].withOpacity(0),
           leading: IconButton(
             onPressed: () {
               Navigator.push(context,
@@ -164,13 +164,11 @@ class LoginPage extends StatelessWidget {
                                       } else {
                                         if (txtlogin.text == 'admin' &&
                                             txtpassword.text == 'admin') {
-
-                                        Navigator.pushReplacement(
-                                            context,
-                                            PageTransition(
-                                                type: PageTransitionType.fade,
-                                                child: St()));
-
+                                          Navigator.pushReplacement(
+                                              context,
+                                              PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child: St()));
                                         } else {
                                           showDialog(
                                               context: context,
