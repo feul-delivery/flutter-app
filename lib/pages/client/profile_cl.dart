@@ -1,3 +1,4 @@
+import 'package:feul_delivery/pages/client/profile_mdf.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'bbar_cl.dart';
@@ -19,6 +20,14 @@ class _profileClState extends State<profileCl> {
           title: Text(
             "Mon Profile",
           ),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.edit_rounded),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => profileCLModifier()));
+                })
+          ],
           leading: Builder(
             builder: (context) => IconButton(
               icon: Icon(Icons.menu_rounded),

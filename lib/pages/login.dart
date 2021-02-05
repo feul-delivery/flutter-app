@@ -20,16 +20,16 @@ class LoginPage extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           brightness: Brightness.light,
-          backgroundColor: Colors.orange[900].withOpacity(0),
+          backgroundColor: Colors.orange[900].withOpacity(1),
           leading: IconButton(
             onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => StarterPage()));
             },
             icon: Icon(
-              Icons.arrow_back_ios,
+              Icons.arrow_back,
               size: 20,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
         ),
@@ -38,8 +38,8 @@ class LoginPage extends StatelessWidget {
           decoration: BoxDecoration(
               gradient: LinearGradient(begin: Alignment.topCenter, colors: [
             Colors.orange[900],
-            Colors.orange[800],
-            Colors.orange[400]
+            Colors.orange[900],
+            Colors.orange[600]
           ])),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

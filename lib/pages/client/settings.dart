@@ -1,5 +1,8 @@
+import 'package:feul_delivery/pages/client/bbar_cl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'index_cl.dart';
 
 class SettingCl extends StatefulWidget {
   SettingCl({Key key}) : super(key: key);
@@ -17,6 +20,15 @@ class _SettingClState extends State<SettingCl> {
             "Paramètres",
             style: TextStyle(),
           ),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.home_rounded),
+                onPressed: () {
+                  selectedIndex = 0;
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => Cl()));
+                })
+          ],
           centerTitle: true,
           backgroundColor: Colors.orange[900],
           elevation: 1,

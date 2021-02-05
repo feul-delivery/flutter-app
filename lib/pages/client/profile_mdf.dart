@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'bbar_cl.dart';
 import 'drawer_cl.dart';
+import 'index_cl.dart';
 
 // ignore: camel_case_types
 class profileCLModifier extends StatefulWidget {
@@ -26,6 +28,15 @@ class _profileCLModifierState extends State<profileCLModifier>
           title: Text(
             "Mon Profile",
           ),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.home_rounded),
+                onPressed: () {
+                  selectedIndex = 0;
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => Cl()));
+                })
+          ],
           leading: Builder(
             builder: (context) => IconButton(
               icon: Icon(Icons.menu_rounded),

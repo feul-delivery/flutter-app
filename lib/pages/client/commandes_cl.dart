@@ -2,7 +2,9 @@ import 'package:feul_delivery/pages/client/commande_cl.dart';
 
 import 'package:flutter/material.dart';
 
+import 'bbar_cl.dart';
 import 'commande_cl.dart';
+import 'index_cl.dart';
 
 class CommandeCl extends StatefulWidget {
   @override
@@ -17,6 +19,15 @@ class _CommandeClState extends State<CommandeCl> {
           title: Text(
             "Mes commandes",
           ),
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.home_rounded),
+                onPressed: () {
+                  selectedIndex = 0;
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => Cl()));
+                })
+          ],
           centerTitle: true,
           backgroundColor: Colors.orange[900],
           elevation: 1,

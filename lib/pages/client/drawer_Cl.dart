@@ -58,6 +58,7 @@ class drawerCL extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
+            selectedIndex = 0;
             Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) => Cl()));
           },
@@ -69,7 +70,6 @@ class drawerCL extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
-            selectedIndex = 0;
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => profileCLModifier()));
           },

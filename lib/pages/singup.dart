@@ -12,15 +12,15 @@ class SignupPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.light,
-        backgroundColor: Colors.orange[900].withOpacity(0),
+        backgroundColor: Colors.orange[900],
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Icon(
-            Icons.arrow_back_ios,
+            Icons.arrow_back,
             size: 20,
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),
@@ -29,8 +29,8 @@ class SignupPage extends StatelessWidget {
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
           Colors.orange[900],
-          Colors.orange[800],
-          Colors.orange[400]
+          Colors.orange[900],
+          Colors.orange[600]
         ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -147,7 +147,7 @@ class SignupPage extends StatelessWidget {
                               height: 50,
                               margin: EdgeInsets.symmetric(horizontal: 50),
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
+                                  borderRadius: BorderRadius.circular(10),
                                   color: Colors.orange[900]),
                               child: Center(
                                 child: FlatButton(
