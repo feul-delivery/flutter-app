@@ -84,7 +84,7 @@ class _StarterPageState extends State<StarterPage>
                   FadeAnimation(
                       1,
                       Text(
-                        "Vous n'avez pas d'essence?\nVous n'avez pas le temps? \nVous n'avez pas les deux? \nC'est pourquoi nous sommes ici.",
+                        "Obtenir le carburant livré à votre porte.",
                         style: TextStyle(
                             color: Colors.white, height: 1.4, fontSize: 18),
                       )),
