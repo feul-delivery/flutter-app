@@ -1,74 +1,161 @@
+import 'package:feul_delivery/pages/client/profile_cl.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:feul_delivery/pages/client/explore_cl.dart';
-import 'package:feul_delivery/pages/client/index_cl.dart';
-import 'package:feul_delivery/pages/client/profile_cl.dart';
+import 'explore_cl.dart';
+import 'index_cl.dart';
 
-class BottomNavigationBarCl extends StatefulWidget {
+int selectedIndex = 0;
+
+class ButtomBARWidget extends StatefulWidget {
   @override
-  _BottomNavigationBarClState createState() => _BottomNavigationBarClState();
+  State createState() => _ButtomBARWidgetState();
 }
 
-class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
+class _ButtomBARWidgetState extends State<ButtomBARWidget> {
+  final List<Item> items = [
+    Item('Acceuil', Icons.home_rounded),
+    Item('Explorer', Icons.explore_rounded),
+    Item('Profile', Icons.account_circle),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return BottomAppBar(
-      color: Theme.of(context).scaffoldBackgroundColor,
-      shape: CircularNotchedRectangle(),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 2.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.home,
-                color: Colors.orange[900],
-                size: 30,
-              ),
-              onPressed: () {
-                setState(() {
-                  Navigator.pushReplacement(
-                      context,
-                      PageTransition(
-                          type: PageTransitionType.fade, child: Cl()));
-                });
-              },
+    return TitledBottomNavigationBar(
+      items: items,
+    );
+  }
+}
+
+class TitledBottomNavigationBar extends StatefulWidget {
+  final List<Item> items;
+
+  const TitledBottomNavigationBar({Key key, this.items}) : super(key: key);
+
+  @override
+  _TitledBottomNavigationBarState createState() =>
+      _TitledBottomNavigationBarState();
+}
+
+class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
+    with SingleTickerProviderStateMixin {
+  List<Item> get items => widget.items;
+  static const double BAR_HEIGHT = 60;
+  static const double INDICATOR_HEIGHT = 2;
+  static const double INDICATOR_WIDTH = 10;
+  double width = 0;
+  double indicatorAlignX = 0;
+
+  Duration duration = Duration(milliseconds: 270);
+
+  @override
+  void initState() {
+    _select(selectedIndex);
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    width = MediaQuery.of(context).size.width;
+    return Container(
+      height: BAR_HEIGHT,
+      width: width,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black12,
+            blurRadius: 10,
+          ),
+        ],
+      ),
+      child: Stack(
+//        overflow: Overflow.visible,// Debug use
+        children: <Widget>[
+          Positioned(
+            top: INDICATOR_HEIGHT,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: items.map((item) {
+                var index = items.indexOf(item);
+                return GestureDetector(
+                  onTap: () => setState(() {
+                    _select(index);
+                    if (selectedIndex == 0) {
+                      Navigator.pushReplacement(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.fade, child: Cl()));
+                    } else if (selectedIndex == 1) {
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.fade,
+                              child: ListSationCl()));
+                    } else if (selectedIndex == 2) {
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              type: PageTransitionType.fade,
+                              child: profileCl()));
+                    }
+                  }),
+                  child: _buildItemWidget(item, index == selectedIndex),
+                );
+              }).toList(),
             ),
-            IconButton(
-              icon: Icon(
-                Icons.explore,
+          ),
+          Positioned(
+            top: 0,
+            width: width,
+            child: AnimatedAlign(
+              alignment: Alignment(indicatorAlignX, 0),
+              curve: Curves.linear,
+              duration: duration,
+              child: Container(
                 color: Colors.orange[900],
-                size: 30,
+                width: width / items.length,
+                height: INDICATOR_HEIGHT,
               ),
-              onPressed: () {
-                setState(() {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          type: PageTransitionType.fade,
-                          child: ListSationCl()));
-                });
-              },
             ),
-            IconButton(
-              icon: Icon(
-                Icons.account_circle,
-                color: Colors.orange[900],
-                size: 30,
-              ),
-              onPressed: () {
-                setState(() {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          type: PageTransitionType.fade, child: profileCl()));
-                });
-              },
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
+
+  _select(int index) {
+    selectedIndex = index;
+    indicatorAlignX = -1 + -(2 / (items.length - 1) * index);
+  }
+
+  Widget _buildItemWidget(Item item, bool isSelected) {
+    return Container(
+      color: Colors.white,
+      height: BAR_HEIGHT,
+      width: width / items.length,
+      child: Stack(
+        alignment: AlignmentDirectional.center,
+        children: <Widget>[
+          AnimatedOpacity(
+            opacity: isSelected ? 0.0 : 1.0,
+            duration: duration,
+            curve: Curves.linear,
+            child: Text(item.title),
+          ),
+          AnimatedAlign(
+            duration: duration,
+            alignment: isSelected ? Alignment.center : Alignment(0, 2.6),
+            child: Icon(item.icon),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Item {
+  final String title;
+  final IconData icon;
+
+  Item(this.title, this.icon);
 }

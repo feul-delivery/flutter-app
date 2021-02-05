@@ -3,6 +3,8 @@ import 'package:feul_delivery/pages/client/settings.dart';
 import 'package:feul_delivery/pages/client/commandes_cl.dart';
 import 'package:flutter/material.dart';
 
+import 'index_cl.dart';
+
 // ignore: camel_case_types
 class drawerCL extends StatelessWidget {
   const drawerCL({Key key}) : super(key: key);
@@ -52,6 +54,17 @@ class drawerCL extends StatelessWidget {
         ),
         SizedBox(
           height: 20.0,
+        ),
+        ListTile(
+          onTap: () {
+            Navigator.of(context).push(
+                MaterialPageRoute(builder: (BuildContext context) => Cl()));
+          },
+          leading: Icon(
+            Icons.home_rounded,
+            color: Colors.orange[900],
+          ),
+          title: Text("Acceuil"),
         ),
         ListTile(
           onTap: () {

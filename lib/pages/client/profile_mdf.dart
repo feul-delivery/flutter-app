@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:feul_delivery/pages/client/bbar_cl.dart';
 import 'drawer_cl.dart';
 
 // ignore: camel_case_types
@@ -37,7 +36,6 @@ class _profileCLModifierState extends State<profileCLModifier>
           backgroundColor: Colors.orange[900],
           elevation: 1,
         ),
-        bottomNavigationBar: BottomNavigationBarCl(),
         drawer: drawerCL(),
         body: new Container(
           color: Colors.white,

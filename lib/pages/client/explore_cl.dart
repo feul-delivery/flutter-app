@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/client/drawer_cl.dart';
-import 'package:feul_delivery/pages/client/bbar_cl.dart';
+import 'bbar_cl.dart';
 
 class ListSationCl extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class _ListSationClState extends State<ListSationCl> {
       ),
       drawer: drawerCL(),
       body: createCard(),
-      bottomNavigationBar: BottomNavigationBarCl(),
+      bottomNavigationBar: ButtomBARWidget(),
     );
   }
 

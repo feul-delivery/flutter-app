@@ -106,8 +106,12 @@ GestureDetector buildChangePasswordRow(BuildContext context, String title) {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text("Close",style: TextStyle(color: Colors.orange[900]))),
-                    FlatButton(onPressed: () {}, child: Text("Change",style: TextStyle(color: Colors.orange[900]))),
+                        child: Text("Close",
+                            style: TextStyle(color: Colors.orange[900]))),
+                    FlatButton(
+                        onPressed: () {},
+                        child: Text("Change",
+                            style: TextStyle(color: Colors.orange[900]))),
                   ],
                 ),
               ],
@@ -167,9 +171,11 @@ GestureDetector buildAboutUsRow(BuildContext context, String title) {
                             fit: BoxFit.cover,
                             image: AssetImage('assets/Feuldelivery.png'))),
                   ),
-                  SizedBox(height: 12,),
+                  SizedBox(
+                    height: 12,
+                  ),
                   Text('Build by Flutter framwork'),
-                  Text('Devlopped by HS & iz'),
+                  Text('Devlopped by HS & IZ'),
                 ],
               ),
               actions: [
@@ -177,7 +183,10 @@ GestureDetector buildAboutUsRow(BuildContext context, String title) {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close",style: TextStyle(color: Colors.orange[900]),)),
+                    child: Text(
+                      "Close",
+                      style: TextStyle(color: Colors.orange[900]),
+                    )),
               ],
             );
           });
@@ -231,12 +240,16 @@ GestureDetector buildRateUsRow(BuildContext context, String title) {
               actions: [
                 Row(
                   children: [
-                    FlatButton(onPressed: () {}, child: Text("Rate",style: TextStyle(color: Colors.orange[900]))),
+                    FlatButton(
+                        onPressed: () {},
+                        child: Text("Rate",
+                            style: TextStyle(color: Colors.orange[900]))),
                     FlatButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text("Close",style: TextStyle(color: Colors.orange[900]))),
+                        child: Text("Close",
+                            style: TextStyle(color: Colors.orange[900]))),
                   ],
                 ),
               ],
@@ -276,9 +289,7 @@ GestureDetector buildAccountOptionRow(BuildContext context, String title) {
               title: Text(title),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: [
-                  
-                ],
+                children: [],
               ),
               actions: [
                 FlatButton(

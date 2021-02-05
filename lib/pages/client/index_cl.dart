@@ -2,8 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/styles/style_accueil_cl.dart';
 import 'package:feul_delivery/pages/client/station_cl.dart';
-import 'package:feul_delivery/pages/client/bbar_cl.dart';
 import 'package:feul_delivery/pages/client/drawer_cl.dart';
+import 'bbar_cl.dart';
 
 class Cl extends StatelessWidget {
   @override
@@ -54,7 +54,7 @@ class Cl extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: BottomNavigationBarCl(),
+        bottomNavigationBar: ButtomBARWidget(),
         drawer: drawerCL(),
       ),
     );
