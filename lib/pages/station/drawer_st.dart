@@ -1,14 +1,9 @@
-import 'package:feul_delivery/pages/client/profile_mdf.dart';
-import 'package:feul_delivery/pages/client/settings.dart';
-import 'package:feul_delivery/pages/client/commandes_cl.dart';
-import 'package:feul_delivery/pages/login.dart';
 import 'package:flutter/material.dart';
-
-import 'index_cl.dart';
+import 'package:feul_delivery/pages/login.dart';
 
 // ignore: camel_case_types
-class drawerCL extends StatelessWidget {
-  const drawerCL({Key key}) : super(key: key);
+class drawerst extends StatelessWidget {
+  const drawerst({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +28,7 @@ class drawerCL extends StatelessWidget {
                   height: 5.0,
                 ),
                 Text(
-                  "Nom Prénom",
+                  "Station nom",
                   style: TextStyle(
                     fontSize: 22.0,
                     fontWeight: FontWeight.w800,
@@ -57,21 +52,7 @@ class drawerCL extends StatelessWidget {
           height: 20.0,
         ),
         ListTile(
-          onTap: () {
-            Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) => Cl()));
-          },
-          leading: Icon(
-            Icons.home_rounded,
-            color: Colors.orange[900],
-          ),
-          title: Text("Acceuil"),
-        ),
-        ListTile(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => profileCLModifier()));
-          },
+          onTap: () {},
           leading: Icon(
             Icons.person,
             color: Colors.orange[900],
@@ -81,27 +62,13 @@ class drawerCL extends StatelessWidget {
         ListTile(
           onTap: () {},
           leading: Icon(
-            Icons.favorite_rounded,
-            color: Colors.orange[900],
-          ),
-          title: Text("Mes favoris"),
-        ),
-        ListTile(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => CommandeCl()));
-          },
-          leading: Icon(
             Icons.receipt_rounded,
             color: Colors.orange[900],
           ),
-          title: Text("Mes commandes"),
+          title: Text("Nos commandes"),
         ),
         ListTile(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => SettingCl()));
-          },
+          onTap: () {},
           leading: Icon(
             Icons.settings,
             color: Colors.orange[900],
@@ -121,8 +88,7 @@ class drawerCL extends StatelessWidget {
               child: FlatButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (BuildContext context) => LoginPage()));
-          
+                      builder: (BuildContext context) => LoginPage()));
                 },
                 child: Text(
                   "Se déconnecter",

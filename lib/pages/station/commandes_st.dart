@@ -2,14 +2,12 @@ import 'package:feul_delivery/pages/client/commande_cl.dart';
 
 import 'package:flutter/material.dart';
 
-import 'commande_cl.dart';
-
-class CommandeCl extends StatefulWidget {
+class CommandNonTermene extends StatefulWidget {
   @override
-  _CommandeClState createState() => _CommandeClState();
+  _CommandNonTermeneState createState() => _CommandNonTermeneState();
 }
 
-class _CommandeClState extends State<CommandeCl> {
+class _CommandNonTermeneState extends State<CommandNonTermene> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
