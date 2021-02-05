@@ -1,9 +1,19 @@
 import 'package:feul_delivery/animations/FadeAnimation.dart';
 import 'package:flutter/material.dart';
 
-class StationProfilCl extends StatelessWidget {
+int like = 10;
+int dislike = 10;
+
+class StationProfilCl extends StatefulWidget {
+  @override
+  _StationProfilClState createState() => _StationProfilClState();
+}
+
+class _StationProfilClState extends State<StationProfilCl> {
   @override
   Widget build(BuildContext context) {
+    String likeText = like.toString();
+    String dislikeText = dislike.toString();
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
@@ -30,48 +40,15 @@ class StationProfilCl extends StatelessWidget {
                             FadeAnimation(
                                 1,
                                 Text(
-                                  "Total",
+                                  "Total - Centre ville",
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 35),
+                                      fontSize: 30),
                                 )),
                             SizedBox(
                               height: 10,
                             ),
-                            Row(
-                              children: <Widget>[
-                                FadeAnimation(
-                                    1.2,
-                                    Row(children: [
-                                      Text(
-                                        "60",
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 18),
-                                      ),
-                                      Icon(
-                                        Icons.thumb_up,
-                                        color: Colors.grey,
-                                      )
-                                    ])),
-                                FadeAnimation(
-                                    1.2,
-                                    Row(children: [
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Text(
-                                        "24",
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 18),
-                                      ),
-                                      Icon(
-                                        Icons.thumb_down,
-                                        color: Colors.grey,
-                                      )
-                                    ]))
-                              ],
-                            )
                           ],
                         ),
                       ),
@@ -82,10 +59,81 @@ class StationProfilCl extends StatelessWidget {
               SliverList(
                 delegate: SliverChildListDelegate([
                   Padding(
-                    padding: EdgeInsets.all(20),
+                    padding: EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      bottom: 20,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              FadeAnimation(
+                                1.2,
+                                Container(
+                                  width: 100,
+                                  child: RaisedButton(
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      setState(() {
+                                        _changeText(0);
+                                      });
+                                    },
+                                    child: Row(
+                                      children: <Widget>[
+                                        Row(children: [
+                                          Icon(
+                                            Icons.thumb_up,
+                                            color: Colors.grey,
+                                          ),
+                                          SizedBox(
+                                            width: 8,
+                                          ),
+                                          Text(
+                                            likeText,
+                                            style: TextStyle(
+                                                color: Colors.grey,
+                                                fontSize: 18),
+                                          ),
+                                        ])
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 20,
+                              ),
+                              FadeAnimation(
+                                  1.2,
+                                  Container(
+                                    width: 100,
+                                    child: RaisedButton(
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        setState(() {
+                                          _changeText(1);
+                                        });
+                                      },
+                                      child: Row(children: [
+                                        Icon(
+                                          Icons.thumb_down,
+                                          color: Colors.grey,
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          dislikeText,
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 18),
+                                        ),
+                                      ]),
+                                    ),
+                                  )),
+                            ]),
                         FadeAnimation(
                           1.2,
                           Row(
@@ -309,9 +357,9 @@ class StationProfilCl extends StatelessWidget {
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: <Widget>[
-                                  makeVideo(image: 'assets/emma.jpg'),
-                                  makeVideo(image: 'assets/emma.jpg'),
-                                  makeVideo(image: 'assets/emma.jpg'),
+                                  makeVideo(image: 'assets/Station3.png'),
+                                  makeVideo(image: 'assets/Station3.png'),
+                                  makeVideo(image: 'assets/Station3.png'),
                                 ],
                               ),
                             )),
@@ -364,5 +412,13 @@ class StationProfilCl extends StatelessWidget {
                 DecorationImage(image: AssetImage(image), fit: BoxFit.cover)),
       ),
     );
+  }
+}
+
+void _changeText(int choix) {
+  if (choix == 0) {
+    like = like + 1;
+  } else if (choix == 1) {
+    dislike = dislike + 1;
   }
 }

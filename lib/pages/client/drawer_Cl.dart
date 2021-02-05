@@ -3,6 +3,7 @@ import 'package:feul_delivery/pages/client/settings.dart';
 import 'package:feul_delivery/pages/client/commandes_cl.dart';
 import 'package:feul_delivery/pages/login.dart';
 import 'package:flutter/material.dart';
+import 'favoris_cl.dart';
 import 'index_cl.dart';
 import 'bbar_cl.dart';
 
@@ -80,7 +81,10 @@ class drawerCL extends StatelessWidget {
           title: Text("Mon Profile"),
         ),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => FavSationCl()));
+          },
           leading: Icon(
             Icons.favorite,
             color: Colors.orange[900],

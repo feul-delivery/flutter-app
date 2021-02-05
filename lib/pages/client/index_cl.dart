@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:feul_delivery/pages/client/favoris_cl.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/styles/style_accueil_cl.dart';
 import 'package:feul_delivery/pages/client/station_cl.dart';
@@ -37,7 +38,12 @@ class Cl extends StatelessWidget {
           backgroundColor: Colors.orange[900],
           centerTitle: true,
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.favorite), onPressed: () {})
+            IconButton(
+                icon: Icon(Icons.favorite),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => FavSationCl()));
+                })
           ],
         ),
         body: SingleChildScrollView(
@@ -154,19 +160,23 @@ class BigStation extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'Best of the week',
+                  'Le meilleur de la semaine',
                   style: tileTitleStyle,
                 ),
               ],
             ),
+            Divider(
+              height: 10,
+              thickness: 1,
+            ),
             Container(
-              margin: const EdgeInsets.only(top: 20.0),
+              margin: const EdgeInsets.only(top: 10.0),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(5.0),
                 child: Hero(
                   tag: 'taaag',
                   child: Image.asset(
-                    'assets/emma.jpg',
+                    'assets/Station3.png',
                     alignment: Alignment.center,
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width,

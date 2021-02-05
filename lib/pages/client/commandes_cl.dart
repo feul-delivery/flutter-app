@@ -58,7 +58,7 @@ class _CommandeClState extends State<CommandeCl> {
     }
     if (items[i]['etat'] != 'complet') {
       titleStyle = titleStyleencoure;
-      etaticon = Icons.block;
+      etaticon = Icons.timer;
     }
 
     return Container(
@@ -98,6 +98,7 @@ class _CommandeClState extends State<CommandeCl> {
                     Container(
                       decoration: new BoxDecoration(
                           color: Colors.orange[900],
+                          borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
                                 color: Color.fromRGBO(225, 95, 27, .3),
@@ -108,6 +109,7 @@ class _CommandeClState extends State<CommandeCl> {
                         flex: 1,
                         child: Container(
                           decoration: new BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
                             color: Colors.orange[900],
                           ),
                           child: Container(

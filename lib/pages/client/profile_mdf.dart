@@ -340,7 +340,7 @@ class _profileCLModifierState extends State<profileCLModifier>
         children: <Widget>[
           Expanded(
             child: Padding(
-              padding: EdgeInsets.only(right: 10.0),
+              padding: EdgeInsets.only(right: 10.0, left: 10),
               child: Container(
                   child: new RaisedButton(
                 child: new Text("Enregistrer"),
@@ -353,7 +353,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                   });
                 },
                 shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(20.0)),
+                    borderRadius: new BorderRadius.circular(10.0)),
               )),
             ),
             flex: 2,
@@ -364,17 +364,16 @@ class _profileCLModifierState extends State<profileCLModifier>
               child: Container(
                 child: new RaisedButton(
                   child: new Text("Annuler"),
-                  textColor: Colors.white,
-                  color: Colors.orange[900],
+                  textColor: Colors.orange[900],
+                  color: Colors.white,
                   onPressed: () {
                     setState(() {
                       _status = true;
                       FocusScope.of(context).requestFocus(new FocusNode());
                     });
                   },
-                  //   shape: new RoundedRectangleBorder(
-                  //       borderRadius: new BorderRadius.circular(20.0)),
-                  // )
+                  shape: new RoundedRectangleBorder(
+                      borderRadius: new BorderRadius.circular(10.0)),
                 ),
               ),
               //flex: 2,

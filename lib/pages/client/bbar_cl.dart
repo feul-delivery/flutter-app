@@ -41,7 +41,6 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
   List<Item> get items => widget.items;
   static const double BAR_HEIGHT = 60;
   static const double INDICATOR_HEIGHT = 2;
-  static const double INDICATOR_WIDTH = 10;
   double width = 0;
   double indicatorAlignX = 0;
 

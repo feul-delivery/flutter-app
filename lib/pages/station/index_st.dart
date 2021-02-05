@@ -43,21 +43,36 @@ class _StState extends State<St> {
           title: Text("Acceuil"),
           backgroundColor: Colors.orange[900],
           centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.find_replace_rounded),
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => St()));
+                })
+          ],
         ),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
-            margin: const EdgeInsets.fromLTRB(25.0, 35.0, 25.0, 15.0),
+            margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
             child: Column(
               children: <Widget>[
+                SizedBox(
+                  height: 10,
+                ),
                 Text(
-                  'comnande non delevery',
+                  'Commandes en direct',
                   style: TextStyle(
                     fontSize: 20,
                   ),
                 ),
+                Divider(
+                  height: 5,
+                  thickness: 1,
+                ),
                 for (int i = 0; i < items.length; i++)
-                  commandtnontermeneState(i)
+                  commandtnontermeneState(i),
               ],
             ),
           ),
@@ -73,7 +88,7 @@ class _StState extends State<St> {
       child: Column(
         children: [
           SizedBox(
-            height: 30,
+            height: 20,
           ),
           Container(
               decoration: new BoxDecoration(
@@ -81,7 +96,7 @@ class _StState extends State<St> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                        color: Color.fromRGBO(225, 95, 27, .3),
+                        color: Colors.orange[900].withOpacity(0.4),
                         blurRadius: 20,
                         offset: Offset(0, 10))
                   ]),
@@ -91,6 +106,7 @@ class _StState extends State<St> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Container(
                           child: Padding(
@@ -99,14 +115,25 @@ class _StState extends State<St> {
                                   style: TextStyle(
                                       color: Colors.black, fontSize: 15))),
                         ),
-                        SizedBox(
-                          width: 120,
-                        ),
-                        Container(
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(items[i]['time'],
-                                  style: TextStyle(color: Colors.grey))),
+                        Positioned(
+                          right: 0,
+                          child: Container(
+                            height: 25,
+                            margin: EdgeInsets.symmetric(horizontal: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.orange[900],
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 5.0, right: 5.0),
+                              child: Center(
+                                  child: Text(
+                                items[i]['time'],
+                                style: TextStyle(color: Colors.white),
+                              )),
+                            ),
+                          ),
                         ),
                       ],
                     ),
@@ -119,7 +146,7 @@ class _StState extends State<St> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  child: Text('Volume demonder : ',
+                                  child: Text('Volume demonder: ',
                                       style:
                                           TextStyle(color: Colors.grey[800])),
                                 ),
@@ -138,7 +165,7 @@ class _StState extends State<St> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
-                                  child: Text('Type : ',
+                                  child: Text('Type:',
                                       style:
                                           TextStyle(color: Colors.grey[800])),
                                 ),
@@ -156,7 +183,7 @@ class _StState extends State<St> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  child: Text('Adresse : ',
+                                  child: Text('Adresse: ',
                                       style:
                                           TextStyle(color: Colors.grey[800])),
                                 ),
@@ -172,18 +199,6 @@ class _StState extends State<St> {
                         SizedBox(
                           width: 10,
                         ),
-                        Container(
-                          height: 30,
-                          margin: EdgeInsets.symmetric(horizontal: 10),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.orange[700],
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Center(child: Text(items[i]['statu'])),
-                          ),
-                        )
                       ],
                     )
                   ],
@@ -196,40 +211,40 @@ class _StState extends State<St> {
 
   List items = [
     {
-      "nom": "saed massawi",
+      "nom": "Da7mad ELMAKKAWI",
       "time": "11:00",
       "etat": "en cour",
-      "volume": "43L",
-      "type": "diesel",
-      "adresse": "Rue N° 35467 \nAvenue alwafae Narjiss \nfes",
-      "statu": "en attend"
+      "volume": "10L",
+      "type": "Gas-oil",
+      "adresse": "Monfleuri 2, Lycée Technique, Fès",
+      "statut": "En attend"
     },
     {
-      "nom": "saed massawi",
+      "nom": "Da7mad ELMAKKAWI",
       "time": "11:00",
       "etat": "en cour",
-      "volume": "43L",
-      "type": "diesel",
-      "adresse": "Rue N° 35467 \nAvenue alwafae Narjiss \nfes",
-      "statu": "en attend"
+      "volume": "50L",
+      "type": "Gas-oil",
+      "adresse": "Monfleuri 2, Lycée Technique, Fès",
+      "statut": "En attend"
     },
     {
-      "nom": "saed massawi",
+      "nom": "Da7mad ELMAKKAWI",
       "time": "11:00",
       "etat": "en cour",
       "volume": "43L",
-      "type": "diesel",
-      "adresse": "Rue N° 35467 \nAvenue alwafae Narjiss \nfes",
-      "statu": "en attend"
+      "type": "Gas-oil",
+      "adresse": "Monfleuri 2, Lycée Technique, Fès",
+      "statut": "En attend"
     },
     {
-      "nom": "saed massawi",
+      "nom": "Da7mad ELMAKKAWI",
       "time": "11:00",
       "etat": "en cour",
       "volume": "43L",
-      "type": "diesel",
-      "statu": "en attend",
-      "adresse": "Rue N° 35467 \nAvenue alwafae Narjiss \nfes",
+      "type": "Gas-oil",
+      "statut": "En attend",
+      "adresse": "Monfleuri 2, Lycée Technique, Fès",
     }
   ];
 }

@@ -1,46 +1,37 @@
 import 'package:feul_delivery/pages/client/station_cl.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/client/drawer_cl.dart';
-import 'bbar_cl.dart';
+
 import 'index_cl.dart';
 
-class ListSationCl extends StatefulWidget {
+class FavSationCl extends StatefulWidget {
   @override
-  _ListSationClState createState() => _ListSationClState();
+  _FavSationClState createState() => _FavSationClState();
 }
 
-class _ListSationClState extends State<ListSationCl> {
-  Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Explorer');
-
+class _FavSationClState extends State<FavSationCl> {
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      // ignore: missing_return
-      onWillPop: () {
-        selectedIndex = 0;
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (BuildContext context) => Cl()));
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.orange[900],
-          title: _appBarTitle,
-          actions: <Widget>[
-            IconButton(
-              icon: new Icon(Icons.search),
-              onPressed: _searchPressed,
-            ),
-          ],
-        ),
-        drawer: drawerCL(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [createCard()],
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.orange[900],
+        title: Text('Favoris'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.home),
+            onPressed: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) => Cl()));
+            },
           ),
+        ],
+      ),
+      drawer: drawerCL(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [createCard()],
         ),
-        bottomNavigationBar: ButtomBARWidget(),
       ),
     );
   }
@@ -81,7 +72,7 @@ class _ListSationClState extends State<ListSationCl> {
                             onPressed: null,
                             child: Icon(
                               Icons.favorite,
-                              color: Colors.white,
+                              color: Colors.orange[900],
                             ),
                           ),
                         )
@@ -97,19 +88,11 @@ class _ListSationClState extends State<ListSationCl> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => StationProfilCl()));
-                            },
-                            child: Text(
-                              'Total - Centre ville',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
-                              ),
+                          Text(
+                            'Total - Centre ville',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                           Text(
@@ -183,20 +166,5 @@ class _ListSationClState extends State<ListSationCl> {
         ),
       ),
     );
-  }
-
-  void _searchPressed() {
-    setState(() {
-      if (this._searchIcon.icon == Icons.search) {
-        this._searchIcon = new Icon(Icons.close);
-        this._appBarTitle = new TextField(
-          decoration: new InputDecoration(
-              prefixIcon: new Icon(Icons.search), hintText: 'Rechercher...'),
-        );
-      } else {
-        this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text('Explorer');
-      }
-    });
   }
 }

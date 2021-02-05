@@ -57,7 +57,7 @@ class _SettingClState extends State<SettingCl> {
               ),
               Divider(
                 height: 15,
-                thickness: 2,
+                thickness: 1,
               ),
               InkWell(
                   onTap: () {},
@@ -84,7 +84,7 @@ class _SettingClState extends State<SettingCl> {
               ),
               Divider(
                 height: 15,
-                thickness: 2,
+                thickness: 1,
               ),
               InkWell(
                   onTap: () {}, child: buildRateUsRow(context, "Évaluez nous")),
@@ -108,7 +108,7 @@ class _SettingClState extends State<SettingCl> {
               ),
               Divider(
                 height: 15,
-                thickness: 2,
+                thickness: 1,
               ),
               InkWell(
                   onTap: () {},
