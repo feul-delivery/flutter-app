@@ -14,7 +14,7 @@ class _SettingClState extends State<SettingCl> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Setting",
+            "Paramètres",
             style: TextStyle(),
           ),
           centerTitle: true,
@@ -28,11 +28,11 @@ class _SettingClState extends State<SettingCl> {
               FocusScope.of(context).unfocus();
             },
             child: ListView(children: [
-              buildChangePasswordRow(context, "Change password"),
-              buildRateUsRow(context, "Rate us"),
-              buildAboutUsRow(context, "About us"),
-              buildAccountOptionRow(context, "Privacy and security"),
-              buildAccountOptionRow(context, "Delete Your account"),
+              buildChangePasswordRow(context, "Changer le mot de passe"),
+              buildRateUsRow(context, "Évaluez nous"),
+              buildAboutUsRow(context, "À propos de nous"),
+              buildAccountOptionRow(context, "Confidentialité et sécurité"),
+              buildAccountOptionRow(context, "Supprimer votre compte"),
               SizedBox(
                 height: 40,
               ),
@@ -65,7 +65,7 @@ GestureDetector buildChangePasswordRow(BuildContext context, String title) {
                               bottom: BorderSide(color: Colors.grey[200]))),
                       child: TextField(
                         decoration: InputDecoration(
-                            hintText: "Old password",
+                            hintText: "Ancien mot de passe",
                             hintStyle: TextStyle(color: Colors.grey),
                             border: InputBorder.none),
                       ),
@@ -78,7 +78,7 @@ GestureDetector buildChangePasswordRow(BuildContext context, String title) {
                       child: TextField(
                         obscureText: true,
                         decoration: InputDecoration(
-                            hintText: "New Password",
+                            hintText: "Nouveau mot de passe",
                             hintStyle: TextStyle(color: Colors.grey),
                             border: InputBorder.none),
                       ),
@@ -91,7 +91,7 @@ GestureDetector buildChangePasswordRow(BuildContext context, String title) {
                       child: TextField(
                         obscureText: true,
                         decoration: InputDecoration(
-                            hintText: "Confirm New Password",
+                            hintText: "Confirmation:",
                             hintStyle: TextStyle(color: Colors.grey),
                             border: InputBorder.none),
                       ),
@@ -103,14 +103,14 @@ GestureDetector buildChangePasswordRow(BuildContext context, String title) {
                 Row(
                   children: [
                     FlatButton(
+                        onPressed: () {},
+                        child: Text("Changer",
+                            style: TextStyle(color: Colors.orange[900]))),
+                    FlatButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text("Close",
-                            style: TextStyle(color: Colors.orange[900]))),
-                    FlatButton(
-                        onPressed: () {},
-                        child: Text("Change",
+                        child: Text("Annuler",
                             style: TextStyle(color: Colors.orange[900]))),
                   ],
                 ),
@@ -174,8 +174,22 @@ GestureDetector buildAboutUsRow(BuildContext context, String title) {
                   SizedBox(
                     height: 12,
                   ),
-                  Text('Build by Flutter framwork'),
-                  Text('Devlopped by HS & IZ'),
+                  Text(
+                    'Construire par le framework Flutter.',
+                    style: TextStyle(fontSize: 10),
+                  ),
+                  Text(
+                    'Développé par:',
+                    style: TextStyle(fontSize: 18),
+                  ),
+                  Text(
+                    'ELHESSBI Imad',
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Text(
+                    'ZAMOURI Iliyass',
+                    style: TextStyle(fontSize: 15),
+                  ),
                 ],
               ),
               actions: [
@@ -184,7 +198,7 @@ GestureDetector buildAboutUsRow(BuildContext context, String title) {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      "Close",
+                      "Fermer",
                       style: TextStyle(color: Colors.orange[900]),
                     )),
               ],
@@ -241,14 +255,14 @@ GestureDetector buildRateUsRow(BuildContext context, String title) {
                 Row(
                   children: [
                     FlatButton(
-                        onPressed: () {},
-                        child: Text("Rate",
-                            style: TextStyle(color: Colors.orange[900]))),
-                    FlatButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text("Close",
+                        child: Text("Annuler",
+                            style: TextStyle(color: Colors.orange[900]))),
+                    FlatButton(
+                        onPressed: () {},
+                        child: Text("Envoyer",
                             style: TextStyle(color: Colors.orange[900]))),
                   ],
                 ),
@@ -296,7 +310,7 @@ GestureDetector buildAccountOptionRow(BuildContext context, String title) {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Close")),
+                    child: Text("Fermer")),
               ],
             );
           });

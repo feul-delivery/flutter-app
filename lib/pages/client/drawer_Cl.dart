@@ -3,8 +3,8 @@ import 'package:feul_delivery/pages/client/settings.dart';
 import 'package:feul_delivery/pages/client/commandes_cl.dart';
 import 'package:feul_delivery/pages/login.dart';
 import 'package:flutter/material.dart';
-
 import 'index_cl.dart';
+import 'bbar_cl.dart';
 
 // ignore: camel_case_types
 class drawerCL extends StatelessWidget {
@@ -69,6 +69,7 @@ class drawerCL extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
+            selectedIndex = 0;
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => profileCLModifier()));
           },
@@ -121,8 +122,7 @@ class drawerCL extends StatelessWidget {
               child: FlatButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                builder: (BuildContext context) => LoginPage()));
-          
+                      builder: (BuildContext context) => LoginPage()));
                 },
                 child: Text(
                   "Se déconnecter",
