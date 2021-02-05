@@ -63,7 +63,7 @@ class drawerCL extends StatelessWidget {
                 MaterialPageRoute(builder: (BuildContext context) => Cl()));
           },
           leading: Icon(
-            Icons.home_rounded,
+            Icons.home,
             color: Colors.orange[900],
           ),
           title: Text("Acceuil"),
@@ -82,7 +82,7 @@ class drawerCL extends StatelessWidget {
         ListTile(
           onTap: () {},
           leading: Icon(
-            Icons.favorite_rounded,
+            Icons.favorite,
             color: Colors.orange[900],
           ),
           title: Text("Mes favoris"),
@@ -93,7 +93,7 @@ class drawerCL extends StatelessWidget {
                 builder: (BuildContext context) => CommandeCl()));
           },
           leading: Icon(
-            Icons.receipt_rounded,
+            Icons.receipt,
             color: Colors.orange[900],
           ),
           title: Text("Mes commandes"),

@@ -22,7 +22,7 @@ class _SettingClState extends State<SettingCl> {
           ),
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.home_rounded),
+                icon: Icon(Icons.home),
                 onPressed: () {
                   selectedIndex = 0;
                   Navigator.of(context).push(MaterialPageRoute(
@@ -40,11 +40,80 @@ class _SettingClState extends State<SettingCl> {
               FocusScope.of(context).unfocus();
             },
             child: ListView(children: [
-              buildChangePasswordRow(context, "Changer le mot de passe"),
-              buildRateUsRow(context, "Évaluez nous"),
-              buildAboutUsRow(context, "À propos de nous"),
-              buildAccountOptionRow(context, "Confidentialité et sécurité"),
-              buildAccountOptionRow(context, "Supprimer votre compte"),
+              Row(
+                children: [
+                  Icon(
+                    Icons.person,
+                    color: Colors.orange[900],
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "Compte",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              Divider(
+                height: 15,
+                thickness: 2,
+              ),
+              InkWell(
+                  onTap: () {},
+                  child: buildChangePasswordRow(
+                      context, "Changer le mot de passe")),
+              InkWell(
+                  onTap: () {},
+                  child:
+                      buildAccountOptionRow(context, "Supprimer votre compte")),
+              Row(
+                children: [
+                  Icon(
+                    Icons.phone_iphone,
+                    color: Colors.orange[900],
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "Application",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              Divider(
+                height: 15,
+                thickness: 2,
+              ),
+              InkWell(
+                  onTap: () {}, child: buildRateUsRow(context, "Évaluez nous")),
+              InkWell(
+                  onTap: () {},
+                  child: buildAboutUsRow(context, "À propos de nous")),
+              Row(
+                children: [
+                  Icon(
+                    Icons.security,
+                    color: Colors.orange[900],
+                  ),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  Text(
+                    "Droits",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
+              Divider(
+                height: 15,
+                thickness: 2,
+              ),
+              InkWell(
+                  onTap: () {},
+                  child: buildAccountOptionRow(
+                      context, "Confidentialité et sécurité")),
               SizedBox(
                 height: 40,
               ),

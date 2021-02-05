@@ -62,7 +62,7 @@ class drawerst extends StatelessWidget {
         ListTile(
           onTap: () {},
           leading: Icon(
-            Icons.receipt_rounded,
+            Icons.receipt,
             color: Colors.orange[900],
           ),
           title: Text("Nos commandes"),

@@ -30,7 +30,7 @@ class _profileCLModifierState extends State<profileCLModifier>
           ),
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.home_rounded),
+                icon: Icon(Icons.home),
                 onPressed: () {
                   selectedIndex = 0;
                   Navigator.of(context).push(MaterialPageRoute(
@@ -39,7 +39,7 @@ class _profileCLModifierState extends State<profileCLModifier>
           ],
           leading: Builder(
             builder: (context) => IconButton(
-              icon: Icon(Icons.menu_rounded),
+              icon: Icon(Icons.menu),
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
           ),

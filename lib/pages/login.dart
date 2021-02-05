@@ -72,8 +72,8 @@ class LoginPage extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(60),
-                          topRight: Radius.circular(60))),
+                          topLeft: Radius.circular(20),
+                          topRight: Radius.circular(20))),
                   child: SingleChildScrollView(
                     child: Padding(
                       padding: EdgeInsets.all(30),
@@ -132,7 +132,7 @@ class LoginPage extends StatelessWidget {
                                 ),
                               )),
                           SizedBox(
-                            height: 30,
+                            height: 20,
                           ),
                           FadeAnimation(
                               1.5,
@@ -144,9 +144,8 @@ class LoginPage extends StatelessWidget {
                             height: 30,
                           ),
                           FadeAnimation(
-                              1.6,
+                              1.2,
                               Container(
-                                height: 50,
                                 margin: EdgeInsets.symmetric(horizontal: 50),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
@@ -199,7 +198,7 @@ class LoginPage extends StatelessWidget {
                                 ),
                               )),
                           SizedBox(
-                            height: 50,
+                            height: 20,
                           ),
                           FadeAnimation(
                               1.7,
@@ -208,7 +207,7 @@ class LoginPage extends StatelessWidget {
                                 style: TextStyle(color: Colors.grey),
                               )),
                           SizedBox(
-                            height: 22,
+                            height: 5,
                           ),
                           Row(
                             children: <Widget>[

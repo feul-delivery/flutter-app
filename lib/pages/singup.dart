@@ -67,8 +67,8 @@ class SignupPage extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(60),
-                        topRight: Radius.circular(60))),
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20))),
                 child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.all(30),
@@ -142,7 +142,7 @@ class SignupPage extends StatelessWidget {
                           height: 30,
                         ),
                         FadeAnimation(
-                            1.6,
+                            1.2,
                             Container(
                               height: 50,
                               margin: EdgeInsets.symmetric(horizontal: 50),
@@ -171,7 +171,7 @@ class SignupPage extends StatelessWidget {
                           height: 30,
                         ),
                         FadeAnimation(
-                            1.6,
+                            1.2,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[

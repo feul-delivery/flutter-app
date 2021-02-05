@@ -13,8 +13,8 @@ class ButtomBARWidget extends StatefulWidget {
 
 class _ButtomBARWidgetState extends State<ButtomBARWidget> {
   final List<Item> items = [
-    Item('Acceuil', Icons.home_rounded),
-    Item('Explorer', Icons.explore_rounded),
+    Item('Acceuil', Icons.home),
+    Item('Explorer', Icons.explore),
     Item('Profile', Icons.account_circle),
   ];
 

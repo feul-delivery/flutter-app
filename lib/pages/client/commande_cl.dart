@@ -29,7 +29,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Commande detail",
+          "Détail",
           style: TextStyle(),
         ),
         centerTitle: true,
@@ -62,7 +62,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "Commande N°:",
+                    "Numéro:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -101,7 +101,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "Date commande :",
+                    "Date:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -140,7 +140,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "l'heure de commande:",
+                    "L'heure:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -179,7 +179,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "Matricule de voiteur pour cette commande:",
+                    "Matricule de voiteur:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -218,7 +218,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "Coleur de voiteur pour cette commande:",
+                    "Coleur:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -257,7 +257,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "Type demander:",
+                    "type diesel:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -296,7 +296,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "Address à livrer",
+                    "Address",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -323,8 +323,11 @@ class _CommandeDetailState extends State<CommandeDetail> {
           height: 20,
         ),
         Container(
-          color: Colors.orange[900],
-          child: FlatButton(onPressed: () {}, child: Text('envoier un raport !',style: TextStyle(color: Colors.white,fontSize: 15))))
+            color: Colors.orange[900],
+            child: FlatButton(
+                onPressed: () {},
+                child: Text('Envoyer une évaluation!',
+                    style: TextStyle(color: Colors.white, fontSize: 15))))
       ],
     );
   }

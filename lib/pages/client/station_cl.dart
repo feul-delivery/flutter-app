@@ -5,31 +5,24 @@ class StationProfilCl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
         children: <Widget>[
           CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
-                expandedHeight: 450,
-                backgroundColor: Colors.black,
+                expandedHeight: 200,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.pin,
                   background: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage('assets/emma.jpg'),
+                            image: AssetImage('assets/Station3.png'),
                             fit: BoxFit.cover)),
                     child: Container(
-                      decoration: BoxDecoration(
-                          gradient: LinearGradient(
-                              begin: Alignment.bottomRight,
-                              colors: [
-                            Colors.black,
-                            Colors.black.withOpacity(.3)
-                          ])),
                       child: Padding(
-                        padding: EdgeInsets.all(20),
+                        padding: EdgeInsets.all(10),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.end,
@@ -41,30 +34,42 @@ class StationProfilCl extends StatelessWidget {
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 40),
+                                      fontSize: 35),
                                 )),
                             SizedBox(
-                              height: 20,
+                              height: 10,
                             ),
                             Row(
                               children: <Widget>[
                                 FadeAnimation(
                                     1.2,
-                                    Text(
-                                      "60 Like",
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 16),
-                                    )),
-                                SizedBox(
-                                  width: 50,
-                                ),
+                                    Row(children: [
+                                      Text(
+                                        "60",
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 18),
+                                      ),
+                                      Icon(
+                                        Icons.thumb_up,
+                                        color: Colors.grey,
+                                      )
+                                    ])),
                                 FadeAnimation(
-                                    1.3,
-                                    Text(
-                                      "24 deslike",
-                                      style: TextStyle(
-                                          color: Colors.grey, fontSize: 16),
-                                    ))
+                                    1.2,
+                                    Row(children: [
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "24",
+                                        style: TextStyle(
+                                            color: Colors.grey, fontSize: 18),
+                                      ),
+                                      Icon(
+                                        Icons.thumb_down,
+                                        color: Colors.grey,
+                                      )
+                                    ]))
                               ],
                             )
                           ],
@@ -82,79 +87,149 @@ class StationProfilCl extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         FadeAnimation(
-                            1.6,
-                            Text(
-                              "Description",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                          1.2,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.article,
+                                color: Colors.orange[900],
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                "Description",
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 15,
+                          thickness: 2,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
                         FadeAnimation(
-                            1.6,
+                            1.2,
                             Text(
-                              "Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla Bla ",
+                              "On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même.",
                               style: TextStyle(color: Colors.grey, height: 1.4),
                             )),
-                        SizedBox(
-                          height: 40,
+                        FadeAnimation(
+                          1.2,
+                          SizedBox(
+                            height: 20,
+                          ),
                         ),
                         FadeAnimation(
-                            1.6,
-                            Text(
-                              "adrisse",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                          1.2,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.business,
+                                color: Colors.orange[900],
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                "Addresse",
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 15,
+                          thickness: 2,
+                        ),
                         SizedBox(
                           height: 10,
                         ),
                         FadeAnimation(
-                            1.6,
+                            1.2,
                             Text(
-                              "rue sefrou, Narjiss, Fés, Maroc",
+                              "Rue Sefrou, Narjiss, Fés, Maroc",
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
                           height: 20,
                         ),
                         FadeAnimation(
-                            1.6,
-                            Text(
-                              "N° de livreur",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                          1.2,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.group,
+                                color: Colors.orange[900],
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                "Livreurs",
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 15,
+                          thickness: 2,
+                        ),
                         SizedBox(
                           height: 10,
                         ),
                         FadeAnimation(
-                            1.6,
+                            1.2,
                             Text(
-                              "4 livreur",
+                              "4 Livreurs",
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
                           height: 20,
                         ),
                         FadeAnimation(
-                            1.6,
-                            Text(
-                              "N° de téléfone",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                          1.2,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.phone,
+                                color: Colors.orange[900],
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                "Tél",
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 15,
+                          thickness: 2,
+                        ),
                         SizedBox(
                           height: 10,
                         ),
                         FadeAnimation(
-                            1.6,
+                            1.2,
                             Text(
                               "+212654543476",
                               style: TextStyle(color: Colors.grey),
@@ -163,37 +238,69 @@ class StationProfilCl extends StatelessWidget {
                           height: 20,
                         ),
                         FadeAnimation(
-                            1.6,
-                            Text(
-                              "email",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                          1.2,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.mail,
+                                color: Colors.orange[900],
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                "Email",
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 15,
+                          thickness: 2,
+                        ),
                         SizedBox(
                           height: 10,
                         ),
                         FadeAnimation(
-                            1.6,
+                            1.2,
                             Text(
-                              "man3rf@total.com",
+                              "contact@total.ma",
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
                           height: 20,
                         ),
                         FadeAnimation(
-                            1.6,
-                            Text(
-                              "images",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold),
-                            )),
+                          1.2,
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.photo,
+                                color: Colors.orange[900],
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                "Images",
+                                style: TextStyle(
+                                    color: Colors.grey,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 15,
+                          thickness: 2,
+                        ),
                         SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
                         FadeAnimation(
                             1.8,
@@ -209,7 +316,7 @@ class StationProfilCl extends StatelessWidget {
                               ),
                             )),
                         SizedBox(
-                          height: 120,
+                          height: 60,
                         )
                       ],
                     ),
@@ -219,21 +326,21 @@ class StationProfilCl extends StatelessWidget {
             ],
           ),
           Positioned.fill(
-            bottom: 50,
+            bottom: 20,
             child: Container(
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: FadeAnimation(
                   2,
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 30),
+                    margin: EdgeInsets.symmetric(horizontal: 80),
                     height: 50,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
+                        borderRadius: BorderRadius.circular(10),
                         color: Colors.orange[900]),
                     child: Align(
                         child: Text(
-                      "Faire un command",
+                      "Faire une commande",
                       style: TextStyle(color: Colors.white),
                     )),
                   ),

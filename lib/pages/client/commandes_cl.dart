@@ -21,7 +21,7 @@ class _CommandeClState extends State<CommandeCl> {
           ),
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.home_rounded),
+                icon: Icon(Icons.home),
                 onPressed: () {
                   selectedIndex = 0;
                   Navigator.of(context).push(MaterialPageRoute(

@@ -72,13 +72,13 @@ class SmallStation extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                'near you',
+                'Près de vous',
                 style: tileTitleStyle,
               ),
               Opacity(
                 opacity: 0.6,
                 child: Text(
-                  'Show all',
+                  'Afficher tout',
                   style: filterStyle,
                 ),
               )
@@ -91,7 +91,7 @@ class SmallStation extends StatelessWidget {
                 Flexible(
                     flex: 5,
                     child: SmallProductTile(
-                      name: 'Afriqia',
+                      name: 'Afriquia',
                       distance: 9,
                       asset: 'assets/Feuldelivery.png',
                       padding: const EdgeInsets.only(left: 14.0),

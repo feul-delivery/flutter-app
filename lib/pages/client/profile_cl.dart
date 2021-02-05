@@ -22,7 +22,7 @@ class _profileClState extends State<profileCl> {
           ),
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.edit_rounded),
+                icon: Icon(Icons.edit),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => profileCLModifier()));
@@ -30,7 +30,7 @@ class _profileClState extends State<profileCl> {
           ],
           leading: Builder(
             builder: (context) => IconButton(
-              icon: Icon(Icons.menu_rounded),
+              icon: Icon(Icons.menu),
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
           ),
