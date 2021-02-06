@@ -12,7 +12,8 @@ class ListSationCl extends StatefulWidget {
 class _ListSationClState extends State<ListSationCl> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text('Explorer');
-
+  Icon _adoreIcon;
+  int adore = 0;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -77,13 +78,13 @@ class _ListSationClState extends State<ListSationCl> {
                           bottom: 0,
                           right: 0,
                           child: FloatingActionButton(
-                            backgroundColor: Colors.white.withOpacity(0),
-                            onPressed: null,
-                            child: Icon(
-                              Icons.favorite,
-                              color: Colors.white,
-                            ),
-                          ),
+                              backgroundColor: Colors.white.withOpacity(0),
+                              onPressed: () {
+                                setState(() {
+                                  _changeFav();
+                                });
+                              },
+                              child: _adoreIcon),
                         )
                       ],
                     ),
@@ -198,5 +199,21 @@ class _ListSationClState extends State<ListSationCl> {
         this._appBarTitle = new Text('Explorer');
       }
     });
+  }
+
+  void _changeFav() {
+    if (adore == 0) {
+      _adoreIcon = new Icon(
+        Icons.favorite,
+        color: Colors.white,
+      );
+      adore = 1;
+    } else {
+      _adoreIcon = new Icon(
+        Icons.favorite,
+        color: Colors.orange[900],
+      );
+      adore = 0;
+    }
   }
 }

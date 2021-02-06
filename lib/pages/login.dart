@@ -136,9 +136,69 @@ class LoginPage extends StatelessWidget {
                           ),
                           FadeAnimation(
                               1.5,
-                              Text(
-                                "mot de passe oublié?",
-                                style: TextStyle(color: Colors.grey),
+                              GestureDetector(
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text("Entrer votre email"),
+                                          content: Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Container(
+                                                padding: EdgeInsets.only(
+                                                    bottom: 0.0,
+                                                    left: 0.0,
+                                                    right: 0.0,
+                                                    top: 0.0),
+                                                decoration: BoxDecoration(
+                                                    border: Border(
+                                                        bottom: BorderSide(
+                                                            color: Colors
+                                                                .grey[200]))),
+                                                child: TextField(
+                                                  obscureText: true,
+                                                  decoration: InputDecoration(
+                                                      hintText: "Email",
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.grey),
+                                                      border: InputBorder.none),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          actions: [
+                                            Row(children: [
+                                              FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text(
+                                                    "Fermer",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Colors.orange[900]),
+                                                  )),
+                                              FlatButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: Text(
+                                                    "Envoyer",
+                                                    style: TextStyle(
+                                                        color:
+                                                            Colors.orange[900]),
+                                                  )),
+                                            ]),
+                                          ],
+                                        );
+                                      });
+                                },
+                                child: Text(
+                                  "mot de passe oublié?",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
                               )),
                           SizedBox(
                             height: 30,
@@ -177,11 +237,23 @@ class LoginPage extends StatelessWidget {
                                                     content: Text(
                                                         'le login ou mot de passe sont incorects'),
                                                     actions: [
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                .all(28.0),
-                                                        child: Text('Ok'),
+                                                      FlatButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop(false);
+                                                        },
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .all(10.0),
+                                                          child: Text(
+                                                            'Ok',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                        .orange[
+                                                                    900]),
+                                                          ),
+                                                        ),
                                                       )
                                                     ],
                                                   ));

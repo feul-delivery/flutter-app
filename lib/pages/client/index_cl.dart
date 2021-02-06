@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:feul_delivery/styles/style_accueil_cl.dart';
 import 'package:feul_delivery/pages/client/station_cl.dart';
 import 'package:feul_delivery/pages/client/drawer_cl.dart';
+import 'package:intl/intl.dart';
 import 'bbar_cl.dart';
+import 'explore_cl.dart';
 
 class Cl extends StatelessWidget {
   @override
@@ -17,15 +19,30 @@ class Cl extends StatelessWidget {
                 title: new Text('Etes-vous sur?'),
                 content: new Text("Quitter l'application?"),
                 actions: <Widget>[
-                  new GestureDetector(
-                    onTap: () => exit(0),
-                    child: Text('OK'),
-                  ),
-                  SizedBox(height: 16),
-                  new GestureDetector(
-                    onTap: () => Navigator.of(context).pop(false),
-                    child: Text('Annuler'),
-                  ),
+                  Row(children: [
+                    new FlatButton(
+                      onPressed: () => exit(0),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 0.0, bottom: 0.0, top: 10),
+                        child: Text(
+                          'OK',
+                          style: TextStyle(color: Colors.orange[900]),
+                        ),
+                      ),
+                    ),
+                    new FlatButton(
+                      onPressed: () => Navigator.of(context).pop(false),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 0.0, bottom: 0.0, top: 10),
+                        child: Text(
+                          'Annuler',
+                          style: TextStyle(color: Colors.orange[900]),
+                        ),
+                      ),
+                    ),
+                  ]),
                 ],
               ),
             ) ??
@@ -49,12 +66,14 @@ class Cl extends StatelessWidget {
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           child: Container(
-            margin: const EdgeInsets.fromLTRB(25.0, 35.0, 25.0, 15.0),
+            margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
             child: Column(
               children: <Widget>[
                 // TODOSwitch case for bottom bar
                 BigStation(),
-                Divider(height: 55.0),
+                SizedBox(
+                  height: 20,
+                ),
                 SmallStation(),
               ],
             ),
@@ -83,62 +102,27 @@ class SmallStation extends StatelessWidget {
               ),
               Opacity(
                 opacity: 0.6,
-                child: Text(
-                  'Afficher tout',
-                  style: filterStyle,
+                child: GestureDetector(
+                  onTap: () {
+                    selectedIndex = 1;
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => ListSationCl()));
+                  },
+                  child: Text(
+                    'Afficher tout',
+                    style: filterStyle,
+                  ),
                 ),
-              )
+              ),
             ],
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 25.0),
-            child: Row(
-              children: <Widget>[
-                Flexible(
-                    flex: 5,
-                    child: SmallProductTile(
-                      name: 'Afriquia',
-                      distance: 9,
-                      asset: 'assets/Feuldelivery.png',
-                      padding: const EdgeInsets.only(left: 14.0),
-                    )),
-                Flexible(
-                  flex: 5,
-                  child: SmallProductTile(
-                    name: 'shell',
-                    distance: 19,
-                    asset: 'assets/Feuldelivery.png',
-                    padding: const EdgeInsets.only(left: 14.0),
-                  ),
-                ),
-              ],
-            ),
+          Divider(
+            thickness: 1,
+            height: 10,
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 25.0),
-            child: Row(
-              children: <Widget>[
-                Flexible(
-                  flex: 5,
-                  child: SmallProductTile(
-                    name: 'Afriqia',
-                    distance: 49,
-                    asset: 'assets/Feuldelivery.png',
-                    padding: const EdgeInsets.only(right: 14.0),
-                  ),
-                ),
-                Flexible(
-                  flex: 5,
-                  child: SmallProductTile(
-                    name: 'shell',
-                    distance: 99,
-                    asset: 'assets/Feuldelivery.png',
-                    padding: const EdgeInsets.only(left: 14.0),
-                  ),
-                ),
-              ],
-            ),
-          ),
+          createSmallCard(),
+          createSmallCard(),
+          createSmallCard()
         ],
       ),
     );
@@ -174,7 +158,7 @@ class BigStation extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5.0),
                 child: Hero(
-                  tag: 'taaag',
+                  tag: 'tage',
                   child: Image.asset(
                     'assets/Station3.png',
                     alignment: Alignment.center,
@@ -185,18 +169,6 @@ class BigStation extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 25.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  Text(
-                    'Total',
-                    style: tileItemStyle,
-                  ),
-                ],
-              ),
-            ),
           ],
         ),
       ),
@@ -204,45 +176,134 @@ class BigStation extends StatelessWidget {
   }
 }
 
-class SmallProductTile extends StatelessWidget {
-  final String name;
-  final int distance;
-  final String asset;
-  final EdgeInsets padding;
-
-  SmallProductTile({
-    @required this.name,
-    @required this.distance,
-    @required this.asset,
-    @required this.padding,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: padding,
-      child: Column(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.asset(
-              asset,
-              fit: BoxFit.fill,
-              width: double.infinity,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text('$name', style: smallTileName),
-                Text('$distance Km', style: smallTileP),
+Container createSmallCard() {
+  return Container(
+    height: 230,
+    child: Container(
+      child: Padding(
+        padding: const EdgeInsets.all(0),
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                InkWell(
+                  onTap: () {},
+                  child: Stack(
+                    children: [
+                      Ink.image(
+                        height: 100,
+                        image: AssetImage(
+                          'assets/Station3.png',
+                        ),
+                        fit: BoxFit.fitWidth,
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      top: 10,
+                      right: 10,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                onTap: () {},
+                                child: Column(children: [
+                                  Text(
+                                    'Total - Centre ville',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    'Av. Mohammed V,Centre villed. Fès',
+                                    style: TextStyle(color: Colors.black54),
+                                  ),
+                                ]),
+                              ),
+                              Positioned(
+                                right: 0,
+                                child: Container(
+                                  height: 25,
+                                  margin: EdgeInsets.symmetric(horizontal: 5),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.orange[900],
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 5.0, right: 5.0),
+                                    child: Center(
+                                        child: Row(children: [
+                                      Icon(
+                                        Icons.location_on,
+                                        color: Colors.white,
+                                      ),
+                                      Text(
+                                        "15 Km",
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ])),
+                                  ),
+                                ),
+                              ),
+                            ]),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(10),
+                              alignment: Alignment.topCenter,
+                              child: FlatButton(
+                                  onPressed: () {},
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.near_me,
+                                        color: Colors.blue[800],
+                                      ),
+                                      Text(
+                                        'Commander',
+                                        style:
+                                            TextStyle(color: Colors.blue[800]),
+                                      ),
+                                    ],
+                                  )),
+                            ),
+                            Container(
+                              padding: EdgeInsets.all(8),
+                              alignment: Alignment.topCenter,
+                              child: FlatButton(
+                                  onPressed: () {},
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.read_more,
+                                      ),
+                                      Text(
+                                        'Details',
+                                      ),
+                                    ],
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )),
               ],
             ),
           ),
-        ],
+        ),
       ),
-    );
-  }
+    ),
+  );
 }

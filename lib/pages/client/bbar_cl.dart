@@ -144,7 +144,10 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
           AnimatedAlign(
             duration: duration,
             alignment: isSelected ? Alignment.center : Alignment(0, 2.6),
-            child: Icon(item.icon),
+            child: Icon(
+              item.icon,
+              color: Colors.orange[900],
+            ),
           ),
         ],
       ),

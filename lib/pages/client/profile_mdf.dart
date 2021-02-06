@@ -128,7 +128,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       new Text(
-                                        'Les informations personnelle :',
+                                        'Les informations personnelle:',
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.bold),
@@ -158,6 +158,43 @@ class _profileCLModifierState extends State<profileCLModifier>
                                     children: <Widget>[
                                       new Text(
                                         'Nom:',
+                                        style: TextStyle(
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 25.0, right: 25.0, top: 2.0),
+                              child: new Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  new Flexible(
+                                    child: new TextField(
+                                      decoration: const InputDecoration(
+                                        hintText: "ELMEKKAWI",
+                                      ),
+                                      enabled: !_status,
+                                      autofocus: !_status,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          Padding(
+                              padding: EdgeInsets.only(
+                                  left: 25.0, right: 25.0, top: 25.0),
+                              child: new Row(
+                                mainAxisSize: MainAxisSize.max,
+                                children: <Widget>[
+                                  new Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      new Text(
+                                        'Prénom:',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold),
@@ -212,7 +249,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                                   new Flexible(
                                     child: new TextField(
                                       decoration: const InputDecoration(
-                                          hintText: "comtact@da7mad.ma"),
+                                          hintText: "contact@da7mad.ma"),
                                       enabled: !_status,
                                     ),
                                   ),
@@ -274,7 +311,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                                   Expanded(
                                     child: Container(
                                       child: new Text(
-                                        'State',
+                                        'Ville:',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold),
@@ -305,7 +342,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                                   Flexible(
                                     child: new TextField(
                                       decoration: const InputDecoration(
-                                          hintText: "Enter State"),
+                                          hintText: "Fès"),
                                       enabled: !_status,
                                     ),
                                     flex: 2,

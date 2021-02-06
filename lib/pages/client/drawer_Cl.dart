@@ -1,5 +1,5 @@
 import 'package:feul_delivery/pages/client/profile_mdf.dart';
-import 'package:feul_delivery/pages/client/settings.dart';
+import 'package:feul_delivery/pages/client/settings_cl.dart';
 import 'package:feul_delivery/pages/client/commandes_cl.dart';
 import 'package:feul_delivery/pages/login.dart';
 import 'package:flutter/material.dart';
