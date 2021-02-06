@@ -65,7 +65,7 @@ class drawerCL extends StatelessWidget {
           },
           leading: Icon(
             Icons.home,
-            color: Colors.orange[900],
+            color: Colors.red[900],
           ),
           title: Text("Acceuil"),
         ),
@@ -76,7 +76,7 @@ class drawerCL extends StatelessWidget {
           },
           leading: Icon(
             Icons.person,
-            color: Colors.orange[900],
+            color: Colors.red[900],
           ),
           title: Text("Mon Profile"),
         ),
@@ -87,7 +87,7 @@ class drawerCL extends StatelessWidget {
           },
           leading: Icon(
             Icons.favorite,
-            color: Colors.orange[900],
+            color: Colors.red[900],
           ),
           title: Text("Mes favoris"),
         ),
@@ -98,7 +98,7 @@ class drawerCL extends StatelessWidget {
           },
           leading: Icon(
             Icons.receipt,
-            color: Colors.orange[900],
+            color: Colors.red[900],
           ),
           title: Text("Mes commandes"),
         ),
@@ -109,7 +109,7 @@ class drawerCL extends StatelessWidget {
           },
           leading: Icon(
             Icons.settings,
-            color: Colors.orange[900],
+            color: Colors.red[900],
           ),
           title: Text("Paramètres"),
         ),
@@ -121,7 +121,7 @@ class drawerCL extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 65, vertical: 20),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.orange[900]),
+                color: Colors.red[900]),
             child: Center(
               child: FlatButton(
                 onPressed: () {

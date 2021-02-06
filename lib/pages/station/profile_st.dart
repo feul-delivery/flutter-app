@@ -26,62 +26,15 @@ class _ProfilStState extends State<ProfilSt> {
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.pin,
                   background: Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/Station3.png'),
-                            fit: BoxFit.cover)),
-                    child: Container(
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            FadeAnimation(
-                                1,
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Total - Centre ville",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 30),
-                                    ),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            Icons.edit,
-                                            size: 13,
-                                            color: Colors.red[900],
-                                          ),
-                                          SizedBox(
-                                            width: 4,
-                                          ),
-                                          Text(
-                                            "edit",
-                                            style: TextStyle(
-                                              color: Colors.red[800],
-                                              fontSize: 13,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            SizedBox(
-                              height: 10,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/Station3.png'),
+                              fit: BoxFit.cover)),
+                      child: Icon(
+                        Icons.edit,
+                        color: Colors.white,
+                        size: 40.0,
+                      )),
                 ),
               ),
               SliverList(
@@ -95,65 +48,62 @@ class _ProfilStState extends State<ProfilSt> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              FadeAnimation(
-                                1.2,
-                                Container(
-                                  width: 100,
-                                  child: RaisedButton(
-                                    color: Colors.white,
-                                    onPressed: () {},
-                                    child: Row(
-                                      children: <Widget>[
-                                        Row(children: [
-                                          Icon(
-                                            Icons.thumb_up,
-                                            color: Colors.grey,
-                                          ),
-                                          SizedBox(
-                                            width: 8,
-                                          ),
+                        Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                FadeAnimation(
+                                    1,
+                                    Column(children: [
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
                                           Text(
-                                            likeText,
+                                            "Total - Centre ville",
                                             style: TextStyle(
-                                                color: Colors.grey,
-                                                fontSize: 18),
+                                                color: Colors.grey[800],
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 25),
                                           ),
-                                        ])
-                                      ],
-                                    ),
-                                  ),
+                                          InkWell(
+                                            onTap: () {},
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.edit,
+                                                  size: 13,
+                                                  color: Colors.red[900],
+                                                ),
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(
+                                                  "Modifier",
+                                                  style: TextStyle(
+                                                    color: Colors.red[800],
+                                                    fontSize: 13,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ])),
+                                SizedBox(
+                                  height: 20,
                                 ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              FadeAnimation(
-                                  1.2,
-                                  Container(
-                                    width: 100,
-                                    child: RaisedButton(
-                                      color: Colors.white,
-                                      onPressed: () {},
-                                      child: Row(children: [
-                                        Icon(
-                                          Icons.thumb_down,
-                                          color: Colors.grey,
-                                        ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(
-                                          dislikeText,
-                                          style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
-                                        ),
-                                      ]),
-                                    ),
-                                  )),
-                            ]),
+                              ],
+                            ),
+                          ),
+                        ),
                         FadeAnimation(
                           1.2,
                           Row(
@@ -163,7 +113,7 @@ class _ProfilStState extends State<ProfilSt> {
                                 children: [
                                   Icon(
                                     Icons.article,
-                                    color: Colors.orange[900],
+                                    color: Colors.red[900],
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -190,7 +140,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "edit",
+                                      "Modifier",
                                       style: TextStyle(
                                         color: Colors.red[800],
                                         fontSize: 13,
@@ -230,7 +180,7 @@ class _ProfilStState extends State<ProfilSt> {
                                 children: [
                                   Icon(
                                     Icons.business,
-                                    color: Colors.orange[900],
+                                    color: Colors.red[900],
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -257,7 +207,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "edit",
+                                      "Modifier",
                                       style: TextStyle(
                                         color: Colors.red[800],
                                         fontSize: 13,
@@ -293,72 +243,8 @@ class _ProfilStState extends State<ProfilSt> {
                               Row(
                                 children: [
                                   Icon(
-                                    Icons.group,
-                                    color: Colors.orange[900],
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    "Livreurs",
-                                    style: TextStyle(
-                                        color: Colors.grey[800],
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              InkWell(
-                                onTap: () {},
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.edit,
-                                      size: 13,
-                                      color: Colors.red[900],
-                                    ),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      "edit",
-                                      style: TextStyle(
-                                        color: Colors.red[800],
-                                        fontSize: 13,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FadeAnimation(
-                            1.2,
-                            Text(
-                              "4 Livreurs",
-                              style: TextStyle(color: Colors.grey),
-                            )),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        FadeAnimation(
-                          1.2,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
                                     Icons.phone,
-                                    color: Colors.orange[900],
+                                    color: Colors.red[900],
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -385,7 +271,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "edit",
+                                      "Modifier",
                                       style: TextStyle(
                                         color: Colors.red[800],
                                         fontSize: 13,
@@ -422,7 +308,7 @@ class _ProfilStState extends State<ProfilSt> {
                                 children: [
                                   Icon(
                                     Icons.mail,
-                                    color: Colors.orange[900],
+                                    color: Colors.red[900],
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -449,7 +335,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "edit",
+                                      "Modifier",
                                       style: TextStyle(
                                         color: Colors.red[800],
                                         fontSize: 13,
@@ -486,7 +372,7 @@ class _ProfilStState extends State<ProfilSt> {
                                 children: [
                                   Icon(
                                     Icons.photo,
-                                    color: Colors.orange[900],
+                                    color: Colors.red[900],
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -513,7 +399,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "edit",
+                                      "Modifier",
                                       style: TextStyle(
                                         color: Colors.red[800],
                                         fontSize: 13,
@@ -573,4 +459,3 @@ class _ProfilStState extends State<ProfilSt> {
     );
   }
 }
-

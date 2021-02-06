@@ -12,7 +12,7 @@ class SignupPage extends StatelessWidget {
       appBar: AppBar(
         elevation: 0,
         brightness: Brightness.light,
-        backgroundColor: Colors.orange[900],
+        backgroundColor: Colors.red[900],
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -27,11 +27,9 @@ class SignupPage extends StatelessWidget {
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
-            gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.orange[900],
-          Colors.orange[900],
-          Colors.orange[600]
-        ])),
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                colors: [Colors.red[900], Colors.red[900], Colors.red[600]])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -148,7 +146,7 @@ class SignupPage extends StatelessWidget {
                               margin: EdgeInsets.symmetric(horizontal: 50),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Colors.orange[900]),
+                                  color: Colors.red[900]),
                               child: Center(
                                 child: FlatButton(
                                   onPressed: () {

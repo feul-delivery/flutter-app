@@ -63,7 +63,7 @@ class Drawerst extends StatelessWidget {
           },
           leading: Icon(
             Icons.person,
-            color: Colors.orange[900],
+            color: Colors.red[900],
           ),
           title: Text("Mon Profile"),
         ),
@@ -76,19 +76,20 @@ class Drawerst extends StatelessWidget {
           },
           leading: Icon(
             Icons.receipt,
-            color: Colors.orange[900],
+            color: Colors.red[900],
           ),
           title: Text("Nos commandes"),
         ),
         ListTile(
-          onTap: () {Navigator.push(
+          onTap: () {
+            Navigator.push(
                 context,
                 PageTransition(
                     type: PageTransitionType.fade, child: SettingSt()));
-        },
+          },
           leading: Icon(
             Icons.settings,
-            color: Colors.orange[900],
+            color: Colors.red[900],
           ),
           title: Text("Paramètres"),
         ),
@@ -100,7 +101,7 @@ class Drawerst extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 65, vertical: 20),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.orange[900]),
+                color: Colors.red[900]),
             child: Center(
               child: FlatButton(
                 onPressed: () {

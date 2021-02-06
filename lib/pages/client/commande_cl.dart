@@ -33,7 +33,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
           style: TextStyle(),
         ),
         centerTitle: true,
-        backgroundColor: Colors.orange[900],
+        backgroundColor: Colors.red[900],
         elevation: 1,
       ),
       body: getBody(),
@@ -323,7 +323,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
           height: 20,
         ),
         Container(
-            color: Colors.orange[900],
+            color: Colors.red[900],
             child: FlatButton(
                 onPressed: () {},
                 child: Text('Envoyer une évaluation!',

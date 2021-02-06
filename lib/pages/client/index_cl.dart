@@ -26,7 +26,7 @@ class Cl extends StatelessWidget {
                             right: 0.0, bottom: 0.0, top: 10),
                         child: Text(
                           'OK',
-                          style: TextStyle(color: Colors.orange[900]),
+                          style: TextStyle(color: Colors.red[900]),
                         ),
                       ),
                     ),
@@ -37,7 +37,7 @@ class Cl extends StatelessWidget {
                             right: 0.0, bottom: 0.0, top: 10),
                         child: Text(
                           'Annuler',
-                          style: TextStyle(color: Colors.orange[900]),
+                          style: TextStyle(color: Colors.red[900]),
                         ),
                       ),
                     ),
@@ -51,7 +51,7 @@ class Cl extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text("Acceuil"),
-          backgroundColor: Colors.orange[900],
+          backgroundColor: Colors.red[900],
           centerTitle: true,
           actions: <Widget>[
             IconButton(
@@ -236,7 +236,7 @@ Container createSmallCard() {
                                   margin: EdgeInsets.symmetric(horizontal: 5),
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Colors.orange[900],
+                                    color: Colors.red[900],
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.only(

@@ -26,7 +26,7 @@ class _ListSationClState extends State<ListSationCl> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.orange[900],
+          backgroundColor: Colors.red[900],
           title: _appBarTitle,
           actions: <Widget>[
             IconButton(
@@ -211,7 +211,7 @@ class _ListSationClState extends State<ListSationCl> {
     } else {
       _adoreIcon = new Icon(
         Icons.favorite,
-        color: Colors.orange[900],
+        color: Colors.red[900],
       );
       adore = 0;
     }

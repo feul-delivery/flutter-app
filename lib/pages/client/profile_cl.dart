@@ -45,7 +45,7 @@ class _profileClState extends State<profileCl> {
               ),
             ),
             centerTitle: true,
-            backgroundColor: Colors.orange[900],
+            backgroundColor: Colors.red[900],
             elevation: 1,
           ),
           bottomNavigationBar: ButtomBARWidget(),

@@ -14,7 +14,7 @@ class _CommandtermeneState extends State<Commandtermene> {
       backgroundColor: Colors.white,
       appBar: AppBar(
         title: Text("commandes"),
-        backgroundColor: Colors.orange[900],
+        backgroundColor: Colors.red[900],
         centerTitle: true,
         actions: <Widget>[
           IconButton(
@@ -35,10 +35,7 @@ class _CommandtermeneState extends State<Commandtermene> {
               ),
               Text(
                 'Commandes terméné',
-                style: TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold
-                ),
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               Divider(
                 height: 5,
@@ -67,7 +64,7 @@ class _CommandtermeneState extends State<Commandtermene> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.orange[200].withOpacity(0.9),
+                        color: Colors.red[200].withOpacity(0.9),
                         blurRadius: 20,
                         offset: Offset(0, 10))
                   ]),
@@ -84,7 +81,7 @@ class _CommandtermeneState extends State<Commandtermene> {
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.orange[900],
+                            color: Colors.red[900],
                           ),
                           child: Padding(
                             padding:
@@ -101,7 +98,7 @@ class _CommandtermeneState extends State<Commandtermene> {
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.orange[900],
+                            color: Colors.red[900],
                           ),
                           child: Padding(
                             padding:

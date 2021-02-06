@@ -100,7 +100,7 @@ class _StarterPageState extends State<StarterPage>
                               width: 150,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.orange[900],
+                                color: Colors.red[900],
                               ),
                               child: AnimatedOpacity(
                                 opacity: _textVisible ? 1.0 : 0.0,

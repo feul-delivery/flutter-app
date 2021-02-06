@@ -30,7 +30,7 @@ class _SettingClState extends State<SettingCl> {
                 })
           ],
           centerTitle: true,
-          backgroundColor: Colors.orange[900],
+          backgroundColor: Colors.red[900],
           elevation: 1,
         ),
         body: Container(
@@ -44,7 +44,7 @@ class _SettingClState extends State<SettingCl> {
                 children: [
                   Icon(
                     Icons.person,
-                    color: Colors.orange[900],
+                    color: Colors.red[900],
                   ),
                   SizedBox(
                     width: 8,
@@ -71,7 +71,7 @@ class _SettingClState extends State<SettingCl> {
                 children: [
                   Icon(
                     Icons.phone_iphone,
-                    color: Colors.orange[900],
+                    color: Colors.red[900],
                   ),
                   SizedBox(
                     width: 8,
@@ -95,7 +95,7 @@ class _SettingClState extends State<SettingCl> {
                 children: [
                   Icon(
                     Icons.security,
-                    color: Colors.orange[900],
+                    color: Colors.red[900],
                   ),
                   SizedBox(
                     width: 8,
@@ -186,13 +186,13 @@ GestureDetector buildChangePasswordRow(BuildContext context, String title) {
                     FlatButton(
                         onPressed: () {},
                         child: Text("Changer",
-                            style: TextStyle(color: Colors.orange[900]))),
+                            style: TextStyle(color: Colors.red[900]))),
                     FlatButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                         child: Text("Annuler",
-                            style: TextStyle(color: Colors.orange[900]))),
+                            style: TextStyle(color: Colors.red[900]))),
                   ],
                 ),
               ],
@@ -280,7 +280,7 @@ GestureDetector buildAboutUsRow(BuildContext context, String title) {
                     },
                     child: Text(
                       "Fermer",
-                      style: TextStyle(color: Colors.orange[900]),
+                      style: TextStyle(color: Colors.red[900]),
                     )),
               ],
             );
@@ -340,11 +340,11 @@ GestureDetector buildRateUsRow(BuildContext context, String title) {
                           Navigator.of(context).pop();
                         },
                         child: Text("Annuler",
-                            style: TextStyle(color: Colors.orange[900]))),
+                            style: TextStyle(color: Colors.red[900]))),
                     FlatButton(
                         onPressed: () {},
                         child: Text("Envoyer",
-                            style: TextStyle(color: Colors.orange[900]))),
+                            style: TextStyle(color: Colors.red[900]))),
                   ],
                 ),
               ],

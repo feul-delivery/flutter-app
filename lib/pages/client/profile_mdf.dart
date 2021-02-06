@@ -44,7 +44,7 @@ class _profileCLModifierState extends State<profileCLModifier>
             ),
           ),
           centerTitle: true,
-          backgroundColor: Colors.orange[900],
+          backgroundColor: Colors.red[900],
           elevation: 1,
         ),
         drawer: drawerCL(),
@@ -93,7 +93,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     new CircleAvatar(
-                                      backgroundColor: Colors.orange[900],
+                                      backgroundColor: Colors.red[900],
                                       radius: 25.0,
                                       child: new Icon(
                                         Icons.camera_alt,
@@ -382,7 +382,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                   child: new RaisedButton(
                 child: new Text("Enregistrer"),
                 textColor: Colors.white,
-                color: Colors.orange[900],
+                color: Colors.red[900],
                 onPressed: () {
                   setState(() {
                     _status = true;
@@ -401,7 +401,7 @@ class _profileCLModifierState extends State<profileCLModifier>
               child: Container(
                 child: new RaisedButton(
                   child: new Text("Annuler"),
-                  textColor: Colors.orange[900],
+                  textColor: Colors.red[900],
                   color: Colors.white,
                   onPressed: () {
                     setState(() {
@@ -424,7 +424,7 @@ class _profileCLModifierState extends State<profileCLModifier>
   Widget _getEditIcon() {
     return new GestureDetector(
       child: new CircleAvatar(
-        backgroundColor: Colors.orange[900],
+        backgroundColor: Colors.red[900],
         radius: 14.0,
         child: new Icon(
           Icons.edit,

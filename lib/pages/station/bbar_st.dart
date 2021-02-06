@@ -23,7 +23,7 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
             IconButton(
               icon: Icon(
                 Icons.new_releases_outlined,
-                color: Colors.orange[900],
+                color: Colors.red[900],
                 size: 30,
               ),
               onPressed: () {
@@ -38,7 +38,7 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
             IconButton(
               icon: Icon(
                 Icons.history,
-                color: Colors.orange[900],
+                color: Colors.red[900],
                 size: 30,
               ),
               onPressed: () {
@@ -52,14 +52,14 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
             IconButton(
               icon: Icon(
                 Icons.supervisor_account_outlined,
-                color: Colors.orange[900],
+                color: Colors.red[900],
                 size: 30,
               ),
-              onPressed: () {Navigator.push(
+              onPressed: () {
+                Navigator.push(
                     context,
                     PageTransition(
-                        type: PageTransitionType.fade,
-                        child: Livreur()));
+                        type: PageTransitionType.fade, child: Livreur()));
               },
             ),
           ],

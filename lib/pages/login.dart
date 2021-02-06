@@ -20,7 +20,7 @@ class LoginPage extends StatelessWidget {
         appBar: AppBar(
           elevation: 0,
           brightness: Brightness.light,
-          backgroundColor: Colors.orange[900].withOpacity(1),
+          backgroundColor: Colors.red[900].withOpacity(1),
           leading: IconButton(
             onPressed: () {
               Navigator.push(context,
@@ -36,11 +36,9 @@ class LoginPage extends StatelessWidget {
         body: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-              gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-            Colors.orange[900],
-            Colors.orange[900],
-            Colors.orange[600]
-          ])),
+              gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  colors: [Colors.red[900], Colors.red[900], Colors.red[600]])),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -177,8 +175,7 @@ class LoginPage extends StatelessWidget {
                                                   child: Text(
                                                     "Fermer",
                                                     style: TextStyle(
-                                                        color:
-                                                            Colors.orange[900]),
+                                                        color: Colors.red[900]),
                                                   )),
                                               FlatButton(
                                                   onPressed: () {
@@ -187,8 +184,7 @@ class LoginPage extends StatelessWidget {
                                                   child: Text(
                                                     "Envoyer",
                                                     style: TextStyle(
-                                                        color:
-                                                            Colors.orange[900]),
+                                                        color: Colors.red[900]),
                                                   )),
                                             ]),
                                           ],
@@ -209,7 +205,7 @@ class LoginPage extends StatelessWidget {
                                 margin: EdgeInsets.symmetric(horizontal: 50),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Colors.orange[900]),
+                                    color: Colors.red[900]),
                                 child: Center(
                                   child: FlatButton(
                                     onPressed: () {
@@ -250,8 +246,7 @@ class LoginPage extends StatelessWidget {
                                                             'Ok',
                                                             style: TextStyle(
                                                                 color: Colors
-                                                                        .orange[
-                                                                    900]),
+                                                                    .red[900]),
                                                           ),
                                                         ),
                                                       )

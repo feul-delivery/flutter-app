@@ -41,7 +41,7 @@ class _StState extends State<St> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text("Acceuil"),
-          backgroundColor: Colors.orange[900],
+          backgroundColor: Colors.red[900],
           centerTitle: true,
           actions: <Widget>[
             IconButton(
@@ -62,10 +62,7 @@ class _StState extends State<St> {
                 ),
                 Text(
                   'Commandes en direct',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                 Divider(
                   height: 5,
@@ -96,7 +93,7 @@ class _StState extends State<St> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.orange[900].withOpacity(0.4),
+                        color: Colors.red[900].withOpacity(0.4),
                         blurRadius: 20,
                         offset: Offset(0, 10))
                   ]),
@@ -122,7 +119,7 @@ class _StState extends State<St> {
                             margin: EdgeInsets.symmetric(horizontal: 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.orange[900],
+                              color: Colors.red[900],
                             ),
                             child: Padding(
                               padding:
@@ -196,16 +193,14 @@ class _StState extends State<St> {
                             ),
                           ],
                         ),
-                        
                       ],
                     )
-                    
                   ],
                 ),
               )),
-              SizedBox(
-                          height: 15,
-                        ),
+          SizedBox(
+            height: 15,
+          ),
         ],
       ),
     );
