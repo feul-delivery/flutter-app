@@ -196,14 +196,16 @@ class _StState extends State<St> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          width: 10,
-                        ),
+                        
                       ],
                     )
+                    
                   ],
                 ),
               )),
+              SizedBox(
+                          height: 15,
+                        ),
         ],
       ),
     );

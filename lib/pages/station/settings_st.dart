@@ -1,4 +1,3 @@
-import 'package:feul_delivery/pages/client/bbar_cl.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'index_st.dart';
@@ -23,7 +22,6 @@ class _SettingStState extends State<SettingSt> {
             IconButton(
                 icon: Icon(Icons.home),
                 onPressed: () {
-                  selectedIndex = 0;
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => St()));
                 })

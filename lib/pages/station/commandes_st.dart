@@ -67,7 +67,7 @@ class _CommandtermeneState extends State<Commandtermene> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.orange[900].withOpacity(0.4),
+                        color: Colors.orange[200].withOpacity(0.9),
                         blurRadius: 20,
                         offset: Offset(0, 10))
                   ]),

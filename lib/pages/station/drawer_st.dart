@@ -3,6 +3,7 @@ import 'package:feul_delivery/pages/login.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/station/profile_st.dart';
 import 'package:feul_delivery/pages/station/commandes_st.dart';
+import 'package:feul_delivery/pages/station/settings_st.dart';
 
 class Drawerst extends StatelessWidget {
   const Drawerst({Key key}) : super(key: key);
@@ -80,7 +81,11 @@ class Drawerst extends StatelessWidget {
           title: Text("Nos commandes"),
         ),
         ListTile(
-          onTap: () {},
+          onTap: () {Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: SettingSt()));
+        },
           leading: Icon(
             Icons.settings,
             color: Colors.orange[900],
