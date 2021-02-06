@@ -1,9 +1,6 @@
 import 'package:feul_delivery/animations/FadeAnimation.dart';
 import 'package:flutter/material.dart';
 
-int like = 10;
-int dislike = 10;
-
 class ProfilSt extends StatefulWidget {
   @override
   _ProfilStState createState() => _ProfilStState();
@@ -12,8 +9,6 @@ class ProfilSt extends StatefulWidget {
 class _ProfilStState extends State<ProfilSt> {
   @override
   Widget build(BuildContext context) {
-    String likeText = like.toString();
-    String dislikeText = dislike.toString();
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
@@ -28,7 +23,7 @@ class _ProfilStState extends State<ProfilSt> {
                   background: Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage('assets/Station3.png'),
+                              image: AssetImage('assets/s4.png'),
                               fit: BoxFit.cover)),
                       child: Icon(
                         Icons.edit,
@@ -425,9 +420,9 @@ class _ProfilStState extends State<ProfilSt> {
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: <Widget>[
-                                  makeVideo(image: 'assets/Station3.png'),
-                                  makeVideo(image: 'assets/Station3.png'),
-                                  makeVideo(image: 'assets/Station3.png'),
+                                  makeVideo(image: 'assets/s4.png'),
+                                  makeVideo(image: 'assets/s4.png'),
+                                  makeVideo(image: 'assets/s4.png'),
                                 ],
                               ),
                             )),

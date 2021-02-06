@@ -28,7 +28,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                   background: Container(
                     decoration: BoxDecoration(
                         image: DecorationImage(
-                            image: AssetImage('assets/Station3.png'),
+                            image: AssetImage('assets/s4.png'),
                             fit: BoxFit.cover)),
                     child: Container(
                       child: Padding(
@@ -357,9 +357,9 @@ class _StationProfilClState extends State<StationProfilCl> {
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: <Widget>[
-                                  makeVideo(image: 'assets/Station3.png'),
-                                  makeVideo(image: 'assets/Station3.png'),
-                                  makeVideo(image: 'assets/Station3.png'),
+                                  makeVideo(image: 'assets/s4.png'),
+                                  makeVideo(image: 'assets/s4.png'),
+                                  makeVideo(image: 'assets/s4.png'),
                                 ],
                               ),
                             )),

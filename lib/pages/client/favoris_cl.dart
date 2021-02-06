@@ -60,7 +60,7 @@ class _FavorisClState extends State<FavorisCl> {
                         Ink.image(
                           height: 100,
                           image: AssetImage(
-                            'assets/Station3.png',
+                            'assets/s3.jpg',
                           ),
                           fit: BoxFit.fitWidth,
                         ),

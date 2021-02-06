@@ -159,7 +159,7 @@ class BigStation extends StatelessWidget {
                 child: Hero(
                   tag: 'tage',
                   child: Image.asset(
-                    'assets/Station3.png',
+                    'assets/s1.png',
                     alignment: Alignment.center,
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width,
@@ -194,7 +194,7 @@ Container createSmallCard() {
                       Ink.image(
                         height: 100,
                         image: AssetImage(
-                          'assets/Station3.png',
+                          'assets/s4.png',
                         ),
                         fit: BoxFit.fitWidth,
                       ),
