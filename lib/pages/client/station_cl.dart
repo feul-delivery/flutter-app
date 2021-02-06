@@ -148,7 +148,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                               Text(
                                 "Description",
                                 style: TextStyle(
-                                    color: Colors.grey,
+                                    color: Colors.grey[800],
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -188,7 +188,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                               Text(
                                 "Addresse",
                                 style: TextStyle(
-                                    color: Colors.grey,
+                                    color: Colors.grey[800],
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -225,7 +225,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                               Text(
                                 "Livreurs",
                                 style: TextStyle(
-                                    color: Colors.grey,
+                                    color: Colors.grey[800],
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -262,7 +262,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                               Text(
                                 "Tél",
                                 style: TextStyle(
-                                    color: Colors.grey,
+                                    color: Colors.grey[800],
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -299,7 +299,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                               Text(
                                 "Email",
                                 style: TextStyle(
-                                    color: Colors.grey,
+                                    color: Colors.grey[800],
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),
@@ -336,7 +336,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                               Text(
                                 "Images",
                                 style: TextStyle(
-                                    color: Colors.grey,
+                                    color: Colors.grey[800],
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold),
                               ),

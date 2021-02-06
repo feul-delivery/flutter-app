@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/login.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:feul_delivery/pages/station/profile_st.dart';
+import 'package:feul_delivery/pages/station/commandes_st.dart';
 
-// ignore: camel_case_types
-class drawerst extends StatelessWidget {
-  const drawerst({Key key}) : super(key: key);
+class Drawerst extends StatelessWidget {
+  const Drawerst({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,12 @@ class drawerst extends StatelessWidget {
           height: 20.0,
         ),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: ProfilSt()));
+          },
           leading: Icon(
             Icons.person,
             color: Colors.orange[900],
@@ -60,7 +67,12 @@ class drawerst extends StatelessWidget {
           title: Text("Mon Profile"),
         ),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: Commandtermene()));
+          },
           leading: Icon(
             Icons.receipt,
             color: Colors.orange[900],

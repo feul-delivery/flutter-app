@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/station/index_st.dart';
+import 'package:feul_delivery/pages/station/commandes_st.dart';
 
 class BottomNavigationBarCl extends StatefulWidget {
   @override
@@ -39,7 +40,13 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
                 color: Colors.orange[900],
                 size: 30,
               ),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.fade,
+                        child: Commandtermene()));
+              },
             ),
             IconButton(
               icon: Icon(

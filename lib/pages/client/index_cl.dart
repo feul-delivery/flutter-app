@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:feul_delivery/styles/style_accueil_cl.dart';
 import 'package:feul_delivery/pages/client/station_cl.dart';
 import 'package:feul_delivery/pages/client/drawer_cl.dart';
-import 'package:intl/intl.dart';
 import 'bbar_cl.dart';
 import 'explore_cl.dart';
 

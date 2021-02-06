@@ -45,10 +45,9 @@ class _StState extends State<St> {
           centerTitle: true,
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.find_replace_rounded),
+                icon: Icon(Icons.refresh),
                 onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => St()));
+                  setState(() {});
                 })
           ],
         ),
@@ -65,6 +64,7 @@ class _StState extends State<St> {
                   'Commandes en direct',
                   style: TextStyle(
                     fontSize: 20,
+                    fontWeight: FontWeight.bold
                   ),
                 ),
                 Divider(
@@ -77,7 +77,7 @@ class _StState extends State<St> {
             ),
           ),
         ),
-        drawer: drawerst(),
+        drawer: Drawerst(),
         bottomNavigationBar: BottomNavigationBarCl(),
       ),
     );
@@ -212,7 +212,7 @@ class _StState extends State<St> {
   List items = [
     {
       "nom": "Da7mad ELMAKKAWI",
-      "time": "11:00",
+      "time": "17:47",
       "etat": "en cour",
       "volume": "10L",
       "type": "Gas-oil",
@@ -221,7 +221,7 @@ class _StState extends State<St> {
     },
     {
       "nom": "Da7mad ELMAKKAWI",
-      "time": "11:00",
+      "time": "17:05",
       "etat": "en cour",
       "volume": "50L",
       "type": "Gas-oil",
@@ -230,7 +230,7 @@ class _StState extends State<St> {
     },
     {
       "nom": "Da7mad ELMAKKAWI",
-      "time": "11:00",
+      "time": "17:01",
       "etat": "en cour",
       "volume": "43L",
       "type": "Gas-oil",
@@ -239,7 +239,7 @@ class _StState extends State<St> {
     },
     {
       "nom": "Da7mad ELMAKKAWI",
-      "time": "11:00",
+      "time": "16:50",
       "etat": "en cour",
       "volume": "43L",
       "type": "Gas-oil",
