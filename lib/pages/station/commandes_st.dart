@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/station/drawer_st.dart';
 import 'package:feul_delivery/pages/station/bbar_st.dart';
 
-class Commandtermene extends StatefulWidget {
+class ToutCommandesSt extends StatefulWidget {
   @override
-  _CommandtermeneState createState() => _CommandtermeneState();
+  _ToutCommandesStState createState() => _ToutCommandesStState();
 }
 
-class _CommandtermeneState extends State<Commandtermene> {
+class _ToutCommandesStState extends State<ToutCommandesSt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +46,8 @@ class _CommandtermeneState extends State<Commandtermene> {
           ),
         ),
       ),
-      drawer: Drawerst(),
-      bottomNavigationBar: BottomNavigationBarCl(),
+      drawer: DrawerSt(),
+      bottomNavigationBar: ButtomBarSt(),
     );
   }
 

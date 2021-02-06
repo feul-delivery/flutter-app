@@ -154,7 +154,7 @@ class SignupPage extends StatelessWidget {
                                         context,
                                         PageTransition(
                                             type: PageTransitionType.fade,
-                                            child: ListSationCl()));
+                                            child: ExploreCl()));
                                   },
                                   child: Text(
                                     "S'inscrire",

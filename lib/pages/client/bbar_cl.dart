@@ -6,12 +6,12 @@ import 'index_cl.dart';
 
 int selectedIndex = 0;
 
-class ButtomBARWidget extends StatefulWidget {
+class ButtomBarCl extends StatefulWidget {
   @override
-  State createState() => _ButtomBARWidgetState();
+  State createState() => _ButtomBarClState();
 }
 
-class _ButtomBARWidgetState extends State<ButtomBARWidget> {
+class _ButtomBarClState extends State<ButtomBarCl> {
   final List<Item> items = [
     Item('Acceuil', Icons.home),
     Item('Explorer', Icons.explore),
@@ -83,13 +83,13 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
                       Navigator.pushReplacement(
                           context,
                           PageTransition(
-                              type: PageTransitionType.fade, child: Cl()));
+                              type: PageTransitionType.fade, child: IndexCl()));
                     } else if (selectedIndex == 1) {
                       Navigator.push(
                           context,
                           PageTransition(
                               type: PageTransitionType.fade,
-                              child: ListSationCl()));
+                              child: ExploreCl()));
                     } else if (selectedIndex == 2) {
                       Navigator.push(
                           context,

@@ -4,12 +4,12 @@ import 'package:feul_delivery/pages/client/drawer_cl.dart';
 
 import 'index_cl.dart';
 
-class FavSationCl extends StatefulWidget {
+class FavorisCl extends StatefulWidget {
   @override
-  _FavSationClState createState() => _FavSationClState();
+  _FavorisClState createState() => _FavorisClState();
 }
 
-class _FavSationClState extends State<FavSationCl> {
+class _FavorisClState extends State<FavorisCl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,13 +21,13 @@ class _FavSationClState extends State<FavSationCl> {
           IconButton(
             icon: Icon(Icons.home),
             onPressed: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (BuildContext context) => Cl()));
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (BuildContext context) => IndexCl()));
             },
           ),
         ],
       ),
-      drawer: drawerCL(),
+      drawer: DrawerCL(),
       body: SingleChildScrollView(
         child: Column(
           children: [createCard()],

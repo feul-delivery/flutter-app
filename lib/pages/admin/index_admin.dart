@@ -1,14 +1,13 @@
 import 'dart:io';
+import 'package:feul_delivery/pages/admin/drawer_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:feul_delivery/pages/station/drawer_st.dart';
-import 'package:feul_delivery/pages/station/bbar_st.dart';
 
-class IndexSt extends StatefulWidget {
+class IndexAdmin extends StatefulWidget {
   @override
-  _IndexStState createState() => _IndexStState();
+  _IndexAdminState createState() => _IndexAdminState();
 }
 
-class _IndexStState extends State<IndexSt> {
+class _IndexAdminState extends State<IndexAdmin> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -45,7 +44,7 @@ class _IndexStState extends State<IndexSt> {
           centerTitle: true,
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.refresh),
+                icon: Icon(Icons.search),
                 onPressed: () {
                   setState(() {});
                 })
@@ -74,8 +73,7 @@ class _IndexStState extends State<IndexSt> {
             ),
           ),
         ),
-        drawer: DrawerSt(),
-        bottomNavigationBar: ButtomBarSt(),
+        drawer: DrawerAdmin(),
       ),
     );
   }

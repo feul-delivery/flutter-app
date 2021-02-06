@@ -6,6 +6,8 @@ import 'package:feul_delivery/pages/station/index_st.dart';
 import 'package:feul_delivery/pages/singup.dart';
 import 'package:feul_delivery/pages/client/index_cl.dart';
 
+import 'admin/index_admin.dart';
+
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -215,15 +217,22 @@ class LoginPage extends StatelessWidget {
                                             context,
                                             PageTransition(
                                                 type: PageTransitionType.fade,
-                                                child: Cl()));
+                                                child: IndexCl()));
                                       } else {
-                                        if (txtlogin.text == 'admin' &&
+                                        if (txtlogin.text == 'st' &&
+                                            txtpassword.text == 'st') {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child: IndexSt()));
+                                        } else if (txtlogin.text == 'admin' &&
                                             txtpassword.text == 'admin') {
                                           Navigator.pushReplacement(
                                               context,
                                               PageTransition(
                                                   type: PageTransitionType.fade,
-                                                  child: St()));
+                                                  child: IndexAdmin()));
                                         } else {
                                           showDialog(
                                               context: context,

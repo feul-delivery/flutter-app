@@ -34,7 +34,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                 onPressed: () {
                   selectedIndex = 0;
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => Cl()));
+                      builder: (BuildContext context) => IndexCl()));
                 })
           ],
           leading: Builder(
@@ -47,7 +47,7 @@ class _profileCLModifierState extends State<profileCLModifier>
           backgroundColor: Colors.red[900],
           elevation: 1,
         ),
-        drawer: drawerCL(),
+        drawer: DrawerCL(),
         body: new Container(
           color: Colors.white,
           child: new ListView(

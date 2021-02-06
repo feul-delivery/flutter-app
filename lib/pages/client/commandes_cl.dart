@@ -25,7 +25,7 @@ class _CommandeClState extends State<CommandeCl> {
                 onPressed: () {
                   selectedIndex = 0;
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => Cl()));
+                      builder: (BuildContext context) => IndexCl()));
                 })
           ],
           centerTitle: true,

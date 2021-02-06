@@ -13,7 +13,7 @@ class _LivreurState extends State<Livreur> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Mes livreurs",
+          "Livreurs",
         ),
         centerTitle: true,
         backgroundColor: Colors.red[900],
@@ -30,8 +30,8 @@ class _LivreurState extends State<Livreur> {
           ],
         ),
       ),
-      drawer: Drawerst(),
-      bottomNavigationBar: BottomNavigationBarCl(),
+      drawer: DrawerSt(),
+      bottomNavigationBar: ButtomBarSt(),
     );
   }
 

@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/station/index_st.dart';
 import 'package:feul_delivery/pages/station/commandes_st.dart';
-import 'package:feul_delivery/pages/station/livreurs.dart';
+import 'package:feul_delivery/pages/station/livreurs_st.dart';
 
-class BottomNavigationBarCl extends StatefulWidget {
+class ButtomBarSt extends StatefulWidget {
   @override
-  _BottomNavigationBarClState createState() => _BottomNavigationBarClState();
+  _ButtomBarStState createState() => _ButtomBarStState();
 }
 
-class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
+class _ButtomBarStState extends State<ButtomBarSt> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -31,7 +31,7 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
                   Navigator.pushReplacement(
                       context,
                       PageTransition(
-                          type: PageTransitionType.fade, child: St()));
+                          type: PageTransitionType.fade, child: IndexSt()));
                 });
               },
             ),
@@ -46,7 +46,7 @@ class _BottomNavigationBarClState extends State<BottomNavigationBarCl> {
                     context,
                     PageTransition(
                         type: PageTransitionType.fade,
-                        child: Commandtermene()));
+                        child: ToutCommandesSt()));
               },
             ),
             IconButton(

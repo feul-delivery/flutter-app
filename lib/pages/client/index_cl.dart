@@ -7,7 +7,7 @@ import 'package:feul_delivery/pages/client/drawer_cl.dart';
 import 'bbar_cl.dart';
 import 'explore_cl.dart';
 
-class Cl extends StatelessWidget {
+class IndexCl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -58,7 +58,7 @@ class Cl extends StatelessWidget {
                 icon: Icon(Icons.favorite),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => FavSationCl()));
+                      builder: (BuildContext context) => FavorisCl()));
                 })
           ],
         ),
@@ -78,8 +78,8 @@ class Cl extends StatelessWidget {
             ),
           ),
         ),
-        bottomNavigationBar: ButtomBARWidget(),
-        drawer: drawerCL(),
+        bottomNavigationBar: ButtomBarCl(),
+        drawer: DrawerCL(),
       ),
     );
   }
@@ -105,7 +105,7 @@ class SmallStation extends StatelessWidget {
                   onTap: () {
                     selectedIndex = 1;
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => ListSationCl()));
+                        builder: (BuildContext context) => ExploreCl()));
                   },
                   child: Text(
                     'Afficher tout',

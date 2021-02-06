@@ -1,17 +1,16 @@
-import 'package:feul_delivery/pages/client/bbar_cl.dart';
+import 'package:feul_delivery/pages/admin/index_admin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'index_admin.dart';
 
-import 'index_cl.dart';
-
-class SettingsCl extends StatefulWidget {
-  SettingsCl({Key key}) : super(key: key);
+class SettingsAdmin extends StatefulWidget {
+  SettingsAdmin({Key key}) : super(key: key);
 
   @override
-  _SettingsClState createState() => _SettingsClState();
+  _SettingsAdminState createState() => _SettingsAdminState();
 }
 
-class _SettingsClState extends State<SettingsCl> {
+class _SettingsAdminState extends State<SettingsAdmin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,9 +23,8 @@ class _SettingsClState extends State<SettingsCl> {
             IconButton(
                 icon: Icon(Icons.home),
                 onPressed: () {
-                  selectedIndex = 0;
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => IndexCl()));
+                      builder: (BuildContext context) => IndexAdmin()));
                 })
           ],
           centerTitle: true,
@@ -34,7 +32,7 @@ class _SettingsClState extends State<SettingsCl> {
           elevation: 1,
         ),
         body: Container(
-          padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+          padding: EdgeInsets.only(left: 15, top: 25, right: 15),
           child: GestureDetector(
             onTap: () {
               FocusScope.of(context).unfocus();
@@ -114,9 +112,6 @@ class _SettingsClState extends State<SettingsCl> {
                   onTap: () {},
                   child: buildAccountOptionRow(
                       context, "Confidentialité et sécurité")),
-              SizedBox(
-                height: 40,
-              ),
             ]),
           ),
         ));
@@ -391,7 +386,10 @@ GestureDetector buildAccountOptionRow(BuildContext context, String title) {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Fermer")),
+                    child: Text(
+                      "Fermer",
+                      style: TextStyle(color: Colors.red[900]),
+                    )),
               ],
             );
           });

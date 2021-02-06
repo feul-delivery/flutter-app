@@ -1,43 +1,31 @@
 import 'package:feul_delivery/animations/FadeAnimation.dart';
-import 'package:feul_delivery/pages/client/profile_mdf.dart';
+import 'package:feul_delivery/pages/admin/index_admin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'bbar_cl.dart';
-import 'drawer_cl.dart';
-import 'index_cl.dart';
+import 'drawer_admin.dart';
 
 // ignore: camel_case_types
-class profileCl extends StatefulWidget {
+class ProfileAdmin extends StatefulWidget {
   @override
-  _profileClState createState() => _profileClState();
+  _ProfileAdminState createState() => _ProfileAdminState();
 }
 
 // ignore: camel_case_types
-class _profileClState extends State<profileCl> {
+class _ProfileAdminState extends State<ProfileAdmin> {
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       // ignore: missing_return
       onWillPop: () {
-        selectedIndex = 0;
         Navigator.of(context).push(
-            MaterialPageRoute(builder: (BuildContext context) => IndexCl()));
+            MaterialPageRoute(builder: (BuildContext context) => IndexAdmin()));
       },
       child: Scaffold(
           appBar: AppBar(
             title: Text(
               "Mon Profile",
             ),
-            actions: <Widget>[
-              IconButton(
-                  icon: Icon(Icons.edit),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            profileCLModifier()));
-                  })
-            ],
             leading: Builder(
               builder: (context) => IconButton(
                 icon: Icon(Icons.menu),
@@ -48,8 +36,7 @@ class _profileClState extends State<profileCl> {
             backgroundColor: Colors.red[900],
             elevation: 1,
           ),
-          bottomNavigationBar: ButtomBarCl(),
-          drawer: DrawerCL(),
+          drawer: DrawerAdmin(),
           body: Container(
             padding: EdgeInsets.only(left: 16, top: 25, right: 16),
             child: ListView(children: [

@@ -4,12 +4,12 @@ import 'package:feul_delivery/pages/client/drawer_cl.dart';
 import 'bbar_cl.dart';
 import 'index_cl.dart';
 
-class ListSationCl extends StatefulWidget {
+class ExploreCl extends StatefulWidget {
   @override
-  _ListSationClState createState() => _ListSationClState();
+  _ExploreClState createState() => _ExploreClState();
 }
 
-class _ListSationClState extends State<ListSationCl> {
+class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text('Explorer');
   Icon _adoreIcon;
@@ -20,8 +20,8 @@ class _ListSationClState extends State<ListSationCl> {
       // ignore: missing_return
       onWillPop: () {
         selectedIndex = 0;
-        Navigator.of(context)
-            .push(MaterialPageRoute(builder: (BuildContext context) => Cl()));
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => IndexCl()));
       },
       child: Scaffold(
         appBar: AppBar(
@@ -35,13 +35,13 @@ class _ListSationClState extends State<ListSationCl> {
             ),
           ],
         ),
-        drawer: drawerCL(),
+        drawer: DrawerCL(),
         body: SingleChildScrollView(
           child: Column(
             children: [createCard()],
           ),
         ),
-        bottomNavigationBar: ButtomBARWidget(),
+        bottomNavigationBar: ButtomBarCl(),
       ),
     );
   }

@@ -1,15 +1,12 @@
-import 'package:feul_delivery/pages/client/profile_mdf.dart';
-import 'package:feul_delivery/pages/client/settings_cl.dart';
-import 'package:feul_delivery/pages/client/commandes_cl.dart';
-import 'package:feul_delivery/pages/login.dart';
+import 'package:feul_delivery/pages/admin/index_admin.dart';
+import 'package:feul_delivery/pages/admin/profile_admin.dart';
+import 'package:feul_delivery/pages/admin/settings_admin.dart';
 import 'package:flutter/material.dart';
-import 'favoris_cl.dart';
-import 'index_cl.dart';
-import 'bbar_cl.dart';
+import 'package:feul_delivery/pages/login.dart';
+import 'package:page_transition/page_transition.dart';
 
-// ignore: camel_case_types
-class DrawerCL extends StatelessWidget {
-  const DrawerCL({Key key}) : super(key: key);
+class DrawerAdmin extends StatelessWidget {
+  const DrawerAdmin({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +23,13 @@ class DrawerCL extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 50.0,
-                  backgroundImage: NetworkImage(
-                    "https://images.unsplash.com/photo-1594616838951-c155f8d978a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-                  ),
+                  backgroundImage: AssetImage('assets/profile.png'),
                 ),
                 SizedBox(
                   height: 5.0,
                 ),
                 Text(
-                  "Nom Prénom",
+                  "Admin",
                   style: TextStyle(
                     fontSize: 22.0,
                     fontWeight: FontWeight.w800,
@@ -44,7 +39,7 @@ class DrawerCL extends StatelessWidget {
                   height: 5.0,
                 ),
                 Text(
-                  "Contact@gmail.com",
+                  "contact@admin.com",
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w400,
@@ -59,20 +54,10 @@ class DrawerCL extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
-            selectedIndex = 0;
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => IndexCl()));
-          },
-          leading: Icon(
-            Icons.home,
-            color: Colors.red[900],
-          ),
-          title: Text("Acceuil"),
-        ),
-        ListTile(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => profileCLModifier()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: ProfileAdmin()));
           },
           leading: Icon(
             Icons.person,
@@ -82,30 +67,36 @@ class DrawerCL extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => FavorisCl()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: IndexAdmin()));
           },
           leading: Icon(
-            Icons.favorite,
+            Icons.business,
             color: Colors.red[900],
           ),
-          title: Text("Mes favoris"),
+          title: Text("Entreprises"),
         ),
         ListTile(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => CommandeCl()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: IndexAdmin()));
           },
           leading: Icon(
-            Icons.receipt,
+            Icons.group,
             color: Colors.red[900],
           ),
-          title: Text("Mes commandes"),
+          title: Text("Livreurs"),
         ),
         ListTile(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => SettingsCl()));
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: SettingsAdmin()));
           },
           leading: Icon(
             Icons.settings,

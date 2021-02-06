@@ -11,5 +11,5 @@ void main() => runApp(MaterialApp(
           '/': (context) => StarterPage(),
           '/login': (context) => LoginPage(),
           '/singup': (context) => SignupPage(),
-          '/client': (context) => Cl()
+          '/client': (context) => IndexCl()
         }));

@@ -5,8 +5,8 @@ import 'package:feul_delivery/pages/station/profile_st.dart';
 import 'package:feul_delivery/pages/station/commandes_st.dart';
 import 'package:feul_delivery/pages/station/settings_st.dart';
 
-class Drawerst extends StatelessWidget {
-  const Drawerst({Key key}) : super(key: key);
+class DrawerSt extends StatelessWidget {
+  const DrawerSt({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +22,13 @@ class Drawerst extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  radius: 50.0,
-                  backgroundImage: NetworkImage(
-                    "https://images.unsplash.com/photo-1594616838951-c155f8d978a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-                  ),
-                ),
+                    radius: 50.0,
+                    backgroundImage: AssetImage('assets/total.png')),
                 SizedBox(
                   height: 5.0,
                 ),
                 Text(
-                  "Station nom",
+                  "Total - Centre ville",
                   style: TextStyle(
                     fontSize: 22.0,
                     fontWeight: FontWeight.w800,
@@ -41,7 +38,7 @@ class Drawerst extends StatelessWidget {
                   height: 5.0,
                 ),
                 Text(
-                  "Contact@gmail.com",
+                  "contact@total.com",
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w400,
@@ -65,27 +62,27 @@ class Drawerst extends StatelessWidget {
             Icons.person,
             color: Colors.red[900],
           ),
-          title: Text("Mon Profile"),
+          title: Text("Profile"),
         ),
         ListTile(
           onTap: () {
             Navigator.push(
                 context,
                 PageTransition(
-                    type: PageTransitionType.fade, child: Commandtermene()));
+                    type: PageTransitionType.fade, child: ToutCommandesSt()));
           },
           leading: Icon(
             Icons.receipt,
             color: Colors.red[900],
           ),
-          title: Text("Nos commandes"),
+          title: Text("Commandes"),
         ),
         ListTile(
           onTap: () {
             Navigator.push(
                 context,
                 PageTransition(
-                    type: PageTransitionType.fade, child: SettingSt()));
+                    type: PageTransitionType.fade, child: SettingsSt()));
           },
           leading: Icon(
             Icons.settings,

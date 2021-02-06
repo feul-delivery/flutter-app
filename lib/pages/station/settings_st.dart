@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'index_st.dart';
 
-class SettingSt extends StatefulWidget {
-  SettingSt({Key key}) : super(key: key);
+class SettingsSt extends StatefulWidget {
+  SettingsSt({Key key}) : super(key: key);
 
   @override
-  _SettingStState createState() => _SettingStState();
+  _SettingsStState createState() => _SettingsStState();
 }
 
-class _SettingStState extends State<SettingSt> {
+class _SettingsStState extends State<SettingsSt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,7 +23,7 @@ class _SettingStState extends State<SettingSt> {
                 icon: Icon(Icons.home),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => St()));
+                      builder: (BuildContext context) => IndexSt()));
                 })
           ],
           centerTitle: true,
