@@ -574,10 +574,3 @@ class _ProfilStState extends State<ProfilSt> {
   }
 }
 
-void _changeText(int choix) {
-  if (choix == 0) {
-    like = like + 1;
-  } else if (choix == 1) {
-    dislike = dislike + 1;
-  }
-}
