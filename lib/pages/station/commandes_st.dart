@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/station/drawer_st.dart';
 import 'package:feul_delivery/pages/station/bbar_st.dart';
 
+import 'index_st.dart';
+
 class ToutCommandesSt extends StatefulWidget {
   @override
   _ToutCommandesStState createState() => _ToutCommandesStState();
@@ -10,48 +12,45 @@ class ToutCommandesSt extends StatefulWidget {
 class _ToutCommandesStState extends State<ToutCommandesSt> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: Text("commandes"),
-        backgroundColor: Colors.red[900],
-        centerTitle: true,
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.refresh_rounded),
-              onPressed: () {
-                setState(() {});
-              })
-        ],
-      ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
-          margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
-          child: Column(
-            children: <Widget>[
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Commandes terméné',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-              Divider(
-                height: 5,
-                thickness: 1,
-              ),
-              for (int i = 0; i < items.length; i++) commandestermeneState(i),
-            ],
+    return WillPopScope(
+      // ignore: missing_return
+      onWillPop: () {
+        selectedIndexSt = 0;
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => IndexSt()));
+      },
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text("Commandes"),
+          backgroundColor: Colors.red[900],
+          centerTitle: true,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.refresh_rounded),
+                onPressed: () {
+                  setState(() {});
+                })
+          ],
+        ),
+        body: SingleChildScrollView(
+          physics: BouncingScrollPhysics(),
+          child: Container(
+            margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
+            child: Column(
+              children: <Widget>[
+                for (int i = 0; i < items.length; i++) toutCommandes(i),
+              ],
+            ),
           ),
         ),
+        drawer: DrawerSt(),
+        bottomNavigationBar: ButtomBarSt(),
       ),
-      drawer: DrawerSt(),
-      bottomNavigationBar: ButtomBarSt(),
     );
   }
 
-  Container commandestermeneState(int i) {
+  Container toutCommandes(int i) {
     return Container(
       child: Column(
         children: [
@@ -64,7 +63,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.red[200].withOpacity(0.9),
+                        color: Colors.red[900].withOpacity(0.4),
                         blurRadius: 20,
                         offset: Offset(0, 10))
                   ]),

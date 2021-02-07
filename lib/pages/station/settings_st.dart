@@ -1,3 +1,4 @@
+import 'package:feul_delivery/pages/station/bbar_st.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'index_st.dart';
@@ -22,6 +23,7 @@ class _SettingsStState extends State<SettingsSt> {
             IconButton(
                 icon: Icon(Icons.home),
                 onPressed: () {
+                  selectedIndexSt = 0;
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => IndexSt()));
                 })
@@ -56,14 +58,8 @@ class _SettingsStState extends State<SettingsSt> {
                 height: 15,
                 thickness: 1,
               ),
-              InkWell(
-                  onTap: () {},
-                  child: buildChangePasswordRow(
-                      context, "Changer le mot de passe")),
-              InkWell(
-                  onTap: () {},
-                  child:
-                      buildAccountOptionRow(context, "Supprimer votre compte")),
+              buildChangePasswordRow(context, " Changer le mot de passe"),
+              buildAccountOptionRow(context, " Supprimer votre compte"),
               Row(
                 children: [
                   Icon(
@@ -83,11 +79,8 @@ class _SettingsStState extends State<SettingsSt> {
                 height: 15,
                 thickness: 1,
               ),
-              InkWell(
-                  onTap: () {}, child: buildRateUsRow(context, "Évaluez nous")),
-              InkWell(
-                  onTap: () {},
-                  child: buildAboutUsRow(context, "À propos de nous")),
+              buildRateUsRow(context, " Évaluez nous"),
+              buildAboutUsRow(context, " À propos de nous"),
               Row(
                 children: [
                   Icon(
@@ -107,18 +100,16 @@ class _SettingsStState extends State<SettingsSt> {
                 height: 15,
                 thickness: 1,
               ),
-              InkWell(
-                  onTap: () {},
-                  child: buildAccountOptionRow(
-                      context, "Confidentialité et sécurité")),
+              buildAccountOptionRow(context, " Confidentialité et sécurité"),
             ]),
           ),
         ));
   }
 }
 
-GestureDetector buildChangePasswordRow(BuildContext context, String title) {
-  return GestureDetector(
+InkWell buildChangePasswordRow(BuildContext context, String title) {
+  return InkWell(
+    borderRadius: BorderRadius.circular(5.0),
     onTap: () {
       showDialog(
           context: context,
@@ -216,8 +207,9 @@ GestureDetector buildChangePasswordRow(BuildContext context, String title) {
   );
 }
 
-GestureDetector buildAboutUsRow(BuildContext context, String title) {
-  return GestureDetector(
+InkWell buildAboutUsRow(BuildContext context, String title) {
+  return InkWell(
+    borderRadius: BorderRadius.circular(5.0),
     onTap: () {
       showDialog(
           context: context,
@@ -303,8 +295,9 @@ GestureDetector buildAboutUsRow(BuildContext context, String title) {
   );
 }
 
-GestureDetector buildRateUsRow(BuildContext context, String title) {
-  return GestureDetector(
+InkWell buildRateUsRow(BuildContext context, String title) {
+  return InkWell(
+    borderRadius: BorderRadius.circular(5.0),
     onTap: () {
       showDialog(
           context: context,
@@ -368,8 +361,9 @@ GestureDetector buildRateUsRow(BuildContext context, String title) {
   );
 }
 
-GestureDetector buildAccountOptionRow(BuildContext context, String title) {
-  return GestureDetector(
+InkWell buildAccountOptionRow(BuildContext context, String title) {
+  return InkWell(
+    borderRadius: BorderRadius.circular(5.0),
     onTap: () {
       showDialog(
           context: context,

@@ -2,36 +2,43 @@ import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/station/drawer_st.dart';
 import 'package:feul_delivery/pages/station/bbar_st.dart';
 
-class Livreur extends StatefulWidget {
+import 'index_st.dart';
+
+class LivreurSt extends StatefulWidget {
   @override
-  _LivreurState createState() => _LivreurState();
+  _LivreurStState createState() => _LivreurStState();
 }
 
-class _LivreurState extends State<Livreur> {
+class _LivreurStState extends State<LivreurSt> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Livreurs",
+    return WillPopScope(
+      // ignore: missing_return
+      onWillPop: () {
+        selectedIndexSt = 0;
+        Navigator.of(context).push(
+            MaterialPageRoute(builder: (BuildContext context) => IndexSt()));
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Livreurs",
+          ),
+          centerTitle: true,
+          backgroundColor: Colors.red[900],
+          elevation: 1,
         ),
-        centerTitle: true,
-        backgroundColor: Colors.red[900],
-        elevation: 1,
-      ),
-      body: SafeArea(
-        child: ListView(
-          padding: EdgeInsets.only(left: 10, right: 10),
-          children: <Widget>[
-            SizedBox(
-              height: 20,
-            ),
-            for (int i = 0; i < items.length; i++) livreurList(i)
-          ],
+        body: SafeArea(
+          child: ListView(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            children: <Widget>[
+              for (int i = 0; i < items.length; i++) livreurList(i)
+            ],
+          ),
         ),
+        drawer: DrawerSt(),
+        bottomNavigationBar: ButtomBarSt(),
       ),
-      drawer: DrawerSt(),
-      bottomNavigationBar: ButtomBarSt(),
     );
   }
 
@@ -42,134 +49,149 @@ class _LivreurState extends State<Livreur> {
           SizedBox(
             height: 20,
           ),
-          Container(
-              decoration: new BoxDecoration(
-                  color: Colors.white70,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.red[900].withOpacity(0.4),
-                        blurRadius: 20,
-                        offset: Offset(0, 10))
-                  ]),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      radius: 40.0,
-                      backgroundImage: NetworkImage(
-                        "https://images.unsplash.com/photo-1594616838951-c155f8d978a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+          InkWell(
+            onTap: () {},
+            child: Container(
+                decoration: new BoxDecoration(
+                    color: Colors.white70,
+                    borderRadius: BorderRadius.circular(10),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Colors.red[900].withOpacity(0.4),
+                          blurRadius: 20,
+                          offset: Offset(0, 10))
+                    ]),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          height: 100,
+                          width: 150,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image(
+                                fit: BoxFit.fitWidth,
+                                image: AssetImage("assets/profile.png")),
+                          )),
+                      Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Container(
+                                height: 25,
+                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.red[900],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 5.0, right: 5.0),
+                                  child: Center(
+                                      child: Text(
+                                    "Depuis:  " + items[i]['date'],
+                                    style: TextStyle(color: Colors.white),
+                                  )),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                    items[i]['nom'] + ' ' + items[i]['prenom'],
+                                    style: TextStyle(
+                                        color: Colors.black, fontSize: 15))),
+                          ),
+                          Row(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            child: Text('CIN: ',
+                                                style: TextStyle(
+                                                    color: Colors.grey[800])),
+                                          ),
+                                          SizedBox(
+                                            width: 20,
+                                          ),
+                                          Container(
+                                            child: Text(items[i]['cin'],
+                                                style: TextStyle(
+                                                    color: Colors.grey[600])),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Container(
+                                        child: Text('tél:',
+                                            style: TextStyle(
+                                                color: Colors.grey[800])),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Container(
+                                        child: Text(items[i]['tele'],
+                                            style: TextStyle(
+                                                color: Colors.grey[600])),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        child: Text('Etat:',
+                                            style: TextStyle(
+                                                color: Colors.grey[800])),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Container(
+                                        child: Text(items[i]['etat'],
+                                            style: TextStyle(
+                                                color: Colors.grey[600])),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                            ],
+                          )
+                        ],
                       ),
-                    ),
-                    Column(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              height: 25,
-                              margin: EdgeInsets.symmetric(horizontal: 5),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.red[900],
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 5.0, right: 5.0),
-                                child: Center(
-                                    child: Text(
-                                  "active depius :" + items[i]['date'],
-                                  style: TextStyle(color: Colors.white),
-                                )),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(items[i]['nom'],
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15))),
-                        ),
-                        Row(
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Container(
-                                          child: Text('CIN : ',
-                                              style: TextStyle(
-                                                  color: Colors.grey[800])),
-                                        ),
-                                        SizedBox(
-                                          width: 20,
-                                        ),
-                                        Container(
-                                          child: Text(items[i]['cin'],
-                                              style: TextStyle(
-                                                  color: Colors.grey[600])),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      child: Text('télé :',
-                                          style: TextStyle(
-                                              color: Colors.grey[800])),
-                                    ),
-                                    SizedBox(
-                                      width: 20,
-                                    ),
-                                    Container(
-                                      child: Text(items[i]['tele'],
-                                          style: TextStyle(
-                                              color: Colors.grey[600])),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                      child: Text('état actual: ',
-                                          style: TextStyle(
-                                              color: Colors.grey[800])),
-                                    ),
-                                    Container(
-                                      child: Text(items[i]['etat'],
-                                          style: TextStyle(
-                                              color: Colors.grey[600])),
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              )),
+                    ],
+                  ),
+                )),
+          ),
         ],
       ),
     );
@@ -177,30 +199,38 @@ class _LivreurState extends State<Livreur> {
 
   List items = [
     {
-      "date": "15/01/2021",
-      "etat": "desponible",
-      "nom": "ikram elbakori",
+      "image": "assets/profile.png",
+      "date": "10/04/2019",
+      "etat": "Disponible",
+      "nom": "ELBAKORI",
+      "prenom": "Ikram",
       "cin": "C121212",
       "tele": "+212698989898",
     },
     {
-      "date": "15/01/2021",
-      "etat": "desponible",
-      "nom": "ikram elbakori",
+      "image": "assets/profile.png",
+      "date": "01/02/2020",
+      "etat": "Disponible",
+      "nom": "AZAMI",
+      "prenom": "Farid",
       "cin": "C121212",
       "tele": "+212698989898",
     },
     {
-      "date": "15/01/2021",
-      "etat": "desponible",
-      "nom": "ikram elbakori",
+      "image": "assets/profile.png",
+      "date": "15/01/2020",
+      "etat": "Disponible",
+      "nom": "MANSORI",
+      "prenom": "Amal",
       "cin": "C121212",
       "tele": "+212698989898",
     },
     {
-      "date": "15/01/2021",
-      "etat": "ikram elbakori",
-      "nom": "en cour",
+      "image": "assets/profile.png",
+      "date": "15/08/2018",
+      "etat": "En cour",
+      "nom": "BENFARES",
+      "prenom": "Mohamed",
       "cin": "C121212",
       "tele": "+212698989898",
     },

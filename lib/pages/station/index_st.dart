@@ -60,16 +60,31 @@ class _IndexStState extends State<IndexSt> {
                 SizedBox(
                   height: 10,
                 ),
-                Text(
-                  'Commandes en direct',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Commandes',
+                        style: TextStyle(
+                            fontSize: 20, fontWeight: FontWeight.bold),
+                      ),
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 2.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5.0),
+                          color: Colors.red[900],
+                        ),
+                        child: Text(
+                          'En direct',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      )
+                    ]),
                 Divider(
                   height: 5,
                   thickness: 1,
                 ),
-                for (int i = 0; i < items.length; i++)
-                  commandtnontermeneState(i),
+                for (int i = 0; i < items.length; i++) commandeEnDirect(i),
               ],
             ),
           ),
@@ -80,7 +95,7 @@ class _IndexStState extends State<IndexSt> {
     );
   }
 
-  Container commandtnontermeneState(int i) {
+  Container commandeEnDirect(int i) {
     return Container(
       child: Column(
         children: [
@@ -143,7 +158,7 @@ class _IndexStState extends State<IndexSt> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  child: Text('Volume demonder: ',
+                                  child: Text('Volume:',
                                       style:
                                           TextStyle(color: Colors.grey[800])),
                                 ),
@@ -180,7 +195,7 @@ class _IndexStState extends State<IndexSt> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  child: Text('Adresse: ',
+                                  child: Text('Adresse:',
                                       style:
                                           TextStyle(color: Colors.grey[800])),
                                 ),
@@ -198,9 +213,6 @@ class _IndexStState extends State<IndexSt> {
                   ],
                 ),
               )),
-          SizedBox(
-            height: 15,
-          ),
         ],
       ),
     );

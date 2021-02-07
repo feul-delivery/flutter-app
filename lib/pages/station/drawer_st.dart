@@ -5,6 +5,8 @@ import 'package:feul_delivery/pages/station/profile_st.dart';
 import 'package:feul_delivery/pages/station/commandes_st.dart';
 import 'package:feul_delivery/pages/station/settings_st.dart';
 
+import 'bbar_st.dart';
+
 class DrawerSt extends StatelessWidget {
   const DrawerSt({Key key}) : super(key: key);
 
@@ -66,6 +68,7 @@ class DrawerSt extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
+            selectedIndexSt = 1;
             Navigator.push(
                 context,
                 PageTransition(
