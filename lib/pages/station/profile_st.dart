@@ -68,7 +68,80 @@ class _ProfilStState extends State<ProfilSt> {
                                                 fontSize: 25),
                                           ),
                                           InkWell(
-                                            onTap: () {},
+                                            onTap: () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                      title:
+                                                          Text('Modifier nom'),
+                                                      content: Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors.white,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        child: Column(
+                                                          mainAxisSize:
+                                                              MainAxisSize.min,
+                                                          children: [
+                                                            Container(
+                                                              padding:
+                                                                  EdgeInsets
+                                                                      .all(10),
+                                                              decoration: BoxDecoration(
+                                                                  border: Border(
+                                                                      bottom: BorderSide(
+                                                                          color:
+                                                                              Colors.grey[200]))),
+                                                              child: TextField(
+                                                                decoration:
+                                                                    InputDecoration(
+                                                                  hintText:
+                                                                      "Total - Centre ville",
+                                                                  hintStyle: TextStyle(
+                                                                      color: Colors
+                                                                          .grey),
+                                                                  border:
+                                                                      InputBorder
+                                                                          .none,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      actions: [
+                                                        Row(
+                                                          children: [
+                                                            FlatButton(
+                                                                onPressed:
+                                                                    () {},
+                                                                child: Text(
+                                                                    "Changer",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .red[900]))),
+                                                            FlatButton(
+                                                                onPressed: () {
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child: Text(
+                                                                    "Annuler",
+                                                                    style: TextStyle(
+                                                                        color: Colors
+                                                                            .red[900]))),
+                                                          ],
+                                                        ),
+                                                      ],
+                                                    );
+                                                  });
+                                            },
                                             child: Row(
                                               children: [
                                                 Icon(
@@ -123,7 +196,64 @@ class _ProfilStState extends State<ProfilSt> {
                                 ],
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('Modifier description'),
+                                          content: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  decoration: BoxDecoration(
+                                                      border: Border(
+                                                          bottom: BorderSide(
+                                                              color: Colors
+                                                                  .grey[200]))),
+                                                  child: TextField(
+                                                    decoration: InputDecoration(
+                                                      hintText: "...",
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.grey),
+                                                      border: InputBorder.none,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            Row(
+                                              children: [
+                                                FlatButton(
+                                                    onPressed: () {},
+                                                    child: Text("Changer",
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .red[900]))),
+                                                FlatButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text("Annuler",
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .red[900]))),
+                                              ],
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                },
                                 child: Row(
                                   children: [
                                     Icon(
@@ -190,7 +320,65 @@ class _ProfilStState extends State<ProfilSt> {
                                 ],
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('Modifier addresse'),
+                                          content: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  decoration: BoxDecoration(
+                                                      border: Border(
+                                                          bottom: BorderSide(
+                                                              color: Colors
+                                                                  .grey[200]))),
+                                                  child: TextField(
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          "Rue Sefrou, Narjiss, Fés, Maroc",
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.grey),
+                                                      border: InputBorder.none,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            Row(
+                                              children: [
+                                                FlatButton(
+                                                    onPressed: () {},
+                                                    child: Text("Changer",
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .red[900]))),
+                                                FlatButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text("Annuler",
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .red[900]))),
+                                              ],
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                },
                                 child: Row(
                                   children: [
                                     Icon(
@@ -254,7 +442,65 @@ class _ProfilStState extends State<ProfilSt> {
                                 ],
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('Modifier tél'),
+                                          content: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  decoration: BoxDecoration(
+                                                      border: Border(
+                                                          bottom: BorderSide(
+                                                              color: Colors
+                                                                  .grey[200]))),
+                                                  child: TextField(
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          "+212654543476",
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.grey),
+                                                      border: InputBorder.none,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            Row(
+                                              children: [
+                                                FlatButton(
+                                                    onPressed: () {},
+                                                    child: Text("Changer",
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .red[900]))),
+                                                FlatButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text("Annuler",
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .red[900]))),
+                                              ],
+                                            ),
+                                          ],
+                                        );
+                                      });
+                                },
                                 child: Row(
                                   children: [
                                     Icon(
@@ -318,7 +564,64 @@ class _ProfilStState extends State<ProfilSt> {
                                 ],
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          title: Text('Modifier Email'),
+                                          content: Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.white,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            child: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.all(10),
+                                                  decoration: BoxDecoration(
+                                                      border: Border(
+                                                          bottom: BorderSide(
+                                                              color: Colors
+                                                                  .grey[200]))),
+                                                  child: TextField(
+                                                    decoration: InputDecoration(
+                                                      hintText:
+                                                          "contact@total.ma",
+                                                      hintStyle: TextStyle(
+                                                          color: Colors.grey),
+                                                      border: InputBorder.none,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            Row(
+                                              children: [
+                                                FlatButton(
+                                                    onPressed: () {},
+                                                    child: Text("Changer",
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .red[900]))),
+                                                FlatButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text("Annuler",
+                                                        style: TextStyle(
+                                                            color: Colors
+                                                                .red[900]))),
+                                              ],
+                                            ),
+                                          ],
+                                        );
+                                      });},
                                 child: Row(
                                   children: [
                                     Icon(
