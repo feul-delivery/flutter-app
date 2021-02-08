@@ -229,30 +229,27 @@ Container createSmallCard() {
                                   ),
                                 ]),
                               ),
-                              Positioned(
-                                right: 0,
-                                child: Container(
-                                  height: 25,
-                                  margin: EdgeInsets.symmetric(horizontal: 5),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.red[900],
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 5.0, right: 5.0),
-                                    child: Center(
-                                        child: Row(children: [
-                                      Icon(
-                                        Icons.location_on,
-                                        color: Colors.white,
-                                      ),
-                                      Text(
-                                        "15 Km",
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    ])),
-                                  ),
+                              Container(
+                                height: 25,
+                                margin: EdgeInsets.symmetric(horizontal: 5),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.red[900],
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 5.0, right: 5.0),
+                                  child: Center(
+                                      child: Row(children: [
+                                    Icon(
+                                      Icons.location_on,
+                                      color: Colors.white,
+                                    ),
+                                    Text(
+                                      "15 Km",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ])),
                                 ),
                               ),
                             ]),

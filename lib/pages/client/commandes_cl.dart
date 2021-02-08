@@ -105,42 +105,39 @@ class _CommandeClState extends State<CommandeCl> {
                                 blurRadius: 20,
                                 offset: Offset(0, 10))
                           ]),
-                      child: Expanded(
-                        flex: 1,
+                      child: Container(
+                        decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.red[900],
+                        ),
                         child: Container(
-                          decoration: new BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.red[900],
-                          ),
-                          child: Container(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: <Widget>[
-                                    Container(
-                                        child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        items[i]['time'],
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15),
-                                      ),
-                                    )),
-                                    Container(
-                                        child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        items[i]['date'],
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 15),
-                                      ),
-                                    )),
-                                  ],
-                                )
-                              ],
-                            ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  Container(
+                                      child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      items[i]['time'],
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15),
+                                    ),
+                                  )),
+                                  Container(
+                                      child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      items[i]['date'],
+                                      style: TextStyle(
+                                          color: Colors.black, fontSize: 15),
+                                    ),
+                                  )),
+                                ],
+                              )
+                            ],
                           ),
                         ),
                       ),
@@ -158,7 +155,7 @@ class _CommandeClState extends State<CommandeCl> {
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
                                 child: Text(
-                                  "commande n° :" + items[i]['code'],
+                                  "Commande N° :" + items[i]['code'],
                                   style: TextStyle(
                                       color: Colors.black87,
                                       fontSize: 15,
