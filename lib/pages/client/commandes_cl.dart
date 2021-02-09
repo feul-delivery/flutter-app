@@ -1,7 +1,5 @@
 import 'package:feul_delivery/pages/client/commande_cl.dart';
-
 import 'package:flutter/material.dart';
-
 import 'bbar_cl.dart';
 import 'commande_cl.dart';
 import 'index_cl.dart';

@@ -1,4 +1,5 @@
 import 'package:feul_delivery/animations/FadeAnimation.dart';
+import 'package:feul_delivery/main.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/StarterPage.dart';
@@ -213,6 +214,7 @@ class LoginPage extends StatelessWidget {
                                     onPressed: () {
                                       if (txtlogin.text == 'user' &&
                                           txtpassword.text == 'user') {
+                                        username = "user";
                                         Navigator.pushReplacement(
                                             context,
                                             PageTransition(
@@ -221,6 +223,7 @@ class LoginPage extends StatelessWidget {
                                       } else {
                                         if (txtlogin.text == 'st' &&
                                             txtpassword.text == 'st') {
+                                          username = "st";
                                           Navigator.pushReplacement(
                                               context,
                                               PageTransition(
@@ -228,6 +231,7 @@ class LoginPage extends StatelessWidget {
                                                   child: IndexSt()));
                                         } else if (txtlogin.text == 'admin' &&
                                             txtpassword.text == 'admin') {
+                                          username = "admin";
                                           Navigator.pushReplacement(
                                               context,
                                               PageTransition(

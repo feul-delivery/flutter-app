@@ -1,5 +1,5 @@
 name: feul_delivery
-description: Feul Deliver To Your Door 24/7.
+description: Fuel Deliver To Your Door 24/7.
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -62,12 +62,21 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
+  fonts:
+    - family: Gotham Font
+      fonts:
+        - asset: fonts/Gotham-Font/GothamMedium.ttf
+        - asset: fonts/Gotham-Font/GothamBold.ttf
+          weight: 500
+        - asset: fonts/Gotham-Font/GothamLight.ttf
+          weight: 300
+        - asset: fonts/Gotham-Font/Gotham-Black.otf
+          weight: 700
+        - asset: fonts/Gotham-Font/GothamBook.ttf
+          weight: 400
+
+
+
   #   - family: Trajan Pro
   #     fonts:
   #       - asset: fonts/TrajanPro.ttf
