@@ -1,3 +1,4 @@
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'bbar_cl.dart';
@@ -27,6 +28,7 @@ class _profileCLModifierState extends State<profileCLModifier>
         appBar: AppBar(
           title: Text(
             "Mon Profile",
+            style: pageTitle,
           ),
           actions: <Widget>[
             IconButton(

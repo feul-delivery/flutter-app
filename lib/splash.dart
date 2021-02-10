@@ -6,6 +6,8 @@ import 'package:feul_delivery/pages/client/index_cl.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 
+import 'local.dart';
+
 class Splash extends StatefulWidget {
   @override
   _SplashState createState() => _SplashState();
@@ -15,6 +17,11 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
+    readContent().then((String value) {
+      setState(() {
+        username = value;
+      });
+    });
     Future.delayed(Duration(seconds: 5), () {
       if (username == "user") {
         Navigator.pushReplacement(context,
@@ -33,7 +40,7 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    Scaffold(
       backgroundColor: Color.fromARGB(255, 215, 0, 0),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -55,5 +62,6 @@ class _SplashState extends State<Splash> {
         ]),
       ),
     );
+    throw UnimplementedError();
   }
 }

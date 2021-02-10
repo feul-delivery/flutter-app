@@ -8,6 +8,7 @@ import 'package:feul_delivery/pages/station/index_st.dart';
 import 'package:feul_delivery/pages/singup.dart';
 import 'package:feul_delivery/pages/client/index_cl.dart';
 
+import '../local.dart';
 import 'admin/index_admin.dart';
 
 class LoginPage extends StatelessWidget {
@@ -227,7 +228,7 @@ class LoginPage extends StatelessWidget {
                                     onPressed: () {
                                       if (txtlogin.text == 'user' &&
                                           txtpassword.text == 'user') {
-                                        username = "user";
+                                        writeContent("user");
                                         Navigator.pushReplacement(
                                             context,
                                             PageTransition(
@@ -236,7 +237,7 @@ class LoginPage extends StatelessWidget {
                                       } else {
                                         if (txtlogin.text == 'st' &&
                                             txtpassword.text == 'st') {
-                                          username = "st";
+                                          writeContent("st");
                                           Navigator.pushReplacement(
                                               context,
                                               PageTransition(
@@ -244,7 +245,7 @@ class LoginPage extends StatelessWidget {
                                                   child: IndexSt()));
                                         } else if (txtlogin.text == 'admin' &&
                                             txtpassword.text == 'admin') {
-                                          username = "admin";
+                                          writeContent("admin");
                                           Navigator.pushReplacement(
                                               context,
                                               PageTransition(
