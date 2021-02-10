@@ -466,8 +466,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                                   .grey[200]))),
                                                   child: TextField(
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          "+212654543476",
+                                                      hintText: "+212654543476",
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
@@ -621,7 +620,8 @@ class _ProfilStState extends State<ProfilSt> {
                                             ),
                                           ],
                                         );
-                                      });},
+                                      });
+                                },
                                 child: Row(
                                   children: [
                                     Icon(

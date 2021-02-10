@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:feul_delivery/pages/client/favoris_cl.dart';
 import 'package:flutter/material.dart';
-import 'package:feul_delivery/styles/style_accueil_cl.dart';
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:feul_delivery/pages/client/station_cl.dart';
 import 'package:feul_delivery/pages/client/drawer_cl.dart';
 import 'bbar_cl.dart';
@@ -50,7 +50,10 @@ class IndexCl extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Acceuil"),
+          title: Text(
+            "Acceuil",
+            style: pageTitle,
+          ),
           backgroundColor: Colors.red[900],
           centerTitle: true,
           actions: <Widget>[
@@ -97,7 +100,7 @@ class SmallStation extends StatelessWidget {
             children: <Widget>[
               Text(
                 'Près de vous',
-                style: tileTitleStyle,
+                style: subTitleStyle,
               ),
               Opacity(
                 opacity: 0.6,
@@ -109,7 +112,7 @@ class SmallStation extends StatelessWidget {
                   },
                   child: Text(
                     'Afficher tout',
-                    style: filterStyle,
+                    style: moreStyle,
                   ),
                 ),
               ),
@@ -144,7 +147,7 @@ class BigStation extends StatelessWidget {
               children: <Widget>[
                 Text(
                   'Le meilleur de la semaine',
-                  style: tileTitleStyle,
+                  style: subTitleStyle,
                 ),
               ],
             ),

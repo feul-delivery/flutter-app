@@ -1,4 +1,5 @@
 import 'package:feul_delivery/animations/FadeAnimation.dart';
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 
 int like = 10;
@@ -42,9 +43,11 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 Text(
                                   "Total - Centre ville",
                                   style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 30),
+                                    color: Colors.white,
+                                    fontFamily: 'Gotham',
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 )),
                             SizedBox(
                               height: 10,
@@ -94,6 +97,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                           Text(
                                             likeText,
                                             style: TextStyle(
+                                                fontFamily: 'Gotham',
                                                 color: Colors.grey,
                                                 fontSize: 18),
                                           ),
@@ -385,11 +389,11 @@ class _StationProfilClState extends State<StationProfilCl> {
                     height: 50,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color: Colors.red[900]),
+                        color: Colors.red[600]),
                     child: Align(
                         child: Text(
                       "Faire une commande",
-                      style: TextStyle(color: Colors.white),
+                      style: buttonStyle,
                     )),
                   ),
                 ),

@@ -1,5 +1,6 @@
 import 'package:feul_delivery/animations/FadeAnimation.dart';
 import 'package:feul_delivery/pages/client/profile_mdf.dart';
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'bbar_cl.dart';
@@ -28,6 +29,7 @@ class _profileClState extends State<profileCl> {
           appBar: AppBar(
             title: Text(
               "Mon Profile",
+              style: pageTitle,
             ),
             actions: <Widget>[
               IconButton(
@@ -79,158 +81,111 @@ class _profileClState extends State<profileCl> {
                 ),
               ),
               SizedBox(
-                height: 35,
+                height: 30,
               ),
               FadeAnimation(
                 1.2,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Prénom :",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ],
+                    Text(
+                      "Prénom : ",
+                      style: textStyle,
                     ),
                     Container(
                       child: Text(
                         'Da7mad',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                        style: strongTextStyle,
                       ),
                     )
                   ],
                 ),
               ),
               Divider(
-                height: 10,
+                height: 30,
                 thickness: 1,
-              ),
-              SizedBox(
-                height: 10,
               ),
               FadeAnimation(
                 1.2,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Nom :",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ],
+                    Text(
+                      "Nom : ",
+                      style: textStyle,
                     ),
                     Container(
                       child: Text(
                         'Lmkawi',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                        style: strongTextStyle,
                       ),
                     )
                   ],
                 ),
               ),
               Divider(
-                height: 15,
+                height: 30,
                 thickness: 1,
-              ),
-              SizedBox(
-                height: 15,
               ),
               FadeAnimation(
                 1.2,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Tél :",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ],
+                    Text(
+                      "Tél : ",
+                      style: textStyle,
                     ),
                     Container(
                       child: Text(
                         '+212601020304',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                        style: strongTextStyle,
                       ),
                     )
                   ],
                 ),
               ),
               Divider(
-                height: 15,
+                height: 30,
                 thickness: 1,
-              ),
-              SizedBox(
-                height: 15,
               ),
               FadeAnimation(
                 1.2,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "Email :",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ],
+                    Text(
+                      "Email : ",
+                      style: textStyle,
                     ),
                     Container(
                       child: Text(
                         'Contact@da7mad.com',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                        style: strongTextStyle,
                       ),
                     )
                   ],
                 ),
               ),
               Divider(
-                height: 15,
+                height: 30,
                 thickness: 1,
-              ),
-              SizedBox(
-                height: 15,
               ),
               FadeAnimation(
                 1.2,
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Row(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          "CIN :",
-                          style: TextStyle(fontSize: 14),
-                        ),
-                      ],
+                    Text(
+                      "CIN : ",
+                      style: textStyle,
                     ),
                     Container(
                       child: Text(
                         'CD454545',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.bold),
+                        style: strongTextStyle,
                       ),
                     )
                   ],
                 ),
               ),
               Divider(
-                height: 15,
+                height: 30,
                 thickness: 1,
               ),
             ]),

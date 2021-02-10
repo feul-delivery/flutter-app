@@ -1,3 +1,4 @@
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/login.dart';
 import 'package:page_transition/page_transition.dart';
@@ -64,7 +65,10 @@ class DrawerSt extends StatelessWidget {
             Icons.person,
             color: Colors.red[900],
           ),
-          title: Text("Profile"),
+          title: Text(
+            "Profile",
+            style: textStyle,
+          ),
         ),
         ListTile(
           onTap: () {
@@ -78,7 +82,10 @@ class DrawerSt extends StatelessWidget {
             Icons.receipt,
             color: Colors.red[900],
           ),
-          title: Text("Commandes"),
+          title: Text(
+            "Commandes",
+            style: textStyle,
+          ),
         ),
         ListTile(
           onTap: () {
@@ -91,14 +98,17 @@ class DrawerSt extends StatelessWidget {
             Icons.settings,
             color: Colors.red[900],
           ),
-          title: Text("Paramètres"),
+          title: Text(
+            "Paramètres",
+            style: textStyle,
+          ),
         ),
         Expanded(
             child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
             height: 35,
-            margin: EdgeInsets.symmetric(horizontal: 65, vertical: 20),
+            margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.red[900]),
@@ -110,7 +120,7 @@ class DrawerSt extends StatelessWidget {
                 },
                 child: Text(
                   "Se déconnecter",
-                  style: TextStyle(color: Colors.white),
+                  style: buttonStyle,
                 ),
               ),
             ),

@@ -1,4 +1,5 @@
 import 'package:feul_delivery/pages/client/bbar_cl.dart';
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +19,7 @@ class _SettingsClState extends State<SettingsCl> {
         appBar: AppBar(
           title: Text(
             "Paramètres",
-            style: TextStyle(),
+            style: pageTitle,
           ),
           actions: <Widget>[
             IconButton(

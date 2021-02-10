@@ -1,3 +1,4 @@
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/station/index_st.dart';
@@ -136,11 +137,13 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
         alignment: AlignmentDirectional.center,
         children: <Widget>[
           AnimatedOpacity(
-            opacity: isSelected ? 0.0 : 1.0,
-            duration: duration,
-            curve: Curves.linear,
-            child: Text(item.title),
-          ),
+              opacity: isSelected ? 0.0 : 1.0,
+              duration: duration,
+              curve: Curves.linear,
+              child: Text(
+                item.title,
+                style: textStyle,
+              )),
           AnimatedAlign(
             duration: duration,
             alignment: isSelected ? Alignment.center : Alignment(0, 2.6),

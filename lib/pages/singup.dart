@@ -1,3 +1,4 @@
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/animations/FadeAnimation.dart';
 import 'package:feul_delivery/pages/client/explore_cl.dart';
@@ -29,7 +30,7 @@ class SignupPage extends StatelessWidget {
         decoration: BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
-                colors: [Colors.red[900], Colors.red[900], Colors.red[600]])),
+                colors: [Colors.red[900], Colors.red[900], Colors.red[700]])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -98,8 +99,7 @@ class SignupPage extends StatelessWidget {
                                     child: TextField(
                                       decoration: InputDecoration(
                                           hintText: "Email",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
+                                          hintStyle: hintStyle,
                                           border: InputBorder.none),
                                     ),
                                   ),
@@ -113,8 +113,7 @@ class SignupPage extends StatelessWidget {
                                       obscureText: true,
                                       decoration: InputDecoration(
                                           hintText: "Mot de passe",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
+                                          hintStyle: hintStyle,
                                           border: InputBorder.none),
                                     ),
                                   ),
@@ -128,8 +127,7 @@ class SignupPage extends StatelessWidget {
                                       obscureText: true,
                                       decoration: InputDecoration(
                                           hintText: "Confirmation",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
+                                          hintStyle: hintStyle,
                                           border: InputBorder.none),
                                     ),
                                   ),
@@ -146,7 +144,7 @@ class SignupPage extends StatelessWidget {
                               margin: EdgeInsets.symmetric(horizontal: 50),
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(10),
-                                  color: Colors.red[900]),
+                                  color: Colors.red[700]),
                               child: Center(
                                 child: FlatButton(
                                   onPressed: () {
@@ -158,9 +156,7 @@ class SignupPage extends StatelessWidget {
                                   },
                                   child: Text(
                                     "S'inscrire",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold),
+                                    style: buttonStyle,
                                   ),
                                 ),
                               ),
@@ -173,15 +169,25 @@ class SignupPage extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                Text("Vous avez déjà un compte?"),
+                                Text(
+                                  "Vous avez déjà un compte?",
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: 'Gotham',
+                                    fontWeight: FontWeight.w300,
+                                  ),
+                                ),
                                 FlatButton(
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text("Se connecter",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          fontSize: 15)),
+                                  child: Text(
+                                    "Se connecter",
+                                    style: TextStyle(
+                                        fontFamily: 'Gotham',
+                                        fontWeight: FontWeight.w500,
+                                        letterSpacing: 1.2),
+                                  ),
                                 ),
                               ],
                             ))

@@ -75,6 +75,7 @@ class _StarterPageState extends State<StarterPage>
                         'Fuel Delivery',
                         style: TextStyle(
                             color: Colors.white,
+                            fontFamily: 'Gotham',
                             fontSize: 50,
                             fontWeight: FontWeight.bold),
                       )),
@@ -100,7 +101,7 @@ class _StarterPageState extends State<StarterPage>
                               width: 150,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.red[900],
+                                color: Colors.red[600],
                               ),
                               child: AnimatedOpacity(
                                 opacity: _textVisible ? 1.0 : 0.0,

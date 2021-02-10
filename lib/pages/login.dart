@@ -1,5 +1,6 @@
 import 'package:feul_delivery/animations/FadeAnimation.dart';
 import 'package:feul_delivery/main.dart';
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/StarterPage.dart';
@@ -41,7 +42,7 @@ class LoginPage extends StatelessWidget {
           decoration: BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
-                  colors: [Colors.red[900], Colors.red[900], Colors.red[600]])),
+                  colors: [Colors.red[900], Colors.red[900], Colors.red[700]])),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -54,7 +55,12 @@ class LoginPage extends StatelessWidget {
                         1,
                         Text(
                           "Bonjour,",
-                          style: TextStyle(color: Colors.white, fontSize: 40),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 40,
+                            fontFamily: 'Gotham',
+                            fontWeight: FontWeight.w500,
+                          ),
                         )),
                     SizedBox(
                       height: 10,
@@ -63,7 +69,12 @@ class LoginPage extends StatelessWidget {
                         1.3,
                         Text(
                           "Nous saluons le retour",
-                          style: TextStyle(color: Colors.white, fontSize: 18),
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontFamily: 'Gotham',
+                            fontWeight: FontWeight.w300,
+                          ),
                         )),
                   ],
                 ),
@@ -108,8 +119,7 @@ class LoginPage extends StatelessWidget {
                                         controller: txtlogin,
                                         decoration: InputDecoration(
                                             hintText: "Email",
-                                            hintStyle:
-                                                TextStyle(color: Colors.grey),
+                                            hintStyle: hintStyle,
                                             border: InputBorder.none),
                                       ),
                                     ),
@@ -124,8 +134,7 @@ class LoginPage extends StatelessWidget {
                                         obscureText: true,
                                         decoration: InputDecoration(
                                             hintText: "Mot de passe",
-                                            hintStyle:
-                                                TextStyle(color: Colors.grey),
+                                            hintStyle: hintStyle,
                                             border: InputBorder.none),
                                       ),
                                     ),
@@ -196,7 +205,11 @@ class LoginPage extends StatelessWidget {
                                 },
                                 child: Text(
                                   "mot de passe oublié?",
-                                  style: TextStyle(color: Colors.grey),
+                                  style: TextStyle(
+                                    color: Colors.grey,
+                                    fontFamily: 'Gotham',
+                                    fontWeight: FontWeight.w300,
+                                  ),
                                 ),
                               )),
                           SizedBox(
@@ -208,7 +221,7 @@ class LoginPage extends StatelessWidget {
                                 margin: EdgeInsets.symmetric(horizontal: 50),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
-                                    color: Colors.red[900]),
+                                    color: Colors.red[700]),
                                 child: Center(
                                   child: FlatButton(
                                     onPressed: () {
@@ -270,9 +283,7 @@ class LoginPage extends StatelessWidget {
                                     },
                                     child: Text(
                                       "Se connecter",
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
+                                      style: buttonStyle,
                                     ),
                                   ),
                                 ),
@@ -284,7 +295,11 @@ class LoginPage extends StatelessWidget {
                               1.7,
                               Text(
                                 "vous êtes nouveau ici?",
-                                style: TextStyle(color: Colors.grey),
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontFamily: 'Gotham',
+                                  fontWeight: FontWeight.w300,
+                                ),
                               )),
                           SizedBox(
                             height: 5,
@@ -299,7 +314,7 @@ class LoginPage extends StatelessWidget {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(10),
-                                          color: Colors.blue),
+                                          color: Colors.blue[900]),
                                       child: Center(
                                           child: FlatButton(
                                         hoverColor: Colors.black,
@@ -314,7 +329,8 @@ class LoginPage extends StatelessWidget {
                                           "Créer un nouveau compte",
                                           style: TextStyle(
                                               color: Colors.white,
-                                              fontWeight: FontWeight.bold,
+                                              fontFamily: 'Gotham',
+                                              fontWeight: FontWeight.w500,
                                               fontSize: 17,
                                               letterSpacing: 2.0),
                                         ),

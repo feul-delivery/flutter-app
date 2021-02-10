@@ -2,6 +2,7 @@ import 'package:feul_delivery/pages/client/profile_mdf.dart';
 import 'package:feul_delivery/pages/client/settings_cl.dart';
 import 'package:feul_delivery/pages/client/commandes_cl.dart';
 import 'package:feul_delivery/pages/login.dart';
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'favoris_cl.dart';
 import 'index_cl.dart';
@@ -67,7 +68,10 @@ class DrawerCL extends StatelessWidget {
             Icons.home,
             color: Colors.red[900],
           ),
-          title: Text("Acceuil"),
+          title: Text(
+            "Acceuil",
+            style: textStyle,
+          ),
         ),
         ListTile(
           onTap: () {
@@ -78,7 +82,10 @@ class DrawerCL extends StatelessWidget {
             Icons.person,
             color: Colors.red[900],
           ),
-          title: Text("Mon Profile"),
+          title: Text(
+            "Mon Profile",
+            style: textStyle,
+          ),
         ),
         ListTile(
           onTap: () {
@@ -89,7 +96,10 @@ class DrawerCL extends StatelessWidget {
             Icons.favorite,
             color: Colors.red[900],
           ),
-          title: Text("Mes favoris"),
+          title: Text(
+            "Mes favoris",
+            style: textStyle,
+          ),
         ),
         ListTile(
           onTap: () {
@@ -100,7 +110,10 @@ class DrawerCL extends StatelessWidget {
             Icons.receipt,
             color: Colors.red[900],
           ),
-          title: Text("Mes commandes"),
+          title: Text(
+            "Mes commandes",
+            style: textStyle,
+          ),
         ),
         ListTile(
           onTap: () {
@@ -111,17 +124,20 @@ class DrawerCL extends StatelessWidget {
             Icons.settings,
             color: Colors.red[900],
           ),
-          title: Text("Paramètres"),
+          title: Text(
+            "Paramètres",
+            style: textStyle,
+          ),
         ),
         Expanded(
             child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
             height: 35,
-            margin: EdgeInsets.symmetric(horizontal: 65, vertical: 20),
+            margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.red[900]),
+                color: Colors.red[700]),
             child: Center(
               child: FlatButton(
                 onPressed: () {
@@ -130,7 +146,7 @@ class DrawerCL extends StatelessWidget {
                 },
                 child: Text(
                   "Se déconnecter",
-                  style: TextStyle(color: Colors.white),
+                  style: buttonStyle,
                 ),
               ),
             ),

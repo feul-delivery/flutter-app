@@ -11,7 +11,13 @@ class ExploreCl extends StatefulWidget {
 
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Explorer');
+  Widget _appBarTitle = new Text(
+    'Explorer',
+    style: TextStyle(
+      fontFamily: 'Gotham',
+      fontWeight: FontWeight.w300,
+    ),
+  );
   Icon _adoreIcon;
   int adore = 0;
   @override
@@ -192,7 +198,11 @@ class _ExploreClState extends State<ExploreCl> {
         this._searchIcon = new Icon(Icons.close);
         this._appBarTitle = new TextField(
           decoration: new InputDecoration(
-              prefixIcon: new Icon(Icons.search), hintText: 'Rechercher...'),
+              hintText: 'Tapez ici',
+              hintStyle: TextStyle(color: Colors.white10),
+              border: InputBorder.none,
+              labelText: 'Recherche',
+              labelStyle: TextStyle(color: Colors.white10)),
         );
       } else {
         this._searchIcon = new Icon(Icons.search);
