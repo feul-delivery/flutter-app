@@ -166,8 +166,7 @@ class SignupPage extends StatelessWidget {
                         ),
                         FadeAnimation(
                             1.2,
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                            Column(
                               children: <Widget>[
                                 Text(
                                   "Vous avez déjà un compte?",

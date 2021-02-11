@@ -1,12 +1,12 @@
 import 'package:feul_delivery/pages/StarterPage.dart';
+import 'package:feul_delivery/pages/admin/index_admin.dart';
 import 'package:feul_delivery/pages/login.dart';
+import 'package:feul_delivery/pages/station/index_st.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/main.dart';
 import 'package:feul_delivery/pages/client/index_cl.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-
-import 'local.dart';
 
 class Splash extends StatefulWidget {
   @override
@@ -17,11 +17,6 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    readContent().then((String value) {
-      setState(() {
-        username = value;
-      });
-    });
     Future.delayed(Duration(seconds: 5), () {
       if (username == "user") {
         Navigator.pushReplacement(context,
@@ -34,6 +29,12 @@ class _SplashState extends State<Splash> {
             context,
             PageTransition(
                 type: PageTransitionType.fade, child: StarterPage()));
+      } else if (username == "admin") {
+        Navigator.pushReplacement(context,
+            PageTransition(type: PageTransitionType.fade, child: IndexAdmin()));
+      } else if (username == "st") {
+        Navigator.pushReplacement(context,
+            PageTransition(type: PageTransitionType.fade, child: IndexSt()));
       }
     });
   }

@@ -4,7 +4,7 @@ import 'package:feul_delivery/pages/login.dart';
 import 'package:feul_delivery/pages/StarterPage.dart';
 import 'package:feul_delivery/pages/singup.dart';
 
-String username = "user";
+String username = "";
 void main() => runApp(MaterialApp(
         title: 'Fuel Delivery',
         theme: ThemeData(

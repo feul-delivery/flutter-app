@@ -1,6 +1,7 @@
-import 'package:feul_delivery/pages/admin/index_admin.dart';
+import 'package:feul_delivery/pages/admin/livreur_admin.dart';
 import 'package:feul_delivery/pages/admin/profile_admin.dart';
 import 'package:feul_delivery/pages/admin/settings_admin.dart';
+import 'package:feul_delivery/pages/admin/station_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/login.dart';
 import 'package:page_transition/page_transition.dart';
@@ -70,7 +71,7 @@ class DrawerAdmin extends StatelessWidget {
             Navigator.push(
                 context,
                 PageTransition(
-                    type: PageTransitionType.fade, child: IndexAdmin()));
+                    type: PageTransitionType.fade, child: StationsPage()));
           },
           leading: Icon(
             Icons.business,
@@ -83,7 +84,7 @@ class DrawerAdmin extends StatelessWidget {
             Navigator.push(
                 context,
                 PageTransition(
-                    type: PageTransitionType.fade, child: IndexAdmin()));
+                    type: PageTransitionType.fade, child: LiveursPage()));
           },
           leading: Icon(
             Icons.group,
