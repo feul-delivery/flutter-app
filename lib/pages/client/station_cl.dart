@@ -3,8 +3,8 @@ import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:feul_delivery/pages/client/commanderPages/cmd_client.dart';
 import 'package:flutter/material.dart';
 
-int like = 10;
-int dislike = 10;
+int like = 24;
+int dislike = 9;
 
 class StationProfilCl extends StatefulWidget {
   @override
@@ -133,7 +133,9 @@ class _StationProfilClState extends State<StationProfilCl> {
                                         Text(
                                           dislikeText,
                                           style: TextStyle(
-                                              color: Colors.grey, fontSize: 18),
+                                              fontFamily: 'Gotham',
+                                              color: Colors.grey,
+                                              fontSize: 18),
                                         ),
                                       ]),
                                     ),
@@ -378,30 +380,31 @@ class _StationProfilClState extends State<StationProfilCl> {
               )
             ],
           ),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Cmd1()));
-            },
-            child: Positioned.fill(
-              bottom: 20,
-              child: Container(
-                child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: FadeAnimation(
-                    2,
-                    Container(
-                      margin: EdgeInsets.symmetric(horizontal: 80),
-                      height: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.red[600]),
-                      child: Align(
-                          child: Text(
+          Positioned.fill(
+            bottom: 20,
+            child: Container(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: FadeAnimation(
+                  2,
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 80),
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.red[600]),
+                    child: Align(
+                        child: FlatButton(
+                      padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                      onPressed: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => Cmd1()));
+                      },
+                      child: Text(
                         "Faire une commande",
                         style: buttonStyle,
-                      )),
-                    ),
+                      ),
+                    )),
                   ),
                 ),
               ),
