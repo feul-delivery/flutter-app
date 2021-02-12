@@ -71,7 +71,6 @@ class IndexCl extends StatelessWidget {
             margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
             child: Column(
               children: <Widget>[
-                // TODOSwitch case for bottom bar
                 BigStation(),
                 SizedBox(
                   height: 20,
@@ -162,7 +161,7 @@ class BigStation extends StatelessWidget {
                 child: Hero(
                   tag: 'tage',
                   child: Image.asset(
-                    'assets/s1.png',
+                    'assets/s3.jpg',
                     alignment: Alignment.center,
                     fit: BoxFit.cover,
                     width: MediaQuery.of(context).size.width,
