@@ -41,7 +41,7 @@ class _SplashState extends State<Splash> {
 
   @override
   Widget build(BuildContext context) {
-    Scaffold(
+    return Scaffold(
       backgroundColor: Color.fromARGB(255, 215, 0, 0),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -63,6 +63,5 @@ class _SplashState extends State<Splash> {
         ]),
       ),
     );
-    throw UnimplementedError();
   }
 }
