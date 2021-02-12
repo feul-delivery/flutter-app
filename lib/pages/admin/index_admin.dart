@@ -51,192 +51,194 @@ class _IndexAdminState extends State<IndexAdmin> {
           ],
         ),
         body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Container(
-            margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
-                Text(
-                  'Commandes en direct',
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                Divider(
-                  height: 5,
-                  thickness: 1,
-                ),
-                for (int i = 0; i < items.length; i++)
-                  commandtnontermeneState(i),
-              ],
-            ),
-          ),
-        ),
+            physics: BouncingScrollPhysics(),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              child: Column(
+                children: <Widget>[
+                  InkWell(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text('Total Views',
+                                    style: TextStyle(color: Colors.blueAccent)),
+                                Text('265K',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 34.0))
+                              ],
+                            ),
+                            Material(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(24.0),
+                                child: Center(
+                                    child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Icon(Icons.timeline,
+                                      color: Colors.white, size: 30.0),
+                                )))
+                          ]),
+                    ),
+                  ),
+                  InkWell(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Material(
+                                color: Colors.teal,
+                                shape: CircleBorder(),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Icon(Icons.settings_applications,
+                                      color: Colors.white, size: 30.0),
+                                )),
+                            Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                            Text('General',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 24.0)),
+                            Text('Images, Videos',
+                                style: TextStyle(color: Colors.black45)),
+                          ]),
+                    ),
+                  ),
+                  InkWell(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Material(
+                                color: Colors.amber,
+                                shape: CircleBorder(),
+                                child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Icon(Icons.notifications,
+                                      color: Colors.white, size: 30.0),
+                                )),
+                            Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                            Text('Alerts',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 24.0)),
+                            Text('All ',
+                                style: TextStyle(color: Colors.black45)),
+                          ]),
+                    ),
+                  ),
+                  InkWell(
+                    child: Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Text('Revenue',
+                                        style: TextStyle(color: Colors.green)),
+                                    Text('\$16K',
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.w700,
+                                            fontSize: 34.0)),
+                                  ],
+                                ),
+                                // DropdownButton(
+                                //     isDense: true,
+                                //     value: ,
+                                //     onChanged: (String value) => setState(() {
+                                //           actualDropdown = value;
+                                //           actualChart =
+                                //               chartDropdownItems.indexOf(
+                                //                   value); // Refresh the chart
+                                //         }),
+                                //     items: chartDropdownItems.map((String title) {
+                                //       return DropdownMenuItem(
+                                //         value: title,
+                                //         child: Text(title,
+                                //             style: TextStyle(
+                                //                 color: Colors.blue,
+                                //                 fontWeight: FontWeight.w400,
+                                //                 fontSize: 14.0)),
+                                //       );
+                                //     }).toList())
+                              ],
+                            ),
+                            Padding(padding: EdgeInsets.only(bottom: 4.0)),
+                            // Sparkline(
+                            //   data: charts[actualChart],
+                            //   lineWidth: 5.0,
+                            //   lineColor: Colors.redAccent,
+                            // )
+                          ],
+                        )),
+                  ),
+                  InkWell(
+                    child: Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text('Shop Items',
+                                    style: TextStyle(color: Colors.redAccent)),
+                                Text('173',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 34.0))
+                              ],
+                            ),
+                            Material(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(24.0),
+                                child: Center(
+                                    child: Padding(
+                                  padding: EdgeInsets.all(16.0),
+                                  child: Icon(Icons.store,
+                                      color: Colors.white, size: 30.0),
+                                )))
+                          ]),
+                    ),
+                    onTap: () {},
+                  )
+                ],
+                // staggeredTiles: [
+                //   StaggeredTile.extent(2, 110.0),
+                //   StaggeredTile.extent(1, 180.0),
+                //   StaggeredTile.extent(1, 180.0),
+                //   StaggeredTile.extent(2, 220.0),
+                //   StaggeredTile.extent(2, 110.0),
+                // ],
+              ),
+            )),
         drawer: DrawerAdmin(),
       ),
     );
   }
-
-  Container commandtnontermeneState(int i) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-              decoration: new BoxDecoration(
-                  color: Colors.white70,
-                  borderRadius: BorderRadius.circular(10),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.red[900].withOpacity(0.4),
-                        blurRadius: 20,
-                        offset: Offset(0, 10))
-                  ]),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(items[i]['nom'],
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15))),
-                        ),
-                        Container(
-                          height: 25,
-                          margin: EdgeInsets.symmetric(horizontal: 5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                            color: Colors.red[900],
-                          ),
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.only(left: 5.0, right: 5.0),
-                            child: Center(
-                                child: Text(
-                              items[i]['time'],
-                              style: TextStyle(color: Colors.white),
-                            )),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Text('Volume demonder: ',
-                                      style:
-                                          TextStyle(color: Colors.grey[800])),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Container(
-                                  child: Text(items[i]['volume'],
-                                      style:
-                                          TextStyle(color: Colors.grey[600])),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  child: Text('Type:',
-                                      style:
-                                          TextStyle(color: Colors.grey[800])),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Container(
-                                  child: Text(items[i]['type'],
-                                      style:
-                                          TextStyle(color: Colors.grey[600])),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Text('Adresse: ',
-                                      style:
-                                          TextStyle(color: Colors.grey[800])),
-                                ),
-                                Container(
-                                  child: Text(items[i]['adresse'],
-                                      style:
-                                          TextStyle(color: Colors.grey[600])),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              )),
-          SizedBox(
-            height: 15,
-          ),
-        ],
-      ),
-    );
-  }
-
-  List items = [
-    {
-      "nom": "Da7mad ELMAKKAWI",
-      "time": "17:47",
-      "etat": "en cour",
-      "volume": "10L",
-      "type": "Gas-oil",
-      "adresse": "Monfleuri 2, Lycée Technique, Fès",
-      "statut": "En attend"
-    },
-    {
-      "nom": "Da7mad ELMAKKAWI",
-      "time": "17:05",
-      "etat": "en cour",
-      "volume": "50L",
-      "type": "Gas-oil",
-      "adresse": "Monfleuri 2, Lycée Technique, Fès",
-      "statut": "En attend"
-    },
-    {
-      "nom": "Da7mad ELMAKKAWI",
-      "time": "17:01",
-      "etat": "en cour",
-      "volume": "43L",
-      "type": "Gas-oil",
-      "adresse": "Monfleuri 2, Lycée Technique, Fès",
-      "statut": "En attend"
-    },
-    {
-      "nom": "Da7mad ELMAKKAWI",
-      "time": "16:50",
-      "etat": "en cour",
-      "volume": "43L",
-      "type": "Gas-oil",
-      "statut": "En attend",
-      "adresse": "Monfleuri 2, Lycée Technique, Fès",
-    }
-  ];
 }
