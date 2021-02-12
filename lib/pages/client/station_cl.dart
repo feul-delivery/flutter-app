@@ -1,5 +1,6 @@
 import 'package:feul_delivery/animations/FadeAnimation.dart';
 import 'package:feul_delivery/styles/textStyles.dart';
+import 'package:feul_delivery/pages/client/commanderPages/cmd1.dart';
 import 'package:flutter/material.dart';
 
 int like = 10;
@@ -377,24 +378,31 @@ class _StationProfilClState extends State<StationProfilCl> {
               )
             ],
           ),
-          Positioned.fill(
-            bottom: 20,
-            child: Container(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: FadeAnimation(
-                  2,
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 80),
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red[600]),
-                    child: Align(
-                        child: Text(
-                      "Faire une commande",
-                      style: buttonStyle,
-                    )),
+          GestureDetector(
+            onTap: () {
+              
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => Cmd1()));
+            },
+                      child: Positioned.fill(
+              bottom: 20,
+              child: Container(
+                child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: FadeAnimation(
+                    2,
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 80),
+                      height: 50,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.red[600]),
+                      child: Align(
+                          child: Text(
+                        "Faire une commande",
+                        style: buttonStyle,
+                      )),
+                    ),
                   ),
                 ),
               ),
