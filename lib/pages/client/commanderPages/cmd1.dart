@@ -21,10 +21,7 @@ class _Cmd1State extends State<Cmd1> {
         elevation: 1,
       ),
       body: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+        padding: EdgeInsets.all(20),
         child: SingleChildScrollView(
           child: Form(
             key: _formKey,
@@ -70,8 +67,8 @@ class _Cmd1State extends State<Cmd1> {
                 Container(
                   padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      border: Border(
-                          bottom: BorderSide(color: Colors.grey[200]))),
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[200]))),
                   child: TextFormField(
                     decoration: InputDecoration(
                         labelText: "Adresse",
@@ -86,10 +83,40 @@ class _Cmd1State extends State<Cmd1> {
                   ),
                 ),
                 Container(
-                  height: 50,
-                  margin: EdgeInsets.symmetric(horizontal: 50),
+                  padding: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[200]))),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "Matricule de voiture",
+                        labelStyle: hintStyle,
+                        border: InputBorder.none),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'cet information est obligatoire';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[200]))),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                        labelText: "Colore de voiture",
+                        labelStyle: hintStyle,
+                        border: InputBorder.none),
+                  ),
+                ),
+                SizedBox(height: 20,),
+                Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
                       color: Colors.red[700]),
                   child: Center(
                     child: FlatButton(
