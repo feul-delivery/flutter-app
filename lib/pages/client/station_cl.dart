@@ -1,6 +1,6 @@
 import 'package:feul_delivery/animations/FadeAnimation.dart';
 import 'package:feul_delivery/styles/textStyles.dart';
-import 'package:feul_delivery/pages/client/commanderPages/cmd1.dart';
+import 'package:feul_delivery/pages/client/commanderPages/cmd_client.dart';
 import 'package:flutter/material.dart';
 
 int like = 10;
@@ -380,11 +380,10 @@ class _StationProfilClState extends State<StationProfilCl> {
           ),
           GestureDetector(
             onTap: () {
-              
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => Cmd1()));
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Cmd1()));
             },
-                      child: Positioned.fill(
+            child: Positioned.fill(
               bottom: 20,
               child: Container(
                 child: Align(
