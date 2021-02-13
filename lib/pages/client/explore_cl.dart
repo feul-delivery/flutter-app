@@ -1,4 +1,5 @@
 import 'package:feul_delivery/pages/client/station_cl.dart';
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/client/drawer_cl.dart';
 import 'bbar_cl.dart';
@@ -11,13 +12,7 @@ class ExploreCl extends StatefulWidget {
 
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text(
-    'Explorer',
-    style: TextStyle(
-      fontFamily: 'Gotham',
-      fontWeight: FontWeight.w300,
-    ),
-  );
+  Widget _appBarTitle = new Text('Explorer', style: pageTitle);
   Icon _adoreIcon;
   int adore = 0;
   @override

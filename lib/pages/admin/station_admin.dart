@@ -1,10 +1,47 @@
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 
-class StationsPage extends StatelessWidget {
-  const StationsPage({Key key}) : super(key: key);
+class StationsPage extends StatefulWidget {
+  @override
+  _StationsPageState createState() => _StationsPageState();
+}
 
+class _StationsPageState extends State<StationsPage> {
+  Icon _searchIcon = new Icon(Icons.search);
+  Widget _appBarTitle = new Text('Entreprises', style: pageTitle);
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.red[900],
+        title: _appBarTitle,
+        actions: <Widget>[
+          IconButton(
+            icon: new Icon(Icons.search),
+            onPressed: _searchPressed,
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _searchPressed() {
+    setState(() {
+      if (this._searchIcon.icon == Icons.search) {
+        this._searchIcon = new Icon(Icons.close);
+        this._appBarTitle = new TextField(
+          decoration: new InputDecoration(
+              hintText: 'Tapez ici',
+              hintStyle: TextStyle(color: Colors.white10),
+              border: InputBorder.none,
+              labelText: 'Recherche',
+              labelStyle: TextStyle(color: Colors.white10)),
+        );
+      } else {
+        this._searchIcon = new Icon(Icons.search);
+        this._appBarTitle = new Text('Entreprises');
+      }
+    });
   }
 }
