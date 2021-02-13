@@ -11,7 +11,7 @@ const pageTitle = TextStyle(
   fontWeight: FontWeight.w300,
 );
 const hintStyle = TextStyle(
-  color: Colors.grey,
+  color: Colors.black54,
   fontFamily: 'Gotham',
   fontWeight: FontWeight.w200,
 );
