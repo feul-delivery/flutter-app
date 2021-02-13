@@ -13,7 +13,7 @@ class _Cmd1State extends State<Cmd1> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Faire une commande",
+          "Commande",
           style: pageTitle,
         ),
         centerTitle: true,
@@ -124,7 +124,9 @@ class _Cmd1State extends State<Cmd1> {
                   child: Center(
                     child: FlatButton(
                       onPressed: () {
-                        if (_formKey.currentState.validate()) {}
+                        if (_formKey.currentState.validate()) {
+                          
+                        }
                       },
                       child: Text(
                         'Suivant',
