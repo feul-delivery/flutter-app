@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:feul_delivery/pages/admin/drawer_admin.dart';
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 
 class IndexAdmin extends StatefulWidget {
@@ -39,7 +40,10 @@ class _IndexAdminState extends State<IndexAdmin> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Acceuil"),
+          title: Text(
+            "Acceuil",
+            style: pageTitle,
+          ),
           backgroundColor: Colors.red[900],
           centerTitle: true,
           actions: <Widget>[
@@ -56,8 +60,20 @@ class _IndexAdminState extends State<IndexAdmin> {
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               child: Column(
                 children: <Widget>[
+                  SizedBox(
+                    height: 10,
+                  ),
                   InkWell(
-                    child: Padding(
+                    child: Container(
+                      decoration: new BoxDecoration(
+                          color: Colors.white70,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.red[900].withOpacity(0.4),
+                                blurRadius: 20,
+                                offset: Offset(0, 10))
+                          ]),
                       padding: const EdgeInsets.all(24.0),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -67,7 +83,7 @@ class _IndexAdminState extends State<IndexAdmin> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('Total Views',
+                                Text('Total Commandes',
                                     style: TextStyle(color: Colors.blueAccent)),
                                 Text('265K',
                                     style: TextStyle(
@@ -88,57 +104,83 @@ class _IndexAdminState extends State<IndexAdmin> {
                           ]),
                     ),
                   ),
-                  InkWell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Material(
-                                color: Colors.teal,
-                                shape: CircleBorder(),
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Icon(Icons.settings_applications,
-                                      color: Colors.white, size: 30.0),
-                                )),
-                            Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                            Text('General',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 24.0)),
-                            Text('Images, Videos',
-                                style: TextStyle(color: Colors.black45)),
-                          ]),
-                    ),
+                  SizedBox(
+                    height: 15,
                   ),
-                  InkWell(
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Material(
-                                color: Colors.amber,
-                                shape: CircleBorder(),
-                                child: Padding(
-                                  padding: EdgeInsets.all(16.0),
-                                  child: Icon(Icons.notifications,
-                                      color: Colors.white, size: 30.0),
-                                )),
-                            Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                            Text('Alerts',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 24.0)),
-                            Text('All ',
-                                style: TextStyle(color: Colors.black45)),
-                          ]),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      InkWell(
+                        child: Container(
+                          decoration: new BoxDecoration(
+                              color: Colors.white70,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.red[900].withOpacity(0.4),
+                                    blurRadius: 20,
+                                    offset: Offset(0, 10))
+                              ]),
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Material(
+                                    color: Colors.teal,
+                                    shape: CircleBorder(),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(16.0),
+                                      child: Icon(Icons.settings_applications,
+                                          color: Colors.white, size: 30.0),
+                                    )),
+                                Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                                Text('General',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24.0)),
+                                Text('Images, Videos',
+                                    style: TextStyle(color: Colors.black45)),
+                              ]),
+                        ),
+                      ),
+                      InkWell(
+                        child: Container(
+                          decoration: new BoxDecoration(
+                              color: Colors.white70,
+                              borderRadius: BorderRadius.circular(10),
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.red[900].withOpacity(0.4),
+                                    blurRadius: 20,
+                                    offset: Offset(0, 10))
+                              ]),
+                          padding: const EdgeInsets.all(24.0),
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Material(
+                                    color: Colors.amber,
+                                    shape: CircleBorder(),
+                                    child: Padding(
+                                      padding: EdgeInsets.all(16.0),
+                                      child: Icon(Icons.notifications,
+                                          color: Colors.white, size: 30.0),
+                                    )),
+                                Padding(padding: EdgeInsets.only(bottom: 16.0)),
+                                Text('Alertes',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 24.0)),
+                                Text('Faible Service ',
+                                    style: TextStyle(color: Colors.black45)),
+                              ]),
+                        ),
+                      ),
+                    ],
                   ),
                   InkWell(
                     child: Padding(
@@ -164,38 +206,23 @@ class _IndexAdminState extends State<IndexAdmin> {
                                             fontSize: 34.0)),
                                   ],
                                 ),
-                                // DropdownButton(
-                                //     isDense: true,
-                                //     value: ,
-                                //     onChanged: (String value) => setState(() {
-                                //           actualDropdown = value;
-                                //           actualChart =
-                                //               chartDropdownItems.indexOf(
-                                //                   value); // Refresh the chart
-                                //         }),
-                                //     items: chartDropdownItems.map((String title) {
-                                //       return DropdownMenuItem(
-                                //         value: title,
-                                //         child: Text(title,
-                                //             style: TextStyle(
-                                //                 color: Colors.blue,
-                                //                 fontWeight: FontWeight.w400,
-                                //                 fontSize: 14.0)),
-                                //       );
-                                //     }).toList())
                               ],
                             ),
                             Padding(padding: EdgeInsets.only(bottom: 4.0)),
-                            // Sparkline(
-                            //   data: charts[actualChart],
-                            //   lineWidth: 5.0,
-                            //   lineColor: Colors.redAccent,
-                            // )
                           ],
                         )),
                   ),
                   InkWell(
-                    child: Padding(
+                    child: Container(
+                      decoration: new BoxDecoration(
+                          color: Colors.white70,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.red[900].withOpacity(0.4),
+                                blurRadius: 20,
+                                offset: Offset(0, 10))
+                          ]),
                       padding: const EdgeInsets.all(24.0),
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -205,7 +232,7 @@ class _IndexAdminState extends State<IndexAdmin> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('Shop Items',
+                                Text('Nouveaux Comptes',
                                     style: TextStyle(color: Colors.redAccent)),
                                 Text('173',
                                     style: TextStyle(
@@ -220,7 +247,7 @@ class _IndexAdminState extends State<IndexAdmin> {
                                 child: Center(
                                     child: Padding(
                                   padding: EdgeInsets.all(16.0),
-                                  child: Icon(Icons.store,
+                                  child: Icon(Icons.approval,
                                       color: Colors.white, size: 30.0),
                                 )))
                           ]),
@@ -228,13 +255,6 @@ class _IndexAdminState extends State<IndexAdmin> {
                     onTap: () {},
                   )
                 ],
-                // staggeredTiles: [
-                //   StaggeredTile.extent(2, 110.0),
-                //   StaggeredTile.extent(1, 180.0),
-                //   StaggeredTile.extent(1, 180.0),
-                //   StaggeredTile.extent(2, 220.0),
-                //   StaggeredTile.extent(2, 110.0),
-                // ],
               ),
             )),
         drawer: DrawerAdmin(),
