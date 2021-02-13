@@ -2,7 +2,7 @@ import 'package:feul_delivery/splash.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/login.dart';
 import 'package:feul_delivery/pages/StarterPage.dart';
-import 'package:feul_delivery/pages/singup.dart';
+import 'package:feul_delivery/pages/sign-up/singup.dart';
 
 String username = "";
 void main() => runApp(MaterialApp(

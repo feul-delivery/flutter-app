@@ -1,3 +1,4 @@
+import 'package:feul_delivery/pages/sign-up/type_compte.dart';
 import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/animations/FadeAnimation.dart';
@@ -152,7 +153,7 @@ class SignupPage extends StatelessWidget {
                                         context,
                                         PageTransition(
                                             type: PageTransitionType.fade,
-                                            child: ExploreCl()));
+                                            child: TypeCompte()));
                                   },
                                   child: Text(
                                     "S'inscrire",
