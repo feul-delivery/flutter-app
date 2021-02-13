@@ -44,7 +44,7 @@ class _IndexAdminState extends State<IndexAdmin> {
             "Acceuil",
             style: pageTitle,
           ),
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.yellow[700],
           centerTitle: true,
           actions: <Widget>[
             IconButton(
@@ -70,7 +70,8 @@ class _IndexAdminState extends State<IndexAdmin> {
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
-                                color: Colors.red[900].withOpacity(0.4),
+                                color:
+                                    Colors.yellowAccent[700].withOpacity(0.4),
                                 blurRadius: 20,
                                 offset: Offset(0, 10))
                           ]),
@@ -117,7 +118,8 @@ class _IndexAdminState extends State<IndexAdmin> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                    color: Colors.red[900].withOpacity(0.4),
+                                    color: Colors.yellowAccent[700]
+                                        .withOpacity(0.4),
                                     blurRadius: 20,
                                     offset: Offset(0, 10))
                               ]),
@@ -152,7 +154,8 @@ class _IndexAdminState extends State<IndexAdmin> {
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
-                                    color: Colors.red[900].withOpacity(0.4),
+                                    color: Colors.yellowAccent[700]
+                                        .withOpacity(0.4),
                                     blurRadius: 20,
                                     offset: Offset(0, 10))
                               ]),
@@ -182,35 +185,8 @@ class _IndexAdminState extends State<IndexAdmin> {
                       ),
                     ],
                   ),
-                  InkWell(
-                    child: Padding(
-                        padding: const EdgeInsets.all(24.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text('Revenue',
-                                        style: TextStyle(color: Colors.green)),
-                                    Text('\$16K',
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w700,
-                                            fontSize: 34.0)),
-                                  ],
-                                ),
-                              ],
-                            ),
-                            Padding(padding: EdgeInsets.only(bottom: 4.0)),
-                          ],
-                        )),
+                  SizedBox(
+                    height: 15,
                   ),
                   InkWell(
                     child: Container(
@@ -219,7 +195,8 @@ class _IndexAdminState extends State<IndexAdmin> {
                           borderRadius: BorderRadius.circular(10),
                           boxShadow: [
                             BoxShadow(
-                                color: Colors.red[900].withOpacity(0.4),
+                                color:
+                                    Colors.yellowAccent[700].withOpacity(0.4),
                                 blurRadius: 20,
                                 offset: Offset(0, 10))
                           ]),

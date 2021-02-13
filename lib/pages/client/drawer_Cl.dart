@@ -133,8 +133,8 @@ class DrawerCL extends StatelessWidget {
             child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: 35,
-            margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
+            height: 40,
+            margin: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.red[700]),

@@ -2,6 +2,7 @@ import 'package:feul_delivery/pages/admin/livreur_admin.dart';
 import 'package:feul_delivery/pages/admin/profile_admin.dart';
 import 'package:feul_delivery/pages/admin/settings_admin.dart';
 import 'package:feul_delivery/pages/admin/station_admin.dart';
+import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/login.dart';
 import 'package:page_transition/page_transition.dart';
@@ -62,7 +63,7 @@ class DrawerAdmin extends StatelessWidget {
           },
           leading: Icon(
             Icons.person,
-            color: Colors.red[900],
+            color: Colors.yellow[700],
           ),
           title: Text("Mon Profile"),
         ),
@@ -75,7 +76,7 @@ class DrawerAdmin extends StatelessWidget {
           },
           leading: Icon(
             Icons.business,
-            color: Colors.red[900],
+            color: Colors.yellow[700],
           ),
           title: Text("Entreprises"),
         ),
@@ -88,7 +89,7 @@ class DrawerAdmin extends StatelessWidget {
           },
           leading: Icon(
             Icons.group,
-            color: Colors.red[900],
+            color: Colors.yellow[700],
           ),
           title: Text("Livreurs"),
         ),
@@ -101,7 +102,7 @@ class DrawerAdmin extends StatelessWidget {
           },
           leading: Icon(
             Icons.settings,
-            color: Colors.red[900],
+            color: Colors.yellow[700],
           ),
           title: Text("Paramètres"),
         ),
@@ -109,11 +110,11 @@ class DrawerAdmin extends StatelessWidget {
             child: Align(
           alignment: Alignment.bottomCenter,
           child: Container(
-            height: 35,
-            margin: EdgeInsets.symmetric(horizontal: 65, vertical: 20),
+            height: 40,
+            margin: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.red[900]),
+                color: Colors.yellow[700]),
             child: Center(
               child: FlatButton(
                 onPressed: () {
@@ -122,7 +123,7 @@ class DrawerAdmin extends StatelessWidget {
                 },
                 child: Text(
                   "Se déconnecter",
-                  style: TextStyle(color: Colors.white),
+                  style: buttonStyle,
                 ),
               ),
             ),
