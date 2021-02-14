@@ -84,7 +84,7 @@ class _IndexAdminState extends State<IndexAdmin> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('Total Commandes',
+                                Text('Total Orders',
                                     style: TextStyle(color: Colors.blueAccent)),
                                 Text('265K',
                                     style: TextStyle(
@@ -173,12 +173,12 @@ class _IndexAdminState extends State<IndexAdmin> {
                                           color: Colors.white, size: 30.0),
                                     )),
                                 Padding(padding: EdgeInsets.only(bottom: 16.0)),
-                                Text('Alertes',
+                                Text('Alerts',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w700,
                                         fontSize: 24.0)),
-                                Text('Faible Service ',
+                                Text('Low Service',
                                     style: TextStyle(color: Colors.black45)),
                               ]),
                         ),
@@ -209,7 +209,7 @@ class _IndexAdminState extends State<IndexAdmin> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
-                                Text('Nouveaux Comptes',
+                                Text('New Accounts',
                                     style: TextStyle(color: Colors.redAccent)),
                                 Text('173',
                                     style: TextStyle(

@@ -24,7 +24,7 @@ class _ProfileAdminState extends State<ProfileAdmin> {
       child: Scaffold(
           appBar: AppBar(
             title: Text(
-              "Mon Profile",
+              "My profile",
             ),
             leading: Builder(
               builder: (context) => IconButton(
@@ -77,7 +77,7 @@ class _ProfileAdminState extends State<ProfileAdmin> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Prénom :",
+                          "First name :",
                           style: TextStyle(fontSize: 14),
                         ),
                       ],
@@ -108,7 +108,7 @@ class _ProfileAdminState extends State<ProfileAdmin> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Nom :",
+                          "Last name :",
                           style: TextStyle(fontSize: 14),
                         ),
                       ],
@@ -139,7 +139,7 @@ class _ProfileAdminState extends State<ProfileAdmin> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Tél :",
+                          "Phone :",
                           style: TextStyle(fontSize: 14),
                         ),
                       ],

@@ -13,7 +13,7 @@ class _Cmd1State extends State<Cmd1> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Commande",
+          "Order",
           style: pageTitle,
         ),
         centerTitle: true,
@@ -40,7 +40,7 @@ class _Cmd1State extends State<Cmd1> {
                         border: InputBorder.none),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'cet information est obligatoire';
+                        return 'Required';
                       }
                       return null;
                     },
@@ -58,7 +58,7 @@ class _Cmd1State extends State<Cmd1> {
                         border: InputBorder.none),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'cet information est obligatoire';
+                        return 'Required';
                       }
                       return null;
                     },
@@ -71,12 +71,12 @@ class _Cmd1State extends State<Cmd1> {
                           Border(bottom: BorderSide(color: Colors.grey[200]))),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        labelText: "Adresse",
+                        labelText: "Address",
                         labelStyle: hintStyle,
                         border: InputBorder.none),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'cet information est obligatoire';
+                        return 'Required';
                       }
                       return null;
                     },
@@ -89,12 +89,12 @@ class _Cmd1State extends State<Cmd1> {
                           Border(bottom: BorderSide(color: Colors.grey[200]))),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        labelText: "Matricule",
+                        labelText: "Registration number",
                         labelStyle: hintStyle,
                         border: InputBorder.none),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'cet information est obligatoire';
+                        return 'Required';
                       }
                       return null;
                     },
@@ -107,7 +107,7 @@ class _Cmd1State extends State<Cmd1> {
                           Border(bottom: BorderSide(color: Colors.grey[200]))),
                   child: TextFormField(
                     decoration: InputDecoration(
-                        labelText: "Colore de voiture",
+                        labelText: "Car color",
                         labelStyle: hintStyle,
                         border: InputBorder.none),
                   ),
@@ -124,12 +124,10 @@ class _Cmd1State extends State<Cmd1> {
                   child: Center(
                     child: FlatButton(
                       onPressed: () {
-                        if (_formKey.currentState.validate()) {
-                          
-                        }
+                        if (_formKey.currentState.validate()) {}
                       },
                       child: Text(
-                        'Suivant',
+                        'Next',
                         style: buttonStyle,
                       ),
                     ),

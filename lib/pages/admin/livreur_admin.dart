@@ -8,7 +8,7 @@ class LiveursPage extends StatefulWidget {
 
 class _LiveursPageState extends State<LiveursPage> {
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Livreurs', style: pageTitle);
+  Widget _appBarTitle = new Text('Deliverymen', style: pageTitle);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,15 +33,15 @@ class _LiveursPageState extends State<LiveursPage> {
         this._searchIcon = new Icon(Icons.close);
         this._appBarTitle = new TextField(
           decoration: new InputDecoration(
-              hintText: 'Tapez ici',
+              hintText: 'Type here',
               hintStyle: TextStyle(color: Colors.white10),
               border: InputBorder.none,
-              labelText: 'Recherche',
+              labelText: 'Search',
               labelStyle: TextStyle(color: Colors.white10)),
         );
       } else {
         this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text('Livreurs');
+        this._appBarTitle = new Text('Deliverymen');
       }
     });
   }
