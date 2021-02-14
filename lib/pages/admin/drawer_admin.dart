@@ -78,7 +78,7 @@ class DrawerAdmin extends StatelessWidget {
             Icons.business,
             color: Colors.yellow[700],
           ),
-          title: Text("Entreprises"),
+          title: Text("Businesses"),
         ),
         ListTile(
           onTap: () {
@@ -91,7 +91,7 @@ class DrawerAdmin extends StatelessWidget {
             Icons.group,
             color: Colors.yellow[700],
           ),
-          title: Text("Livreurs"),
+          title: Text("Deliverymen"),
         ),
         ListTile(
           onTap: () {
@@ -104,7 +104,7 @@ class DrawerAdmin extends StatelessWidget {
             Icons.settings,
             color: Colors.yellow[700],
           ),
-          title: Text("Paramètres"),
+          title: Text("Settings"),
         ),
         Expanded(
             child: Align(
@@ -122,7 +122,7 @@ class DrawerAdmin extends StatelessWidget {
                       builder: (BuildContext context) => LoginPage()));
                 },
                 child: Text(
-                  "Se déconnecter",
+                  "Sign out",
                   style: buttonStyle,
                 ),
               ),

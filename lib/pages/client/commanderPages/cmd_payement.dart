@@ -18,17 +18,17 @@ class _CommandePaymentState extends State<CommandePayment> {
       appBar: AppBar(
         backgroundColor: Colors.red[900],
         title: Text(
-          'Payement',
+          'Payment',
           style: pageTitle,
         ),
-        actions: [FlatButton(onPressed: () {}, child: Text('Terminer'))],
+        actions: [FlatButton(onPressed: () {}, child: Text('Finish'))],
       ),
       body: Container(
         padding: EdgeInsets.all(10),
         child: Column(
           children: [
             ListTile(
-              title: Text('Paiement à la livraison'),
+              title: Text('Cash on delivery'),
               leading: Radio(
                   activeColor: Colors.red[900],
                   value: pmethode.livraison,

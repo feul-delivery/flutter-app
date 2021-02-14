@@ -29,7 +29,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          "Détail",
+          "Details",
           style: TextStyle(),
         ),
         centerTitle: true,
@@ -62,7 +62,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "Numéro:",
+                    "Number:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -140,7 +140,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "L'heure:",
+                    "Time:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -179,7 +179,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "Matricule de voiteur:",
+                    "Registration number:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -218,7 +218,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "Coleur:",
+                    "Color:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -257,7 +257,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     width: 15,
                   ),
                   Text(
-                    "type diesel:",
+                    "Fuel type:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -326,7 +326,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
             color: Colors.red[900],
             child: FlatButton(
                 onPressed: () {},
-                child: Text('Envoyer une évaluation!',
+                child: Text('Send a review!',
                     style: TextStyle(color: Colors.white, fontSize: 15))))
       ],
     );

@@ -8,7 +8,7 @@ class StationsPage extends StatefulWidget {
 
 class _StationsPageState extends State<StationsPage> {
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Entreprises', style: pageTitle);
+  Widget _appBarTitle = new Text('Businesses', style: pageTitle);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,15 +32,15 @@ class _StationsPageState extends State<StationsPage> {
         this._searchIcon = new Icon(Icons.close);
         this._appBarTitle = new TextField(
           decoration: new InputDecoration(
-              hintText: 'Tapez ici',
+              hintText: 'Type here',
               hintStyle: TextStyle(color: Colors.white10),
               border: InputBorder.none,
-              labelText: 'Recherche',
+              labelText: 'Search',
               labelStyle: TextStyle(color: Colors.white10)),
         );
       } else {
         this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text('Entreprises');
+        this._appBarTitle = new Text('Businesses');
       }
     });
   }
