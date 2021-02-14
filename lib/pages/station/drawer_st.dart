@@ -82,7 +82,7 @@ class DrawerSt extends StatelessWidget {
             color: Colors.red[900],
           ),
           title: Text(
-            "Commandes",
+            "Orders",
             style: textStyle,
           ),
         ),
@@ -98,7 +98,7 @@ class DrawerSt extends StatelessWidget {
             color: Colors.red[900],
           ),
           title: Text(
-            "Paramètres",
+            "Settings",
             style: textStyle,
           ),
         ),
@@ -118,7 +118,7 @@ class DrawerSt extends StatelessWidget {
                       builder: (BuildContext context) => LoginPage()));
                 },
                 child: Text(
-                  "Se déconnecter",
+                  "Sign out",
                   style: buttonStyle,
                 ),
               ),

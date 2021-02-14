@@ -16,12 +16,12 @@ class _IndexStState extends State<IndexSt> {
         return showDialog(
               context: context,
               builder: (context) => new AlertDialog(
-                title: new Text('Etes-vous sur?'),
-                content: new Text("Quitter l'application?"),
+                title: new Text('Are you sure?'),
+                content: new Text("Exit the application"),
                 actions: <Widget>[
                   new GestureDetector(
                     onTap: () => exit(0),
-                    child: Text('OK'),
+                    child: Text('Yes'),
                   ),
                   SizedBox(height: 16),
                   new GestureDetector(
@@ -29,7 +29,7 @@ class _IndexStState extends State<IndexSt> {
                     child: Container(
                         child: Padding(
                       padding: const EdgeInsets.all(18.0),
-                      child: Text('Annuler'),
+                      child: Text('Cancel'),
                     )),
                   ),
                 ],
@@ -40,7 +40,7 @@ class _IndexStState extends State<IndexSt> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Acceuil"),
+          title: Text("Home"),
           backgroundColor: Colors.red[900],
           centerTitle: true,
           actions: <Widget>[
@@ -64,7 +64,7 @@ class _IndexStState extends State<IndexSt> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Commandes',
+                        'Orders',
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
@@ -75,7 +75,7 @@ class _IndexStState extends State<IndexSt> {
                           color: Colors.red[900],
                         ),
                         child: Text(
-                          'En direct',
+                          'Live',
                           style: TextStyle(color: Colors.white),
                         ),
                       )
@@ -192,7 +192,7 @@ class _IndexStState extends State<IndexSt> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  child: Text('Adresse:',
+                                  child: Text('Address:',
                                       style:
                                           TextStyle(color: Colors.grey[800])),
                                 ),

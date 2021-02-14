@@ -16,7 +16,7 @@ class _SettingsStState extends State<SettingsSt> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Paramètres",
+            "Settings",
             style: TextStyle(),
           ),
           actions: <Widget>[
@@ -49,7 +49,7 @@ class _SettingsStState extends State<SettingsSt> {
                     width: 8,
                   ),
                   Text(
-                    "Compte",
+                    "Account",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -58,8 +58,8 @@ class _SettingsStState extends State<SettingsSt> {
                 height: 15,
                 thickness: 1,
               ),
-              buildChangePasswordRow(context, " Changer le mot de passe"),
-              buildAccountOptionRow(context, " Supprimer votre compte"),
+              buildChangePasswordRow(context, " Change Password"),
+              buildAccountOptionRow(context, " Delete your account"),
               Row(
                 children: [
                   Icon(
@@ -79,8 +79,8 @@ class _SettingsStState extends State<SettingsSt> {
                 height: 15,
                 thickness: 1,
               ),
-              buildRateUsRow(context, " Évaluez nous"),
-              buildAboutUsRow(context, " À propos de nous"),
+              buildRateUsRow(context, " Rate us"),
+              buildAboutUsRow(context, " About Us"),
               Row(
                 children: [
                   Icon(
@@ -91,7 +91,7 @@ class _SettingsStState extends State<SettingsSt> {
                     width: 8,
                   ),
                   Text(
-                    "Droits",
+                    "Rights",
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ],
@@ -100,7 +100,7 @@ class _SettingsStState extends State<SettingsSt> {
                 height: 15,
                 thickness: 1,
               ),
-              buildAccountOptionRow(context, " Confidentialité et sécurité"),
+              buildAccountOptionRow(context, " Privacy and Security"),
             ]),
           ),
         ));
@@ -131,7 +131,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                               bottom: BorderSide(color: Colors.grey[200]))),
                       child: TextField(
                         decoration: InputDecoration(
-                            hintText: "Ancien mot de passe",
+                            hintText: "Old Password",
                             hintStyle: TextStyle(color: Colors.grey),
                             border: InputBorder.none),
                       ),
@@ -144,7 +144,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                       child: TextField(
                         obscureText: true,
                         decoration: InputDecoration(
-                            hintText: "Nouveau mot de passe",
+                            hintText: "New Password",
                             hintStyle: TextStyle(color: Colors.grey),
                             border: InputBorder.none),
                       ),
@@ -157,7 +157,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                       child: TextField(
                         obscureText: true,
                         decoration: InputDecoration(
-                            hintText: "Confirmation:",
+                            hintText: "Confirmation",
                             hintStyle: TextStyle(color: Colors.grey),
                             border: InputBorder.none),
                       ),
@@ -170,13 +170,13 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                   children: [
                     FlatButton(
                         onPressed: () {},
-                        child: Text("Changer",
+                        child: Text("Change",
                             style: TextStyle(color: Colors.red[900]))),
                     FlatButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text("Annuler",
+                        child: Text("Cancel",
                             style: TextStyle(color: Colors.red[900]))),
                   ],
                 ),
@@ -242,11 +242,11 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
                     height: 12,
                   ),
                   Text(
-                    'Construire par le framework Flutter.',
+                    'Build With Love by the Flutter framework.',
                     style: TextStyle(fontSize: 10),
                   ),
                   Text(
-                    'Développé par:',
+                    'Developped by',
                     style: TextStyle(fontSize: 18),
                   ),
                   Text(
@@ -265,7 +265,7 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      "Fermer",
+                      "Close",
                       style: TextStyle(color: Colors.red[900]),
                     )),
               ],
@@ -326,11 +326,11 @@ InkWell buildRateUsRow(BuildContext context, String title) {
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text("Annuler",
+                        child: Text("Cancel",
                             style: TextStyle(color: Colors.red[900]))),
                     FlatButton(
                         onPressed: () {},
-                        child: Text("Envoyer",
+                        child: Text("Send",
                             style: TextStyle(color: Colors.red[900]))),
                   ],
                 ),
@@ -380,7 +380,7 @@ InkWell buildAccountOptionRow(BuildContext context, String title) {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      "Fermer",
+                      "Close",
                       style: TextStyle(color: Colors.red[900]),
                     )),
               ],

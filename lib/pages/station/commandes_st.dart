@@ -22,7 +22,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Commandes"),
+          title: Text("Orders"),
           backgroundColor: Colors.red[900],
           centerTitle: true,
           actions: <Widget>[
@@ -129,7 +129,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Container(
-                                      child: Text('Volume demonder: ',
+                                      child: Text('Volume: ',
                                           style: TextStyle(
                                               color: Colors.grey[800])),
                                     ),
@@ -168,7 +168,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  child: Text('Adresse: ',
+                                  child: Text('Address: ',
                                       style:
                                           TextStyle(color: Colors.grey[800])),
                                 ),
@@ -199,7 +199,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
       "nom": "Da7mad ELMAKKAWI",
       "time": "17:47",
       "date": "17/01/2021",
-      "etat": "en cour",
+      "etat": "waiting",
       "volume": "10L",
       "type": "Gas-oil",
       "adresse": "Monfleuri 2, Lycée Technique, Fès",
@@ -208,7 +208,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
       "nom": "Da7mad ELMAKKAWI",
       "time": "17:05",
       "date": "17/01/2021",
-      "etat": "en cour",
+      "etat": "waiting",
       "volume": "50L",
       "type": "Gas-oil",
       "adresse": "Monfleuri 2, Lycée Technique, Fès",
@@ -217,7 +217,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
       "nom": "Da7mad ELMAKKAWI",
       "time": "17:01",
       "date": "17/01/2021",
-      "etat": "en cour",
+      "etat": "waiting",
       "volume": "43L",
       "type": "Gas-oil",
       "adresse": "Monfleuri 2, Lycée Technique, Fès",
@@ -226,7 +226,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
       "nom": "Da7mad ELMAKKAWI",
       "time": "16:50",
       "date": "17/01/2021",
-      "etat": "en cour",
+      "etat": "waiting",
       "volume": "43L",
       "type": "Gas-oil",
       "adresse": "Monfleuri 2, Lycée Technique, Fès",

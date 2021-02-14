@@ -96,7 +96,7 @@ class _LivreurStState extends State<LivreurSt> {
                                       left: 5.0, right: 5.0),
                                   child: Center(
                                       child: Text(
-                                    "Depuis:  " + items[i]['date'],
+                                    "Since:  " + items[i]['date'],
                                     style: TextStyle(color: Colors.white),
                                   )),
                                 ),
@@ -146,7 +146,7 @@ class _LivreurStState extends State<LivreurSt> {
                                         CrossAxisAlignment.center,
                                     children: [
                                       Container(
-                                        child: Text('tél:',
+                                        child: Text('Phone:',
                                             style: TextStyle(
                                                 color: Colors.grey[800])),
                                       ),
@@ -165,7 +165,7 @@ class _LivreurStState extends State<LivreurSt> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        child: Text('Etat:',
+                                        child: Text('Status:',
                                             style: TextStyle(
                                                 color: Colors.grey[800])),
                                       ),

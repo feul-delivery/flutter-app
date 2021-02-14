@@ -14,9 +14,9 @@ class ButtomBarSt extends StatefulWidget {
 
 class _ButtomBarStState extends State<ButtomBarSt> {
   final List<Item> items = [
-    Item('Acceuil', Icons.new_releases_outlined),
-    Item('Commandes', Icons.history_outlined),
-    Item('Livreurs', Icons.group_outlined),
+    Item('Home', Icons.new_releases_outlined),
+    Item('Orders', Icons.history_outlined),
+    Item('Deliverymen', Icons.group_outlined),
   ];
 
   @override

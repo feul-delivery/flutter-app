@@ -74,8 +74,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                   builder:
                                                       (BuildContext context) {
                                                     return AlertDialog(
-                                                      title:
-                                                          Text('Modifier nom'),
+                                                      title: Text('Edit nom'),
                                                       content: Container(
                                                         decoration:
                                                             BoxDecoration(
@@ -121,7 +120,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                                 onPressed:
                                                                     () {},
                                                                 child: Text(
-                                                                    "Changer",
+                                                                    "Change",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .red[900]))),
@@ -132,7 +131,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                                       .pop();
                                                                 },
                                                                 child: Text(
-                                                                    "Annuler",
+                                                                    "Cancel",
                                                                     style: TextStyle(
                                                                         color: Colors
                                                                             .red[900]))),
@@ -153,7 +152,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                   width: 4,
                                                 ),
                                                 Text(
-                                                  "Modifier",
+                                                  "Edit",
                                                   style: TextStyle(
                                                     color: Colors.red[800],
                                                     fontSize: 13,
@@ -201,7 +200,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title: Text('Modifier description'),
+                                          title: Text('Edit description'),
                                           content: Container(
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -235,7 +234,7 @@ class _ProfilStState extends State<ProfilSt> {
                                               children: [
                                                 FlatButton(
                                                     onPressed: () {},
-                                                    child: Text("Changer",
+                                                    child: Text("Change",
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .red[900]))),
@@ -244,7 +243,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("Annuler",
+                                                    child: Text("Cancel",
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .red[900]))),
@@ -265,7 +264,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "Modifier",
+                                      "Edit",
                                       style: TextStyle(
                                         color: Colors.red[800],
                                         fontSize: 13,
@@ -287,7 +286,7 @@ class _ProfilStState extends State<ProfilSt> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même.",
+                              "It has long been known that working with readable and meaningful text is distracting, and distracts from the focus on the layout itself.",
                               style: TextStyle(color: Colors.grey, height: 1.4),
                             )),
                         FadeAnimation(
@@ -311,7 +310,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     width: 8,
                                   ),
                                   Text(
-                                    "Addresse",
+                                    "Address",
                                     style: TextStyle(
                                         color: Colors.grey[800],
                                         fontSize: 18,
@@ -325,7 +324,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title: Text('Modifier addresse'),
+                                          title: Text('Edit address'),
                                           content: Container(
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -360,7 +359,7 @@ class _ProfilStState extends State<ProfilSt> {
                                               children: [
                                                 FlatButton(
                                                     onPressed: () {},
-                                                    child: Text("Changer",
+                                                    child: Text("Change",
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .red[900]))),
@@ -369,7 +368,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("Annuler",
+                                                    child: Text("Cancel",
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .red[900]))),
@@ -390,7 +389,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "Modifier",
+                                      "Edit",
                                       style: TextStyle(
                                         color: Colors.red[800],
                                         fontSize: 13,
@@ -433,7 +432,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     width: 8,
                                   ),
                                   Text(
-                                    "Tél",
+                                    "Phone",
                                     style: TextStyle(
                                         color: Colors.grey[800],
                                         fontSize: 18,
@@ -447,7 +446,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title: Text('Modifier tél'),
+                                          title: Text('Change phone'),
                                           content: Container(
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -481,7 +480,7 @@ class _ProfilStState extends State<ProfilSt> {
                                               children: [
                                                 FlatButton(
                                                     onPressed: () {},
-                                                    child: Text("Changer",
+                                                    child: Text("Change",
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .red[900]))),
@@ -490,7 +489,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("Annuler",
+                                                    child: Text("Cancel",
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .red[900]))),
@@ -511,7 +510,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "Modifier",
+                                      "Edit",
                                       style: TextStyle(
                                         color: Colors.red[800],
                                         fontSize: 13,
@@ -568,7 +567,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title: Text('Modifier Email'),
+                                          title: Text('Edit Email'),
                                           content: Container(
                                             decoration: BoxDecoration(
                                               color: Colors.white,
@@ -603,7 +602,7 @@ class _ProfilStState extends State<ProfilSt> {
                                               children: [
                                                 FlatButton(
                                                     onPressed: () {},
-                                                    child: Text("Changer",
+                                                    child: Text("Change",
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .red[900]))),
@@ -612,7 +611,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("Annuler",
+                                                    child: Text("Cancel",
                                                         style: TextStyle(
                                                             color: Colors
                                                                 .red[900]))),
@@ -633,7 +632,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "Modifier",
+                                      "Edit",
                                       style: TextStyle(
                                         color: Colors.red[800],
                                         fontSize: 13,
@@ -697,7 +696,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       width: 4,
                                     ),
                                     Text(
-                                      "Modifier",
+                                      "Edit",
                                       style: TextStyle(
                                         color: Colors.red[800],
                                         fontSize: 13,
