@@ -52,7 +52,7 @@ class LoginPage extends StatelessWidget {
                     FadeAnimation(
                         1,
                         Text(
-                          "Bonjour,",
+                          "Login",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 40,
@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                     FadeAnimation(
                         1.3,
                         Text(
-                          "Nous saluons le retour",
+                          "Welcome back",
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 18,
@@ -131,7 +131,7 @@ class LoginPage extends StatelessWidget {
                                         controller: txtpassword,
                                         obscureText: true,
                                         decoration: InputDecoration(
-                                            hintText: "Mot de passe",
+                                            hintText: "Password",
                                             hintStyle: hintStyle,
                                             border: InputBorder.none),
                                       ),
@@ -150,7 +150,7 @@ class LoginPage extends StatelessWidget {
                                       context: context,
                                       builder: (BuildContext context) {
                                         return AlertDialog(
-                                          title: Text("Entrer votre email"),
+                                          title: Text("Enter your email"),
                                           content: Column(
                                             mainAxisSize: MainAxisSize.min,
                                             children: [
@@ -183,7 +183,7 @@ class LoginPage extends StatelessWidget {
                                                     Navigator.of(context).pop();
                                                   },
                                                   child: Text(
-                                                    "Fermer",
+                                                    "Close",
                                                     style: TextStyle(
                                                         color: Colors.red[900]),
                                                   )),
@@ -192,7 +192,7 @@ class LoginPage extends StatelessWidget {
                                                     Navigator.of(context).pop();
                                                   },
                                                   child: Text(
-                                                    "Envoyer",
+                                                    "Submit",
                                                     style: TextStyle(
                                                         color: Colors.red[900]),
                                                   )),
@@ -202,7 +202,7 @@ class LoginPage extends StatelessWidget {
                                       });
                                 },
                                 child: Text(
-                                  "mot de passe oublié?",
+                                  "Forgot your password?",
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontFamily: 'Gotham',
@@ -250,9 +250,9 @@ class LoginPage extends StatelessWidget {
                                               context: context,
                                               builder: (context) =>
                                                   new AlertDialog(
-                                                    title: Text('Erreur'),
+                                                    title: Text('Error'),
                                                     content: Text(
-                                                        'le login ou mot de passe sont incorects'),
+                                                        'The login or password are incorrect'),
                                                     actions: [
                                                       FlatButton(
                                                         onPressed: () {
@@ -277,7 +277,7 @@ class LoginPage extends StatelessWidget {
                                       }
                                     },
                                     child: Text(
-                                      "Se connecter",
+                                      "Log in",
                                       style: buttonStyle,
                                     ),
                                   ),
@@ -289,7 +289,7 @@ class LoginPage extends StatelessWidget {
                           FadeAnimation(
                               1.7,
                               Text(
-                                "vous êtes nouveau ici?",
+                                "you are new here?",
                                 style: TextStyle(
                                   color: Colors.grey,
                                   fontFamily: 'Gotham',
@@ -321,7 +321,7 @@ class LoginPage extends StatelessWidget {
                                                   child: SignupPage()));
                                         },
                                         child: Text(
-                                          "Créer un nouveau compte",
+                                          "Create a new account",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontFamily: 'Gotham',

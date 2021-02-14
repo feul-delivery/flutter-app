@@ -27,7 +27,7 @@ class _profileCLModifierState extends State<profileCLModifier>
     return new Scaffold(
         appBar: AppBar(
           title: Text(
-            "Mon Profile",
+            "My profile",
             style: pageTitle,
           ),
           actions: <Widget>[
@@ -130,7 +130,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       new Text(
-                                        'Les informations personnelle:',
+                                        'Personal information',
                                         style: TextStyle(
                                             fontSize: 18.0,
                                             fontWeight: FontWeight.bold),
@@ -159,7 +159,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       new Text(
-                                        'Nom:',
+                                        'Last name:',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold),
@@ -196,7 +196,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       new Text(
-                                        'Prénom:',
+                                        'First name:',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold),
@@ -268,7 +268,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                                     mainAxisSize: MainAxisSize.min,
                                     children: <Widget>[
                                       new Text(
-                                        'Tél:',
+                                        'Phone:',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold),
@@ -313,7 +313,7 @@ class _profileCLModifierState extends State<profileCLModifier>
                                   Expanded(
                                     child: Container(
                                       child: new Text(
-                                        'Ville:',
+                                        'City:',
                                         style: TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold),
@@ -382,7 +382,7 @@ class _profileCLModifierState extends State<profileCLModifier>
               padding: EdgeInsets.only(right: 10.0, left: 10),
               child: Container(
                   child: new RaisedButton(
-                child: new Text("Enregistrer"),
+                child: new Text("Save"),
                 textColor: Colors.white,
                 color: Colors.red[900],
                 onPressed: () {
@@ -402,7 +402,7 @@ class _profileCLModifierState extends State<profileCLModifier>
               padding: EdgeInsets.only(left: 10.0),
               child: Container(
                 child: new RaisedButton(
-                  child: new Text("Annuler"),
+                  child: new Text("Cancel"),
                   textColor: Colors.red[900],
                   color: Colors.white,
                   onPressed: () {

@@ -2,7 +2,6 @@ import 'package:feul_delivery/pages/sign-up/type_compte.dart';
 import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/animations/FadeAnimation.dart';
-import 'package:feul_delivery/pages/client/explore_cl.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SignupPage extends StatelessWidget {
@@ -46,7 +45,7 @@ class SignupPage extends StatelessWidget {
                   FadeAnimation(
                       1,
                       Text(
-                        "Inscrivez-vous",
+                        "Sign up",
                         style: TextStyle(color: Colors.white, fontSize: 40),
                       )),
                   SizedBox(
@@ -55,7 +54,7 @@ class SignupPage extends StatelessWidget {
                   FadeAnimation(
                       1.3,
                       Text(
-                        "Créez un compte, c'est gratuit",
+                        "Create an account, it's free",
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       )),
                 ],
@@ -113,7 +112,7 @@ class SignupPage extends StatelessWidget {
                                     child: TextField(
                                       obscureText: true,
                                       decoration: InputDecoration(
-                                          hintText: "Mot de passe",
+                                          hintText: "Password",
                                           hintStyle: hintStyle,
                                           border: InputBorder.none),
                                     ),
@@ -156,7 +155,7 @@ class SignupPage extends StatelessWidget {
                                             child: TypeCompte()));
                                   },
                                   child: Text(
-                                    "S'inscrire",
+                                    "Register",
                                     style: buttonStyle,
                                   ),
                                 ),
@@ -170,7 +169,7 @@ class SignupPage extends StatelessWidget {
                             Column(
                               children: <Widget>[
                                 Text(
-                                  "Vous avez déjà un compte?",
+                                  "Already have an account?",
                                   style: TextStyle(
                                     color: Colors.grey,
                                     fontFamily: 'Gotham',
@@ -182,7 +181,7 @@ class SignupPage extends StatelessWidget {
                                     Navigator.pop(context);
                                   },
                                   child: Text(
-                                    "Se connecter",
+                                    "Login",
                                     style: TextStyle(
                                         fontFamily: 'Gotham',
                                         fontWeight: FontWeight.w500,

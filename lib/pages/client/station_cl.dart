@@ -172,7 +172,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "On sait depuis longtemps que travailler avec du texte lisible et contenant du sens est source de distractions, et empêche de se concentrer sur la mise en page elle-même.",
+                              "It has long been known that working with readable and meaningful text is distracting, and distracts from the focus on the layout itself.",
                               style: TextStyle(color: Colors.grey, height: 1.4),
                             )),
                         FadeAnimation(
@@ -193,7 +193,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 width: 8,
                               ),
                               Text(
-                                "Addresse",
+                                "Address",
                                 style: TextStyle(
                                     color: Colors.grey[800],
                                     fontSize: 18,
@@ -230,7 +230,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 width: 8,
                               ),
                               Text(
-                                "Livreurs",
+                                "Deliverymen",
                                 style: TextStyle(
                                     color: Colors.grey[800],
                                     fontSize: 18,
@@ -249,7 +249,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "4 Livreurs",
+                              "4 deliveryman",
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
@@ -267,7 +267,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 width: 8,
                               ),
                               Text(
-                                "Tél",
+                                "Phone",
                                 style: TextStyle(
                                     color: Colors.grey[800],
                                     fontSize: 18,
@@ -341,7 +341,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 width: 8,
                               ),
                               Text(
-                                "Images",
+                                "Pictures",
                                 style: TextStyle(
                                     color: Colors.grey[800],
                                     fontSize: 18,
@@ -401,7 +401,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                             MaterialPageRoute(builder: (context) => Cmd1()));
                       },
                       child: Text(
-                        "Faire une commande",
+                        "Place an order",
                         style: buttonStyle,
                       ),
                     )),
