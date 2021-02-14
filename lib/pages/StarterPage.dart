@@ -85,7 +85,7 @@ class _StarterPageState extends State<StarterPage>
                   FadeAnimation(
                       1,
                       Text(
-                        "Obtenir le carburant livré à votre porte.",
+                        "Get the fuel delivered to your door.",
                         style: TextStyle(
                             color: Colors.white, height: 1.4, fontSize: 18),
                       )),
@@ -110,7 +110,7 @@ class _StarterPageState extends State<StarterPage>
                                   onPressed: () => _onTap(),
                                   minWidth: double.infinity,
                                   child: Text(
-                                    "Commencer",
+                                    "Start",
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
@@ -127,7 +127,7 @@ class _StarterPageState extends State<StarterPage>
                         duration: Duration(milliseconds: 50),
                         child: Align(
                           child: Text(
-                            "Maintenant livrez à votre porte 24/7",
+                            "Working 24/7",
                             style:
                                 TextStyle(color: Colors.white70, fontSize: 15),
                           ),

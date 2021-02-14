@@ -28,7 +28,7 @@ class _profileClState extends State<profileCl> {
       child: Scaffold(
           appBar: AppBar(
             title: Text(
-              "Mon Profile",
+              "My profile",
               style: pageTitle,
             ),
             actions: <Widget>[
@@ -88,7 +88,7 @@ class _profileClState extends State<profileCl> {
                 Row(
                   children: [
                     Text(
-                      "Prénom : ",
+                      "First name : ",
                       style: textStyle,
                     ),
                     Container(
@@ -109,7 +109,7 @@ class _profileClState extends State<profileCl> {
                 Row(
                   children: [
                     Text(
-                      "Nom : ",
+                      "Last name : ",
                       style: textStyle,
                     ),
                     Container(
@@ -130,7 +130,7 @@ class _profileClState extends State<profileCl> {
                 Row(
                   children: [
                     Text(
-                      "Tél : ",
+                      "Phone : ",
                       style: textStyle,
                     ),
                     Container(

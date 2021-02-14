@@ -145,7 +145,7 @@ class BigStation extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  'Le meilleur de la semaine',
+                  'The best of the week',
                   style: subTitleStyle,
                 ),
               ],
@@ -270,7 +270,7 @@ Container createSmallCard() {
                                         color: Colors.blue[800],
                                       ),
                                       Text(
-                                        'Commander',
+                                        'Order',
                                         style:
                                             TextStyle(color: Colors.blue[800]),
                                       ),

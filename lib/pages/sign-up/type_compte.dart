@@ -14,7 +14,7 @@ class _TypeCompteState extends State<TypeCompte> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            "Type compte",
+            "Account type",
             style: pageTitle,
           ),
           backgroundColor: Colors.red[900],
@@ -47,7 +47,7 @@ class _TypeCompteState extends State<TypeCompte> {
                         children: <Widget>[
                           Column(
                             children: <Widget>[
-                              Text('Client',
+                              Text('Customer',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w700,
