@@ -15,8 +15,8 @@ class IndexCl extends StatelessWidget {
         return showDialog(
               context: context,
               builder: (context) => new AlertDialog(
-                title: new Text('Etes-vous sur?'),
-                content: new Text("Quitter l'application?"),
+                title: new Text('Are you sure?'),
+                content: new Text("Exit the application"),
                 actions: <Widget>[
                   Row(children: [
                     new FlatButton(
@@ -25,7 +25,7 @@ class IndexCl extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             right: 0.0, bottom: 0.0, top: 10),
                         child: Text(
-                          'OK',
+                          'Yes',
                           style: TextStyle(color: Colors.red[900]),
                         ),
                       ),
@@ -36,7 +36,7 @@ class IndexCl extends StatelessWidget {
                         padding: const EdgeInsets.only(
                             right: 0.0, bottom: 0.0, top: 10),
                         child: Text(
-                          'Annuler',
+                          'Cancel',
                           style: TextStyle(color: Colors.red[900]),
                         ),
                       ),
@@ -51,7 +51,7 @@ class IndexCl extends StatelessWidget {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            "Acceuil",
+            "Home",
             style: pageTitle,
           ),
           backgroundColor: Colors.red[900],
@@ -98,7 +98,7 @@ class SmallStation extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                'Près de vous',
+                'Close to you',
                 style: subTitleStyle,
               ),
               Opacity(
@@ -110,7 +110,7 @@ class SmallStation extends StatelessWidget {
                         builder: (BuildContext context) => ExploreCl()));
                   },
                   child: Text(
-                    'Afficher tout',
+                    'View all',
                     style: moreStyle,
                   ),
                 ),

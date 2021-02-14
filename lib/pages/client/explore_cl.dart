@@ -51,135 +51,132 @@ class _ExploreClState extends State<ExploreCl> {
     return Container(
       height: 230,
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(0),
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => StationProfilCl()));
-                    },
-                    child: Stack(
-                      children: [
-                        Ink.image(
-                          height: 100,
-                          image: AssetImage(
-                            'assets/s4.png',
-                          ),
-                          fit: BoxFit.fitWidth,
+        child: Card(
+          clipBehavior: Clip.antiAlias,
+          child: Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => StationProfilCl()));
+                  },
+                  child: Stack(
+                    children: [
+                      Ink.image(
+                        height: 100,
+                        image: AssetImage(
+                          'assets/s4.png',
                         ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: FloatingActionButton(
-                              backgroundColor: Colors.white.withOpacity(0),
-                              onPressed: () {
-                                setState(() {
-                                  _changeFav();
-                                });
-                              },
-                              child: _adoreIcon),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10,
-                        top: 10,
-                        right: 10,
+                        fit: BoxFit.fitWidth,
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => StationProfilCl()));
+                      Positioned(
+                        bottom: 0,
+                        right: 0,
+                        child: FloatingActionButton(
+                            backgroundColor: Colors.white.withOpacity(0),
+                            onPressed: () {
+                              setState(() {
+                                _changeFav();
+                              });
                             },
-                            child: Text(
-                              'Total - Centre ville',
-                              style: TextStyle(
-                                fontSize: 20.0,
-                                fontWeight: FontWeight.bold,
+                            child: _adoreIcon),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      top: 10,
+                      right: 10,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => StationProfilCl()));
+                          },
+                          child: Text(
+                            'Total - Centre ville',
+                            style: TextStyle(
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          'Av. Mohammed V,Centre villed. Fès',
+                          style: TextStyle(color: Colors.black54),
+                        ),
+                        Container(
+                          child: Row(
+                            children: [
+                              IconButton(
+                                onPressed: null,
+                                icon: Icon(
+                                  Icons.phone,
+                                  color: Colors.green,
+                                ),
                               ),
-                            ),
+                              IconButton(
+                                onPressed: null,
+                                icon: Icon(Icons.chat),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(10),
+                                alignment: Alignment.topCenter,
+                                child: FlatButton(
+                                    onPressed: () {},
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          Icons.near_me,
+                                          color: Colors.blue[800],
+                                        ),
+                                        Text(
+                                          'Order',
+                                          style: TextStyle(
+                                              color: Colors.blue[800]),
+                                        ),
+                                      ],
+                                    )),
+                              ),
+                              Container(
+                                padding: EdgeInsets.all(8),
+                                alignment: Alignment.topCenter,
+                                child: FlatButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  StationProfilCl()));
+                                    },
+                                    child: Column(
+                                      children: [
+                                        Icon(
+                                          Icons.read_more,
+                                        ),
+                                        Text(
+                                          'Details',
+                                        ),
+                                      ],
+                                    )),
+                              ),
+                            ],
                           ),
-                          Text(
-                            'Av. Mohammed V,Centre villed. Fès',
-                            style: TextStyle(color: Colors.black54),
-                          ),
-                          Container(
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  onPressed: null,
-                                  icon: Icon(
-                                    Icons.phone,
-                                    color: Colors.green,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: null,
-                                  icon: Icon(Icons.chat),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(10),
-                                  alignment: Alignment.topCenter,
-                                  child: FlatButton(
-                                      onPressed: () {},
-                                      child: Column(
-                                        children: [
-                                          Icon(
-                                            Icons.near_me,
-                                            color: Colors.blue[800],
-                                          ),
-                                          Text(
-                                            'Order',
-                                            style: TextStyle(
-                                                color: Colors.blue[800]),
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(8),
-                                  alignment: Alignment.topCenter,
-                                  child: FlatButton(
-                                      onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    StationProfilCl()));
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Icon(
-                                            Icons.read_more,
-                                          ),
-                                          Text(
-                                            'Details',
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )),
-                ],
-              ),
+                        ),
+                      ],
+                    )),
+              ],
             ),
           ),
         ),

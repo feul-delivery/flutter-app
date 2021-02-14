@@ -16,12 +16,20 @@ class _CommandePaymentState extends State<CommandePayment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.red[900],
         title: Text(
           'Payment',
           style: pageTitle,
         ),
-        actions: [FlatButton(onPressed: () {}, child: Text('Finish'))],
+        actions: [
+          FlatButton(
+              onPressed: () {},
+              child: Text(
+                'Finish',
+                style: buttonStyle,
+              ))
+        ],
       ),
       body: Container(
         padding: EdgeInsets.all(10),
@@ -34,7 +42,9 @@ class _CommandePaymentState extends State<CommandePayment> {
                   value: pmethode.livraison,
                   groupValue: _methode,
                   onChanged: (pmethode valeur) {
-                    _methode = valeur;
+                    setState(() {
+                      _methode = valeur;
+                    });
                   }),
             ),
             ListTile(
@@ -44,7 +54,9 @@ class _CommandePaymentState extends State<CommandePayment> {
                   value: pmethode.google,
                   groupValue: _methode,
                   onChanged: (pmethode valeur) {
-                    _methode = valeur;
+                    setState(() {
+                      _methode = valeur;
+                    });
                   }),
             )
           ],

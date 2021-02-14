@@ -230,7 +230,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 width: 8,
                               ),
                               Text(
-                                "Deliverymen",
+                                "Delivery",
                                 style: TextStyle(
                                     color: Colors.grey[800],
                                     fontSize: 18,

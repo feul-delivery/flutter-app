@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/styles/textStyles.dart';
 
+import 'cmd_payement.dart';
+
 class Cmd1 extends StatefulWidget {
   @override
   _Cmd1State createState() => _Cmd1State();
@@ -16,6 +18,20 @@ class _Cmd1State extends State<Cmd1> {
           "Order",
           style: pageTitle,
         ),
+        actions: [
+          FlatButton(
+            onPressed: () {
+              if (_formKey.currentState.validate()) {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CommandePayment()));
+              }
+            },
+            child: Text(
+              'Next',
+              style: buttonStyle,
+            ),
+          ),
+        ],
         centerTitle: true,
         backgroundColor: Colors.red[900],
         elevation: 1,
@@ -110,27 +126,6 @@ class _Cmd1State extends State<Cmd1> {
                         labelText: "Car color",
                         labelStyle: hintStyle,
                         border: InputBorder.none),
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  height: 50,
-                  margin: EdgeInsets.fromLTRB(50, 5, 50, 5),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.red[700]),
-                  child: Center(
-                    child: FlatButton(
-                      onPressed: () {
-                        if (_formKey.currentState.validate()) {}
-                      },
-                      child: Text(
-                        'Next',
-                        style: buttonStyle,
-                      ),
-                    ),
                   ),
                 ),
               ],
