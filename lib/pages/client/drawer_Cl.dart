@@ -35,7 +35,7 @@ class DrawerCL extends StatelessWidget {
                   height: 5.0,
                 ),
                 Text(
-                  "Nom Prénom",
+                  "Name surname",
                   style: TextStyle(
                     fontSize: 22.0,
                     fontWeight: FontWeight.w800,
@@ -69,7 +69,7 @@ class DrawerCL extends StatelessWidget {
             color: Colors.red[900],
           ),
           title: Text(
-            "Acceuil",
+            "Home",
             style: textStyle,
           ),
         ),
@@ -83,7 +83,7 @@ class DrawerCL extends StatelessWidget {
             color: Colors.red[900],
           ),
           title: Text(
-            "Mon Profile",
+            "My profile",
             style: textStyle,
           ),
         ),
@@ -97,7 +97,7 @@ class DrawerCL extends StatelessWidget {
             color: Colors.red[900],
           ),
           title: Text(
-            "Mes favoris",
+            "Favorites",
             style: textStyle,
           ),
         ),
@@ -111,7 +111,7 @@ class DrawerCL extends StatelessWidget {
             color: Colors.red[900],
           ),
           title: Text(
-            "Mes commandes",
+            "My orders",
             style: textStyle,
           ),
         ),
@@ -125,7 +125,7 @@ class DrawerCL extends StatelessWidget {
             color: Colors.red[900],
           ),
           title: Text(
-            "Paramètres",
+            "Settings",
             style: textStyle,
           ),
         ),
@@ -145,7 +145,7 @@ class DrawerCL extends StatelessWidget {
                       builder: (BuildContext context) => LoginPage()));
                 },
                 child: Text(
-                  "Se déconnecter",
+                  "Sign out",
                   style: buttonStyle,
                 ),
               ),

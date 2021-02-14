@@ -16,7 +16,7 @@ class _FavorisClState extends State<FavorisCl> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.red[900],
-        title: Text('Favoris'),
+        title: Text('Favorites'),
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.home),
@@ -125,7 +125,7 @@ class _FavorisClState extends State<FavorisCl> {
                                             color: Colors.blue[800],
                                           ),
                                           Text(
-                                            'Commander',
+                                            'Order',
                                             style: TextStyle(
                                                 color: Colors.blue[800]),
                                           ),

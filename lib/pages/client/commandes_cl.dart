@@ -15,7 +15,7 @@ class _CommandeClState extends State<CommandeCl> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Mes commandes",
+            "My orders",
           ),
           actions: <Widget>[
             IconButton(
@@ -50,11 +50,11 @@ class _CommandeClState extends State<CommandeCl> {
         TextStyle(color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold);
     TextStyle titleStyle;
     IconData etaticon;
-    if (items[i]['etat'] == 'complet') {
+    if (items[i]['etat'] == 'delivered') {
       titleStyle = titleStylecomplet;
       etaticon = Icons.check;
     }
-    if (items[i]['etat'] != 'complet') {
+    if (items[i]['etat'] != 'delivered') {
       titleStyle = titleStyleencoure;
       etaticon = Icons.timer;
     }
@@ -153,7 +153,7 @@ class _CommandeClState extends State<CommandeCl> {
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
                                 child: Text(
-                                  "Commande N° :" + items[i]['code'],
+                                  "Order No. :" + items[i]['code'],
                                   style: TextStyle(
                                       color: Colors.black87,
                                       fontSize: 15,
@@ -209,7 +209,7 @@ class _CommandeClState extends State<CommandeCl> {
       "code": "SSH081686",
       "time": "11:00",
       "date": "15/01/2021",
-      "etat": "en cour",
+      "etat": "in process",
       "volume": "43L",
       "couleur": "blue",
       "matricule": "15-A-545454",
@@ -221,7 +221,7 @@ class _CommandeClState extends State<CommandeCl> {
       "code": "SSH023912",
       "time": "16:00",
       "date": "15/01/2021",
-      "etat": "complet",
+      "etat": "delivered",
       "volume": "43L",
       "couleur": "blue",
       "matricule": "15-A-545454",
@@ -233,7 +233,7 @@ class _CommandeClState extends State<CommandeCl> {
       "code": "PC985170",
       "time": "12:00",
       "date": "15/01/2021",
-      "etat": "complet",
+      "etat": "delivered",
       "volume": "43L",
       "couleur": "blue",
       "matricule": "15-A-545454",
@@ -245,7 +245,7 @@ class _CommandeClState extends State<CommandeCl> {
       "code": "PC980394",
       "time": "17:00",
       "date": "15/01/2021",
-      "etat": "complet",
+      "etat": "delivered",
       "volume": "43L",
       "couleur": "blue",
       "matricule": "15-A-545454",
@@ -257,7 +257,7 @@ class _CommandeClState extends State<CommandeCl> {
       "code": "PC932721",
       "time": "19:00",
       "date": "15/01/2021",
-      "etat": "complet",
+      "etat": "delivered",
       "volume": "43L",
       "couleur": "blue",
       "matricule": "15-A-545454",
@@ -269,7 +269,7 @@ class _CommandeClState extends State<CommandeCl> {
       "code": "PC900005",
       "time": "06:00",
       "date": "15/01/2021",
-      "etat": "complet",
+      "etat": "delivered",
       "volume": "43L",
       "couleur": "blue",
       "matricule": "15-A-545454",

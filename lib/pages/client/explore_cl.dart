@@ -12,7 +12,7 @@ class ExploreCl extends StatefulWidget {
 
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Explorer', style: pageTitle);
+  Widget _appBarTitle = new Text('Explore', style: pageTitle);
   Icon _adoreIcon;
   int adore = 0;
   @override
@@ -144,7 +144,7 @@ class _ExploreClState extends State<ExploreCl> {
                                             color: Colors.blue[800],
                                           ),
                                           Text(
-                                            'Commander',
+                                            'Order',
                                             style: TextStyle(
                                                 color: Colors.blue[800]),
                                           ),
@@ -193,15 +193,15 @@ class _ExploreClState extends State<ExploreCl> {
         this._searchIcon = new Icon(Icons.close);
         this._appBarTitle = new TextField(
           decoration: new InputDecoration(
-              hintText: 'Tapez ici',
+              hintText: 'Type here',
               hintStyle: TextStyle(color: Colors.white10),
               border: InputBorder.none,
-              labelText: 'Recherche',
+              labelText: 'Search',
               labelStyle: TextStyle(color: Colors.white10)),
         );
       } else {
         this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text('Explorer');
+        this._appBarTitle = new Text('Explore');
       }
     });
   }
