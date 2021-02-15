@@ -261,37 +261,30 @@ Container createSmallCard() {
                             Container(
                               padding: EdgeInsets.all(10),
                               alignment: Alignment.topCenter,
-                              child: FlatButton(
-                                  onPressed: () {},
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.near_me,
-                                        color: Colors.blue[800],
-                                      ),
-                                      Text(
-                                        'Order',
-                                        style:
-                                            TextStyle(color: Colors.blue[800]),
-                                      ),
-                                    ],
-                                  )),
+                              child: FlatButton.icon(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.near_me,
+                                  color: Colors.blue[800],
+                                ),
+                                label: Text(
+                                  'Order',
+                                  style: TextStyle(color: Colors.blue[800]),
+                                ),
+                              ),
                             ),
                             Container(
                               padding: EdgeInsets.all(8),
                               alignment: Alignment.topCenter,
-                              child: FlatButton(
-                                  onPressed: () {},
-                                  child: Column(
-                                    children: [
-                                      Icon(
-                                        Icons.read_more,
-                                      ),
-                                      Text(
-                                        'Details',
-                                      ),
-                                    ],
-                                  )),
+                              child: FlatButton.icon(
+                                onPressed: () {},
+                                icon: Icon(
+                                  Icons.read_more,
+                                ),
+                                label: Text(
+                                  'Details',
+                                ),
+                              ),
                             ),
                           ],
                         ),

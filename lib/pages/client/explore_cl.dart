@@ -128,48 +128,43 @@ class _ExploreClState extends State<ExploreCl> {
                               ),
                               IconButton(
                                 onPressed: null,
-                                icon: Icon(Icons.chat),
+                                icon: Icon(
+                                  Icons.chat,
+                                  color: Colors.amber[700],
+                                ),
                               ),
                               Container(
-                                padding: EdgeInsets.all(10),
-                                alignment: Alignment.topCenter,
-                                child: FlatButton(
+                                  padding: EdgeInsets.all(10),
+                                  alignment: Alignment.topCenter,
+                                  child: FlatButton.icon(
                                     onPressed: () {},
-                                    child: Column(
-                                      children: [
-                                        Icon(
-                                          Icons.near_me,
-                                          color: Colors.blue[800],
-                                        ),
-                                        Text(
-                                          'Order',
-                                          style: TextStyle(
-                                              color: Colors.blue[800]),
-                                        ),
-                                      ],
-                                    )),
-                              ),
+                                    icon: Icon(
+                                      Icons.near_me,
+                                      color: Colors.blue[800],
+                                    ),
+                                    label: Text(
+                                      'Order',
+                                      style: TextStyle(color: Colors.blue[800]),
+                                    ),
+                                  )),
                               Container(
                                 padding: EdgeInsets.all(8),
                                 alignment: Alignment.topCenter,
-                                child: FlatButton(
-                                    onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  StationProfilCl()));
-                                    },
-                                    child: Column(
-                                      children: [
-                                        Icon(
-                                          Icons.read_more,
-                                        ),
-                                        Text(
-                                          'Details',
-                                        ),
-                                      ],
-                                    )),
+                                child: FlatButton.icon(
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                StationProfilCl()));
+                                  },
+                                  icon: Icon(
+                                    Icons.read_more,
+                                  ),
+                                  label: Text(
+                                    'Details',
+                                  ),
+                                ),
                               ),
                             ],
                           ),
