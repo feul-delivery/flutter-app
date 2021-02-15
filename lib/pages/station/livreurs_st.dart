@@ -30,7 +30,7 @@ class _LivreurStState extends State<LivreurSt> {
         ),
         body: SafeArea(
           child: ListView(
-            padding: EdgeInsets.only(left: 10, right: 10),
+            padding: EdgeInsets.only(left: 5, right: 5),
             children: <Widget>[
               for (int i = 0; i < items.length; i++) livreurList(i)
             ],
