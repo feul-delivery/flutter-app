@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/StarterPage.dart';
 import 'package:feul_delivery/pages/station/index_st.dart';
-import 'package:feul_delivery/pages/sign-up/singup.dart';
+import 'package:feul_delivery/pages/authentification/singup.dart';
 import 'package:feul_delivery/pages/client/index_cl.dart';
-import 'admin/index_admin.dart';
+import '../admin/index_admin.dart';
 
 class LoginPage extends StatelessWidget {
   @override
