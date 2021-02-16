@@ -1,4 +1,4 @@
-import 'package:feul_delivery/styles/textStyles.dart';
+import 'package:feul_delivery/shared/textStyles.dart';
 import 'package:flutter/material.dart';
 
 class LiveursPage extends StatefulWidget {

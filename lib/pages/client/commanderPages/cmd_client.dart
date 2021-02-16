@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:feul_delivery/styles/textStyles.dart';
+import 'package:feul_delivery/shared/textStyles.dart';
 
 import 'cmd_payement.dart';
 

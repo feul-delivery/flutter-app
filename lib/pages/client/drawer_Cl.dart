@@ -2,7 +2,7 @@ import 'package:feul_delivery/pages/client/profile_mdf.dart';
 import 'package:feul_delivery/pages/client/settings_cl.dart';
 import 'package:feul_delivery/pages/client/commandes_cl.dart';
 import 'package:feul_delivery/pages/authentification/login.dart';
-import 'package:feul_delivery/styles/textStyles.dart';
+import 'package:feul_delivery/shared/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'favoris_cl.dart';
 import 'index_cl.dart';
