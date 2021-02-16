@@ -258,32 +258,24 @@ Container createSmallCard() {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Container(
-                              padding: EdgeInsets.all(10),
-                              alignment: Alignment.topCenter,
-                              child: FlatButton.icon(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.near_me,
-                                  color: Colors.blue[800],
-                                ),
-                                label: Text(
-                                  'Order',
-                                  style: TextStyle(color: Colors.blue[800]),
-                                ),
+                            FlatButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.near_me,
+                                color: Colors.blue[800],
+                              ),
+                              label: Text(
+                                'Order',
+                                style: TextStyle(color: Colors.blue[800]),
                               ),
                             ),
-                            Container(
-                              padding: EdgeInsets.all(8),
-                              alignment: Alignment.topCenter,
-                              child: FlatButton.icon(
-                                onPressed: () {},
-                                icon: Icon(
-                                  Icons.read_more,
-                                ),
-                                label: Text(
-                                  'Details',
-                                ),
+                            FlatButton.icon(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.read_more,
+                              ),
+                              label: Text(
+                                'Details',
                               ),
                             ),
                           ],

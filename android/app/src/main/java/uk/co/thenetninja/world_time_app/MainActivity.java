@@ -1,4 +1,4 @@
-package com.fuel.delivery;
+package com.fuel_delivery.ma;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
