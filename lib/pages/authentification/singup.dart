@@ -1,7 +1,7 @@
 import 'package:feul_delivery/pages/authentification/type_compte.dart';
 import 'package:feul_delivery/styles/textStyles.dart';
 import 'package:flutter/material.dart';
-import 'package:feul_delivery/animations/FadeAnimation.dart';
+import 'package:feul_delivery/shared/FadeAnimation.dart';
 import 'package:page_transition/page_transition.dart';
 
 class SignupPage extends StatelessWidget {

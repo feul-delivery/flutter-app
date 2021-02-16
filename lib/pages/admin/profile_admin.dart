@@ -1,4 +1,4 @@
-import 'package:feul_delivery/animations/FadeAnimation.dart';
+import 'package:feul_delivery/shared/FadeAnimation.dart';
 import 'package:feul_delivery/pages/admin/index_admin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
