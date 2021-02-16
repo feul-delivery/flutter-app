@@ -105,6 +105,6 @@ class DatabaseService {
 
   // get livreur stream
   Stream<QuerySnapshot> get orders {
-    return livreurCollection.snapshots();
+    return ordersCollection.snapshots();
   }
 }
