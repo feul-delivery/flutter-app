@@ -4,7 +4,7 @@ import 'package:feul_delivery/pages/admin/settings_admin.dart';
 import 'package:feul_delivery/pages/admin/station_admin.dart';
 import 'package:feul_delivery/shared/textStyles.dart';
 import 'package:flutter/material.dart';
-import 'package:feul_delivery/pages/authentification/login.dart';
+import 'package:feul_delivery/authentification/sign_in.dart';
 import 'package:page_transition/page_transition.dart';
 
 class DrawerAdmin extends StatelessWidget {
@@ -119,7 +119,7 @@ class DrawerAdmin extends StatelessWidget {
               child: FlatButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => LoginPage()));
+                      builder: (BuildContext context) => SignIn()));
                 },
                 child: Text(
                   "Sign out",

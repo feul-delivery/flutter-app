@@ -1,7 +1,7 @@
 import 'package:feul_delivery/pages/client/profile_mdf.dart';
 import 'package:feul_delivery/pages/client/settings_cl.dart';
 import 'package:feul_delivery/pages/client/commandes_cl.dart';
-import 'package:feul_delivery/pages/authentification/login.dart';
+import 'package:feul_delivery/authentification/sign_in.dart';
 import 'package:feul_delivery/shared/textStyles.dart';
 import 'package:flutter/material.dart';
 import 'favoris_cl.dart';
@@ -142,7 +142,7 @@ class DrawerCL extends StatelessWidget {
               child: FlatButton(
                 onPressed: () {
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => LoginPage()));
+                      builder: (BuildContext context) => SignIn()));
                 },
                 child: Text(
                   "Sign out",

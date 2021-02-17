@@ -1,6 +1,6 @@
+import 'package:feul_delivery/authentification/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/shared/FadeAnimation.dart';
-import 'package:feul_delivery/pages/authentification/login.dart';
 import 'package:page_transition/page_transition.dart';
 
 class StarterPage extends StatefulWidget {
@@ -42,7 +42,7 @@ class _StarterPageState extends State<StarterPage>
           (f) => Navigator.push(
               context,
               PageTransition(
-                  type: PageTransitionType.fade, child: LoginPage())),
+                  type: PageTransitionType.fade, child: Authenticate())),
         );
   }
 
