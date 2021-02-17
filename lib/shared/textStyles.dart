@@ -21,6 +21,12 @@ const buttonStyle = TextStyle(
   fontWeight: FontWeight.w500,
   letterSpacing: 1.3,
 );
+const buttonRegisterStyle = TextStyle(
+    color: Colors.white,
+    fontFamily: 'Gotham',
+    fontWeight: FontWeight.w500,
+    fontSize: 17,
+    letterSpacing: 2.0);
 const moreStyle = TextStyle(
   color: Colors.black,
   fontFamily: 'Gotham',

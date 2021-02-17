@@ -1,6 +1,6 @@
 import 'package:feul_delivery/pages/StarterPage.dart';
 import 'package:feul_delivery/pages/admin/index_admin.dart';
-import 'package:feul_delivery/pages/authentification/login.dart';
+import 'package:feul_delivery/authentification/sign_in.dart';
 import 'package:feul_delivery/pages/station/index_st.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/main.dart';
@@ -23,7 +23,7 @@ class _SplashState extends State<Splash> {
             PageTransition(type: PageTransitionType.fade, child: IndexCl()));
       } else if (username == "0") {
         Navigator.pushReplacement(context,
-            PageTransition(type: PageTransitionType.fade, child: LoginPage()));
+            PageTransition(type: PageTransitionType.fade, child: SignIn()));
       } else if (username == "") {
         Navigator.pushReplacement(
             context,
