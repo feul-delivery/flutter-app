@@ -39,9 +39,9 @@ class _RegisterState extends State<Register> {
               width: double.infinity,
               decoration: BoxDecoration(
                   gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-                Colors.red[700],
-                Colors.red[400],
-                Colors.red[200]
+                Colors.red[800],
+                Colors.red[600],
+                Colors.red[400]
               ])),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

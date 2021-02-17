@@ -24,8 +24,6 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    final txtlogin = TextEditingController();
-    final txtpassword = TextEditingController();
     return loading
         ? Loading()
         : Scaffold(
@@ -35,8 +33,8 @@ class _SignInState extends State<SignIn> {
               decoration: BoxDecoration(
                   gradient: LinearGradient(begin: Alignment.topCenter, colors: [
                 Colors.red[800],
-                Colors.red[500],
-                Colors.red[300]
+                Colors.red[600],
+                Colors.red[400]
               ])),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -114,7 +112,6 @@ class _SignInState extends State<SignIn> {
                                                         color:
                                                             Colors.grey[200]))),
                                             child: TextFormField(
-                                              controller: txtlogin,
                                               decoration: InputDecoration(
                                                   hintText: "Email",
                                                   hintStyle: hintStyle,
@@ -135,7 +132,6 @@ class _SignInState extends State<SignIn> {
                                                         color:
                                                             Colors.grey[200]))),
                                             child: TextFormField(
-                                              controller: txtpassword,
                                               obscureText: true,
                                               decoration: InputDecoration(
                                                   hintText: "Password",

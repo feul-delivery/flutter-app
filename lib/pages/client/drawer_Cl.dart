@@ -2,6 +2,7 @@ import 'package:feul_delivery/pages/client/profile_mdf.dart';
 import 'package:feul_delivery/pages/client/settings_cl.dart';
 import 'package:feul_delivery/pages/client/commandes_cl.dart';
 import 'package:feul_delivery/authentification/sign_in.dart';
+import 'package:feul_delivery/services/auth.dart';
 import 'package:feul_delivery/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'favoris_cl.dart';
@@ -10,7 +11,7 @@ import 'bbar_cl.dart';
 
 // ignore: camel_case_types
 class DrawerCL extends StatelessWidget {
-  const DrawerCL({Key key}) : super(key: key);
+  final AuthService _auth = AuthService();
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +141,9 @@ class DrawerCL extends StatelessWidget {
                 color: Colors.red[700]),
             child: Center(
               child: FlatButton(
-                onPressed: () {
+                onPressed: () async {
+                  await _auth.signOut();
+
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (BuildContext context) => SignIn()));
                 },
