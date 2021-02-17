@@ -1,10 +1,7 @@
 import 'package:feul_delivery/services/auth.dart';
 import 'package:feul_delivery/shared/splash.dart';
-import 'package:feul_delivery/wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:feul_delivery/pages/StarterPage.dart';
 import 'package:provider/provider.dart';
-
 import 'modules/user.dart';
 
 void main() => runApp(FuelDeliveryApp());
@@ -17,17 +14,14 @@ class FuelDeliveryApp extends StatelessWidget {
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
-          home: Wrapper(),
-          title: 'Fuel Delivery',
-          theme: ThemeData(
-            primarySwatch: Colors.red,
-          ),
-          initialRoute: '/',
-          debugShowCheckedModeBanner: false,
-          routes: {
-            '/': (context) => SplashScreen(),
-            '/start': (context) => StarterPage(),
-          }),
+        home: SplashScreen(),
+        title: 'Fuel Delivery',
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+        ),
+        initialRoute: '/',
+        debugShowCheckedModeBanner: false,
+      ),
     );
   }
 }

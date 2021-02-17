@@ -1,4 +1,3 @@
-import 'package:feul_delivery/pages/StarterPage.dart';
 import 'package:feul_delivery/services/auth.dart';
 import 'package:feul_delivery/shared/FadeAnimation.dart';
 import 'package:feul_delivery/shared/loading.dart';
