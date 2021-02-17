@@ -19,8 +19,6 @@ class FuelDeliveryApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.red,
         ),
-        initialRoute: '/',
-        debugShowCheckedModeBanner: false,
       ),
     );
   }

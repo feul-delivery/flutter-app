@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:feul_delivery/modules/client.dart';
 
 class DatabaseService {
   final String uid;
@@ -17,22 +18,13 @@ class DatabaseService {
   final CollectionReference entrepriseCollection =
       Firestore.instance.collection('entreprise');
 
-  Future<void> updateClientData(
-      String idclient,
-      String nom,
-      String prenom,
-      String email,
-      String password,
-      String sexe,
-      String cin,
-      String tele,
-      int idVille) async {
+  Future<void> updateClientData(String account, String nom, String prenom,
+      String email, String sexe, String cin, String tele, int idVille) async {
     return await clientCollection.document(uid).setData({
-      'idclient': idclient,
+      'account': account,
       'nom': nom,
       'prenom': prenom,
       'email': email,
-      'password': password,
       'sexe': sexe,
       'cin': cin,
       'tele': tele,
@@ -43,6 +35,27 @@ class DatabaseService {
   // get client stream
   Stream<QuerySnapshot> get client {
     return clientCollection.snapshots();
+  }
+
+  ClientData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return ClientData(
+        uid: uid,
+        account: snapshot.data['account'],
+        nom: snapshot.data['nom'],
+        prenom: snapshot.data['prenom'],
+        email: snapshot.data['email'],
+        sexe: snapshot.data['sexe'],
+        cin: snapshot.data['cin'],
+        tele: snapshot.data['tele'],
+        idville: snapshot.data['idville']);
+  }
+
+  // get user doc stream
+  Stream<ClientData> get userData {
+    return clientCollection
+        .document(uid)
+        .snapshots()
+        .map(_userDataFromSnapshot);
   }
 
   Future<void> updateLivreurData(
