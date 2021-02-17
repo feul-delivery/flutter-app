@@ -1,5 +1,5 @@
 class Client {
-  final String idclient;
+  final String uid;
   final String nom;
   final String prenom;
   final String email;
@@ -9,7 +9,7 @@ class Client {
   final String tele;
   final int idVille;
   Client(
-      {this.idclient,
+      {this.uid,
       this.nom,
       this.prenom,
       this.email,

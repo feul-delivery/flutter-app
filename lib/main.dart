@@ -1,16 +1,33 @@
+import 'package:feul_delivery/services/auth.dart';
 import 'package:feul_delivery/shared/splash.dart';
+import 'package:feul_delivery/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/pages/StarterPage.dart';
+import 'package:provider/provider.dart';
 
-String username = "";
-void main() => runApp(MaterialApp(
-        title: 'Fuel Delivery',
-        theme: ThemeData(
-          primarySwatch: Colors.red,
-        ),
-        initialRoute: '/',
-        debugShowCheckedModeBanner: false,
-        routes: {
-          '/': (context) => Splash(),
-          '/start': (context) => StarterPage(),
-        }));
+import 'modules/user.dart';
+
+void main() => runApp(FuelDeliveryApp());
+
+class FuelDeliveryApp extends StatelessWidget {
+  const FuelDeliveryApp({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamProvider<User>.value(
+      value: AuthService().user,
+      child: MaterialApp(
+          home: Wrapper(),
+          title: 'Fuel Delivery',
+          theme: ThemeData(
+            primarySwatch: Colors.red,
+          ),
+          initialRoute: '/',
+          debugShowCheckedModeBanner: false,
+          routes: {
+            '/': (context) => SplashScreen(),
+            '/start': (context) => StarterPage(),
+          }),
+    );
+  }
+}

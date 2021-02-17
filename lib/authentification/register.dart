@@ -1,7 +1,7 @@
 import 'package:feul_delivery/authentification/type_compte.dart';
 import 'package:feul_delivery/services/auth.dart';
 import 'package:feul_delivery/shared/loading.dart';
-import 'package:feul_delivery/shared/textStyles.dart';
+import 'package:feul_delivery/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:feul_delivery/shared/FadeAnimation.dart';
 import 'package:page_transition/page_transition.dart';
