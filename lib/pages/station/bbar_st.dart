@@ -1,4 +1,4 @@
-import 'package:feul_delivery/shared/textStyles.dart';
+import 'package:feul_delivery/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:feul_delivery/pages/station/index_st.dart';
