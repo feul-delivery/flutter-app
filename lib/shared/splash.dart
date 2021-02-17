@@ -1,42 +1,51 @@
 import 'package:feul_delivery/pages/StarterPage.dart';
-import 'package:feul_delivery/pages/admin/index_admin.dart';
-import 'package:feul_delivery/authentification/sign_in.dart';
-import 'package:feul_delivery/pages/station/index_st.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:feul_delivery/main.dart';
-import 'package:feul_delivery/pages/client/index_cl.dart';
+import 'package:feul_delivery/wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:page_transition/page_transition.dart';
 import 'dart:async';
 
-class Splash extends StatefulWidget {
+class SplashScreen extends StatefulWidget {
   @override
-  _SplashState createState() => _SplashState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashState extends State<Splash> {
+class _SplashScreenState extends State<SplashScreen> {
+  bool isFirstTime = false;
+
   @override
   void initState() {
     super.initState();
+    _getIsFirstTimeFromSharedPref();
     Future.delayed(Duration(seconds: 5), () {
-      if (username == "user") {
+      if (isFirstTime == false) {
         Navigator.pushReplacement(context,
-            PageTransition(type: PageTransitionType.fade, child: IndexCl()));
-      } else if (username == "0") {
-        Navigator.pushReplacement(context,
-            PageTransition(type: PageTransitionType.fade, child: SignIn()));
-      } else if (username == "") {
+            PageTransition(type: PageTransitionType.fade, child: Wrapper()));
+      } else {
+        _isFirstTimeChangeState();
         Navigator.pushReplacement(
             context,
             PageTransition(
                 type: PageTransitionType.fade, child: StarterPage()));
-      } else if (username == "admin") {
-        Navigator.pushReplacement(context,
-            PageTransition(type: PageTransitionType.fade, child: IndexAdmin()));
-      } else if (username == "st") {
-        Navigator.pushReplacement(context,
-            PageTransition(type: PageTransitionType.fade, child: IndexSt()));
       }
     });
+  }
+
+  Future<void> _getIsFirstTimeFromSharedPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    var isFirstTime = prefs.getBool('isFirstTime');
+    if (isFirstTime != null) {
+      isFirstTime = true;
+    } else
+      isFirstTime = false;
+  }
+
+  Future<void> _isFirstTimeChangeState() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (isFirstTime) {
+      setState(() => isFirstTime = false);
+      await prefs.setBool('isFirstTime', false);
+    }
   }
 
   @override

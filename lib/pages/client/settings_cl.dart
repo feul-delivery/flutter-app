@@ -1,5 +1,5 @@
 import 'package:feul_delivery/pages/client/bbar_cl.dart';
-import 'package:feul_delivery/shared/textStyles.dart';
+import 'package:feul_delivery/shared/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
