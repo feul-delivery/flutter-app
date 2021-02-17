@@ -158,13 +158,10 @@ class _RegisterState extends State<Register> {
                                                   hintText: "Confirmation",
                                                   hintStyle: hintStyle,
                                                   border: InputBorder.none),
-                                              validator: (val) => val ==
+                                              validator: (val) => val !=
                                                       password
                                                   ? 'confirmation do not match the password.'
                                                   : null,
-                                              onChanged: (val) {
-                                                setState(() => password = val);
-                                              },
                                             ),
                                           ),
                                         ],
@@ -210,12 +207,7 @@ class _RegisterState extends State<Register> {
                                                     'Please supply a valid email';
                                               });
                                             } else {
-                                              Navigator.pushReplacement(
-                                                  context,
-                                                  PageTransition(
-                                                      type: PageTransitionType
-                                                          .fade,
-                                                      child: TypeCompte()));
+                                              print(result);
                                             }
                                           }
                                         },
