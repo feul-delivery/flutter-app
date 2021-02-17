@@ -14,6 +14,9 @@ class DatabaseService {
   final CollectionReference ordersCollection =
       Firestore.instance.collection('orders');
 
+  final CollectionReference entrepriseCollection =
+      Firestore.instance.collection('entreprise');
+
   Future<void> updateClientData(
       String idclient,
       String nom,
@@ -106,5 +109,40 @@ class DatabaseService {
   // get livreur stream
   Stream<QuerySnapshot> get orders {
     return ordersCollection.snapshots();
+  }
+
+  Future<void> updateEntrepriseData(
+    String identreprise,
+    String volume,
+    String adresse,
+    String dateheurec,
+    String dateheurel,
+    String matricule,
+    String color,
+    double prixtotal,
+    String statut,
+    String methode,
+    String idclient,
+    String idtype,
+  ) async {
+    return await entrepriseCollection.document(uid).setData({
+      'idorder': identreprise,
+      'volume': volume,
+      'adresse': adresse,
+      'dateheurec': dateheurec,
+      'dateheurel': dateheurel,
+      'matricule': matricule,
+      'color': color,
+      'prixtotal': prixtotal,
+      'statut': statut,
+      'methode': methode,
+      'idclient': idclient,
+      'idtype': idtype,
+    });
+  }
+
+  // get livreur stream
+  Stream<QuerySnapshot> get entreprise {
+    return entrepriseCollection.snapshots();
   }
 }
