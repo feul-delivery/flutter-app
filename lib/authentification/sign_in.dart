@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:feul_delivery/modules/user.dart';
-import 'package:feul_delivery/pages/StarterPage.dart';
-=======
->>>>>>> parent of 877fa47 (x)
 import 'package:feul_delivery/services/auth.dart';
 import 'package:feul_delivery/shared/FadeAnimation.dart';
 import 'package:feul_delivery/shared/loading.dart';
@@ -291,12 +285,7 @@ class _SignInState extends State<SignIn> {
                                                           ],
                                                         ));
                                               });
-<<<<<<< HEAD
-=======
-                                            }else{
-                                              
->>>>>>> parent of 877fa47 (x)
-                                            }
+                                            } else {}
                                           }
                                         },
                                         child: Text(
