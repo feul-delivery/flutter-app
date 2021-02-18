@@ -39,6 +39,8 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    final txtlogin = TextEditingController();
+    final txtpassword = TextEditingController();
     return loading
         ? Loading()
         : Scaffold(
@@ -127,6 +129,7 @@ class _SignInState extends State<SignIn> {
                                                         color:
                                                             Colors.grey[200]))),
                                             child: TextFormField(
+                                              controller: txtlogin,
                                               decoration: InputDecoration(
                                                   hintText: "Email",
                                                   hintStyle: hintStyle,
@@ -147,6 +150,7 @@ class _SignInState extends State<SignIn> {
                                                         color:
                                                             Colors.grey[200]))),
                                             child: TextFormField(
+                                              controller: txtpassword,
                                               obscureText: true,
                                               decoration: InputDecoration(
                                                   hintText: "Password",
@@ -297,7 +301,7 @@ class _SignInState extends State<SignIn> {
                                                           ],
                                                         ));
                                               });
-                                            } else {}
+                                            }
                                           }
                                         },
                                         child: Text(
