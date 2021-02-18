@@ -12,14 +12,17 @@ class Wrapper extends StatelessWidget {
     final user = Provider.of<User>(context);
 
     // return either the index or Authenticate widget
-    if (user.account == "client") {
-      return IndexCl();
-    } else if (user.account == "livreur") {
-    } else if (user.account == "entreprise") {
-      return IndexSt();
-    } else if (user.account == "admin") {
-      return IndexAdmin();
+    if (user == null) {
+      return Authenticate();
+    } else {
+      if (user.account == "client") {
+        return IndexCl();
+      } else if (user.account == "livreur") {
+      } else if (user.account == "entreprise") {
+        return IndexSt();
+      } else if (user.account == "admin") {
+        return IndexAdmin();
+      }
     }
-    return Authenticate();
   }
 }
