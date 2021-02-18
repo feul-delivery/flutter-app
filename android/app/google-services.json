@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "291153983638",
+    "project_id": "fuel-delivery-bts",
+    "storage_bucket": "fuel-delivery-bts.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291153983638:android:e9c54bed6765bc4ef62ab7",
+        "android_client_info": {
+          "package_name": "com.fuel_delivery.ma"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291153983638-l9c56he9e3q4cdv98ckjg31c1iudav92.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAlnSplnJliTzR9OnhtugvLm0p2eNtLSZA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291153983638-l9c56he9e3q4cdv98ckjg31c1iudav92.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
