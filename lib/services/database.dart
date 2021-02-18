@@ -1,16 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feul_delivery/modules/client.dart';
-import 'package:feul_delivery/modules/user.dart';
 
 class DatabaseService {
   final String uid;
   DatabaseService({this.uid});
 
   // collection reference
-
-  final CollectionReference usersCollection =
-      Firestore.instance.collection('users');
-
   final CollectionReference clientCollection =
       Firestore.instance.collection('client');
 
@@ -22,33 +17,6 @@ class DatabaseService {
 
   final CollectionReference entrepriseCollection =
       Firestore.instance.collection('entreprise');
-
-  Future<void> updateUserData(String uid, String account) async {
-    return await usersCollection.document(uid).setData({
-      'nom': uid,
-      'account': account,
-    });
-  }
-
-  User _userDataFromSnapshot(DocumentSnapshot snapshot) {
-    return User(
-      uid: uid,
-      account: snapshot.data['account'],
-    );
-  }
-
-  // get user doc stream
-  Stream<User> get userData {
-    return clientCollection
-        .document(uid)
-        .snapshots()
-        .map(_userDataFromSnapshot);
-  }
-
-  // get client stream
-  Stream<QuerySnapshot> get user {
-    return usersCollection.snapshots();
-  }
 
   Future<void> updateClientData(String account, String nom, String prenom,
       String email, String sexe, String cin, String tele, int idVille) async {
@@ -69,7 +37,7 @@ class DatabaseService {
     return clientCollection.snapshots();
   }
 
-  ClientData _clientDataFromSnapshot(DocumentSnapshot snapshot) {
+  ClientData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return ClientData(
         uid: uid,
         account: snapshot.data['account'],
@@ -83,11 +51,11 @@ class DatabaseService {
   }
 
   // get user doc stream
-  Stream<ClientData> get clientData {
+  Stream<ClientData> get userData {
     return clientCollection
         .document(uid)
         .snapshots()
-        .map(_clientDataFromSnapshot);
+        .map(_userDataFromSnapshot);
   }
 
   Future<void> updateLivreurData(

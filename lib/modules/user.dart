@@ -1,5 +1,5 @@
 class User {
-  String uid;
-  String account;
-  User({this.uid, this.account});
+  final String uid;
+
+  User({this.uid});
 }

@@ -1,28 +1,18 @@
+<<<<<<< HEAD
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:feul_delivery/modules/user.dart';
 import 'package:feul_delivery/pages/StarterPage.dart';
+=======
+>>>>>>> parent of 877fa47 (x)
 import 'package:feul_delivery/services/auth.dart';
 import 'package:feul_delivery/shared/FadeAnimation.dart';
 import 'package:feul_delivery/shared/loading.dart';
 import 'package:feul_delivery/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 
-User currentUser = User();
-
 class SignIn extends StatefulWidget {
   final Function toggleView;
   SignIn({this.toggleView});
-  Future getAccountType() async {
-    var userDetail;
-    Firestore.instance
-        .collection('users')
-        .document(currentUser.uid)
-        .get()
-        .then((DocumentSnapshot doc) {
-      userDetail = doc;
-      currentUser.account = userDetail.data()['account'].toString();
-    });
-  }
 
   @override
   _SignInState createState() => _SignInState();
@@ -267,7 +257,6 @@ class _SignInState extends State<SignIn> {
                                             dynamic result = await _auth
                                                 .signInWithEmailAndPassword(
                                                     email, password);
-
                                             if (result == null) {
                                               setState(() {
                                                 loading = false;
@@ -302,6 +291,11 @@ class _SignInState extends State<SignIn> {
                                                           ],
                                                         ));
                                               });
+<<<<<<< HEAD
+=======
+                                            }else{
+                                              
+>>>>>>> parent of 877fa47 (x)
                                             }
                                           }
                                         },
