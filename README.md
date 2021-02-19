@@ -1,2 +1,2 @@
-# FD-flutter-app
+# flutter-app
 
