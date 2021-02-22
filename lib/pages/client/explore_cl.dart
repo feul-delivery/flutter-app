@@ -119,18 +119,24 @@ class _ExploreClState extends State<ExploreCl> {
                         Container(
                           child: Row(
                             children: [
-                              IconButton(
-                                onPressed: null,
-                                icon: Icon(
-                                  Icons.phone,
-                                  color: Colors.green,
+                              InkWell(
+                                onTap: () {},
+                                child: IconButton(
+                                  onPressed: null,
+                                  icon: Icon(
+                                    Icons.phone,
+                                    color: Colors.green,
+                                  ),
                                 ),
                               ),
-                              IconButton(
-                                onPressed: null,
-                                icon: Icon(
-                                  Icons.chat,
-                                  color: Colors.amber[700],
+                              InkWell(
+                                onTap: () {},
+                                child: IconButton(
+                                  onPressed: null,
+                                  icon: Icon(
+                                    Icons.chat,
+                                    color: Colors.amber[700],
+                                  ),
                                 ),
                               ),
                               Container(

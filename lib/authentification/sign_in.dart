@@ -1,8 +1,12 @@
+import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -24,8 +28,7 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    final txtlogin = TextEditingController();
-    final txtpassword = TextEditingController();
+    User user = Provider.of<User>(context);
     return loading
         ? Loading()
         : Scaffold(
@@ -114,7 +117,6 @@ class _SignInState extends State<SignIn> {
                                                         color:
                                                             Colors.grey[200]))),
                                             child: TextFormField(
-                                              controller: txtlogin,
                                               decoration: InputDecoration(
                                                   hintText: "Email",
                                                   hintStyle: hintStyle,
@@ -135,7 +137,6 @@ class _SignInState extends State<SignIn> {
                                                         color:
                                                             Colors.grey[200]))),
                                             child: TextFormField(
-                                              controller: txtpassword,
                                               obscureText: true,
                                               decoration: InputDecoration(
                                                   hintText: "Password",
@@ -285,7 +286,10 @@ class _SignInState extends State<SignIn> {
                                                           ],
                                                         ));
                                               });
-                                            } else {}
+                                            } else {
+                                              user.account =
+                                                  await getUserName();
+                                            }
                                           }
                                         },
                                         child: Text(
@@ -345,4 +349,16 @@ class _SignInState extends State<SignIn> {
             ),
           );
   }
+}
+
+Future<String> getUserName() async {
+  Firestore.instance
+      .collection('user')
+      .document((await FirebaseAuth.instance.currentUser()).uid)
+      .get()
+      .then((value) {
+    print(value.data['account'].toString());
+    return value.data['account'].toString();
+  });
+  return null;
 }

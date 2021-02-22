@@ -158,13 +158,10 @@ class _RegisterState extends State<Register> {
                                                   hintText: "Confirmation",
                                                   hintStyle: hintStyle,
                                                   border: InputBorder.none),
-                                              validator: (val) => val ==
+                                              validator: (val) => val !=
                                                       password
                                                   ? 'confirmation do not match the password.'
                                                   : null,
-                                              onChanged: (val) {
-                                                setState(() => password = val);
-                                              },
                                             ),
                                           ),
                                         ],

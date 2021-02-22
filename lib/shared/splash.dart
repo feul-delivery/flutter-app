@@ -1,10 +1,11 @@
-import 'package:FD_flutter/pages/StarterPage.dart';
+import 'package:FD_flutter/shared/StarterPage.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:page_transition/page_transition.dart';
 import 'dart:async';
-
 import '../wrapper.dart';
+
+bool isFirstTime = true;
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -12,18 +13,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool isFirstTime = false;
-
   @override
   void initState() {
     super.initState();
-    _getIsFirstTimeFromSharedPref();
-    Future.delayed(Duration(seconds: 5), () {
-      if (isFirstTime == false) {
+    Future.delayed(Duration(seconds: 5), () async {
+      await _getIsFirstTimeFromSharedPref();
+      if (!isFirstTime) {
         Navigator.pushReplacement(context,
             PageTransition(type: PageTransitionType.fade, child: Wrapper()));
       } else {
-        _isFirstTimeChangeState();
+        await _isFirstTimeChangeState();
         Navigator.pushReplacement(
             context,
             PageTransition(
@@ -34,11 +33,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> _getIsFirstTimeFromSharedPref() async {
     final prefs = await SharedPreferences.getInstance();
-    var isFirstTime = prefs.getBool('isFirstTime');
-    if (isFirstTime != null) {
-      isFirstTime = true;
-    } else
-      isFirstTime = false;
+    if (prefs.getBool('isFirstTime') == null) {
+      setState(() {
+        isFirstTime = true;
+      });
+    } else {
+      setState(() {
+        isFirstTime = prefs.getBool('isFirstTime');
+      });
+    }
   }
 
   Future<void> _isFirstTimeChangeState() async {

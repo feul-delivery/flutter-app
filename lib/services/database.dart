@@ -1,4 +1,5 @@
 import 'package:FD_flutter/modules/client.dart';
+import 'package:FD_flutter/modules/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
@@ -9,6 +10,9 @@ class DatabaseService {
   final CollectionReference clientCollection =
       Firestore.instance.collection('client');
 
+  final CollectionReference userCollection =
+      Firestore.instance.collection('user');
+
   final CollectionReference livreurCollection =
       Firestore.instance.collection('livreur');
 
@@ -17,6 +21,12 @@ class DatabaseService {
 
   final CollectionReference entrepriseCollection =
       Firestore.instance.collection('entreprise');
+
+  Future<void> _updateUserData(String account) async {
+    return await userCollection.document(uid).setData({
+      'account': account,
+    });
+  }
 
   Future<void> updateClientData(String account, String nom, String prenom,
       String email, String sexe, String cin, String tele, int idVille) async {
@@ -37,7 +47,14 @@ class DatabaseService {
     return clientCollection.snapshots();
   }
 
-  ClientData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+  User _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    return User(
+      uid: uid,
+      account: snapshot.data['account'],
+    );
+  }
+
+  ClientData _clientDataFromSnapshot(DocumentSnapshot snapshot) {
     return ClientData(
         uid: uid,
         account: snapshot.data['account'],
@@ -55,11 +72,15 @@ class DatabaseService {
     return clientCollection
         .document(uid)
         .snapshots()
-        .map(_userDataFromSnapshot);
+        .map(_clientDataFromSnapshot);
+  }
+
+  Stream<User> get userType {
+    return userCollection.document(uid).snapshots().map(_userDataFromSnapshot);
   }
 
   Future<void> updateLivreurData(
-    String idLivreur,
+    String account,
     String nom,
     String prenom,
     String email,
@@ -71,7 +92,7 @@ class DatabaseService {
     String identreprise,
   ) async {
     return await livreurCollection.document(uid).setData({
-      'idclient': idLivreur,
+      'account': account,
       'nom': nom,
       'prenom': prenom,
       'email': email,

@@ -1,7 +1,7 @@
+import 'package:FD_flutter/authentification/sign_in.dart';
+import 'package:FD_flutter/pages/client/commandes_cl.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/pages/client/settings_cl.dart';
-import 'package:FD_flutter/pages/client/commandes_cl.dart';
-import 'package:FD_flutter/authentification/sign_in.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';

@@ -179,8 +179,8 @@ class BigStation extends StatelessWidget {
 
 Container createSmallCard() {
   return Container(
-    height: 230,
-    child: Container(
+    height: 220,
+    child: Center(
       child: Padding(
         padding: const EdgeInsets.all(0),
         child: Card(
@@ -212,49 +212,25 @@ Container createSmallCard() {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                onTap: () {},
-                                child: Column(children: [
-                                  Text(
-                                    'Total - Centre ville',
-                                    style: TextStyle(
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                        GestureDetector(
+                          onTap: () {},
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'Total - Centre ville',
+                                  style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.bold,
                                   ),
-                                  Text(
-                                    'Av. Mohammed V,Centre villed. Fès',
-                                    style: TextStyle(color: Colors.black54),
-                                  ),
-                                ]),
-                              ),
-                              Container(
-                                height: 25,
-                                margin: EdgeInsets.symmetric(horizontal: 5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.red[900],
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 5.0, right: 5.0),
-                                  child: Center(
-                                      child: Row(children: [
-                                    Icon(
-                                      Icons.location_on,
-                                      color: Colors.white,
-                                    ),
-                                    Text(
-                                      "15 Km",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                  ])),
+                                Text(
+                                  'Av. Mohammed V,Centre villed. Fès',
+                                  style: TextStyle(color: Colors.black54),
                                 ),
-                              ),
-                            ]),
+                              ]),
+                        ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -276,6 +252,29 @@ Container createSmallCard() {
                               ),
                               label: Text(
                                 'Details',
+                              ),
+                            ),
+                            Container(
+                              height: 25,
+                              margin: EdgeInsets.symmetric(horizontal: 5),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.red[900],
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 5.0, right: 5.0),
+                                child: Center(
+                                    child: Row(children: [
+                                  Icon(
+                                    Icons.location_on,
+                                    color: Colors.white,
+                                  ),
+                                  Text(
+                                    "15 Km",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                ])),
                               ),
                             ),
                           ],
