@@ -3,8 +3,6 @@ import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +26,6 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
-    User user = Provider.of<User>(context);
     return loading
         ? Loading()
         : Scaffold(
@@ -246,12 +243,17 @@ class _SignInState extends State<SignIn> {
                                     child: Center(
                                       child: FlatButton(
                                         onPressed: () async {
+                                          await _auth.signOut();
                                           if (_formKey.currentState
                                               .validate()) {
                                             setState(() => loading = true);
+
                                             dynamic result = await _auth
                                                 .signInWithEmailAndPassword(
                                                     email, password);
+                                            print("result:$result");
+                                            print(
+                                                "this is the type ${Provider.of<User>(context).account}");
                                             if (result == null) {
                                               setState(() {
                                                 loading = false;
@@ -286,9 +288,6 @@ class _SignInState extends State<SignIn> {
                                                           ],
                                                         ));
                                               });
-                                            } else {
-                                              user.account =
-                                                  await getUserName();
                                             }
                                           }
                                         },
@@ -349,16 +348,4 @@ class _SignInState extends State<SignIn> {
             ),
           );
   }
-}
-
-Future<String> getUserName() async {
-  Firestore.instance
-      .collection('user')
-      .document((await FirebaseAuth.instance.currentUser()).uid)
-      .get()
-      .then((value) {
-    print(value.data['account'].toString());
-    return value.data['account'].toString();
-  });
-  return null;
 }

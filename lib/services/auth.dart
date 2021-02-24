@@ -1,13 +1,27 @@
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/database.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  String _accountType = "";
 
   // create user obj based on firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid, account: "") : null;
+    return user != null ? User(uid: user.uid, account: _accountType) : null;
+  }
+
+  Future<String> getAccountType() async {
+    Firestore.instance
+        .collection('user')
+        .document((await FirebaseAuth.instance.currentUser()).uid)
+        .get()
+        .then((value) {
+      print(value.data['account'].toString());
+      return value.data['account'].toString();
+    });
+    return null;
   }
 
   // auth change user stream
@@ -23,6 +37,7 @@ class AuthService {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       FirebaseUser user = result.user;
+      _accountType = await getAccountType();
       return user;
     } catch (error) {
       print(error.toString());

@@ -1,5 +1,4 @@
 import 'package:FD_flutter/authentification/authenticate.dart';
-import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/admin/index_admin.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
@@ -11,7 +10,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     User user = Provider.of<User>(context);
-
+    print(user.account);
     // return either the index or Authenticate widget
     if (user == null) {
       return Authenticate();
@@ -23,7 +22,7 @@ class Wrapper extends StatelessWidget {
     } else if (user.account == "admin") {
       return IndexAdmin();
     } else if (user.account == "") {
-      return TypeCompte();
+      return Authenticate();
     }
     return Authenticate();
   }
