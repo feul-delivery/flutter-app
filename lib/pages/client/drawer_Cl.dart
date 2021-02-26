@@ -22,36 +22,37 @@ class DrawerCL extends StatelessWidget {
         Container(
           child: Padding(
             padding: EdgeInsets.only(top: 50.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CircleAvatar(
-                  radius: 50.0,
+                  radius: 35.0,
                   backgroundImage: NetworkImage(
                     "https://images.unsplash.com/photo-1594616838951-c155f8d978a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
                   ),
                 ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  "Name surname",
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  "Contact@gmail.com",
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
+                Column(
+                  children: [
+                    Text(
+                      "Name surname",
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 5.0,
+                    ),
+                    Text(
+                      "Contact@gmail.com",
+                      style: TextStyle(
+                        fontSize: 12.0,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                )
               ],
             ),
           ),
