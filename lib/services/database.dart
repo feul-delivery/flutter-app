@@ -1,6 +1,7 @@
 import 'package:FD_flutter/modules/client.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DatabaseService {
   final String uid;
@@ -26,6 +27,21 @@ class DatabaseService {
     return await userCollection.document(uid).setData({
       'account': account,
     });
+
+
+  }
+  Future<String> getAccountType() async {
+    await Firestore.instance
+        .collection('user')
+        .document(uid)
+        .get()
+        .then((value)async {
+      print(value.data['account'].toString());
+      dynamic kk= await value.data['account'];
+      print(kk);
+      return await kk;
+    });
+    return null;
   }
 
   Future<void> updateClientData(String uid, String nom, String prenom,

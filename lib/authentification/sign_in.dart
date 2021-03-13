@@ -1,10 +1,16 @@
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/pages/client/index_cl.dart';
+import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/auth.dart';
+import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:page_transition/page_transition.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -15,7 +21,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final AuthService _auth = AuthService();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
   String error = '';
   bool loading = false;
@@ -243,14 +249,13 @@ class _SignInState extends State<SignIn> {
                                     child: Center(
                                       child: FlatButton(
                                         onPressed: () async {
-                                          await _auth.signOut();
                                           if (_formKey.currentState
                                               .validate()) {
                                             setState(() => loading = true);
-
                                             dynamic result = await _auth
                                                 .signInWithEmailAndPassword(
-                                                    email, password);
+                                                    email: email,
+                                                    password: password);
                                             if (result == null) {
                                               setState(() {
                                                 loading = false;
@@ -286,9 +291,59 @@ class _SignInState extends State<SignIn> {
                                                         ));
                                               });
                                             } else {
-                                              print("result:$result");
-                                              print(
-                                                  "this is the type ${Provider.of<User>(context).account}");
+                                              setState(() => loading = false);
+                                              final FirebaseAuth auth =
+                                                  FirebaseAuth.instance;
+                                              final FirebaseUser user =
+                                                  await auth.currentUser();
+                                              final uid = user.uid;
+                                              print("$uid");
+                                              dynamic type;
+                                              await Firestore.instance
+                                                  .collection('user')
+                                                  .document(uid)
+                                                  .get()
+                                                  .then((value) async {
+                                                print('hammm');
+                                                type =
+                                                    await value.data['account'];
+                                              });
+
+                                              // await DatabaseService(
+                                              //         uid: uid)
+                                              //     .getAccountType();
+                                              print(type);
+                                              switch (type.toString()) {
+                                                case "cl":
+                                                  {
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        PageTransition(
+                                                            type:
+                                                                PageTransitionType
+                                                                    .fade,
+                                                            child: IndexCl()));
+                                                  }
+                                                  break;
+
+                                                case "st":
+                                                  {
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        PageTransition(
+                                                            type:
+                                                                PageTransitionType
+                                                                    .fade,
+                                                            child: IndexSt()));
+                                                  }
+                                                  break;
+
+                                                default:
+                                                  {
+                                                    print('waaa3');
+                                                  }
+                                                  break;
+                                              }
                                             }
                                           }
                                         },

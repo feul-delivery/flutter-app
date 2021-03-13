@@ -35,10 +35,17 @@ class AuthService {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-      FirebaseUser user = result.user;
-      _accountType = await getAccountType();
-      return user;
+          if (result == null) {
+            print('hoooo');
+            return null;
+          }else{
+            print('hiii');
+      
+      return getAccountType();
+
+          }
     } catch (error) {
+            print('haaaa');
       print(error.toString());
       return null;
     }
