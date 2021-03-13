@@ -251,9 +251,6 @@ class _SignInState extends State<SignIn> {
                                             dynamic result = await _auth
                                                 .signInWithEmailAndPassword(
                                                     email, password);
-                                            print("result:$result");
-                                            print(
-                                                "this is the type ${Provider.of<User>(context).account}");
                                             if (result == null) {
                                               setState(() {
                                                 loading = false;
@@ -288,6 +285,10 @@ class _SignInState extends State<SignIn> {
                                                           ],
                                                         ));
                                               });
+                                            } else {
+                                              print("result:$result");
+                                              print(
+                                                  "this is the type ${Provider.of<User>(context).account}");
                                             }
                                           }
                                         },

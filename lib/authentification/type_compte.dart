@@ -1,4 +1,6 @@
+import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class TypeCompte extends StatefulWidget {
@@ -29,6 +31,14 @@ class _TypeCompteState extends State<TypeCompte> {
                   height: 20,
                 ),
                 InkWell(
+                  onTap: () async {
+                    final FirebaseAuth auth = FirebaseAuth.instance;
+                    final FirebaseUser user = await auth.currentUser();
+                    final uid = user.uid;
+                    print(uid);
+                    DatabaseService(uid: uid).updateUserData("cl");
+                    //goto user inyterface
+                  },
                   child: Container(
                     decoration: new BoxDecoration(
                         color: Colors.white70,
@@ -69,6 +79,14 @@ class _TypeCompteState extends State<TypeCompte> {
                   height: 20,
                 ),
                 InkWell(
+                    onTap: () async {
+                    final FirebaseAuth auth = FirebaseAuth.instance;
+                    final FirebaseUser user = await auth.currentUser();
+                    final uid = user.uid;
+                    print(uid);
+                    DatabaseService(uid: uid).updateUserData("st");
+                    // here you write the codes to input the data into firestore
+                  },
                   child: Container(
                     decoration: new BoxDecoration(
                         color: Colors.white70,
