@@ -37,6 +37,28 @@ class _TypeCompteState extends State<TypeCompte> {
                     final uid = user.uid;
                     print(uid);
                     DatabaseService(uid: uid).updateUserData("cl");
+
+                    showDialog(
+                        context: context,
+                        builder: (context) => new AlertDialog(
+                              title: Text('Nta zaml :)'),
+                              content: Text(
+                                  'sf rak tsjlti sir dir login azbi'),
+                              actions: [
+                                FlatButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop(false);
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: Text(
+                                      'Ok',
+                                      style: TextStyle(color: Colors.red[900]),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ));
                     //goto user inyterface
                   },
                   child: Container(
@@ -79,7 +101,7 @@ class _TypeCompteState extends State<TypeCompte> {
                   height: 20,
                 ),
                 InkWell(
-                    onTap: () async {
+                  onTap: () async {
                     final FirebaseAuth auth = FirebaseAuth.instance;
                     final FirebaseUser user = await auth.currentUser();
                     final uid = user.uid;
