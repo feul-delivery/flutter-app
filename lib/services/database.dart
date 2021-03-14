@@ -43,12 +43,11 @@ class DatabaseService {
   }
 
   Future<void> updateClientData(String uid, String nom, String prenom,
-      String email, String sexe, String cin, String tele, int idVille) async {
+       String sexe, String cin, String tele, int idVille) async {
     return await clientCollection.document(uid).setData({
       'uid': uid,
       'nom': nom,
       'prenom': prenom,
-      'email': email,
       'sexe': sexe,
       'cin': cin,
       'tele': tele,

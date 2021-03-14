@@ -17,6 +17,9 @@ class User with ChangeNotifier {
   setAccount(String account) {
     this.account = account;
   }
+  String getuid(){
+    return uid;
+  }
 
   String getAccount() {
     return this.account;

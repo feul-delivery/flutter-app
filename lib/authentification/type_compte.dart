@@ -1,7 +1,9 @@
+import 'package:FD_flutter/pages/client/initial_profil_cl.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class TypeCompte extends StatefulWidget {
   @override
@@ -36,30 +38,12 @@ class _TypeCompteState extends State<TypeCompte> {
                     final FirebaseUser user = await auth.currentUser();
                     final uid = user.uid;
                     print(uid);
-                    DatabaseService(uid: uid).updateUserData("cl");
-
-                    showDialog(
-                        context: context,
-                        builder: (context) => new AlertDialog(
-                              title: Text('Nta zaml :)'),
-                              content: Text(
-                                  'sf rak tsjlti sir dir login azbi'),
-                              actions: [
-                                FlatButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop(false);
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Text(
-                                      'Ok',
-                                      style: TextStyle(color: Colors.red[900]),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ));
-                    //goto user inyterface
+                    await DatabaseService(uid: uid).updateUserData("cl");
+                    Navigator.pushReplacement(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.fade,
+                            child: initialProfile()));
                   },
                   child: Container(
                     decoration: new BoxDecoration(

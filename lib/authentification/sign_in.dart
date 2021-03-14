@@ -304,18 +304,12 @@ class _SignInState extends State<SignIn> {
                                                   .document(uid)
                                                   .get()
                                                   .then((value) async {
-                                                print('hammm');
                                                 type =
                                                     await value.data['account'];
                                                 Provider.of<User>(context,
                                                         listen: true)
                                                     .account = type;
                                               });
-
-                                              // await DatabaseService(
-                                              //         uid: uid)
-                                              //     .getAccountType();
-                                              print(type);
                                               Navigator.pushReplacement(
                                                   context,
                                                   PageTransition(
