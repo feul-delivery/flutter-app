@@ -1,20 +1,20 @@
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'index_cl.dart';
 
 // ignore: camel_case_types
-class initialProfilecl extends StatefulWidget {
+class initialProfileSt extends StatefulWidget {
   @override
-  _initialProfileclState createState() => _initialProfileclState();
+  _initialProfileStState createState() => _initialProfileStState();
 }
 
 // ignore: camel_case_types
-class _initialProfileclState extends State<initialProfilecl>
+class _initialProfileStState extends State<initialProfileSt>
     with SingleTickerProviderStateMixin {
   final FocusNode myFocusNode = FocusNode();
 
@@ -26,9 +26,9 @@ class _initialProfileclState extends State<initialProfilecl>
   final DatabaseService _auth = DatabaseService();
   final _formKey = GlobalKey<FormState>();
   String nom = '';
-  String prenom = '';
+  String email = '';
   String cin = '';
-  String ville = '';
+  String address = '';
   String phone = '';
 
   bool loading = false;
@@ -123,31 +123,10 @@ class _initialProfileclState extends State<initialProfilecl>
                                     new Flexible(
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
-                                          labelText: "prnom",
+                                          labelText: "nom de entreprise",
                                         ),
                                         validator: (val) => val.isEmpty
-                                            ? 'Entere vous prenom svp'
-                                            : null,
-                                        onChanged: (val) {
-                                          setState(() => prenom = val);
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 2.0),
-                                child: new Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
-                                    new Flexible(
-                                      child: new TextFormField(
-                                        decoration: const InputDecoration(
-                                          labelText: "nom",
-                                        ),
-                                        validator: (val) => val.isEmpty
-                                            ? 'Entere vous nom svp'
+                                            ? 'Entere un nom svp'
                                             : null,
                                         onChanged: (val) {
                                           setState(() => nom = val);
@@ -165,12 +144,33 @@ class _initialProfileclState extends State<initialProfilecl>
                                     new Flexible(
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
-                                            labelText: "Phone"),
+                                          labelText: "email",
+                                        ),
                                         validator: (val) => val.isEmpty
-                                            ? 'Entere vous phone svp'
+                                            ? 'Entere vous email svp'
                                             : null,
                                         onChanged: (val) {
-                                          setState(() => phone = val);
+                                          setState(() => email = val);
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                )),
+                            Padding(
+                                padding: EdgeInsets.only(
+                                    left: 25.0, right: 25.0, top: 2.0),
+                                child: new Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    new Flexible(
+                                      child: new TextFormField(
+                                        decoration: const InputDecoration(
+                                            labelText: "address"),
+                                        validator: (val) => val.isEmpty
+                                            ? 'Entere l\'address de entreprise svp'
+                                            : null,
+                                        onChanged: (val) {
+                                          setState(() => address = val);
                                         },
                                       ),
                                     ),
@@ -188,9 +188,9 @@ class _initialProfileclState extends State<initialProfilecl>
                                         padding: EdgeInsets.only(right: 10.0),
                                         child: new TextFormField(
                                           decoration: const InputDecoration(
-                                              hintText: "CIN"),
+                                              hintText: "CIN de responcable"),
                                           validator: (val) => val.isEmpty
-                                              ? 'Entere vous prenom svp'
+                                              ? 'Entere vous CIN'
                                               : null,
                                           onChanged: (val) {
                                             setState(() => cin = val);
@@ -202,12 +202,12 @@ class _initialProfileclState extends State<initialProfilecl>
                                     Flexible(
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
-                                            hintText: "Ville actual"),
+                                            hintText: "phone "),
                                         validator: (val) => val.isEmpty
-                                            ? 'Entere vous ville'
+                                            ? 'Entere vous phone'
                                             : null,
                                         onChanged: (val) {
-                                          setState(() => ville = val);
+                                          setState(() => phone = val);
                                         },
                                       ),
                                       flex: 2,
@@ -234,19 +234,24 @@ class _initialProfileclState extends State<initialProfilecl>
                                           if (_formKey.currentState
                                               .validate()) {
                                             setState(() => loading = true);
-                                            
+
                                             String uid = Provider.of<User>(
                                                     context,
                                                     listen: true)
                                                 .getuid();
-                                            await _auth.updateClientData(uid, nom,
-                                                prenom, "", cin, phone, 0);
-                                                Navigator.pushReplacement(
+                                            await _auth.updateEntrepriseData(
+                                                uid: uid,
+                                                adresse: address,
+                                                description: "",
+                                                email: email,
+                                                tele: phone,
+                                                titre: nom);
+                                            Navigator.pushReplacement(
                                                 context,
                                                 PageTransition(
                                                     type:
                                                         PageTransitionType.fade,
-                                                    child: IndexCl()));
+                                                    child: IndexSt()));
                                           }
                                         },
                                         shape: new RoundedRectangleBorder(

@@ -20,7 +20,6 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final _formKey = GlobalKey<FormState>();
-  String error = '';
   bool loading = false;
 
   // text field state

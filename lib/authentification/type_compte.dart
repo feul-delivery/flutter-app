@@ -1,4 +1,5 @@
 import 'package:FD_flutter/pages/client/initial_profil_cl.dart';
+import 'package:FD_flutter/pages/station/initial_profil_st.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -37,13 +38,12 @@ class _TypeCompteState extends State<TypeCompte> {
                     final FirebaseAuth auth = FirebaseAuth.instance;
                     final FirebaseUser user = await auth.currentUser();
                     final uid = user.uid;
-                    print(uid);
                     await DatabaseService(uid: uid).updateUserData("cl");
                     Navigator.pushReplacement(
                         context,
                         PageTransition(
                             type: PageTransitionType.fade,
-                            child: initialProfile()));
+                            child: initialProfilecl()));
                   },
                   child: Container(
                     decoration: new BoxDecoration(
@@ -89,9 +89,12 @@ class _TypeCompteState extends State<TypeCompte> {
                     final FirebaseAuth auth = FirebaseAuth.instance;
                     final FirebaseUser user = await auth.currentUser();
                     final uid = user.uid;
-                    print(uid);
-                    DatabaseService(uid: uid).updateUserData("st");
-                    // here you write the codes to input the data into firestore
+                    await DatabaseService(uid: uid).updateUserData("st");
+                    Navigator.pushReplacement(
+                        context,
+                        PageTransition(
+                            type: PageTransitionType.fade,
+                            child: initialProfileSt()));
                   },
                   child: Container(
                     decoration: new BoxDecoration(

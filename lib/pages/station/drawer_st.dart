@@ -1,10 +1,12 @@
+import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:FD_flutter/authentification/sign_in.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/pages/station/profile_st.dart';
 import 'package:FD_flutter/pages/station/commandes_st.dart';
 import 'package:FD_flutter/pages/station/settings_st.dart';
+import 'package:provider/provider.dart';
+import '../../wrapper.dart';
 import 'bbar_st.dart';
 
 class DrawerSt extends StatelessWidget {
@@ -114,8 +116,12 @@ class DrawerSt extends StatelessWidget {
             child: Center(
               child: FlatButton(
                 onPressed: () {
+                  Provider.of<User>(context,
+                                                        listen: true)
+                                                    .account = "";
+
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => SignIn()));
+                      builder: (BuildContext context) => Wrapper()));
                 },
                 child: Text(
                   "Sign out",

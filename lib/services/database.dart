@@ -43,7 +43,7 @@ class DatabaseService {
   }
 
   Future<void> updateClientData(String uid, String nom, String prenom,
-       String sexe, String cin, String tele, int idVille) async {
+      String sexe, String cin, String tele, int idVille) async {
     return await clientCollection.document(uid).setData({
       'uid': uid,
       'nom': nom,
@@ -158,7 +158,7 @@ class DatabaseService {
     return ordersCollection.snapshots();
   }
 
-  Future<void> updateEntrepriseData(
+  Future<void> updateEntrepriseData({
     String uid,
     String titre,
     String description,
@@ -167,16 +167,16 @@ class DatabaseService {
     String adresse,
     String like,
     String dislike,
-  ) async {
+  }) async {
     return await entrepriseCollection.document(uid).setData({
       'uid': uid,
-      'volume': titre,
-      'adresse': description,
-      'dateheurec': tele,
-      'dateheurel': email,
-      'matricule': adresse,
-      'color': like,
-      'prixtotal': dislike,
+      'titre': titre,
+      'description': description,
+      'tele': tele,
+      'email': email,
+      'adresse': adresse,
+      'like': like,
+      'dislike': dislike,
     });
   }
 
