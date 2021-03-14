@@ -112,6 +112,8 @@ class _RegisterState extends State<Register> {
                                                         color:
                                                             Colors.grey[200]))),
                                             child: TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.next,
                                               decoration: InputDecoration(
                                                   hintText: "Email",
                                                   hintStyle: hintStyle,
@@ -132,6 +134,8 @@ class _RegisterState extends State<Register> {
                                                         color:
                                                             Colors.grey[200]))),
                                             child: TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.next,
                                               obscureText: true,
                                               decoration: InputDecoration(
                                                   hintText: "Password",

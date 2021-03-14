@@ -116,6 +116,8 @@ class _SignInState extends State<SignIn> {
                                                         color:
                                                             Colors.grey[200]))),
                                             child: TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.next,
                                               decoration: InputDecoration(
                                                   hintText: "Email",
                                                   hintStyle: hintStyle,

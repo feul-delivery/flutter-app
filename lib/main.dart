@@ -1,5 +1,7 @@
+import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'modules/user.dart';
@@ -15,7 +17,7 @@ class FuelDeliveryApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: SplashScreen(),
+        home: Wrapper(),
         title: 'Fuel Delivery',
         theme: ThemeData(
           primarySwatch: Colors.red,

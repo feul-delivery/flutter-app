@@ -1,3 +1,4 @@
+import 'package:FD_flutter/pages/station/add_livreur.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
@@ -21,6 +22,18 @@ class _LivreurStState extends State<LivreurSt> {
       },
       child: Scaffold(
         appBar: AppBar(
+          actions: [
+            InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => AddLivreur()));
+              },
+              child: Container(
+                padding: EdgeInsets.all(15),
+                child: Icon(Icons.group_add),
+              ),
+            ),
+          ],
           title: Text(
             "Livreurs",
           ),
