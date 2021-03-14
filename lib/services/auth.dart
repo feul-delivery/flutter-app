@@ -35,17 +35,16 @@ class AuthService {
     try {
       AuthResult result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
-          if (result == null) {
-            print('hoooo');
-            return null;
-          }else{
-            print('hiii');
-      
-      return getAccountType();
+      if (result == null) {
+        print('hoooo');
+        return null;
+      } else {
+        print('hiii');
 
-          }
+        return getAccountType();
+      }
     } catch (error) {
-            print('haaaa');
+      print('haaaa');
       print(error.toString());
       return null;
     }

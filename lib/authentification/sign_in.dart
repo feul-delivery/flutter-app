@@ -1,16 +1,13 @@
 import 'package:FD_flutter/modules/user.dart';
-import 'package:FD_flutter/pages/client/index_cl.dart';
-import 'package:FD_flutter/pages/station/index_st.dart';
-import 'package:FD_flutter/services/auth.dart';
-import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:FD_flutter/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -297,6 +294,9 @@ class _SignInState extends State<SignIn> {
                                               final FirebaseUser user =
                                                   await auth.currentUser();
                                               final uid = user.uid;
+                                              Provider.of<User>(context,
+                                                      listen: true)
+                                                  .uid = uid;
                                               print("$uid");
                                               dynamic type;
                                               await Firestore.instance
@@ -307,43 +307,21 @@ class _SignInState extends State<SignIn> {
                                                 print('hammm');
                                                 type =
                                                     await value.data['account'];
+                                                Provider.of<User>(context,
+                                                        listen: true)
+                                                    .account = type;
                                               });
 
                                               // await DatabaseService(
                                               //         uid: uid)
                                               //     .getAccountType();
                                               print(type);
-                                              switch (type.toString()) {
-                                                case "cl":
-                                                  {
-                                                    Navigator.pushReplacement(
-                                                        context,
-                                                        PageTransition(
-                                                            type:
-                                                                PageTransitionType
-                                                                    .fade,
-                                                            child: IndexCl()));
-                                                  }
-                                                  break;
-
-                                                case "st":
-                                                  {
-                                                    Navigator.pushReplacement(
-                                                        context,
-                                                        PageTransition(
-                                                            type:
-                                                                PageTransitionType
-                                                                    .fade,
-                                                            child: IndexSt()));
-                                                  }
-                                                  break;
-
-                                                default:
-                                                  {
-                                                    print('waaa3');
-                                                  }
-                                                  break;
-                                              }
+                                              Navigator.pushReplacement(
+                                                  context,
+                                                  PageTransition(
+                                                      type: PageTransitionType
+                                                          .fade,
+                                                      child: Wrapper()));
                                             }
                                           }
                                         },

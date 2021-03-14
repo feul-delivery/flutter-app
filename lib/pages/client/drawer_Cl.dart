@@ -1,9 +1,8 @@
-import 'package:FD_flutter/authentification/sign_in.dart';
 import 'package:FD_flutter/pages/client/commandes_cl.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/pages/client/settings_cl.dart';
-import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'favoris_cl.dart';
 import 'index_cl.dart';
@@ -11,8 +10,6 @@ import 'bbar_cl.dart';
 
 // ignore: camel_case_types
 class DrawerCL extends StatelessWidget {
-  final AuthService _auth = AuthService();
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -142,11 +139,11 @@ class DrawerCL extends StatelessWidget {
                 color: Colors.red[700]),
             child: Center(
               child: FlatButton(
-                onPressed: () async {
-                  await _auth.signOut();
+                onPressed: () {
+                  // await _auth.signOut();
 
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => SignIn()));
+                      builder: (BuildContext context) => Wrapper()));
                 },
                 child: Text(
                   "Sign out",
