@@ -1,3 +1,4 @@
+import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
@@ -25,6 +26,7 @@ class _SignInState extends State<SignIn> {
   // text field state
   String email = '';
   String password = '';
+  String errorMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +51,7 @@ class _SignInState extends State<SignIn> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         FadeAnimation(
-                            1,
+                            0.2,
                             Text(
                               "Login",
                               style: TextStyle(
@@ -63,7 +65,7 @@ class _SignInState extends State<SignIn> {
                           height: 10,
                         ),
                         FadeAnimation(
-                            1.3,
+                            0.2,
                             Text(
                               "Welcome back",
                               style: TextStyle(
@@ -92,7 +94,7 @@ class _SignInState extends State<SignIn> {
                                 height: 10,
                               ),
                               FadeAnimation(
-                                  1.4,
+                                  0.2,
                                   Container(
                                     decoration: BoxDecoration(
                                         color: Colors.white,
@@ -122,9 +124,16 @@ class _SignInState extends State<SignIn> {
                                                   hintText: "Email",
                                                   hintStyle: hintStyle,
                                                   border: InputBorder.none),
-                                              validator: (val) => val.isEmpty
-                                                  ? 'Enter an email'
-                                                  : null,
+                                              validator: (val) {
+                                                if (val.isEmpty ||
+                                                    !val.contains('@') ||
+                                                    !val.contains('.')) {
+                                                  return 'Please enter a valid email address.';
+                                                }
+                                                return null;
+                                              },
+                                              keyboardType:
+                                                  TextInputType.emailAddress,
                                               onChanged: (val) {
                                                 setState(() => email = val);
                                               },
@@ -159,7 +168,7 @@ class _SignInState extends State<SignIn> {
                                 height: 20,
                               ),
                               FadeAnimation(
-                                  1.5,
+                                  0.2,
                                   GestureDetector(
                                     onTap: () {
                                       showDialog(
@@ -234,10 +243,24 @@ class _SignInState extends State<SignIn> {
                                     ),
                                   )),
                               SizedBox(
-                                height: 30,
+                                height: 20,
                               ),
                               FadeAnimation(
-                                  1.2,
+                                0.2,
+                                Text(
+                                  errorMessage,
+                                  style: TextStyle(
+                                      color: Colors.red,
+                                      fontFamily: 'Gotham',
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              FadeAnimation(
+                                  0.2,
                                   Container(
                                     margin:
                                         EdgeInsets.symmetric(horizontal: 50),
@@ -250,46 +273,53 @@ class _SignInState extends State<SignIn> {
                                           if (_formKey.currentState
                                               .validate()) {
                                             setState(() => loading = true);
-                                            dynamic result = await _auth
-                                                .signInWithEmailAndPassword(
-                                                    email: email,
-                                                    password: password);
+                                            dynamic result;
+                                            try {
+                                              result = await _auth
+                                                  .signInWithEmailAndPassword(
+                                                      email: email,
+                                                      password: password);
+                                            } catch (error) {
+                                              switch (error.code) {
+                                                case "ERROR_INVALID_EMAIL":
+                                                  errorMessage =
+                                                      "Your email address appears to be malformed.";
+                                                  break;
+                                                case "ERROR_WRONG_PASSWORD":
+                                                  errorMessage =
+                                                      "Your password is wrong.";
+                                                  break;
+                                                case "ERROR_USER_NOT_FOUND":
+                                                  errorMessage =
+                                                      "User with this email doesn't exist.";
+                                                  break;
+                                                case "ERROR_USER_DISABLED":
+                                                  errorMessage =
+                                                      "User with this email has been disabled.";
+                                                  break;
+                                                case "ERROR_TOO_MANY_REQUESTS":
+                                                  errorMessage =
+                                                      "Too many requests. Try again later.";
+                                                  break;
+                                                case "ERROR_OPERATION_NOT_ALLOWED":
+                                                  errorMessage =
+                                                      "Signing in with Email and Password is not enabled.";
+                                                  break;
+                                                default:
+                                                  errorMessage =
+                                                      "An undefined Error happened.";
+                                              }
+
+                                              setState(() {
+                                                loading = false;
+                                              });
+                                            }
+
                                             if (result == null) {
                                               setState(() {
                                                 loading = false;
-                                                showDialog(
-                                                    context: context,
-                                                    builder: (context) =>
-                                                        new AlertDialog(
-                                                          title: Text('Error'),
-                                                          content: Text(
-                                                              'Could not sign in with those credentials'),
-                                                          actions: [
-                                                            FlatButton(
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop(false);
-                                                              },
-                                                              child: Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .all(
-                                                                        10.0),
-                                                                child: Text(
-                                                                  'Ok',
-                                                                  style: TextStyle(
-                                                                      color: Colors
-                                                                              .red[
-                                                                          900]),
-                                                                ),
-                                                              ),
-                                                            )
-                                                          ],
-                                                        ));
                                               });
                                             } else {
-                                              setState(() => loading = false);
                                               final FirebaseAuth auth =
                                                   FirebaseAuth.instance;
                                               final FirebaseUser user =
@@ -298,19 +328,32 @@ class _SignInState extends State<SignIn> {
                                               Provider.of<User>(context,
                                                       listen: true)
                                                   .uid = uid;
-                                              print("$uid");
+
                                               dynamic type;
+
                                               await Firestore.instance
                                                   .collection('user')
                                                   .document(uid)
                                                   .get()
                                                   .then((value) async {
-                                                type =
-                                                    await value.data['account'];
-                                                Provider.of<User>(context,
-                                                        listen: true)
-                                                    .account = type;
+                                                if (value.exists) {
+                                                  type = await value
+                                                      .data['account'];
+                                                  Provider.of<User>(context,
+                                                          listen: true)
+                                                      .account = type;
+                                                } else {
+                                                  Navigator.pushReplacement(
+                                                      context,
+                                                      PageTransition(
+                                                          type:
+                                                              PageTransitionType
+                                                                  .fade,
+                                                          child: TypeCompte()));
+                                                }
                                               });
+
+                                              setState(() => loading = false);
                                               Navigator.pushReplacement(
                                                   context,
                                                   PageTransition(
@@ -331,7 +374,7 @@ class _SignInState extends State<SignIn> {
                                 height: 20,
                               ),
                               FadeAnimation(
-                                  1.7,
+                                  0.2,
                                   Text(
                                     "you are new here?",
                                     style: TextStyle(
@@ -347,7 +390,7 @@ class _SignInState extends State<SignIn> {
                                 children: <Widget>[
                                   Expanded(
                                     child: FadeAnimation(
-                                        1.8,
+                                        0.2,
                                         Container(
                                           height: 50,
                                           decoration: BoxDecoration(

@@ -118,9 +118,16 @@ class _RegisterState extends State<Register> {
                                                   hintText: "Email",
                                                   hintStyle: hintStyle,
                                                   border: InputBorder.none),
-                                              validator: (val) => val.isEmpty
-                                                  ? 'enter an email.'
-                                                  : null,
+                                              validator: (val) {
+                                                if (val.isEmpty ||
+                                                    !val.contains('@') ||
+                                                    !val.contains('.')) {
+                                                  return 'Please enter a valid email address.';
+                                                }
+                                                return null;
+                                              },
+                                              keyboardType:
+                                                  TextInputType.emailAddress,
                                               onChanged: (val) {
                                                 setState(() => email = val);
                                               },

@@ -69,7 +69,7 @@ class _ProfileAdminState extends State<ProfileAdmin> {
                 height: 35,
               ),
               FadeAnimation(
-                1.2,
+                0.2,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -100,7 +100,7 @@ class _ProfileAdminState extends State<ProfileAdmin> {
                 height: 10,
               ),
               FadeAnimation(
-                1.2,
+                0.2,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -131,7 +131,7 @@ class _ProfileAdminState extends State<ProfileAdmin> {
                 height: 15,
               ),
               FadeAnimation(
-                1.2,
+                0.2,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -162,7 +162,7 @@ class _ProfileAdminState extends State<ProfileAdmin> {
                 height: 15,
               ),
               FadeAnimation(
-                1.2,
+                0.2,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -193,7 +193,7 @@ class _ProfileAdminState extends State<ProfileAdmin> {
                 height: 15,
               ),
               FadeAnimation(
-                1.2,
+                0.2,
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
