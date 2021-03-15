@@ -17,11 +17,12 @@ class User with ChangeNotifier {
   setAccount(String account) {
     this.account = account;
   }
-  String getuid(){
+
+  String getuid() {
     return uid;
   }
 
   String getAccount() {
-    return this.account;
+    return this.account == null ? "" : this.account;
   }
 }
