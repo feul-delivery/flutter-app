@@ -342,14 +342,6 @@ class _SignInState extends State<SignIn> {
                                                   Provider.of<User>(context,
                                                           listen: true)
                                                       .account = type;
-                                                } else {
-                                                  Navigator.pushReplacement(
-                                                      context,
-                                                      PageTransition(
-                                                          type:
-                                                              PageTransitionType
-                                                                  .fade,
-                                                          child: TypeCompte()));
                                                 }
                                               });
 
