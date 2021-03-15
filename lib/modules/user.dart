@@ -23,6 +23,6 @@ class User with ChangeNotifier {
   }
 
   String getAccount() {
-    return this.account != null ? this.account : "none";
+    return this.account;
   }
 }
