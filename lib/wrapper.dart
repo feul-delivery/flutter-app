@@ -22,7 +22,7 @@ class Wrapper extends StatelessWidget {
         }
         break;
 
-      case "none":
+      default:
         {
           return Authenticate();
         }
