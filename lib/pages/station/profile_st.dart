@@ -1,3 +1,5 @@
+import 'package:FD_flutter/shared/loading.dart';
+
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,13 +11,47 @@ class ProfilSt extends StatefulWidget {
 }
 
 class _ProfilStState extends State<ProfilSt> {
+    dynamic titre="N/A";
+    dynamic description="N/A";
+    dynamic email="N/A";
+    dynamic tele="N/A";
+    dynamic adresse="N/A";
+
+  @override
+  // ignore: must_call_super
+  void initState() {
+    getEntData();
+  }
+Future getEntData() async {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseUser user = await auth.currentUser();
+  final uid = user.uid;
+
+  Firestore.instance
+      .collection('entreprise')
+      .document(uid)
+      .get()
+      .then((value) async {
+    if (value.exists) {
+      print(value);
+      var key1 = await value.data['titre'];
+      var key2 = await value.data['description'];
+      var key3 = await value.data['email'];
+      var key4 = await value.data['tele'];
+      var key5 = await value.data['adresse'];
+      setState(() {
+          this.titre = key1;
+          this.description = key2;
+          this.email = key3;
+          this.tele = key4;
+          this.adresse = key5;
+        });
+    }
+  });
+}
+
   @override
   Widget build(BuildContext context) {
-    String titre = "N/A";
-    setState(() {
-      titre = getEntData("titre").toString();
-      print(titre.toString());
-    });
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
@@ -107,7 +143,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                                 decoration:
                                                                     InputDecoration(
                                                                   hintText:
-                                                                      "Total - Centre ville",
+                                                                      "$titre",
                                                                   hintStyle: TextStyle(
                                                                       color: Colors
                                                                           .grey),
@@ -125,7 +161,10 @@ class _ProfilStState extends State<ProfilSt> {
                                                           children: [
                                                             FlatButton(
                                                                 onPressed:
-                                                                    () {},
+                                                                    () {
+
+                                                                      
+                                                                    },
                                                                 child: Text(
                                                                     "Change",
                                                                     style: TextStyle(
@@ -226,7 +265,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                                   .grey[200]))),
                                                   child: TextField(
                                                     decoration: InputDecoration(
-                                                      hintText: "...",
+                                                      hintText: "$description",
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
@@ -293,7 +332,7 @@ class _ProfilStState extends State<ProfilSt> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "It has long been known that working with readable and meaningful text is distracting, and distracts from the focus on the layout itself.",
+                              "$description",
                               style: TextStyle(color: Colors.grey, height: 1.4),
                             )),
                         FadeAnimation(
@@ -351,7 +390,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                   child: TextField(
                                                     decoration: InputDecoration(
                                                       hintText:
-                                                          "Rue Sefrou, Narjiss, Fés, Maroc",
+                                                          "$adresse",
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
@@ -418,7 +457,7 @@ class _ProfilStState extends State<ProfilSt> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "Rue Sefrou, Narjiss, Fés, Maroc",
+                              "$adresse",
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
@@ -472,7 +511,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                                   .grey[200]))),
                                                   child: TextField(
                                                     decoration: InputDecoration(
-                                                      hintText: "+212654543476",
+                                                      hintText: "$tele",
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
@@ -539,7 +578,7 @@ class _ProfilStState extends State<ProfilSt> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "+212654543476",
+                              "$tele",
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
@@ -594,7 +633,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                   child: TextField(
                                                     decoration: InputDecoration(
                                                       hintText:
-                                                          "contact@total.ma",
+                                                          "$email",
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
@@ -661,7 +700,7 @@ class _ProfilStState extends State<ProfilSt> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "contact@total.ma",
+                              "$email",
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
@@ -762,23 +801,4 @@ class _ProfilStState extends State<ProfilSt> {
       ),
     );
   }
-}
-
-Future<String> getEntData(String field) async {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final FirebaseUser user = await auth.currentUser();
-  final uid = user.uid;
-  String kk = "N/A";
-
-  await Firestore.instance
-      .collection('entreprise')
-      .document(uid)
-      .get()
-      .then((value) async {
-    if (value.exists) {
-      kk = await value.data['$field'];
-    }
-  });
-  print(kk);
-  return kk.toString();
 }
