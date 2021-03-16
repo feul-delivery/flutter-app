@@ -1,4 +1,3 @@
-import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +5,6 @@ import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/pages/station/profile_st.dart';
 import 'package:FD_flutter/pages/station/commandes_st.dart';
 import 'package:FD_flutter/pages/station/settings_st.dart';
-import 'package:provider/provider.dart';
 import '../../wrapper.dart';
 import 'bbar_st.dart';
 
@@ -118,7 +116,6 @@ class DrawerSt extends StatelessWidget {
               child: FlatButton(
                 onPressed: () async {
                   _auth.signOut();
-                  Provider.of<User>(context, listen: true).setAll("", "", "");
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (BuildContext context) => Wrapper()));
                 },
