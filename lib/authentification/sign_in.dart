@@ -1,4 +1,3 @@
-import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';

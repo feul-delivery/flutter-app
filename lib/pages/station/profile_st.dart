@@ -1,4 +1,8 @@
+import 'dart:io';
+
 import 'package:FD_flutter/shared/FadeAnimation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfilSt extends StatefulWidget {
@@ -7,8 +11,15 @@ class ProfilSt extends StatefulWidget {
 }
 
 class _ProfilStState extends State<ProfilSt> {
+  
+
   @override
   Widget build(BuildContext context) {
+    String titre="N/A";
+    setState(() {
+      titre= getEntData("titre").toString() ;
+      print(titre.toString());
+    });
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
@@ -61,7 +72,7 @@ class _ProfilStState extends State<ProfilSt> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Text(
-                                            "Total - Centre ville",
+                                            titre,
                                             style: TextStyle(
                                                 color: Colors.grey[800],
                                                 fontWeight: FontWeight.bold,
@@ -755,4 +766,23 @@ class _ProfilStState extends State<ProfilSt> {
       ),
     );
   }
+}
+
+Future<String> getEntData(String field) async {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final FirebaseUser user = await auth.currentUser();
+  final uid = user.uid;
+  String kk = "N/A";
+
+  await Firestore.instance
+      .collection('entreprise')
+      .document(uid)
+      .get()
+      .then((value) async {
+    if (value.exists) {
+      kk = await value.data['$field'];
+    }
+  });
+  print(kk);
+  return kk.toString();
 }

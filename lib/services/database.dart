@@ -1,6 +1,8 @@
 import 'package:FD_flutter/modules/client.dart';
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/modules/entreprise.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class DatabaseService {
   final String uid;
@@ -183,5 +185,30 @@ class DatabaseService {
   // get livreur stream
   Stream<QuerySnapshot> get entreprise {
     return entrepriseCollection.snapshots();
+  }
+
+ Future<Entreprise> getDataEnt() async {
+    String title;
+    String description;
+    String phone;
+    String email;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final FirebaseUser user = await auth.currentUser();
+    final uid = user.uid;
+    await Firestore.instance
+        .collection('entreprise')
+        .document(uid)
+        .get()
+        .then((value) async {
+      title = await value.data['titre'];
+      description = await value.data['description'];
+      email = await value.data['email'];
+      phone = await value.data['tele'];
+      print(title);
+      print(phone);
+      return Entreprise(titre: title,description: description,email: email,tele: phone);
+    });
+    return Entreprise(titre:"HHHH");
+    
   }
 }

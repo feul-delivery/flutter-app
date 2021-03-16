@@ -1,3 +1,5 @@
+
+
 class Entreprise {
   final String identreprise;
   final String titre;
@@ -16,4 +18,9 @@ class Entreprise {
       this.adresse,
       this.like,
       this.dislike});
+  String gettitre() {
+    return this.titre;
+  }
+
+ 
 }
