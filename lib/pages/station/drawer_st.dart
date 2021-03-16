@@ -1,4 +1,5 @@
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -10,8 +11,8 @@ import '../../wrapper.dart';
 import 'bbar_st.dart';
 
 class DrawerSt extends StatelessWidget {
-  const DrawerSt({Key key}) : super(key: key);
-
+  DrawerSt({Key key}) : super(key: key);
+  final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -115,10 +116,9 @@ class DrawerSt extends StatelessWidget {
                 color: Colors.red[900]),
             child: Center(
               child: FlatButton(
-                onPressed: () {
-                  Provider.of<User>(context,
-                                                        listen: true)
-                                                    .account = "";
+                onPressed: () async {
+                  await _auth.signOut();
+                  Provider.of<User>(context, listen: true).setAll("", "", "");
 
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (BuildContext context) => Wrapper()));

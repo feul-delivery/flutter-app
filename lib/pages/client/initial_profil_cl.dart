@@ -8,13 +8,13 @@ import 'package:provider/provider.dart';
 import 'index_cl.dart';
 
 // ignore: camel_case_types
-class initialProfilecl extends StatefulWidget {
+class InitialProfilecl extends StatefulWidget {
   @override
   _initialProfileclState createState() => _initialProfileclState();
 }
 
 // ignore: camel_case_types
-class _initialProfileclState extends State<initialProfilecl>
+class _initialProfileclState extends State<InitialProfilecl>
     with SingleTickerProviderStateMixin {
   final FocusNode myFocusNode = FocusNode();
 
@@ -27,6 +27,8 @@ class _initialProfileclState extends State<initialProfilecl>
   final _formKey = GlobalKey<FormState>();
   String nom = '';
   String prenom = '';
+  String email = '';
+  String sexe = '';
   String cin = '';
   String ville = '';
   String phone = '';
@@ -40,8 +42,32 @@ class _initialProfileclState extends State<initialProfilecl>
             "My profile",
             style: pageTitle,
           ),
-          actions: <Widget>[],
-          centerTitle: true,
+          actions: <Widget>[
+            FlatButton(
+              child: Text(
+                "Save",
+                style: buttonStyle,
+              ),
+              textColor: Colors.white,
+              color: Colors.red[900],
+              onPressed: () async {
+                if (_formKey.currentState.validate()) {
+                  setState(() => loading = true);
+
+                  email = Provider.of<User>(context, listen: true).getEmail();
+                  await _auth.updateClientData(
+                      nom, prenom, email, sexe, cin, phone, ville);
+                  Navigator.pushReplacement(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade, child: IndexCl()));
+                }
+              },
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(5.0)),
+            ),
+          ],
+          centerTitle: false,
           backgroundColor: Colors.red[900],
           elevation: 1,
         ),
@@ -116,17 +142,18 @@ class _initialProfileclState extends State<initialProfilecl>
                           children: <Widget>[
                             Padding(
                                 padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 2.0),
+                                    left: 17.0, right: 17.0, top: 15),
                                 child: new Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
-                                          labelText: "prnom",
+                                          border: const OutlineInputBorder(),
+                                          labelText: "First name",
                                         ),
                                         validator: (val) => val.isEmpty
-                                            ? 'Entere vous prenom svp'
+                                            ? 'This field is required'
                                             : null,
                                         onChanged: (val) {
                                           setState(() => prenom = val);
@@ -137,17 +164,18 @@ class _initialProfileclState extends State<initialProfilecl>
                                 )),
                             Padding(
                                 padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 2.0),
+                                    left: 17.0, right: 17.0, top: 15),
                                 child: new Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
-                                          labelText: "nom",
+                                          border: const OutlineInputBorder(),
+                                          labelText: "Last name",
                                         ),
                                         validator: (val) => val.isEmpty
-                                            ? 'Entere vous nom svp'
+                                            ? 'This field is required'
                                             : null,
                                         onChanged: (val) {
                                           setState(() => nom = val);
@@ -158,16 +186,17 @@ class _initialProfileclState extends State<initialProfilecl>
                                 )),
                             Padding(
                                 padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 2.0),
+                                    left: 17.0, right: 17.0, top: 15),
                                 child: new Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
+                                            border: const OutlineInputBorder(),
                                             labelText: "Phone"),
                                         validator: (val) => val.isEmpty
-                                            ? 'Entere vous phone svp'
+                                            ? 'This field is required'
                                             : null,
                                         onChanged: (val) {
                                           setState(() => phone = val);
@@ -178,7 +207,7 @@ class _initialProfileclState extends State<initialProfilecl>
                                 )),
                             Padding(
                                 padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 2.0),
+                                    left: 17.0, right: 17.0, top: 15),
                                 child: new Row(
                                   mainAxisSize: MainAxisSize.max,
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -188,9 +217,11 @@ class _initialProfileclState extends State<initialProfilecl>
                                         padding: EdgeInsets.only(right: 10.0),
                                         child: new TextFormField(
                                           decoration: const InputDecoration(
-                                              hintText: "CIN"),
+                                              border:
+                                                  const OutlineInputBorder(),
+                                              hintText: "Cin"),
                                           validator: (val) => val.isEmpty
-                                              ? 'Entere vous prenom svp'
+                                              ? 'This field is required'
                                               : null,
                                           onChanged: (val) {
                                             setState(() => cin = val);
@@ -202,9 +233,10 @@ class _initialProfileclState extends State<initialProfilecl>
                                     Flexible(
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
-                                            hintText: "Ville actual"),
+                                            border: const OutlineInputBorder(),
+                                            hintText: "City"),
                                         validator: (val) => val.isEmpty
-                                            ? 'Entere vous ville'
+                                            ? 'This field is required'
                                             : null,
                                         onChanged: (val) {
                                           setState(() => ville = val);
@@ -214,52 +246,6 @@ class _initialProfileclState extends State<initialProfilecl>
                                     ),
                                   ],
                                 )),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 45.0),
-                              child: new Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          right: 10.0, left: 10),
-                                      child: Container(
-                                          child: new RaisedButton(
-                                        child: new Text("Save"),
-                                        textColor: Colors.white,
-                                        color: Colors.red[900],
-                                        onPressed: () async {
-                                          if (_formKey.currentState
-                                              .validate()) {
-                                            setState(() => loading = true);
-                                            
-                                            String uid = Provider.of<User>(
-                                                    context,
-                                                    listen: true)
-                                                .getuid();
-                                            await _auth.updateClientData(uid, nom,
-                                                prenom, "", cin, phone, 0);
-                                                Navigator.pushReplacement(
-                                                context,
-                                                PageTransition(
-                                                    type:
-                                                        PageTransitionType.fade,
-                                                    child: IndexCl()));
-                                          }
-                                        },
-                                        shape: new RoundedRectangleBorder(
-                                            borderRadius:
-                                                new BorderRadius.circular(
-                                                    10.0)),
-                                      )),
-                                    ),
-                                    flex: 2,
-                                  ),
-                                ],
-                              ),
-                            )
                           ],
                         ),
                       ),

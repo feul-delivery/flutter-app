@@ -1,7 +1,9 @@
 import 'package:FD_flutter/authentification/authenticate.dart';
 import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/pages/admin/index_admin.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
+import 'package:FD_flutter/pages/livreur/index_lv.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,18 +16,27 @@ class Wrapper extends StatelessWidget {
       return Authenticate();
     } else {
       switch (Provider.of<User>(context, listen: true).getAccount()) {
-        case "cl":
+        case "Client":
           {
             return IndexCl();
           }
           break;
 
-        case "st":
+        case "Entreprise":
           {
             return IndexSt();
           }
           break;
-
+        case "Admin":
+          {
+            return IndexAdmin();
+          }
+          break;
+        case "Livreur":
+          {
+            return IndexLv();
+          }
+          break;
         default:
           {
             return TypeCompte();

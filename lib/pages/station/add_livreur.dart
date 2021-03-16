@@ -8,6 +8,7 @@ class AddLivreur extends StatefulWidget {
 }
 
 class _AddLivreurState extends State<AddLivreur> {
+  TextEditingController searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,11 +21,16 @@ class _AddLivreurState extends State<AddLivreur> {
           Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
+                controller: searchController,
                 textInputAction: TextInputAction.search,
                 decoration: InputDecoration(
-                  border: const OutlineInputBorder(),
-                  labelText: "Type an email",
-                ),
+                    border: const UnderlineInputBorder(),
+                    labelText: "Type an email",
+                    suffixIcon: IconButton(
+                      onPressed: () => searchController.clear(),
+                      icon: Icon(Icons.clear),
+                      color: Colors.black26,
+                    )),
               ))
         ],
       ),

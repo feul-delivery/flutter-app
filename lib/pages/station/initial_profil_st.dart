@@ -8,13 +8,13 @@ import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
-class initialProfileSt extends StatefulWidget {
+class InitialProfileSt extends StatefulWidget {
   @override
   _initialProfileStState createState() => _initialProfileStState();
 }
 
 // ignore: camel_case_types
-class _initialProfileStState extends State<initialProfileSt>
+class _initialProfileStState extends State<InitialProfileSt>
     with SingleTickerProviderStateMixin {
   final FocusNode myFocusNode = FocusNode();
 
@@ -25,11 +25,11 @@ class _initialProfileStState extends State<initialProfileSt>
 
   final DatabaseService _auth = DatabaseService();
   final _formKey = GlobalKey<FormState>();
-  String nom = '';
+  String titre = '';
+  String description = '';
+  String tele = '';
   String email = '';
-  String cin = '';
   String address = '';
-  String phone = '';
 
   bool loading = false;
   @override
@@ -40,8 +40,36 @@ class _initialProfileStState extends State<initialProfileSt>
             "My profile",
             style: pageTitle,
           ),
-          actions: <Widget>[],
-          centerTitle: true,
+          actions: <Widget>[
+            FlatButton(
+              child: new Text(
+                "Save",
+                style: buttonStyle,
+              ),
+              textColor: Colors.white,
+              color: Colors.red[900],
+              onPressed: () async {
+                if (_formKey.currentState.validate()) {
+                  setState(() => loading = true);
+                  email = Provider.of<User>(context, listen: true).email;
+                  await _auth.updateEntrepriseData(
+                    titre: titre,
+                    description: description,
+                    tele: tele,
+                    email: email,
+                    address: address,
+                  );
+                  Navigator.pushReplacement(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade, child: IndexSt()));
+                }
+              },
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(10.0)),
+            )
+          ],
+          centerTitle: false,
           backgroundColor: Colors.red[900],
           elevation: 1,
         ),
@@ -116,20 +144,21 @@ class _initialProfileStState extends State<initialProfileSt>
                           children: <Widget>[
                             Padding(
                                 padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 2.0),
+                                    left: 17.0, right: 17.0, top: 15.0),
                                 child: new Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
-                                          labelText: "nom de entreprise",
+                                          border: const OutlineInputBorder(),
+                                          labelText: "Title",
                                         ),
                                         validator: (val) => val.isEmpty
-                                            ? 'Entere un nom svp'
+                                            ? 'This field is required'
                                             : null,
                                         onChanged: (val) {
-                                          setState(() => nom = val);
+                                          setState(() => titre = val);
                                         },
                                       ),
                                     ),
@@ -137,20 +166,21 @@ class _initialProfileStState extends State<initialProfileSt>
                                 )),
                             Padding(
                                 padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 2.0),
+                                    left: 17.0, right: 17.0, top: 15.0),
                                 child: new Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
-                                          labelText: "email",
+                                          border: const OutlineInputBorder(),
+                                          labelText: "Phone",
                                         ),
                                         validator: (val) => val.isEmpty
-                                            ? 'Entere vous email svp'
+                                            ? 'This field is required'
                                             : null,
                                         onChanged: (val) {
-                                          setState(() => email = val);
+                                          setState(() => tele = val);
                                         },
                                       ),
                                     ),
@@ -158,16 +188,17 @@ class _initialProfileStState extends State<initialProfileSt>
                                 )),
                             Padding(
                                 padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 2.0),
+                                    left: 17.0, right: 17.0, top: 15.0),
                                 child: new Row(
                                   mainAxisSize: MainAxisSize.max,
                                   children: <Widget>[
                                     new Flexible(
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
-                                            labelText: "address"),
+                                            border: const OutlineInputBorder(),
+                                            labelText: "Address"),
                                         validator: (val) => val.isEmpty
-                                            ? 'Entere l\'address de entreprise svp'
+                                            ? 'This field is required'
                                             : null,
                                         onChanged: (val) {
                                           setState(() => address = val);
@@ -178,93 +209,24 @@ class _initialProfileStState extends State<initialProfileSt>
                                 )),
                             Padding(
                                 padding: EdgeInsets.only(
-                                    left: 25.0, right: 25.0, top: 2.0),
+                                    left: 17.0, right: 17.0, top: 15.0),
                                 child: new Row(
                                   mainAxisSize: MainAxisSize.max,
-                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    Flexible(
-                                      child: Padding(
-                                        padding: EdgeInsets.only(right: 10.0),
-                                        child: new TextFormField(
-                                          decoration: const InputDecoration(
-                                              hintText: "CIN de responcable"),
-                                          validator: (val) => val.isEmpty
-                                              ? 'Entere vous CIN'
-                                              : null,
-                                          onChanged: (val) {
-                                            setState(() => cin = val);
-                                          },
-                                        ),
-                                      ),
-                                      flex: 2,
-                                    ),
-                                    Flexible(
+                                    new Flexible(
                                       child: new TextFormField(
+                                        maxLines: 3,
                                         decoration: const InputDecoration(
-                                            hintText: "phone "),
-                                        validator: (val) => val.isEmpty
-                                            ? 'Entere vous phone'
-                                            : null,
+                                          border: const OutlineInputBorder(),
+                                          labelText: "Description",
+                                        ),
                                         onChanged: (val) {
-                                          setState(() => phone = val);
+                                          setState(() => description = val);
                                         },
                                       ),
-                                      flex: 2,
                                     ),
                                   ],
                                 )),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: 25.0, right: 25.0, top: 45.0),
-                              child: new Row(
-                                mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: <Widget>[
-                                  Expanded(
-                                    child: Padding(
-                                      padding: EdgeInsets.only(
-                                          right: 10.0, left: 10),
-                                      child: Container(
-                                          child: new RaisedButton(
-                                        child: new Text("Save"),
-                                        textColor: Colors.white,
-                                        color: Colors.red[900],
-                                        onPressed: () async {
-                                          if (_formKey.currentState
-                                              .validate()) {
-                                            setState(() => loading = true);
-
-                                            String uid = Provider.of<User>(
-                                                    context,
-                                                    listen: true)
-                                                .getuid();
-                                            await _auth.updateEntrepriseData(
-                                                uid: uid,
-                                                adresse: address,
-                                                description: "",
-                                                email: email,
-                                                tele: phone,
-                                                titre: nom);
-                                            Navigator.pushReplacement(
-                                                context,
-                                                PageTransition(
-                                                    type:
-                                                        PageTransitionType.fade,
-                                                    child: IndexSt()));
-                                          }
-                                        },
-                                        shape: new RoundedRectangleBorder(
-                                            borderRadius:
-                                                new BorderRadius.circular(
-                                                    10.0)),
-                                      )),
-                                    ),
-                                    flex: 2,
-                                  ),
-                                ],
-                              ),
-                            )
                           ],
                         ),
                       ),

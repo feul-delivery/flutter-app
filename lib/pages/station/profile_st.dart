@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,13 +9,11 @@ class ProfilSt extends StatefulWidget {
 }
 
 class _ProfilStState extends State<ProfilSt> {
-  
-
   @override
   Widget build(BuildContext context) {
-    String titre="N/A";
+    String titre = "N/A";
     setState(() {
-      titre= getEntData("titre").toString() ;
+      titre = getEntData("titre").toString();
       print(titre.toString());
     });
     return Scaffold(

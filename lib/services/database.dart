@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:FD_flutter/modules/client.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/modules/entreprise.dart';
@@ -44,16 +46,16 @@ class DatabaseService {
     return null;
   }
 
-  Future<void> updateClientData(String uid, String nom, String prenom,
-      String sexe, String cin, String tele, int idVille) async {
+  Future<void> updateClientData(String nom, String prenom, String email,
+      String sexe, String cin, String tele, String ville) async {
     return await clientCollection.document(uid).setData({
-      'uid': uid,
       'nom': nom,
       'prenom': prenom,
+      'email': email,
       'sexe': sexe,
       'cin': cin,
       'tele': tele,
-      'idville': idVille,
+      'ville': ville,
     });
   }
 
@@ -62,40 +64,30 @@ class DatabaseService {
     return clientCollection.snapshots();
   }
 
-  User _userDataFromSnapshot(DocumentSnapshot snapshot) {
+  User userDataFromSnapshot(DocumentSnapshot snapshot) {
     return User(
       uid: uid,
       account: snapshot.data['account'],
     );
   }
 
-  ClientData _clientDataFromSnapshot(DocumentSnapshot snapshot) {
-    return ClientData(
-        uid: uid,
-        account: snapshot.data['account'],
+  Client _clientFromSnapshot(DocumentSnapshot snapshot) {
+    return Client(
         nom: snapshot.data['nom'],
         prenom: snapshot.data['prenom'],
         email: snapshot.data['email'],
         sexe: snapshot.data['sexe'],
         cin: snapshot.data['cin'],
         tele: snapshot.data['tele'],
-        idville: snapshot.data['idville']);
+        ville: snapshot.data['ville']);
   }
 
   // get user doc stream
-  Stream<ClientData> get userData {
-    return clientCollection
-        .document(uid)
-        .snapshots()
-        .map(_clientDataFromSnapshot);
-  }
-
-  Stream<User> get userType {
-    return userCollection.document(uid).snapshots().map(_userDataFromSnapshot);
+  Stream<Client> get userData {
+    return clientCollection.document(uid).snapshots().map(_clientFromSnapshot);
   }
 
   Future<void> updateLivreurData(
-    String uid,
     String nom,
     String prenom,
     String email,
@@ -104,7 +96,7 @@ class DatabaseService {
     String sexe,
     String tele,
     String statut,
-    String identreprise,
+    String uidentreprise,
   ) async {
     return await livreurCollection.document(uid).setData({
       'uid': uid,
@@ -116,7 +108,7 @@ class DatabaseService {
       'sexe': sexe,
       'tele': tele,
       'statut': statut,
-      'identreprise': identreprise,
+      'uidentreprise': uidentreprise,
     });
   }
 
@@ -126,21 +118,23 @@ class DatabaseService {
   }
 
   Future<void> updateOrdersData(
-    String idorder,
-    String volume,
+    int ordernum,
+    String uidorder,
+    Double volume,
     String adresse,
-    String dateheurec,
-    String dateheurel,
+    DateTime dateheurec,
+    DateTime dateheurel,
     String matricule,
     String color,
     String prixtotal,
     String statut,
     String methode,
-    String idclient,
+    String uidstation,
+    String uidlivreur,
     String idtype,
   ) async {
-    return await ordersCollection.document(uid).setData({
-      'idorder': idorder,
+    return await ordersCollection.document(uid + "/" + "$ordernum").setData({
+      'idorder': uidorder,
       'volume': volume,
       'adresse': adresse,
       'dateheurec': dateheurec,
@@ -150,7 +144,8 @@ class DatabaseService {
       'prixtotal': prixtotal,
       'statut': statut,
       'methode': methode,
-      'idclient': idclient,
+      'uidstation': uidstation,
+      'uidlivreur': uidlivreur,
       'idtype': idtype,
     });
   }
@@ -161,22 +156,20 @@ class DatabaseService {
   }
 
   Future<void> updateEntrepriseData({
-    String uid,
     String titre,
     String description,
     String tele,
     String email,
-    String adresse,
+    String address,
     String like,
     String dislike,
   }) async {
     return await entrepriseCollection.document(uid).setData({
-      'uid': uid,
       'titre': titre,
       'description': description,
       'tele': tele,
       'email': email,
-      'adresse': adresse,
+      'adresse': address,
       'like': like,
       'dislike': dislike,
     });
@@ -187,7 +180,7 @@ class DatabaseService {
     return entrepriseCollection.snapshots();
   }
 
- Future<Entreprise> getDataEnt() async {
+  Future<Entreprise> getDataEnt() async {
     String title;
     String description;
     String phone;
@@ -206,9 +199,9 @@ class DatabaseService {
       phone = await value.data['tele'];
       print(title);
       print(phone);
-      return Entreprise(titre: title,description: description,email: email,tele: phone);
+      return Entreprise(
+          titre: title, description: description, email: email, tele: phone);
     });
-    return Entreprise(titre:"HHHH");
-    
+    return Entreprise(titre: "HHHH");
   }
 }

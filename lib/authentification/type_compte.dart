@@ -38,12 +38,12 @@ class _TypeCompteState extends State<TypeCompte> {
                     final FirebaseAuth auth = FirebaseAuth.instance;
                     final FirebaseUser user = await auth.currentUser();
                     final uid = user.uid;
-                    await DatabaseService(uid: uid).updateUserData("cl");
+                    await DatabaseService(uid: uid).updateUserData("Client");
                     Navigator.pushReplacement(
                         context,
                         PageTransition(
                             type: PageTransitionType.fade,
-                            child: initialProfilecl()));
+                            child: InitialProfilecl()));
                   },
                   child: Container(
                     decoration: new BoxDecoration(
@@ -89,12 +89,13 @@ class _TypeCompteState extends State<TypeCompte> {
                     final FirebaseAuth auth = FirebaseAuth.instance;
                     final FirebaseUser user = await auth.currentUser();
                     final uid = user.uid;
-                    await DatabaseService(uid: uid).updateUserData("st");
+                    await DatabaseService(uid: uid)
+                        .updateUserData("Entreprise");
                     Navigator.pushReplacement(
                         context,
                         PageTransition(
                             type: PageTransitionType.fade,
-                            child: initialProfileSt()));
+                            child: InitialProfileSt()));
                   },
                   child: Container(
                     decoration: new BoxDecoration(

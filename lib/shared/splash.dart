@@ -30,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
             PageTransition(
                 type: PageTransitionType.fade, child: StarterPage()));
       }
-      Provider.of<User>(context, listen: true).setAll("", "");
+      Provider.of<User>(context, listen: true).setAll("", "", "");
     });
   }
 
