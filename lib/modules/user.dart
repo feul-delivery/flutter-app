@@ -11,24 +11,4 @@ class User with ChangeNotifier {
     this.account = account;
     this.email = email;
   }
-
-  setUid(String uid) {
-    this.uid = uid;
-  }
-
-  setAccount(String account) {
-    this.account = account;
-  }
-
-  String getuid() {
-    return uid;
-  }
-
-  String getEmail() {
-    return email;
-  }
-
-  String getAccount() {
-    return this.account;
-  }
 }

@@ -119,7 +119,6 @@ class DatabaseService {
 
   Future<void> updateOrdersData(
     int ordernum,
-    String uidorder,
     Double volume,
     String adresse,
     DateTime dateheurec,
@@ -134,7 +133,7 @@ class DatabaseService {
     String idtype,
   ) async {
     return await ordersCollection.document(uid + "/" + "$ordernum").setData({
-      'idorder': uidorder,
+      'ordernum': ordernum,
       'volume': volume,
       'adresse': adresse,
       'dateheurec': dateheurec,

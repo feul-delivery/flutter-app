@@ -11,44 +11,46 @@ class ProfilSt extends StatefulWidget {
 }
 
 class _ProfilStState extends State<ProfilSt> {
-    dynamic titre="N/A";
-    dynamic description="N/A";
-    dynamic email="N/A";
-    dynamic tele="N/A";
-    dynamic adresse="N/A";
+  dynamic titre = "N/A";
+  dynamic description = "N/A";
+  dynamic email = "N/A";
+  dynamic tele = "N/A";
+  dynamic adresse = "N/A";
 
   @override
   // ignore: must_call_super
   void initState() {
     getEntData();
   }
-Future getEntData() async {
-  final FirebaseAuth auth = FirebaseAuth.instance;
-  final FirebaseUser user = await auth.currentUser();
-  final uid = user.uid;
 
-  Firestore.instance
-      .collection('entreprise')
-      .document(uid)
-      .get()
-      .then((value) async {
-    if (value.exists) {
-      print(value);
-      var key1 = await value.data['titre'];
-      var key2 = await value.data['description'];
-      var key3 = await value.data['email'];
-      var key4 = await value.data['tele'];
-      var key5 = await value.data['adresse'];
-      setState(() {
+  Future getEntData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final FirebaseUser user = await auth.currentUser();
+    final uid = user.uid;
+
+    Firestore.instance
+        .collection('entreprise')
+        .document(uid)
+        .get()
+        .then((value) async {
+      if (value.exists) {
+        print(value);
+        var key1 = await value.data['titre'];
+        var key2 = await value.data['description'];
+        var key3 = await value.data['email'];
+        var key4 = await value.data['tele'];
+        var key5 = await value.data['adresse'];
+        print(key1);
+        setState(() {
           this.titre = key1;
           this.description = key2;
           this.email = key3;
           this.tele = key4;
           this.adresse = key5;
         });
-    }
-  });
-}
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,10 +163,7 @@ Future getEntData() async {
                                                           children: [
                                                             FlatButton(
                                                                 onPressed:
-                                                                    () {
-
-                                                                      
-                                                                    },
+                                                                    () {},
                                                                 child: Text(
                                                                     "Change",
                                                                     style: TextStyle(
@@ -389,8 +388,7 @@ Future getEntData() async {
                                                                   .grey[200]))),
                                                   child: TextField(
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          "$adresse",
+                                                      hintText: "$adresse",
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
@@ -632,8 +630,7 @@ Future getEntData() async {
                                                                   .grey[200]))),
                                                   child: TextField(
                                                     decoration: InputDecoration(
-                                                      hintText:
-                                                          "$email",
+                                                      hintText: "$email",
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
                                                       border: InputBorder.none,

@@ -54,7 +54,7 @@ class _initialProfileclState extends State<InitialProfilecl>
                 if (_formKey.currentState.validate()) {
                   setState(() => loading = true);
 
-                  email = Provider.of<User>(context, listen: true).getEmail();
+                  email = Provider.of<User>(context, listen: true).email;
                   await _auth.updateClientData(
                       nom, prenom, email, sexe, cin, phone, ville);
                   Navigator.pushReplacement(
