@@ -8,7 +8,9 @@ class AuthService {
 
   // create user obj based on firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
-    return user != null ? User(uid: user.uid, account: _accountType) : null;
+    return user != null
+        ? User(uid: user.uid, account: _accountType, email: user.email)
+        : null;
   }
 
   Future<String> getAccountType() async {

@@ -117,6 +117,7 @@ class DrawerSt extends StatelessWidget {
             child: Center(
               child: FlatButton(
                 onPressed: () async {
+                  _auth.signOut();
                   Provider.of<User>(context, listen: true).setAll("", "", "");
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (BuildContext context) => Wrapper()));

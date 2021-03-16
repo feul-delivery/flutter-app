@@ -1,5 +1,3 @@
-import 'package:FD_flutter/shared/loading.dart';
-
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
