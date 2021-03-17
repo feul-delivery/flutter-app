@@ -31,8 +31,8 @@ class _ProfilStState extends State<ProfilSt> {
         .document(uid)
         .get()
         .then((value) async {
+          print(uid);
       if (value.exists) {
-        print(value);
         var key1 = await value.data['titre'];
         var key2 = await value.data['description'];
         var key3 = await value.data['email'];
