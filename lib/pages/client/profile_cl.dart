@@ -1,6 +1,8 @@
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'bbar_cl.dart';
@@ -16,6 +18,53 @@ class profileCl extends StatefulWidget {
 // ignore: camel_case_types
 class _profileClState extends State<profileCl> {
   bool showPassword = false;
+  String cin;
+  String ville;
+  String nom;
+  String prenom;
+  String sexe;
+  String tele;
+  var uid;
+  var email;
+  void initState() {
+    super.initState();
+    getEntData();
+  }
+
+  Future getEntData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final FirebaseUser user = await auth.currentUser();
+    uid = user.uid;
+    email = user.email;
+print(email);
+    Firestore.instance
+        .collection('client')
+        .document(uid)
+        .get()
+        .then((value) async {
+      print(uid);
+      if (value.exists) {
+        var key1 = await value.data['cin'];
+        var key2 = await value.data['ville'];
+        var key3 = await value.data['nom'];
+        var key4 = await value.data['prenom'];
+        var key5 = await value.data['sexe'];
+        var key6 = await value.data['tele'];
+        print(key1);
+        setState(() {
+          this.cin = key1;
+          this.ville = key2;
+          this.nom = key3;
+          this.prenom = key4;
+          this.sexe = key5;
+          this.tele = key6;
+          print(cin);
+          print(sexe);
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -93,7 +142,7 @@ class _profileClState extends State<profileCl> {
                     ),
                     Container(
                       child: Text(
-                        'Da7mad',
+                        '$nom',
                         style: strongTextStyle,
                       ),
                     )
@@ -114,7 +163,7 @@ class _profileClState extends State<profileCl> {
                     ),
                     Container(
                       child: Text(
-                        'Lmkawi',
+                        '$prenom',
                         style: strongTextStyle,
                       ),
                     )
@@ -135,7 +184,7 @@ class _profileClState extends State<profileCl> {
                     ),
                     Container(
                       child: Text(
-                        '+212601020304',
+                        '$tele',
                         style: strongTextStyle,
                       ),
                     )
@@ -156,7 +205,7 @@ class _profileClState extends State<profileCl> {
                     ),
                     Container(
                       child: Text(
-                        'Contact@da7mad.com',
+                        '$email',
                         style: strongTextStyle,
                       ),
                     )
@@ -177,7 +226,7 @@ class _profileClState extends State<profileCl> {
                     ),
                     Container(
                       child: Text(
-                        'CD454545',
+                        '$cin',
                         style: strongTextStyle,
                       ),
                     )

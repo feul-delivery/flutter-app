@@ -1,6 +1,7 @@
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:page_transition/page_transition.dart';
@@ -23,7 +24,6 @@ class _initialProfileclState extends State<InitialProfilecl>
     super.initState();
   }
 
-  final DatabaseService _auth = DatabaseService();
   final _formKey = GlobalKey<FormState>();
   String nom = '';
   String prenom = '';
@@ -51,11 +51,16 @@ class _initialProfileclState extends State<InitialProfilecl>
               textColor: Colors.white,
               color: Colors.red[900],
               onPressed: () async {
+                final FirebaseAuth auth = FirebaseAuth.instance;
+                final FirebaseUser user = await auth.currentUser();
+                final uid = user.uid;
+                final DatabaseService _auth = DatabaseService(uid: uid);
+
                 if (_formKey.currentState.validate()) {
                   setState(() => loading = true);
 
                   email = Provider.of<User>(context, listen: true).email;
-                  await _auth.updateClientData(
+                  await _auth.setClientData(
                       nom, prenom, email, sexe, cin, phone, ville);
                   Navigator.pushReplacement(
                       context,
@@ -204,6 +209,26 @@ class _initialProfileclState extends State<InitialProfilecl>
                                       ),
                                     ),
                                   ],
+                                )),Padding(
+                                padding: EdgeInsets.only(
+                                    left: 17.0, right: 17.0, top: 15),
+                                child: new Row(
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    new Flexible(
+                                      child: new TextFormField(
+                                        decoration: const InputDecoration(
+                                            border: const OutlineInputBorder(),
+                                            labelText: "ville actual"),
+                                        validator: (val) => val.isEmpty
+                                            ? 'This field is required'
+                                            : null,
+                                        onChanged: (val) {
+                                          setState(() => ville = val);
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 )),
                             Padding(
                                 padding: EdgeInsets.only(
@@ -234,12 +259,12 @@ class _initialProfileclState extends State<InitialProfilecl>
                                       child: new TextFormField(
                                         decoration: const InputDecoration(
                                             border: const OutlineInputBorder(),
-                                            hintText: "City"),
+                                            hintText: "sexe (F ou M)"),
                                         validator: (val) => val.isEmpty
                                             ? 'This field is required'
                                             : null,
                                         onChanged: (val) {
-                                          setState(() => ville = val);
+                                          setState(() => sexe = val);
                                         },
                                       ),
                                       flex: 2,
