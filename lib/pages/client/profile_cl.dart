@@ -28,15 +28,14 @@ class _profileClState extends State<profileCl> {
   var email;
   void initState() {
     super.initState();
-    getEntData();
+    _getEntData();
   }
 
-  Future getEntData() async {
+  Future _getEntData() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final FirebaseUser user = await auth.currentUser();
     uid = user.uid;
     email = user.email;
-print(email);
     Firestore.instance
         .collection('client')
         .document(uid)
@@ -58,8 +57,6 @@ print(email);
           this.prenom = key4;
           this.sexe = key5;
           this.tele = key6;
-          print(cin);
-          print(sexe);
         });
       }
     });
