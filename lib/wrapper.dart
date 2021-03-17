@@ -12,10 +12,12 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // return either the index or Authenticate widget
-    if (Provider.of<User>(context, listen: true).uid == "") {
+    if (Provider.of<User>(context, listen: true)?.uid == "" ||
+        Provider.of<User>(context, listen: true)?.uid == null) {
+      print(Provider.of<User>(context, listen: true)?.uid);
       return Authenticate();
     } else {
-      switch (Provider.of<User>(context, listen: true).account) {
+      switch (Provider.of<User>(context, listen: true)?.account) {
         case "Client":
           {
             return IndexCl();
