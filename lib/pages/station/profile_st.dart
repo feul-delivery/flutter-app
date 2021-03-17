@@ -1,3 +1,4 @@
+import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,12 +10,17 @@ class ProfilSt extends StatefulWidget {
 }
 
 class _ProfilStState extends State<ProfilSt> {
-  dynamic titre = "N/A";
-  dynamic description = "N/A";
-  dynamic email = "N/A";
-  dynamic tele = "N/A";
-  dynamic adresse = "N/A";
-
+  String titre = "N/A";
+  String titreTmp;
+  String descriptionTmp;
+  String emailTmp;
+  String teleTmp;
+  String adresseTmp;
+  String description = "N/A";
+  String email = "N/A";
+  String tele = "N/A";
+  String adresse = "N/A";
+  var uid;
   @override
   // ignore: must_call_super
   void initState() {
@@ -24,14 +30,14 @@ class _ProfilStState extends State<ProfilSt> {
   Future getEntData() async {
     final FirebaseAuth auth = FirebaseAuth.instance;
     final FirebaseUser user = await auth.currentUser();
-    final uid = user.uid;
+    uid = user.uid;
 
     Firestore.instance
         .collection('entreprise')
         .document(uid)
         .get()
         .then((value) async {
-          print(uid);
+      print(uid);
       if (value.exists) {
         var key1 = await value.data['titre'];
         var key2 = await value.data['description'];
@@ -151,6 +157,12 @@ class _ProfilStState extends State<ProfilSt> {
                                                                       InputBorder
                                                                           .none,
                                                                 ),
+                                                                onChanged:
+                                                                    (val) {
+                                                                  setState(() =>
+                                                                      titreTmp =
+                                                                          val);
+                                                                },
                                                               ),
                                                             ),
                                                           ],
@@ -161,7 +173,26 @@ class _ProfilStState extends State<ProfilSt> {
                                                           children: [
                                                             FlatButton(
                                                                 onPressed:
-                                                                    () {},
+                                                                    () async {
+                                                                  await DatabaseService(uid: uid).updateEntrepriseData(
+                                                                      titre:
+                                                                          titreTmp,
+                                                                      address:
+                                                                          adresse,
+                                                                      description:
+                                                                          description,
+                                                                      tele:
+                                                                          tele,
+                                                                      email:
+                                                                          email);
+                                                                  titre =
+                                                                      titreTmp;
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                  setState(
+                                                                      () {});
+                                                                },
                                                                 child: Text(
                                                                     "Change",
                                                                     style: TextStyle(
@@ -267,6 +298,10 @@ class _ProfilStState extends State<ProfilSt> {
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
                                                     ),
+                                                    onChanged: (val) {
+                                                      setState(() =>
+                                                          descriptionTmp = val);
+                                                    },
                                                   ),
                                                 ),
                                               ],
@@ -276,7 +311,22 @@ class _ProfilStState extends State<ProfilSt> {
                                             Row(
                                               children: [
                                                 FlatButton(
-                                                    onPressed: () {},
+                                                    onPressed: () async {
+                                                      await DatabaseService(
+                                                              uid: uid)
+                                                          .updateEntrepriseData(
+                                                              titre: titre,
+                                                              address: adresse,
+                                                              description:
+                                                                  descriptionTmp,
+                                                              tele: tele,
+                                                              email: email);
+                                                      description =
+                                                          descriptionTmp;
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      setState(() {});
+                                                    },
                                                     child: Text("Change",
                                                         style: TextStyle(
                                                             color: Colors
@@ -391,6 +441,10 @@ class _ProfilStState extends State<ProfilSt> {
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
                                                     ),
+                                                    onChanged: (val) {
+                                                      setState(() =>
+                                                          adresseTmp = val);
+                                                    },
                                                   ),
                                                 ),
                                               ],
@@ -400,7 +454,22 @@ class _ProfilStState extends State<ProfilSt> {
                                             Row(
                                               children: [
                                                 FlatButton(
-                                                    onPressed: () {},
+                                                    onPressed: () async {
+                                                      await DatabaseService(
+                                                              uid: uid)
+                                                          .updateEntrepriseData(
+                                                              titre: titre,
+                                                              address:
+                                                                  adresseTmp,
+                                                              description:
+                                                                  description,
+                                                              tele: tele,
+                                                              email: email);
+                                                      adresse = adresseTmp;
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      setState(() {});
+                                                    },
                                                     child: Text("Change",
                                                         style: TextStyle(
                                                             color: Colors
@@ -512,6 +581,10 @@ class _ProfilStState extends State<ProfilSt> {
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
                                                     ),
+                                                    onChanged: (val) {
+                                                      setState(
+                                                          () => teleTmp = val);
+                                                    },
                                                   ),
                                                 ),
                                               ],
@@ -521,7 +594,21 @@ class _ProfilStState extends State<ProfilSt> {
                                             Row(
                                               children: [
                                                 FlatButton(
-                                                    onPressed: () {},
+                                                    onPressed: () async {
+                                                      await DatabaseService(
+                                                              uid: uid)
+                                                          .updateEntrepriseData(
+                                                              titre: titre,
+                                                              address: adresse,
+                                                              description:
+                                                                  description,
+                                                              tele: teleTmp,
+                                                              email: email);
+                                                      tele = teleTmp;
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      setState(() {});
+                                                    },
                                                     child: Text("Change",
                                                         style: TextStyle(
                                                             color: Colors
@@ -632,7 +719,12 @@ class _ProfilStState extends State<ProfilSt> {
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
-                                                    ),
+                                                    ),onChanged:
+                                                                    (val) {
+                                                                  setState(() =>
+                                                                      emailTmp =
+                                                                          val);
+                                                                },
                                                   ),
                                                 ),
                                               ],
@@ -642,7 +734,21 @@ class _ProfilStState extends State<ProfilSt> {
                                             Row(
                                               children: [
                                                 FlatButton(
-                                                    onPressed: () {},
+                                                    onPressed: () async {
+                                                      await DatabaseService(
+                                                              uid: uid)
+                                                          .updateEntrepriseData(
+                                                              titre: titre,
+                                                              address: adresse,
+                                                              description:
+                                                                  description,
+                                                              tele: tele,
+                                                              email: emailTmp);
+                                                      email = emailTmp;
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                      setState(() {});
+                                                    },
                                                     child: Text("Change",
                                                         style: TextStyle(
                                                             color: Colors
