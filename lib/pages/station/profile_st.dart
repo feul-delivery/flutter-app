@@ -147,8 +147,9 @@ class _ProfilStState extends State<ProfilSt> {
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: IndexSt.entreprise?.photoURL == null
-                                  ? AssetImage('assets/s4.png')
-                                  : NetworkImage(IndexSt.entreprise.photoURL),
+                                  ? new AssetImage('assets/s4.png')
+                                  : new NetworkImage(
+                                      IndexSt.entreprise.photoURL),
                               fit: BoxFit.cover)),
                       child: IconButton(
                         onPressed: () async {

@@ -208,8 +208,11 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                     decoration: new BoxDecoration(
                                       shape: BoxShape.circle,
                                       image: new DecorationImage(
-                                        image: new ExactAssetImage(
-                                            'assets/profile.png'),
+                                        image: IndexCl.client?.photoURL == null
+                                            ? new AssetImage(
+                                                'assets/profile.png')
+                                            : new NetworkImage(
+                                                IndexCl.client.photoURL),
                                         fit: BoxFit.cover,
                                       ),
                                     )),

@@ -14,7 +14,7 @@ class ExploreCl extends StatefulWidget {
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text('Explore', style: pageTitle);
-  Icon _adoreIcon;
+  // Icon _adoreIcon;
   int adore = 0;
   @override
   Widget build(BuildContext context) {
@@ -249,19 +249,19 @@ class _ExploreClState extends State<ExploreCl> {
     });
   }
 
-  void _changeFav() {
-    if (adore == 0) {
-      _adoreIcon = new Icon(
-        Icons.favorite,
-        color: Colors.white,
-      );
-      adore = 1;
-    } else {
-      _adoreIcon = new Icon(
-        Icons.favorite,
-        color: Colors.red[900],
-      );
-      adore = 0;
-    }
-  }
+  // void _changeFav() {
+  //   if (adore == 0) {
+  //     _adoreIcon = new Icon(
+  //       Icons.favorite,
+  //       color: Colors.white,
+  //     );
+  //     adore = 1;
+  //   } else {
+  //     _adoreIcon = new Icon(
+  //       Icons.favorite,
+  //       color: Colors.red[900],
+  //     );
+  //     adore = 0;
+  //   }
+  // }
 }
