@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:FD_flutter/pages/client/favoris_cl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
@@ -7,7 +8,12 @@ import 'package:FD_flutter/pages/client/drawer_cl.dart';
 import 'bbar_cl.dart';
 import 'explore_cl.dart';
 
-class IndexCl extends StatelessWidget {
+class IndexCl extends StatefulWidget {
+  @override
+  _IndexClState createState() => _IndexClState();
+}
+
+class _IndexClState extends State<IndexCl> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -75,56 +81,91 @@ class IndexCl extends StatelessWidget {
                 SizedBox(
                   height: 20,
                 ),
-                SmallStation(),
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Close to you',
+                            style: subTitleStyle,
+                          ),
+                          Opacity(
+                            opacity: 0.6,
+                            child: GestureDetector(
+                              onTap: () {
+                                ButtomBarCl.selectedIndex = 1;
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ExploreCl()));
+                              },
+                              child: Text(
+                                'View all',
+                                style: moreStyle,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Divider(
+                        thickness: 1,
+                        height: 10,
+                      ),
+                      StreamBuilder<QuerySnapshot>(
+                        stream: Firestore.instance
+                            .collection('entreprise')
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Icon(Icons.cancel, color: Colors.red[900]);
+                          }
+
+                          switch (snapshot.connectionState) {
+                            case ConnectionState.waiting:
+                              return SizedBox(
+                                  child: Center(
+                                      child: CircularProgressIndicator(
+                                          backgroundColor: Colors.red[900])));
+                            case ConnectionState.none:
+                              return Icon(Icons.error_outline,
+                                  color: Colors.red[900]);
+                            case ConnectionState.done:
+                              return Icon(
+                                Icons.done,
+                                color: Colors.red[900],
+                              );
+                            default:
+                              return new ListView(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  physics: BouncingScrollPhysics(),
+                                  children: snapshot.data?.documents
+                                      ?.map((DocumentSnapshot document) {
+                                    return InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      StationProfilCl(
+                                                          doc: document)));
+                                        },
+                                        child: createSmallCard(document));
+                                  })?.toList());
+                          }
+                        },
+                      ),
+                    ],
+                  ),
+                )
               ],
             ),
           ),
         ),
         bottomNavigationBar: ButtomBarCl(),
         drawer: DrawerCL(),
-      ),
-    );
-  }
-}
-
-class SmallStation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                'Close to you',
-                style: subTitleStyle,
-              ),
-              Opacity(
-                opacity: 0.6,
-                child: GestureDetector(
-                  onTap: () {
-                    ButtomBarCl.selectedIndex = 1;
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => ExploreCl()));
-                  },
-                  child: Text(
-                    'View all',
-                    style: moreStyle,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Divider(
-            thickness: 1,
-            height: 10,
-          ),
-          createSmallCard(),
-          createSmallCard(),
-          createSmallCard()
-        ],
       ),
     );
   }
@@ -158,15 +199,12 @@ class BigStation extends StatelessWidget {
               margin: const EdgeInsets.only(top: 10.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5.0),
-                child: Hero(
-                  tag: 'tage',
-                  child: Image.asset(
-                    'assets/s3.jpg',
-                    alignment: Alignment.center,
-                    fit: BoxFit.cover,
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.width - 150,
-                  ),
+                child: Image.asset(
+                  'assets/s3.jpg',
+                  alignment: Alignment.center,
+                  fit: BoxFit.cover,
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.width - 150,
                 ),
               ),
             ),
@@ -177,7 +215,7 @@ class BigStation extends StatelessWidget {
   }
 }
 
-Container createSmallCard() {
+Container createSmallCard(DocumentSnapshot document) {
   return Container(
     height: 220,
     child: Center(
@@ -189,19 +227,16 @@ Container createSmallCard() {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                InkWell(
-                  onTap: () {},
-                  child: Stack(
-                    children: [
-                      Ink.image(
-                        height: 100,
-                        image: AssetImage(
-                          'assets/s4.png',
-                        ),
-                        fit: BoxFit.fitWidth,
+                Stack(
+                  children: [
+                    Ink.image(
+                      height: 100,
+                      image: AssetImage(
+                        'assets/s4.png',
                       ),
-                    ],
-                  ),
+                      fit: BoxFit.fitWidth,
+                    ),
+                  ],
                 ),
                 Padding(
                     padding: const EdgeInsets.only(
@@ -219,14 +254,14 @@ Container createSmallCard() {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Total - Centre ville',
+                                  '${document['titre']}',
                                   style: TextStyle(
                                     fontSize: 18.0,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
                                 Text(
-                                  'Av. Mohammed V,Centre villed. Fès',
+                                  '${document['adresse']}',
                                   style: TextStyle(color: Colors.black54),
                                 ),
                               ]),

@@ -1,12 +1,16 @@
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 int like = 24;
 int dislike = 9;
 
 class StationProfilCl extends StatefulWidget {
+  final DocumentSnapshot doc;
+  StationProfilCl({@required this.doc});
+
   @override
   _StationProfilClState createState() => _StationProfilClState();
 }
@@ -16,6 +20,7 @@ class _StationProfilClState extends State<StationProfilCl> {
   Widget build(BuildContext context) {
     String likeText = like.toString();
     String dislikeText = dislike.toString();
+    var doc = widget.doc;
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
@@ -42,7 +47,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                             FadeAnimation(
                                 1,
                                 Text(
-                                  "Total - Centre ville",
+                                  doc['titre'],
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontFamily: 'Gotham',
@@ -172,7 +177,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "It has long been known that working with readable and meaningful text is distracting, and distracts from the focus on the layout itself.",
+                              doc['description'],
                               style: TextStyle(color: Colors.grey, height: 1.4),
                             )),
                         FadeAnimation(
@@ -212,7 +217,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "Rue Sefrou, Narjiss, Fés, Maroc",
+                              doc['adresse'],
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
@@ -249,6 +254,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                         FadeAnimation(
                             1.2,
                             Text(
+                              //TODO livreur
                               "4 deliveryman",
                               style: TextStyle(color: Colors.grey),
                             )),
@@ -286,7 +292,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "+212654543476",
+                              doc['adresse'],
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
@@ -323,7 +329,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              "contact@total.ma",
+                              doc['email'],
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(

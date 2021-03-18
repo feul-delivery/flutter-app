@@ -1,9 +1,10 @@
+import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/client/drawer_cl.dart';
 import 'bbar_cl.dart';
-import 'index_cl.dart';
 
 class ExploreCl extends StatefulWidget {
   @override
@@ -21,7 +22,7 @@ class _ExploreClState extends State<ExploreCl> {
       // ignore: missing_return
       onWillPop: () {
         ButtomBarCl.selectedIndex = 0;
-        Navigator.of(context).push(
+        Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (BuildContext context) => IndexCl()));
       },
       child: Scaffold(
@@ -37,17 +38,52 @@ class _ExploreClState extends State<ExploreCl> {
           ],
         ),
         drawer: DrawerCL(),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [createCard()],
-          ),
+        body: StreamBuilder<QuerySnapshot>(
+          stream: Firestore.instance.collection('entreprise').snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Icon(Icons.cancel, color: Colors.red[900]);
+            }
+
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return SizedBox(
+                    child: Center(
+                        child: CircularProgressIndicator(
+                            backgroundColor: Colors.red[900])));
+              case ConnectionState.none:
+                return Icon(Icons.error_outline, color: Colors.red[900]);
+              case ConnectionState.done:
+                return Icon(
+                  Icons.done,
+                  color: Colors.red[900],
+                );
+              default:
+                return new ListView(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    physics: BouncingScrollPhysics(),
+                    children: snapshot.data?.documents
+                        ?.map((DocumentSnapshot document) {
+                      return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        StationProfilCl(doc: document)));
+                          },
+                          child: createCard(document));
+                    })?.toList());
+            }
+          },
         ),
         bottomNavigationBar: ButtomBarCl(),
       ),
     );
   }
 
-  Container createCard() {
+  Container createCard(DocumentSnapshot document) {
     return Container(
       height: 230,
       child: Center(
@@ -62,7 +98,9 @@ class _ExploreClState extends State<ExploreCl> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => StationProfilCl()));
+                            builder: (context) => StationProfilCl(
+                                  doc: document,
+                                )));
                   },
                   child: Stack(
                     children: [
@@ -105,7 +143,7 @@ class _ExploreClState extends State<ExploreCl> {
                                     builder: (context) => StationProfilCl()));
                           },
                           child: Text(
-                            'Total - Centre ville',
+                            '${document['titre']}',
                             style: TextStyle(
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
@@ -113,7 +151,7 @@ class _ExploreClState extends State<ExploreCl> {
                           ),
                         ),
                         Text(
-                          'Av. Mohammed V,Centre villed. Fès',
+                          '${document['adresse']}',
                           style: TextStyle(color: Colors.black54),
                         ),
                         Container(
