@@ -11,6 +11,18 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
+  getClient() async {
+    Future.delayed(Duration(seconds: 5)).then((value) async {
+      DatabaseService databaseService = DatabaseService();
+      IndexCl.client = await databaseService.clientData();
+    });
+  }
+
+  getEntreprise() async {
+    DatabaseService databaseService = DatabaseService();
+    IndexSt.entreprise = await databaseService.entrepriseData();
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
@@ -24,20 +36,14 @@ class Wrapper extends StatelessWidget {
       switch (AuthService.type) {
         case "Client":
           {
-            Future.delayed(Duration(seconds: 5)).then((value) async {
-              DatabaseService databaseService = DatabaseService();
-              IndexCl.client = await databaseService.clientData();
-            });
+            getClient();
             return IndexCl();
           }
           break;
 
         case "Entreprise":
           {
-            Future.delayed(Duration(seconds: 5)).then((value) async {
-              DatabaseService databaseService = DatabaseService();
-              IndexSt.entreprise = await databaseService.entrepriseData();
-            });
+            getEntreprise();
             return IndexSt();
           }
           break;

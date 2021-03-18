@@ -1,8 +1,6 @@
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'bbar_cl.dart';
@@ -10,57 +8,43 @@ import 'drawer_cl.dart';
 import 'index_cl.dart';
 
 // ignore: camel_case_types
-class profileCl extends StatefulWidget {
+class ProfileCl extends StatefulWidget {
   @override
-  _profileClState createState() => _profileClState();
+  _ProfileClState createState() => _ProfileClState();
 }
 
 // ignore: camel_case_types
-class _profileClState extends State<profileCl> {
-  bool showPassword = false;
-  String cin;
-  String ville;
-  String nom;
-  String prenom;
-  String sexe;
-  String tele;
-  var uid;
-  var email;
-  void initState() {
-    super.initState();
-    _getEntData();
-  }
-
-  Future _getEntData() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final FirebaseUser user = await auth.currentUser();
-    uid = user.uid;
-    email = user.email;
-    Firestore.instance
-        .collection('client')
-        .document(uid)
-        .get()
-        .then((value) async {
-      print(uid);
-      if (value.exists) {
-        var key1 = await value.data['cin'];
-        var key2 = await value.data['ville'];
-        var key3 = await value.data['nom'];
-        var key4 = await value.data['prenom'];
-        var key5 = await value.data['sexe'];
-        var key6 = await value.data['tele'];
-        print(key1);
-        setState(() {
-          this.cin = key1;
-          this.ville = key2;
-          this.nom = key3;
-          this.prenom = key4;
-          this.sexe = key5;
-          this.tele = key6;
-        });
-      }
-    });
-  }
+class _ProfileClState extends State<ProfileCl> {
+  // Future _getEntData() async {
+  //   final FirebaseAuth auth = FirebaseAuth.instance;
+  //   final FirebaseUser user = await auth.currentUser();
+  //   uid = user.uid;
+  //   email = user.email;
+  //   Firestore.instance
+  //       .collection('client')
+  //       .document(uid)
+  //       .get()
+  //       .then((value) async {
+  //     print(uid);
+  //     if (value.exists) {
+  //       var key1 = await value.data['cin'];
+  //       var key2 = await value.data['ville'];
+  //       var key3 = await value.data['nom'];
+  //       var key4 = await value.data['prenom'];
+  //       var key5 = await value.data['sexe'];
+  //       var key6 = await value.data['tele'];
+  //       print(key1);
+  //       setState(() {
+  //         this.cin = key1;
+  //         this.ville = key2;
+  //         this.nom = key3;
+  //         this.prenom = key4;
+  //         this.sexe = key5;
+  //         this.tele = key6;
+  //       });
+  //     }
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +123,7 @@ class _profileClState extends State<profileCl> {
                     ),
                     Container(
                       child: Text(
-                        '$nom',
+                        '${IndexCl.client.prenom}',
                         style: strongTextStyle,
                       ),
                     )
@@ -160,7 +144,7 @@ class _profileClState extends State<profileCl> {
                     ),
                     Container(
                       child: Text(
-                        '$prenom',
+                        '${IndexCl.client.nom}',
                         style: strongTextStyle,
                       ),
                     )
@@ -181,7 +165,7 @@ class _profileClState extends State<profileCl> {
                     ),
                     Container(
                       child: Text(
-                        '$tele',
+                        '${IndexCl.client.tele}',
                         style: strongTextStyle,
                       ),
                     )
@@ -202,7 +186,7 @@ class _profileClState extends State<profileCl> {
                     ),
                     Container(
                       child: Text(
-                        '$email',
+                        '${IndexCl.client.email}',
                         style: strongTextStyle,
                       ),
                     )
@@ -223,7 +207,7 @@ class _profileClState extends State<profileCl> {
                     ),
                     Container(
                       child: Text(
-                        '$cin',
+                        '${IndexCl.client.cin}',
                         style: strongTextStyle,
                       ),
                     )

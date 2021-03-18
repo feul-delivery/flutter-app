@@ -188,12 +188,12 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                     color: Colors.white,
                     child: new Column(
                       children: <Widget>[
-                        Padding(
-                            padding: EdgeInsets.only(left: 20.0, top: 20.0),
-                            child: new Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: <Widget>[],
-                            )),
+                        // Padding(
+                        //     padding: EdgeInsets.only(left: 20.0, top: 20.0),
+                        //     child: new Row(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: <Widget>[],
+                        //     )),
                         Padding(
                           padding: EdgeInsets.only(top: 20.0),
                           child:
@@ -212,7 +212,8 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             ? new AssetImage(
                                                 'assets/profile.png')
                                             : new NetworkImage(
-                                                IndexCl.client.photoURL),
+                                                IndexCl.client.photoURL,
+                                              ),
                                         fit: BoxFit.cover,
                                       ),
                                     )),

@@ -1,8 +1,8 @@
+import 'package:FD_flutter/pages/client/profile_cl.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'explore_cl.dart';
 import 'index_cl.dart';
-import 'profile_cl.dart';
 
 class ButtomBarCl extends StatefulWidget {
   static int selectedIndex = 0;
@@ -94,7 +94,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
                           context,
                           PageTransition(
                               type: PageTransitionType.fade,
-                              child: profileCl()));
+                              child: ProfileCl()));
                     }
                   }),
                   child: _buildItemWidget(

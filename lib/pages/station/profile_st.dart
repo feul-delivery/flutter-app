@@ -90,7 +90,7 @@ class _ProfilStState extends State<ProfilSt> {
                     if (profileImage != null) {
                       profileURL = await uploadFile(profileImage);
                       setState(() {
-                        IndexSt.entreprise.photoURL = profileURL;
+                        IndexSt.entreprise?.photoURL = profileURL;
                       });
                     }
                   },
@@ -110,7 +110,7 @@ class _ProfilStState extends State<ProfilSt> {
                     if (profileImage != null) {
                       profileURL = await uploadFile(profileImage);
                       setState(() {
-                        IndexSt.entreprise.photoURL = profileURL;
+                        IndexSt.entreprise?.photoURL = profileURL;
                       });
                     }
                   },
@@ -159,6 +159,58 @@ class _ProfilStState extends State<ProfilSt> {
                         color: Colors.white,
                         iconSize: 40.0,
                       )),
+                  // FutureBuilder<AdvancedNetworkImage>(
+                  //     future: _getImage(context, IndexSt.entreprise.photoURL),
+                  //     builder: (context, snapshot) {
+                  //       if (snapshot.hasError) {
+                  //         return Container(
+                  //           child: Image(
+                  //             image: AssetImage('assets/s4.png'),
+                  //           ),
+                  //         );
+                  //       }
+                  //       switch (snapshot.connectionState) {
+                  //         case ConnectionState.waiting:
+                  //           return SizedBox(
+                  //               child: Center(
+                  //                   child: CircularProgressIndicator(
+                  //                       backgroundColor: Colors.white)));
+                  //           break;
+                  //         case ConnectionState.done:
+                  //           return Container(
+                  //               decoration: BoxDecoration(
+                  //                   image: DecorationImage(
+                  //                       image: snapshot.data,
+                  //                       fit: BoxFit.cover)),
+                  //               child: IconButton(
+                  //                 onPressed: () async {
+                  //                   _showImageSettingsPanel();
+                  //                 },
+                  //                 icon: Icon(Icons.edit),
+                  //                 color: Colors.white,
+                  //                 iconSize: 40.0,
+                  //               ));
+                  //           break;
+                  //         case ConnectionState.none:
+                  //           return Container(
+                  //             child: Image(
+                  //               image: AssetImage('assets/s4.png'),
+                  //             ),
+                  //           );
+                  //           break;
+                  //         case ConnectionState.active:
+                  //           return SizedBox(
+                  //               child: Center(
+                  //                   child: CircularProgressIndicator(
+                  //                       backgroundColor: Colors.white)));
+                  //           break;
+                  //       }
+                  //       return Container(
+                  //         child: Image(
+                  //           image: AssetImage('assets/s4.png'),
+                  //         ),
+                  //       );
+                  //     }),
                 ),
               ),
               SliverList(

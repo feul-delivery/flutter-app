@@ -10,7 +10,12 @@ import 'index_cl.dart';
 import 'bbar_cl.dart';
 
 // ignore: camel_case_types
-class DrawerCL extends StatelessWidget {
+class DrawerCL extends StatefulWidget {
+  @override
+  _DrawerCLState createState() => _DrawerCLState();
+}
+
+class _DrawerCLState extends State<DrawerCL> {
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
@@ -29,7 +34,9 @@ class DrawerCL extends StatelessWidget {
                   radius: 35.0,
                   backgroundImage: IndexCl.client?.photoURL == null
                       ? AssetImage('assets/profile.png')
-                      : NetworkImage(IndexCl.client.photoURL),
+                      : NetworkImage(
+                          IndexCl.client.photoURL,
+                        ),
                 ),
                 Column(
                   children: [

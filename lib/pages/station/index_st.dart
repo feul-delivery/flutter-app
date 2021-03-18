@@ -11,6 +11,17 @@ class IndexSt extends StatefulWidget {
 }
 
 class _IndexStState extends State<IndexSt> {
+  // @override
+  // void initState() {
+  //   _loadImage();
+  //   super.initState();
+  //   WidgetsBinding.instance.addPostFrameCallback((_) => _loadImage());
+  // }
+
+  // Future _loadImage() async {
+  //   await Utils.cacheImage(context, IndexSt.entreprise?.photoURL);
+  // }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

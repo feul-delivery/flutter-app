@@ -29,12 +29,14 @@ class DrawerSt extends StatelessWidget {
                     radius: 50.0,
                     backgroundImage: IndexSt.entreprise?.photoURL == null
                         ? AssetImage('assets/total.png')
-                        : NetworkImage(IndexSt.entreprise?.photoURL)),
+                        : NetworkImage(
+                            IndexSt.entreprise?.photoURL,
+                          )),
                 SizedBox(
                   height: 5.0,
                 ),
                 Text(
-                  IndexSt.entreprise?.titre,
+                  '${IndexSt.entreprise?.titre}',
                   style: TextStyle(
                     fontSize: 22.0,
                     fontWeight: FontWeight.w800,
@@ -44,7 +46,7 @@ class DrawerSt extends StatelessWidget {
                   height: 5.0,
                 ),
                 Text(
-                  IndexSt.entreprise?.email,
+                  '${IndexSt.entreprise?.email}',
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w400,
