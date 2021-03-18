@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:FD_flutter/modules/entreprise.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
 
 class IndexSt extends StatefulWidget {
+  static Entreprise entreprise;
   @override
   _IndexStState createState() => _IndexStState();
 }

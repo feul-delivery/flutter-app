@@ -5,6 +5,7 @@ class Livreur {
   String cin;
   String sexe;
   String tele;
+  String photoURL;
   String statut;
   String uidentreprise;
   Livreur(
@@ -14,6 +15,7 @@ class Livreur {
       this.cin,
       this.sexe,
       this.tele,
+      this.photoURL,
       this.statut,
       this.uidentreprise});
 }

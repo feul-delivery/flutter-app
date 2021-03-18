@@ -1,13 +1,14 @@
 import 'package:FD_flutter/modules/livreur.dart';
 
 class Entreprise {
-  final String titre;
-  final String description;
-  final String tele;
-  final String email;
-  final String adresse;
-  final int like;
-  final int dislike;
+  String titre;
+  String description;
+  String tele;
+  String email;
+  String adresse;
+  String photoURL;
+  int like;
+  int dislike;
   List<Livreur> list;
   Entreprise(
       {this.titre,
@@ -15,6 +16,7 @@ class Entreprise {
       this.tele,
       this.email,
       this.adresse,
+      this.photoURL,
       this.like,
       this.dislike,
       this.list});

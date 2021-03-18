@@ -254,7 +254,6 @@ class _StationProfilClState extends State<StationProfilCl> {
                         FadeAnimation(
                             1.2,
                             Text(
-                              //TODO livreur
                               "4 deliveryman",
                               style: TextStyle(color: Colors.grey),
                             )),

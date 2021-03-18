@@ -1,3 +1,4 @@
+import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +27,14 @@ class DrawerSt extends StatelessWidget {
               children: [
                 CircleAvatar(
                     radius: 50.0,
-                    backgroundImage: AssetImage('assets/total.png')),
+                    backgroundImage: IndexSt.entreprise?.photoURL == null
+                        ? AssetImage('assets/total.png')
+                        : NetworkImage(IndexSt.entreprise?.photoURL)),
                 SizedBox(
                   height: 5.0,
                 ),
                 Text(
-                  "Total - Centre ville",
+                  IndexSt.entreprise?.titre,
                   style: TextStyle(
                     fontSize: 22.0,
                     fontWeight: FontWeight.w800,
@@ -41,7 +44,7 @@ class DrawerSt extends StatelessWidget {
                   height: 5.0,
                 ),
                 Text(
-                  "contact@total.com",
+                  IndexSt.entreprise?.email,
                   style: TextStyle(
                     fontSize: 16.0,
                     fontWeight: FontWeight.w400,

@@ -6,6 +6,7 @@ import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/livreur/index_lv.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/auth.dart';
+import 'package:FD_flutter/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -29,6 +30,10 @@ class Wrapper extends StatelessWidget {
 
         case "Entreprise":
           {
+            Future.delayed(Duration(seconds: 5)).then((value) async {
+              DatabaseService databaseService = DatabaseService();
+              IndexSt.entreprise = await databaseService.entrepriseData();
+            });
             return IndexSt();
           }
           break;

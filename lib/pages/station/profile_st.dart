@@ -1,8 +1,14 @@
+import 'dart:io';
+import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/database.dart';
+import 'package:FD_flutter/services/profile_picture.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+
+String profileURL;
 
 class ProfilSt extends StatefulWidget {
   @override
@@ -56,6 +62,74 @@ class _ProfilStState extends State<ProfilSt> {
     });
   }
 
+  final picker = ImagePicker();
+
+  Future<File> getImage(ImageSource source) async {
+    final pickedFile = await picker.getImage(source: source);
+    if (pickedFile != null) {
+      return File(pickedFile.path);
+    }
+    print('naaaaani');
+    return null;
+  }
+
+  void _showImageSettingsPanel() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            margin: EdgeInsets.all(50),
+            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () async {
+                    File profileImage = await getImage(ImageSource.camera);
+                    if (profileImage != null) {
+                      profileURL = await uploadFile(profileImage);
+                      setState(() {
+                        IndexSt.entreprise.photoURL = profileURL;
+                      });
+                    }
+                  },
+                  child: Material(
+                      color: Colors.red[900],
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Icon(Icons.camera_alt,
+                            color: Colors.white, size: 40.0),
+                      ))),
+                ),
+                InkWell(
+                  onTap: () async {
+                    File profileImage = await getImage(ImageSource.gallery);
+                    if (profileImage != null) {
+                      profileURL = await uploadFile(profileImage);
+                      setState(() {
+                        IndexSt.entreprise.photoURL = profileURL;
+                      });
+                    }
+                  },
+                  child: Material(
+                      color: Colors.red[900],
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child:
+                            Icon(Icons.photo, color: Colors.white, size: 40.0),
+                      ))),
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,12 +146,17 @@ class _ProfilStState extends State<ProfilSt> {
                   background: Container(
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage('assets/s4.png'),
+                              image: IndexSt.entreprise?.photoURL == null
+                                  ? AssetImage('assets/s4.png')
+                                  : NetworkImage(IndexSt.entreprise.photoURL),
                               fit: BoxFit.cover)),
-                      child: Icon(
-                        Icons.edit,
+                      child: IconButton(
+                        onPressed: () async {
+                          _showImageSettingsPanel();
+                        },
+                        icon: Icon(Icons.edit),
                         color: Colors.white,
-                        size: 40.0,
+                        iconSize: 40.0,
                       )),
                 ),
               ),
@@ -719,12 +798,11 @@ class _ProfilStState extends State<ProfilSt> {
                                                       hintStyle: TextStyle(
                                                           color: Colors.grey),
                                                       border: InputBorder.none,
-                                                    ),onChanged:
-                                                                    (val) {
-                                                                  setState(() =>
-                                                                      emailTmp =
-                                                                          val);
-                                                                },
+                                                    ),
+                                                    onChanged: (val) {
+                                                      setState(
+                                                          () => emailTmp = val);
+                                                    },
                                                   ),
                                                 ),
                                               ],

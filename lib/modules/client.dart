@@ -5,6 +5,7 @@ class Client {
   final String sexe;
   final String cin;
   final String tele;
+  final String photoURL;
   final int ville;
 
   Client(
@@ -14,5 +15,6 @@ class Client {
       this.sexe,
       this.cin,
       this.tele,
+      this.photoURL,
       this.ville});
 }

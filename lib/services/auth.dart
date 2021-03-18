@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
   FirebaseAuth _auth = FirebaseAuth.instance;
+  AuthResult _result;
   static String type;
   static String error = "An undefined Error happened.";
   // create user obj based on firebase user
@@ -22,21 +23,31 @@ class AuthService {
   // sign in with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
     FirebaseUser user;
-    AuthResult result;
     try {
       type = await _getAccountType(email);
-      result = await _auth.signInWithEmailAndPassword(
+      _result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
     } catch (error) {
       _findError(error.code);
       return null;
     }
-    user = result.user;
-
+    user = _result.user;
     print(type);
     return _userFromFirebaseUser(
       user,
     );
+  }
+
+//  Update elail of the current user
+  Future updateEmail(email) async {
+    FirebaseUser firebaseUser = await _auth.currentUser();
+    String currentEmail = firebaseUser.email;
+    await _result.user.updateEmail(email);
+    Firestore.instance.collection('user').document(currentEmail).delete();
+    Firestore.instance
+        .collection('user')
+        .document(email)
+        .setData({'account': type});
   }
 
   _findError(dynamic code) {
@@ -100,5 +111,11 @@ class AuthService {
       }
     });
     return typeAccount;
+  }
+
+  Future<String> currentUser() async {
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseUser user = await _auth.currentUser();
+    return user.uid;
   }
 }

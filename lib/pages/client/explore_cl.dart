@@ -114,14 +114,17 @@ class _ExploreClState extends State<ExploreCl> {
                       Positioned(
                         bottom: 0,
                         right: 0,
-                        child: FloatingActionButton(
-                            backgroundColor: Colors.white.withOpacity(0),
-                            onPressed: () {
-                              setState(() {
-                                _changeFav();
-                              });
-                            },
-                            child: _adoreIcon),
+                        child: RaisedButton(
+                          onPressed: () {},
+                        ),
+                        // child: FloatingActionButton(
+                        //     backgroundColor: Colors.white.withOpacity(0),
+                        //     onPressed: () {
+                        //       setState(() {
+                        //         _changeFav();
+                        //       });
+                        //     },
+                        //     child: _adoreIcon),
                       )
                     ],
                   ),
@@ -140,7 +143,9 @@ class _ExploreClState extends State<ExploreCl> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => StationProfilCl()));
+                                    builder: (context) => StationProfilCl(
+                                          doc: document,
+                                        )));
                           },
                           child: Text(
                             '${document['titre']}',
@@ -200,7 +205,9 @@ class _ExploreClState extends State<ExploreCl> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                StationProfilCl()));
+                                                StationProfilCl(
+                                                  doc: document,
+                                                )));
                                   },
                                   icon: Icon(
                                     Icons.read_more,

@@ -77,7 +77,7 @@ class _IndexClState extends State<IndexCl> {
             margin: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
             child: Column(
               children: <Widget>[
-                BigStation(),
+                _bigStation(context),
                 SizedBox(
                   height: 20,
                 ),
@@ -152,7 +152,7 @@ class _IndexClState extends State<IndexCl> {
                                                       StationProfilCl(
                                                           doc: document)));
                                         },
-                                        child: createSmallCard(document));
+                                        child: _createSmallCard(document));
                                   })?.toList());
                           }
                         },
@@ -171,51 +171,48 @@ class _IndexClState extends State<IndexCl> {
   }
 }
 
-class BigStation extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => StationProfilCl()));
-      },
-      child: Container(
-        child: Column(
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(
-                  'The best of the week',
-                  style: subTitleStyle,
-                ),
-              ],
-            ),
-            Divider(
-              height: 10,
-              thickness: 1,
-            ),
-            Container(
-              margin: const EdgeInsets.only(top: 10.0),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5.0),
-                child: Image.asset(
-                  'assets/s3.jpg',
-                  alignment: Alignment.center,
-                  fit: BoxFit.cover,
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.width - 150,
-                ),
+GestureDetector _bigStation(BuildContext context) {
+  return GestureDetector(
+    onTap: () {
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (context) => StationProfilCl()));
+    },
+    child: Container(
+      child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Text(
+                'The best of the week',
+                style: subTitleStyle,
+              ),
+            ],
+          ),
+          Divider(
+            height: 10,
+            thickness: 1,
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 10.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5.0),
+              child: Image.asset(
+                'assets/s3.jpg',
+                alignment: Alignment.center,
+                fit: BoxFit.cover,
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.width - 150,
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
-    );
-  }
+    ),
+  );
 }
 
-Container createSmallCard(DocumentSnapshot document) {
+Container _createSmallCard(DocumentSnapshot document) {
   return Container(
     height: 220,
     child: Center(

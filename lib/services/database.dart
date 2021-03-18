@@ -1,8 +1,7 @@
 import 'dart:ffi';
-
 import 'package:FD_flutter/modules/client.dart';
-import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/modules/entreprise.dart';
+import 'package:FD_flutter/services/profile_picture.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -32,19 +31,19 @@ class DatabaseService {
     });
   }
 
-  Future<String> getAccountType() async {
-    await Firestore.instance
-        .collection('user')
-        .document(uid)
-        .get()
-        .then((value) async {
-      print(value.data['account'].toString());
-      dynamic kk = await value.data['account'];
-      print(kk);
-      return await kk;
-    });
-    return null;
-  }
+  // Future<String> getAccountType() async {
+  //   await Firestore.instance
+  //       .collection('user')
+  //       .document(uid)
+  //       .get()
+  //       .then((value) async {
+  //     print(value.data['account'].toString());
+  //     dynamic kk = await value.data['account'];
+  //     print(kk);
+  //     return await kk;
+  //   });
+  //   return null;
+  // }
 
   Future<void> updateClientData(String nom, String prenom, String email,
       String sexe, String cin, String tele, String ville) async {
@@ -184,10 +183,11 @@ class DatabaseService {
     return entrepriseCollection.snapshots();
   }
 
-  Future<Entreprise> getDataEnt() async {
+  Future<Entreprise> entrepriseData() async {
     String title;
     String description;
     String phone;
+    String address;
     String email;
     final FirebaseAuth auth = FirebaseAuth.instance;
     final FirebaseUser user = await auth.currentUser();
@@ -201,11 +201,17 @@ class DatabaseService {
       description = await value.data['description'];
       email = await value.data['email'];
       phone = await value.data['tele'];
+      address = await value.data['adresse'];
       print(title);
       print(phone);
-      return Entreprise(
-          titre: title, description: description, email: email, tele: phone);
     });
-    return Entreprise(titre: "HHHH");
+    String photo = await readImage();
+    return Entreprise(
+        titre: title,
+        description: description,
+        tele: phone,
+        email: email,
+        adresse: address,
+        photoURL: photo);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:FD_flutter/pages/client/station_cl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/client/drawer_cl.dart';
 
@@ -30,13 +31,13 @@ class _FavorisClState extends State<FavorisCl> {
       drawer: DrawerCL(),
       body: SingleChildScrollView(
         child: Column(
-          children: [createCard()],
-        ),
+            // children: [createCard()],
+            ),
       ),
     );
   }
 
-  Container createCard() {
+  Container createCard(DocumentSnapshot document) {
     return Container(
       height: 230,
       child: Center(
@@ -53,7 +54,9 @@ class _FavorisClState extends State<FavorisCl> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => StationProfilCl()));
+                              builder: (context) => StationProfilCl(
+                                    doc: document,
+                                  )));
                     },
                     child: Stack(
                       children: [
@@ -67,14 +70,17 @@ class _FavorisClState extends State<FavorisCl> {
                         Positioned(
                           bottom: 0,
                           right: 0,
-                          child: FloatingActionButton(
-                            backgroundColor: Colors.white.withOpacity(0),
-                            onPressed: null,
-                            child: Icon(
-                              Icons.favorite,
-                              color: Colors.red[900],
-                            ),
+                          child: RaisedButton(
+                            onPressed: () {},
                           ),
+                          // child: FloatingActionButton(
+                          //   backgroundColor: Colors.white.withOpacity(0),
+                          //   onPressed: null,
+                          //   child: Icon(
+                          //     Icons.favorite,
+                          //     color: Colors.red[900],
+                          //   ),
+                          // ),
                         )
                       ],
                     ),
@@ -137,11 +143,11 @@ class _FavorisClState extends State<FavorisCl> {
                                   alignment: Alignment.topCenter,
                                   child: FlatButton(
                                       onPressed: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    StationProfilCl()));
+                                        // Navigator.push(
+                                        //     context,
+                                        //     MaterialPageRoute(
+                                        //         builder: (context) =>
+                                        //             StationProfilCl()));
                                       },
                                       child: Column(
                                         children: [
