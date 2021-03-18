@@ -67,7 +67,7 @@ class _profileClState extends State<profileCl> {
     return WillPopScope(
       // ignore: missing_return
       onWillPop: () {
-        selectedIndex = 0;
+        ButtomBarCl.selectedIndex = 0;
         Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) => IndexCl()));
       },

@@ -89,7 +89,7 @@ class _profileCLModifierState extends State<profileCLModifier>
             IconButton(
                 icon: Icon(Icons.home),
                 onPressed: () {
-                  selectedIndex = 0;
+                  ButtomBarCl.selectedIndex = 0;
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => IndexCl()));
                 })
@@ -425,42 +425,40 @@ class _profileCLModifierState extends State<profileCLModifier>
                 child: new Text("Save"),
                 textColor: Colors.white,
                 color: Colors.red[900],
-                onPressed: () async{
+                onPressed: () async {
                   setState(() {
                     _status = true;
                     FocusScope.of(context).requestFocus(new FocusNode());
-                    
-                      if (nomTmp != null) {
-                        nom = nomTmp;
-                      }
-                      if (prenomTmp != null) {
-                        prenom = prenomTmp;
-                      }
-                      if (teleTmp != null) {
-                        tele = teleTmp;
-                      }
-                      if (cinTmp != null) {
-                        cin = cinTmp;
-                      }
-                      if (villeTmp != null) {
-                        ville = villeTmp;
-                      }
-                      _controller1.clear();
-                      _controller2.clear();
-                      _controller3.clear();
-                      _controller4.clear();
-                      _controller5.clear();
-                      _controller6.clear();
 
-                      
-                  });final FirebaseAuth auth = FirebaseAuth.instance;
-                      final FirebaseUser user = await auth.currentUser();
-                      final uid = user.uid;
-                      final DatabaseService _auth = DatabaseService(uid: uid);
-                      email = Provider.of<User>(context, listen: true).email;
-                      await _auth.updateClientData(
-                          nom, prenom, email, sexe, cin, tele, ville);
-                    
+                    if (nomTmp != null) {
+                      nom = nomTmp;
+                    }
+                    if (prenomTmp != null) {
+                      prenom = prenomTmp;
+                    }
+                    if (teleTmp != null) {
+                      tele = teleTmp;
+                    }
+                    if (cinTmp != null) {
+                      cin = cinTmp;
+                    }
+                    if (villeTmp != null) {
+                      ville = villeTmp;
+                    }
+                    _controller1.clear();
+                    _controller2.clear();
+                    _controller3.clear();
+                    _controller4.clear();
+                    _controller5.clear();
+                    _controller6.clear();
+                  });
+                  final FirebaseAuth auth = FirebaseAuth.instance;
+                  final FirebaseUser user = await auth.currentUser();
+                  final uid = user.uid;
+                  final DatabaseService _auth = DatabaseService(uid: uid);
+                  email = Provider.of<User>(context, listen: true).email;
+                  await _auth.updateClientData(
+                      nom, prenom, email, sexe, cin, tele, ville);
                 },
                 shape: new RoundedRectangleBorder(
                     borderRadius: new BorderRadius.circular(10.0)),

@@ -63,7 +63,7 @@ class DrawerCL extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
-            selectedIndex = 0;
+            ButtomBarCl.selectedIndex = 0;
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => IndexCl()));
           },

@@ -23,7 +23,7 @@ class _SettingsStState extends State<SettingsSt> {
             IconButton(
                 icon: Icon(Icons.home),
                 onPressed: () {
-                  selectedIndexSt = 0;
+                  ButtomBarSt.selectedIndexSt = 0;
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => IndexSt()));
                 })

@@ -1,7 +1,5 @@
 import 'package:FD_flutter/modules/user.dart';
-import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/services/database.dart';
-import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -55,7 +53,7 @@ class _AddLivreurState extends State<AddLivreur> {
                   ? Firestore.instance.collection('client').snapshots()
                   : Firestore.instance
                       .collection('client')
-                      .where('email', isEqualTo: searchTerm)
+                      .where('email', isGreaterThanOrEqualTo: searchTerm)
                       .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {

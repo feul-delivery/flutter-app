@@ -5,9 +5,8 @@ import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/pages/station/commandes_st.dart';
 import 'package:FD_flutter/pages/station/livreurs_st.dart';
 
-int selectedIndexSt = 0;
-
 class ButtomBarSt extends StatefulWidget {
+  static int selectedIndexSt = 0;
   @override
   _ButtomBarStState createState() => _ButtomBarStState();
 }
@@ -49,7 +48,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
 
   @override
   void initState() {
-    _select(selectedIndexSt);
+    _select(ButtomBarSt.selectedIndexSt);
     super.initState();
   }
 
@@ -80,18 +79,18 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
                 return GestureDetector(
                   onTap: () => setState(() {
                     _select(index);
-                    if (selectedIndexSt == 0) {
+                    if (ButtomBarSt.selectedIndexSt == 0) {
                       Navigator.pushReplacement(
                           context,
                           PageTransition(
                               type: PageTransitionType.fade, child: IndexSt()));
-                    } else if (selectedIndexSt == 1) {
+                    } else if (ButtomBarSt.selectedIndexSt == 1) {
                       Navigator.push(
                           context,
                           PageTransition(
                               type: PageTransitionType.fade,
                               child: ToutCommandesSt()));
-                    } else if (selectedIndexSt == 2) {
+                    } else if (ButtomBarSt.selectedIndexSt == 2) {
                       Navigator.push(
                           context,
                           PageTransition(
@@ -99,7 +98,8 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
                               child: LivreurSt()));
                     }
                   }),
-                  child: _buildItemWidget(item, index == selectedIndexSt),
+                  child: _buildItemWidget(
+                      item, index == ButtomBarSt.selectedIndexSt),
                 );
               }).toList(),
             ),
@@ -124,7 +124,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
   }
 
   _select(int index) {
-    selectedIndexSt = index;
+    ButtomBarSt.selectedIndexSt = index;
     indicatorAlignX = -1 + -(2 / (items.length - 1) * index);
   }
 

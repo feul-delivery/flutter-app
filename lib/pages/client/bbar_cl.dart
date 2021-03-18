@@ -4,9 +4,8 @@ import 'explore_cl.dart';
 import 'index_cl.dart';
 import 'profile_cl.dart';
 
-int selectedIndex = 0;
-
 class ButtomBarCl extends StatefulWidget {
+  static int selectedIndex = 0;
   @override
   State createState() => _ButtomBarClState();
 }
@@ -48,7 +47,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
 
   @override
   void initState() {
-    _select(selectedIndex);
+    _select(ButtomBarCl.selectedIndex);
     super.initState();
   }
 
@@ -79,18 +78,18 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
                 return GestureDetector(
                   onTap: () => setState(() {
                     _select(index);
-                    if (selectedIndex == 0) {
+                    if (ButtomBarCl.selectedIndex == 0) {
                       Navigator.pushReplacement(
                           context,
                           PageTransition(
                               type: PageTransitionType.fade, child: IndexCl()));
-                    } else if (selectedIndex == 1) {
+                    } else if (ButtomBarCl.selectedIndex == 1) {
                       Navigator.push(
                           context,
                           PageTransition(
                               type: PageTransitionType.fade,
                               child: ExploreCl()));
-                    } else if (selectedIndex == 2) {
+                    } else if (ButtomBarCl.selectedIndex == 2) {
                       Navigator.push(
                           context,
                           PageTransition(
@@ -98,7 +97,8 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
                               child: profileCl()));
                     }
                   }),
-                  child: _buildItemWidget(item, index == selectedIndex),
+                  child: _buildItemWidget(
+                      item, index == ButtomBarCl.selectedIndex),
                 );
               }).toList(),
             ),
@@ -123,7 +123,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
   }
 
   _select(int index) {
-    selectedIndex = index;
+    ButtomBarCl.selectedIndex = index;
     indicatorAlignX = -1 + -(2 / (items.length - 1) * index);
   }
 

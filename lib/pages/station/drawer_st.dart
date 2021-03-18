@@ -72,7 +72,7 @@ class DrawerSt extends StatelessWidget {
         ),
         ListTile(
           onTap: () {
-            selectedIndexSt = 1;
+            ButtomBarSt.selectedIndexSt = 1;
             Navigator.push(
                 context,
                 PageTransition(

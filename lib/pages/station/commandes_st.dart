@@ -15,7 +15,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
     return WillPopScope(
       // ignore: missing_return
       onWillPop: () {
-        selectedIndexSt = 0;
+        ButtomBarSt.selectedIndexSt = 0;
         Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) => IndexSt()));
       },

@@ -105,7 +105,7 @@ class SmallStation extends StatelessWidget {
                 opacity: 0.6,
                 child: GestureDetector(
                   onTap: () {
-                    selectedIndex = 1;
+                    ButtomBarCl.selectedIndex = 1;
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) => ExploreCl()));
                   },

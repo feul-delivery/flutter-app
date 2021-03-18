@@ -1,4 +1,3 @@
-import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
@@ -6,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
 
 // ignore: camel_case_types
 class InitialProfileSt extends StatefulWidget {

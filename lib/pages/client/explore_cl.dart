@@ -20,7 +20,7 @@ class _ExploreClState extends State<ExploreCl> {
     return WillPopScope(
       // ignore: missing_return
       onWillPop: () {
-        selectedIndex = 0;
+        ButtomBarCl.selectedIndex = 0;
         Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) => IndexCl()));
       },
