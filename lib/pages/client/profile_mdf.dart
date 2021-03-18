@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/services/profile_picture.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -202,21 +204,46 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                new Container(
-                                    width: 140.0,
-                                    height: 140.0,
-                                    decoration: new BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: new DecorationImage(
-                                        image: IndexCl.client?.photoURL == null
-                                            ? new AssetImage(
-                                                'assets/profile.png')
-                                            : new NetworkImage(
-                                                IndexCl.client.photoURL,
-                                              ),
-                                        fit: BoxFit.cover,
+                                IndexSt.entreprise?.photoURL == null
+                                    ? Container(
+                                        width: 140.0,
+                                        height: 140.0,
+                                        decoration: new BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          image: new DecorationImage(
+                                            image:
+                                                IndexCl.client?.photoURL == null
+                                                    ? new AssetImage(
+                                                        'assets/total.png')
+                                                    : new NetworkImage(
+                                                        IndexCl.client.photoURL,
+                                                      ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ))
+                                    : CachedNetworkImage(
+                                        imageUrl: IndexSt.entreprise?.photoURL,
+                                        imageBuilder: (context,
+                                                imageProvider) =>
+                                            new Container(
+                                                width: 140.0,
+                                                height: 140.0,
+                                                decoration: new BoxDecoration(
+                                                  shape: BoxShape.circle,
+                                                  image: new DecorationImage(
+                                                    image: imageProvider,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                )),
+                                        progressIndicatorBuilder: (context, url,
+                                                downloadProgress) =>
+                                            CircularProgressIndicator(
+                                                value:
+                                                    downloadProgress.progress),
+                                        errorWidget: (context, url, error) =>
+                                            Icon(Icons.error,
+                                                color: Colors.red[900]),
                                       ),
-                                    )),
                               ],
                             ),
                             Padding(

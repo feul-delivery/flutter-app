@@ -1,6 +1,7 @@
 import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/pages/station/profile_st.dart';
@@ -25,13 +26,31 @@ class DrawerSt extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CircleAvatar(
-                    radius: 50.0,
-                    backgroundImage: IndexSt.entreprise?.photoURL == null
-                        ? AssetImage('assets/total.png')
-                        : NetworkImage(
-                            IndexSt.entreprise?.photoURL,
-                          )),
+                IndexSt.entreprise?.photoURL == null
+                    ? AssetImage('assets/total.png')
+                    : CachedNetworkImage(
+                        imageUrl: IndexSt.entreprise?.photoURL,
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                          radius: 50.0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                                // colorFilter: ColorFilter.mode(
+                                //     Colors.red, BlendMode.colorBurn)
+                              ),
+                            ),
+                          ),
+                        ),
+                        progressIndicatorBuilder:
+                            (context, url, downloadProgress) =>
+                                CircularProgressIndicator(
+                                    value: downloadProgress.progress),
+                        errorWidget: (context, url, error) =>
+                            Icon(Icons.error, color: Colors.red[900]),
+                      ),
                 SizedBox(
                   height: 5.0,
                 ),

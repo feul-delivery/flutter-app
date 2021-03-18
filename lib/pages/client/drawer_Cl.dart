@@ -1,4 +1,5 @@
 import 'package:FD_flutter/pages/client/commandes_cl.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/pages/client/settings_cl.dart';
 import 'package:FD_flutter/services/auth.dart';
@@ -34,9 +35,20 @@ class _DrawerCLState extends State<DrawerCL> {
                   radius: 35.0,
                   backgroundImage: IndexCl.client?.photoURL == null
                       ? AssetImage('assets/profile.png')
-                      : NetworkImage(
-                          IndexCl.client.photoURL,
-                        ),
+                      : CachedNetworkImage(
+  imageUrl: IndexCl.client.photoURL,
+  imageBuilder: (context, imageProvider) => Container(
+    decoration: BoxDecoration(
+      image: DecorationImage(
+          image: imageProvider,
+          fit: BoxFit.cover,
+          colorFilter:
+              ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
+    ),
+  ),
+  placeholder: (context, url) => CircularProgressIndicator(),
+  errorWidget: (context, url, error) => Icon(Icons.error),
+),
                 ),
                 Column(
                   children: [

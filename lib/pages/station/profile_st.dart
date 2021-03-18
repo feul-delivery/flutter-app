@@ -3,6 +3,7 @@ import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/services/profile_picture.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -143,22 +144,30 @@ class _ProfilStState extends State<ProfilSt> {
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.pin,
-                  background: Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: IndexSt.entreprise?.photoURL == null
-                                  ? new AssetImage('assets/s4.png')
-                                  : new NetworkImage(
-                                      IndexSt.entreprise.photoURL),
-                              fit: BoxFit.cover)),
-                      child: IconButton(
-                        onPressed: () async {
-                          _showImageSettingsPanel();
-                        },
-                        icon: Icon(Icons.edit),
-                        color: Colors.white,
-                        iconSize: 40.0,
-                      )),
+                  background: IndexSt.entreprise?.photoURL == null
+                      ? AssetImage('assets/total.png')
+                      : CachedNetworkImage(
+                          imageUrl: IndexSt.entreprise?.photoURL,
+                          imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: imageProvider, fit: BoxFit.cover)),
+                              child: IconButton(
+                                onPressed: () async {
+                                  _showImageSettingsPanel();
+                                },
+                                icon: Icon(Icons.edit),
+                                color: Colors.white,
+                                iconSize: 40.0,
+                              )),
+                          progressIndicatorBuilder:
+                              (context, url, downloadProgress) =>
+                                  CircularProgressIndicator(
+                                      value: downloadProgress.progress),
+                          errorWidget: (context, url, error) =>
+                              Icon(Icons.error, color: Colors.red[900]),
+                        ),
+
                   // FutureBuilder<AdvancedNetworkImage>(
                   //     future: _getImage(context, IndexSt.entreprise.photoURL),
                   //     builder: (context, snapshot) {

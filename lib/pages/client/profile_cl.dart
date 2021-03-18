@@ -1,6 +1,7 @@
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'bbar_cl.dart';
@@ -104,8 +105,28 @@ class _ProfileClState extends State<ProfileCl> {
                           ],
                           shape: BoxShape.circle,
                           image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage('assets/profile.png'))),
+                            fit: BoxFit.cover,
+                            image: IndexCl.client?.photoURL == null
+                                ? AssetImage('assets/profile.png')
+                                : CachedNetworkImage(
+                                    imageUrl: IndexCl.client.photoURL,
+                                    imageBuilder: (context, imageProvider) =>
+                                        Container(
+                                      decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
+                                            colorFilter: ColorFilter.mode(
+                                                Colors.red,
+                                                BlendMode.colorBurn)),
+                                      ),
+                                    ),
+                                    placeholder: (context, url) =>
+                                        CircularProgressIndicator(),
+                                    errorWidget: (context, url, error) =>
+                                        Icon(Icons.error),
+                                  ),
+                          )),
                     ),
                   ],
                 ),
