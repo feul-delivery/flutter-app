@@ -1,12 +1,12 @@
 class Client {
-  final String nom;
-  final String prenom;
-  final String email;
-  final String sexe;
-  final String cin;
-  final String tele;
-  final String photoURL;
-  final int ville;
+  String nom;
+  String prenom;
+  String email;
+  String sexe;
+  String cin;
+  String tele;
+  String photoURL;
+  String ville;
 
   Client(
       {this.nom,

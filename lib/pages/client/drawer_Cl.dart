@@ -1,4 +1,3 @@
-import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/commandes_cl.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/pages/client/settings_cl.dart';
@@ -6,7 +5,6 @@ import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'favoris_cl.dart';
 import 'index_cl.dart';
 import 'bbar_cl.dart';
@@ -29,14 +27,14 @@ class DrawerCL extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 35.0,
-                  backgroundImage: NetworkImage(
-                    "https://images.unsplash.com/photo-1594616838951-c155f8d978a0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
-                  ),
+                  backgroundImage: IndexCl.client?.photoURL == null
+                      ? AssetImage('assets/profile.png')
+                      : NetworkImage(IndexCl.client.photoURL),
                 ),
                 Column(
                   children: [
                     Text(
-                      "Name surname",
+                      "${IndexCl.client?.nom} ${IndexCl.client?.prenom}",
                       style: TextStyle(
                         fontSize: 18.0,
                         fontWeight: FontWeight.w800,
@@ -46,7 +44,7 @@ class DrawerCL extends StatelessWidget {
                       height: 5.0,
                     ),
                     Text(
-                      "Contact@gmail.com",
+                      "${IndexCl.client?.email}",
                       style: TextStyle(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w400,
@@ -79,7 +77,7 @@ class DrawerCL extends StatelessWidget {
         ListTile(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => profileCLModifier()));
+                builder: (BuildContext context) => ProfileCLModifier()));
           },
           leading: Icon(
             Icons.person,
@@ -145,7 +143,6 @@ class DrawerCL extends StatelessWidget {
               child: FlatButton(
                 onPressed: () async {
                   await _auth.signOut();
-                  print(Provider.of<User>(context).uid);
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (BuildContext context) => new Wrapper()));
                 },

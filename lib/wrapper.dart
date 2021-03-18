@@ -24,6 +24,10 @@ class Wrapper extends StatelessWidget {
       switch (AuthService.type) {
         case "Client":
           {
+            Future.delayed(Duration(seconds: 5)).then((value) async {
+              DatabaseService databaseService = DatabaseService();
+              IndexCl.client = await databaseService.clientData();
+            });
             return IndexCl();
           }
           break;

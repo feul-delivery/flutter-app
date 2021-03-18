@@ -92,7 +92,7 @@ class AuthService {
   // sign out
   Future signOut() async {
     try {
-      type = '';
+      type = null;
       return await _auth.signOut();
     } catch (error) {
       print(error.toString());

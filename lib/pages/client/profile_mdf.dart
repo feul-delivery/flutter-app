@@ -1,23 +1,27 @@
+import 'dart:io';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/database.dart';
+import 'package:FD_flutter/services/profile_picture.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'bbar_cl.dart';
 import 'drawer_cl.dart';
 import 'index_cl.dart';
 
-// ignore: camel_case_types
-class profileCLModifier extends StatefulWidget {
+String profileURL;
+
+class ProfileCLModifier extends StatefulWidget {
   @override
-  _profileCLModifierState createState() => _profileCLModifierState();
+  _ProfileCLModifierState createState() => _ProfileCLModifierState();
 }
 
 // ignore: camel_case_types
-class _profileCLModifierState extends State<profileCLModifier>
+class _ProfileCLModifierState extends State<ProfileCLModifier>
     with SingleTickerProviderStateMixin {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
@@ -75,6 +79,74 @@ class _profileCLModifierState extends State<profileCLModifier>
         });
       }
     });
+  }
+
+  final picker = ImagePicker();
+
+  Future<File> getImage(ImageSource source) async {
+    final pickedFile = await picker.getImage(source: source);
+    if (pickedFile != null) {
+      return File(pickedFile.path);
+    }
+    print('naaaaani');
+    return null;
+  }
+
+  void _showImageSettingsPanel() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return Container(
+            margin: EdgeInsets.all(50),
+            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                InkWell(
+                  onTap: () async {
+                    File profileImage = await getImage(ImageSource.camera);
+                    if (profileImage != null) {
+                      profileURL = await uploadFile(profileImage);
+                      setState(() {
+                        IndexCl.client.photoURL = profileURL;
+                      });
+                    }
+                  },
+                  child: Material(
+                      color: Colors.red[900],
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Icon(Icons.camera_alt,
+                            color: Colors.white, size: 40.0),
+                      ))),
+                ),
+                InkWell(
+                  onTap: () async {
+                    File profileImage = await getImage(ImageSource.gallery);
+                    if (profileImage != null) {
+                      profileURL = await uploadFile(profileImage);
+                      setState(() {
+                        IndexCl.client.photoURL = profileURL;
+                      });
+                    }
+                  },
+                  child: Material(
+                      color: Colors.red[900],
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: Center(
+                          child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child:
+                            Icon(Icons.photo, color: Colors.white, size: 40.0),
+                      ))),
+                ),
+              ],
+            ),
+          );
+        });
   }
 
   @override
@@ -152,8 +224,11 @@ class _profileCLModifierState extends State<profileCLModifier>
                                     new CircleAvatar(
                                       backgroundColor: Colors.red[900],
                                       radius: 25.0,
-                                      child: new Icon(
-                                        Icons.camera_alt,
+                                      child: new IconButton(
+                                        onPressed: () async {
+                                          _showImageSettingsPanel();
+                                        },
+                                        icon: Icon(Icons.camera_alt),
                                         color: Colors.white,
                                       ),
                                     )

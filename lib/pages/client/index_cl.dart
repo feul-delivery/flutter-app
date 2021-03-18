@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:FD_flutter/modules/client.dart';
 import 'package:FD_flutter/pages/client/favoris_cl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ import 'bbar_cl.dart';
 import 'explore_cl.dart';
 
 class IndexCl extends StatefulWidget {
+  static Client client;
   @override
   _IndexClState createState() => _IndexClState();
 }

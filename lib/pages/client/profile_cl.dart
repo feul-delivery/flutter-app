@@ -1,5 +1,5 @@
-import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
+import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -83,7 +83,7 @@ class _profileClState extends State<profileCl> {
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
-                            profileCLModifier()));
+                            ProfileCLModifier()));
                   })
             ],
             leading: Builder(

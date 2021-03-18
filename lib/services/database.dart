@@ -189,8 +189,8 @@ class DatabaseService {
     String phone;
     String address;
     String email;
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final FirebaseUser user = await auth.currentUser();
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseUser user = await _auth.currentUser();
     final uid = user.uid;
     await Firestore.instance
         .collection('entreprise')
@@ -212,6 +212,45 @@ class DatabaseService {
         tele: phone,
         email: email,
         adresse: address,
+        photoURL: photo);
+  }
+
+  Future<Client> clientData() async {
+    String nom;
+    String prenom;
+    String email;
+    String cin;
+    String phone;
+    String ville;
+    String sexe;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseUser user = await _auth.currentUser();
+    final uid = user.uid;
+    await Firestore.instance
+        .collection('client')
+        .document(uid)
+        .get()
+        .then((value) async {
+      nom = await value.data['nom'];
+      prenom = await value.data['prenom'];
+      email = await value.data['email'];
+
+      cin = await value.data['cin'];
+      phone = await value.data['tele'];
+      ville = await value.data['ville'];
+      sexe = await value.data['sexe'];
+      print(nom);
+      print(phone);
+    });
+    String photo = await readImage();
+    return Client(
+        sexe: sexe,
+        nom: nom,
+        cin: cin,
+        prenom: prenom,
+        tele: phone,
+        email: email,
+        ville: ville,
         photoURL: photo);
   }
 }
