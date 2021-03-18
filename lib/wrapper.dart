@@ -5,19 +5,22 @@ import 'package:FD_flutter/pages/admin/index_admin.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/livreur/index_lv.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
+import 'package:FD_flutter/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     // return either the index or Authenticate widget
-    if (Provider.of<User>(context, listen: true)?.uid == "" ||
-        Provider.of<User>(context, listen: true)?.uid == null) {
-      print(Provider.of<User>(context, listen: true)?.uid);
+    if (user == null) {
       return Authenticate();
     } else {
-      switch (Provider.of<User>(context, listen: true)?.account) {
+      print(user?.uid);
+      print(user.account);
+      print(AuthService.type);
+      switch (AuthService.type) {
         case "Client":
           {
             return IndexCl();

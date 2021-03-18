@@ -1,14 +1,9 @@
-import 'package:flutter/cupertino.dart';
-
-class User with ChangeNotifier {
-  String uid;
-  String account;
-  String email;
+class User {
+  final String uid;
+  final String account;
+  final String email;
 
   User({this.uid, this.account, this.email});
-  setAll(String uid, String account, String email) {
-    this.uid = uid;
-    this.account = account;
-    this.email = email;
-  }
+  // ignore: non_constant_identifier_names
+
 }

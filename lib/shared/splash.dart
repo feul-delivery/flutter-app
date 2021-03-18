@@ -1,7 +1,6 @@
-import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/StarterPage.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:page_transition/page_transition.dart';
 import 'dart:async';
@@ -15,10 +14,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final AuthService _auth = AuthService();
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 5), () async {
+      await _auth.signOut();
       await _getIsFirstTimeFromSharedPref();
       if (!isFirstTime) {
         Navigator.pushReplacement(context,
@@ -30,7 +31,6 @@ class _SplashScreenState extends State<SplashScreen> {
             PageTransition(
                 type: PageTransitionType.fade, child: StarterPage()));
       }
-      Provider.of<User>(context, listen: true).setAll("", "", "");
     });
   }
 

@@ -1,13 +1,8 @@
-import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
-import 'package:FD_flutter/wrapper.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -18,7 +13,7 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
@@ -272,86 +267,19 @@ class _SignInState extends State<SignIn> {
                                           if (_formKey.currentState
                                               .validate()) {
                                             setState(() => loading = true);
-                                            dynamic result;
-                                            try {
-                                              result = await _auth
-                                                  .signInWithEmailAndPassword(
-                                                      email: email,
-                                                      password: password);
-                                            } catch (error) {
-                                              switch (error.code) {
-                                                case "ERROR_INVALID_EMAIL":
-                                                  errorMessage =
-                                                      "Your email address appears to be malformed.";
-                                                  break;
-                                                case "ERROR_WRONG_PASSWORD":
-                                                  errorMessage =
-                                                      "Your password is wrong.";
-                                                  break;
-                                                case "ERROR_USER_NOT_FOUND":
-                                                  errorMessage =
-                                                      "User with this email doesn't exist.";
-                                                  break;
-                                                case "ERROR_USER_DISABLED":
-                                                  errorMessage =
-                                                      "User with this email has been disabled.";
-                                                  break;
-                                                case "ERROR_TOO_MANY_REQUESTS":
-                                                  errorMessage =
-                                                      "Too many requests. Try again later.";
-                                                  break;
-                                                case "ERROR_OPERATION_NOT_ALLOWED":
-                                                  errorMessage =
-                                                      "Signing in with Email and Password is not enabled.";
-                                                  break;
-                                                default:
-                                                  errorMessage =
-                                                      "An undefined Error happened.";
-                                              }
 
+                                            dynamic user = await _auth
+                                                .signInWithEmailAndPassword(
+                                                    email, password);
+                                            if (user == null) {
+                                              errorMessage = AuthService.error;
                                               setState(() {
                                                 loading = false;
                                               });
                                             }
-
-                                            if (result == null) {
-                                              setState(() {
-                                                loading = false;
-                                              });
-                                            } else {
-                                              final FirebaseAuth auth =
-                                                  FirebaseAuth.instance;
-                                              final FirebaseUser user =
-                                                  await auth.currentUser();
-                                              final uid = user.uid;
-                                              Provider.of<User>(context,
-                                                      listen: true)
-                                                  .uid = uid;
-
-                                              dynamic type;
-
-                                              await Firestore.instance
-                                                  .collection('user')
-                                                  .document(uid)
-                                                  .get()
-                                                  .then((value) async {
-                                                if (value.exists) {
-                                                  type = await value
-                                                      .data['account'];
-                                                  Provider.of<User>(context,
-                                                          listen: true)
-                                                      .account = type;
-                                                }
-                                              });
-
-                                              setState(() => loading = false);
-                                              Navigator.pushReplacement(
-                                                  context,
-                                                  PageTransition(
-                                                      type: PageTransitionType
-                                                          .fade,
-                                                      child: Wrapper()));
-                                            }
+                                            setState(() {
+                                              loading = false;
+                                            });
                                           }
                                         },
                                         child: Text(

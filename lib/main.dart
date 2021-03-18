@@ -7,8 +7,6 @@ import 'modules/user.dart';
 void main() => runApp(FuelDeliveryApp());
 
 class FuelDeliveryApp extends StatelessWidget {
-  const FuelDeliveryApp({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return StreamProvider<User>.value(

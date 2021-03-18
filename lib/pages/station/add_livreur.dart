@@ -60,7 +60,12 @@ class _AddLivreurState extends State<AddLivreur> {
                             child: CircularProgressIndicator(
                                 backgroundColor: Colors.red[900])));
                   case ConnectionState.none:
-                    return Text('Oops no data');
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('Oops no data.'),
+                    ));
+                    return Text(
+                      'Oops no data',
+                    );
                   case ConnectionState.done:
                     return Text('Done');
                   default:
