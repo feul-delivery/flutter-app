@@ -26,8 +26,8 @@ class DatabaseService {
   final CollectionReference entrepriseCollection =
       Firestore.instance.collection('entreprise');
 
-  Future<void> updateUserData(String account) async {
-    return await userCollection.document(uid).setData({
+  Future<void> updateUserType(String account, String email) async {
+    return await userCollection.document(email).setData({
       'account': account,
     });
   }
@@ -63,7 +63,7 @@ class DatabaseService {
     return await clientCollection.document(uid).setData({
       'nom': nom,
       'prenom': prenom,
-      'emaim' : email,
+      'emaim': email,
       'sexe': sexe,
       'cin': cin,
       'tele': tele,
@@ -76,12 +76,12 @@ class DatabaseService {
     return clientCollection.snapshots();
   }
 
-  User userDataFromSnapshot(DocumentSnapshot snapshot) {
-    return User(
-      uid: uid,
-      account: snapshot.data['account'],
-    );
-  }
+  // User userDataFromSnapshot(DocumentSnapshot snapshot) {
+  //   return User(
+  //     uid: uid,
+  //     account: snapshot.data['account'],
+  //   );
+  // }
 
   Client _clientFromSnapshot(DocumentSnapshot snapshot) {
     return Client(
@@ -103,7 +103,6 @@ class DatabaseService {
     String nom,
     String prenom,
     String email,
-    String password,
     String cin,
     String sexe,
     String tele,
@@ -111,11 +110,9 @@ class DatabaseService {
     String uidentreprise,
   ) async {
     return await livreurCollection.document(uid).setData({
-      'uid': uid,
       'nom': nom,
       'prenom': prenom,
       'email': email,
-      'password': password,
       'cin': cin,
       'sexe': sexe,
       'tele': tele,
@@ -172,8 +169,6 @@ class DatabaseService {
     String tele,
     String email,
     String address,
-    String like,
-    String dislike,
   }) async {
     return await entrepriseCollection.document(uid).setData({
       'titre': titre,
@@ -181,8 +176,6 @@ class DatabaseService {
       'tele': tele,
       'email': email,
       'adresse': address,
-      'like': like,
-      'dislike': dislike,
     });
   }
 

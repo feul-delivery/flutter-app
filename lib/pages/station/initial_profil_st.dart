@@ -55,7 +55,7 @@ class _initialProfileStState extends State<InitialProfileSt>
                 final DatabaseService _auth = DatabaseService(uid: uid);
                 if (_formKey.currentState.validate()) {
                   setState(() => loading = true);
-                  email = Provider.of<User>(context, listen: true).email;
+                  email = user.email;
                   await _auth.updateEntrepriseData(
                     titre: titre,
                     description: description,

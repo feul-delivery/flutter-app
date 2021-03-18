@@ -1,7 +1,6 @@
-
+import 'package:FD_flutter/modules/livreur.dart';
 
 class Entreprise {
-  final String identreprise;
   final String titre;
   final String description;
   final String tele;
@@ -9,18 +8,14 @@ class Entreprise {
   final String adresse;
   final int like;
   final int dislike;
+  List<Livreur> list;
   Entreprise(
-      {this.identreprise,
-      this.titre,
+      {this.titre,
       this.description,
       this.tele,
       this.email,
       this.adresse,
       this.like,
-      this.dislike});
-  String gettitre() {
-    return this.titre;
-  }
-
- 
+      this.dislike,
+      this.list});
 }

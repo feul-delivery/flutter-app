@@ -38,7 +38,8 @@ class _TypeCompteState extends State<TypeCompte> {
                     final FirebaseAuth auth = FirebaseAuth.instance;
                     final FirebaseUser user = await auth.currentUser();
                     final uid = user.uid;
-                    await DatabaseService(uid: uid).updateUserData("Client");
+                    await DatabaseService(uid: uid)
+                        .updateUserType("Client", user.email);
                     Navigator.pushReplacement(
                         context,
                         PageTransition(
@@ -90,7 +91,7 @@ class _TypeCompteState extends State<TypeCompte> {
                     final FirebaseUser user = await auth.currentUser();
                     final uid = user.uid;
                     await DatabaseService(uid: uid)
-                        .updateUserData("Entreprise");
+                        .updateUserType("Entreprise", user.email);
                     Navigator.pushReplacement(
                         context,
                         PageTransition(

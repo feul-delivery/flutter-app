@@ -1,8 +1,14 @@
+import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/services/auth.dart';
+import 'package:FD_flutter/services/database.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AddLivreur extends StatefulWidget {
   const AddLivreur({Key key}) : super(key: key);
+
   @override
   _AddLivreurState createState() => _AddLivreurState();
 }
@@ -10,8 +16,10 @@ class AddLivreur extends StatefulWidget {
 class _AddLivreurState extends State<AddLivreur> {
   TextEditingController searchController = TextEditingController();
   String searchTerm;
+  String message = '';
   @override
   Widget build(BuildContext context) {
+    final User _user = Provider.of<User>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.red[900],
@@ -51,7 +59,7 @@ class _AddLivreurState extends State<AddLivreur> {
                       .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Text('Error');
+                  return Icon(Icons.cancel, color: Colors.red[900]);
                 }
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
@@ -60,14 +68,12 @@ class _AddLivreurState extends State<AddLivreur> {
                             child: CircularProgressIndicator(
                                 backgroundColor: Colors.red[900])));
                   case ConnectionState.none:
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text('Oops no data.'),
-                    ));
-                    return Text(
-                      'Oops no data',
-                    );
+                    return Icon(Icons.error_outline, color: Colors.red[900]);
                   case ConnectionState.done:
-                    return Text('Done');
+                    return Icon(
+                      Icons.done,
+                      color: Colors.red[900],
+                    );
                   default:
                     return new ListView(
                         children: snapshot.data.documents
@@ -79,7 +85,19 @@ class _AddLivreurState extends State<AddLivreur> {
                           trailing: IconButton(
                             icon: Icon(Icons.add),
                             onPressed: () {
-                              _addToLv(document);
+                              _showMyDialog(document, _user.uid);
+                              if (message != '') {
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                  duration: Duration(seconds: 1),
+                                  content: Text(
+                                    message,
+                                    style: TextStyle(color: Colors.white),
+                                  ),
+                                  backgroundColor: Colors.red[900],
+                                ));
+                              } else {
+                                message = '';
+                              }
                             },
                           ));
                     }).toList());
@@ -91,24 +109,59 @@ class _AddLivreurState extends State<AddLivreur> {
       ),
     );
   }
+
+  Future<void> _showMyDialog(DocumentSnapshot document, String uid) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Confirmation'),
+          content: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Text('${document['nom']} ${document['prenom']} will '),
+                Text('work for you?'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Confirm'),
+              onPressed: () {
+                _addToLv(document, uid);
+                Navigator.of(context).pop();
+                setState(() {
+                  message = 'Done';
+                });
+              },
+            ),
+            TextButton(
+              child: Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+                setState(() {
+                  message = 'Canceled';
+                });
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
 
-Future<bool> _addToLv(DocumentSnapshot document) async {
+Future<bool> _addToLv(DocumentSnapshot document, String uid) async {
+  final DatabaseService _auth = DatabaseService(uid: document.documentID);
+  _auth.updateLivreurData(
+      document['nom'],
+      document['prenom'],
+      document['email'],
+      document['cin'],
+      document['sexe'],
+      document['tele'],
+      'Waiting',
+      uid);
   return true;
 }
-// Future<Livreur> _findEmail(String value) async {
-//   String valeur = value;
-//   Livreur lv;
-//   List<DocumentSnapshot> documentList;
-//   documentList = (await Firestore.instance
-//           .collection('client')
-//           .where("email", isEqualTo: value)
-//           .getDocuments())
-//       .documents;
-//   for (DocumentSnapshot documentSnapshot in documentList) {
-//     documentSnapshot.data.map((key, value) => {if (value == valeur) {
-
-//     }});
-//   }
-//   return lv;
-// }
