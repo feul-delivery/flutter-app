@@ -22,56 +22,58 @@ class _DrawerCLState extends State<DrawerCL> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      width: 260,
+      width: MediaQuery.of(context).size.width,
       child: Column(children: [
         Container(
           child: Padding(
             padding: EdgeInsets.only(top: 50.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 35.0,
-                  backgroundImage: IndexCl.client?.photoURL == null
-                      ? AssetImage('assets/profile.png')
+            child: Container(
+              margin: EdgeInsets.all(20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IndexCl.client?.photoURL == null
+                      ? CircleAvatar(
+                          radius: 35.0,
+                          backgroundImage: AssetImage('assets/profile.png'),
+                        )
                       : CachedNetworkImage(
-  imageUrl: IndexCl.client.photoURL,
-  imageBuilder: (context, imageProvider) => Container(
-    decoration: BoxDecoration(
-      image: DecorationImage(
-          image: imageProvider,
-          fit: BoxFit.cover,
-          colorFilter:
-              ColorFilter.mode(Colors.red, BlendMode.colorBurn)),
-    ),
-  ),
-  placeholder: (context, url) => CircularProgressIndicator(),
-  errorWidget: (context, url, error) => Icon(Icons.error),
-),
-                ),
-                Column(
-                  children: [
-                    Text(
-                      "${IndexCl.client?.nom} ${IndexCl.client?.prenom}",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w800,
-                      ),
+                          imageUrl: IndexCl.client.photoURL,
+                          imageBuilder: (context, imageProvider) =>
+                              CircleAvatar(
+                                  radius: 35.0, backgroundImage: imageProvider),
+                          placeholder: (context, url) => CircleAvatar(
+                              radius: 35.0, child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) => CircleAvatar(
+                              radius: 35.0, child: Icon(Icons.error)),
+                        ),
+                  Container(
+                    margin: EdgeInsets.only(left: 20),
+                    child: Column(
+                      children: [
+                        Text(
+                          "${IndexCl.client?.nom} ${IndexCl.client?.prenom}",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                          "${IndexCl.client?.email}",
+                          style: TextStyle(
+                            fontSize: 12.0,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
                     ),
-                    SizedBox(
-                      height: 5.0,
-                    ),
-                    Text(
-                      "${IndexCl.client?.email}",
-                      style: TextStyle(
-                        fontSize: 12.0,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
-                )
-              ],
+                  )
+                ],
+              ),
             ),
           ),
         ),
@@ -135,41 +137,45 @@ class _DrawerCLState extends State<DrawerCL> {
             style: textStyle,
           ),
         ),
-        ListTile(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => SettingsCl()));
-          },
-          leading: Icon(
-            Icons.settings,
-            color: Colors.red[900],
-          ),
-          title: Text(
-            "Settings",
-            style: textStyle,
-          ),
-        ),
         Expanded(
-            child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Container(
-            height: 40,
-            margin: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.red[700]),
-            child: Center(
-              child: FlatButton(
-                onPressed: () async {
-                  await _auth.signOut();
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => new Wrapper()));
-                },
-                child: Text(
-                  "Sign out",
-                  style: buttonStyle,
+            child: Container(
+          margin: EdgeInsets.fromLTRB(10, 10, 20, 10),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  height: 40,
+                  margin: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.red[700]),
+                  child: Center(
+                    child: FlatButton(
+                      onPressed: () async {
+                        await _auth.signOut();
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (BuildContext context) => new Wrapper()));
+                      },
+                      child: Text(
+                        "Sign out",
+                        style: buttonStyle,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => SettingsCl()));
+                  },
+                  child: Icon(
+                    Icons.settings,
+                    color: Colors.red[900],
+                  ),
+                ),
+              ],
             ),
           ),
         ))

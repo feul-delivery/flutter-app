@@ -28,7 +28,6 @@ class _FavorisClState extends State<FavorisCl> {
           ),
         ],
       ),
-      drawer: DrawerCL(),
       body: SingleChildScrollView(
         child: Column(
             // children: [createCard()],

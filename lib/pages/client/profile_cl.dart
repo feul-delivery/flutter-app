@@ -89,45 +89,37 @@ class _ProfileClState extends State<ProfileCl> {
               Center(
                 child: Stack(
                   children: [
-                    Container(
-                      width: 140,
-                      height: 140,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 1,
-                              color: Theme.of(context).scaffoldBackgroundColor),
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.1),
-                                offset: Offset(0, 7))
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: IndexCl.client?.photoURL == null
-                                ? AssetImage('assets/profile.png')
-                                : CachedNetworkImage(
-                                    imageUrl: IndexCl.client.photoURL,
-                                    imageBuilder: (context, imageProvider) =>
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
-                                            colorFilter: ColorFilter.mode(
-                                                Colors.red,
-                                                BlendMode.colorBurn)),
-                                      ),
-                                    ),
-                                    placeholder: (context, url) =>
-                                        CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
-                                  ),
-                          )),
-                    ),
+                    IndexCl.client?.photoURL == null
+                        ? Container(
+                            width: 140,
+                            height: 140,
+                            child: CircleAvatar(
+                              radius: 35.0,
+                              backgroundImage: AssetImage('assets/profile.png'),
+                            ),
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: IndexCl.client.photoURL,
+                            imageBuilder: (context, imageProvider) => Container(
+                              width: 140,
+                              height: 140,
+                              child: CircleAvatar(
+                                  radius: 35.0, backgroundImage: imageProvider),
+                            ),
+                            placeholder: (context, url) => Container(
+                              width: 140,
+                              height: 140,
+                              child: CircleAvatar(
+                                  radius: 35.0,
+                                  child: CircularProgressIndicator()),
+                            ),
+                            errorWidget: (context, url, error) => Container(
+                              width: 140,
+                              height: 140,
+                              child: CircleAvatar(
+                                  radius: 35.0, child: Icon(Icons.error)),
+                            ),
+                          ),
                   ],
                 ),
               ),
@@ -144,7 +136,7 @@ class _ProfileClState extends State<ProfileCl> {
                     ),
                     Container(
                       child: Text(
-                        '${IndexCl.client.prenom}',
+                        '${IndexCl.client?.prenom}',
                         style: strongTextStyle,
                       ),
                     )

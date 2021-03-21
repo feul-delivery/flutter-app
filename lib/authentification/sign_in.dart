@@ -255,33 +255,35 @@ class _SignInState extends State<SignIn> {
                               ),
                               FadeAnimation(
                                   0.2,
-                                  Container(
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 50),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.red[700]),
-                                    child: Center(
-                                      child: FlatButton(
-                                        onPressed: () async {
-                                          if (_formKey.currentState
-                                              .validate()) {
-                                            setState(() => loading = true);
+                                  InkWell(
+                                    onTap: () async {
+                                      if (_formKey.currentState.validate()) {
+                                        setState(() => loading = true);
 
-                                            dynamic user = await _auth
-                                                .signInWithEmailAndPassword(
-                                                    email, password);
-                                            if (user == null) {
-                                              errorMessage = AuthService.error;
-                                              setState(() {
-                                                loading = false;
-                                              });
-                                            }
-                                            setState(() {
-                                              loading = false;
-                                            });
-                                          }
-                                        },
+                                        dynamic user = await _auth
+                                            .signInWithEmailAndPassword(
+                                                email, password);
+                                        if (user == null) {
+                                          errorMessage = AuthService.error;
+                                          setState(() {
+                                            loading = false;
+                                          });
+                                        }
+                                        setState(() {
+                                          loading = false;
+                                        });
+                                      }
+                                    },
+                                    child: Container(
+                                      margin: EdgeInsets.fromLTRB(
+                                          80.0, 5.0, 80.0, 5.0),
+                                      padding: EdgeInsets.fromLTRB(
+                                          20.0, 20.0, 20.0, 20.0),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          color: Colors.red[700]),
+                                      child: Center(
                                         child: Text(
                                           "Log in",
                                           style: buttonStyle,
@@ -310,20 +312,21 @@ class _SignInState extends State<SignIn> {
                                   Expanded(
                                     child: FadeAnimation(
                                         0.2,
-                                        Container(
-                                          height: 50,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: Colors.blue[900]),
-                                          child: Center(
-                                              child: FlatButton(
-                                            hoverColor: Colors.black,
-                                            onPressed: () =>
-                                                widget.toggleView(),
-                                            child: Text("Create a new account",
-                                                style: buttonRegisterStyle),
-                                          )),
+                                        InkWell(
+                                          hoverColor: Colors.black,
+                                          onTap: () => widget.toggleView(),
+                                          child: Container(
+                                            height: 50,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: Colors.blue[900]),
+                                            child: Center(
+                                                child: Text(
+                                                    "Create a new account",
+                                                    style:
+                                                        buttonRegisterStyle)),
+                                          ),
                                         )),
                                   ),
                                 ],

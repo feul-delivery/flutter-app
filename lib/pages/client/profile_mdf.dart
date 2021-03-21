@@ -96,11 +96,12 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
 
   void _showImageSettingsPanel() {
     showModalBottomSheet(
+        backgroundColor: Colors.transparent,
         context: context,
         builder: (context) {
           return Container(
-            margin: EdgeInsets.all(50),
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+            height: 100,
+            margin: EdgeInsets.all(10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -118,12 +119,18 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                   child: Material(
                       color: Colors.red[900],
                       borderRadius: BorderRadius.circular(10.0),
-                      child: Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Icon(Icons.camera_alt,
-                            color: Colors.white, size: 40.0),
-                      ))),
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(Icons.camera_alt,
+                                color: Colors.white, size: 40.0),
+                            Text('Camera', style: buttonStyle),
+                          ],
+                        ),
+                      )),
                 ),
                 InkWell(
                   onTap: () async {
@@ -138,12 +145,17 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                   child: Material(
                       color: Colors.red[900],
                       borderRadius: BorderRadius.circular(10.0),
-                      child: Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child:
+                      child: Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 20.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
                             Icon(Icons.photo, color: Colors.white, size: 40.0),
-                      ))),
+                            Text('Gallery', style: buttonStyle),
+                          ],
+                        ),
+                      )),
                 ),
               ],
             ),
@@ -211,13 +223,8 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                         decoration: new BoxDecoration(
                                           shape: BoxShape.circle,
                                           image: new DecorationImage(
-                                            image:
-                                                IndexCl.client?.photoURL == null
-                                                    ? new AssetImage(
-                                                        'assets/total.png')
-                                                    : new NetworkImage(
-                                                        IndexCl.client.photoURL,
-                                                      ),
+                                            image: new AssetImage(
+                                                'assets/total.png'),
                                             fit: BoxFit.cover,
                                           ),
                                         ))
@@ -538,8 +545,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
 
                     if (nomTmp != null) {
                       nom = nomTmp;
-                    }
-                    if (prenomTmp != null) {
+                    } else if (prenomTmp != null) {
                       prenom = prenomTmp;
                     }
                     if (teleTmp != null) {
