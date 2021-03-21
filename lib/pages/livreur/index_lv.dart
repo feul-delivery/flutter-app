@@ -1,6 +1,15 @@
+import 'dart:io';
+import 'package:FD_flutter/modules/livreur.dart';
+import 'package:FD_flutter/pages/livreur/bbar_liv.dart';
+import 'package:FD_flutter/pages/livreur/drawer_liv.dart';
+//import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+//import '../../wrapper.dart';
+
 class IndexLv extends StatefulWidget {
+  static Livreur livreur;
   IndexLv({Key key}) : super(key: key);
 
   @override
@@ -8,12 +17,241 @@ class IndexLv extends StatefulWidget {
 }
 
 class _IndexLvState extends State<IndexLv> {
-  @override
+  get child => null;
+
   Widget build(BuildContext context) {
+    return WillPopScope(
+        onWillPop: () {
+          return showDialog(
+                context: context,
+                builder: (context) => new AlertDialog(
+                  title: new Text('Are you sure?'),
+                  content: new Text("Exit the application"),
+                  actions: <Widget>[
+                    Row(children: [
+                      new FlatButton(
+                        onPressed: () => exit(0),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              right: 0.0, bottom: 0.0, top: 10),
+                          child: Text(
+                            'Yes',
+                            style: TextStyle(color: Colors.red[900]),
+                          ),
+                        ),
+                      ),
+                      new FlatButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              right: 0.0, bottom: 0.0, top: 10),
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.red[900]),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ],
+                ),
+              ) ??
+              false;
+        },
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
+            title: Text("Home"),
+            backgroundColor: Colors.red[900],
+            centerTitle: true,
+            actions: <Widget>[
+              IconButton(
+                  icon: Icon(Icons.refresh),
+                  onPressed: () {
+                    setState(() {});
+                  })
+            ],
+          ),
+          body: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Commandes:',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.bold),
+                        ),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 2.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5.0),
+                            color: Colors.green[700],
+                          ),
+                          child: Text(
+                            'Disponible',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        )
+                      ]),
+                  Divider(
+                    height: 5,
+                    thickness: 1,
+                  ),
+                  for (int i = 0; i < items.length; i++) commandeEnLine(i),
+                ],
+              ),
+            ),
+          ),
+          drawer: DrawerLiv(),
+          bottomNavigationBar: ButtomBarLiv(),
+        ));
+  }
+
+  Container commandeEnLine(int i) {
     return Container(
-      child: Center(
-        child: Text("Livreur"),
+      child: Column(
+        children: [
+          SizedBox(
+            height: 20,
+          ),
+          Container(
+            decoration: new BoxDecoration(
+                color: Colors.white70,
+                borderRadius: BorderRadius.circular(10),
+                boxShadow: [
+                  BoxShadow(
+                      color: Colors.red[900].withOpacity(0.4),
+                      blurRadius: 20,
+                      offset: Offset(0, 10))
+                ]),
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(items[i]['nom'],
+                                  style: TextStyle(
+                                      color: Colors.black, fontSize: 15))),
+                        ),
+                        Container(
+                            height: 25,
+                            margin: EdgeInsets.symmetric(horizontal: 5),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.red[900],
+                            )),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text('Volume:',
+                                      style:
+                                          TextStyle(color: Colors.grey[800])),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Container(
+                                  child: Text(items[i]['volume'],
+                                      style:
+                                          TextStyle(color: Colors.grey[600])),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  child: Text('Type:',
+                                      style:
+                                          TextStyle(color: Colors.grey[800])),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Container(
+                                  child: Text(items[i]['type'],
+                                      style:
+                                          TextStyle(color: Colors.grey[600])),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text('Address:',
+                                      style:
+                                          TextStyle(color: Colors.grey[800])),
+                                ),
+                                Container(
+                                  child: Text(items[i]['adresse'],
+                                      style:
+                                          TextStyle(color: Colors.grey[600])),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                )),
+          )
+        ],
       ),
     );
   }
+
+  List items = [
+    {
+      "nom": "Mr Benarafa",
+      "volume": "10L",
+      "type": "Gas-oil",
+      "adresse": "Monfleuri 2, Lycée Technique, Fès",
+      "statut": ""
+    },
+    {
+      "nom": "Mr Bennani",
+      "volume": "50L",
+      "type": "Gas-oil",
+      "adresse": "Monfleuri 1, Rue el karama, Fès",
+      "statut": ""
+    },
+    {
+      "nom": " Mr Wardi",
+      "volume": "43L",
+      "type": "Gas-oil",
+      "adresse": "Monfleuri 2, Lycée Technique, Fès",
+      "statut": "En attend"
+    },
+    {
+      "nom": "Mme Twati",
+      "volume": "43L",
+      "type": "Gas-oil",
+      "statut": "En attend",
+      "adresse": "Barid Banque, Bensoda, Fès",
+    },
+  ];
 }
