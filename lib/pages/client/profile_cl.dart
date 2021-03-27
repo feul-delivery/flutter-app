@@ -16,37 +16,6 @@ class ProfileCl extends StatefulWidget {
 
 // ignore: camel_case_types
 class _ProfileClState extends State<ProfileCl> {
-  // Future _getEntData() async {
-  //   final FirebaseAuth auth = FirebaseAuth.instance;
-  //   final FirebaseUser user = await auth.currentUser();
-  //   uid = user.uid;
-  //   email = user.email;
-  //   Firestore.instance
-  //       .collection('client')
-  //       .document(uid)
-  //       .get()
-  //       .then((value) async {
-  //     print(uid);
-  //     if (value.exists) {
-  //       var key1 = await value.data['cin'];
-  //       var key2 = await value.data['ville'];
-  //       var key3 = await value.data['nom'];
-  //       var key4 = await value.data['prenom'];
-  //       var key5 = await value.data['sexe'];
-  //       var key6 = await value.data['tele'];
-  //       print(key1);
-  //       setState(() {
-  //         this.cin = key1;
-  //         this.ville = key2;
-  //         this.nom = key3;
-  //         this.prenom = key4;
-  //         this.sexe = key5;
-  //         this.tele = key6;
-  //       });
-  //     }
-  //   });
-  // }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -99,7 +68,7 @@ class _ProfileClState extends State<ProfileCl> {
                             ),
                           )
                         : CachedNetworkImage(
-                            imageUrl: IndexCl.client.photoURL,
+                            imageUrl: IndexCl.client?.photoURL,
                             imageBuilder: (context, imageProvider) => Container(
                               width: 140,
                               height: 140,
@@ -130,11 +99,16 @@ class _ProfileClState extends State<ProfileCl> {
                 1.2,
                 Row(
                   children: [
-                    Text(
-                      "First name : ",
-                      style: textStyle,
+                    Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                      color: Colors.red[900],
+                      child: Text(
+                        "First name : ",
+                        style: textStyleWhite,
+                      ),
                     ),
                     Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                       child: Text(
                         '${IndexCl.client?.prenom}',
                         style: strongTextStyle,
@@ -151,13 +125,18 @@ class _ProfileClState extends State<ProfileCl> {
                 1.2,
                 Row(
                   children: [
-                    Text(
-                      "Last name : ",
-                      style: textStyle,
+                    Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                      color: Colors.red[900],
+                      child: Text(
+                        "Last name : ",
+                        style: textStyleWhite,
+                      ),
                     ),
                     Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                       child: Text(
-                        '${IndexCl.client.nom}',
+                        '${IndexCl.client?.nom}',
                         style: strongTextStyle,
                       ),
                     )
@@ -172,13 +151,18 @@ class _ProfileClState extends State<ProfileCl> {
                 1.2,
                 Row(
                   children: [
-                    Text(
-                      "Phone : ",
-                      style: textStyle,
+                    Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                      color: Colors.red[900],
+                      child: Text(
+                        "Phone : ",
+                        style: textStyleWhite,
+                      ),
                     ),
                     Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                       child: Text(
-                        '${IndexCl.client.tele}',
+                        '${IndexCl.client?.tele}',
                         style: strongTextStyle,
                       ),
                     )
@@ -193,13 +177,18 @@ class _ProfileClState extends State<ProfileCl> {
                 1.2,
                 Row(
                   children: [
-                    Text(
-                      "Email : ",
-                      style: textStyle,
+                    Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                      color: Colors.red[900],
+                      child: Text(
+                        "Email : ",
+                        style: textStyleWhite,
+                      ),
                     ),
                     Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                       child: Text(
-                        '${IndexCl.client.email}',
+                        '${IndexCl.client?.email}',
                         style: strongTextStyle,
                       ),
                     )
@@ -214,22 +203,23 @@ class _ProfileClState extends State<ProfileCl> {
                 1.2,
                 Row(
                   children: [
-                    Text(
-                      "CIN : ",
-                      style: textStyle,
+                    Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+                      color: Colors.red[900],
+                      child: Text(
+                        "CIN : ",
+                        style: textStyleWhite,
+                      ),
                     ),
                     Container(
+                      padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                       child: Text(
-                        '${IndexCl.client.cin}',
+                        '${IndexCl.client?.cin}',
                         style: strongTextStyle,
                       ),
                     )
                   ],
                 ),
-              ),
-              Divider(
-                height: 30,
-                thickness: 1,
               ),
             ]),
           )),

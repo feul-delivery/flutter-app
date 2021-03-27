@@ -35,6 +35,14 @@ class _CommandeDetailState extends State<CommandeDetail> {
         centerTitle: true,
         backgroundColor: Colors.red[900],
         elevation: 1,
+        actions: [
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.new_releases,
+                color: Colors.white,
+              )),
+        ],
       ),
       body: getBody(),
     );
@@ -319,15 +327,6 @@ class _CommandeDetailState extends State<CommandeDetail> {
             ],
           ),
         ),
-        SizedBox(
-          height: 20,
-        ),
-        Container(
-            color: Colors.red[900],
-            child: FlatButton(
-                onPressed: () {},
-                child: Text('Send a review!',
-                    style: TextStyle(color: Colors.white, fontSize: 15))))
       ],
     );
   }

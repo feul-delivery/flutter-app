@@ -31,20 +31,6 @@ class DatabaseService {
     });
   }
 
-  // Future<String> getAccountType() async {
-  //   await Firestore.instance
-  //       .collection('user')
-  //       .document(uid)
-  //       .get()
-  //       .then((value) async {
-  //     print(value.data['account'].toString());
-  //     dynamic kk = await value.data['account'];
-  //     print(kk);
-  //     return await kk;
-  //   });
-  //   return null;
-  // }
-
   Future<void> updateClientData(String nom, String prenom, String email,
       String sexe, String cin, String tele, String ville) async {
     return await clientCollection.document(uid).updateData({
@@ -125,7 +111,7 @@ class DatabaseService {
     return livreurCollection.snapshots();
   }
 
-  Future<void> updateOrdersData(
+  Future<void> newOrderData(
     int ordernum,
     Double volume,
     String adresse,
@@ -140,7 +126,7 @@ class DatabaseService {
     String uidlivreur,
     String idtype,
   ) async {
-    return await ordersCollection.document(uid + "/" + "$ordernum").setData({
+    return await ordersCollection.document().setData({
       'ordernum': ordernum,
       'volume': volume,
       'adresse': adresse,

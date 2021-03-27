@@ -1,16 +1,17 @@
 class Order {
-  final String idorder;
-  final String volume;
-  final String adresse;
-  DateTime dateheurec = DateTime.now();
-  final DateTime dateheurel;
-  final String matricule;
-  final String color;
-  final String prixtotal;
-  final String statut;
-  final String methode;
-  final String idclient;
-  final String idtype;
+  String idorder;
+  double volume;
+  String adresse;
+  DateTime dateheurec;
+  DateTime dateheurel;
+  String matricule;
+  String color;
+  String prixtotal;
+  String statut;
+  String methode;
+  String uidclient;
+  String uidentreprise;
+  String idtype;
   Order({
     this.idorder,
     this.volume,
@@ -22,7 +23,8 @@ class Order {
     this.prixtotal,
     this.statut,
     this.methode,
-    this.idclient,
+    this.uidclient,
+    this.uidentreprise,
     this.idtype,
   });
 }

@@ -1,10 +1,13 @@
+import 'package:FD_flutter/modules/order.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 
 enum pmethode { livraison, google }
 
+// ignore: must_be_immutable
 class CommandePayment extends StatefulWidget {
-  const CommandePayment({Key key}) : super(key: key);
+  Order newOrder;
+  CommandePayment({@required this.newOrder});
 
   @override
   _CommandePaymentState createState() => _CommandePaymentState();

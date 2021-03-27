@@ -22,7 +22,7 @@ class _DrawerCLState extends State<DrawerCL> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      width: MediaQuery.of(context).size.width,
+      width: MediaQuery.of(context).size.width * 2 / 3,
       child: Column(children: [
         Container(
           child: Padding(

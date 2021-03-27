@@ -209,7 +209,8 @@ class _initialProfileclState extends State<InitialProfilecl>
                                       ),
                                     ),
                                   ],
-                                )),Padding(
+                                )),
+                            Padding(
                                 padding: EdgeInsets.only(
                                     left: 17.0, right: 17.0, top: 15),
                                 child: new Row(

@@ -1,8 +1,6 @@
 import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:FD_flutter/pages/client/drawer_cl.dart';
-
 import 'index_cl.dart';
 
 class FavorisCl extends StatefulWidget {

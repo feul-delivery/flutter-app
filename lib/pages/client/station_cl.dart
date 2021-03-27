@@ -387,29 +387,31 @@ class _StationProfilClState extends State<StationProfilCl> {
           ),
           Positioned.fill(
             bottom: 20,
-            child: Container(
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: FadeAnimation(
-                  2,
-                  Container(
-                    margin: EdgeInsets.symmetric(horizontal: 80),
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        color: Colors.red[600]),
-                    child: Align(
-                        child: FlatButton(
-                      padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                      onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => Cmd1()));
-                      },
-                      child: Text(
-                        "Place an order",
-                        style: buttonStyle,
-                      ),
-                    )),
+            top: MediaQuery.of(context).size.height -
+                MediaQuery.of(context).size.height * 1 / 12,
+            left: MediaQuery.of(context).size.width -
+                MediaQuery.of(context).size.width * 5 / 6,
+            right: MediaQuery.of(context).size.width -
+                MediaQuery.of(context).size.width * 5 / 6,
+            child: FadeAnimation(
+              2,
+              InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ClientOrder(
+                                doc: doc,
+                              )));
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.red[600]),
+                  child: Text(
+                    "Place an order",
+                    style: buttonStyle,
                   ),
                 ),
               ),

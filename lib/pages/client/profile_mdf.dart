@@ -15,8 +15,6 @@ import 'bbar_cl.dart';
 import 'drawer_cl.dart';
 import 'index_cl.dart';
 
-String profileURL;
-
 class ProfileCLModifier extends StatefulWidget {
   @override
   _ProfileCLModifierState createState() => _ProfileCLModifierState();
@@ -110,9 +108,9 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                   onTap: () async {
                     File profileImage = await getImage(ImageSource.camera);
                     if (profileImage != null) {
-                      profileURL = await uploadFile(profileImage);
-                      setState(() {
-                        IndexCl.client.photoURL = profileURL;
+                      setState(() async {
+                        IndexCl.client?.photoURL =
+                            await uploadFile(profileImage);
                       });
                     }
                   },
@@ -136,9 +134,9 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                   onTap: () async {
                     File profileImage = await getImage(ImageSource.gallery);
                     if (profileImage != null) {
-                      profileURL = await uploadFile(profileImage);
-                      setState(() {
-                        IndexCl.client.photoURL = profileURL;
+                      setState(() async {
+                        IndexCl.client?.photoURL =
+                            await uploadFile(profileImage);
                       });
                     }
                   },
@@ -180,12 +178,6 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                       builder: (BuildContext context) => IndexCl()));
                 })
           ],
-          leading: Builder(
-            builder: (context) => IconButton(
-              icon: Icon(Icons.menu),
-              onPressed: () => Scaffold.of(context).openDrawer(),
-            ),
-          ),
           centerTitle: true,
           backgroundColor: Colors.red[900],
           elevation: 1,
@@ -202,12 +194,6 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                     color: Colors.white,
                     child: new Column(
                       children: <Widget>[
-                        // Padding(
-                        //     padding: EdgeInsets.only(left: 20.0, top: 20.0),
-                        //     child: new Row(
-                        //       crossAxisAlignment: CrossAxisAlignment.start,
-                        //       children: <Widget>[],
-                        //     )),
                         Padding(
                           padding: EdgeInsets.only(top: 20.0),
                           child:
@@ -216,7 +202,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                IndexSt.entreprise?.photoURL == null
+                                IndexCl.client?.photoURL == null
                                     ? Container(
                                         width: 140.0,
                                         height: 140.0,
@@ -229,7 +215,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                           ),
                                         ))
                                     : CachedNetworkImage(
-                                        imageUrl: IndexSt.entreprise?.photoURL,
+                                        imageUrl: IndexCl.client.photoURL,
                                         imageBuilder: (context,
                                                 imageProvider) =>
                                             new Container(

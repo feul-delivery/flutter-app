@@ -1,4 +1,5 @@
 import 'package:FD_flutter/modules/livreur.dart';
+import 'package:FD_flutter/modules/order.dart';
 
 class Entreprise {
   String titre;
@@ -9,7 +10,8 @@ class Entreprise {
   String photoURL;
   int like;
   int dislike;
-  List<Livreur> list;
+  List<Livreur> workerslist;
+  List<Order> entrepriseOrders;
   Entreprise(
       {this.titre,
       this.description,
@@ -19,5 +21,6 @@ class Entreprise {
       this.photoURL,
       this.like,
       this.dislike,
-      this.list});
+      this.workerslist,
+      this.entrepriseOrders});
 }

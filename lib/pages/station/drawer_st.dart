@@ -17,7 +17,7 @@ class DrawerSt extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      width: 260,
+      width: MediaQuery.of(context).size.width * 2 / 3,
       child: Column(children: [
         Container(
           child: Padding(
