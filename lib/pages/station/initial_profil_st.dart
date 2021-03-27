@@ -1,4 +1,4 @@
-import 'package:FD_flutter/pages/station/index_st.dart';
+import 'package:FD_flutter/pages/station/type_st.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -41,7 +41,7 @@ class _initialProfileStState extends State<InitialProfileSt>
           actions: <Widget>[
             FlatButton(
               child: new Text(
-                "Save",
+                "Next",
                 style: buttonStyle,
               ),
               textColor: Colors.white,
@@ -64,7 +64,7 @@ class _initialProfileStState extends State<InitialProfileSt>
                   Navigator.pushReplacement(
                       context,
                       PageTransition(
-                          type: PageTransitionType.fade, child: IndexSt()));
+                          type: PageTransitionType.fade, child: Type(id: uid,)));
                 }
               },
               shape: new RoundedRectangleBorder(
