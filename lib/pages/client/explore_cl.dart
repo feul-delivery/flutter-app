@@ -1,9 +1,11 @@
+import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/client/drawer_cl.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'bbar_cl.dart';
 
 class ExploreCl extends StatefulWidget {
@@ -14,7 +16,10 @@ class ExploreCl extends StatefulWidget {
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text('Explore', style: pageTitle);
-  // Icon _adoreIcon;
+  Icon _adoreIcon = new Icon(
+    Icons.favorite,
+    color: Colors.red[900],
+  );
   int adore = 0;
   @override
   Widget build(BuildContext context) {
@@ -86,145 +91,140 @@ class _ExploreClState extends State<ExploreCl> {
   Container createCard(DocumentSnapshot document) {
     return Container(
       height: 230,
-      child: Center(
-        child: Card(
-          clipBehavior: Clip.antiAlias,
-          child: Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => StationProfilCl(
-                                  doc: document,
-                                )));
-                  },
-                  child: Stack(
-                    children: [
-                      Ink.image(
-                        height: 100,
-                        image: AssetImage(
-                          'assets/s4.png',
-                        ),
-                        fit: BoxFit.fitWidth,
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: RaisedButton(
-                          onPressed: () {},
-                        ),
-                        // child: FloatingActionButton(
-                        //     backgroundColor: Colors.white.withOpacity(0),
-                        //     onPressed: () {
-                        //       setState(() {
-                        //         _changeFav();
-                        //       });
-                        //     },
-                        //     child: _adoreIcon),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(
-                      left: 10,
-                      top: 10,
-                      right: 10,
+      margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      child: Card(
+        clipBehavior: Clip.antiAlias,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => StationProfilCl(
+                              doc: document,
+                            )));
+              },
+              child: Stack(
+                children: [
+                  Ink.image(
+                    height: 100,
+                    image: AssetImage(
+                      'assets/s4.png',
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => StationProfilCl(
-                                          doc: document,
-                                        )));
-                          },
-                          child: Text(
-                            '${document['titre']}',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
+                    fit: BoxFit.fitWidth,
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          _changeFav();
+                        });
+                      },
+                      icon: _adoreIcon,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  top: 10,
+                  right: 10,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => StationProfilCl(
+                                      doc: document,
+                                    )));
+                      },
+                      child: Text('${document['titre']}',
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontFamily: 'Gotham',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 24,
+                          )),
+                    ),
+                    Text(
+                      '${document['adresse']}',
+                      style: TextStyle(
+                        color: Colors.black38,
+                        fontFamily: 'Gotham',
+                        fontWeight: FontWeight.w400,
+                        fontSize: 14,
+                      ),
+                    ),
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          IconButton(
+                            onPressed: () async {
+                              var tele = 'tel:${document['tele']}';
+                              if (await canLaunch(tele)) {
+                                await launch(tele);
+                              }
+                            },
+                            icon: Icon(
+                              Icons.phone,
+                              color: Colors.green,
                             ),
                           ),
-                        ),
-                        Text(
-                          '${document['adresse']}',
-                          style: TextStyle(color: Colors.black54),
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              InkWell(
-                                onTap: () {},
-                                child: IconButton(
-                                  onPressed: null,
-                                  icon: Icon(
-                                    Icons.phone,
-                                    color: Colors.green,
-                                  ),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: () {},
-                                child: IconButton(
-                                  onPressed: null,
-                                  icon: Icon(
-                                    Icons.chat,
-                                    color: Colors.amber[700],
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                  padding: EdgeInsets.all(10),
-                                  alignment: Alignment.topCenter,
-                                  child: FlatButton.icon(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.near_me,
-                                      color: Colors.blue[800],
-                                    ),
-                                    label: Text(
-                                      'Order',
-                                      style: TextStyle(color: Colors.blue[800]),
-                                    ),
-                                  )),
-                              Container(
-                                padding: EdgeInsets.all(8),
-                                alignment: Alignment.topCenter,
-                                child: FlatButton.icon(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                StationProfilCl(
-                                                  doc: document,
-                                                )));
-                                  },
-                                  icon: Icon(
-                                    Icons.read_more,
-                                  ),
-                                  label: Text(
-                                    'Details',
-                                  ),
-                                ),
-                              ),
-                            ],
+                          IconButton(
+                            onPressed: () async {
+                              var email = 'mailto:${document['email']}';
+                              if (await canLaunch(email)) {
+                                await launch(email);
+                              }
+                            },
+                            icon: Icon(
+                              Icons.mail,
+                              color: Colors.amber[700],
+                            ),
                           ),
-                        ),
-                      ],
-                    )),
-              ],
-            ),
-          ),
+                          Container(
+                              padding: EdgeInsets.all(10),
+                              alignment: Alignment.topCenter,
+                              child: FlatButton.icon(
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ClientOrder(
+                                                doc: document,
+                                              )));
+                                },
+                                icon: Icon(
+                                  Icons.near_me,
+                                  color: Colors.blue[800],
+                                ),
+                                label: Text(
+                                  'Order',
+                                  style: TextStyle(
+                                    color: Colors.blue,
+                                    fontFamily: 'Gotham',
+                                    fontWeight: FontWeight.w400,
+                                    fontSize: 14,
+                                  ),
+                                ),
+                              )),
+                        ],
+                      ),
+                    ),
+                  ],
+                )),
+          ],
         ),
       ),
     );
@@ -249,19 +249,19 @@ class _ExploreClState extends State<ExploreCl> {
     });
   }
 
-  // void _changeFav() {
-  //   if (adore == 0) {
-  //     _adoreIcon = new Icon(
-  //       Icons.favorite,
-  //       color: Colors.white,
-  //     );
-  //     adore = 1;
-  //   } else {
-  //     _adoreIcon = new Icon(
-  //       Icons.favorite,
-  //       color: Colors.red[900],
-  //     );
-  //     adore = 0;
-  //   }
-  // }
+  void _changeFav() {
+    if (adore == 0) {
+      _adoreIcon = new Icon(
+        Icons.favorite,
+        color: Colors.white,
+      );
+      adore = 1;
+    } else {
+      _adoreIcon = new Icon(
+        Icons.favorite,
+        color: Colors.red[900],
+      );
+      adore = 0;
+    }
+  }
 }

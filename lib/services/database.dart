@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'package:FD_flutter/modules/client.dart';
 import 'package:FD_flutter/modules/entreprise.dart';
 import 'package:FD_flutter/services/profile_picture.dart';
@@ -113,15 +112,16 @@ class DatabaseService {
 
   Future<void> newOrderData(
     int ordernum,
-    Double volume,
+    double volume,
     String adresse,
     DateTime dateheurec,
     DateTime dateheurel,
     String matricule,
     String color,
-    String prixtotal,
+    double prixtotal,
     String statut,
     String methode,
+    String uidclient,
     String uidstation,
     String uidlivreur,
     String idtype,
@@ -137,10 +137,19 @@ class DatabaseService {
       'prixtotal': prixtotal,
       'statut': statut,
       'methode': methode,
+      'uidclient': uidclient,
       'uidstation': uidstation,
       'uidlivreur': uidlivreur,
       'idtype': idtype,
     });
+  }
+
+  Future<int> countOrdersDocuments(String uid) async {
+    QuerySnapshot _myDoc = await ordersCollection
+        .where('uidclient', isEqualTo: uid)
+        .getDocuments();
+    List<DocumentSnapshot> _myDocCount = _myDoc.documents;
+    return _myDocCount.length; // Count of Documents in Collection
   }
 
   // get livreur stream

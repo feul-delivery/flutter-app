@@ -1,5 +1,6 @@
 import 'package:FD_flutter/modules/order.dart';
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
@@ -17,7 +18,7 @@ class ClientOrder extends StatefulWidget {
 
 class _ClientOrderState extends State<ClientOrder> {
   double _volume;
-  String _type;
+  Map<dynamic, dynamic> _type;
   String _adresse;
   String _matricule;
   Color _pickerColor = Color(0xffff6b81);
@@ -36,6 +37,8 @@ class _ClientOrderState extends State<ClientOrder> {
     List<Map<dynamic, dynamic>> _types =
         List<Map<dynamic, dynamic>>.from(doc['type']).toList();
     final user = Provider.of<User>(context);
+    int _orderNum = 1;
+    DatabaseService _auth = DatabaseService();
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -44,16 +47,20 @@ class _ClientOrderState extends State<ClientOrder> {
         ),
         actions: [
           FlatButton(
-            onPressed: () {
+            onPressed: () async {
               if (_formKey.currentState.validate()) {
+                _orderNum =
+                    _orderNum + await _auth.countOrdersDocuments(user.uid);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (context) => CommandePayment(
                         newOrder: Order(
+                          idorder: _orderNum,
+                          prixtotal: _volume * _type['prix'],
                           uidentreprise: doc.documentID,
                           uidclient: user.uid,
-                          idtype: _type,
+                          idtype: _type['libelle'],
                           dateheurec: DateTime.now(),
                           color: _carColor.toString(),
                           matricule: _matricule,
@@ -111,9 +118,9 @@ class _ClientOrderState extends State<ClientOrder> {
                     decoration: InputDecoration(border: InputBorder.none),
                     items: _types.map((type) {
                       return DropdownMenuItem(
-                        value: type['libelle'],
+                        value: type,
                         child: Text(
-                          '${type['libelle']} - ${type['prix']} DH',
+                          '${type['libelle']} - ${type['prix']} DH/L',
                           style: hintStyle,
                         ),
                       );

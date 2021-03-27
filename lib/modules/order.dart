@@ -1,12 +1,12 @@
 class Order {
-  String idorder;
+  int idorder;
   double volume;
   String adresse;
   DateTime dateheurec;
   DateTime dateheurel;
   String matricule;
   String color;
-  String prixtotal;
+  double prixtotal;
   String statut;
   String methode;
   String uidclient;

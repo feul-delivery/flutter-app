@@ -1,4 +1,6 @@
 import 'package:FD_flutter/modules/order.dart';
+import 'package:FD_flutter/pages/client/commanderPages/cmd_done.dart';
+import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -17,6 +19,9 @@ class _CommandePaymentState extends State<CommandePayment> {
   pmethode _methode = pmethode.livraison;
   @override
   Widget build(BuildContext context) {
+    var _order = widget.newOrder;
+    DatabaseService _databaseService = DatabaseService();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -27,7 +32,31 @@ class _CommandePaymentState extends State<CommandePayment> {
         ),
         actions: [
           FlatButton(
-              onPressed: () {},
+              onPressed: () async {
+                _order.methode = 'COD';
+                await _databaseService.newOrderData(
+                    _order.idorder,
+                    _order.volume,
+                    _order.adresse,
+                    DateTime.now(),
+                    DateTime(0000, 0, 0),
+                    _order.matricule,
+                    _order.color,
+                    _order.prixtotal,
+                    'Waiting',
+                    _order.methode,
+                    _order.uidclient,
+                    _order.uidentreprise,
+                    '',
+                    _order.idtype);
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => OrderDone(
+                        order: _order,
+                      ),
+                    ));
+              },
               child: Text(
                 'Finish',
                 style: buttonStyle,

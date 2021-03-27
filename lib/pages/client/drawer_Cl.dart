@@ -29,7 +29,12 @@ class _DrawerCLState extends State<DrawerCL> {
             padding: EdgeInsets.only(top: 50.0),
             child: Container(
               margin: EdgeInsets.all(20),
-              child: Row(
+              padding: EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.red[900],
+              ),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -49,24 +54,26 @@ class _DrawerCLState extends State<DrawerCL> {
                               radius: 35.0, child: Icon(Icons.error)),
                         ),
                   Container(
-                    margin: EdgeInsets.only(left: 20),
+                    margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
                     child: Column(
                       children: [
                         Text(
-                          "${IndexCl.client?.nom} ${IndexCl.client?.prenom}",
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.w800,
-                          ),
-                        ),
+                            "${IndexCl.client?.nom?.toUpperCase()} ${IndexCl.client?.prenom?.toUpperCase()}",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Gotham',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17,
+                            )),
                         SizedBox(
                           height: 5.0,
                         ),
                         Text(
                           "${IndexCl.client?.email}",
                           style: TextStyle(
-                            fontSize: 12.0,
-                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                            fontFamily: 'Gotham',
+                            fontWeight: FontWeight.w200,
                           ),
                         ),
                       ],
