@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/user.dart';
-import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/services/profile_picture.dart';
 import 'package:FD_flutter/shared/text_styles.dart';

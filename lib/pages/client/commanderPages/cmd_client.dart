@@ -33,7 +33,8 @@ class _ClientOrderState extends State<ClientOrder> {
   ) {
     final _formKey = GlobalKey<FormState>();
     var doc = widget.doc;
-    List<String> _types = List<String>.from(doc['type']).toList();
+    List<Map<dynamic, dynamic>> _types =
+        List<Map<dynamic, dynamic>>.from(doc['type']).toList();
     final user = Provider.of<User>(context);
     return Scaffold(
       appBar: AppBar(
@@ -110,9 +111,9 @@ class _ClientOrderState extends State<ClientOrder> {
                     decoration: InputDecoration(border: InputBorder.none),
                     items: _types.map((type) {
                       return DropdownMenuItem(
-                        value: type,
+                        value: type['libelle'],
                         child: Text(
-                          '$type',
+                          '${type['libelle']} - ${type['prix']} DH',
                           style: hintStyle,
                         ),
                       );
