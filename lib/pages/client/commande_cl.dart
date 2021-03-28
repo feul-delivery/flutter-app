@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class CommandeDetail extends StatefulWidget {
   final int id;
@@ -321,6 +322,21 @@ class _CommandeDetailState extends State<CommandeDetail> {
                   child: Text(
                     widget.address,
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.width * 2 / 3,
+                  width: MediaQuery.of(context).size.width * 2 / 3,
+                  child: QrImage(
+                    data: '96LWayplp1ex1rnKKkWkYy4Zd6s2',
+                    //   embeddedImage: AssetImage('assets/profile.png'),
+                    //   embeddedImageStyle:
+                    //       QrEmbeddedImageStyle(size: Size(100, 100)),
                   ),
                 ),
               ),

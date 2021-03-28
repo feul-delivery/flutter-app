@@ -1,5 +1,4 @@
 import 'package:FD_flutter/modules/user.dart';
-import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
