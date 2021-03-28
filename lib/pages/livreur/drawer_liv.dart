@@ -31,7 +31,7 @@ class _DrawerLivState extends State<DrawerLiv> {
               children: [
                 CircleAvatar(
                   radius: 35.0,
-                  backgroundImage: IndexLv.livreur.photoURL = null
+                  backgroundImage: IndexLv.livreur?.photoURL = null
                       ? AssetImage('assets/profile.png')
                       : CachedNetworkImage(
                           imageUrl: IndexLv.livreur.photoURL,

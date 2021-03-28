@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/entreprise.dart';
+import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
+import 'package:page_transition/page_transition.dart';
 
 class IndexSt extends StatefulWidget {
   static Entreprise entreprise;
@@ -11,17 +13,6 @@ class IndexSt extends StatefulWidget {
 }
 
 class _IndexStState extends State<IndexSt> {
-  // @override
-  // void initState() {
-  //   _loadImage();
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((_) => _loadImage());
-  // }
-
-  // Future _loadImage() async {
-  //   await Utils.cacheImage(context, IndexSt.entreprise?.photoURL);
-  // }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -60,7 +51,10 @@ class _IndexStState extends State<IndexSt> {
             IconButton(
                 icon: Icon(Icons.refresh),
                 onPressed: () {
-                  setState(() {});
+                  setState(() {
+                    Navigator.of(context).pushReplacement(PageTransition(
+                        type: PageTransitionType.fade, child: Wrapper()));
+                  });
                 })
           ],
         ),

@@ -145,7 +145,19 @@ class _ProfilStState extends State<ProfilSt> {
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.pin,
                   background: IndexSt.entreprise?.photoURL == null
-                      ? AssetImage('assets/total.png')
+                      ? Container(
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/total.png'),
+                                  fit: BoxFit.cover)),
+                          child: IconButton(
+                            onPressed: () async {
+                              _showImageSettingsPanel();
+                            },
+                            icon: Icon(Icons.edit),
+                            color: Colors.white,
+                            iconSize: 40.0,
+                          ))
                       : CachedNetworkImage(
                           imageUrl: IndexSt.entreprise?.photoURL,
                           imageBuilder: (context, imageProvider) => Container(

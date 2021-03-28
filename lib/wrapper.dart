@@ -4,6 +4,7 @@ import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/admin/index_admin.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/livreur/index_lv.dart';
+import 'package:FD_flutter/pages/station/bbar_st.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/services/database.dart';
@@ -19,6 +20,7 @@ class Wrapper extends StatelessWidget {
   }
 
   getEntreprise() async {
+    ButtomBarSt.selectedIndexSt = 0;
     DatabaseService databaseService = DatabaseService();
     IndexSt.entreprise = await databaseService.entrepriseData();
   }

@@ -29,7 +29,10 @@ class DrawerSt extends StatelessWidget {
             children: [
               Container(
                 child: IndexSt.entreprise?.photoURL == null
-                    ? AssetImage('assets/total.png')
+                    ? CircleAvatar(
+                        backgroundImage: AssetImage('assets/total.png'),
+                        radius: 50.0,
+                      )
                     : CachedNetworkImage(
                         imageUrl: IndexSt.entreprise?.photoURL,
                         imageBuilder: (context, imageProvider) => CircleAvatar(

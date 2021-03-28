@@ -1,5 +1,6 @@
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
+import 'package:FD_flutter/wrapper.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -35,7 +36,7 @@ class _TypeStState extends State<TypeSt> {
                 Navigator.pushReplacement(
                     context,
                     PageTransition(
-                        type: PageTransitionType.fade, child: IndexSt()));
+                        type: PageTransitionType.fade, child: Wrapper()));
               },
             ),
           ],
@@ -70,7 +71,7 @@ class _TypeStState extends State<TypeSt> {
                     children: _types.map((type) {
                   return new ListTile(
                       title: Text("${type['libelle']}"),
-                      subtitle: Text('${type['prix']} Dh/L'),
+                      subtitle: Text('${type['prix'] as double} Dh/L'),
                       trailing: IconButton(
                         icon: Icon(Icons.delete),
                         onPressed: () {
