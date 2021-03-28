@@ -119,7 +119,7 @@ class DrawerSt extends StatelessWidget {
         ListTile(
           onTap: () {
             ButtomBarSt.selectedIndexSt = 1;
-            Navigator.push(context,
+            Navigator.pushReplacement(context,
                 PageTransition(type: PageTransitionType.fade, child: TypeSt()));
           },
           leading: Icon(

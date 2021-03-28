@@ -54,13 +54,14 @@ class _initialProfileStState extends State<InitialProfileSt>
                 if (_formKey.currentState.validate()) {
                   setState(() => loading = true);
                   email = user.email;
+                  List<Map<dynamic, dynamic>> _initTypes;
                   await _auth.updateEntrepriseData(
                       titre: titre,
                       description: description,
                       tele: tele,
                       email: email,
                       address: address,
-                      types: []);
+                      types: _initTypes);
                   Navigator.pushReplacement(
                       context,
                       PageTransition(

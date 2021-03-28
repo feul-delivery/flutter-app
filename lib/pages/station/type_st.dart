@@ -1,4 +1,6 @@
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/pages/station/index_st.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -24,12 +26,17 @@ class _TypeStState extends State<TypeSt> {
           actions: <Widget>[
             FlatButton(
               child: new Text(
-                "Done",
+                "Save",
                 style: buttonStyle,
               ),
               textColor: Colors.white,
               color: Colors.red[900],
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    PageTransition(
+                        type: PageTransitionType.fade, child: IndexSt()));
+              },
             ),
           ],
         ),
@@ -198,11 +205,13 @@ class _TypeStState extends State<TypeSt> {
                                   border: const OutlineInputBorder(),
                                   labelText: "Price",
                                 ),
+                                keyboardType: TextInputType.number,
                                 validator: (val) => val == null
                                     ? 'This field is required'
                                     : null,
                                 onChanged: (val) {
-                                  setState(() => _typePrix = val as double);
+                                  setState(() =>
+                                      _typePrix = double.tryParse(val) ?? 0.0);
                                 },
                               ),
                             ))),

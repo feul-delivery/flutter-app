@@ -163,7 +163,7 @@ class DatabaseService {
     String tele,
     String email,
     String address,
-    List types,
+    List<Map<dynamic, dynamic>> types,
   }) async {
     if (types == null) {
       return await entrepriseCollection.document(uid).setData({
