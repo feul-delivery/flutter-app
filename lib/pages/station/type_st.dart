@@ -18,105 +18,106 @@ class _TypeStState extends State<TypeSt> {
   @override
   Widget build(BuildContext context) {
     User _user = Provider.of<User>(context);
-    return Container(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.red[900],
-          title: Text("Types"),
-          centerTitle: true,
-          actions: <Widget>[
-            FlatButton(
-              child: new Text(
-                "Save",
-                style: buttonStyle,
+    return WillPopScope(
+        child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: Colors.red[900],
+            title: Text("Types"),
+            centerTitle: true,
+            actions: <Widget>[
+              FlatButton(
+                child: new Text(
+                  "Save",
+                  style: buttonStyle,
+                ),
+                textColor: Colors.white,
+                color: Colors.red[900],
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade, child: Wrapper()));
+                },
               ),
-              textColor: Colors.white,
-              color: Colors.red[900],
-              onPressed: () {
-                Navigator.pushReplacement(
-                    context,
-                    PageTransition(
-                        type: PageTransitionType.fade, child: Wrapper()));
-              },
-            ),
-          ],
+            ],
+          ),
+          body: StreamBuilder<DocumentSnapshot>(
+            stream: Firestore.instance
+                .collection('entreprise')
+                .document(_user.uid)
+                .snapshots(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Icon(Icons.cancel, color: Colors.red[900]);
+              }
+              switch (snapshot.connectionState) {
+                case ConnectionState.waiting:
+                  return SizedBox(
+                      child: Center(
+                          child: CircularProgressIndicator(
+                              backgroundColor: Colors.red[900])));
+                case ConnectionState.none:
+                  return Icon(Icons.error_outline, color: Colors.red[900]);
+                case ConnectionState.done:
+                  return Icon(
+                    Icons.done,
+                    color: Colors.red[900],
+                  );
+                default:
+                  List<Map<dynamic, dynamic>> _types =
+                      List<Map<dynamic, dynamic>>.from(snapshot.data['type'])
+                          .toList();
+                  return new ListView(
+                      children: _types.map((type) {
+                    return new ListTile(
+                        title: Text("${type['libelle']}"),
+                        subtitle: Text('${type['prix'] as double} Dh/L'),
+                        trailing: IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () {
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                              duration: Duration(seconds: 1),
+                              content: Text(
+                                'Are you sure',
+                                style: textStyleWhite,
+                              ),
+                              backgroundColor: Colors.red[900],
+                              action: SnackBarAction(
+                                textColor: Colors.white,
+                                label: 'Confirm',
+                                onPressed: () async {
+                                  try {
+                                    await Firestore.instance
+                                        .collection('entreprise')
+                                        .document(_user.uid)
+                                        .updateData(
+                                      {
+                                        'type': FieldValue.arrayRemove([type])
+                                      },
+                                    );
+                                  } catch (e) {
+                                    print(e);
+                                  }
+                                },
+                              ),
+                            ));
+                          },
+                        ));
+                  }).toList());
+              }
+            },
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+            onPressed: () {
+              _addType(_user.uid);
+            },
+            label: Text('add type'),
+            icon: Icon(Icons.add),
+            backgroundColor: Colors.red[900],
+          ),
         ),
-        body: StreamBuilder<DocumentSnapshot>(
-          stream: Firestore.instance
-              .collection('entreprise')
-              .document(_user.uid)
-              .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Icon(Icons.cancel, color: Colors.red[900]);
-            }
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return SizedBox(
-                    child: Center(
-                        child: CircularProgressIndicator(
-                            backgroundColor: Colors.red[900])));
-              case ConnectionState.none:
-                return Icon(Icons.error_outline, color: Colors.red[900]);
-              case ConnectionState.done:
-                return Icon(
-                  Icons.done,
-                  color: Colors.red[900],
-                );
-              default:
-                List<Map<dynamic, dynamic>> _types =
-                    List<Map<dynamic, dynamic>>.from(snapshot.data['type'])
-                        .toList();
-                return new ListView(
-                    children: _types.map((type) {
-                  return new ListTile(
-                      title: Text("${type['libelle']}"),
-                      subtitle: Text('${type['prix'] as double} Dh/L'),
-                      trailing: IconButton(
-                        icon: Icon(Icons.delete),
-                        onPressed: () {
-                          Scaffold.of(context).showSnackBar(SnackBar(
-                            duration: Duration(seconds: 1),
-                            content: Text(
-                              'Are you sure',
-                              style: textStyleWhite,
-                            ),
-                            backgroundColor: Colors.red[900],
-                            action: SnackBarAction(
-                              textColor: Colors.white,
-                              label: 'Confirm',
-                              onPressed: () async {
-                                try {
-                                  await Firestore.instance
-                                      .collection('entreprise')
-                                      .document(_user.uid)
-                                      .updateData(
-                                    {
-                                      'type': FieldValue.arrayRemove([type])
-                                    },
-                                  );
-                                } catch (e) {
-                                  print(e);
-                                }
-                              },
-                            ),
-                          ));
-                        },
-                      ));
-                }).toList());
-            }
-          },
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: () {
-            _addType(_user.uid);
-          },
-          label: Text('add type'),
-          icon: Icon(Icons.add),
-          backgroundColor: Colors.red[900],
-        ),
-      ),
-    );
+        onWillPop: () => Navigator.of(context).pushReplacement(
+            PageTransition(child: Wrapper(), type: PageTransitionType.fade)));
   }
 
   void _addType(String uid) {

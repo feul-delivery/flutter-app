@@ -1,9 +1,14 @@
+import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/pages/station/type_st.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:FD_flutter/services/profile_picture.dart';
+import 'dart:io';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:page_transition/page_transition.dart';
 
 // ignore: camel_case_types
@@ -32,6 +37,87 @@ class _initialProfileStState extends State<InitialProfileSt>
   bool loading = false;
   @override
   Widget build(BuildContext context) {
+    final picker = ImagePicker();
+
+    Future<File> getImage(ImageSource source) async {
+      final pickedFile = await picker.getImage(source: source);
+      if (pickedFile != null) {
+        return File(pickedFile.path);
+      }
+      print('');
+      return null;
+    }
+
+    void _showImageSettingsPanel() {
+      showModalBottomSheet(
+          backgroundColor: Colors.transparent,
+          context: context,
+          builder: (context) {
+            return Container(
+              height: 100,
+              margin: EdgeInsets.all(10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () async {
+                      File profileImage = await getImage(ImageSource.camera);
+                      if (profileImage != null) {
+                        setState(() async {
+                          IndexSt.entreprise?.photoURL =
+                              await uploadFile(profileImage);
+                        });
+                      }
+                    },
+                    child: Material(
+                        color: Colors.red[900],
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 20.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(Icons.camera_alt,
+                                  color: Colors.white, size: 40.0),
+                              Text('Camera', style: buttonStyle),
+                            ],
+                          ),
+                        )),
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      File profileImage = await getImage(ImageSource.gallery);
+                      if (profileImage != null) {
+                        setState(() async {
+                          IndexSt.entreprise?.photoURL =
+                              await uploadFile(profileImage);
+                        });
+                      }
+                    },
+                    child: Material(
+                        color: Colors.red[900],
+                        borderRadius: BorderRadius.circular(10.0),
+                        child: Padding(
+                          padding:
+                              const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 20.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Icon(Icons.photo,
+                                  color: Colors.white, size: 40.0),
+                              Text('Gallery', style: buttonStyle),
+                            ],
+                          ),
+                        )),
+                  ),
+                ],
+              ),
+            );
+          });
+    }
+
     return new Scaffold(
         appBar: AppBar(
           title: Text(
@@ -102,16 +188,24 @@ class _initialProfileStState extends State<InitialProfileSt>
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 new Container(
-                                    width: 140.0,
-                                    height: 140.0,
-                                    decoration: new BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      image: new DecorationImage(
-                                        image: new ExactAssetImage(
-                                            'assets/profile.png'),
-                                        fit: BoxFit.cover,
-                                      ),
-                                    )),
+                                  width: 140.0,
+                                  height: 140.0,
+                                  decoration: new BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: new DecorationImage(
+                                      image: new ExactAssetImage(
+                                          'assets/profile.png'),
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  child: Positioned(
+                                      child: IconButton(
+                                    onPressed: () {
+                                      _showImageSettingsPanel();
+                                    },
+                                    icon: Icon(Icons.camera),
+                                  )),
+                                ),
                               ],
                             ),
                             Padding(

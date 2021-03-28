@@ -29,27 +29,25 @@ class _DrawerLivState extends State<DrawerLiv> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                CircleAvatar(
-                  radius: 35.0,
-                  backgroundImage: IndexLv.livreur?.photoURL = null
-                      ? AssetImage('assets/profile.png')
-                      : CachedNetworkImage(
-                          imageUrl: IndexLv.livreur.photoURL,
-                          imageBuilder: (context, imageProvider) => Container(
-                            decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
-                                  colorFilter: ColorFilter.mode(
-                                      Colors.red, BlendMode.colorBurn)),
-                            ),
+                IndexLv.livreur?.photoURL == null
+                    ? CircleAvatar(
+                        radius: 35.0,
+                        backgroundImage: AssetImage('assets/profile.png'))
+                    : CachedNetworkImage(
+                        imageUrl: IndexLv.livreur.photoURL,
+                        imageBuilder: (context, imageProvider) => Container(
+                          decoration: BoxDecoration(
+                            image: DecorationImage(
+                                image: imageProvider,
+                                fit: BoxFit.cover,
+                                colorFilter: ColorFilter.mode(
+                                    Colors.red, BlendMode.colorBurn)),
                           ),
-                          placeholder: (context, url) =>
-                              CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error),
                         ),
-                ),
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator(),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
                 Column(
                   children: [
                     Text(

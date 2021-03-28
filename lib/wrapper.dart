@@ -2,6 +2,7 @@ import 'package:FD_flutter/authentification/authenticate.dart';
 import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/admin/index_admin.dart';
+import 'package:FD_flutter/pages/client/bbar_cl.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/livreur/index_lv.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
@@ -13,6 +14,7 @@ import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
   getClient() async {
+    ButtomBarCl.selectedIndex = 0;
     Future.delayed(Duration(seconds: 5)).then((value) async {
       DatabaseService databaseService = DatabaseService();
       IndexCl.client = await databaseService.clientData();
