@@ -43,6 +43,9 @@ class _LivreurStState extends State<LivreurSt> {
         ),
         body: SafeArea(
           child: ListView(
+            scrollDirection: Axis.vertical,
+            shrinkWrap: true,
+            physics: BouncingScrollPhysics(),
             padding: EdgeInsets.only(left: 5, right: 5),
             children: <Widget>[
               for (int i = 0; i < items.length; i++) livreurList(i)
@@ -57,155 +60,134 @@ class _LivreurStState extends State<LivreurSt> {
 
   Container livreurList(int i) {
     return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          InkWell(
-            onTap: () {},
-            child: Container(
-                decoration: new BoxDecoration(
-                    color: Colors.white70,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.red[900].withOpacity(0.4),
-                          blurRadius: 20,
-                          offset: Offset(0, 10))
-                    ]),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          height: 100,
-                          width: 150,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image(
-                                fit: BoxFit.fitWidth,
-                                image: AssetImage("assets/profile.png")),
-                          )),
-                      Column(
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              Container(
-                                height: 25,
-                                margin: EdgeInsets.symmetric(horizontal: 5),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: Colors.red[900],
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 5.0, right: 5.0),
-                                  child: Center(
-                                      child: Text(
-                                    "Since:  " + items[i]['date'],
-                                    style: TextStyle(color: Colors.white),
-                                  )),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Container(
-                            child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                    items[i]['nom'] + ' ' + items[i]['prenom'],
-                                    style: TextStyle(
-                                        color: Colors.black, fontSize: 15))),
-                          ),
-                          Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            child: Text('CIN: ',
-                                                style: TextStyle(
-                                                    color: Colors.grey[800])),
-                                          ),
-                                          SizedBox(
-                                            width: 20,
-                                          ),
-                                          Container(
-                                            child: Text(items[i]['cin'],
-                                                style: TextStyle(
-                                                    color: Colors.grey[600])),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      Container(
-                                        child: Text('Phone:',
-                                            style: TextStyle(
-                                                color: Colors.grey[800])),
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Container(
-                                        child: Text(items[i]['tele'],
-                                            style: TextStyle(
-                                                color: Colors.grey[600])),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        child: Text('Status:',
-                                            style: TextStyle(
-                                                color: Colors.grey[800])),
-                                      ),
-                                      SizedBox(
-                                        width: 20,
-                                      ),
-                                      Container(
-                                        child: Text(items[i]['etat'],
-                                            style: TextStyle(
-                                                color: Colors.grey[600])),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
+      decoration: new BoxDecoration(
+          color: Colors.white70,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+                color: Colors.red[900].withOpacity(0.4),
+                blurRadius: 20,
+                offset: Offset(0, 10))
+          ]),
+      margin: EdgeInsets.fromLTRB(15, 15, 15, 0),
+      padding: const EdgeInsets.all(10.0),
+      child: InkWell(
+        onTap: () {},
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: 150,
+                width: 150,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image(
+                      fit: BoxFit.contain,
+                      image: AssetImage("assets/profile.png")),
                 )),
-          ),
-        ],
+            Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 25,
+                      margin: EdgeInsets.symmetric(horizontal: 5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.red[900],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.only(left: 5.0, right: 5.0),
+                        child: Center(
+                            child: Text(
+                          "Since:  " + items[i]['date'],
+                          style: TextStyle(color: Colors.white),
+                        )),
+                      ),
+                    ),
+                  ],
+                ),
+                Container(
+                  child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(items[i]['nom'] + ' ' + items[i]['prenom'],
+                          style: TextStyle(color: Colors.black, fontSize: 15))),
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text('CIN: ',
+                                      style:
+                                          TextStyle(color: Colors.grey[800])),
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Container(
+                                  child: Text(items[i]['cin'],
+                                      style:
+                                          TextStyle(color: Colors.grey[600])),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              child: Text('Phone:',
+                                  style: TextStyle(color: Colors.grey[800])),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              child: Text(items[i]['tele'],
+                                  style: TextStyle(color: Colors.grey[600])),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              child: Text('Status:',
+                                  style: TextStyle(color: Colors.grey[800])),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            Container(
+                              child: Text(items[i]['etat'],
+                                  style: TextStyle(color: Colors.grey[600])),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

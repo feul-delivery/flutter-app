@@ -64,7 +64,7 @@ class _initialProfileStState extends State<InitialProfileSt>
                   Navigator.pushReplacement(
                       context,
                       PageTransition(
-                          type: PageTransitionType.fade, child: Type(id: uid,)));
+                          type: PageTransitionType.fade, child: TypeSt()));
                 }
               },
               shape: new RoundedRectangleBorder(

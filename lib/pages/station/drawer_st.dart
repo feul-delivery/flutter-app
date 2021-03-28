@@ -1,4 +1,5 @@
 import 'package:FD_flutter/pages/station/index_st.dart';
+import 'package:FD_flutter/pages/station/type_st.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -20,13 +21,14 @@ class DrawerSt extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 2 / 3,
       child: Column(children: [
         Container(
-          child: Padding(
-            padding: EdgeInsets.only(top: 50.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                IndexSt.entreprise?.photoURL == null
+          padding: EdgeInsets.only(top: 50.0),
+          margin: EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                child: IndexSt.entreprise?.photoURL == null
                     ? AssetImage('assets/total.png')
                     : CachedNetworkImage(
                         imageUrl: IndexSt.entreprise?.photoURL,
@@ -51,28 +53,31 @@ class DrawerSt extends StatelessWidget {
                         errorWidget: (context, url, error) =>
                             Icon(Icons.error, color: Colors.red[900]),
                       ),
-                SizedBox(
-                  height: 5.0,
+              ),
+              SizedBox(
+                height: 20.0,
+              ),
+              Text(
+                '${IndexSt.entreprise?.titre?.toUpperCase()}',
+                style: TextStyle(
+                  color: Colors.black87,
+                  fontFamily: 'Gotham',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 17,
                 ),
-                Text(
-                  '${IndexSt.entreprise?.titre}',
-                  style: TextStyle(
-                    fontSize: 22.0,
-                    fontWeight: FontWeight.w800,
-                  ),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Text(
+                '${IndexSt.entreprise?.email}',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontFamily: 'Gotham',
+                  fontWeight: FontWeight.w200,
                 ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  '${IndexSt.entreprise?.email}',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
         SizedBox(
@@ -108,6 +113,21 @@ class DrawerSt extends StatelessWidget {
           ),
           title: Text(
             "Orders",
+            style: textStyle,
+          ),
+        ),
+        ListTile(
+          onTap: () {
+            ButtomBarSt.selectedIndexSt = 1;
+            Navigator.push(context,
+                PageTransition(type: PageTransitionType.fade, child: TypeSt()));
+          },
+          leading: Icon(
+            Icons.offline_bolt_rounded,
+            color: Colors.red[900],
+          ),
+          title: Text(
+            "Fuel types",
             style: textStyle,
           ),
         ),

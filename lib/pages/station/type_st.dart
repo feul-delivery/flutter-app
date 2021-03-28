@@ -1,28 +1,26 @@
-import 'package:FD_flutter/services/database.dart';
+import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class Type extends StatefulWidget {
-  final String id;
-  Type({@required this.id});
+class TypeSt extends StatefulWidget {
   @override
-  _TypeState createState() => _TypeState();
+  _TypeStState createState() => _TypeStState();
 }
 
 final _formKey = GlobalKey<FormState>();
-String typeName;
-String typePrix;
 
-class _TypeState extends State<Type> {
+class _TypeStState extends State<TypeSt> {
   @override
   Widget build(BuildContext context) {
-    var uid = widget.id;
+    User _user = Provider.of<User>(context);
     return Container(
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.red[900],
-          title: Text("Types desponible"),
+          title: Text("Types"),
+          centerTitle: true,
           actions: <Widget>[
             FlatButton(
               child: new Text(
@@ -35,10 +33,75 @@ class _TypeState extends State<Type> {
             ),
           ],
         ),
-        body: _createlistTile(),
+        body: StreamBuilder<DocumentSnapshot>(
+          stream: Firestore.instance
+              .collection('entreprise')
+              .document(_user.uid)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Icon(Icons.cancel, color: Colors.red[900]);
+            }
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return SizedBox(
+                    child: Center(
+                        child: CircularProgressIndicator(
+                            backgroundColor: Colors.red[900])));
+              case ConnectionState.none:
+                return Icon(Icons.error_outline, color: Colors.red[900]);
+              case ConnectionState.done:
+                return Icon(
+                  Icons.done,
+                  color: Colors.red[900],
+                );
+              default:
+                List<Map<dynamic, dynamic>> _types =
+                    List<Map<dynamic, dynamic>>.from(snapshot.data['type'])
+                        .toList();
+                return new ListView(
+                    children: _types.map((type) {
+                  return new ListTile(
+                      title: Text("${type['libelle']}"),
+                      subtitle: Text('${type['prix']} Dh/L'),
+                      trailing: IconButton(
+                        icon: Icon(Icons.delete),
+                        onPressed: () {
+                          Scaffold.of(context).showSnackBar(SnackBar(
+                            duration: Duration(seconds: 1),
+                            content: Text(
+                              'Are you sure',
+                              style: textStyleWhite,
+                            ),
+                            backgroundColor: Colors.red[900],
+                            action: SnackBarAction(
+                              textColor: Colors.white,
+                              label: 'Confirm',
+                              onPressed: () async {
+                                try {
+                                  await Firestore.instance
+                                      .collection('entreprise')
+                                      .document(_user.uid)
+                                      .updateData(
+                                    {
+                                      'type': FieldValue.arrayRemove([type])
+                                    },
+                                  );
+                                } catch (e) {
+                                  print(e);
+                                }
+                              },
+                            ),
+                          ));
+                        },
+                      ));
+                }).toList());
+            }
+          },
+        ),
         floatingActionButton: FloatingActionButton.extended(
           onPressed: () {
-            _addType(uid);
+            _addType(_user.uid);
           },
           label: Text('add type'),
           icon: Icon(Icons.add),
@@ -49,13 +112,57 @@ class _TypeState extends State<Type> {
   }
 
   void _addType(String uid) {
+    String _typeName;
+    double _typePrix;
     showModalBottomSheet(
         context: context,
         builder: (context) {
           return Container(
-            height: MediaQuery.of(context).size.height * 2 / 5,
+            height: MediaQuery.of(context).size.width * 2 / 3,
             child: Column(
               children: [
+                Container(
+                  margin: EdgeInsets.fromLTRB(15, 5, 20, 10),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: Text(
+                            "Cancel",
+                            style: buttonStyleBlack,
+                          )),
+                      FlatButton(
+                          color: Colors.red[900],
+                          onPressed: () async {
+                            if (_formKey.currentState.validate()) {
+                              // add type
+                              try {
+                                Map<dynamic, dynamic> _newType = {
+                                  'libelle': _typeName,
+                                  'prix': _typePrix
+                                };
+                                await Firestore.instance
+                                    .collection('entreprise')
+                                    .document(uid)
+                                    .setData({
+                                  'type': [_newType]
+                                }, merge: true);
+                              } catch (e) {
+                                print(e);
+                              }
+                              Navigator.pop(context);
+                            }
+                          },
+                          child: Text(
+                            'Add',
+                            style: buttonStyle,
+                          )),
+                    ],
+                  ),
+                ),
                 Container(
                   margin: EdgeInsets.all(5),
                   padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 2.0),
@@ -72,13 +179,13 @@ class _TypeState extends State<Type> {
                               child: TextFormField(
                                 decoration: const InputDecoration(
                                   border: const OutlineInputBorder(),
-                                  labelText: "nom de type",
+                                  labelText: "Label",
                                 ),
                                 validator: (val) => val.isEmpty
                                     ? 'This field is required'
                                     : null,
                                 onChanged: (val) {
-                                  setState(() => typeName = val);
+                                  setState(() => _typeName = val);
                                 },
                               ),
                             ))),
@@ -89,13 +196,13 @@ class _TypeState extends State<Type> {
                               child: TextFormField(
                                 decoration: const InputDecoration(
                                   border: const OutlineInputBorder(),
-                                  labelText: "Prix de type",
+                                  labelText: "Price",
                                 ),
                                 validator: (val) => val.isEmpty
                                     ? 'This field is required'
                                     : null,
                                 onChanged: (val) {
-                                  setState(() => typePrix = val);
+                                  setState(() => _typePrix = val as double);
                                 },
                               ),
                             ))),
@@ -103,58 +210,9 @@ class _TypeState extends State<Type> {
                         ),
                       )),
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    FlatButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: Text(
-                          "annuler",
-                          style: TextStyle(color: Colors.red[900]),
-                        )),
-                    FlatButton(
-                        onPressed: () async {
-                          final DatabaseService _auth =
-                              DatabaseService(uid: uid);
-                          if (_formKey.currentState.validate()) {
-                            // add type
-                            Navigator.pop(context);
-                          }
-                        },
-                        child: Text(
-                          "Submit",
-                          style: TextStyle(color: Colors.red[900]),
-                        )),
-                  ],
-                ),
               ],
             ),
           );
         });
   }
-}
-
-Container _createlistTile({DocumentSnapshot document}) {
-  return Container(
-      margin: EdgeInsets.all(10),
-      child: ListTile(
-        title: Text(
-          'klakak',
-        ),
-        subtitle: Text('Prix : 1.35467'),
-        trailing: Wrap(
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () {},
-            ),
-            IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {},
-            ),
-          ],
-        ),
-      ));
 }
