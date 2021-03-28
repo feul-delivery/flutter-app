@@ -163,14 +163,26 @@ class DatabaseService {
     String tele,
     String email,
     String address,
+    List types,
   }) async {
-    return await entrepriseCollection.document(uid).setData({
-      'titre': titre,
-      'description': description,
-      'tele': tele,
-      'email': email,
-      'adresse': address,
-    });
+    if (types == null) {
+      return await entrepriseCollection.document(uid).setData({
+        'titre': titre,
+        'description': description,
+        'tele': tele,
+        'email': email,
+        'adresse': address,
+      }, merge: true);
+    } else {
+      return await entrepriseCollection.document(uid).setData({
+        'titre': titre,
+        'description': description,
+        'tele': tele,
+        'email': email,
+        'adresse': address,
+        'type': types
+      }, merge: true);
+    }
   }
 
   // get livreur stream

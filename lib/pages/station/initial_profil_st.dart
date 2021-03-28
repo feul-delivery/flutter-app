@@ -55,12 +55,12 @@ class _initialProfileStState extends State<InitialProfileSt>
                   setState(() => loading = true);
                   email = user.email;
                   await _auth.updateEntrepriseData(
-                    titre: titre,
-                    description: description,
-                    tele: tele,
-                    email: email,
-                    address: address,
-                  );
+                      titre: titre,
+                      description: description,
+                      tele: tele,
+                      email: email,
+                      address: address,
+                      types: []);
                   Navigator.pushReplacement(
                       context,
                       PageTransition(

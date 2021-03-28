@@ -118,7 +118,7 @@ class _TypeStState extends State<TypeSt> {
         context: context,
         builder: (context) {
           return Container(
-            height: MediaQuery.of(context).size.width * 2 / 3,
+            height: MediaQuery.of(context).size.width,
             child: Column(
               children: [
                 Container(
@@ -148,7 +148,7 @@ class _TypeStState extends State<TypeSt> {
                                     .collection('entreprise')
                                     .document(uid)
                                     .setData({
-                                  'type': [_newType]
+                                  'type': FieldValue.arrayUnion([_newType])
                                 }, merge: true);
                               } catch (e) {
                                 print(e);
@@ -198,7 +198,7 @@ class _TypeStState extends State<TypeSt> {
                                   border: const OutlineInputBorder(),
                                   labelText: "Price",
                                 ),
-                                validator: (val) => val.isEmpty
+                                validator: (val) => val == null
                                     ? 'This field is required'
                                     : null,
                                 onChanged: (val) {
