@@ -1,7 +1,9 @@
-import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
+import 'package:intl/intl.dart';
 
 import 'index_st.dart';
 
@@ -11,6 +13,19 @@ class ToutCommandesSt extends StatefulWidget {
 }
 
 class _ToutCommandesStState extends State<ToutCommandesSt> {
+  var uid;
+  @override
+  void initState() {
+    super.initState();
+    _getEntID();
+  }
+
+  Future _getEntID() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final FirebaseUser user = await auth.currentUser();
+    uid = user.uid;
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -23,10 +38,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text(
-            "Orders",
-            style: pageTitle,
-          ),
+          title: Text("Orders"),
           backgroundColor: Colors.black,
           centerTitle: true,
           actions: <Widget>[
@@ -43,7 +55,58 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
             margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
             child: Column(
               children: <Widget>[
-                for (int i = 0; i < items.length; i++) toutCommandes(i),
+                StreamBuilder<QuerySnapshot>(
+                  stream: Firestore.instance
+                      .collection('orders')
+                      .where('uidstation', isEqualTo: uid)
+                      .where('statut', isEqualTo: 'done')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Icon(Icons.cancel, color: Colors.black);
+                    }
+
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return SizedBox(
+                            child: Center(
+                                child: CircularProgressIndicator(
+                                    backgroundColor: Colors.black)));
+                      case ConnectionState.none:
+                        return Icon(Icons.error_outline, color: Colors.black);
+                      case ConnectionState.done:
+                        return Icon(
+                          Icons.done,
+                          color: Colors.black,
+                        );
+                      default:
+                        return new ListView(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            physics: BouncingScrollPhysics(),
+                            children: snapshot.data?.documents
+                                ?.map((DocumentSnapshot document) {
+                              var noom = 'N/A';
+                              setState(() async {
+                                await Firestore.instance
+                                    .collection('client')
+                                    .document(document['uidclient'])
+                                    .get()
+                                    .then((value) async {
+                                  print(value);
+                                  noom = await value?.data['nom'];
+                                  noom =
+                                      noom + ' ' + await value?.data['prenom'];
+                                });
+                              });
+
+                              return InkWell(
+                                  onTap: () {},
+                                  child: toutCommandes(document, noom));
+                            })?.toList());
+                    }
+                  },
+                ),
               ],
             ),
           ),
@@ -54,7 +117,9 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
     );
   }
 
-  Container toutCommandes(int i) {
+  Container toutCommandes(DocumentSnapshot document, var nom) {
+    DateTime date = DateTime.parse(document['dateheurec']);
+    print(nom);
     return Container(
       child: Column(
         children: [
@@ -64,7 +129,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
           Container(
               decoration: new BoxDecoration(
                   color: Colors.white70,
-                  borderRadius: BorderRadius.circular(20),
+                  borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.4),
@@ -83,7 +148,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                           height: 25,
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             color: Colors.black,
                           ),
                           child: Padding(
@@ -91,7 +156,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                                 const EdgeInsets.only(left: 5.0, right: 5.0),
                             child: Center(
                                 child: Text(
-                              items[i]['date'],
+                              DateFormat.Hm().format(date),
                               style: TextStyle(color: Colors.white),
                             )),
                           ),
@@ -100,7 +165,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                           height: 25,
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
+                            borderRadius: BorderRadius.circular(10),
                             color: Colors.black,
                           ),
                           child: Padding(
@@ -108,7 +173,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                                 const EdgeInsets.only(left: 5.0, right: 5.0),
                             child: Center(
                                 child: Text(
-                              items[i]['time'],
+                              "${date.day}/${date.month}/${date.year}",
                               style: TextStyle(color: Colors.white),
                             )),
                           ),
@@ -118,7 +183,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                     Container(
                       child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(items[i]['nom'],
+                          child: Text(nom,
                               style: TextStyle(
                                   color: Colors.black, fontSize: 15))),
                     ),
@@ -141,7 +206,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                                       width: 20,
                                     ),
                                     Container(
-                                      child: Text(items[i]['volume'],
+                                      child: Text('${document['volume']}L',
                                           style: TextStyle(
                                               color: Colors.grey[600])),
                                     ),
@@ -162,7 +227,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                                   width: 20,
                                 ),
                                 Container(
-                                  child: Text(items[i]['type'],
+                                  child: Text(document['idtype'],
                                       style:
                                           TextStyle(color: Colors.grey[600])),
                                 ),
@@ -177,7 +242,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                                           TextStyle(color: Colors.grey[800])),
                                 ),
                                 Container(
-                                  child: Text(items[i]['adresse'],
+                                  child: Text(document['adresse'],
                                       style:
                                           TextStyle(color: Colors.grey[600])),
                                 ),
