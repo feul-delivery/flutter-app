@@ -86,25 +86,9 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                             physics: BouncingScrollPhysics(),
                             children: snapshot.data?.documents
                                 ?.map((DocumentSnapshot document) {
-                              var noom = 'N/A';
-                              Future<void> dd() async {
-                                await Firestore.instance
-                                    .collection('client')
-                                    .document(document['uidclient'])
-                                    .get()
-                                    .then((value) async {
-                                  print(value);
-                                  noom = await value?.data['nom'];
-                                  noom =
-                                      noom + ' ' + await value?.data['prenom'];
-                                });
-                              }
-
-                              dd();
-
                               return InkWell(
                                   onTap: () {},
-                                  child: toutCommandes(document, noom));
+                                  child: toutCommandes(document));
                             })?.toList());
                     }
                   },
@@ -119,9 +103,8 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
     );
   }
 
-  Container toutCommandes(DocumentSnapshot document, var nom) {
+  Container toutCommandes(DocumentSnapshot document) {
     DateTime date = DateTime.parse(document['dateheurec']);
-    print(nom);
     return Container(
       child: Column(
         children: [
@@ -185,7 +168,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                     Container(
                       child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(nom,
+                          child: Text('REF : ${document['uidclient']}',
                               style: TextStyle(
                                   color: Colors.black, fontSize: 15))),
                     ),
