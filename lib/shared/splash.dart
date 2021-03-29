@@ -1,7 +1,7 @@
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/StarterPage.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:page_transition/page_transition.dart';
 import 'dart:async';
@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
           Text(
             'Fuel Delivery',
             style: TextStyle(
-                fontFamily: GoogleFonts.openSans().fontFamily,
+                fontFamily: 'Gotham',
                 fontWeight: FontWeight.w700,
                 fontSize: 50,
                 color: Color.fromRGBO(246, 204, 7, 1)),

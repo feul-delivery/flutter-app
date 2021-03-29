@@ -1,6 +1,5 @@
 import 'package:FD_flutter/modules/order.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class OrderDone extends StatefulWidget {
@@ -45,7 +44,7 @@ class _OrderDoneState extends State<OrderDone> {
                 'Order finished',
                 style: TextStyle(
                   color: Colors.black54,
-                  fontFamily: GoogleFonts.openSans().fontFamily,
+                  fontFamily: 'Gotham',
                   fontSize: 35,
                   fontWeight: FontWeight.w500,
                 ),
@@ -55,7 +54,7 @@ class _OrderDoneState extends State<OrderDone> {
               'will be delivered ASAP',
               style: TextStyle(
                   color: Colors.black26,
-                  fontFamily: GoogleFonts.openSans().fontFamily,
+                  fontFamily: 'Gotham',
                   fontWeight: FontWeight.w200,
                   fontSize: 17),
             ),

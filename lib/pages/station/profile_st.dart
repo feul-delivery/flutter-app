@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/database.dart';
@@ -9,7 +8,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 String profileURL;

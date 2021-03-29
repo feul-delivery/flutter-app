@@ -6,7 +6,7 @@ import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'favoris_cl.dart';
 import 'index_cl.dart';
 import 'bbar_cl.dart';
@@ -62,7 +62,7 @@ class _DrawerCLState extends State<DrawerCL> {
                             "${IndexCl.client?.nom?.toUpperCase()} ${IndexCl.client?.prenom?.toUpperCase()}",
                             style: TextStyle(
                               color: Colors.white,
-                              fontFamily: GoogleFonts.openSans().fontFamily,
+                              fontFamily: 'Gotham',
                               fontWeight: FontWeight.w500,
                               fontSize: 17,
                             )),
@@ -73,7 +73,7 @@ class _DrawerCLState extends State<DrawerCL> {
                           "${IndexCl.client?.email}",
                           style: TextStyle(
                             color: Colors.white,
-                            fontFamily: GoogleFonts.openSans().fontFamily,
+                            fontFamily: 'Gotham',
                             fontWeight: FontWeight.w200,
                           ),
                         ),

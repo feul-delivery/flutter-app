@@ -3,7 +3,6 @@ import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 int like = 24;
 int dislike = 9;
@@ -51,8 +50,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                   doc['titre'],
                                   style: TextStyle(
                                     color: Colors.white,
-                                    fontFamily:
-                                        GoogleFonts.openSans().fontFamily,
+                                    fontFamily: 'Gotham',
                                     fontSize: 25,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -105,9 +103,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                           Text(
                                             likeText,
                                             style: TextStyle(
-                                                fontFamily:
-                                                    GoogleFonts.openSans()
-                                                        .fontFamily,
+                                                fontFamily: 'Gotham',
                                                 color: Colors.grey,
                                                 fontSize: 18),
                                           ),
@@ -142,8 +138,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                         Text(
                                           dislikeText,
                                           style: TextStyle(
-                                              fontFamily: GoogleFonts.openSans()
-                                                  .fontFamily,
+                                              fontFamily: 'Gotham',
                                               color: Colors.grey,
                                               fontSize: 18),
                                         ),

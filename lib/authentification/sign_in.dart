@@ -3,7 +3,6 @@ import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -382,8 +381,7 @@ class _SignInState extends State<SignIn> {
                                         "you are new here?",
                                         style: TextStyle(
                                           color: Colors.grey,
-                                          fontFamily:
-                                              GoogleFonts.openSans().fontFamily,
+                                          fontFamily: 'Gotham',
                                           fontWeight: FontWeight.w300,
                                         ),
                                       )),

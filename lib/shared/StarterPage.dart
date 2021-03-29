@@ -1,7 +1,8 @@
 import 'package:FD_flutter/authentification/authenticate.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:page_transition/page_transition.dart';
 
 class StarterPage extends StatefulWidget {
@@ -76,7 +77,7 @@ class _StarterPageState extends State<StarterPage>
                         'Fuel Delivery',
                         style: TextStyle(
                             color: Colors.white,
-                            fontFamily: GoogleFonts.openSans().fontFamily,
+                            fontFamily: 'Gotham',
                             fontSize: 50,
                             fontWeight: FontWeight.bold),
                       )),
@@ -101,8 +102,8 @@ class _StarterPageState extends State<StarterPage>
                           child: Container(
                               width: 150,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Colors.red[600],
+                                borderRadius: BorderRadius.circular(50),
+                                color: Colors.white,
                               ),
                               child: AnimatedOpacity(
                                 opacity: _textVisible ? 1.0 : 0.0,
@@ -112,7 +113,7 @@ class _StarterPageState extends State<StarterPage>
                                   minWidth: double.infinity,
                                   child: Text(
                                     "Start",
-                                    style: TextStyle(color: Colors.white),
+                                    style: buttonStyleBlack,
                                   ),
                                 ),
                               )),

@@ -5,7 +5,7 @@ import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/client/drawer_cl.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'bbar_cl.dart';
 
@@ -152,7 +152,7 @@ class _ExploreClState extends State<ExploreCl> {
                       child: Text('${document['titre']}',
                           style: TextStyle(
                             color: Colors.black54,
-                            fontFamily: GoogleFonts.openSans().fontFamily,
+                            fontFamily: 'Gotham',
                             fontWeight: FontWeight.w400,
                             fontSize: 24,
                           )),
@@ -161,7 +161,7 @@ class _ExploreClState extends State<ExploreCl> {
                       '${document['adresse']}',
                       style: TextStyle(
                         color: Colors.black38,
-                        fontFamily: GoogleFonts.openSans().fontFamily,
+                        fontFamily: 'Gotham',
                         fontWeight: FontWeight.w400,
                         fontSize: 14,
                       ),
@@ -214,8 +214,7 @@ class _ExploreClState extends State<ExploreCl> {
                                   'Order',
                                   style: TextStyle(
                                     color: Colors.blue,
-                                    fontFamily:
-                                        GoogleFonts.openSans().fontFamily,
+                                    fontFamily: 'Gotham',
                                     fontWeight: FontWeight.w400,
                                     fontSize: 14,
                                   ),
