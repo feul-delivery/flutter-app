@@ -21,15 +21,6 @@ class _SettingsClState extends State<SettingsCl> {
             "Settings",
             style: pageTitle,
           ),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.home),
-                onPressed: () {
-                  ButtomBarCl.selectedIndex = 0;
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => IndexCl()));
-                })
-          ],
           centerTitle: true,
           backgroundColor: Colors.black,
           elevation: 1,

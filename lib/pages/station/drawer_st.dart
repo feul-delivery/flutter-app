@@ -28,11 +28,8 @@ class DrawerSt extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(20),
-                      topRight: Radius.circular(20)),
-                ),
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(50)),
                 child: IndexSt.entreprise?.photoURL == null
                     ? Image.asset(
                         'assets/total.png',
@@ -43,9 +40,7 @@ class DrawerSt extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 2 / 3,
                           height: MediaQuery.of(context).size.width * 1 / 3,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20)),
+                            borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
                               image: imageProvider,
                               fit: BoxFit.cover,
@@ -64,11 +59,6 @@ class DrawerSt extends StatelessWidget {
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20))),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -78,7 +68,7 @@ class DrawerSt extends StatelessWidget {
                     Text(
                       '${IndexSt.entreprise?.titre?.toUpperCase()}',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontFamily: 'Gotham',
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
@@ -91,7 +81,7 @@ class DrawerSt extends StatelessWidget {
                       '${IndexSt.entreprise?.email}',
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.white,
+                        color: Colors.black,
                         fontFamily: 'Gotham',
                         fontWeight: FontWeight.w200,
                       ),
@@ -159,51 +149,43 @@ class DrawerSt extends StatelessWidget {
         Expanded(
             child: Align(
           alignment: Alignment.bottomCenter,
-          child: Container(
-            decoration: BoxDecoration(
-                color: Colors.black,
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(20),
-                    topRight: Radius.circular(20))),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                InkWell(
-                  onTap: () async {
-                    _auth.signOut();
-                    Navigator.of(context).pushReplacement(MaterialPageRoute(
-                        builder: (BuildContext context) => Wrapper()));
-                  },
-                  child: Container(
-                    height: 30,
-                    margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    width: MediaQuery.of(context).size.width * 1 / 4,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.white),
-                    child: Center(
-                      child: Text(
-                        "Sign out",
-                        style: buttonStyleBlack,
-                      ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              InkWell(
+                onTap: () async {
+                  _auth.signOut();
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (BuildContext context) => Wrapper()));
+                },
+                child: Container(
+                  height: 30,
+                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  width: MediaQuery.of(context).size.width * 1 / 4,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.black),
+                  child: Center(
+                    child: Text(
+                      "Sign out",
+                      style: buttonStyle,
                     ),
                   ),
                 ),
-                IconButton(
-                  icon: Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        PageTransition(
-                            type: PageTransitionType.fade,
-                            child: SettingsSt()));
-                  },
-                )
-              ],
-            ),
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.settings,
+                  color: Colors.black,
+                ),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      PageTransition(
+                          type: PageTransitionType.fade, child: SettingsSt()));
+                },
+              )
+            ],
           ),
         ))
       ]),
