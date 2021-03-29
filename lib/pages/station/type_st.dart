@@ -20,7 +20,7 @@ class _TypeStState extends State<TypeSt> {
     return WillPopScope(
         child: Scaffold(
           appBar: AppBar(
-            backgroundColor: Colors.red[900],
+            backgroundColor: Colors.black,
             title: Text("Types"),
             centerTitle: true,
             actions: <Widget>[
@@ -30,7 +30,7 @@ class _TypeStState extends State<TypeSt> {
                   style: buttonStyle,
                 ),
                 textColor: Colors.white,
-                color: Colors.red[900],
+                color: Colors.black,
                 onPressed: () {
                   Navigator.pushReplacement(
                       context,
@@ -47,20 +47,20 @@ class _TypeStState extends State<TypeSt> {
                 .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
-                return Icon(Icons.cancel, color: Colors.red[900]);
+                return Icon(Icons.cancel, color: Colors.black);
               }
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
                   return SizedBox(
                       child: Center(
                           child: CircularProgressIndicator(
-                              backgroundColor: Colors.red[900])));
+                              backgroundColor: Colors.black)));
                 case ConnectionState.none:
-                  return Icon(Icons.error_outline, color: Colors.red[900]);
+                  return Icon(Icons.error_outline, color: Colors.black);
                 case ConnectionState.done:
                   return Icon(
                     Icons.done,
-                    color: Colors.red[900],
+                    color: Colors.black,
                   );
                 default:
                   List<Map<dynamic, dynamic>> _types =
@@ -80,7 +80,7 @@ class _TypeStState extends State<TypeSt> {
                                 'Are you sure',
                                 style: textStyleWhite,
                               ),
-                              backgroundColor: Colors.red[900],
+                              backgroundColor: Colors.black,
                               action: SnackBarAction(
                                 textColor: Colors.white,
                                 label: 'Confirm',
@@ -112,7 +112,7 @@ class _TypeStState extends State<TypeSt> {
             },
             label: Text('add type'),
             icon: Icon(Icons.add),
-            backgroundColor: Colors.red[900],
+            backgroundColor: Colors.black,
           ),
         ),
         onWillPop: () => Navigator.of(context).pushReplacement(
@@ -143,7 +143,7 @@ class _TypeStState extends State<TypeSt> {
                             style: buttonStyleBlack,
                           )),
                       FlatButton(
-                          color: Colors.red[900],
+                          color: Colors.black,
                           onPressed: () async {
                             if (_formKey.currentState.validate()) {
                               // add type

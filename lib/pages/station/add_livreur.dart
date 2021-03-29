@@ -20,7 +20,7 @@ class _AddLivreurState extends State<AddLivreur> {
     final User _user = Provider.of<User>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.red[900],
+        backgroundColor: Colors.black,
         title: Text("New Deliveryman"),
       ),
       body: Column(
@@ -57,20 +57,20 @@ class _AddLivreurState extends State<AddLivreur> {
                       .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
-                  return Icon(Icons.cancel, color: Colors.red[900]);
+                  return Icon(Icons.cancel, color: Colors.black);
                 }
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
                     return SizedBox(
                         child: Center(
                             child: CircularProgressIndicator(
-                                backgroundColor: Colors.red[900])));
+                                backgroundColor: Colors.black)));
                   case ConnectionState.none:
-                    return Icon(Icons.error_outline, color: Colors.red[900]);
+                    return Icon(Icons.error_outline, color: Colors.black);
                   case ConnectionState.done:
                     return Icon(
                       Icons.done,
-                      color: Colors.red[900],
+                      color: Colors.black,
                     );
                   default:
                     return new ListView(
@@ -91,7 +91,7 @@ class _AddLivreurState extends State<AddLivreur> {
                                     message,
                                     style: TextStyle(color: Colors.white),
                                   ),
-                                  backgroundColor: Colors.red[900],
+                                  backgroundColor: Colors.black,
                                 ));
                               } else {
                                 message = '';

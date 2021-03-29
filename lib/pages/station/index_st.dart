@@ -45,7 +45,7 @@ class _IndexStState extends State<IndexSt> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text("Home"),
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.black,
           centerTitle: true,
           actions: <Widget>[
             IconButton(
@@ -79,7 +79,7 @@ class _IndexStState extends State<IndexSt> {
                         padding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 2.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5.0),
-                          color: Colors.red[900],
+                          color: Colors.black,
                         ),
                         child: Text(
                           'Live',
@@ -115,7 +115,7 @@ class _IndexStState extends State<IndexSt> {
                   borderRadius: BorderRadius.circular(10),
                   boxShadow: [
                     BoxShadow(
-                        color: Colors.red[900].withOpacity(0.4),
+                        color: Colors.black.withOpacity(0.4),
                         blurRadius: 20,
                         offset: Offset(0, 10))
                   ]),
@@ -139,7 +139,7 @@ class _IndexStState extends State<IndexSt> {
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.red[900],
+                            color: Colors.black,
                           ),
                           child: Padding(
                             padding:

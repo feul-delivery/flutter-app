@@ -1,13 +1,16 @@
 import 'dart:io';
+import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/database.dart';
-import 'package:FD_flutter/services/profile_picture.dart';
+import 'package:FD_flutter/shared/image_capture.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
 
 String profileURL;
 
@@ -66,7 +69,7 @@ class _ProfilStState extends State<ProfilSt> {
   final picker = ImagePicker();
 
   Future<File> getImage(ImageSource source) async {
-    final pickedFile = await picker.getImage(source: source);
+    final pickedFile = await ImagePicker.pickImage(source: source);
     if (pickedFile != null) {
       return File(pickedFile.path);
     }
@@ -74,62 +77,62 @@ class _ProfilStState extends State<ProfilSt> {
     return null;
   }
 
-  void _showImageSettingsPanel() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            margin: EdgeInsets.all(50),
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () async {
-                    File profileImage = await getImage(ImageSource.camera);
-                    if (profileImage != null) {
-                      profileURL = await uploadFile(profileImage);
-                      setState(() {
-                        IndexSt.entreprise?.photoURL = profileURL;
-                      });
-                    }
-                  },
-                  child: Material(
-                      color: Colors.red[900],
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Icon(Icons.camera_alt,
-                            color: Colors.white, size: 40.0),
-                      ))),
-                ),
-                InkWell(
-                  onTap: () async {
-                    File profileImage = await getImage(ImageSource.gallery);
-                    if (profileImage != null) {
-                      profileURL = await uploadFile(profileImage);
-                      setState(() {
-                        IndexSt.entreprise?.photoURL = profileURL;
-                      });
-                    }
-                  },
-                  child: Material(
-                      color: Colors.red[900],
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child:
-                            Icon(Icons.photo, color: Colors.white, size: 40.0),
-                      ))),
-                ),
-              ],
-            ),
-          );
-        });
-  }
+  // void _showImageSettingsPanel() {
+  //   showModalBottomSheet(
+  //       context: context,
+  //       builder: (context) {
+  //         return Container(
+  //           margin: EdgeInsets.all(50),
+  //           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //             crossAxisAlignment: CrossAxisAlignment.center,
+  //             children: [
+  //               InkWell(
+  //                 onTap: () async {
+  //                   File profileImage = await getImage(ImageSource.camera);
+  //                   if (profileImage != null) {
+  //                     profileURL = await uploadFile(profileImage);
+  //                     setState(() {
+  //                       IndexSt.entreprise?.photoURL = profileURL;
+  //                     });
+  //                   }
+  //                 },
+  //                 child: Material(
+  //                     color: Colors.black,
+  //                     borderRadius: BorderRadius.circular(10.0),
+  //                     child: Center(
+  //                         child: Padding(
+  //                       padding: const EdgeInsets.all(20.0),
+  //                       child: Icon(Icons.camera_alt,
+  //                           color: Colors.white, size: 40.0),
+  //                     ))),
+  //               ),
+  //               InkWell(
+  //                 onTap: () async {
+  //                   File profileImage = await getImage(ImageSource.gallery);
+  //                   if (profileImage != null) {
+  //                     profileURL = await uploadFile(profileImage);
+  //                     setState(() {
+  //                       IndexSt.entreprise?.photoURL = profileURL;
+  //                     });
+  //                   }
+  //                 },
+  //                 child: Material(
+  //                     color: Colors.black,
+  //                     borderRadius: BorderRadius.circular(10.0),
+  //                     child: Center(
+  //                         child: Padding(
+  //                       padding: const EdgeInsets.all(20.0),
+  //                       child:
+  //                           Icon(Icons.photo, color: Colors.white, size: 40.0),
+  //                     ))),
+  //               ),
+  //             ],
+  //           ),
+  //         );
+  //       });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +155,13 @@ class _ProfilStState extends State<ProfilSt> {
                                   fit: BoxFit.cover)),
                           child: IconButton(
                             onPressed: () async {
-                              _showImageSettingsPanel();
+                              String _uid =
+                                  Provider.of<User>(context, listen: true).uid;
+                              Navigator.of(context).push(PageTransition(
+                                  type: PageTransitionType.leftToRight,
+                                  child: ImageCapture(
+                                    filePath: 'images/profile/$_uid',
+                                  )));
                             },
                             icon: Icon(Icons.edit),
                             color: Colors.white,
@@ -166,7 +175,14 @@ class _ProfilStState extends State<ProfilSt> {
                                       image: imageProvider, fit: BoxFit.cover)),
                               child: IconButton(
                                 onPressed: () async {
-                                  _showImageSettingsPanel();
+                                  String _uid =
+                                      Provider.of<User>(context, listen: true)
+                                          .uid;
+                                  Navigator.of(context).push(PageTransition(
+                                      type: PageTransitionType.leftToRight,
+                                      child: ImageCapture(
+                                        filePath: 'images/profile/$_uid',
+                                      )));
                                 },
                                 icon: Icon(Icons.edit),
                                 color: Colors.white,
@@ -177,7 +193,7 @@ class _ProfilStState extends State<ProfilSt> {
                                   CircularProgressIndicator(
                                       value: downloadProgress.progress),
                           errorWidget: (context, url, error) =>
-                              Icon(Icons.error, color: Colors.red[900]),
+                              Icon(Icons.error, color: Colors.black),
                         ),
                 ),
               ),
@@ -320,7 +336,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                 Icon(
                                                   Icons.edit,
                                                   size: 13,
-                                                  color: Colors.red[900],
+                                                  color: Colors.black,
                                                 ),
                                                 SizedBox(
                                                   width: 4,
@@ -354,7 +370,7 @@ class _ProfilStState extends State<ProfilSt> {
                                 children: [
                                   Icon(
                                     Icons.article,
-                                    color: Colors.red[900],
+                                    color: Colors.black,
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -451,7 +467,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     Icon(
                                       Icons.edit,
                                       size: 13,
-                                      color: Colors.red[900],
+                                      color: Colors.black,
                                     ),
                                     SizedBox(
                                       width: 4,
@@ -497,7 +513,7 @@ class _ProfilStState extends State<ProfilSt> {
                                 children: [
                                   Icon(
                                     Icons.business,
-                                    color: Colors.red[900],
+                                    color: Colors.black,
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -594,7 +610,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     Icon(
                                       Icons.edit,
                                       size: 13,
-                                      color: Colors.red[900],
+                                      color: Colors.black,
                                     ),
                                     SizedBox(
                                       width: 4,
@@ -637,7 +653,7 @@ class _ProfilStState extends State<ProfilSt> {
                                 children: [
                                   Icon(
                                     Icons.phone,
-                                    color: Colors.red[900],
+                                    color: Colors.black,
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -733,7 +749,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     Icon(
                                       Icons.edit,
                                       size: 13,
-                                      color: Colors.red[900],
+                                      color: Colors.black,
                                     ),
                                     SizedBox(
                                       width: 4,
@@ -776,7 +792,7 @@ class _ProfilStState extends State<ProfilSt> {
                                 children: [
                                   Icon(
                                     Icons.mail,
-                                    color: Colors.red[900],
+                                    color: Colors.black,
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -872,7 +888,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     Icon(
                                       Icons.edit,
                                       size: 13,
-                                      color: Colors.red[900],
+                                      color: Colors.black,
                                     ),
                                     SizedBox(
                                       width: 4,
@@ -915,7 +931,7 @@ class _ProfilStState extends State<ProfilSt> {
                                 children: [
                                   Icon(
                                     Icons.photo,
-                                    color: Colors.red[900],
+                                    color: Colors.black,
                                   ),
                                   SizedBox(
                                     width: 8,
@@ -936,7 +952,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     Icon(
                                       Icons.edit,
                                       size: 13,
-                                      color: Colors.red[900],
+                                      color: Colors.black,
                                     ),
                                     SizedBox(
                                       width: 4,

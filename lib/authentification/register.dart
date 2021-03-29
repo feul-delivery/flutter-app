@@ -16,17 +16,12 @@ class Register extends StatefulWidget {
 
 class _RegisterState extends State<Register> {
   final AuthService _auth = AuthService();
-
   final _formKey = GlobalKey<FormState>();
-
   String error = '';
-
   bool loading = false;
-
   String email = '';
-
   String password = '';
-
+  bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
     return loading
@@ -39,9 +34,9 @@ class _RegisterState extends State<Register> {
               width: double.infinity,
               decoration: BoxDecoration(
                   gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-                Colors.red[800],
-                Colors.red[600],
-                Colors.red[400]
+                Colors.black87,
+                Colors.black54,
+                Colors.black45
               ])),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,9 +138,25 @@ class _RegisterState extends State<Register> {
                                             child: TextFormField(
                                               textInputAction:
                                                   TextInputAction.next,
-                                              obscureText: true,
+                                              obscureText: _isObscure,
                                               decoration: InputDecoration(
                                                   hintText: "Password",
+                                                  suffixIcon: IconButton(
+                                                      icon: Icon(
+                                                        _isObscure
+                                                            ? Icons.visibility
+                                                            : Icons
+                                                                .visibility_off,
+                                                        color: _isObscure
+                                                            ? Colors.black54
+                                                            : Colors.black,
+                                                      ),
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          _isObscure =
+                                                              !_isObscure;
+                                                        });
+                                                      }),
                                                   hintStyle: hintStyle,
                                                   border: InputBorder.none),
                                               validator: (val) => val.length < 6
@@ -191,42 +202,42 @@ class _RegisterState extends State<Register> {
                                     fontWeight: FontWeight.w400),
                               ),
                               SizedBox(
-                                height: 15,
+                                height: 10,
                               ),
                               FadeAnimation(
                                   1.2,
-                                  Container(
-                                    height: 50,
-                                    margin:
-                                        EdgeInsets.symmetric(horizontal: 50),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.red[700]),
-                                    child: Center(
-                                      child: FlatButton(
-                                        onPressed: () async {
-                                          if (_formKey.currentState
-                                              .validate()) {
-                                            setState(() => loading = true);
-                                            dynamic result = await _auth
-                                                .registerWithEmailAndPassword(
-                                                    email, password);
-                                            if (result == null) {
-                                              setState(() {
-                                                loading = false;
-                                                error =
-                                                    'Please supply a valid email';
-                                              });
-                                            } else {
-                                              Navigator.pushReplacement(
-                                                  context,
-                                                  PageTransition(
-                                                      type: PageTransitionType
-                                                          .fade,
-                                                      child: TypeCompte()));
-                                            }
-                                          }
-                                        },
+                                  InkWell(
+                                    onTap: () async {
+                                      if (_formKey.currentState.validate()) {
+                                        setState(() => loading = true);
+                                        dynamic result = await _auth
+                                            .registerWithEmailAndPassword(
+                                                email, password);
+                                        if (result == null) {
+                                          setState(() {
+                                            loading = false;
+                                            error =
+                                                'Please supply a valid email';
+                                          });
+                                        } else {
+                                          Navigator.pushReplacement(
+                                              context,
+                                              PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child: TypeCompte()));
+                                        }
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 50,
+                                      width: MediaQuery.of(context).size.width *
+                                          1 /
+                                          3,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          color: Colors.black),
+                                      child: Center(
                                         child: Text(
                                           "Register",
                                           style: buttonStyle,
@@ -254,7 +265,9 @@ class _RegisterState extends State<Register> {
                                         child: Text(
                                           "Login",
                                           style: TextStyle(
+                                              fontSize: 17,
                                               fontFamily: 'Gotham',
+                                              color: Colors.black87,
                                               fontWeight: FontWeight.w500,
                                               letterSpacing: 1.2),
                                         ),

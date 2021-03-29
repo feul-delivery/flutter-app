@@ -21,7 +21,7 @@ class _TypeCompteState extends State<TypeCompte> {
             "Account type",
             style: pageTitle,
           ),
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.black,
           centerTitle: true,
         ),
         body: Padding(
@@ -52,7 +52,7 @@ class _TypeCompteState extends State<TypeCompte> {
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.red[900].withOpacity(0.4),
+                              color: Colors.black.withOpacity(0.4),
                               blurRadius: 20,
                               offset: Offset(0, 10))
                         ]),
@@ -104,7 +104,7 @@ class _TypeCompteState extends State<TypeCompte> {
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                              color: Colors.red[900].withOpacity(0.4),
+                              color: Colors.black.withOpacity(0.4),
                               blurRadius: 20,
                               offset: Offset(0, 10))
                         ]),

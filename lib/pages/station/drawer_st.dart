@@ -54,7 +54,7 @@ class DrawerSt extends StatelessWidget {
                                 CircularProgressIndicator(
                                     value: downloadProgress.progress),
                         errorWidget: (context, url, error) =>
-                            Icon(Icons.error, color: Colors.red[900]),
+                            Icon(Icons.error, color: Colors.black),
                       ),
               ),
               SizedBox(
@@ -95,7 +95,7 @@ class DrawerSt extends StatelessWidget {
           },
           leading: Icon(
             Icons.person,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "Profile",
@@ -112,7 +112,7 @@ class DrawerSt extends StatelessWidget {
           },
           leading: Icon(
             Icons.receipt,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "Orders",
@@ -127,7 +127,7 @@ class DrawerSt extends StatelessWidget {
           },
           leading: Icon(
             Icons.offline_bolt_rounded,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "Fuel types",
@@ -143,7 +143,7 @@ class DrawerSt extends StatelessWidget {
           },
           leading: Icon(
             Icons.settings,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "Settings",
@@ -157,8 +157,7 @@ class DrawerSt extends StatelessWidget {
             height: 35,
             margin: EdgeInsets.symmetric(horizontal: 55, vertical: 20),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.red[900]),
+                borderRadius: BorderRadius.circular(10), color: Colors.black),
             child: Center(
               child: FlatButton(
                 onPressed: () async {

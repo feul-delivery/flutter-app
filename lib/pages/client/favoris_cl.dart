@@ -14,7 +14,7 @@ class _FavorisClState extends State<FavorisCl> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.red[900],
+        backgroundColor: Colors.black,
         title: Text('Favorites'),
         actions: <Widget>[
           IconButton(
@@ -75,7 +75,7 @@ class _FavorisClState extends State<FavorisCl> {
                           //   onPressed: null,
                           //   child: Icon(
                           //     Icons.favorite,
-                          //     color: Colors.red[900],
+                          //     color: Colors.black,
                           //   ),
                           // ),
                         )

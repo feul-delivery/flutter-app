@@ -25,7 +25,7 @@ class _CommandePaymentState extends State<CommandePayment> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.red[900],
+        backgroundColor: Colors.black,
         title: Text(
           'Payment',
           style: pageTitle,
@@ -70,7 +70,7 @@ class _CommandePaymentState extends State<CommandePayment> {
             ListTile(
               title: Text('Cash on delivery'),
               leading: Radio(
-                  activeColor: Colors.red[900],
+                  activeColor: Colors.black,
                   value: pmethode.livraison,
                   groupValue: _methode,
                   onChanged: (pmethode valeur) {
@@ -82,7 +82,7 @@ class _CommandePaymentState extends State<CommandePayment> {
             ListTile(
               title: Text('G-Pay'),
               leading: Radio(
-                  activeColor: Colors.red[900],
+                  activeColor: Colors.black,
                   value: pmethode.google,
                   groupValue: _methode,
                   onChanged: (pmethode valeur) {

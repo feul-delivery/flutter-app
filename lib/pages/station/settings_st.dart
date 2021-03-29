@@ -29,7 +29,7 @@ class _SettingsStState extends State<SettingsSt> {
                 })
           ],
           centerTitle: true,
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.black,
           elevation: 1,
         ),
         body: Container(
@@ -43,7 +43,7 @@ class _SettingsStState extends State<SettingsSt> {
                 children: [
                   Icon(
                     Icons.person,
-                    color: Colors.red[900],
+                    color: Colors.black,
                   ),
                   SizedBox(
                     width: 8,
@@ -64,7 +64,7 @@ class _SettingsStState extends State<SettingsSt> {
                 children: [
                   Icon(
                     Icons.phone_iphone,
-                    color: Colors.red[900],
+                    color: Colors.black,
                   ),
                   SizedBox(
                     width: 8,
@@ -85,7 +85,7 @@ class _SettingsStState extends State<SettingsSt> {
                 children: [
                   Icon(
                     Icons.security,
-                    color: Colors.red[900],
+                    color: Colors.black,
                   ),
                   SizedBox(
                     width: 8,
@@ -171,13 +171,13 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                     FlatButton(
                         onPressed: () {},
                         child: Text("Change",
-                            style: TextStyle(color: Colors.red[900]))),
+                            style: TextStyle(color: Colors.black))),
                     FlatButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                         child: Text("Cancel",
-                            style: TextStyle(color: Colors.red[900]))),
+                            style: TextStyle(color: Colors.black))),
                   ],
                 ),
               ],
@@ -266,7 +266,7 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
                     },
                     child: Text(
                       "Close",
-                      style: TextStyle(color: Colors.red[900]),
+                      style: TextStyle(color: Colors.black),
                     )),
               ],
             );
@@ -327,11 +327,11 @@ InkWell buildRateUsRow(BuildContext context, String title) {
                           Navigator.of(context).pop();
                         },
                         child: Text("Cancel",
-                            style: TextStyle(color: Colors.red[900]))),
+                            style: TextStyle(color: Colors.black))),
                     FlatButton(
                         onPressed: () {},
                         child: Text("Send",
-                            style: TextStyle(color: Colors.red[900]))),
+                            style: TextStyle(color: Colors.black))),
                   ],
                 ),
               ],
@@ -381,7 +381,7 @@ InkWell buildAccountOptionRow(BuildContext context, String title) {
                     },
                     child: Text(
                       "Close",
-                      style: TextStyle(color: Colors.red[900]),
+                      style: TextStyle(color: Colors.black),
                     )),
               ],
             );

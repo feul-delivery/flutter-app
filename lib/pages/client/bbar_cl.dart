@@ -111,7 +111,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
               curve: Curves.linear,
               duration: duration,
               child: Container(
-                color: Colors.red[900],
+                color: Colors.black,
                 width: width / items.length,
                 height: INDICATOR_HEIGHT,
               ),
@@ -146,7 +146,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
             alignment: isSelected ? Alignment.center : Alignment(0, 2.6),
             child: Icon(
               item.icon,
-              color: Colors.red[900],
+              color: Colors.black,
             ),
           ),
         ],

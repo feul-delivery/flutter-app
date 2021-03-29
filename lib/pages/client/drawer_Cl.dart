@@ -32,7 +32,7 @@ class _DrawerCLState extends State<DrawerCL> {
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.red[900],
+                color: Colors.black,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -95,7 +95,7 @@ class _DrawerCLState extends State<DrawerCL> {
           },
           leading: Icon(
             Icons.home,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "Home",
@@ -109,7 +109,7 @@ class _DrawerCLState extends State<DrawerCL> {
           },
           leading: Icon(
             Icons.person,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "My profile",
@@ -123,7 +123,7 @@ class _DrawerCLState extends State<DrawerCL> {
           },
           leading: Icon(
             Icons.favorite,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "Favorites",
@@ -137,7 +137,7 @@ class _DrawerCLState extends State<DrawerCL> {
           },
           leading: Icon(
             Icons.receipt,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "My orders",
@@ -157,7 +157,7 @@ class _DrawerCLState extends State<DrawerCL> {
                   margin: EdgeInsets.symmetric(horizontal: 25, vertical: 20),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.red[700]),
+                      color: Colors.black),
                   child: Center(
                     child: FlatButton(
                       onPressed: () async {
@@ -179,7 +179,7 @@ class _DrawerCLState extends State<DrawerCL> {
                   },
                   child: Icon(
                     Icons.settings,
-                    color: Colors.red[900],
+                    color: Colors.black,
                   ),
                 ),
               ],

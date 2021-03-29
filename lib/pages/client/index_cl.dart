@@ -34,7 +34,7 @@ class _IndexClState extends State<IndexCl> {
                             right: 0.0, bottom: 0.0, top: 10),
                         child: Text(
                           'Yes',
-                          style: TextStyle(color: Colors.red[900]),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),
@@ -45,7 +45,7 @@ class _IndexClState extends State<IndexCl> {
                             right: 0.0, bottom: 0.0, top: 10),
                         child: Text(
                           'Cancel',
-                          style: TextStyle(color: Colors.red[900]),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),
@@ -62,7 +62,7 @@ class _IndexClState extends State<IndexCl> {
             "Home",
             style: pageTitle,
           ),
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.black,
           centerTitle: true,
           actions: <Widget>[
             IconButton(
@@ -121,7 +121,7 @@ class _IndexClState extends State<IndexCl> {
                             .snapshots(),
                         builder: (context, snapshot) {
                           if (snapshot.hasError) {
-                            return Icon(Icons.cancel, color: Colors.red[900]);
+                            return Icon(Icons.cancel, color: Colors.black);
                           }
 
                           switch (snapshot.connectionState) {
@@ -129,14 +129,14 @@ class _IndexClState extends State<IndexCl> {
                               return SizedBox(
                                   child: Center(
                                       child: CircularProgressIndicator(
-                                          backgroundColor: Colors.red[900])));
+                                          backgroundColor: Colors.black)));
                             case ConnectionState.none:
                               return Icon(Icons.error_outline,
-                                  color: Colors.red[900]);
+                                  color: Colors.black);
                             case ConnectionState.done:
                               return Icon(
                                 Icons.done,
-                                color: Colors.red[900],
+                                color: Colors.black,
                               );
                             default:
                               return new ListView(
@@ -293,7 +293,7 @@ Container _createSmallCard(DocumentSnapshot document) {
                               margin: EdgeInsets.symmetric(horizontal: 5),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: Colors.red[900],
+                                color: Colors.black,
                               ),
                               child: Padding(
                                 padding: const EdgeInsets.only(

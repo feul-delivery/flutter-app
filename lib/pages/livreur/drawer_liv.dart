@@ -84,7 +84,7 @@ class _DrawerLivState extends State<DrawerLiv> {
           },
           leading: Icon(
             Icons.home,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "Home",
@@ -98,7 +98,7 @@ class _DrawerLivState extends State<DrawerLiv> {
           },
           leading: Icon(
             Icons.person,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "My profile",
@@ -112,7 +112,7 @@ class _DrawerLivState extends State<DrawerLiv> {
           },
           leading: Icon(
             Icons.receipt,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "Rapport",
@@ -126,7 +126,7 @@ class _DrawerLivState extends State<DrawerLiv> {
           },
           leading: Icon(
             Icons.settings,
-            color: Colors.red[900],
+            color: Colors.black,
           ),
           title: Text(
             "Settings",
@@ -140,8 +140,7 @@ class _DrawerLivState extends State<DrawerLiv> {
             height: 40,
             margin: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.red[700]),
+                borderRadius: BorderRadius.circular(10), color: Colors.black),
             child: Center(
               child: FlatButton(
                 onPressed: () async {

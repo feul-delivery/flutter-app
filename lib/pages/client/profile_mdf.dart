@@ -1,8 +1,9 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/database.dart';
-import 'package:FD_flutter/services/profile_picture.dart';
+import 'package:FD_flutter/shared/image_capture.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -83,81 +84,12 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
   final picker = ImagePicker();
 
   Future<File> getImage(ImageSource source) async {
-    final pickedFile = await picker.getImage(source: source);
+    final pickedFile = await ImagePicker.pickImage(source: source);
     if (pickedFile != null) {
       return File(pickedFile.path);
     }
     print('naaaaani');
     return null;
-  }
-
-  void _showImageSettingsPanel() {
-    showModalBottomSheet(
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (context) {
-          return Container(
-            height: 100,
-            margin: EdgeInsets.all(10),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () async {
-                    File profileImage = await getImage(ImageSource.camera);
-                    if (profileImage != null) {
-                      setState(() async {
-                        IndexCl.client?.photoURL =
-                            await uploadFile(profileImage);
-                      });
-                    }
-                  },
-                  child: Material(
-                      color: Colors.red[900],
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Icon(Icons.camera_alt,
-                                color: Colors.white, size: 40.0),
-                            Text('Camera', style: buttonStyle),
-                          ],
-                        ),
-                      )),
-                ),
-                InkWell(
-                  onTap: () async {
-                    File profileImage = await getImage(ImageSource.gallery);
-                    if (profileImage != null) {
-                      setState(() async {
-                        IndexCl.client?.photoURL =
-                            await uploadFile(profileImage);
-                      });
-                    }
-                  },
-                  child: Material(
-                      color: Colors.red[900],
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Padding(
-                        padding:
-                            const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 20.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Icon(Icons.photo, color: Colors.white, size: 40.0),
-                            Text('Gallery', style: buttonStyle),
-                          ],
-                        ),
-                      )),
-                ),
-              ],
-            ),
-          );
-        });
   }
 
   @override
@@ -178,7 +110,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                 })
           ],
           centerTitle: true,
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.black,
           elevation: 1,
         ),
         drawer: DrawerCL(),
@@ -234,7 +166,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                                     downloadProgress.progress),
                                         errorWidget: (context, url, error) =>
                                             Icon(Icons.error,
-                                                color: Colors.red[900]),
+                                                color: Colors.black),
                                       ),
                               ],
                             ),
@@ -245,11 +177,22 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     new CircleAvatar(
-                                      backgroundColor: Colors.red[900],
+                                      backgroundColor: Colors.black,
                                       radius: 25.0,
                                       child: new IconButton(
                                         onPressed: () async {
-                                          _showImageSettingsPanel();
+                                          String _uid = Provider.of<User>(
+                                                  context,
+                                                  listen: true)
+                                              .uid;
+                                          Navigator.of(context).push(
+                                              PageTransition(
+                                                  type: PageTransitionType
+                                                      .leftToRight,
+                                                  child: ImageCapture(
+                                                    filePath:
+                                                        'images/profile/$_uid',
+                                                  )));
                                         },
                                         icon: Icon(Icons.camera_alt),
                                         color: Colors.white,
@@ -522,7 +465,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                   child: new RaisedButton(
                 child: new Text("Save"),
                 textColor: Colors.white,
-                color: Colors.red[900],
+                color: Colors.black,
                 onPressed: () async {
                   setState(() {
                     _status = true;
@@ -569,7 +512,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
               child: Container(
                 child: new RaisedButton(
                   child: new Text("Cancel"),
-                  textColor: Colors.red[900],
+                  textColor: Colors.black,
                   color: Colors.white,
                   onPressed: () {
                     setState(() {
@@ -589,10 +532,86 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
     );
   }
 
+  // // ignore: missing_return
+  // bool _showImageSettingsPanel(BuildContext context) {
+  //   showModalBottomSheet(
+  //       backgroundColor: Colors.transparent,
+  //       context: context,
+  //       builder: (context) {
+  //         return Container(
+  //           height: 100,
+  //           margin: EdgeInsets.all(10),
+  //           child: Row(
+  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  //             crossAxisAlignment: CrossAxisAlignment.center,
+  //             children: [
+  //               InkWell(
+  //                 onTap: () async {
+  //                   File profileImage = await getImage(ImageSource.camera);
+  //                   if (profileImage != null) {
+  //                     setState(() async {
+  //                       IndexCl.client?.photoURL =
+  //                           await uploadFile(profileImage);
+  //                     });
+  //                     return true;
+  //                   } else {
+  //                     return false;
+  //                   }
+  //                 },
+  //                 child: Material(
+  //                     color: Colors.black,
+  //                     borderRadius: BorderRadius.circular(10.0),
+  //                     child: Padding(
+  //                       padding:
+  //                           const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 20.0),
+  //                       child: Column(
+  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                         children: [
+  //                           Icon(Icons.camera_alt,
+  //                               color: Colors.white, size: 40.0),
+  //                           Text('Camera', style: buttonStyle),
+  //                         ],
+  //                       ),
+  //                     )),
+  //               ),
+  //               InkWell(
+  //                 onTap: () async {
+  //                   File profileImage = await getImage(ImageSource.gallery);
+  //                   if (profileImage != null) {
+  //                     setState(() async {
+  //                       IndexCl.client?.photoURL =
+  //                           await uploadFile(profileImage);
+  //                     });
+  //                     return true;
+  //                   } else {
+  //                     return false;
+  //                   }
+  //                 },
+  //                 child: Material(
+  //                     color: Colors.black,
+  //                     borderRadius: BorderRadius.circular(10.0),
+  //                     child: Padding(
+  //                       padding:
+  //                           const EdgeInsets.fromLTRB(40.0, 20.0, 40.0, 20.0),
+  //                       child: Column(
+  //                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //                         children: [
+  //                           Icon(Icons.photo, color: Colors.white, size: 40.0),
+  //                           Text('Gallery', style: buttonStyle),
+  //                         ],
+  //                       ),
+  //                     )),
+  //               ),
+  //             ],
+  //           ),
+  //         );
+  //       });
+  // }
+
   Widget _getEditIcon() {
     return new GestureDetector(
       child: new CircleAvatar(
-        backgroundColor: Colors.red[900],
+        backgroundColor: Colors.black,
         radius: 14.0,
         child: new Icon(
           Icons.edit,

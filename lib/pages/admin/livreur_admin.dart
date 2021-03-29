@@ -14,7 +14,7 @@ class _LiveursPageState extends State<LiveursPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.red[900],
+        backgroundColor: Colors.black,
         title: _appBarTitle,
         actions: <Widget>[
           IconButton(

@@ -36,7 +36,7 @@ class _IndexLvState extends State<IndexLv> {
                               right: 0.0, bottom: 0.0, top: 10),
                           child: Text(
                             'Yes',
-                            style: TextStyle(color: Colors.red[900]),
+                            style: TextStyle(color: Colors.black),
                           ),
                         ),
                       ),
@@ -47,7 +47,7 @@ class _IndexLvState extends State<IndexLv> {
                               right: 0.0, bottom: 0.0, top: 10),
                           child: Text(
                             'Cancel',
-                            style: TextStyle(color: Colors.red[900]),
+                            style: TextStyle(color: Colors.black),
                           ),
                         ),
                       ),
@@ -61,7 +61,7 @@ class _IndexLvState extends State<IndexLv> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             title: Text("Home"),
-            backgroundColor: Colors.red[900],
+            backgroundColor: Colors.black,
             centerTitle: true,
             actions: <Widget>[
               IconButton(
@@ -127,7 +127,7 @@ class _IndexLvState extends State<IndexLv> {
                 borderRadius: BorderRadius.circular(10),
                 boxShadow: [
                   BoxShadow(
-                      color: Colors.red[900].withOpacity(0.4),
+                      color: Colors.black.withOpacity(0.4),
                       blurRadius: 20,
                       offset: Offset(0, 10))
                 ]),
@@ -151,7 +151,7 @@ class _IndexLvState extends State<IndexLv> {
                             margin: EdgeInsets.symmetric(horizontal: 5),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: Colors.red[900],
+                              color: Colors.black,
                             )),
                       ],
                     ),

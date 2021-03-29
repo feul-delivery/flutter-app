@@ -47,7 +47,7 @@ class _ProfileClState extends State<ProfileCl> {
               ),
             ),
             centerTitle: true,
-            backgroundColor: Colors.red[900],
+            backgroundColor: Colors.black,
             elevation: 1,
           ),
           bottomNavigationBar: ButtomBarCl(),
@@ -101,7 +101,9 @@ class _ProfileClState extends State<ProfileCl> {
                   children: [
                     Container(
                       padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                      color: Colors.red[900],
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(50)),
                       child: Text(
                         "First name : ",
                         style: textStyleWhite,
@@ -110,7 +112,7 @@ class _ProfileClState extends State<ProfileCl> {
                     Container(
                       padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                       child: Text(
-                        '${IndexCl.client?.prenom}',
+                        '${IndexCl.client?.prenom?.toUpperCase()}',
                         style: strongTextStyle,
                       ),
                     )
@@ -127,7 +129,9 @@ class _ProfileClState extends State<ProfileCl> {
                   children: [
                     Container(
                       padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                      color: Colors.red[900],
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(50)),
                       child: Text(
                         "Last name : ",
                         style: textStyleWhite,
@@ -136,7 +140,7 @@ class _ProfileClState extends State<ProfileCl> {
                     Container(
                       padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                       child: Text(
-                        '${IndexCl.client?.nom}',
+                        '${IndexCl.client?.nom?.toUpperCase()}',
                         style: strongTextStyle,
                       ),
                     )
@@ -153,7 +157,9 @@ class _ProfileClState extends State<ProfileCl> {
                   children: [
                     Container(
                       padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                      color: Colors.red[900],
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(50)),
                       child: Text(
                         "Phone : ",
                         style: textStyleWhite,
@@ -179,7 +185,9 @@ class _ProfileClState extends State<ProfileCl> {
                   children: [
                     Container(
                       padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                      color: Colors.red[900],
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(50)),
                       child: Text(
                         "Email : ",
                         style: textStyleWhite,
@@ -188,7 +196,7 @@ class _ProfileClState extends State<ProfileCl> {
                     Container(
                       padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                       child: Text(
-                        '${IndexCl.client?.email}',
+                        '${IndexCl.client?.email?.toLowerCase()}',
                         style: strongTextStyle,
                       ),
                     )
@@ -205,7 +213,9 @@ class _ProfileClState extends State<ProfileCl> {
                   children: [
                     Container(
                       padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                      color: Colors.red[900],
+                      decoration: BoxDecoration(
+                          color: Colors.black,
+                          borderRadius: BorderRadius.circular(50)),
                       child: Text(
                         "CIN : ",
                         style: textStyleWhite,
@@ -214,7 +224,7 @@ class _ProfileClState extends State<ProfileCl> {
                     Container(
                       padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                       child: Text(
-                        '${IndexCl.client?.cin}',
+                        '${IndexCl.client?.cin?.toUpperCase()}',
                         style: strongTextStyle,
                       ),
                     )

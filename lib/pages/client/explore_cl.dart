@@ -18,7 +18,7 @@ class _ExploreClState extends State<ExploreCl> {
   Widget _appBarTitle = new Text('Explore', style: pageTitle);
   Icon _adoreIcon = new Icon(
     Icons.favorite,
-    color: Colors.red[900],
+    color: Colors.black,
   );
   int adore = 0;
   @override
@@ -33,7 +33,7 @@ class _ExploreClState extends State<ExploreCl> {
       child: Scaffold(
         appBar: AppBar(
           centerTitle: true,
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.black,
           title: _appBarTitle,
           actions: <Widget>[
             IconButton(
@@ -47,7 +47,7 @@ class _ExploreClState extends State<ExploreCl> {
           stream: Firestore.instance.collection('entreprise').snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
-              return Icon(Icons.cancel, color: Colors.red[900]);
+              return Icon(Icons.cancel, color: Colors.black);
             }
 
             switch (snapshot.connectionState) {
@@ -55,13 +55,13 @@ class _ExploreClState extends State<ExploreCl> {
                 return SizedBox(
                     child: Center(
                         child: CircularProgressIndicator(
-                            backgroundColor: Colors.red[900])));
+                            backgroundColor: Colors.black)));
               case ConnectionState.none:
-                return Icon(Icons.error_outline, color: Colors.red[900]);
+                return Icon(Icons.error_outline, color: Colors.black);
               case ConnectionState.done:
                 return Icon(
                   Icons.done,
-                  color: Colors.red[900],
+                  color: Colors.black,
                 );
               default:
                 return new ListView(
@@ -259,7 +259,7 @@ class _ExploreClState extends State<ExploreCl> {
     } else {
       _adoreIcon = new Icon(
         Icons.favorite,
-        color: Colors.red[900],
+        color: Colors.black,
       );
       adore = 0;
     }

@@ -27,7 +27,7 @@ class _HistoriqueLivState extends State<HistoriqueLiv> {
         child: Scaffold(
           appBar: AppBar(
             centerTitle: true,
-            backgroundColor: Colors.red[900],
+            backgroundColor: Colors.black,
             title: _appBarTitle,
             actions: <Widget>[
               IconButton(

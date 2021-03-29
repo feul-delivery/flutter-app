@@ -1,5 +1,6 @@
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/database.dart';
+import 'package:FD_flutter/shared/image_capture.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class _initialProfileclState extends State<InitialProfilecl>
                 style: buttonStyle,
               ),
               textColor: Colors.white,
-              color: Colors.red[900],
+              color: Colors.black,
               onPressed: () async {
                 final FirebaseAuth auth = FirebaseAuth.instance;
                 final FirebaseUser user = await auth.currentUser();
@@ -73,7 +74,7 @@ class _initialProfileclState extends State<InitialProfilecl>
             ),
           ],
           centerTitle: false,
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.black,
           elevation: 1,
         ),
         body: new Container(
@@ -121,10 +122,24 @@ class _initialProfileclState extends State<InitialProfilecl>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     new CircleAvatar(
-                                      backgroundColor: Colors.red[900],
+                                      backgroundColor: Colors.black,
                                       radius: 25.0,
-                                      child: new Icon(
-                                        Icons.camera_alt,
+                                      child: new IconButton(
+                                        onPressed: () {
+                                          String _uid = Provider.of<User>(
+                                                  context,
+                                                  listen: true)
+                                              .uid;
+                                          Navigator.of(context).push(
+                                              PageTransition(
+                                                  type: PageTransitionType
+                                                      .leftToRight,
+                                                  child: ImageCapture(
+                                                    filePath:
+                                                        'images/profile/$_uid',
+                                                  )));
+                                        },
+                                        icon: Icon(Icons.camera_alt),
                                         color: Colors.white,
                                       ),
                                     )

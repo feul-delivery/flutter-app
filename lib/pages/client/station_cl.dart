@@ -152,7 +152,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                             children: [
                               Icon(
                                 Icons.article,
-                                color: Colors.red[900],
+                                color: Colors.black,
                               ),
                               SizedBox(
                                 width: 8,
@@ -192,7 +192,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                             children: [
                               Icon(
                                 Icons.business,
-                                color: Colors.red[900],
+                                color: Colors.black,
                               ),
                               SizedBox(
                                 width: 8,
@@ -229,7 +229,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                             children: [
                               Icon(
                                 Icons.group,
-                                color: Colors.red[900],
+                                color: Colors.black,
                               ),
                               SizedBox(
                                 width: 8,
@@ -266,7 +266,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                             children: [
                               Icon(
                                 Icons.phone,
-                                color: Colors.red[900],
+                                color: Colors.black,
                               ),
                               SizedBox(
                                 width: 8,
@@ -303,7 +303,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                             children: [
                               Icon(
                                 Icons.mail,
-                                color: Colors.red[900],
+                                color: Colors.black,
                               ),
                               SizedBox(
                                 width: 8,
@@ -340,7 +340,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                             children: [
                               Icon(
                                 Icons.photo,
-                                color: Colors.red[900],
+                                color: Colors.black,
                               ),
                               SizedBox(
                                 width: 8,

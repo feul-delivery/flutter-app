@@ -27,7 +27,7 @@ class _RapportLivState extends State<RapportLiv> {
                 })
           ],
           centerTitle: true,
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.black,
           elevation: 1,
         ),
         body: SafeArea(

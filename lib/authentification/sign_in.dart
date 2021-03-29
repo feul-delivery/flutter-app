@@ -21,7 +21,8 @@ class _SignInState extends State<SignIn> {
   String email = '';
   String password = '';
   String errorMessage = '';
-
+  bool _isObscure = true;
+  int _password = 0;
   @override
   Widget build(BuildContext context) {
     return loading
@@ -32,9 +33,9 @@ class _SignInState extends State<SignIn> {
               width: double.infinity,
               decoration: BoxDecoration(
                   gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-                Colors.red[800],
-                Colors.red[600],
-                Colors.red[400]
+                Colors.black87,
+                Colors.black54,
+                Colors.black45
               ])),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,252 +84,345 @@ class _SignInState extends State<SignIn> {
                         child: Padding(
                           padding: EdgeInsets.all(30),
                           child: Column(
-                            children: <Widget>[
+                            children: [
                               SizedBox(
                                 height: 10,
                               ),
-                              FadeAnimation(
-                                  0.2,
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Color.fromRGBO(
-                                                  225, 95, 27, .3),
-                                              blurRadius: 20,
-                                              offset: Offset(0, 10))
-                                        ]),
-                                    child: Form(
-                                      key: _formKey,
+                              _password == 3
+                                  ? Container(
+                                      padding: EdgeInsets.all(20),
                                       child: Column(
-                                        children: <Widget>[
-                                          Container(
-                                            padding: EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                                border: Border(
-                                                    bottom: BorderSide(
-                                                        color:
-                                                            Colors.grey[200]))),
-                                            child: TextFormField(
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              decoration: InputDecoration(
-                                                  hintText: "Email",
-                                                  hintStyle: hintStyle,
-                                                  border: InputBorder.none),
-                                              validator: (val) {
-                                                if (val.isEmpty ||
-                                                    !val.contains('@') ||
-                                                    !val.contains('.')) {
-                                                  return 'Please enter a valid email address.';
-                                                }
-                                                return null;
-                                              },
-                                              keyboardType:
-                                                  TextInputType.emailAddress,
-                                              onChanged: (val) {
-                                                setState(() => email = val);
-                                              },
+                                        children: [
+                                          Text(
+                                            "Forgot your password?",
+                                            style: TextStyle(
+                                              color: Colors.grey,
+                                              fontFamily: 'Gotham',
+                                              fontWeight: FontWeight.w300,
                                             ),
                                           ),
-                                          Container(
-                                            padding: EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                                border: Border(
-                                                    bottom: BorderSide(
-                                                        color:
-                                                            Colors.grey[200]))),
-                                            child: TextFormField(
-                                              obscureText: true,
-                                              decoration: InputDecoration(
-                                                  hintText: "Password",
-                                                  hintStyle: hintStyle,
-                                                  border: InputBorder.none),
-                                              validator: (val) => val.length < 6
-                                                  ? 'Enter a password 6+ chars long'
-                                                  : null,
-                                              onChanged: (val) {
-                                                setState(() => password = val);
-                                              },
-                                            ),
+                                          SizedBox(
+                                            height: 20.0,
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  )),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              FadeAnimation(
-                                  0.2,
-                                  GestureDetector(
-                                    onTap: () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return AlertDialog(
-                                              title: Text("Enter your email"),
-                                              content: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Container(
-                                                    padding: EdgeInsets.only(
-                                                        bottom: 0.0,
-                                                        left: 0.0,
-                                                        right: 0.0,
-                                                        top: 0.0),
-                                                    decoration: BoxDecoration(
-                                                        border: Border(
-                                                            bottom: BorderSide(
-                                                                color:
-                                                                    Colors.grey[
-                                                                        200]))),
-                                                    child: TextField(
-                                                      obscureText: true,
-                                                      decoration: InputDecoration(
-                                                          hintText: "Email",
-                                                          hintStyle: TextStyle(
-                                                              color:
-                                                                  Colors.grey),
-                                                          border:
-                                                              InputBorder.none),
-                                                    ),
-                                                  ),
-                                                ],
+                                          Column(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Container(
+                                                padding: EdgeInsets.all(10),
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          color: Color.fromRGBO(
+                                                              225, 95, 27, .3),
+                                                          blurRadius: 20,
+                                                          offset: Offset(0, 10))
+                                                    ]),
+                                                child: TextFormField(
+                                                  textInputAction:
+                                                      TextInputAction.next,
+                                                  decoration: InputDecoration(
+                                                      hintText: "Email",
+                                                      hintStyle: hintStyle,
+                                                      border: InputBorder.none),
+                                                  validator: (val) {
+                                                    if (val.isEmpty ||
+                                                        !val.contains('@') ||
+                                                        !val.contains('.')) {
+                                                      return 'Please enter a valid email address.';
+                                                    }
+                                                    return null;
+                                                  },
+                                                  keyboardType: TextInputType
+                                                      .emailAddress,
+                                                  onChanged: (val) {
+                                                    setState(() => email = val);
+                                                  },
+                                                ),
                                               ),
-                                              actions: [
-                                                Row(children: [
-                                                  FlatButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
-                                                      child: Text(
-                                                        "Close",
-                                                        style: TextStyle(
-                                                            color: Colors
-                                                                .red[900]),
-                                                      )),
-                                                  FlatButton(
-                                                      onPressed: () {
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                      },
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 20.0,
+                                          ),
+                                          Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.end,
+                                              children: [
+                                                FlatButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        _password = 0;
+                                                      });
+                                                    },
+                                                    child: Text(
+                                                      'Close',
+                                                      style: hintStyle,
+                                                    )),
+                                                InkWell(
+                                                  onTap: () {},
+                                                  child: Container(
+                                                    height: 30,
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            1 /
+                                                            5,
+                                                    padding:
+                                                        EdgeInsets.fromLTRB(0.0,
+                                                            10.0, 0.0, 10.0),
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(50),
+                                                        color: Colors.black),
+                                                    child: Center(
                                                       child: Text(
                                                         "Submit",
-                                                        style: TextStyle(
-                                                            color: Colors
-                                                                .red[900]),
-                                                      )),
-                                                ]),
-                                              ],
-                                            );
-                                          });
-                                    },
-                                    child: Text(
-                                      "Forgot your password?",
-                                      style: TextStyle(
-                                        color: Colors.grey,
-                                        fontFamily: 'Gotham',
-                                        fontWeight: FontWeight.w300,
-                                      ),
-                                    ),
-                                  )),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              FadeAnimation(
-                                0.2,
-                                Text(
-                                  errorMessage,
-                                  style: TextStyle(
-                                      color: Colors.red,
-                                      fontFamily: 'Gotham',
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              FadeAnimation(
-                                  0.2,
-                                  InkWell(
-                                    onTap: () async {
-                                      if (_formKey.currentState.validate()) {
-                                        setState(() => loading = true);
-
-                                        dynamic user = await _auth
-                                            .signInWithEmailAndPassword(
-                                                email, password);
-                                        if (user == null) {
-                                          errorMessage = AuthService.error;
-                                          setState(() {
-                                            loading = false;
-                                          });
-                                        }
-                                        setState(() {
-                                          loading = false;
-                                        });
-                                      }
-                                    },
-                                    child: Container(
-                                      margin: EdgeInsets.fromLTRB(
-                                          80.0, 5.0, 80.0, 5.0),
-                                      padding: EdgeInsets.fromLTRB(
-                                          20.0, 20.0, 20.0, 20.0),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Colors.red[700]),
-                                      child: Center(
-                                        child: Text(
-                                          "Log in",
-                                          style: buttonStyle,
+                                                        style: buttonStyle,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ]),
+                                        ],
+                                      ))
+                                  : Column(
+                                      children: <Widget>[
+                                        FadeAnimation(
+                                            0.2,
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  boxShadow: [
+                                                    BoxShadow(
+                                                        color: Color.fromRGBO(
+                                                            225, 95, 27, .3),
+                                                        blurRadius: 20,
+                                                        offset: Offset(0, 10))
+                                                  ]),
+                                              child: Form(
+                                                key: _formKey,
+                                                child: Column(
+                                                  children: <Widget>[
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.all(10),
+                                                      decoration: BoxDecoration(
+                                                          border: Border(
+                                                              bottom: BorderSide(
+                                                                  color: Colors
+                                                                          .grey[
+                                                                      200]))),
+                                                      child: TextFormField(
+                                                        textInputAction:
+                                                            TextInputAction
+                                                                .next,
+                                                        decoration:
+                                                            InputDecoration(
+                                                                hintText:
+                                                                    "Email",
+                                                                hintStyle:
+                                                                    hintStyle,
+                                                                border:
+                                                                    InputBorder
+                                                                        .none),
+                                                        validator: (val) {
+                                                          if (val.isEmpty ||
+                                                              !val.contains(
+                                                                  '@') ||
+                                                              !val.contains(
+                                                                  '.')) {
+                                                            return 'Please enter a valid email address.';
+                                                          }
+                                                          return null;
+                                                        },
+                                                        keyboardType:
+                                                            TextInputType
+                                                                .emailAddress,
+                                                        onChanged: (val) {
+                                                          setState(() =>
+                                                              email = val);
+                                                        },
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      padding:
+                                                          EdgeInsets.all(10),
+                                                      decoration: BoxDecoration(
+                                                          border: Border(
+                                                              bottom: BorderSide(
+                                                                  color: Colors
+                                                                          .grey[
+                                                                      200]))),
+                                                      child: TextFormField(
+                                                        obscureText: _isObscure,
+                                                        decoration:
+                                                            InputDecoration(
+                                                                hintText:
+                                                                    "Password",
+                                                                hintStyle:
+                                                                    hintStyle,
+                                                                suffixIcon:
+                                                                    IconButton(
+                                                                        icon:
+                                                                            Icon(
+                                                                          _isObscure
+                                                                              ? Icons.visibility
+                                                                              : Icons.visibility_off,
+                                                                          color: _isObscure
+                                                                              ? Colors.black54
+                                                                              : Colors.black,
+                                                                        ),
+                                                                        onPressed:
+                                                                            () {
+                                                                          setState(
+                                                                              () {
+                                                                            _isObscure =
+                                                                                !_isObscure;
+                                                                          });
+                                                                        }),
+                                                                border:
+                                                                    InputBorder
+                                                                        .none),
+                                                        validator: (val) => val
+                                                                    .length <
+                                                                6
+                                                            ? 'Enter a password 6+ chars long'
+                                                            : null,
+                                                        onChanged: (val) {
+                                                          setState(() =>
+                                                              password = val);
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            )),
+                                        SizedBox(
+                                          height: 15,
                                         ),
-                                      ),
+                                        errorMessage == ''
+                                            ? Container()
+                                            : SizedBox(
+                                                height: 10,
+                                                child: FadeAnimation(
+                                                  0.2,
+                                                  Text(
+                                                    errorMessage,
+                                                    style: TextStyle(
+                                                        color: Colors.red,
+                                                        fontFamily: 'Gotham',
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                ),
+                                              ),
+                                        SizedBox(
+                                          height: 15,
+                                        ),
+                                        FadeAnimation(
+                                            0.2,
+                                            InkWell(
+                                              onTap: () async {
+                                                if (_formKey.currentState
+                                                    .validate()) {
+                                                  setState(
+                                                      () => loading = true);
+
+                                                  dynamic user = await _auth
+                                                      .signInWithEmailAndPassword(
+                                                          email, password);
+                                                  if (user == null) {
+                                                    errorMessage =
+                                                        AuthService.error;
+                                                    if (errorMessage ==
+                                                        "Your password is wrong.") {
+                                                      setState(() {
+                                                        _password++;
+                                                      });
+                                                    }
+
+                                                    setState(() {
+                                                      loading = false;
+                                                    });
+                                                  }
+                                                  setState(() {
+                                                    loading = false;
+                                                  });
+                                                }
+                                              },
+                                              child: Container(
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    1 /
+                                                    3,
+                                                padding: EdgeInsets.fromLTRB(
+                                                    20.0, 20.0, 20.0, 20.0),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50),
+                                                    color: Colors.black),
+                                                child: Center(
+                                                  child: Text(
+                                                    "Log in",
+                                                    style: buttonStyle,
+                                                  ),
+                                                ),
+                                              ),
+                                            )),
+                                      ],
                                     ),
-                                  )),
-                              SizedBox(
-                                height: 20,
-                              ),
-                              FadeAnimation(
-                                  0.2,
-                                  Text(
-                                    "you are new here?",
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontFamily: 'Gotham',
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  )),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: <Widget>[
-                                  Expanded(
-                                    child: FadeAnimation(
-                                        0.2,
-                                        InkWell(
-                                          hoverColor: Colors.black,
-                                          onTap: () => widget.toggleView(),
-                                          child: Container(
-                                            height: 50,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: Colors.blue[900]),
-                                            child: Center(
-                                                child: Text(
-                                                    "Create a new account",
-                                                    style:
-                                                        buttonRegisterStyle)),
-                                          ),
-                                        )),
+                              Column(
+                                children: [
+                                  SizedBox(
+                                    height: 20,
                                   ),
+                                  FadeAnimation(
+                                      0.2,
+                                      Text(
+                                        "you are new here?",
+                                        style: TextStyle(
+                                          color: Colors.grey,
+                                          fontFamily: 'Gotham',
+                                          fontWeight: FontWeight.w300,
+                                        ),
+                                      )),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  FadeAnimation(
+                                      0.2,
+                                      InkWell(
+                                        hoverColor: Colors.black,
+                                        onTap: () => widget.toggleView(),
+                                        child: Container(
+                                          height: 50,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              2 /
+                                              3,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                              color: Colors.blue[900]),
+                                          child: Center(
+                                              child: Text(
+                                                  "Create a new account",
+                                                  style: buttonRegisterStyle)),
+                                        ),
+                                      ))
                                 ],
                               )
                             ],

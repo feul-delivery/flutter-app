@@ -34,7 +34,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
           style: TextStyle(),
         ),
         centerTitle: true,
-        backgroundColor: Colors.red[900],
+        backgroundColor: Colors.black,
         elevation: 1,
         actions: [
           IconButton(

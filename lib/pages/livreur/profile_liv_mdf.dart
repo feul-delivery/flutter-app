@@ -92,7 +92,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
   final picker = ImagePicker();
 
   Future<File> getImage(ImageSource source) async {
-    final pickedFile = await picker.getImage(source: source);
+    final pickedFile = await ImagePicker.pickImage(source: source);
     if (pickedFile != null) {
       return File(pickedFile.path);
     }
@@ -122,7 +122,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                     }
                   },
                   child: Material(
-                      color: Colors.red[900],
+                      color: Colors.black,
                       borderRadius: BorderRadius.circular(10.0),
                       child: Center(
                           child: Padding(
@@ -142,7 +142,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                     }
                   },
                   child: Material(
-                      color: Colors.red[900],
+                      color: Colors.black,
                       borderRadius: BorderRadius.circular(10.0),
                       child: Center(
                           child: Padding(
@@ -181,7 +181,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
             ),
           ),
           centerTitle: true,
-          backgroundColor: Colors.red[900],
+          backgroundColor: Colors.black,
           elevation: 1,
         ),
         drawer: DrawerLiv(),
@@ -248,7 +248,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                                     downloadProgress.progress),
                                         errorWidget: (context, url, error) =>
                                             Icon(Icons.error,
-                                                color: Colors.red[900]),
+                                                color: Colors.black),
                                       ),
                               ],
                             ),
@@ -259,7 +259,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     new CircleAvatar(
-                                      backgroundColor: Colors.red[900],
+                                      backgroundColor: Colors.black,
                                       radius: 25.0,
                                       child: new IconButton(
                                         onPressed: () async {
@@ -535,7 +535,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                   child: new RaisedButton(
                 child: new Text("Save"),
                 textColor: Colors.white,
-                color: Colors.red[900],
+                color: Colors.black,
                 onPressed: () async {
                   setState(() {
                     _status = true;
@@ -583,7 +583,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
               child: Container(
                 child: new RaisedButton(
                   child: new Text("Cancel"),
-                  textColor: Colors.red[900],
+                  textColor: Colors.black,
                   color: Colors.white,
                   onPressed: () {
                     setState(() {
@@ -606,7 +606,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
   Widget _getEditIcon() {
     return new GestureDetector(
       child: new CircleAvatar(
-        backgroundColor: Colors.red[900],
+        backgroundColor: Colors.black,
         radius: 14.0,
         child: new Icon(
           Icons.edit,
