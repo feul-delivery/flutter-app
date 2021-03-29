@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/entreprise.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
@@ -25,7 +26,10 @@ class _IndexStState extends State<IndexSt> {
                 actions: <Widget>[
                   new GestureDetector(
                     onTap: () => exit(0),
-                    child: Text('Yes'),
+                    child: Text(
+                      'Yes',
+                      style: buttonStyle,
+                    ),
                   ),
                   SizedBox(height: 16),
                   new GestureDetector(
@@ -33,7 +37,10 @@ class _IndexStState extends State<IndexSt> {
                     child: Container(
                         child: Padding(
                       padding: const EdgeInsets.all(18.0),
-                      child: Text('Cancel'),
+                      child: Text(
+                        'Cancel',
+                        style: hintStyle,
+                      ),
                     )),
                   ),
                 ],
@@ -44,7 +51,7 @@ class _IndexStState extends State<IndexSt> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Home"),
+          title: Text("Home", style: pageTitle),
           backgroundColor: Colors.black,
           centerTitle: true,
           actions: <Widget>[
@@ -72,18 +79,17 @@ class _IndexStState extends State<IndexSt> {
                     children: [
                       Text(
                         'Orders',
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                        style: subTitleStyle,
                       ),
                       Container(
-                        padding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 2.0),
+                        padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.0),
+                          borderRadius: BorderRadius.circular(20.0),
                           color: Colors.black,
                         ),
                         child: Text(
                           'Live',
-                          style: TextStyle(color: Colors.white),
+                          style: moreStyleWhite,
                         ),
                       )
                     ]),
@@ -112,7 +118,7 @@ class _IndexStState extends State<IndexSt> {
           Container(
               decoration: new BoxDecoration(
                   color: Colors.white70,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.4),
@@ -138,7 +144,7 @@ class _IndexStState extends State<IndexSt> {
                           height: 25,
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                             color: Colors.black,
                           ),
                           child: Padding(

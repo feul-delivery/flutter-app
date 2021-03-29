@@ -1,4 +1,5 @@
 import 'package:FD_flutter/pages/station/add_livreur.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
@@ -23,19 +24,17 @@ class _LivreurStState extends State<LivreurSt> {
       child: Scaffold(
         appBar: AppBar(
           actions: [
-            InkWell(
-              onTap: () {
+            IconButton(
+              onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => AddLivreur()));
               },
-              child: Container(
-                padding: EdgeInsets.all(15),
-                child: Icon(Icons.group_add),
-              ),
-            ),
+              icon: Icon(Icons.group_add),
+            )
           ],
           title: Text(
             "Livreurs",
+            style: pageTitle,
           ),
           centerTitle: true,
           backgroundColor: Colors.black,
@@ -62,7 +61,7 @@ class _LivreurStState extends State<LivreurSt> {
     return Container(
       decoration: new BoxDecoration(
           color: Colors.white70,
-          borderRadius: BorderRadius.circular(10),
+          borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
                 color: Colors.black.withOpacity(0.4),
@@ -78,7 +77,7 @@ class _LivreurStState extends State<LivreurSt> {
           children: [
             Container(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 height: 150,
                 width: 150,
@@ -89,6 +88,8 @@ class _LivreurStState extends State<LivreurSt> {
                       image: AssetImage("assets/profile.png")),
                 )),
             Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -97,7 +98,7 @@ class _LivreurStState extends State<LivreurSt> {
                       height: 25,
                       margin: EdgeInsets.symmetric(horizontal: 5),
                       decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(20),
                         color: Colors.black,
                       ),
                       child: Padding(

@@ -53,7 +53,7 @@ class _SignInState extends State<SignIn> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 40,
-                                fontFamily: GoogleFonts.openSans().fontFamily,
+                                fontFamily: 'Gotham',
                                 fontWeight: FontWeight.w500,
                               ),
                             )),
@@ -67,7 +67,7 @@ class _SignInState extends State<SignIn> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
-                                fontFamily: GoogleFonts.openSans().fontFamily,
+                                fontFamily: 'Gotham',
                                 fontWeight: FontWeight.w300,
                               ),
                             )),
@@ -96,56 +96,44 @@ class _SignInState extends State<SignIn> {
                                         children: [
                                           Text(
                                             "Forgot your password?",
-                                            style: TextStyle(
-                                              color: Colors.grey,
-                                              fontFamily: GoogleFonts.openSans()
-                                                  .fontFamily,
-                                              fontWeight: FontWeight.w300,
-                                            ),
+                                            style: textStyle,
                                           ),
                                           SizedBox(
                                             height: 20.0,
                                           ),
-                                          Column(
-                                            mainAxisSize: MainAxisSize.min,
-                                            children: [
-                                              Container(
-                                                padding: EdgeInsets.all(10),
-                                                decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                          color: Color.fromRGBO(
-                                                              225, 95, 27, .3),
-                                                          blurRadius: 20,
-                                                          offset: Offset(0, 10))
-                                                    ]),
-                                                child: TextFormField(
-                                                  textInputAction:
-                                                      TextInputAction.next,
-                                                  decoration: InputDecoration(
-                                                      hintText: "Email",
-                                                      hintStyle: hintStyle,
-                                                      border: InputBorder.none),
-                                                  validator: (val) {
-                                                    if (val.isEmpty ||
-                                                        !val.contains('@') ||
-                                                        !val.contains('.')) {
-                                                      return 'Please enter a valid email address.';
-                                                    }
-                                                    return null;
-                                                  },
-                                                  keyboardType: TextInputType
-                                                      .emailAddress,
-                                                  onChanged: (val) {
-                                                    setState(() => email = val);
-                                                  },
-                                                ),
-                                              ),
-                                            ],
+                                          Container(
+                                            padding: EdgeInsets.all(10),
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color: Colors.black38,
+                                                      blurRadius: 20,
+                                                      offset: Offset(0, 10))
+                                                ]),
+                                            child: TextFormField(
+                                              textInputAction:
+                                                  TextInputAction.done,
+                                              decoration: InputDecoration(
+                                                  hintText: "Email",
+                                                  hintStyle: hintStyle,
+                                                  border: InputBorder.none),
+                                              validator: (val) {
+                                                if (val.isEmpty ||
+                                                    !val.contains('@') ||
+                                                    !val.contains('.')) {
+                                                  return 'Please enter a valid email address.';
+                                                }
+                                                return null;
+                                              },
+                                              keyboardType:
+                                                  TextInputType.emailAddress,
+                                              onChanged: (val) {
+                                                setState(() => email = val);
+                                              },
+                                            ),
                                           ),
                                           SizedBox(
                                             height: 20.0,
@@ -201,11 +189,10 @@ class _SignInState extends State<SignIn> {
                                               decoration: BoxDecoration(
                                                   color: Colors.white,
                                                   borderRadius:
-                                                      BorderRadius.circular(10),
+                                                      BorderRadius.circular(20),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                        color: Color.fromRGBO(
-                                                            225, 95, 27, .3),
+                                                        color: Colors.black38,
                                                         blurRadius: 20,
                                                         offset: Offset(0, 10))
                                                   ]),
@@ -312,22 +299,19 @@ class _SignInState extends State<SignIn> {
                                           height: 15,
                                         ),
                                         errorMessage == ''
-                                            ? Container()
-                                            : SizedBox(
-                                                height: 10,
-                                                child: FadeAnimation(
-                                                  0.2,
-                                                  Text(
-                                                    errorMessage,
-                                                    style: TextStyle(
-                                                        color: Colors.red,
-                                                        fontFamily: GoogleFonts
-                                                                .openSans()
-                                                            .fontFamily,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w400),
-                                                  ),
+                                            ? SizedBox(
+                                                height: 15,
+                                              )
+                                            : FadeAnimation(
+                                                0.2,
+                                                Text(
+                                                  errorMessage,
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontFamily: 'Gotham',
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w400),
                                                 ),
                                               ),
                                         SizedBox(

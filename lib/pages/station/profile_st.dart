@@ -66,16 +66,16 @@ class _ProfilStState extends State<ProfilSt> {
     });
   }
 
-  final picker = ImagePicker();
+  // final picker = ImagePicker();
 
-  Future<File> getImage(ImageSource source) async {
-    final pickedFile = await ImagePicker.pickImage(source: source);
-    if (pickedFile != null) {
-      return File(pickedFile.path);
-    }
-    print('naaaaani');
-    return null;
-  }
+  // Future<File> getImage(ImageSource source) async {
+  //   final pickedFile = await ImagePicker.pickImage(source: source);
+  //   if (pickedFile != null) {
+  //     return File(pickedFile.path);
+  //   }
+  //   print('naaaaani');
+  //   return null;
+  // }
 
   // void _showImageSettingsPanel() {
   //   showModalBottomSheet(
@@ -395,7 +395,7 @@ class _ProfilStState extends State<ProfilSt> {
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                                  BorderRadius.circular(20),
                                             ),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
@@ -538,7 +538,7 @@ class _ProfilStState extends State<ProfilSt> {
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                                  BorderRadius.circular(20),
                                             ),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
@@ -678,7 +678,7 @@ class _ProfilStState extends State<ProfilSt> {
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                                  BorderRadius.circular(20),
                                             ),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
@@ -817,7 +817,7 @@ class _ProfilStState extends State<ProfilSt> {
                                             decoration: BoxDecoration(
                                               color: Colors.white,
                                               borderRadius:
-                                                  BorderRadius.circular(10),
+                                                  BorderRadius.circular(20),
                                             ),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,

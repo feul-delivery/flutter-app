@@ -49,7 +49,7 @@ class _TypeCompteState extends State<TypeCompte> {
                   child: Container(
                     decoration: new BoxDecoration(
                         color: Colors.white70,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.4),
@@ -101,7 +101,7 @@ class _TypeCompteState extends State<TypeCompte> {
                   child: Container(
                     decoration: new BoxDecoration(
                         color: Colors.white70,
-                        borderRadius: BorderRadius.circular(10),
+                        borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
                               color: Colors.black.withOpacity(0.4),

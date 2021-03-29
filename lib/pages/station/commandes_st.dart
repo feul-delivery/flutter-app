@@ -1,3 +1,4 @@
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
@@ -22,7 +23,10 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Orders"),
+          title: Text(
+            "Orders",
+            style: pageTitle,
+          ),
           backgroundColor: Colors.black,
           centerTitle: true,
           actions: <Widget>[
@@ -60,7 +64,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
           Container(
               decoration: new BoxDecoration(
                   color: Colors.white70,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.4),
@@ -79,7 +83,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                           height: 25,
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                             color: Colors.black,
                           ),
                           child: Padding(
@@ -96,7 +100,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                           height: 25,
                           margin: EdgeInsets.symmetric(horizontal: 5),
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(20),
                             color: Colors.black,
                           ),
                           child: Padding(

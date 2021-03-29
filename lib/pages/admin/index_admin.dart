@@ -67,7 +67,7 @@ class _IndexAdminState extends State<IndexAdmin> {
                     child: Container(
                       decoration: new BoxDecoration(
                           color: Colors.white70,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
                                 color:
@@ -115,7 +115,7 @@ class _IndexAdminState extends State<IndexAdmin> {
                         child: Container(
                           decoration: new BoxDecoration(
                               color: Colors.white70,
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
                                     color: Colors.yellowAccent[700]
@@ -151,7 +151,7 @@ class _IndexAdminState extends State<IndexAdmin> {
                         child: Container(
                           decoration: new BoxDecoration(
                               color: Colors.white70,
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                 BoxShadow(
                                     color: Colors.yellowAccent[700]
@@ -192,7 +192,7 @@ class _IndexAdminState extends State<IndexAdmin> {
                     child: Container(
                       decoration: new BoxDecoration(
                           color: Colors.white70,
-                          borderRadius: BorderRadius.circular(10),
+                          borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
                                 color:

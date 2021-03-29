@@ -292,7 +292,7 @@ Container _createSmallCard(DocumentSnapshot document) {
                               height: 25,
                               margin: EdgeInsets.symmetric(horizontal: 5),
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(20),
                                 color: Colors.black,
                               ),
                               child: Padding(

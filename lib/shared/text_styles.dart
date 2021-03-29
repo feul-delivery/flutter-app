@@ -38,6 +38,11 @@ const moreStyle = TextStyle(
   fontFamily: 'Gotham',
   fontWeight: FontWeight.w300,
 );
+const moreStyleWhite = TextStyle(
+  color: Colors.white,
+  fontFamily: 'Gotham',
+  fontWeight: FontWeight.w300,
+);
 const textStyle = TextStyle(
   color: Colors.black,
   fontFamily: 'Gotham',

@@ -1,4 +1,5 @@
 import 'package:FD_flutter/pages/station/bbar_st.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'index_st.dart';
@@ -17,17 +18,8 @@ class _SettingsStState extends State<SettingsSt> {
         appBar: AppBar(
           title: Text(
             "Settings",
-            style: TextStyle(),
+            style: pageTitle,
           ),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.home),
-                onPressed: () {
-                  ButtomBarSt.selectedIndexSt = 0;
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => IndexSt()));
-                })
-          ],
           centerTitle: true,
           backgroundColor: Colors.black,
           elevation: 1,
@@ -119,7 +111,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
               content: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.circular(20),
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

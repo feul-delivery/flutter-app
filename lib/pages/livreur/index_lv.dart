@@ -124,7 +124,7 @@ class _IndexLvState extends State<IndexLv> {
           Container(
             decoration: new BoxDecoration(
                 color: Colors.white70,
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
                 boxShadow: [
                   BoxShadow(
                       color: Colors.black.withOpacity(0.4),
@@ -150,7 +150,7 @@ class _IndexLvState extends State<IndexLv> {
                             height: 25,
                             margin: EdgeInsets.symmetric(horizontal: 5),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                               color: Colors.black,
                             )),
                       ],

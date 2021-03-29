@@ -140,7 +140,7 @@ class _DrawerLivState extends State<DrawerLiv> {
             height: 40,
             margin: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), color: Colors.black),
+                borderRadius: BorderRadius.circular(20), color: Colors.black),
             child: Center(
               child: FlatButton(
                 onPressed: () async {

@@ -113,7 +113,7 @@ class DrawerAdmin extends StatelessWidget {
             height: 40,
             margin: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
                 color: Colors.yellow[700]),
             child: Center(
               child: FlatButton(

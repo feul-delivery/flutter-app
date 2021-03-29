@@ -101,7 +101,7 @@ class _StarterPageState extends State<StarterPage>
                           child: Container(
                               width: 150,
                               decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(20),
                                 color: Colors.red[600],
                               ),
                               child: AnimatedOpacity(

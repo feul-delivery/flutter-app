@@ -1,5 +1,6 @@
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/database.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -21,7 +22,11 @@ class _AddLivreurState extends State<AddLivreur> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("New Deliveryman"),
+        title: Text(
+          "New Deliveryman",
+          style: pageTitle,
+        ),
+        centerTitle: true,
       ),
       body: Column(
         children: [
@@ -38,6 +43,7 @@ class _AddLivreurState extends State<AddLivreur> {
                 decoration: InputDecoration(
                     border: const UnderlineInputBorder(),
                     labelText: "Type an email",
+                    labelStyle: hintStyle,
                     suffixIcon: IconButton(
                       onPressed: () => searchController.clear(),
                       icon: Icon(Icons.clear),
@@ -77,13 +83,18 @@ class _AddLivreurState extends State<AddLivreur> {
                         children: snapshot.data.documents
                             .map((DocumentSnapshot document) {
                       return new ListTile(
-                          title:
-                              Text("${document['nom']} ${document['prenom']}"),
-                          subtitle: Text(document['tele']),
+                          title: Text(
+                            "${document['nom']} ${document['prenom']}",
+                            style: textStyle,
+                          ),
+                          subtitle: Text(
+                            document['tele'],
+                            style: moreStyle,
+                          ),
                           trailing: IconButton(
                             icon: Icon(Icons.add),
                             onPressed: () {
-                              _showMyDialog(document, _user.uid);
+                              _showModalDialogConfAdd(document, _user.uid);
                               if (message != '') {
                                 Scaffold.of(context).showSnackBar(SnackBar(
                                   duration: Duration(seconds: 1),
@@ -108,42 +119,68 @@ class _AddLivreurState extends State<AddLivreur> {
     );
   }
 
-  Future<void> _showMyDialog(DocumentSnapshot document, String uid) async {
-    return showDialog<void>(
+  Future<void> _showModalDialogConfAdd(
+      DocumentSnapshot document, String uid) async {
+    return showModalBottomSheet(
+      backgroundColor: Colors.transparent,
       context: context,
-      barrierDismissible: false, // user must tap button!
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Confirmation'),
-          content: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Text('${document['nom']} ${document['prenom']} will '),
-                Text('work for you?'),
-              ],
-            ),
+      builder: (context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 1 / 4,
+          color: Colors.white,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    margin: EdgeInsets.only(left: 10),
+                    child: TextButton(
+                      child: Text(
+                        'Cancel',
+                        style: hintStyle,
+                      ),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                        setState(() {
+                          message = 'Canceled';
+                        });
+                      },
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      _addToLv(document, uid);
+                      Navigator.of(context).pop();
+                      setState(() {
+                        message = 'Done';
+                      });
+                    },
+                    child: Container(
+                      height: 30,
+                      width: MediaQuery.of(context).size.width * 1 / 5,
+                      margin: EdgeInsets.only(right: 10),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.black),
+                      child: Center(
+                        child: Text(
+                          'Confirm',
+                          style: buttonStyle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                'Confirmation',
+                style: titleStyle,
+              ),
+              Text('${document['nom']} ${document['prenom']} will '),
+              Text('work for you?'),
+            ],
           ),
-          actions: <Widget>[
-            TextButton(
-              child: Text('Confirm'),
-              onPressed: () {
-                _addToLv(document, uid);
-                Navigator.of(context).pop();
-                setState(() {
-                  message = 'Done';
-                });
-              },
-            ),
-            TextButton(
-              child: Text('Cancel'),
-              onPressed: () {
-                Navigator.of(context).pop();
-                setState(() {
-                  message = 'Canceled';
-                });
-              },
-            ),
-          ],
         );
       },
     );

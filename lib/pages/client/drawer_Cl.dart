@@ -32,7 +32,7 @@ class _DrawerCLState extends State<DrawerCL> {
               margin: EdgeInsets.all(20),
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
                 color: Colors.black,
               ),
               child: Column(
@@ -151,7 +151,6 @@ class _DrawerCLState extends State<DrawerCL> {
           child: Align(
             alignment: Alignment.bottomCenter,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Container(
                   height: 40,
@@ -173,16 +172,16 @@ class _DrawerCLState extends State<DrawerCL> {
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => SettingsCl()));
-                  },
-                  child: Icon(
+                IconButton(
+                  icon: Icon(
                     Icons.settings,
                     color: Colors.black,
                   ),
-                ),
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => SettingsCl()));
+                  },
+                )
               ],
             ),
           ),
