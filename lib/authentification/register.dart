@@ -91,8 +91,7 @@ class _RegisterState extends State<Register> {
                                         borderRadius: BorderRadius.circular(10),
                                         boxShadow: [
                                           BoxShadow(
-                                              color: Color.fromRGBO(
-                                                  225, 95, 27, .3),
+                                              color: Colors.black38,
                                               blurRadius: 20,
                                               offset: Offset(0, 10))
                                         ]),
