@@ -390,9 +390,9 @@ class _StationProfilClState extends State<StationProfilCl> {
             top: MediaQuery.of(context).size.height -
                 MediaQuery.of(context).size.height * 1 / 12,
             left: MediaQuery.of(context).size.width -
-                MediaQuery.of(context).size.width * 5 / 6,
+                MediaQuery.of(context).size.width * 7 / 10,
             right: MediaQuery.of(context).size.width -
-                MediaQuery.of(context).size.width * 5 / 6,
+                MediaQuery.of(context).size.width * 7 / 10,
             child: FadeAnimation(
               2,
               InkWell(
@@ -407,8 +407,8 @@ class _StationProfilClState extends State<StationProfilCl> {
                 child: Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: Colors.red[600]),
+                      borderRadius: BorderRadius.circular(50),
+                      color: Colors.green.shade400),
                   child: Text(
                     "Place an order",
                     style: buttonStyle,

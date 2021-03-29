@@ -38,57 +38,76 @@ class _ClientOrderState extends State<ClientOrder> {
         builder: (context) {
           return StatefulBuilder(builder: (BuildContext context, setState) {
             return Container(
+                height: MediaQuery.of(context).size.height * 1 / 4,
                 child: ListView(
-              children: [
-                Text(
-                  'Payment',
-                  style: pageTitle,
-                ),
-                FlatButton(
-                    onPressed: () {
-                      if (_methd == pmethode.google) {
-                        _methode = 'GPAY';
-                      } else {
-                        _methode = 'COD';
-                      }
-                    },
-                    child: Text(
-                      'Finish',
-                      style: buttonStyle,
-                    )),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text('Cash on delivery'),
-                        leading: Radio(
-                            activeColor: Colors.black,
-                            value: pmethode.livraison,
-                            groupValue: _methd,
-                            onChanged: (pmethode valeur) {
-                              setState(() {
-                                _methd = valeur;
-                              });
-                            }),
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          margin: EdgeInsets.all(20),
+                          child: Text(
+                            'Payment',
+                            style: pageTitle,
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            if (_methd == pmethode.google) {
+                              _methode = 'GPAY';
+                            } else {
+                              _methode = 'COD';
+                            }
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.black,
+                                borderRadius: BorderRadius.circular(50)),
+                            margin: EdgeInsets.all(10),
+                            padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                            child: Center(
+                              child: Text(
+                                'Finish',
+                                style: buttonStyle,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      child: Column(
+                        children: [
+                          ListTile(
+                            title: Text('Cash on delivery'),
+                            leading: Radio(
+                                activeColor: Colors.black,
+                                value: pmethode.livraison,
+                                groupValue: _methd,
+                                onChanged: (pmethode valeur) {
+                                  setState(() {
+                                    _methd = valeur;
+                                  });
+                                }),
+                          ),
+                          ListTile(
+                            title: Text('G-Pay'),
+                            leading: Radio(
+                                activeColor: Colors.black,
+                                value: pmethode.google,
+                                groupValue: _methd,
+                                onChanged: (pmethode valeur) {
+                                  setState(() {
+                                    _methd = valeur;
+                                  });
+                                }),
+                          )
+                        ],
                       ),
-                      ListTile(
-                        title: Text('G-Pay'),
-                        leading: Radio(
-                            activeColor: Colors.black,
-                            value: pmethode.google,
-                            groupValue: _methd,
-                            onChanged: (pmethode valeur) {
-                              setState(() {
-                                _methd = valeur;
-                              });
-                            }),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ));
+                    ),
+                  ],
+                ));
           });
         });
   }
@@ -115,7 +134,16 @@ class _ClientOrderState extends State<ClientOrder> {
           style: pageTitle,
         ),
         actions: [
-          FlatButton(
+          IconButton(
+              icon: Icon(
+                Icons.payment,
+                color: Colors.white,
+              ),
+              onPressed: () => _showModalSheetPayment(context)),
+          SizedBox(
+            width: 10.0,
+          ),
+          IconButton(
             onPressed: () async {
               if (_methode == null) {
                 _showModalSheetPayment(context);
@@ -173,13 +201,12 @@ class _ClientOrderState extends State<ClientOrder> {
                 }
               }
             },
-            child: Text(
-              'Next',
-              style: buttonStyle,
-            ),
+            icon: Icon(Icons.navigate_next),
+          ),
+          SizedBox(
+            width: 10.0,
           ),
         ],
-        centerTitle: true,
         backgroundColor: Colors.black,
         elevation: 1,
       ),
