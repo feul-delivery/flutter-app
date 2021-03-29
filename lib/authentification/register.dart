@@ -4,6 +4,7 @@ import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Register extends StatefulWidget {
@@ -197,7 +198,8 @@ class _RegisterState extends State<Register> {
                                 error,
                                 style: TextStyle(
                                     color: Colors.red,
-                                    fontFamily: 'Gotham',
+                                    fontFamily:
+                                        GoogleFonts.openSans().fontFamily,
                                     fontSize: 14,
                                     fontWeight: FontWeight.w400),
                               ),
@@ -256,7 +258,8 @@ class _RegisterState extends State<Register> {
                                         "Already have an account?",
                                         style: TextStyle(
                                           color: Colors.grey,
-                                          fontFamily: 'Gotham',
+                                          fontFamily:
+                                              GoogleFonts.openSans().fontFamily,
                                           fontWeight: FontWeight.w300,
                                         ),
                                       ),
@@ -266,7 +269,8 @@ class _RegisterState extends State<Register> {
                                           "Login",
                                           style: TextStyle(
                                               fontSize: 17,
-                                              fontFamily: 'Gotham',
+                                              fontFamily: GoogleFonts.openSans()
+                                                  .fontFamily,
                                               color: Colors.black87,
                                               fontWeight: FontWeight.w500,
                                               letterSpacing: 1.2),

@@ -3,8 +3,8 @@ import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/image_capture.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -228,7 +228,7 @@ class _ProfilStState extends State<ProfilSt> {
                                           Text(
                                             titre,
                                             style: TextStyle(
-                                                color: Colors.grey[800],
+                                                color: Colors.grey,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 25),
                                           ),
@@ -313,7 +313,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                                     "Change",
                                                                     style: TextStyle(
                                                                         color: Colors
-                                                                            .red[900]))),
+                                                                            .black))),
                                                             FlatButton(
                                                                 onPressed: () {
                                                                   Navigator.of(
@@ -324,7 +324,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                                     "Cancel",
                                                                     style: TextStyle(
                                                                         color: Colors
-                                                                            .red[900]))),
+                                                                            .black))),
                                                           ],
                                                         ),
                                                       ],
@@ -344,7 +344,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                 Text(
                                                   "Edit",
                                                   style: TextStyle(
-                                                    color: Colors.red[800],
+                                                    color: Colors.black,
                                                     fontSize: 13,
                                                   ),
                                                 ),
@@ -378,7 +378,7 @@ class _ProfilStState extends State<ProfilSt> {
                                   Text(
                                     "Description",
                                     style: TextStyle(
-                                        color: Colors.grey[800],
+                                        color: Colors.grey,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -445,8 +445,8 @@ class _ProfilStState extends State<ProfilSt> {
                                                     },
                                                     child: Text("Change",
                                                         style: TextStyle(
-                                                            color: Colors
-                                                                .red[900]))),
+                                                            color:
+                                                                Colors.black))),
                                                 FlatButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
@@ -454,8 +454,8 @@ class _ProfilStState extends State<ProfilSt> {
                                                     },
                                                     child: Text("Cancel",
                                                         style: TextStyle(
-                                                            color: Colors
-                                                                .red[900]))),
+                                                            color:
+                                                                Colors.black))),
                                               ],
                                             ),
                                           ],
@@ -475,7 +475,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     Text(
                                       "Edit",
                                       style: TextStyle(
-                                        color: Colors.red[800],
+                                        color: Colors.black,
                                         fontSize: 13,
                                       ),
                                     ),
@@ -521,7 +521,7 @@ class _ProfilStState extends State<ProfilSt> {
                                   Text(
                                     "Address",
                                     style: TextStyle(
-                                        color: Colors.grey[800],
+                                        color: Colors.grey,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -588,8 +588,8 @@ class _ProfilStState extends State<ProfilSt> {
                                                     },
                                                     child: Text("Change",
                                                         style: TextStyle(
-                                                            color: Colors
-                                                                .red[900]))),
+                                                            color:
+                                                                Colors.black))),
                                                 FlatButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
@@ -597,8 +597,8 @@ class _ProfilStState extends State<ProfilSt> {
                                                     },
                                                     child: Text("Cancel",
                                                         style: TextStyle(
-                                                            color: Colors
-                                                                .red[900]))),
+                                                            color:
+                                                                Colors.black))),
                                               ],
                                             ),
                                           ],
@@ -618,7 +618,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     Text(
                                       "Edit",
                                       style: TextStyle(
-                                        color: Colors.red[800],
+                                        color: Colors.black,
                                         fontSize: 13,
                                       ),
                                     ),
@@ -661,7 +661,7 @@ class _ProfilStState extends State<ProfilSt> {
                                   Text(
                                     "Phone",
                                     style: TextStyle(
-                                        color: Colors.grey[800],
+                                        color: Colors.grey,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -727,8 +727,8 @@ class _ProfilStState extends State<ProfilSt> {
                                                     },
                                                     child: Text("Change",
                                                         style: TextStyle(
-                                                            color: Colors
-                                                                .red[900]))),
+                                                            color:
+                                                                Colors.black))),
                                                 FlatButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
@@ -736,8 +736,8 @@ class _ProfilStState extends State<ProfilSt> {
                                                     },
                                                     child: Text("Cancel",
                                                         style: TextStyle(
-                                                            color: Colors
-                                                                .red[900]))),
+                                                            color:
+                                                                Colors.black))),
                                               ],
                                             ),
                                           ],
@@ -757,7 +757,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     Text(
                                       "Edit",
                                       style: TextStyle(
-                                        color: Colors.red[800],
+                                        color: Colors.black,
                                         fontSize: 13,
                                       ),
                                     ),
@@ -800,7 +800,7 @@ class _ProfilStState extends State<ProfilSt> {
                                   Text(
                                     "Email",
                                     style: TextStyle(
-                                        color: Colors.grey[800],
+                                        color: Colors.grey,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -866,8 +866,8 @@ class _ProfilStState extends State<ProfilSt> {
                                                     },
                                                     child: Text("Change",
                                                         style: TextStyle(
-                                                            color: Colors
-                                                                .red[900]))),
+                                                            color:
+                                                                Colors.black))),
                                                 FlatButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
@@ -875,8 +875,8 @@ class _ProfilStState extends State<ProfilSt> {
                                                     },
                                                     child: Text("Cancel",
                                                         style: TextStyle(
-                                                            color: Colors
-                                                                .red[900]))),
+                                                            color:
+                                                                Colors.black))),
                                               ],
                                             ),
                                           ],
@@ -896,7 +896,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     Text(
                                       "Edit",
                                       style: TextStyle(
-                                        color: Colors.red[800],
+                                        color: Colors.black,
                                         fontSize: 13,
                                       ),
                                     ),
@@ -939,7 +939,7 @@ class _ProfilStState extends State<ProfilSt> {
                                   Text(
                                     "Images",
                                     style: TextStyle(
-                                        color: Colors.grey[800],
+                                        color: Colors.grey,
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
@@ -960,7 +960,7 @@ class _ProfilStState extends State<ProfilSt> {
                                     Text(
                                       "Edit",
                                       style: TextStyle(
-                                        color: Colors.red[800],
+                                        color: Colors.black,
                                         fontSize: 13,
                                       ),
                                     ),

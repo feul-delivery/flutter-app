@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Uploader extends StatefulWidget {
   final File file;
@@ -45,10 +46,14 @@ class _UploaderState extends State<Uploader> {
               children: [
                 if (_uploadTask.isComplete)
                   Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Row(
                         children: [
-                          Text('Uploading completed successfuly'),
+                          Text('Uploading completed successfuly',
+                              style: TextStyle(
+                                  fontFamily:
+                                      GoogleFonts.openSans().fontFamily)),
                           SizedBox(
                             width: 5,
                           ),
@@ -75,7 +80,11 @@ class _UploaderState extends State<Uploader> {
 
                 // Progress bar
                 LinearProgressIndicator(value: progressPercent),
-                Text('${(progressPercent * 100).toStringAsFixed(2)} % '),
+                Text(
+                  '${(progressPercent * 100).toStringAsFixed(2)} % ',
+                  style:
+                      TextStyle(fontFamily: GoogleFonts.openSans().fontFamily),
+                ),
               ],
             );
           });

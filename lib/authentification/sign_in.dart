@@ -3,6 +3,7 @@ import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
@@ -52,7 +53,7 @@ class _SignInState extends State<SignIn> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 40,
-                                fontFamily: 'Gotham',
+                                fontFamily: GoogleFonts.openSans().fontFamily,
                                 fontWeight: FontWeight.w500,
                               ),
                             )),
@@ -66,7 +67,7 @@ class _SignInState extends State<SignIn> {
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18,
-                                fontFamily: 'Gotham',
+                                fontFamily: GoogleFonts.openSans().fontFamily,
                                 fontWeight: FontWeight.w300,
                               ),
                             )),
@@ -97,7 +98,8 @@ class _SignInState extends State<SignIn> {
                                             "Forgot your password?",
                                             style: TextStyle(
                                               color: Colors.grey,
-                                              fontFamily: 'Gotham',
+                                              fontFamily: GoogleFonts.openSans()
+                                                  .fontFamily,
                                               fontWeight: FontWeight.w300,
                                             ),
                                           ),
@@ -319,7 +321,9 @@ class _SignInState extends State<SignIn> {
                                                     errorMessage,
                                                     style: TextStyle(
                                                         color: Colors.red,
-                                                        fontFamily: 'Gotham',
+                                                        fontFamily: GoogleFonts
+                                                                .openSans()
+                                                            .fontFamily,
                                                         fontSize: 14,
                                                         fontWeight:
                                                             FontWeight.w400),
@@ -394,7 +398,8 @@ class _SignInState extends State<SignIn> {
                                         "you are new here?",
                                         style: TextStyle(
                                           color: Colors.grey,
-                                          fontFamily: 'Gotham',
+                                          fontFamily:
+                                              GoogleFonts.openSans().fontFamily,
                                           fontWeight: FontWeight.w300,
                                         ),
                                       )),

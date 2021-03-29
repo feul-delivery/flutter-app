@@ -17,11 +17,11 @@ class FuelDeliveryApp extends StatelessWidget {
       value: AuthService().user,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        // ignore: missing_required_param
         home: SplashScreen(),
-        title: 'Fuel Delivery',
+        title: 'Fuesl Delivery',
         theme: ThemeData(
-          primarySwatch: Colors.red,
+          brightness: Brightness.light,
+          primaryColor: Colors.black,
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:FD_flutter/authentification/authenticate.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 class StarterPage extends StatefulWidget {
@@ -75,7 +76,7 @@ class _StarterPageState extends State<StarterPage>
                         'Fuel Delivery',
                         style: TextStyle(
                             color: Colors.white,
-                            fontFamily: 'Gotham',
+                            fontFamily: GoogleFonts.openSans().fontFamily,
                             fontSize: 50,
                             fontWeight: FontWeight.bold),
                       )),

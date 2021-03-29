@@ -4,6 +4,7 @@ import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/pages/station/profile_st.dart';
 import 'package:FD_flutter/pages/station/commandes_st.dart';
@@ -64,7 +65,7 @@ class DrawerSt extends StatelessWidget {
                 '${IndexSt.entreprise?.titre?.toUpperCase()}',
                 style: TextStyle(
                   color: Colors.black87,
-                  fontFamily: 'Gotham',
+                  fontFamily: GoogleFonts.openSans().fontFamily,
                   fontWeight: FontWeight.w500,
                   fontSize: 17,
                 ),
@@ -76,7 +77,7 @@ class DrawerSt extends StatelessWidget {
                 '${IndexSt.entreprise?.email}',
                 style: TextStyle(
                   color: Colors.black54,
-                  fontFamily: 'Gotham',
+                  fontFamily: GoogleFonts.openSans().fontFamily,
                   fontWeight: FontWeight.w200,
                 ),
               ),
