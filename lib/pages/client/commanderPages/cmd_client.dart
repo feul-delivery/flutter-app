@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:FD_flutter/modules/order.dart';
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/pages/client/commanderPages/cmd_done.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,10 @@ import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:provider/provider.dart';
 import 'cmd_payement.dart';
 
-// ignore: must_be_immutable
+enum pmethode { livraison, google }
+
 class ClientOrder extends StatefulWidget {
-  DocumentSnapshot doc;
+  final DocumentSnapshot doc;
   ClientOrder({@required this.doc});
   @override
   _ClientOrderState createState() => _ClientOrderState();
@@ -24,8 +26,72 @@ class _ClientOrderState extends State<ClientOrder> {
   Map<dynamic, dynamic> _type;
   String _adresse;
   String _matricule;
+  String _methode;
   Color _pickerColor = Color(0xffff6b81);
   Color _carColor = Color(0xffff6b81);
+  DatabaseService _databaseService = DatabaseService();
+  pmethode _methd = pmethode.livraison;
+
+  Future<void> _showModalSheetPayment(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return StatefulBuilder(builder: (BuildContext context, setState) {
+            return Container(
+                child: ListView(
+              children: [
+                Text(
+                  'Payment',
+                  style: pageTitle,
+                ),
+                FlatButton(
+                    onPressed: () {
+                      if (_methd == pmethode.google) {
+                        _methode = 'GPAY';
+                      } else {
+                        _methode = 'COD';
+                      }
+                    },
+                    child: Text(
+                      'Finish',
+                      style: buttonStyle,
+                    )),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text('Cash on delivery'),
+                        leading: Radio(
+                            activeColor: Colors.black,
+                            value: pmethode.livraison,
+                            groupValue: _methd,
+                            onChanged: (pmethode valeur) {
+                              setState(() {
+                                _methd = valeur;
+                              });
+                            }),
+                      ),
+                      ListTile(
+                        title: Text('G-Pay'),
+                        leading: Radio(
+                            activeColor: Colors.black,
+                            value: pmethode.google,
+                            groupValue: _methd,
+                            onChanged: (pmethode valeur) {
+                              setState(() {
+                                _methd = valeur;
+                              });
+                            }),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ));
+          });
+        });
+  }
 
   void changeColor(Color color) {
     setState(() => _pickerColor = color);
@@ -51,40 +117,60 @@ class _ClientOrderState extends State<ClientOrder> {
         actions: [
           FlatButton(
             onPressed: () async {
-              if (_formKey.currentState.validate()) {
-                _orderNum =
-                    _orderNum + await _auth.countOrdersDocuments(user.uid);
-                inspect(Order(
-                  idorder: _orderNum,
-                  prixtotal: _volume * _type['prix'],
-                  uidentreprise: doc.documentID,
-                  uidclient: user.uid,
-                  idtype: _type['libelle'],
-                  dateheurec: DateTime.now(),
-                  color: _carColor.toString(),
-                  matricule: _matricule,
-                  adresse: _adresse,
-                  volume: _volume,
-                ));
+              if (_methode == null) {
+                _showModalSheetPayment(context);
+              } else {
+                if (_formKey.currentState.validate()) {
+                  _orderNum =
+                      _orderNum + await _auth.countOrdersDocuments(user.uid);
+                  Order _order = Order(
+                    idorder: _orderNum,
+                    prixtotal: _volume * _type['prix'],
+                    uidentreprise: doc.documentID,
+                    uidclient: user.uid,
+                    idtype: _type['libelle'],
+                    dateheurec: DateTime.now(),
+                    color: _carColor.toString(),
+                    matricule: _matricule,
+                    adresse: _adresse,
+                    volume: _volume,
+                  );
+                  // inspect(Order(
+                  //   idorder: _orderNum,
+                  //   prixtotal: _volume * _type['prix'],
+                  //   uidentreprise: doc.documentID,
+                  //   uidclient: user.uid,
+                  //   idtype: _type['libelle'],
+                  //   dateheurec: DateTime.now(),
+                  //   color: _carColor.toString(),
+                  //   matricule: _matricule,
+                  //   adresse: _adresse,
+                  //   volume: _volume,
+                  // ));
 
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CommandePayment(
-                        newOrder: Order(
-                          idorder: _orderNum,
-                          prixtotal: _volume * _type['prix'],
-                          uidentreprise: doc.documentID,
-                          uidclient: user.uid,
-                          idtype: _type['libelle'],
-                          dateheurec: DateTime.now(),
-                          color: _carColor.toString(),
-                          matricule: _matricule,
-                          adresse: _adresse,
-                          volume: _volume,
+                  await _databaseService.newOrderData(
+                      _order.idorder,
+                      _order.volume,
+                      _order.adresse,
+                      DateTime.now(),
+                      DateTime(0000, 0, 0),
+                      _order.matricule,
+                      _order.color,
+                      _order.prixtotal,
+                      'Waiting',
+                      _order.methode,
+                      _order.uidclient,
+                      _order.uidentreprise,
+                      '',
+                      _order.idtype);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => OrderDone(
+                          order: _order,
                         ),
-                      ),
-                    ));
+                      ));
+                }
               }
             },
             child: Text(
