@@ -87,7 +87,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                             children: snapshot.data?.documents
                                 ?.map((DocumentSnapshot document) {
                               var noom = 'N/A';
-                              setState(() async {
+                              Future<void> dd() async {
                                 await Firestore.instance
                                     .collection('client')
                                     .document(document['uidclient'])
@@ -98,7 +98,9 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                                   noom =
                                       noom + ' ' + await value?.data['prenom'];
                                 });
-                              });
+                              }
+
+                              dd();
 
                               return InkWell(
                                   onTap: () {},
