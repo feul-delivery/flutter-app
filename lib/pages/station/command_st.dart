@@ -12,12 +12,15 @@ class CommandeDetailSt extends StatefulWidget {
 }
 
 class _CommandeDetailStState extends State<CommandeDetailSt> {
-  var livreur='N/A';
+  var livreur = 'N/A';
+  var clNom = 'N/A';
+  var clNum = 'N/A';
   @override
   void initState() {
     super.initState();
     if (widget.document['statut'] == 'done') {
       getLivreur();
+      getClient();
     }
   }
 
@@ -37,6 +40,23 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
       }
     });
   }
+  Future getClient() async {
+    await Firestore.instance
+        .collection('client')
+        .document(widget.document['uidclient'])
+        .get()
+        .then((value) async {
+      if (value.exists) {
+        var key1 = await value.data['prenom'];
+        var key2 = await value.data['nom'];
+        var key3 = await value.data['tele'];
+        setState(() {
+          clNom = key1 + ' ' + key2;
+          clNum= key3;
+        });
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +72,9 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
           elevation: 1,
           actions: [
             IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  _clientDetailSheet(context,clNom,clNum);
+                },
                 icon: Icon(
                   Icons.info_outline,
                   color: Colors.white,
@@ -653,4 +675,78 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
       ],
     );
   }
+}
+
+Future<void> _clientDetailSheet(BuildContext context,var nom,var num) {
+  return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (BuildContext context, setState) {
+          return Container(
+              height: MediaQuery.of(context).size.height * 1 / 5,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        height: MediaQuery.of(context).size.width / 5,
+                        width: MediaQuery.of(context).size.width / 5,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.0),
+                          child: Image(
+                              fit: BoxFit.contain,
+                              image: AssetImage("assets/profile.png")),
+                        )),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.person,
+                                color: Colors.black54,
+                                size: 18,
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Container(
+                                child: Text(nom,
+                                    style: TextStyle(
+                                        color: Colors.grey[800], fontSize: 22)),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.phone,
+                                color: Colors.black54,
+                                size: 18,
+                              ),
+                              SizedBox(
+                                width: 15,
+                              ),
+                              Container(
+                                child: Text(num,
+                                    style: TextStyle(
+                                        color: Colors.grey[800], fontSize: 22)),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ));
+        });
+      });
 }
