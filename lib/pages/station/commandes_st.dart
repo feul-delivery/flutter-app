@@ -1,3 +1,4 @@
+import 'package:FD_flutter/pages/station/command_st.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -87,7 +88,14 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                             children: snapshot.data?.documents
                                 ?.map((DocumentSnapshot document) {
                               return InkWell(
-                                  onTap: () {},
+                                  onTap: () {
+                                    
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                CommandeDetailSt(document)));
+                                  },
                                   child: toutCommandes(document));
                             })?.toList());
                     }
