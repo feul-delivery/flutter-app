@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:FD_flutter/modules/order.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_done.dart';
@@ -10,7 +8,6 @@ import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:provider/provider.dart';
-import 'cmd_payement.dart';
 
 enum pmethode { livraison, google }
 

@@ -8,7 +8,9 @@ import 'package:image_picker/image_picker.dart';
 /// Widget to capture and crop the image
 class ImageCapture extends StatefulWidget {
   final String filePath;
-  ImageCapture({@required this.filePath});
+  final String collection;
+  final bool manyPics;
+  ImageCapture({@required this.filePath, this.collection, this.manyPics});
 
   createState() => _ImageCaptureState();
 }
@@ -105,6 +107,8 @@ class _ImageCaptureState extends State<ImageCapture> {
               Uploader(
                 file: _imageFile,
                 filePath: widget.filePath,
+                collection: widget.collection,
+                isMany: widget.manyPics,
               )
             ]
           ],

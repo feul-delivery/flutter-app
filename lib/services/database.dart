@@ -1,6 +1,5 @@
 import 'package:FD_flutter/modules/client.dart';
 import 'package:FD_flutter/modules/entreprise.dart';
-import 'package:FD_flutter/services/profile_picture.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -196,6 +195,7 @@ class DatabaseService {
     String phone;
     String address;
     String email;
+    String photoURL;
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final FirebaseUser user = await _auth.currentUser();
     final uid = user.uid;
@@ -209,17 +209,15 @@ class DatabaseService {
       email = await value.data['email'];
       phone = await value.data['tele'];
       address = await value.data['adresse'];
-      print(title);
-      print(phone);
+      photoURL = await value.data['photoURL'];
     });
-    String photo = await readImage();
     return Entreprise(
         titre: title,
         description: description,
         tele: phone,
         email: email,
         adresse: address,
-        photoURL: photo);
+        photoURL: photoURL);
   }
 
   Future<Client> clientData() async {
@@ -230,6 +228,7 @@ class DatabaseService {
     String phone;
     String ville;
     String sexe;
+    String photoURL;
     final FirebaseAuth _auth = FirebaseAuth.instance;
     final FirebaseUser user = await _auth.currentUser();
     final uid = user.uid;
@@ -246,10 +245,8 @@ class DatabaseService {
       phone = await value.data['tele'];
       ville = await value.data['ville'];
       sexe = await value.data['sexe'];
-      print(nom);
-      print(phone);
+      photoURL = await value.data['photoURL'];
     });
-    String photo = await readImage();
     return Client(
         sexe: sexe,
         nom: nom,
@@ -258,6 +255,6 @@ class DatabaseService {
         tele: phone,
         email: email,
         ville: ville,
-        photoURL: photo);
+        photoURL: photoURL);
   }
 }
