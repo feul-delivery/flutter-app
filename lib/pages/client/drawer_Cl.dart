@@ -65,31 +65,27 @@ class _DrawerCLState extends State<DrawerCL> {
                                     CircleAvatar(
                                         radius: 50.0, child: Icon(Icons.error)),
                               ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                          child: Column(
-                            children: [
-                              Text(
-                                  '${snapshot.data['nom']} ${snapshot.data['prenom']}'
-                                      .toUpperCase(),
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Gotham',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 17,
-                                  )),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Text(
-                                '${snapshot.data['email']}'.toLowerCase(),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontFamily: 'Gotham',
-                                  fontWeight: FontWeight.w200,
-                                ),
-                              ),
-                            ],
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                            '${snapshot.data['nom']} ${snapshot.data['prenom']}'
+                                .toUpperCase(),
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Gotham',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 17,
+                            )),
+                        SizedBox(
+                          height: 5.0,
+                        ),
+                        Text(
+                          '${snapshot.data['email']}'.toLowerCase(),
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontFamily: 'Gotham',
+                            fontWeight: FontWeight.w200,
                           ),
                         )
                       ],
