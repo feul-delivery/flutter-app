@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -40,6 +41,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
       }
     });
   }
+
   Future getClient() async {
     await Firestore.instance
         .collection('client')
@@ -52,7 +54,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
         var key3 = await value.data['tele'];
         setState(() {
           clNom = key1 + ' ' + key2;
-          clNum= key3;
+          clNum = key3;
         });
       }
     });
@@ -73,7 +75,8 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
           actions: [
             IconButton(
                 onPressed: () {
-                  _clientDetailSheet(context,clNom,clNum);
+                  _clientDetailSheet(
+                      context, widget.document['uidclient'], clNom, clNum);
                 },
                 icon: Icon(
                   Icons.info_outline,
@@ -677,7 +680,8 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
   }
 }
 
-Future<void> _clientDetailSheet(BuildContext context,var nom,var num) {
+Future<void> _clientDetailSheet(
+    BuildContext context, var id, var nom, var num) {
   return showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -688,18 +692,52 @@ Future<void> _clientDetailSheet(BuildContext context,var nom,var num) {
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
+                    
                     Container(
-                        decoration: BoxDecoration(
+                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20),
                         ),
                         height: MediaQuery.of(context).size.width / 5,
                         width: MediaQuery.of(context).size.width / 5,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(10.0),
-                          child: Image(
-                              fit: BoxFit.contain,
-                              image: AssetImage("assets/profile.png")),
-                        )),
+                      child: StreamBuilder<DocumentSnapshot>(
+                          stream: Firestore.instance
+                              .collection('client')
+                              .document(id)
+                              .get()
+                              .asStream(),
+                          builder: (context, snapshot) {
+                            return Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                snapshot.data['photoURL'] == null
+                                    ? CircleAvatar(
+                                        radius: 50.0,
+                                        backgroundImage:
+                                            AssetImage('assets/profile.png'),
+                                      )
+                                    : CachedNetworkImage(
+                                        imageUrl: snapshot.data['photoURL'],
+                                        imageBuilder: (context,
+                                                imageProvider) =>
+                                            CircleAvatar(
+                                                radius: 30.0,
+                                                backgroundImage: imageProvider),
+                                        placeholder: (context, url) =>
+                                            CircleAvatar(
+                                                radius: 30.0,
+                                                child:
+                                                    CircularProgressIndicator()),
+                                        errorWidget: (context, url, error) =>
+                                            CircleAvatar(
+                                                radius: 30.0,
+                                                child: Icon(Icons.error)),
+                                      ),
+                                
+                              ],
+                            );
+                          }),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Column(
