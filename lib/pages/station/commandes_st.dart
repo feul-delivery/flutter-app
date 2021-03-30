@@ -89,7 +89,6 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                                 ?.map((DocumentSnapshot document) {
                               return InkWell(
                                   onTap: () {
-                                    
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -110,5 +109,4 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
       ),
     );
   }
-
 }

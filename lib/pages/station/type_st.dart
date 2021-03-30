@@ -70,7 +70,7 @@ class _TypeStState extends State<TypeSt> {
                       children: _types.map((type) {
                     return new ListTile(
                         title: Text("${type['libelle']}"),
-                        subtitle: Text('${type['prix'] as double} Dh/L'),
+                        subtitle: Text('${type['prix'] } Dh/L'),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
                           onPressed: () {

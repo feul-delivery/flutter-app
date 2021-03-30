@@ -3,23 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ToutCommandes extends StatefulWidget {
-
   final DocumentSnapshot document;
-ToutCommandes(this.document);
+  ToutCommandes(this.document);
   @override
   _ToutCommandesState createState() => _ToutCommandesState();
 }
 
 class _ToutCommandesState extends State<ToutCommandes> {
-  var pnom='N/A';
+  var pnom = 'N/A';
 
-@override
-void initState() { 
-  super.initState();
-  getNom();
-}
-Future getNom() async {
-  
+  @override
+  void initState() {
+    super.initState();
+    getNom();
+  }
+
+  Future getNom() async {
     await Firestore.instance
         .collection('client')
         .document(widget.document['uidclient'])
@@ -34,10 +33,11 @@ Future getNom() async {
         });
       }
     });
-}
+  }
+
   @override
   Widget build(BuildContext context) {
-      var document = widget.document;
+    var document = widget.document;
     DateTime date = DateTime.parse(document['dateheurec']);
     return Container(
       child: Column(
@@ -99,22 +99,24 @@ Future getNom() async {
                         ),
                       ],
                     ),
-                    Container(
+                    Center(
                       child: Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text('$pnom',
+                          child: Text('Commande pour : \n$pnom',
+                              textAlign: TextAlign.center,
                               style: TextStyle(
-                                  color: Colors.black, fontSize: 25))),
+                                  color: Colors.black, fontSize: 18))),
                     ),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
-                              children: [
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Container(
                                       child: Text('Volume: ',
@@ -122,7 +124,7 @@ Future getNom() async {
                                               color: Colors.grey[800])),
                                     ),
                                     SizedBox(
-                                      width: 20,
+                                      width: 15,
                                     ),
                                     Container(
                                       child: Text('${document['volume']}L',
@@ -131,11 +133,15 @@ Future getNom() async {
                                     ),
                                   ],
                                 ),
+                                SizedBox(
+                                  width: 40,
+                                ),
                               ],
                             ),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Container(
                                   child: Text('Type:',
@@ -143,14 +149,18 @@ Future getNom() async {
                                           TextStyle(color: Colors.grey[800])),
                                 ),
                                 SizedBox(
-                                  width: 20,
+                                  width: 15,
                                 ),
                                 Container(
                                   child: Text(document['idtype'],
+                                      textAlign: TextAlign.center,
                                       style:
                                           TextStyle(color: Colors.grey[600])),
                                 ),
                               ],
+                            ),
+                            SizedBox(
+                              height: 10,
                             ),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,7 +171,12 @@ Future getNom() async {
                                           TextStyle(color: Colors.grey[800])),
                                 ),
                                 Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 3 / 5,
+                                  alignment: Alignment.bottomRight,
                                   child: Text(document['adresse'],
+                                      textAlign: TextAlign.center,
+                                      maxLines: 2,
                                       style:
                                           TextStyle(color: Colors.grey[600])),
                                 ),

@@ -79,8 +79,8 @@ class _LivreurStState extends State<LivreurSt> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(20),
                 ),
-                height: 150,
-                width: 150,
+                height: MediaQuery.of(context).size.width/5,
+                width: MediaQuery.of(context).size.width/5,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: Image(

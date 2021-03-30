@@ -85,7 +85,7 @@ class _IndexStState extends State<IndexSt> {
                         padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.black,
+                          color: Colors.green,
                         ),
                         child: Text(
                           'Live',
