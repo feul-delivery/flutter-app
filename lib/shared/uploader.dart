@@ -16,8 +16,8 @@ class Uploader extends StatefulWidget {
   Uploader(
       {@required this.file,
       @required this.filePath,
-      this.collection,
-      this.isMany});
+      @required this.collection,
+      @required this.isMany});
 
   @override
   _UploaderState createState() => _UploaderState();

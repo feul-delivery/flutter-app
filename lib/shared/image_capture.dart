@@ -10,7 +10,10 @@ class ImageCapture extends StatefulWidget {
   final String filePath;
   final String collection;
   final bool manyPics;
-  ImageCapture({@required this.filePath, this.collection, this.manyPics});
+  ImageCapture(
+      {@required this.filePath,
+      @required this.collection,
+      @required this.manyPics});
 
   createState() => _ImageCaptureState();
 }

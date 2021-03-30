@@ -137,6 +137,8 @@ class _initialProfileclState extends State<InitialProfilecl>
                                                   child: ImageCapture(
                                                     filePath:
                                                         'images/profile/$_uid',
+                                                    collection: 'client',
+                                                    manyPics: false,
                                                   )));
                                         },
                                         icon: Icon(Icons.camera_alt),

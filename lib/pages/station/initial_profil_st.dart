@@ -140,6 +140,8 @@ class _initialProfileStState extends State<InitialProfileSt>
                                                   child: ImageCapture(
                                                     filePath:
                                                         'images/profile/$_uid',
+                                                    collection: 'entreprise',
+                                                    manyPics: false,
                                                   )));
                                         },
                                         icon: Icon(Icons.camera),

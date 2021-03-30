@@ -1,12 +1,12 @@
 import 'package:FD_flutter/modules/user.dart';
-import 'package:FD_flutter/pages/station/index_st.dart';
-import 'package:FD_flutter/services/database.dart';
+// import 'package:FD_flutter/pages/station/index_st.dart';
+// import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/image_capture.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -18,51 +18,51 @@ class ProfilSt extends StatefulWidget {
 }
 
 class _ProfilStState extends State<ProfilSt> {
-  String titre = "N/A";
-  String titreTmp;
-  String descriptionTmp;
-  String emailTmp;
-  String teleTmp;
-  String adresseTmp;
-  String description = "N/A";
-  String email = "N/A";
-  String tele = "N/A";
-  String adresse = "N/A";
-  var uid;
-  @override
+  // String titre = "N/A";
+  // String titreTmp;
+  // String descriptionTmp;
+  // String emailTmp;
+  // String teleTmp;
+  // String adresseTmp;
+  // String description = "N/A";
+  // String email = "N/A";
+  // String tele = "N/A";
+  // String adresse = "N/A";
+  // var uid;
+  // @override
   // ignore: must_call_super
-  void initState() {
-    getEntData();
-  }
+  // void initState() {
+  //   getEntData();
+  // }
 
-  Future getEntData() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final FirebaseUser user = await auth.currentUser();
-    uid = user.uid;
+  // Future getEntData() async {
+  //   final FirebaseAuth auth = FirebaseAuth.instance;
+  //   final FirebaseUser user = await auth.currentUser();
+  //   uid = user.uid;
 
-    Firestore.instance
-        .collection('entreprise')
-        .document(uid)
-        .get()
-        .then((value) async {
-      print(uid);
-      if (value.exists) {
-        var key1 = await value.data['titre'];
-        var key2 = await value.data['description'];
-        var key3 = await value.data['email'];
-        var key4 = await value.data['tele'];
-        var key5 = await value.data['adresse'];
-        print(key1);
-        setState(() {
-          this.titre = key1;
-          this.description = key2;
-          this.email = key3;
-          this.tele = key4;
-          this.adresse = key5;
-        });
-      }
-    });
-  }
+  //   Firestore.instance
+  //       .collection('entreprise')
+  //       .document(uid)
+  //       .get()
+  //       .then((value) async {
+  //     print(uid);
+  //     if (value.exists) {
+  //       var key1 = await value.data['titre'];
+  //       var key2 = await value.data['description'];
+  //       var key3 = await value.data['email'];
+  //       var key4 = await value.data['tele'];
+  //       var key5 = await value.data['adresse'];
+  //       print(key1);
+  //       setState(() {
+  //         this.titre = key1;
+  //         this.description = key2;
+  //         this.email = key3;
+  //         this.tele = key4;
+  //         this.adresse = key5;
+  //       });
+  //     }
+  //   });
+  // }
 
   // final picker = ImagePicker();
 
@@ -132,874 +132,586 @@ class _ProfilStState extends State<ProfilSt> {
   //       });
   // }
 
+  void _editInfoDialog(
+      String uid, String field, String fieldName, BuildContext context) {
+    String _value;
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Edit $fieldName'),
+            content: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: BoxDecoration(
+                        border: Border(
+                            bottom: BorderSide(color: Colors.grey[200]))),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: '$fieldName',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: InputBorder.none,
+                      ),
+                      onChanged: (val) {
+                        _value = val;
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              Row(
+                children: [
+                  FlatButton(
+                      onPressed: () async {
+                        Firestore.instance
+                            .collection('entreprise')
+                            .document(uid)
+                            .updateData({field: _value});
+                      },
+                      child: Text('Change',
+                          style: TextStyle(color: Colors.black))),
+                  FlatButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Cancel',
+                          style: TextStyle(color: Colors.black))),
+                ],
+              ),
+            ],
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
+    User _user = Provider.of<User>(context, listen: true);
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-      body: Stack(
-        children: <Widget>[
-          CustomScrollView(
-            slivers: <Widget>[
-              SliverAppBar(
-                expandedHeight: 200,
-                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.pin,
-                  background: IndexSt.entreprise?.photoURL == null
-                      ? Container(
-                          decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/total.png'),
-                                  fit: BoxFit.cover)),
-                          child: IconButton(
-                            onPressed: () async {
-                              String _uid =
-                                  Provider.of<User>(context, listen: true).uid;
-                              Navigator.of(context).push(PageTransition(
-                                  type: PageTransitionType.leftToRight,
-                                  child: ImageCapture(
-                                    filePath: 'images/profile/$_uid',
-                                  )));
-                            },
-                            icon: Icon(Icons.edit),
-                            color: Colors.white,
-                            iconSize: 40.0,
-                          ))
-                      : CachedNetworkImage(
-                          imageUrl: IndexSt.entreprise?.photoURL,
-                          imageBuilder: (context, imageProvider) => Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: imageProvider, fit: BoxFit.cover)),
-                              child: IconButton(
-                                onPressed: () async {
-                                  String _uid =
-                                      Provider.of<User>(context, listen: true)
-                                          .uid;
-                                  Navigator.of(context).push(PageTransition(
-                                      type: PageTransitionType.leftToRight,
-                                      child: ImageCapture(
-                                        filePath: 'images/profile/$_uid',
-                                      )));
-                                },
-                                icon: Icon(Icons.edit),
-                                color: Colors.white,
-                                iconSize: 40.0,
-                              )),
-                          progressIndicatorBuilder:
-                              (context, url, downloadProgress) =>
-                                  CircularProgressIndicator(
-                                      value: downloadProgress.progress),
-                          errorWidget: (context, url, error) =>
-                              Icon(Icons.error, color: Colors.black),
-                        ),
-                ),
-              ),
-              SliverList(
-                delegate: SliverChildListDelegate([
-                  Padding(
-                    padding: EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                      bottom: 20,
+      body: StreamBuilder<DocumentSnapshot>(
+          stream: Firestore.instance
+              .collection('entreprise')
+              .document(_user.uid)
+              .get()
+              .asStream(),
+          builder: (context, snapshot) {
+            return Stack(
+              children: <Widget>[
+                CustomScrollView(
+                  slivers: <Widget>[
+                    SliverAppBar(
+                      expandedHeight: 200,
+                      backgroundColor:
+                          Theme.of(context).scaffoldBackgroundColor,
+                      flexibleSpace: FlexibleSpaceBar(
+                        collapseMode: CollapseMode.pin,
+                        background: snapshot.data['photoURL'] == null
+                            ? Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: AssetImage('assets/total.png'),
+                                        fit: BoxFit.cover)),
+                                child: IconButton(
+                                  onPressed: () async {
+                                    Navigator.of(context).push(PageTransition(
+                                        type: PageTransitionType.leftToRight,
+                                        child: ImageCapture(
+                                          filePath:
+                                              'images/profile/${_user.uid}',
+                                          manyPics: false,
+                                          collection: 'entreprise',
+                                        )));
+                                  },
+                                  icon: Icon(Icons.edit),
+                                  color: Colors.white,
+                                  iconSize: 40.0,
+                                ))
+                            : CachedNetworkImage(
+                                imageUrl: snapshot.data['photoURL'],
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                        decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                                image: imageProvider,
+                                                fit: BoxFit.cover)),
+                                        child: IconButton(
+                                          onPressed: () async {
+                                            String _uid = Provider.of<User>(
+                                                    context,
+                                                    listen: true)
+                                                .uid;
+                                            Navigator.of(context).push(
+                                                PageTransition(
+                                                    type: PageTransitionType
+                                                        .leftToRight,
+                                                    child: ImageCapture(
+                                                      filePath:
+                                                          'images/profile/$_uid',
+                                                      collection: 'entreprise',
+                                                      manyPics: false,
+                                                    )));
+                                          },
+                                          icon: Icon(Icons.edit),
+                                          color: Colors.white,
+                                          iconSize: 40.0,
+                                        )),
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) =>
+                                        CircularProgressIndicator(
+                                            value: downloadProgress.progress),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error, color: Colors.black),
+                              ),
+                      ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: <Widget>[
-                                FadeAnimation(
-                                    1,
-                                    Column(children: [
-                                      SizedBox(
-                                        height: 20,
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Text(
-                                            titre,
-                                            style: TextStyle(
-                                                color: Colors.grey,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 25),
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              showDialog(
-                                                  context: context,
-                                                  builder:
-                                                      (BuildContext context) {
-                                                    return AlertDialog(
-                                                      title: Text('Edit nom'),
-                                                      content: Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color: Colors.white,
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                        ),
-                                                        child: Column(
-                                                          mainAxisSize:
-                                                              MainAxisSize.min,
-                                                          children: [
-                                                            Container(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .all(10),
-                                                              decoration: BoxDecoration(
-                                                                  border: Border(
-                                                                      bottom: BorderSide(
-                                                                          color:
-                                                                              Colors.grey[200]))),
-                                                              child: TextField(
-                                                                decoration:
-                                                                    InputDecoration(
-                                                                  hintText:
-                                                                      "$titre",
-                                                                  hintStyle: TextStyle(
-                                                                      color: Colors
-                                                                          .grey),
-                                                                  border:
-                                                                      InputBorder
-                                                                          .none,
-                                                                ),
-                                                                onChanged:
-                                                                    (val) {
-                                                                  setState(() =>
-                                                                      titreTmp =
-                                                                          val);
-                                                                },
-                                                              ),
-                                                            ),
-                                                          ],
+                    SliverList(
+                      delegate: SliverChildListDelegate([
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 20,
+                            right: 20,
+                            bottom: 20,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Container(
+                                child: Padding(
+                                  padding: EdgeInsets.all(10),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.end,
+                                    children: <Widget>[
+                                      FadeAnimation(
+                                          1,
+                                          Column(children: [
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Text(
+                                                  '${snapshot.data['titre']}',
+                                                  style: TextStyle(
+                                                      color: Colors.grey,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      fontSize: 25),
+                                                ),
+                                                InkWell(
+                                                  onTap: () {
+                                                    _editInfoDialog(
+                                                        _user.uid,
+                                                        'titre',
+                                                        'Title',
+                                                        context);
+                                                  },
+                                                  child: Row(
+                                                    children: [
+                                                      Icon(
+                                                        Icons.edit,
+                                                        size: 13,
+                                                        color: Colors.black,
+                                                      ),
+                                                      SizedBox(
+                                                        width: 4,
+                                                      ),
+                                                      Text(
+                                                        "Edit",
+                                                        style: TextStyle(
+                                                          color: Colors.black,
+                                                          fontSize: 13,
                                                         ),
                                                       ),
-                                                      actions: [
-                                                        Row(
-                                                          children: [
-                                                            FlatButton(
-                                                                onPressed:
-                                                                    () async {
-                                                                  await DatabaseService(uid: uid).updateEntrepriseData(
-                                                                      titre:
-                                                                          titreTmp,
-                                                                      address:
-                                                                          adresse,
-                                                                      description:
-                                                                          description,
-                                                                      tele:
-                                                                          tele,
-                                                                      email:
-                                                                          email);
-                                                                  titre =
-                                                                      titreTmp;
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
-                                                                  setState(
-                                                                      () {});
-                                                                },
-                                                                child: Text(
-                                                                    "Change",
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black))),
-                                                            FlatButton(
-                                                                onPressed: () {
-                                                                  Navigator.of(
-                                                                          context)
-                                                                      .pop();
-                                                                },
-                                                                child: Text(
-                                                                    "Cancel",
-                                                                    style: TextStyle(
-                                                                        color: Colors
-                                                                            .black))),
-                                                          ],
-                                                        ),
-                                                      ],
-                                                    );
-                                                  });
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.edit,
-                                                  size: 13,
-                                                  color: Colors.black,
-                                                ),
-                                                SizedBox(
-                                                  width: 4,
-                                                ),
-                                                Text(
-                                                  "Edit",
-                                                  style: TextStyle(
-                                                    color: Colors.black,
-                                                    fontSize: 13,
+                                                    ],
                                                   ),
                                                 ),
                                               ],
+                                            ),
+                                          ])),
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              FadeAnimation(
+                                1.2,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.article,
+                                          color: Colors.black,
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          "Description",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        _editInfoDialog(
+                                            _user.uid,
+                                            'description',
+                                            'Description',
+                                            context);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.edit,
+                                            size: 13,
+                                            color: Colors.black,
+                                          ),
+                                          SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(
+                                            "Edit",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 13,
                                             ),
                                           ),
                                         ],
                                       ),
-                                    ])),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Divider(
+                                height: 15,
+                                thickness: 2,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              FadeAnimation(
+                                  1.2,
+                                  Text(
+                                    '${snapshot.data['description']}',
+                                    style: TextStyle(
+                                        color: Colors.grey, height: 1.4),
+                                  )),
+                              FadeAnimation(
+                                1.2,
                                 SizedBox(
                                   height: 20,
                                 ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        FadeAnimation(
-                          1.2,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.article,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    "Description",
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
                               ),
-                              InkWell(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text('Edit description'),
-                                          content: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.all(10),
-                                                  decoration: BoxDecoration(
-                                                      border: Border(
-                                                          bottom: BorderSide(
-                                                              color: Colors
-                                                                  .grey[200]))),
-                                                  child: TextField(
-                                                    decoration: InputDecoration(
-                                                      hintText: "$description",
-                                                      hintStyle: TextStyle(
-                                                          color: Colors.grey),
-                                                      border: InputBorder.none,
-                                                    ),
-                                                    onChanged: (val) {
-                                                      setState(() =>
-                                                          descriptionTmp = val);
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
+                              FadeAnimation(
+                                1.2,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.business,
+                                          color: Colors.black,
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          "Address",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        _editInfoDialog(_user.uid, 'adresse',
+                                            'Address', context);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.edit,
+                                            size: 13,
+                                            color: Colors.black,
+                                          ),
+                                          SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(
+                                            "Edit",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 13,
                                             ),
                                           ),
-                                          actions: [
-                                            Row(
-                                              children: [
-                                                FlatButton(
-                                                    onPressed: () async {
-                                                      await DatabaseService(
-                                                              uid: uid)
-                                                          .updateEntrepriseData(
-                                                              titre: titre,
-                                                              address: adresse,
-                                                              description:
-                                                                  descriptionTmp,
-                                                              tele: tele,
-                                                              email: email);
-                                                      description =
-                                                          descriptionTmp;
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                      setState(() {});
-                                                    },
-                                                    child: Text("Change",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black))),
-                                                FlatButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text("Cancel",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black))),
-                                              ],
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.edit,
-                                      size: 13,
-                                      color: Colors.black,
-                                    ),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      "Edit",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 13,
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FadeAnimation(
-                            1.2,
-                            Text(
-                              "$description",
-                              style: TextStyle(color: Colors.grey, height: 1.4),
-                            )),
-                        FadeAnimation(
-                          1.2,
-                          SizedBox(
-                            height: 20,
-                          ),
-                        ),
-                        FadeAnimation(
-                          1.2,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.business,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    "Address",
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                              Divider(
+                                height: 15,
+                                thickness: 2,
                               ),
-                              InkWell(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text('Edit address'),
-                                          content: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.all(10),
-                                                  decoration: BoxDecoration(
-                                                      border: Border(
-                                                          bottom: BorderSide(
-                                                              color: Colors
-                                                                  .grey[200]))),
-                                                  child: TextField(
-                                                    decoration: InputDecoration(
-                                                      hintText: "$adresse",
-                                                      hintStyle: TextStyle(
-                                                          color: Colors.grey),
-                                                      border: InputBorder.none,
-                                                    ),
-                                                    onChanged: (val) {
-                                                      setState(() =>
-                                                          adresseTmp = val);
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
+                              SizedBox(
+                                height: 10,
+                              ),
+                              FadeAnimation(
+                                  1.2,
+                                  Text(
+                                    '${snapshot.data['adresse']}',
+                                    style: TextStyle(color: Colors.grey),
+                                  )),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              FadeAnimation(
+                                1.2,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.phone,
+                                          color: Colors.black,
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          "Phone",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        _editInfoDialog(_user.uid, 'tele',
+                                            'phone', context);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.edit,
+                                            size: 13,
+                                            color: Colors.black,
+                                          ),
+                                          SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(
+                                            "Edit",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 13,
                                             ),
                                           ),
-                                          actions: [
-                                            Row(
-                                              children: [
-                                                FlatButton(
-                                                    onPressed: () async {
-                                                      await DatabaseService(
-                                                              uid: uid)
-                                                          .updateEntrepriseData(
-                                                              titre: titre,
-                                                              address:
-                                                                  adresseTmp,
-                                                              description:
-                                                                  description,
-                                                              tele: tele,
-                                                              email: email);
-                                                      adresse = adresseTmp;
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                      setState(() {});
-                                                    },
-                                                    child: Text("Change",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black))),
-                                                FlatButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text("Cancel",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black))),
-                                              ],
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.edit,
-                                      size: 13,
-                                      color: Colors.black,
-                                    ),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      "Edit",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 13,
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FadeAnimation(
-                            1.2,
-                            Text(
-                              "$adresse",
-                              style: TextStyle(color: Colors.grey),
-                            )),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        FadeAnimation(
-                          1.2,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.phone,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    "Phone",
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                              Divider(
+                                height: 15,
+                                thickness: 2,
                               ),
-                              InkWell(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text('Change phone'),
-                                          content: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.all(10),
-                                                  decoration: BoxDecoration(
-                                                      border: Border(
-                                                          bottom: BorderSide(
-                                                              color: Colors
-                                                                  .grey[200]))),
-                                                  child: TextField(
-                                                    decoration: InputDecoration(
-                                                      hintText: "$tele",
-                                                      hintStyle: TextStyle(
-                                                          color: Colors.grey),
-                                                      border: InputBorder.none,
-                                                    ),
-                                                    onChanged: (val) {
-                                                      setState(
-                                                          () => teleTmp = val);
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
+                              SizedBox(
+                                height: 10,
+                              ),
+                              FadeAnimation(
+                                  1.2,
+                                  Text(
+                                    '${snapshot.data['tele']}',
+                                    style: TextStyle(color: Colors.grey),
+                                  )),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              FadeAnimation(
+                                1.2,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.mail,
+                                          color: Colors.black,
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          "Email",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        _editInfoDialog(_user.uid, 'email',
+                                            'email', context);
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.edit,
+                                            size: 13,
+                                            color: Colors.black,
+                                          ),
+                                          SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(
+                                            "Edit",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 13,
                                             ),
                                           ),
-                                          actions: [
-                                            Row(
-                                              children: [
-                                                FlatButton(
-                                                    onPressed: () async {
-                                                      await DatabaseService(
-                                                              uid: uid)
-                                                          .updateEntrepriseData(
-                                                              titre: titre,
-                                                              address: adresse,
-                                                              description:
-                                                                  description,
-                                                              tele: teleTmp,
-                                                              email: email);
-                                                      tele = teleTmp;
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                      setState(() {});
-                                                    },
-                                                    child: Text("Change",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black))),
-                                                FlatButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text("Cancel",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black))),
-                                              ],
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.edit,
-                                      size: 13,
-                                      color: Colors.black,
-                                    ),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      "Edit",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 13,
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FadeAnimation(
-                            1.2,
-                            Text(
-                              "$tele",
-                              style: TextStyle(color: Colors.grey),
-                            )),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        FadeAnimation(
-                          1.2,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.mail,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    "Email",
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
+                              Divider(
+                                height: 15,
+                                thickness: 2,
                               ),
-                              InkWell(
-                                onTap: () {
-                                  showDialog(
-                                      context: context,
-                                      builder: (BuildContext context) {
-                                        return AlertDialog(
-                                          title: Text('Edit Email'),
-                                          content: Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                            ),
-                                            child: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Container(
-                                                  padding: EdgeInsets.all(10),
-                                                  decoration: BoxDecoration(
-                                                      border: Border(
-                                                          bottom: BorderSide(
-                                                              color: Colors
-                                                                  .grey[200]))),
-                                                  child: TextField(
-                                                    decoration: InputDecoration(
-                                                      hintText: "$email",
-                                                      hintStyle: TextStyle(
-                                                          color: Colors.grey),
-                                                      border: InputBorder.none,
-                                                    ),
-                                                    onChanged: (val) {
-                                                      setState(
-                                                          () => emailTmp = val);
-                                                    },
-                                                  ),
-                                                ),
-                                              ],
+                              SizedBox(
+                                height: 10,
+                              ),
+                              FadeAnimation(
+                                  1.2,
+                                  Text(
+                                    '${snapshot.data['email']}',
+                                    style: TextStyle(color: Colors.grey),
+                                  )),
+                              SizedBox(
+                                height: 20,
+                              ),
+                              FadeAnimation(
+                                1.2,
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.photo,
+                                          color: Colors.black,
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          "Images",
+                                          style: TextStyle(
+                                              color: Colors.grey,
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        //page where images will be taking care of
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.edit,
+                                            size: 13,
+                                            color: Colors.black,
+                                          ),
+                                          SizedBox(
+                                            width: 4,
+                                          ),
+                                          Text(
+                                            "Edit",
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 13,
                                             ),
                                           ),
-                                          actions: [
-                                            Row(
-                                              children: [
-                                                FlatButton(
-                                                    onPressed: () async {
-                                                      await DatabaseService(
-                                                              uid: uid)
-                                                          .updateEntrepriseData(
-                                                              titre: titre,
-                                                              address: adresse,
-                                                              description:
-                                                                  description,
-                                                              tele: tele,
-                                                              email: emailTmp);
-                                                      email = emailTmp;
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                      setState(() {});
-                                                    },
-                                                    child: Text("Change",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black))),
-                                                FlatButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: Text("Cancel",
-                                                        style: TextStyle(
-                                                            color:
-                                                                Colors.black))),
-                                              ],
-                                            ),
-                                          ],
-                                        );
-                                      });
-                                },
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.edit,
-                                      size: 13,
-                                      color: Colors.black,
-                                    ),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      "Edit",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 13,
+                                        ],
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
+                              Divider(
+                                height: 15,
+                                thickness: 2,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              FadeAnimation(
+                                  1.8,
+                                  Container(
+                                    height: 200,
+                                    child: ListView(
+                                      scrollDirection: Axis.horizontal,
+                                      children: <Widget>[
+                                        makeVideo(image: 'assets/s4.png'),
+                                        makeVideo(image: 'assets/s4.png'),
+                                        makeVideo(image: 'assets/s4.png'),
+                                      ],
+                                    ),
+                                  )),
+                              SizedBox(
+                                height: 60,
+                              )
                             ],
                           ),
-                        ),
-                        Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FadeAnimation(
-                            1.2,
-                            Text(
-                              "$email",
-                              style: TextStyle(color: Colors.grey),
-                            )),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        FadeAnimation(
-                          1.2,
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Icon(
-                                    Icons.photo,
-                                    color: Colors.black,
-                                  ),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    "Images",
-                                    style: TextStyle(
-                                        color: Colors.grey,
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ],
-                              ),
-                              InkWell(
-                                onTap: () {},
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.edit,
-                                      size: 13,
-                                      color: Colors.black,
-                                    ),
-                                    SizedBox(
-                                      width: 4,
-                                    ),
-                                    Text(
-                                      "Edit",
-                                      style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 13,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Divider(
-                          height: 15,
-                          thickness: 2,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FadeAnimation(
-                            1.8,
-                            Container(
-                              height: 200,
-                              child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: <Widget>[
-                                  makeVideo(image: 'assets/s4.png'),
-                                  makeVideo(image: 'assets/s4.png'),
-                                  makeVideo(image: 'assets/s4.png'),
-                                ],
-                              ),
-                            )),
-                        SizedBox(
-                          height: 60,
                         )
-                      ],
-                    ),
-                  )
-                ]),
-              )
-            ],
-          ),
-        ],
-      ),
+                      ]),
+                    )
+                  ],
+                ),
+              ],
+            );
+          }),
     );
   }
 

@@ -43,7 +43,7 @@ class _DrawerCLState extends State<DrawerCL> {
                       .asStream(),
                   builder: (context, snapshot) {
                     return Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         snapshot.data['photoURL'] == null
@@ -69,7 +69,7 @@ class _DrawerCLState extends State<DrawerCL> {
                           height: 10,
                         ),
                         Text(
-                            '${snapshot.data['nom']} ${snapshot.data['prenom']}'
+                            '${snapshot.data['nom']} eginrofn ${snapshot.data['prenom']}'
                                 .toUpperCase(),
                             style: TextStyle(
                               color: Colors.black,

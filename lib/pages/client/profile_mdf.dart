@@ -20,18 +20,20 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
     with SingleTickerProviderStateMixin {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
-  TextEditingController _controller1 = TextEditingController();
-  TextEditingController _controller2 = TextEditingController();
-  TextEditingController _controller3 = TextEditingController();
-  TextEditingController _controller4 = TextEditingController();
-  TextEditingController _controller5 = TextEditingController();
-  TextEditingController _controller6 = TextEditingController();
+  TextEditingController _controllerNom = TextEditingController();
+  TextEditingController _controllerPrenom = TextEditingController();
+  TextEditingController _controllerSexe = TextEditingController();
+  TextEditingController _controllerTele = TextEditingController();
+  TextEditingController _controllerCin = TextEditingController();
+  TextEditingController _controllerVille = TextEditingController();
+  //main variables
   String _cin;
   String _ville;
   String _nom;
   String _prenom;
   String _sexe;
   String _tele;
+  //temporary variables
   String _cinTmp;
   String _villeTmp;
   String _nomTmp;
@@ -90,6 +92,18 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                 .get()
                 .asStream(),
             builder: (context, snapshot) {
+              this._cin = snapshot.data['cin'];
+              this._ville = snapshot.data['ville'];
+              this._nom = snapshot.data['nom'];
+              this._prenom = snapshot.data['prenom'];
+              this._sexe = snapshot.data['sexe'];
+              this._tele = snapshot.data['tele'];
+              this._sexe = snapshot.data['sexe'];
+              _controllerNom.text = _nom;
+              _controllerPrenom.text = _prenom;
+              _controllerTele.text = _tele;
+              _controllerCin.text = _cin;
+              _controllerVille.text = _ville;
               return new Container(
                 color: Colors.white,
                 child: new ListView(
@@ -266,10 +280,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                       children: <Widget>[
                                         Flexible(
                                           child: new TextField(
-                                            controller: _controller2,
-                                            decoration: InputDecoration(
-                                              hintText: '$_prenom',
-                                            ),
+                                            controller: _controllerPrenom,
                                             enabled: !_status,
                                             autofocus: !_status,
                                             onChanged: (val) {
@@ -283,10 +294,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             padding:
                                                 EdgeInsets.only(right: 10.0),
                                             child: new TextField(
-                                              controller: _controller1,
-                                              decoration: InputDecoration(
-                                                hintText: '$_nom',
-                                              ),
+                                              controller: _controllerNom,
                                               enabled: !_status,
                                               autofocus: !_status,
                                               onChanged: (val) {
@@ -327,9 +335,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                       children: <Widget>[
                                         new Flexible(
                                           child: new TextField(
-                                            controller: _controller4,
-                                            decoration: InputDecoration(
-                                                hintText: "$_tele"),
+                                            controller: _controllerTele,
                                             enabled: !_status,
                                             onChanged: (val) {
                                               setState(() => _teleTmp = val);
@@ -383,9 +389,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             padding:
                                                 EdgeInsets.only(right: 10.0),
                                             child: new TextField(
-                                              controller: _controller5,
-                                              decoration: InputDecoration(
-                                                  hintText: "$_cin"),
+                                              controller: _controllerCin,
                                               enabled: !_status,
                                               onChanged: (val) {
                                                 setState(() => _cinTmp = val);
@@ -396,9 +400,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                         ),
                                         Flexible(
                                           child: new TextField(
-                                            controller: _controller6,
-                                            decoration: InputDecoration(
-                                                hintText: "$_ville"),
+                                            controller: _controllerVille,
                                             enabled: !_status,
                                             onChanged: (val) {
                                               setState(() => _villeTmp = val);
@@ -454,7 +456,8 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
 
               if (_nomTmp != null) {
                 _nom = _nomTmp;
-              } else if (_prenomTmp != null) {
+              }
+              if (_prenomTmp != null) {
                 _prenom = _prenomTmp;
               }
               if (_teleTmp != null) {
@@ -466,12 +469,12 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
               if (_villeTmp != null) {
                 _ville = _villeTmp;
               }
-              _controller1.clear();
-              _controller2.clear();
-              _controller3.clear();
-              _controller4.clear();
-              _controller5.clear();
-              _controller6.clear();
+              _controllerNom.clear();
+              _controllerPrenom.clear();
+              _controllerSexe.clear();
+              _controllerTele.clear();
+              _controllerCin.clear();
+              _controllerVille.clear();
             });
             final DatabaseService _auth = DatabaseService(uid: _user.uid);
             await _auth.updateClientData(
