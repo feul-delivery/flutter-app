@@ -4,7 +4,6 @@ import 'package:FD_flutter/pages/livreur/bbar_liv.dart';
 import 'package:FD_flutter/pages/livreur/index_lv.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/database.dart';
-import 'package:FD_flutter/services/profile_picture.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -115,7 +114,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                   onTap: () async {
                     File profileImage = await getImage(ImageSource.camera);
                     if (profileImage != null) {
-                      profileURL = await uploadFile(profileImage);
+                      // profileURL = await uploadFile(profileImage);
                       setState(() {
                         IndexLv.livreur.photoURL = profileURL;
                       });
@@ -135,7 +134,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                   onTap: () async {
                     File profileImage = await getImage(ImageSource.gallery);
                     if (profileImage != null) {
-                      profileURL = await uploadFile(profileImage);
+                      // profileURL = await uploadFile(profileImage);
                       setState(() {
                         IndexLv.livreur.photoURL = profileURL;
                       });

@@ -1,12 +1,15 @@
+import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/commandes_cl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/pages/client/settings_cl.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'favoris_cl.dart';
 import 'index_cl.dart';
@@ -32,53 +35,66 @@ class _DrawerCLState extends State<DrawerCL> {
             child: Container(
               margin: EdgeInsets.all(20),
               padding: EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IndexCl.client?.photoURL == null
-                      ? CircleAvatar(
-                          radius: 50.0,
-                          backgroundImage: AssetImage('assets/profile.png'),
-                        )
-                      : CachedNetworkImage(
-                          imageUrl: IndexCl.client.photoURL,
-                          imageBuilder: (context, imageProvider) =>
-                              CircleAvatar(
-                                  radius: 50.0, backgroundImage: imageProvider),
-                          placeholder: (context, url) => CircleAvatar(
-                              radius: 50.0, child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) => CircleAvatar(
-                              radius: 50.0, child: Icon(Icons.error)),
-                        ),
-                  Container(
-                    margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                    child: Column(
+              child: StreamBuilder<DocumentSnapshot>(
+                  stream: Firestore.instance
+                      .collection('client')
+                      .document(Provider.of<User>(context).uid)
+                      .get()
+                      .asStream(),
+                  builder: (context, snapshot) {
+                    return Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Text(
-                            "${IndexCl.client?.nom?.toUpperCase()} ${IndexCl.client?.prenom?.toUpperCase()}",
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Gotham',
-                              fontWeight: FontWeight.w500,
-                              fontSize: 17,
-                            )),
-                        SizedBox(
-                          height: 5.0,
-                        ),
-                        Text(
-                          "${IndexCl.client?.email}",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: 'Gotham',
-                            fontWeight: FontWeight.w200,
+                        snapshot.data['photoURL'] == null
+                            ? CircleAvatar(
+                                radius: 50.0,
+                                backgroundImage:
+                                    AssetImage('assets/profile.png'),
+                              )
+                            : CachedNetworkImage(
+                                imageUrl: snapshot.data['photoURL'],
+                                imageBuilder: (context, imageProvider) =>
+                                    CircleAvatar(
+                                        radius: 50.0,
+                                        backgroundImage: imageProvider),
+                                placeholder: (context, url) => CircleAvatar(
+                                    radius: 50.0,
+                                    child: CircularProgressIndicator()),
+                                errorWidget: (context, url, error) =>
+                                    CircleAvatar(
+                                        radius: 50.0, child: Icon(Icons.error)),
+                              ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          child: Column(
+                            children: [
+                              Text(
+                                  '${snapshot.data['nom']} ${snapshot.data['prenom']}'
+                                      .toUpperCase(),
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Gotham',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 17,
+                                  )),
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              Text(
+                                '${snapshot.data['email']}'.toLowerCase(),
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontFamily: 'Gotham',
+                                  fontWeight: FontWeight.w200,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
+                        )
                       ],
-                    ),
-                  )
-                ],
-              ),
+                    );
+                  }),
             ),
           ),
         ),

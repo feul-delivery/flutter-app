@@ -13,13 +13,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
-  getClient() async {
-    ButtomBarCl.selectedIndex = 0;
-    Future.delayed(Duration(seconds: 5)).then((value) async {
-      DatabaseService databaseService = DatabaseService();
-      IndexCl.client = await databaseService.clientData();
-    });
-  }
+  // getClient() async {
+
+  //   Future.delayed(Duration(seconds: 5)).then((value) async {
+  //     DatabaseService databaseService = DatabaseService();
+  //     IndexCl.client = await databaseService.clientData();
+  //   });
+  // }
 
   getEntreprise() async {
     ButtomBarSt.selectedIndexSt = 0;
@@ -40,7 +40,8 @@ class Wrapper extends StatelessWidget {
       switch (AuthService.type) {
         case "Client":
           {
-            getClient();
+            ButtomBarCl.selectedIndex = 0;
+            // getClient();
             return IndexCl();
           }
           break;
