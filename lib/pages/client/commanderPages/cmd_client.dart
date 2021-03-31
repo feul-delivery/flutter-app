@@ -55,6 +55,7 @@ class _ClientOrderState extends State<ClientOrder> {
                             } else {
                               _methode = 'COD';
                             }
+                            Navigator.of(context).pop();
                           },
                           child: Container(
                             decoration: BoxDecoration(
@@ -151,7 +152,7 @@ class _ClientOrderState extends State<ClientOrder> {
                     uidclient: user.uid,
                     idtype: _type['libelle'],
                     dateheurec: DateTime.now(),
-                    color: _carColor.toString(),
+                    color: _carColor.value,
                     matricule: _matricule,
                     adresse: _adresse,
                     volume: _volume,
