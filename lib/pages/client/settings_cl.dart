@@ -40,7 +40,7 @@ class _SettingsClState extends State<SettingsCl> {
                   ),
                   Text(
                     "Account",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: tileTitleStyle,
                   ),
                 ],
               ),
@@ -61,7 +61,7 @@ class _SettingsClState extends State<SettingsCl> {
                   ),
                   Text(
                     "Application",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: tileTitleStyle,
                   ),
                 ],
               ),
@@ -82,7 +82,7 @@ class _SettingsClState extends State<SettingsCl> {
                   ),
                   Text(
                     "Droits",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: tileTitleStyle,
                   ),
                 ],
               ),
@@ -108,7 +108,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(title),
+              title: Text(title, style: smallTileGray),
               content: Container(
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -125,7 +125,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                       child: TextField(
                         decoration: InputDecoration(
                             hintText: "Old Password",
-                            hintStyle: TextStyle(color: Colors.grey),
+                            hintStyle: hintStyle,
                             border: InputBorder.none),
                       ),
                     ),
@@ -138,7 +138,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                         obscureText: true,
                         decoration: InputDecoration(
                             hintText: "New Password",
-                            hintStyle: TextStyle(color: Colors.grey),
+                            hintStyle: hintStyle,
                             border: InputBorder.none),
                       ),
                     ),
@@ -151,7 +151,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                         obscureText: true,
                         decoration: InputDecoration(
                             hintText: "Confirmation",
-                            hintStyle: TextStyle(color: Colors.grey),
+                            hintStyle: hintStyle,
                             border: InputBorder.none),
                       ),
                     ),
@@ -163,14 +163,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                   children: [
                     FlatButton(
                         onPressed: () {},
-                        child: Text("Change",
-                            style: TextStyle(color: Colors.black))),
-                    FlatButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text("Cancel",
-                            style: TextStyle(color: Colors.black))),
+                        child: Text("Change", style: buttonStyleBlack)),
                   ],
                 ),
               ],
@@ -184,15 +177,12 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
         children: [
           Text(
             title,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600],
-            ),
+            style: smallTileGray,
           ),
           Icon(
             Icons.arrow_forward_ios,
-            color: Colors.grey,
+            color: Colors.black45,
+            size: 14,
           ),
         ],
       ),
@@ -208,7 +198,10 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(title),
+              title: Text(
+                title,
+                style: smallTileGray,
+              ),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -217,38 +210,41 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
                     height: 60,
                     decoration: BoxDecoration(
                         border: Border.all(
-                            width: 4,
+                            width: 10,
                             color: Theme.of(context).scaffoldBackgroundColor),
-                        boxShadow: [
-                          BoxShadow(
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1),
-                              offset: Offset(0, 10))
-                        ],
+                        boxShadow: [],
                         shape: BoxShape.circle,
                         image: DecorationImage(
                             fit: BoxFit.cover,
-                            image: AssetImage('assets/Feuldelivery.png'))),
+                            image: AssetImage('assets/Fueldelivery.png'))),
                   ),
                   SizedBox(
                     height: 12,
                   ),
                   Text(
                     'Build by the Flutter framework.',
-                    style: TextStyle(fontSize: 10),
+                    style: textStyle,
+                  ),
+                  SizedBox(
+                    height: 5,
                   ),
                   Text(
                     'Developped by:',
-                    style: TextStyle(fontSize: 18),
+                    style: textStyle,
+                  ),
+                  SizedBox(
+                    height: 5,
                   ),
                   Text(
                     'ELHESSBI Imad',
-                    style: TextStyle(fontSize: 15),
+                    style: textStyle,
+                  ),
+                  SizedBox(
+                    height: 5,
                   ),
                   Text(
                     'ZAMOURI Iliyass',
-                    style: TextStyle(fontSize: 15),
+                    style: textStyle,
                   ),
                 ],
               ),
@@ -258,8 +254,8 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
                       Navigator.of(context).pop();
                     },
                     child: Text(
-                      "Fermer",
-                      style: TextStyle(color: Colors.black),
+                      "Close",
+                      style: buttonStyleBlack,
                     )),
               ],
             );
@@ -272,15 +268,12 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
         children: [
           Text(
             title,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600],
-            ),
+            style: smallTileGray,
           ),
           Icon(
             Icons.arrow_forward_ios,
-            color: Colors.grey,
+            color: Colors.black45,
+            size: 14,
           ),
         ],
       ),
@@ -296,7 +289,7 @@ InkWell buildRateUsRow(BuildContext context, String title) {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(title),
+              title: Text(title, style: smallTileGray),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -316,15 +309,8 @@ InkWell buildRateUsRow(BuildContext context, String title) {
                 Row(
                   children: [
                     FlatButton(
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text("Annuler",
-                            style: TextStyle(color: Colors.black))),
-                    FlatButton(
                         onPressed: () {},
-                        child: Text("Envoyer",
-                            style: TextStyle(color: Colors.black))),
+                        child: Text("Envoyer", style: buttonStyleBlack)),
                   ],
                 ),
               ],
@@ -336,17 +322,11 @@ InkWell buildRateUsRow(BuildContext context, String title) {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600],
-            ),
-          ),
+          Text(title, style: smallTileGray),
           Icon(
             Icons.arrow_forward_ios,
-            color: Colors.grey,
+            color: Colors.black45,
+            size: 14,
           ),
         ],
       ),
@@ -362,7 +342,7 @@ InkWell buildAccountOptionRow(BuildContext context, String title) {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text(title),
+              title: Text(title, style: smallTileGray),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [],
@@ -372,7 +352,10 @@ InkWell buildAccountOptionRow(BuildContext context, String title) {
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text("Fermer")),
+                    child: Text(
+                      "Close",
+                      style: buttonStyleBlack,
+                    )),
               ],
             );
           });
@@ -384,15 +367,12 @@ InkWell buildAccountOptionRow(BuildContext context, String title) {
         children: [
           Text(
             title,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w500,
-              color: Colors.grey[600],
-            ),
+            style: smallTileGray,
           ),
           Icon(
             Icons.arrow_forward_ios,
-            color: Colors.grey,
+            color: Colors.black45,
+            size: 14,
           ),
         ],
       ),

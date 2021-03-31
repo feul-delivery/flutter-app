@@ -96,3 +96,8 @@ const smallTileP = TextStyle(
     fontSize: 16,
     fontWeight: FontWeight.w400,
     color: Colors.black);
+const smallTileGray = TextStyle(
+    fontFamily: 'Gotham',
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: Colors.black45);
