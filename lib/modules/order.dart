@@ -5,7 +5,7 @@ class Order {
   DateTime dateheurec;
   DateTime dateheurel;
   String matricule;
-  String color;
+  int color;
   double prixtotal;
   String statut;
   String methode;
