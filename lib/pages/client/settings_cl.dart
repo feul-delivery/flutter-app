@@ -1,3 +1,4 @@
+import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -107,7 +108,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
+            return CustomAlertDialog(
               title: Text(title, style: smallTileGray),
               content: Container(
                 decoration: BoxDecoration(
@@ -197,7 +198,7 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
+            return CustomAlertDialog(
               title: Text(
                 title,
                 style: smallTileGray,
@@ -288,7 +289,7 @@ InkWell buildRateUsRow(BuildContext context, String title) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
+            return CustomAlertDialog(
               title: Text(title, style: smallTileGray),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -341,7 +342,7 @@ InkWell buildAccountOptionRow(BuildContext context, String title) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
+            return CustomAlertDialog(
               title: Text(title, style: smallTileGray),
               content: Column(
                 mainAxisSize: MainAxisSize.min,

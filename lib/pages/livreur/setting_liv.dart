@@ -1,5 +1,6 @@
 import 'package:FD_flutter/pages/livreur/bbar_liv.dart';
 import 'package:FD_flutter/pages/livreur/index_lv.dart';
+import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -117,7 +118,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
+            return CustomAlertDialog(
               title: Text(title),
               content: Container(
                 decoration: BoxDecoration(
@@ -217,7 +218,7 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
+            return CustomAlertDialog(
               title: Text(title),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -309,7 +310,7 @@ InkWell buildRateUsRow(BuildContext context, String title) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
+            return CustomAlertDialog(
               title: Text(title),
               content: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -375,7 +376,7 @@ InkWell buildAccountOptionRow(BuildContext context, String title) {
       showDialog(
           context: context,
           builder: (BuildContext context) {
-            return AlertDialog(
+            return CustomAlertDialog(
               title: Text(title),
               content: Column(
                 mainAxisSize: MainAxisSize.min,

@@ -1,7 +1,10 @@
+import 'dart:ui';
+
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/client/drawer_cl.dart';
@@ -30,6 +33,7 @@ class _ExploreClState extends State<ExploreCl> {
             MaterialPageRoute(builder: (BuildContext context) => IndexCl()));
       },
       child: Scaffold(
+        backgroundColor: Theme.of(context).backgroundColor,
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.black,
@@ -96,143 +100,163 @@ class _ExploreClState extends State<ExploreCl> {
 
   Container createCard(DocumentSnapshot document) {
     return Container(
-      height: 230,
-      margin: EdgeInsets.fromLTRB(20, 20, 20, 0),
+      margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
       child: Card(
         clipBehavior: Clip.antiAlias,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => StationProfilCl(
-                              doc: document,
-                            )));
-              },
-              child: Stack(
-                children: [
-//image of the station
-
-                  Ink.image(
-                    height: 100,
-                    image: AssetImage(
-                      'assets/s4.png',
-                    ),
-                    fit: BoxFit.fitWidth,
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          _changeFav();
-                        });
-                      },
-                      icon: _adoreIcon,
-                    ),
-                  )
-                ],
-              ),
-            ),
-            Padding(
-                padding: const EdgeInsets.only(
-                  left: 10,
-                  top: 10,
-                  right: 10,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => StationProfilCl(
-                                      doc: document,
-                                    )));
-                      },
-                      child: Text('${document['titre']}',
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontFamily: 'Gotham',
-                            fontWeight: FontWeight.w400,
-                            fontSize: 24,
-                          )),
-                    ),
-                    Text(
-                      '${document['adresse']}',
-                      style: TextStyle(
-                        color: Colors.black38,
-                        fontFamily: 'Gotham',
-                        fontWeight: FontWeight.w400,
-                        fontSize: 14,
-                      ),
-                    ),
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          IconButton(
-                            onPressed: () async {
-                              var tele = 'tel:${document['tele']}';
-                              if (await canLaunch(tele)) {
-                                await launch(tele);
-                              }
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => StationProfilCl(
+                          doc: document,
+                        )));
+          },
+          child: Column(
+            children: [
+              Container(
+                  margin: EdgeInsets.only(left: 7, bottom: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => StationProfilCl(
+                                            doc: document,
+                                          )));
                             },
-                            icon: Icon(
-                              Icons.phone,
-                              color: Colors.green,
+                            child: Text('${document['titre']}'.toUpperCase(),
+                                style: tileTitleStyle),
+                          ),
+                          Text(
+                            '${document['adresse']}'.toLowerCase(),
+                            style: TextStyle(
+                              color: Colors.black38,
+                              fontFamily: 'Gotham',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 14,
                             ),
                           ),
-                          IconButton(
-                            onPressed: () async {
-                              var email = 'mailto:${document['email']}';
-                              if (await canLaunch(email)) {
-                                await launch(email);
-                              }
-                            },
-                            icon: Icon(
-                              Icons.mail,
-                              color: Colors.amber[700],
-                            ),
-                          ),
-                          Container(
-                              padding: EdgeInsets.all(10),
-                              alignment: Alignment.topCenter,
-                              child: FlatButton.icon(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ClientOrder(
-                                                doc: document,
-                                              )));
-                                },
-                                icon: Icon(
-                                  Icons.near_me,
-                                  color: Colors.blue[800],
-                                ),
-                                label: Text(
-                                  'Order',
-                                  style: TextStyle(
-                                    color: Colors.blue,
-                                    fontFamily: 'Gotham',
-                                    fontWeight: FontWeight.w400,
-                                    fontSize: 14,
-                                  ),
-                                ),
-                              )),
                         ],
                       ),
+                      PopupMenuButton(
+                        itemBuilder: (BuildContext bc) => [
+                          PopupMenuItem(
+                            child: TextButton.icon(
+                                onPressed: () async {
+                                  var tele = 'tel:${document['tele']}';
+                                  if (await canLaunch(tele)) {
+                                    await launch(tele);
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.phone,
+                                  color: Colors.green,
+                                ),
+                                label: Text(
+                                  'Call',
+                                  style: textStyle,
+                                )),
+                          ),
+                          PopupMenuItem(
+                            child: TextButton.icon(
+                                onPressed: () async {
+                                  var email = 'mailto:${document['email']}';
+                                  if (await canLaunch(email)) {
+                                    await launch(email);
+                                  }
+                                },
+                                icon: Icon(
+                                  Icons.mail,
+                                  color: Colors.amber[700],
+                                ),
+                                label: Text(
+                                  'Mail',
+                                  style: textStyle,
+                                )),
+                          ),
+                        ],
+                        onSelected: (route) {
+                          print(route);
+                          // Note You must create respective pages for navigation
+                          Navigator.pushNamed(context, route);
+                        },
+                      ),
+                    ],
+                  )),
+//image of the station
+              document['photoURL'] != null
+                  ? CachedNetworkImage(
+                      imageUrl: document['photoURL'],
+                      imageBuilder: (context, imageProvider) => Ink.image(
+                        height: 200,
+                        image: imageProvider,
+                        fit: BoxFit.fitWidth,
+                      ),
+                      placeholder: (context, url) => Container(
+                        height: 200,
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            backgroundColor: Colors.black,
+                            valueColor:
+                                new AlwaysStoppedAnimation<Color>(Colors.white),
+                          ),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        height: 200,
+                        child: Center(
+                          child: Icon(Icons.error, color: Colors.black),
+                        ),
+                      ),
+                    )
+                  : Container(
+                      height: 200,
+                      child: Center(
+                        child: Icon(Icons.error, color: Colors.black),
+                      ),
                     ),
-                  ],
-                )),
-          ],
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ClientOrder(
+                                        doc: document,
+                                      )));
+                        },
+                        icon: Icon(
+                          Icons.near_me,
+                          color: Colors.blue[800],
+                        ),
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _changeFav();
+                      });
+                    },
+                    icon: _adoreIcon,
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 // import 'package:FD_flutter/pages/station/index_st.dart';
 // import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/image_capture.dart';
@@ -138,7 +139,7 @@ class _ProfilStState extends State<ProfilSt> {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return AlertDialog(
+          return CustomAlertDialog(
             title: Text('Edit $fieldName'),
             content: Container(
               decoration: BoxDecoration(

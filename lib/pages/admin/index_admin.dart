@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:FD_flutter/pages/admin/drawer_admin.dart';
+import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class _IndexAdminState extends State<IndexAdmin> {
       onWillPop: () {
         return showDialog(
               context: context,
-              builder: (context) => new AlertDialog(
+              builder: (context) => new CustomAlertDialog(
                 title: new Text('Etes-vous sur?'),
                 content: new Text("Quitter l'application?"),
                 actions: <Widget>[

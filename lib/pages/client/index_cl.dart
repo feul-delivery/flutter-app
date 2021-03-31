@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/client.dart';
 import 'package:FD_flutter/pages/client/favoris_cl.dart';
+import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
@@ -22,7 +23,7 @@ class _IndexClState extends State<IndexCl> {
       onWillPop: () {
         return showDialog(
               context: context,
-              builder: (context) => new AlertDialog(
+              builder: (context) => new CustomAlertDialog(
                 title: new Text('Are you sure?'),
                 content: new Text("Exit the application"),
                 actions: <Widget>[
@@ -198,18 +199,56 @@ GestureDetector _bigStation(BuildContext context) {
             height: 10,
             thickness: 1,
           ),
-          Container(
-            margin: const EdgeInsets.only(top: 10.0),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(5.0),
-              child: Image.asset(
-                'assets/s3.jpg',
-                alignment: Alignment.center,
-                fit: BoxFit.cover,
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.width - 150,
+          Stack(
+            children: [
+              Container(
+                margin: const EdgeInsets.only(top: 10.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10.0),
+                  child: Image.asset(
+                    'assets/s3.jpg',
+                    alignment: Alignment.center,
+                    fit: BoxFit.cover,
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.width - 150,
+                  ),
+                ),
               ),
-            ),
+              Positioned(
+                bottom: 15,
+                left: 15,
+                child: Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //'${document['titre']}',
+                      Text('Total Maroc',
+                          style: TextStyle(
+                            color: Colors.black54,
+                            fontFamily: 'Gotham',
+                            fontWeight: FontWeight.w400,
+                            fontSize: 24,
+                          )),
+                      SizedBox(height: 5),
+                      Text(
+                        // '${document['adresse']}',
+                        'Route sefrou, marjane 30000',
+                        style: TextStyle(
+                          color: Colors.black54,
+                          fontFamily: 'Gotham',
+                          fontWeight: FontWeight.w400,
+                          fontSize: 14,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
           ),
         ],
       ),

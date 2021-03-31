@@ -2,6 +2,7 @@ import 'package:FD_flutter/modules/order.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_done.dart';
 import 'package:FD_flutter/services/database.dart';
+import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -280,7 +281,7 @@ class _ClientOrderState extends State<ClientOrder> {
                       onPressed: () {
                         showDialog(
                           context: context,
-                          child: AlertDialog(
+                          child: CustomAlertDialog(
                             title: const Text('Pick a color'),
                             content: SingleChildScrollView(
                               child: ColorPicker(

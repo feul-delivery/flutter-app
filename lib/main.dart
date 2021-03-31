@@ -20,6 +20,7 @@ class FuelDeliveryApp extends StatelessWidget {
         home: SplashScreen(),
         title: 'Fuel Delivery',
         theme: ThemeData(
+          backgroundColor: Colors.black,
           brightness: Brightness.light,
           primaryColor: Colors.black,
         ),

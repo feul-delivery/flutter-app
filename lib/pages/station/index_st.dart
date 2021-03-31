@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/entreprise.dart';
+import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +21,7 @@ class _IndexStState extends State<IndexSt> {
       onWillPop: () {
         return showDialog(
               context: context,
-              builder: (context) => new AlertDialog(
+              builder: (context) => new CustomAlertDialog(
                 title: new Text('Are you sure?'),
                 content: new Text("Exit the application"),
                 actions: <Widget>[
