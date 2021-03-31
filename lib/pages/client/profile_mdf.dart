@@ -40,6 +40,10 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
   String _prenomTmp;
   String _sexeTmp;
   String _teleTmp;
+
+//temps
+  List<String> _sexeTypes = ['female', 'male'];
+
   // void initState() {
   //   super.initState();
   //   //_getEntData();
@@ -104,6 +108,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
               _controllerTele.text = _tele;
               _controllerCin.text = _cin;
               _controllerVille.text = _ville;
+              _controllerSexe.text = _sexe;
               return new Container(
                 color: Colors.white,
                 child: new ListView(
@@ -212,34 +217,28 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                         right: 25.0,
                                         top: 25.0,
                                         bottom: 10.0),
-                                    child: new Row(
+                                    child: Column(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      mainAxisSize: MainAxisSize.max,
-                                      children: <Widget>[
-                                        new Column(
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        new Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          mainAxisSize: MainAxisSize.min,
+                                              MainAxisAlignment.spaceBetween,
+                                          mainAxisSize: MainAxisSize.max,
                                           children: <Widget>[
                                             new Text(
                                               'Personal information',
-                                              style: TextStyle(
-                                                  fontSize: 18.0,
-                                                  fontWeight: FontWeight.bold),
+                                              style: subTitleStyle,
                                             ),
-                                          ],
-                                        ),
-                                        new Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: <Widget>[
                                             _status
                                                 ? _getEditIcon()
-                                                : new Container(),
+                                                : new Container()
                                           ],
-                                        )
+                                        ),
+                                        Divider(
+                                          height: 10,
+                                          thickness: 1,
+                                        ),
                                       ],
                                     )),
                                 Padding(
@@ -254,9 +253,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                           child: Container(
                                             child: new Text(
                                               'First name:',
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold),
+                                              style: tileTitleStyle,
                                             ),
                                           ),
                                           flex: 2,
@@ -265,9 +262,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                           child: Container(
                                             child: new Text(
                                               'Last name:',
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold),
+                                              style: tileTitleStyle,
                                             ),
                                           ),
                                           flex: 2,
@@ -284,6 +279,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                       children: <Widget>[
                                         Flexible(
                                           child: new TextField(
+                                            style: hintStyle,
                                             controller: _controllerPrenom,
                                             enabled: !_status,
                                             autofocus: !_status,
@@ -298,6 +294,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             padding:
                                                 EdgeInsets.only(right: 10.0),
                                             child: new TextField(
+                                              style: hintStyle,
                                               controller: _controllerNom,
                                               enabled: !_status,
                                               autofocus: !_status,
@@ -323,9 +320,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                           children: <Widget>[
                                             new Text(
                                               'Phone:',
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold),
+                                              style: tileTitleStyle,
                                             ),
                                           ],
                                         ),
@@ -339,6 +334,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                       children: <Widget>[
                                         new Flexible(
                                           child: new TextField(
+                                            style: hintStyle,
                                             controller: _controllerTele,
                                             enabled: !_status,
                                             onChanged: (val) {
@@ -360,9 +356,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                           child: Container(
                                             child: new Text(
                                               'CIN:',
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold),
+                                              style: tileTitleStyle,
                                             ),
                                           ),
                                           flex: 2,
@@ -371,9 +365,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                           child: Container(
                                             child: new Text(
                                               'City:',
-                                              style: TextStyle(
-                                                  fontSize: 16.0,
-                                                  fontWeight: FontWeight.bold),
+                                              style: tileTitleStyle,
                                             ),
                                           ),
                                           flex: 2,
@@ -393,6 +385,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             padding:
                                                 EdgeInsets.only(right: 10.0),
                                             child: new TextField(
+                                              style: hintStyle,
                                               controller: _controllerCin,
                                               enabled: !_status,
                                               onChanged: (val) {
@@ -404,6 +397,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                         ),
                                         Flexible(
                                           child: new TextField(
+                                            style: hintStyle,
                                             controller: _controllerVille,
                                             enabled: !_status,
                                             onChanged: (val) {
@@ -415,6 +409,48 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                       ],
                                     )),
                                 //add sexe here as dropdown
+                                Container(
+                                  margin: EdgeInsets.only(top: 20),
+                                  padding: EdgeInsets.only(
+                                      left: 25.0, right: 25.0, top: 2.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        child: new Text(
+                                          'Sexe:',
+                                          style: tileTitleStyle,
+                                        ),
+                                      ),
+                                      DropdownButtonFormField(
+                                        value: '${snapshot.data['sexe']}',
+                                        decoration: InputDecoration(
+                                            enabled: !_status,
+                                            border: InputBorder.none),
+                                        hint: Text(
+                                          '$_sexe',
+                                          style: hintStyle,
+                                        ),
+                                        items: _status == false
+                                            ? _sexeTypes.map((sexe) {
+                                                return DropdownMenuItem(
+                                                  value: sexe.toLowerCase(),
+                                                  child: Text(
+                                                    '$sexe',
+                                                    style: hintStyle,
+                                                  ),
+                                                );
+                                              }).toList()
+                                            : null,
+                                        onChanged: (val) => _sexeTmp = val,
+                                        validator: (value) =>
+                                            value.isEmpty ? 'Required' : null,
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ],
                             ),
                           ),
@@ -474,6 +510,9 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
               if (_villeTmp != null) {
                 _ville = _villeTmp;
               }
+              if (_sexeTmp != null) {
+                _sexe = _sexeTmp;
+              }
               _controllerNom.clear();
               _controllerPrenom.clear();
               _controllerSexe.clear();
@@ -483,7 +522,13 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
             });
             final DatabaseService _auth = DatabaseService(uid: _user.uid);
             await _auth.updateClientData(
-                _nom, _prenom, _user.email, _sexe, _cin, _tele, _ville);
+                _nom.toLowerCase(),
+                _prenom.toLowerCase(),
+                _user.email.toLowerCase(),
+                _sexe.toLowerCase(),
+                _cin.toLowerCase(),
+                _tele.toLowerCase(),
+                _ville.toLowerCase());
           },
         )
       ],
