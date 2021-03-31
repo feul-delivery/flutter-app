@@ -1,6 +1,7 @@
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -28,42 +29,48 @@ class _StationProfilClState extends State<StationProfilCl> {
           CustomScrollView(
             slivers: <Widget>[
               SliverAppBar(
+                leading: IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    }),
                 expandedHeight: 200,
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 flexibleSpace: FlexibleSpaceBar(
-                  collapseMode: CollapseMode.pin,
-                  background: Container(
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage('assets/s4.png'),
-                            fit: BoxFit.cover)),
-                    child: Container(
-                      child: Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            FadeAnimation(
-                                1,
-                                Text(
-                                  doc['titre'],
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Gotham',
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )),
-                            SizedBox(
-                              height: 10,
+                    collapseMode: CollapseMode.pin,
+                    background: doc.data['photoURL'] == null
+                        ? Container(
+                            decoration: BoxDecoration(
+                                image: DecorationImage(
+                                    image: AssetImage('assets/s4.png'),
+                                    fit: BoxFit.cover)),
+                            child: Container(),
+                          )
+                        : CachedNetworkImage(
+                            imageUrl: doc.data['photoURL'],
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: imageProvider, fit: BoxFit.cover)),
+                              child: Container(),
                             ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                            placeholder: (context, url) => Container(
+                              height: 200,
+                              child: Center(
+                                child: CircularProgressIndicator(
+                                  backgroundColor: Colors.black,
+                                  valueColor: new AlwaysStoppedAnimation<Color>(
+                                      Colors.white),
+                                ),
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => Container(
+                              height: 200,
+                              child: Center(
+                                child: Icon(Icons.error, color: Colors.black),
+                              ),
+                            ),
+                          )),
               ),
               SliverList(
                 delegate: SliverChildListDelegate([
@@ -80,7 +87,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               FadeAnimation(
-                                1.2,
+                                0.2,
                                 Container(
                                   width: 100,
                                   child: RaisedButton(
@@ -117,7 +124,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 width: 20,
                               ),
                               FadeAnimation(
-                                  1.2,
+                                  0.2,
                                   Container(
                                     width: 100,
                                     child: RaisedButton(
@@ -147,7 +154,30 @@ class _StationProfilClState extends State<StationProfilCl> {
                                   )),
                             ]),
                         FadeAnimation(
-                          1.2,
+                          0.2,
+                          Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: <Widget>[
+                                FadeAnimation(
+                                    1,
+                                    Center(
+                                      child: Text(
+                                        doc['titre'],
+                                        style: titleStyle,
+                                      ),
+                                    )),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        FadeAnimation(
+                          0.2,
                           Row(
                             children: [
                               Icon(
@@ -159,35 +189,32 @@ class _StationProfilClState extends State<StationProfilCl> {
                               ),
                               Text(
                                 "Description",
-                                style: TextStyle(
-                                    color: Colors.grey[800],
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                style: tileTitleStyle,
                               ),
                             ],
                           ),
                         ),
                         Divider(
                           height: 15,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         FadeAnimation(
-                            1.2,
+                            0.2,
                             Text(
                               doc['description'],
-                              style: TextStyle(color: Colors.grey, height: 1.4),
+                              style: smallTileGray,
                             )),
                         FadeAnimation(
-                          1.2,
+                          0.2,
                           SizedBox(
                             height: 20,
                           ),
                         ),
                         FadeAnimation(
-                          1.2,
+                          0.2,
                           Row(
                             children: [
                               Icon(
@@ -199,32 +226,29 @@ class _StationProfilClState extends State<StationProfilCl> {
                               ),
                               Text(
                                 "Address",
-                                style: TextStyle(
-                                    color: Colors.grey[800],
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                style: tileTitleStyle,
                               ),
                             ],
                           ),
                         ),
                         Divider(
                           height: 15,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         FadeAnimation(
-                            1.2,
+                            0.2,
                             Text(
                               doc['adresse'],
-                              style: TextStyle(color: Colors.grey),
+                              style: smallTileGray,
                             )),
                         SizedBox(
                           height: 20,
                         ),
                         FadeAnimation(
-                          1.2,
+                          0.2,
                           Row(
                             children: [
                               Icon(
@@ -236,32 +260,29 @@ class _StationProfilClState extends State<StationProfilCl> {
                               ),
                               Text(
                                 "Delivery",
-                                style: TextStyle(
-                                    color: Colors.grey[800],
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                style: tileTitleStyle,
                               ),
                             ],
                           ),
                         ),
                         Divider(
                           height: 15,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         FadeAnimation(
-                            1.2,
+                            0.2,
                             Text(
                               "4 deliveryman",
-                              style: TextStyle(color: Colors.grey),
+                              style: smallTileGray,
                             )),
                         SizedBox(
                           height: 20,
                         ),
                         FadeAnimation(
-                          1.2,
+                          0.2,
                           Row(
                             children: [
                               Icon(
@@ -273,32 +294,29 @@ class _StationProfilClState extends State<StationProfilCl> {
                               ),
                               Text(
                                 "Phone",
-                                style: TextStyle(
-                                    color: Colors.grey[800],
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                style: tileTitleStyle,
                               ),
                             ],
                           ),
                         ),
                         Divider(
                           height: 15,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         FadeAnimation(
-                            1.2,
+                            0.2,
                             Text(
-                              doc['adresse'],
-                              style: TextStyle(color: Colors.grey),
+                              doc['tele'],
+                              style: smallTileGray,
                             )),
                         SizedBox(
                           height: 20,
                         ),
                         FadeAnimation(
-                          1.2,
+                          0.2,
                           Row(
                             children: [
                               Icon(
@@ -310,32 +328,29 @@ class _StationProfilClState extends State<StationProfilCl> {
                               ),
                               Text(
                                 "Email",
-                                style: TextStyle(
-                                    color: Colors.grey[800],
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                style: tileTitleStyle,
                               ),
                             ],
                           ),
                         ),
                         Divider(
                           height: 15,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         SizedBox(
                           height: 10,
                         ),
                         FadeAnimation(
-                            1.2,
+                            0.2,
                             Text(
                               doc['email'],
-                              style: TextStyle(color: Colors.grey),
+                              style: smallTileGray,
                             )),
                         SizedBox(
                           height: 20,
                         ),
                         FadeAnimation(
-                          1.2,
+                          0.2,
                           Row(
                             children: [
                               Icon(
@@ -347,17 +362,14 @@ class _StationProfilClState extends State<StationProfilCl> {
                               ),
                               Text(
                                 "Pictures",
-                                style: TextStyle(
-                                    color: Colors.grey[800],
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold),
+                                style: tileTitleStyle,
                               ),
                             ],
                           ),
                         ),
                         Divider(
                           height: 15,
-                          thickness: 2,
+                          thickness: 1,
                         ),
                         SizedBox(
                           height: 10,

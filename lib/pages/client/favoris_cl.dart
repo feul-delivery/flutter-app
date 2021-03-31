@@ -1,7 +1,7 @@
 import 'package:FD_flutter/pages/client/station_cl.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'index_cl.dart';
 
 class FavorisCl extends StatefulWidget {
   @override
@@ -15,16 +15,15 @@ class _FavorisClState extends State<FavorisCl> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.black,
-        title: Text('Favorites'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.home),
+        title: Text(
+          'Favorites',
+          style: pageTitle,
+        ),
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
             onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (BuildContext context) => IndexCl()));
-            },
-          ),
-        ],
+              Navigator.pop(context);
+            }),
       ),
       body: SingleChildScrollView(
         child: Column(

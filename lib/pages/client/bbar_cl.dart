@@ -1,4 +1,5 @@
 import 'package:FD_flutter/pages/client/profile_cl.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'explore_cl.dart';
@@ -139,7 +140,10 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
             opacity: isSelected ? 0.0 : 1.0,
             duration: duration,
             curve: Curves.linear,
-            child: Text(item.title),
+            child: Text(
+              item.title,
+              style: pageTitle,
+            ),
           ),
           AnimatedAlign(
             duration: duration,

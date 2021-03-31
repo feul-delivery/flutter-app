@@ -1,3 +1,4 @@
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -31,8 +32,13 @@ class _CommandeDetailState extends State<CommandeDetail> {
       appBar: AppBar(
         title: Text(
           "Details",
-          style: TextStyle(),
+          style: pageTitle,
         ),
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
         centerTitle: true,
         backgroundColor: Colors.black,
         elevation: 1,

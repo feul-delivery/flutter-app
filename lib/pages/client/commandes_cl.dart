@@ -1,8 +1,7 @@
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'bbar_cl.dart';
 import 'commande_cl.dart';
-import 'index_cl.dart';
 
 class CommandeCl extends StatefulWidget {
   @override
@@ -16,16 +15,13 @@ class _CommandeClState extends State<CommandeCl> {
         appBar: AppBar(
           title: Text(
             "My orders",
+            style: pageTitle,
           ),
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.home),
-                onPressed: () {
-                  ButtomBarCl.selectedIndex = 0;
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => IndexCl()));
-                })
-          ],
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
           centerTitle: true,
           backgroundColor: Colors.black,
           elevation: 1,

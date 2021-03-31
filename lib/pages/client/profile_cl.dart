@@ -119,20 +119,22 @@ class _ProfileClState extends State<ProfileCl> {
                       Row(
                         children: [
                           Container(
+                            alignment: Alignment.centerRight,
+                            width: MediaQuery.of(context).size.width * 1 / 4,
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             decoration: BoxDecoration(
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(50)),
                             child: Text(
-                              "First name : ",
+                              "First name :",
                               style: textStyleWhite,
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             child: Text(
-                              '${snapshot.data['prenom']}',
-                              style: strongTextStyle,
+                              '${snapshot.data['prenom']}'.toUpperCase(),
+                              style: smallTileGray,
                             ),
                           )
                         ],
@@ -147,20 +149,22 @@ class _ProfileClState extends State<ProfileCl> {
                       Row(
                         children: [
                           Container(
+                            alignment: Alignment.centerRight,
+                            width: MediaQuery.of(context).size.width * 1 / 4,
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             decoration: BoxDecoration(
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(50)),
                             child: Text(
-                              "Last name : ",
+                              "Last name :",
                               style: textStyleWhite,
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             child: Text(
-                              '${snapshot.data['nom']}',
-                              style: strongTextStyle,
+                              '${snapshot.data['nom']}'.toUpperCase(),
+                              style: smallTileGray,
                             ),
                           )
                         ],
@@ -175,20 +179,22 @@ class _ProfileClState extends State<ProfileCl> {
                       Row(
                         children: [
                           Container(
+                            alignment: Alignment.centerRight,
+                            width: MediaQuery.of(context).size.width * 1 / 4,
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             decoration: BoxDecoration(
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(50)),
                             child: Text(
-                              "Phone : ",
+                              "Phone :",
                               style: textStyleWhite,
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             child: Text(
-                              '${snapshot.data['tele']}',
-                              style: strongTextStyle,
+                              '${snapshot.data['tele']}'.toLowerCase(),
+                              style: smallTileGray,
                             ),
                           )
                         ],
@@ -203,20 +209,22 @@ class _ProfileClState extends State<ProfileCl> {
                       Row(
                         children: [
                           Container(
+                            alignment: Alignment.centerRight,
+                            width: MediaQuery.of(context).size.width * 1 / 4,
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             decoration: BoxDecoration(
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(50)),
                             child: Text(
-                              "Email : ",
+                              "Email :",
                               style: textStyleWhite,
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             child: Text(
-                              '${snapshot.data['email']}',
-                              style: strongTextStyle,
+                              '${snapshot.data['email']}'.toLowerCase(),
+                              style: smallTileGray,
                             ),
                           )
                         ],
@@ -231,20 +239,22 @@ class _ProfileClState extends State<ProfileCl> {
                       Row(
                         children: [
                           Container(
+                            alignment: Alignment.centerRight,
+                            width: MediaQuery.of(context).size.width * 1 / 4,
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             decoration: BoxDecoration(
                                 color: Colors.black,
                                 borderRadius: BorderRadius.circular(50)),
                             child: Text(
-                              "CIN : ",
+                              "CIN :",
                               style: textStyleWhite,
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
                             child: Text(
-                              '${snapshot.data['cin']}',
-                              style: strongTextStyle,
+                              '${snapshot.data['cin']}'.toUpperCase(),
+                              style: smallTileGray,
                             ),
                           )
                         ],

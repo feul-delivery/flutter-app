@@ -19,6 +19,11 @@ class _SettingsClState extends State<SettingsCl> {
             "Settings",
             style: pageTitle,
           ),
+          leading: IconButton(
+              icon: Icon(Icons.arrow_back_ios),
+              onPressed: () {
+                Navigator.pop(context);
+              }),
           centerTitle: true,
           backgroundColor: Colors.black,
           elevation: 1,
