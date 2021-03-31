@@ -93,7 +93,12 @@ class _ProfileClState extends State<ProfileCl> {
                                     height: 140,
                                     child: CircleAvatar(
                                         radius: 35.0,
-                                        child: CircularProgressIndicator()),
+                                        child: CircularProgressIndicator(
+                                          backgroundColor: Colors.black,
+                                          valueColor:
+                                              new AlwaysStoppedAnimation<Color>(
+                                                  Colors.white),
+                                        )),
                                   ),
                                   errorWidget: (context, url, error) =>
                                       Container(

@@ -54,6 +54,8 @@ class _TypeStState extends State<TypeSt> {
                   return SizedBox(
                       child: Center(
                           child: CircularProgressIndicator(
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  Colors.white),
                               backgroundColor: Colors.black)));
                 case ConnectionState.none:
                   return Icon(Icons.error_outline, color: Colors.black);
@@ -70,7 +72,7 @@ class _TypeStState extends State<TypeSt> {
                       children: _types.map((type) {
                     return new ListTile(
                         title: Text("${type['libelle']}"),
-                        subtitle: Text('${type['prix'] } Dh/L'),
+                        subtitle: Text('${type['prix']} Dh/L'),
                         trailing: IconButton(
                           icon: Icon(Icons.delete),
                           onPressed: () {

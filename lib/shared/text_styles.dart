@@ -15,6 +15,11 @@ const hintStyle = TextStyle(
   fontFamily: 'Gotham',
   fontWeight: FontWeight.w200,
 );
+const hintStyleWhite = TextStyle(
+  color: Colors.white,
+  fontFamily: 'Gotham',
+  fontWeight: FontWeight.w200,
+);
 const buttonStyle = TextStyle(
   color: Colors.white,
   fontFamily: 'Gotham',

@@ -264,10 +264,14 @@ class _ProfilStState extends State<ProfilSt> {
                                           color: Colors.white,
                                           iconSize: 40.0,
                                         )),
-                                progressIndicatorBuilder:
-                                    (context, url, downloadProgress) =>
-                                        CircularProgressIndicator(
-                                            value: downloadProgress.progress),
+                                progressIndicatorBuilder: (context, url,
+                                        downloadProgress) =>
+                                    CircularProgressIndicator(
+                                        valueColor:
+                                            new AlwaysStoppedAnimation<Color>(
+                                                Colors.white),
+                                        backgroundColor: Colors.black,
+                                        value: downloadProgress.progress),
                                 errorWidget: (context, url, error) =>
                                     Icon(Icons.error, color: Colors.black),
                               ),

@@ -1,5 +1,4 @@
 import 'package:FD_flutter/modules/order.dart';
-import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -396,9 +395,13 @@ class _OrderDoneState extends State<OrderDone> {
                           width: 10,
                         ),
                         Center(
-                          child: Text('${widget.order.prixtotal} Dh'
-                              // color: Color(widget.order.color),
-                              ),
+                          child: Text(
+                            '${widget.order.prixtotal} Dh',
+                            style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black54),
+                          ),
                         ),
                       ],
                     ),

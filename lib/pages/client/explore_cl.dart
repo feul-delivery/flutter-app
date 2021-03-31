@@ -17,10 +17,8 @@ class ExploreCl extends StatefulWidget {
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text('Explore', style: pageTitle);
-  Icon _adoreIcon = new Icon(
-    Icons.favorite,
-    color: Colors.black,
-  );
+  Icon _adoreIcon = new Icon(Icons.favorite, color: Colors.black);
+  String _searchString;
   int adore = 0;
   @override
   Widget build(BuildContext context) {
@@ -45,7 +43,12 @@ class _ExploreClState extends State<ExploreCl> {
         ),
         drawer: DrawerCL(),
         body: StreamBuilder<QuerySnapshot>(
-          stream: Firestore.instance.collection('entreprise').snapshots(),
+          stream: _searchString == null
+              ? Firestore.instance.collection('entreprise').snapshots()
+              : Firestore.instance
+                  .collection('entreprise')
+                  .where('titre', isGreaterThanOrEqualTo: _searchString)
+                  .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Icon(Icons.cancel, color: Colors.black);
@@ -56,6 +59,8 @@ class _ExploreClState extends State<ExploreCl> {
                 return SizedBox(
                     child: Center(
                         child: CircularProgressIndicator(
+                            valueColor:
+                                new AlwaysStoppedAnimation<Color>(Colors.white),
                             backgroundColor: Colors.black)));
               case ConnectionState.none:
                 return Icon(Icons.error_outline, color: Colors.black);
@@ -109,6 +114,8 @@ class _ExploreClState extends State<ExploreCl> {
               },
               child: Stack(
                 children: [
+//image of the station
+
                   Ink.image(
                     height: 100,
                     image: AssetImage(
@@ -236,16 +243,26 @@ class _ExploreClState extends State<ExploreCl> {
       if (this._searchIcon.icon == Icons.search) {
         this._searchIcon = new Icon(Icons.close);
         this._appBarTitle = new TextField(
+          style: textStyleWhite,
+          keyboardType: TextInputType.text,
           decoration: new InputDecoration(
-              hintText: 'Type here',
-              hintStyle: TextStyle(color: Colors.white10),
-              border: InputBorder.none,
-              labelText: 'Search',
-              labelStyle: TextStyle(color: Colors.white10)),
+            hintText: 'Type here',
+            hintStyle: hintStyleWhite,
+            border: InputBorder.none,
+          ),
+          onChanged: (value) {
+            setState(() {
+              _searchString = value;
+            });
+          },
         );
       } else {
+        _searchString = null;
         this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text('Explore');
+        this._appBarTitle = new Text(
+          'Explore',
+          style: pageTitle,
+        );
       }
     });
   }

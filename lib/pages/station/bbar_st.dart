@@ -39,7 +39,7 @@ class TitledBottomNavigationBar extends StatefulWidget {
 class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
     with SingleTickerProviderStateMixin {
   List<Item> get items => widget.items;
-  static const double BAR_HEIGHT = 50;
+  static const double BAR_HEIGHT = 55;
   static const double INDICATOR_HEIGHT = 2;
   double width = 0;
   double indicatorAlignX = 0;

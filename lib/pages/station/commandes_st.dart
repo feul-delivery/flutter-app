@@ -72,6 +72,9 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                         return SizedBox(
                             child: Center(
                                 child: CircularProgressIndicator(
+                                    valueColor:
+                                        new AlwaysStoppedAnimation<Color>(
+                                            Colors.white),
                                     backgroundColor: Colors.black)));
                       case ConnectionState.none:
                         return Icon(Icons.error_outline, color: Colors.black);

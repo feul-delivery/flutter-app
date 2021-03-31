@@ -38,7 +38,7 @@ class _DrawerCLState extends State<DrawerCL> {
               child: StreamBuilder<DocumentSnapshot>(
                   stream: Firestore.instance
                       .collection('client')
-                      .document(Provider.of<User>(context).uid)
+                      .document(Provider.of<User>(context)?.uid)
                       .get()
                       .asStream(),
                   builder: (context, snapshot) {
@@ -58,7 +58,12 @@ class _DrawerCLState extends State<DrawerCL> {
                                         backgroundImage: imageProvider),
                                 placeholder: (context, url) => CircleAvatar(
                                     radius: 50.0,
-                                    child: CircularProgressIndicator()),
+                                    child: CircularProgressIndicator(
+                                      backgroundColor: Colors.black,
+                                      valueColor:
+                                          new AlwaysStoppedAnimation<Color>(
+                                              Colors.blue),
+                                    )),
                                 errorWidget: (context, url, error) =>
                                     CircleAvatar(
                                         radius: 50.0, child: Icon(Icons.error)),

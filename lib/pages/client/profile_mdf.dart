@@ -145,6 +145,10 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                         progressIndicatorBuilder: (context, url,
                                                 downloadProgress) =>
                                             CircularProgressIndicator(
+                                                backgroundColor: Colors.white,
+                                                valueColor:
+                                                    new AlwaysStoppedAnimation<
+                                                        Color>(Colors.white),
                                                 value:
                                                     downloadProgress.progress),
                                         errorWidget: (context, url, error) =>
