@@ -4,6 +4,7 @@ import 'package:FD_flutter/pages/client/commanderPages/cmd_done.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
@@ -26,7 +27,6 @@ class _ClientOrderState extends State<ClientOrder> {
   String _methode;
   Color _pickerColor = Color(0xffff6b81);
   Color _carColor = Color(0xffff6b81);
-  DatabaseService _databaseService = DatabaseService();
   pmethode _methd = pmethode.livraison;
 
   Future<void> _showModalSheetPayment(BuildContext context) {
@@ -83,9 +83,7 @@ class _ClientOrderState extends State<ClientOrder> {
                                 value: pmethode.livraison,
                                 groupValue: _methd,
                                 onChanged: (pmethode valeur) {
-                                  setState(() {
-                                    _methd = valeur;
-                                  });
+                                  _methd = valeur;
                                 }),
                           ),
                           ListTile(
@@ -95,9 +93,7 @@ class _ClientOrderState extends State<ClientOrder> {
                                 value: pmethode.google,
                                 groupValue: _methd,
                                 onChanged: (pmethode valeur) {
-                                  setState(() {
-                                    _methd = valeur;
-                                  });
+                                  _methd = valeur;
                                 }),
                           )
                         ],
@@ -172,29 +168,11 @@ class _ClientOrderState extends State<ClientOrder> {
                   //   adresse: _adresse,
                   //   volume: _volume,
                   // ));
-
-                  await _databaseService.newOrderData(
-                      _order.idorder,
-                      _order.volume,
-                      _order.adresse,
-                      DateTime.now(),
-                      DateTime(0000, 0, 0),
-                      _order.matricule,
-                      _order.color,
-                      _order.prixtotal,
-                      'Waiting',
-                      _order.methode,
-                      _order.uidclient,
-                      _order.uidentreprise,
-                      '',
-                      _order.idtype);
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => OrderDone(
-                          order: _order,
-                        ),
-                      ));
+                  Navigator.of(context).pushReplacement(PageTransition(
+                      type: PageTransitionType.leftToRight,
+                      child: OrderDone(
+                        order: _order,
+                      )));
                 }
               }
             },
@@ -221,7 +199,7 @@ class _ClientOrderState extends State<ClientOrder> {
                         Border(bottom: BorderSide(color: Colors.grey[200]))),
                 child: TextFormField(
                   onChanged: (value) {
-                    setState(() => _volume = value as double ?? 0.0);
+                    _volume = double.tryParse(value) ?? 0.0;
                   },
                   decoration: InputDecoration(
                       labelText: "Volume",

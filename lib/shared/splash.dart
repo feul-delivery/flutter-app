@@ -7,22 +7,24 @@ import 'package:page_transition/page_transition.dart';
 import 'dart:async';
 import '../wrapper.dart';
 
-bool isFirstTime = true;
-
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  final AuthService _auth = AuthService();
+  bool _isFirstTime = true;
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 5), () async {
-      await _auth.signOut();
+//where the user type will be backapped
+      String _type = await _getUserTypeFromSharedPref();
+      setState(() {
+        AuthService.type = _type;
+      });
       await _getIsFirstTimeFromSharedPref();
-      if (!isFirstTime) {
+      if (!_isFirstTime) {
         Navigator.pushReplacement(context,
             PageTransition(type: PageTransitionType.fade, child: Wrapper()));
       } else {
@@ -35,23 +37,33 @@ class _SplashScreenState extends State<SplashScreen> {
     });
   }
 
+//user type from shared prefs
+  Future<String> _getUserTypeFromSharedPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    if (prefs.getString('typeAccount') == null) {
+      return null;
+    } else {
+      return prefs.getString('typeAccount');
+    }
+  }
+
   Future<void> _getIsFirstTimeFromSharedPref() async {
     final prefs = await SharedPreferences.getInstance();
     if (prefs.getBool('isFirstTime') == null) {
       setState(() {
-        isFirstTime = true;
+        _isFirstTime = true;
       });
     } else {
       setState(() {
-        isFirstTime = prefs.getBool('isFirstTime');
+        _isFirstTime = prefs.getBool('isFirstTime');
       });
     }
   }
 
   Future<void> _isFirstTimeChangeState() async {
     final prefs = await SharedPreferences.getInstance();
-    if (isFirstTime) {
-      setState(() => isFirstTime = false);
+    if (_isFirstTime) {
+      setState(() => _isFirstTime = false);
       await prefs.setBool('isFirstTime', false);
     }
   }

@@ -40,10 +40,10 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
   String _prenomTmp;
   String _sexeTmp;
   String _teleTmp;
-  void initState() {
-    super.initState();
-    //_getEntData();
-  }
+  // void initState() {
+  //   super.initState();
+  //   //_getEntData();
+  // }
 
   // Future _getEntData() async {
 
@@ -284,7 +284,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             enabled: !_status,
                                             autofocus: !_status,
                                             onChanged: (val) {
-                                              setState(() => _prenomTmp = val);
+                                              _prenomTmp = val;
                                             },
                                           ),
                                           flex: 2,
@@ -298,7 +298,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                               enabled: !_status,
                                               autofocus: !_status,
                                               onChanged: (val) {
-                                                setState(() => _nomTmp = val);
+                                                _nomTmp = val;
                                               },
                                             ),
                                           ),
@@ -338,7 +338,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             controller: _controllerTele,
                                             enabled: !_status,
                                             onChanged: (val) {
-                                              setState(() => _teleTmp = val);
+                                              _teleTmp = val;
                                             },
                                           ),
                                         ),
@@ -392,7 +392,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                               controller: _controllerCin,
                                               enabled: !_status,
                                               onChanged: (val) {
-                                                setState(() => _cinTmp = val);
+                                                _cinTmp = val;
                                               },
                                             ),
                                           ),
@@ -403,7 +403,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             controller: _controllerVille,
                                             enabled: !_status,
                                             onChanged: (val) {
-                                              setState(() => _villeTmp = val);
+                                              _villeTmp = val;
                                             },
                                           ),
                                           flex: 2,

@@ -11,6 +11,7 @@ import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Wrapper extends StatelessWidget {
   // getClient() async {
@@ -20,6 +21,14 @@ class Wrapper extends StatelessWidget {
   //     IndexCl.client = await databaseService.clientData();
   //   });
   // }
+
+  Future<void> _typeAccountChangeStateSharedPrefs() async {
+    print("dzt mhna");
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('typeAccount', AuthService.type);
+  }
+
+  void initState() {}
 
   getEntreprise() async {
     ButtomBarSt.selectedIndexSt = 0;
@@ -34,6 +43,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return Authenticate();
     } else {
+      if (AuthService?.type != null) _typeAccountChangeStateSharedPrefs();
       print(user?.uid);
       print(user.account);
       print(AuthService.type);
