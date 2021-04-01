@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
@@ -16,7 +18,8 @@ class _SignInState extends State<SignIn> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
-
+  final GlobalKey<ScaffoldState> _mScaffoldState =
+      new GlobalKey<ScaffoldState>();
   // text field state
   String email = '';
   String password = '';
@@ -28,6 +31,7 @@ class _SignInState extends State<SignIn> {
     return loading
         ? Loading()
         : Scaffold(
+            key: _mScaffoldState,
             body: Container(
               padding: EdgeInsets.only(top: 80),
               width: double.infinity,
@@ -322,29 +326,43 @@ class _SignInState extends State<SignIn> {
                                               onTap: () async {
                                                 if (_formKey.currentState
                                                     .validate()) {
-                                                  setState(
-                                                      () => loading = true);
+                                                  try {
+                                                    final result =
+                                                        await InternetAddress
+                                                            .lookup(
+                                                                'google.com');
+                                                    if (result.isNotEmpty &&
+                                                        result[0]
+                                                            .rawAddress
+                                                            .isNotEmpty) {
+                                                      setState(
+                                                          () => loading = true);
+                                                      dynamic user = await _auth
+                                                          .signInWithEmailAndPassword(
+                                                              email, password);
+                                                      if (user == null) {
+                                                        errorMessage =
+                                                            AuthService.error;
+                                                        if (errorMessage ==
+                                                            "Your password is wrong.") {
+                                                          setState(() {
+                                                            _password++;
+                                                          });
+                                                        }
 
-                                                  dynamic user = await _auth
-                                                      .signInWithEmailAndPassword(
-                                                          email, password);
-                                                  if (user == null) {
-                                                    errorMessage =
-                                                        AuthService.error;
-                                                    if (errorMessage ==
-                                                        "Your password is wrong.") {
+                                                        setState(() {
+                                                          loading = false;
+                                                        });
+                                                      }
                                                       setState(() {
-                                                        _password++;
+                                                        loading = false;
                                                       });
                                                     }
+                                                  } on SocketException catch (_) {
 
-                                                    setState(() {
-                                                      loading = false;
-                                                    });
+                                                    showInSnackBar(
+                                                        "you don\'t have a internet connection");
                                                   }
-                                                  setState(() {
-                                                    loading = false;
-                                                  });
                                                 }
                                               },
                                               child: Container(
@@ -422,5 +440,10 @@ class _SignInState extends State<SignIn> {
               ),
             ),
           );
+  }
+
+  void showInSnackBar(String value) {
+    SnackBar snackBar = new SnackBar(content: new Text(value));
+    _mScaffoldState.currentState.showSnackBar(snackBar);
   }
 }

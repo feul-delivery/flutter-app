@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
@@ -15,6 +17,8 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
+  final GlobalKey<ScaffoldState> _mScaffoldState =
+      new GlobalKey<ScaffoldState>();
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   String error = '';
@@ -27,6 +31,7 @@ class _RegisterState extends State<Register> {
     return loading
         ? Loading()
         : Scaffold(
+            key: _mScaffoldState,
             resizeToAvoidBottomInset: true,
             backgroundColor: Colors.white,
             body: Container(
@@ -208,22 +213,34 @@ class _RegisterState extends State<Register> {
                                   InkWell(
                                     onTap: () async {
                                       if (_formKey.currentState.validate()) {
-                                        setState(() => loading = true);
-                                        dynamic result = await _auth
-                                            .registerWithEmailAndPassword(
-                                                email, password);
-                                        if (result == null) {
-                                          setState(() {
-                                            loading = false;
-                                            error =
-                                                'Please supply a valid email';
-                                          });
-                                        } else {
-                                          Navigator.pushReplacement(
-                                              context,
-                                              PageTransition(
-                                                  type: PageTransitionType.fade,
-                                                  child: TypeCompte()));
+                                        try {
+                                          final result =
+                                              await InternetAddress.lookup(
+                                                  'google.com');
+                                          if (result.isNotEmpty &&
+                                              result[0].rawAddress.isNotEmpty) {
+                                            setState(() => loading = true);
+                                            dynamic result = await _auth
+                                                .registerWithEmailAndPassword(
+                                                    email, password);
+                                            if (result == null) {
+                                              setState(() {
+                                                loading = false;
+                                                error =
+                                                    'Please supply a valid email';
+                                              });
+                                            } else {
+                                              Navigator.pushReplacement(
+                                                  context,
+                                                  PageTransition(
+                                                      type: PageTransitionType
+                                                          .fade,
+                                                      child: TypeCompte()));
+                                            }
+                                          }
+                                        } on SocketException catch (_) {
+                                          showInSnackBar(
+                                              "you don\'t have a internet connection");
                                         }
                                       }
                                     },
@@ -283,5 +300,10 @@ class _RegisterState extends State<Register> {
               ),
             ),
           );
+  }
+
+  void showInSnackBar(String value) {
+    SnackBar snackBar = new SnackBar(content: new Text(value));
+    _mScaffoldState.currentState.showSnackBar(snackBar);
   }
 }
