@@ -39,7 +39,7 @@ class _TypeCompteState extends State<TypeCompte> {
                     final FirebaseUser user = await auth.currentUser();
                     final uid = user.uid;
                     await DatabaseService(uid: uid)
-                        .updateUserType("Client", user.email);
+                        .updateUserType("client", user.email);
                     Navigator.pushReplacement(
                         context,
                         PageTransition(
@@ -91,7 +91,7 @@ class _TypeCompteState extends State<TypeCompte> {
                     final FirebaseUser user = await auth.currentUser();
                     final uid = user.uid;
                     await DatabaseService(uid: uid)
-                        .updateUserType("Entreprise", user.email);
+                        .updateUserType("entreprise", user.email);
                     Navigator.pushReplacement(
                         context,
                         PageTransition(

@@ -123,65 +123,72 @@ class _AddLivreurState extends State<AddLivreur> {
   Future<void> _showModalDialogConfAdd(
       DocumentSnapshot document, String uid) async {
     return showModalBottomSheet(
-      isScrollControlled: true,
       backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       context: context,
       builder: (context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 1 / 4,
-          color: Colors.white,
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 1 / 4,
+              color: Colors.white,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Container(
-                    margin: EdgeInsets.only(left: 10),
-                    child: TextButton(
-                      child: Text(
-                        'Cancel',
-                        style: hintStyle,
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                        setState(() {
-                          message = 'Canceled';
-                        });
-                      },
-                    ),
-                  ),
-                  InkWell(
-                    onTap: () {
-                      _addClToLv(document, uid);
-                      Navigator.of(context).pop();
-                      setState(() {
-                        message = 'Done';
-                      });
-                    },
-                    child: Container(
-                      height: 30,
-                      width: MediaQuery.of(context).size.width * 1 / 5,
-                      margin: EdgeInsets.only(right: 10),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.black),
-                      child: Center(
-                        child: Text(
-                          'Confirm',
-                          style: buttonStyle,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 10),
+                        child: TextButton(
+                          child: Text(
+                            'Cancel',
+                            style: hintStyle,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                            setState(() {
+                              message = 'Canceled';
+                            });
+                          },
                         ),
                       ),
-                    ),
+                      InkWell(
+                        onTap: () {
+                          _addClToLv(document, uid);
+                          Navigator.of(context).pop();
+                          setState(() {
+                            message = 'Done';
+                          });
+                        },
+                        child: Container(
+                          height: 30,
+                          width: MediaQuery.of(context).size.width * 1 / 5,
+                          margin: EdgeInsets.only(right: 10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.black),
+                          child: Center(
+                            child: Text(
+                              'Confirm',
+                              style: buttonStyle,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
+                  Text(
+                    'Confirmation',
+                    style: titleStyle,
+                  ),
+                  Text('${document['nom']} ${document['prenom']} will '),
+                  Text('work for you?'),
                 ],
               ),
-              Text(
-                'Confirmation',
-                style: titleStyle,
-              ),
-              Text('${document['nom']} ${document['prenom']} will '),
-              Text('work for you?'),
-            ],
+            ),
           ),
         );
       },
@@ -197,6 +204,7 @@ Future<bool> _addClToLv(DocumentSnapshot document, String uid) async {
   String _cin = await document['cin'];
   String _sexe = await document['sexe'];
   String _tele = document['tele'];
+  String _photoURL = await document['photoURL'];
 
   await Firestore.instance.collection('livreur').document(_clientUID).setData({
     'nom': _nom,
@@ -205,7 +213,9 @@ Future<bool> _addClToLv(DocumentSnapshot document, String uid) async {
     'cin': _cin,
     'sexe': _sexe,
     'tele': _tele,
-    'statut': 'indisponible',
+    'photoURL': _photoURL,
+    'dateajoute': DateTime.now().toString(),
+    'statut': 'inactif',
     'uidentreprise': uid,
   }).whenComplete(() async => await _clientRemoval(_email, _clientUID));
 

@@ -53,25 +53,25 @@ class Wrapper extends StatelessWidget {
       print(user.account);
       print(AuthService.type);
       switch (AuthService.type) {
-        case "Client":
+        case "client":
           {
             ButtomBarCl.selectedIndex = 0;
             return IndexCl();
           }
           break;
 
-        case "Entreprise":
+        case "entreprise":
           {
             getEntreprise();
             return IndexSt();
           }
           break;
-        case "Admin":
+        case "admin":
           {
             return IndexAdmin();
           }
           break;
-        case "Livreur":
+        case "livreur":
           {
             return IndexLv();
           }

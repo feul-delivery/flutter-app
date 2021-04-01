@@ -4,7 +4,6 @@ import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/pages/station/profile_st.dart';
 import 'package:FD_flutter/pages/station/commandes_st.dart';
@@ -182,7 +181,8 @@ class DrawerSt extends StatelessWidget {
                   color: Colors.black,
                 ),
                 onPressed: () {
-                  Navigator.push(
+                  _auth.signOut();
+                  Navigator.pushReplacement(
                       context,
                       PageTransition(
                           type: PageTransitionType.fade, child: SettingsSt()));

@@ -43,14 +43,16 @@ class DatabaseService {
 
   Future<void> setClientData(String nom, String prenom, String email,
       String sexe, String cin, String tele, String ville) async {
+    List<String> _favList = [];
     return await clientCollection.document(uid).setData({
       'nom': nom,
       'prenom': prenom,
-      'emaim': email,
+      'email': email,
       'sexe': sexe,
       'cin': cin,
       'tele': tele,
       'ville': ville,
+      'favorite': _favList
     });
   }
 

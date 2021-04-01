@@ -99,11 +99,11 @@ class AuthService {
     }
   }
 
-  Future<String> _getAccountType(String uid) async {
+  Future<String> _getAccountType(String email) async {
     String typeAccount = '';
     await Firestore.instance
         .collection('user')
-        .document(uid)
+        .document(email)
         .get()
         .then((value) async {
       if (value.exists) {
