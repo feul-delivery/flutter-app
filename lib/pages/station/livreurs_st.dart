@@ -112,6 +112,12 @@ class _LivreurStState extends State<LivreurSt> {
 
   Container livreurList(DocumentSnapshot document) {
     DateTime date = DateTime.parse(document['dateAjoute']);
+    Color col;
+    if (document['statut']=='actif') {
+       col=Colors.green;
+    }else{
+       col = Colors.red;
+    }
     print(date);
     return Container(
       decoration: new BoxDecoration(
@@ -249,7 +255,7 @@ class _LivreurStState extends State<LivreurSt> {
                             ),
                             Container(
                               child: Text(document['statut'],
-                                  style: TextStyle(color: Colors.grey[600])),
+                                  style: TextStyle(color: col)),
                             ),
                           ],
                         ),
