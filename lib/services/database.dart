@@ -49,6 +49,7 @@ class DatabaseService {
       'prenom': prenom,
       'email': email,
       'sexe': sexe,
+      'photoURL': '',
       'cin': cin,
       'tele': tele,
       'ville': ville,

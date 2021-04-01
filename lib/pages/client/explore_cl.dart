@@ -9,9 +9,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/client/drawer_cl.dart';
-
+import 'package:FD_flutter/modules/user.dart';
+import 'package:like_button/like_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'bbar_cl.dart';
+import 'package:provider/provider.dart';
 
 class ExploreCl extends StatefulWidget {
   @override
@@ -21,14 +23,21 @@ class ExploreCl extends StatefulWidget {
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text('Explore', style: pageTitle);
-  Icon _adoreIcon = new Icon(Icons.favorite, color: Colors.black);
-  Icon _icon = new Icon(Icons.favorite, color: Colors.black38);
   String _searchString;
-  int adore = 0;
-
+  List<String> _favList;
   @override
   Widget build(BuildContext context) {
-    inspect(FavorisCl.favList);
+    Future.delayed(Duration(seconds: 5)).then((value) async {
+      await Firestore.instance
+          .collection('client')
+          .document(Provider.of<User>(context).uid)
+          .get()
+          .then((value) async {
+        _favList = List.from(value.data['favorite']);
+      });
+    });
+
+    inspect(_favList);
     return WillPopScope(
       // ignore: missing_return
       onWillPop: () {
@@ -233,7 +242,16 @@ class _ExploreClState extends State<ExploreCl> {
                 children: [
                   Row(
                     children: [
-                      IconButton(
+                      TextButton.icon(
+                        label: Text(
+                          'Order',
+                          style: TextStyle(
+                            color: Colors.blue[800],
+                            fontFamily: 'Gotham',
+                            fontWeight: FontWeight.w500,
+                            letterSpacing: 1.3,
+                          ),
+                        ),
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -249,16 +267,43 @@ class _ExploreClState extends State<ExploreCl> {
                       ),
                     ],
                   ),
-                  IconButton(
-                    onPressed: () {
-                      setState(() {
-                        _changeFav();
-                      });
-                    },
-                    icon: FavorisCl.favList
-                            .any((element) => element == document.documentID)
-                        ? _adoreIcon
-                        : _icon,
+                  Container(
+                    margin: EdgeInsets.only(right: 5),
+                    child: LikeButton(
+                      isLiked: _favList
+                          .any((element) => element == document.documentID),
+                      size: 25,
+                      circleColor: CircleColor(
+                          start: Color(0xff00ddff), end: Color(0xff0099cc)),
+                      bubblesColor: BubblesColor(
+                        dotPrimaryColor: Color(0xff33b5e5),
+                        dotSecondaryColor: Color(0xff0099cc),
+                      ),
+                      likeBuilder: (bool isLiked) {
+                        _changeFav(document, Provider.of<User>(context).uid);
+                        return Icon(
+                          Icons.favorite,
+                          color: isLiked ? Colors.pink : Colors.grey,
+                          size: 25,
+                        );
+                      },
+                      countBuilder: (int count, bool isLiked, String text) {
+                        var color =
+                            isLiked ? Colors.deepPurpleAccent : Colors.grey;
+                        Widget result;
+                        if (count == 0) {
+                          result = Text(
+                            "love",
+                            style: TextStyle(color: color),
+                          );
+                        } else
+                          result = Text(
+                            text,
+                            style: TextStyle(color: color),
+                          );
+                        return result;
+                      },
+                    ),
                   ),
                 ],
               )
@@ -298,19 +343,25 @@ class _ExploreClState extends State<ExploreCl> {
     });
   }
 
-  void _changeFav() {
-    if (adore == 0) {
-      _adoreIcon = new Icon(
-        Icons.favorite,
-        color: Colors.white,
-      );
-      adore = 1;
+  Future<void> _changeFav(DocumentSnapshot document, String uid) async {
+    if (_favList.any((element) => element == document.documentID)) {
+      try {
+        await Firestore.instance.collection('client').document(uid).updateData(
+          {
+            'favorite': FieldValue.arrayRemove([document.documentID])
+          },
+        );
+      } catch (e) {
+        print(e);
+      }
     } else {
-      _adoreIcon = new Icon(
-        Icons.favorite,
-        color: Colors.black,
-      );
-      adore = 0;
+      try {
+        await Firestore.instance.collection('client').document(uid).setData({
+          'favorite': FieldValue.arrayUnion([document.documentID])
+        }, merge: true);
+      } catch (e) {
+        print(e);
+      }
     }
   }
 }

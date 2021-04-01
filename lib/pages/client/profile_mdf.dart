@@ -20,6 +20,8 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
     with SingleTickerProviderStateMixin {
   bool _status = true;
   final FocusNode myFocusNode = FocusNode();
+
+  //controller of text editing
   TextEditingController _controllerNom = TextEditingController();
   TextEditingController _controllerPrenom = TextEditingController();
   TextEditingController _controllerSexe = TextEditingController();
@@ -43,33 +45,6 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
 
 //temps
   List<String> _sexeTypes = ['female', 'male'];
-
-  // void initState() {
-  //   super.initState();
-  //   //_getEntData();
-  // }
-
-  // Future _getEntData() async {
-
-  //       .then((value) async {
-  //     if (value.exists) {
-  //       var key1 = await value.data['cin'];
-  //       var key2 = await value.data['ville'];
-  //       var key3 = await value.data['nom'];
-  //       var key4 = await value.data['prenom'];
-  //       var key5 = await value.data['sexe'];
-  //       var key6 = await value.data['tele'];
-  //       setState(() {
-  //         this._cin = key1;
-  //         this._ville = key2;
-  //         this._nom = key3;
-  //         this._prenom = key4;
-  //         this._sexe = key5;
-  //         this._tele = key6;
-  //       });
-  //     }
-  //   });
-  // }
 
   User _user;
   @override
@@ -103,6 +78,10 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
               this._sexe = snapshot.data['sexe'];
               this._tele = snapshot.data['tele'];
               this._sexe = snapshot.data['sexe'];
+              DrawerCL.photoURL = snapshot.data['photoURL'];
+              DrawerCL.email = snapshot.data['email'];
+              DrawerCL.titre =
+                  '${snapshot.data['nom']} ${snapshot.data['prenom']}';
               _controllerNom.text = _nom;
               _controllerPrenom.text = _prenom;
               _controllerTele.text = _tele;

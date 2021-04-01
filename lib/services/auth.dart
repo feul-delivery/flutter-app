@@ -32,22 +32,21 @@ class AuthService {
       return null;
     }
     user = _result.user;
-    print(type);
     return _userFromFirebaseUser(
       user,
     );
   }
 
 //  Update elail of the current user
-  Future updateEmail(email) async {
-    FirebaseUser firebaseUser = await _auth.currentUser();
-    String currentEmail = firebaseUser.email;
+  Future updateEmail(String email) async {
+    FirebaseUser _firebaseUser = await _auth.currentUser();
+    String _uid = _firebaseUser.uid;
     await _result.user.updateEmail(email);
-    Firestore.instance.collection('user').document(currentEmail).delete();
-    Firestore.instance
-        .collection('user')
-        .document(email)
-        .setData({'account': type});
+    Firestore.instance.document(_uid).updateData({'email': email});
+  }
+
+  Future updatePassword(String password) async {
+    await _result.user.updatePassword(password);
   }
 
   _findError(dynamic code) {
@@ -100,17 +99,17 @@ class AuthService {
   }
 
   Future<String> _getAccountType(String email) async {
-    String typeAccount = '';
+    String _typeAccount = '';
     await Firestore.instance
         .collection('user')
         .document(email)
         .get()
         .then((value) async {
       if (value.exists) {
-        typeAccount = value.data['account'].toString();
+        _typeAccount = value.data['account'].toString();
       }
     });
-    return typeAccount;
+    return _typeAccount;
   }
 
   Future<String> currentUser() async {

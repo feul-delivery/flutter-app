@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
-import 'index_cl.dart';
+import 'package:FD_flutter/wrapper.dart';
 
 // ignore: camel_case_types
 class InitialProfilecl extends StatefulWidget {
@@ -66,7 +66,7 @@ class _initialProfileclState extends State<InitialProfilecl>
                   Navigator.pushReplacement(
                       context,
                       PageTransition(
-                          type: PageTransitionType.fade, child: IndexCl()));
+                          type: PageTransitionType.fade, child: Wrapper()));
                 }
               },
               shape: new RoundedRectangleBorder(
