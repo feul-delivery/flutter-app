@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class FavorisCl extends StatefulWidget {
+  static List<String> favList;
   @override
   _FavorisClState createState() => _FavorisClState();
 }

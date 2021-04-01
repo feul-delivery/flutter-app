@@ -125,6 +125,7 @@ class _TypeStState extends State<TypeSt> {
     String _typeName;
     double _typePrix;
     showModalBottomSheet(
+      isScrollControlled: true,
         context: context,
         builder: (context) {
           return Container(

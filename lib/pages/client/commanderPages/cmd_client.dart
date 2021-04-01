@@ -32,6 +32,7 @@ class _ClientOrderState extends State<ClientOrder> {
 
   Future<void> _showModalSheetPayment(BuildContext context) {
     return showModalBottomSheet(
+        isScrollControlled: true,
         context: context,
         builder: (context) {
           return StatefulBuilder(builder: (BuildContext context, setState) {

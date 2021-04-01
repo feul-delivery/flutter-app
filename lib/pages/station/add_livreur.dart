@@ -124,6 +124,7 @@ class _AddLivreurState extends State<AddLivreur> {
   Future<void> _showModalDialogConfAdd(
       DocumentSnapshot document, String uid) async {
     return showModalBottomSheet(
+      isScrollControlled: true,
       backgroundColor: Colors.transparent,
       context: context,
       builder: (context) {

@@ -683,6 +683,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
 Future<void> _clientDetailSheet(
     BuildContext context, var id, var nom, var num) {
   return showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context) {
         return StatefulBuilder(builder: (BuildContext context, setState) {
@@ -692,13 +693,12 @@ Future<void> _clientDetailSheet(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
-                    
                     Container(
-                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        height: MediaQuery.of(context).size.width / 5,
-                        width: MediaQuery.of(context).size.width / 5,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      height: MediaQuery.of(context).size.width / 5,
+                      width: MediaQuery.of(context).size.width / 5,
                       child: StreamBuilder<DocumentSnapshot>(
                           stream: Firestore.instance
                               .collection('client')
@@ -733,7 +733,6 @@ Future<void> _clientDetailSheet(
                                                 radius: 30.0,
                                                 child: Icon(Icons.error)),
                                       ),
-                                
                               ],
                             );
                           }),

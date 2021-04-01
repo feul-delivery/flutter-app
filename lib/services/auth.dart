@@ -6,13 +6,11 @@ class AuthService {
   FirebaseAuth _auth = FirebaseAuth.instance;
   AuthResult _result;
   static String type;
-  static String photoURL;
   static String error = "An undefined Error happened.";
   // create user obj based on firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null
-        ? User(
-            uid: user.uid, account: type, email: user.email, photoURL: photoURL)
+        ? User(uid: user.uid, account: type, email: user.email)
         : null;
   }
 

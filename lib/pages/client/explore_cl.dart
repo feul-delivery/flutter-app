@@ -1,6 +1,7 @@
+import 'dart:developer';
 import 'dart:ui';
-
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
+import 'package:FD_flutter/pages/client/favoris_cl.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
@@ -21,10 +22,13 @@ class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text('Explore', style: pageTitle);
   Icon _adoreIcon = new Icon(Icons.favorite, color: Colors.black);
+  Icon _icon = new Icon(Icons.favorite, color: Colors.black38);
   String _searchString;
   int adore = 0;
+
   @override
   Widget build(BuildContext context) {
+    inspect(FavorisCl.favList);
     return WillPopScope(
       // ignore: missing_return
       onWillPop: () {
@@ -251,7 +255,10 @@ class _ExploreClState extends State<ExploreCl> {
                         _changeFav();
                       });
                     },
-                    icon: _adoreIcon,
+                    icon: FavorisCl.favList
+                            .any((element) => element == document.documentID)
+                        ? _adoreIcon
+                        : _icon,
                   ),
                 ],
               )

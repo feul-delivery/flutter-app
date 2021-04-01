@@ -233,6 +233,7 @@ class CustomAlertDialog extends StatelessWidget {
             new EdgeInsets.fromLTRB(
                 24.0, 24.0, 24.0, content == null ? 20.0 : 0.0),
         child: new DefaultTextStyle(
+          // ignore: deprecated_member_use
           style: Theme.of(context).textTheme.title,
           child: new Semantics(child: title, namesRoute: true),
         ),
@@ -254,6 +255,7 @@ class CustomAlertDialog extends StatelessWidget {
         child: new Padding(
           padding: contentPadding,
           child: new DefaultTextStyle(
+            // ignore: deprecated_member_use
             style: Theme.of(context).textTheme.subhead,
             child: content,
           ),
@@ -262,6 +264,7 @@ class CustomAlertDialog extends StatelessWidget {
     }
 
     if (actions != null) {
+      // ignore: deprecated_member_use
       children.add(new ButtonTheme.bar(
         child: new ButtonBar(
           children: actions,

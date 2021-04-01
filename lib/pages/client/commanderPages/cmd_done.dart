@@ -424,7 +424,7 @@ class _OrderDoneState extends State<OrderDone> {
                           'matricule': widget.order.matricule,
                           'color': widget.order.color,
                           'prixtotal': widget.order.prixtotal,
-                          'statut': 'Waiting',
+                          'statut': 'waiting',
                           'methode': widget.order.methode,
                           'uidclient': widget.order.uidclient,
                           'uidstation': widget.order.uidentreprise,
