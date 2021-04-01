@@ -16,16 +16,16 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Wrapper extends StatelessWidget {
-  getClientFavEntreprises(String userUID) async {
-    Future.delayed(Duration(seconds: 5)).then((value) async {
-      await Firestore.instance
-          .collection('client')
-          .document(userUID)
-          .get()
-          .then((value) async =>
-              FavorisCl.favList = await value.data['favorite']);
-    });
-  }
+  // getClientFavEntreprises(String userUID) async {
+  //   Future.delayed(Duration(seconds: 5)).then((value) async {
+  //     await Firestore.instance
+  //         .collection('client')
+  //         .document(userUID)
+  //         .get()
+  //         .then((value) async =>
+  //             FavorisCl.favList = await value.data['favorite']);
+  //   });
+  // }
 
   Future<void> _typeAccountChangeStateSharedPrefs() async {
     print("dzt mhna");
@@ -55,9 +55,7 @@ class Wrapper extends StatelessWidget {
       switch (AuthService.type) {
         case "Client":
           {
-            getClientFavEntreprises(user.uid);
             ButtomBarCl.selectedIndex = 0;
-            // getClient();
             return IndexCl();
           }
           break;

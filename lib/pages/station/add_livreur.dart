@@ -1,5 +1,4 @@
 import 'package:FD_flutter/modules/user.dart';
-import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +152,7 @@ class _AddLivreurState extends State<AddLivreur> {
                   ),
                   InkWell(
                     onTap: () {
-                      _addToLv(document, uid);
+                      _addClToLv(document, uid);
                       Navigator.of(context).pop();
                       setState(() {
                         message = 'Done';
@@ -190,16 +189,33 @@ class _AddLivreurState extends State<AddLivreur> {
   }
 }
 
-Future<bool> _addToLv(DocumentSnapshot document, String uid) async {
-  final DatabaseService _auth = DatabaseService(uid: document.documentID);
-  _auth.updateLivreurData(
-      document['nom'],
-      document['prenom'],
-      document['email'],
-      document['cin'],
-      document['sexe'],
-      document['tele'],
-      'Waiting',
-      uid);
+Future<bool> _addClToLv(DocumentSnapshot document, String uid) async {
+  String _clientUID = document.documentID;
+  String _nom = await document['nom'];
+  String _prenom = await document['prenom'];
+  String _email = await document['email'];
+  String _cin = await document['cin'];
+  String _sexe = await document['sexe'];
+  String _tele = document['tele'];
+
+  await Firestore.instance.collection('livreur').document(_clientUID).setData({
+    'nom': _nom,
+    'prenom': _prenom,
+    'email': _email,
+    'cin': _cin,
+    'sexe': _sexe,
+    'tele': _tele,
+    'statut': 'indisponible',
+    'uidentreprise': uid,
+  }).whenComplete(() async => await _clientRemoval(_email, _clientUID));
+
   return true;
+}
+
+_clientRemoval(String email, String uid) async {
+  await Firestore.instance
+      .collection('user')
+      .document(email)
+      .updateData({'account': 'livreur'});
+  await Firestore.instance.collection('client').document(uid).delete();
 }
