@@ -105,8 +105,8 @@ class _ToutCommandesState extends State<ToutCommandes> {
                       ),
                       Center(
                         child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text('Commande pour : \n$pnom',
+                            padding: const EdgeInsets.all(4.0),
+                            child: Text('$pnom',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 18))),
