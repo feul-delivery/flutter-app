@@ -1,8 +1,12 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/entreprise.dart';
+import 'package:FD_flutter/pages/station/cartCommandes.dart';
+import 'package:FD_flutter/pages/station/command_st.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
@@ -15,6 +19,18 @@ class IndexSt extends StatefulWidget {
 }
 
 class _IndexStState extends State<IndexSt> {
+   var uid;
+
+  void initState() {
+    super.initState();
+    _getEntID();
+  }
+
+  Future _getEntID() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final FirebaseUser user = await auth.currentUser();
+    uid = user.uid;
+  }
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -98,7 +114,55 @@ class _IndexStState extends State<IndexSt> {
                   height: 5,
                   thickness: 1,
                 ),
-                for (int i = 0; i < items.length; i++) commandeEnDirect(i),
+
+
+                StreamBuilder<QuerySnapshot>(
+                  stream: Firestore.instance
+                      .collection('orders')
+                      .where('uidstation', isEqualTo: uid)
+                      .where('statut', isEqualTo: 'waiting')
+                      .orderBy('dateheurec', descending: true)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Icon(Icons.cancel, color: Colors.black);
+                    }
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return SizedBox(
+                            child: Center(
+                                child: CircularProgressIndicator(
+                                    valueColor:
+                                        new AlwaysStoppedAnimation<Color>(
+                                            Colors.white),
+                                    backgroundColor: Colors.black)));
+                      case ConnectionState.none:
+                        return Icon(Icons.error_outline, color: Colors.black);
+                      case ConnectionState.done:
+                        return Icon(
+                          Icons.done,
+                          color: Colors.black,
+                        );
+                      default:
+                        return new ListView(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            physics: BouncingScrollPhysics(),
+                            children: snapshot.data?.documents
+                                ?.map((DocumentSnapshot document) {
+                              return InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                CommandeDetailSt(document)));
+                                  },
+                                  child: ToutCommandes(document,'index'));
+                            })?.toList());
+                    }
+                  },
+                ),
               ],
             ),
           ),

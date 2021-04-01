@@ -61,12 +61,12 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                       .collection('orders')
                       .where('uidstation', isEqualTo: uid)
                       .where('statut', isEqualTo: 'done')
+                      .orderBy('dateheurec', descending: true)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Icon(Icons.cancel, color: Colors.black);
                     }
-
                     switch (snapshot.connectionState) {
                       case ConnectionState.waiting:
                         return SizedBox(
@@ -98,7 +98,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                                             builder: (context) =>
                                                 CommandeDetailSt(document)));
                                   },
-                                  child: ToutCommandes(document));
+                                  child: ToutCommandes(document,'histo'));
                             })?.toList());
                     }
                   },
