@@ -27,9 +27,11 @@ class _FavorisClState extends State<FavorisCl> {
             }),
       ),
       body: SingleChildScrollView(
-        child: Column(
-            // children: [createCard()],
-            ),
+        child: StreamBuilder<QuerySnapshot>(
+            stream: null,
+            builder: (context, snapshot) {
+              return Column();
+            }),
       ),
     );
   }
