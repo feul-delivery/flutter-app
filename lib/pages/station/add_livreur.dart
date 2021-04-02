@@ -85,11 +85,12 @@ class _AddLivreurState extends State<AddLivreur> {
                             .map((DocumentSnapshot document) {
                       return new ListTile(
                           title: Text(
-                            "${document['nom']} ${document['prenom']}",
+                            "${document['nom']} ${document['prenom']}"
+                                .toUpperCase(),
                             style: textStyle,
                           ),
                           subtitle: Text(
-                            document['tele'],
+                            '${document['tele']}'.toLowerCase(),
                             style: moreStyle,
                           ),
                           trailing: IconButton(
@@ -207,13 +208,13 @@ Future<bool> _addClToLv(DocumentSnapshot document, String uid) async {
   String _photoURL = await document['photoURL'];
 
   await Firestore.instance.collection('livreur').document(_clientUID).setData({
-    'nom': _nom,
-    'prenom': _prenom,
-    'email': _email,
-    'cin': _cin,
-    'sexe': _sexe,
-    'tele': _tele,
-    'photoURL': _photoURL,
+    'nom': _nom.toLowerCase(),
+    'prenom': _prenom.toLowerCase(),
+    'email': _email.toLowerCase(),
+    'cin': _cin.toLowerCase(),
+    'sexe': _sexe.toLowerCase(),
+    'tele': _tele.toLowerCase(),
+    'photoURL': _photoURL.toLowerCase(),
     'dateajoute': DateTime.now().toString(),
     'statut': 'inactif',
     'uidentreprise': uid,

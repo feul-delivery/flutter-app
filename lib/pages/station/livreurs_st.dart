@@ -113,10 +113,10 @@ class _LivreurStState extends State<LivreurSt> {
   Container livreurList(DocumentSnapshot document) {
     DateTime date = DateTime.parse(document['dateajoute']);
     Color col;
-    if (document['statut']=='actif') {
-       col=Colors.green;
-    }else{
-       col = Colors.red;
+    if (document['statut'] == 'actif') {
+      col = Colors.green;
+    } else {
+      col = Colors.red;
     }
     print(date);
     return Container(
@@ -145,28 +145,20 @@ class _LivreurStState extends State<LivreurSt> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
                   child: document['photoURL'] == ""
-                                    ? CircleAvatar(
-                                        radius: 50.0,
-                                        backgroundImage:
-                                            AssetImage('assets/profile0.png'),
-                                      )
-                                    : CachedNetworkImage(
-                                        imageUrl: document['photoURL'],
-                                        imageBuilder: (context,
-                                                imageProvider) =>
-                                            CircleAvatar(
-                                                radius: 30.0,
-                                                backgroundImage: imageProvider),
-                                        placeholder: (context, url) =>
-                                            CircleAvatar(
-                                                radius: 30.0,
-                                                child:
-                                                    CircularProgressIndicator()),
-                                        errorWidget: (context, url, error) =>
-                                            CircleAvatar(
-                                                radius: 30.0,
-                                                child: Icon(Icons.error)),
-                                      ),
+                      ? CircleAvatar(
+                          radius: 50.0,
+                          backgroundImage: AssetImage('assets/profile.png'),
+                        )
+                      : CachedNetworkImage(
+                          imageUrl: document['photoURL'],
+                          imageBuilder: (context, imageProvider) =>
+                              CircleAvatar(
+                                  radius: 30.0, backgroundImage: imageProvider),
+                          placeholder: (context, url) => CircleAvatar(
+                              radius: 30.0, child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) => CircleAvatar(
+                              radius: 30.0, child: Icon(Icons.error)),
+                        ),
                 )),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
