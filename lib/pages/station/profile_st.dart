@@ -19,120 +19,6 @@ class ProfilSt extends StatefulWidget {
 }
 
 class _ProfilStState extends State<ProfilSt> {
-  // String titre = "N/A";
-  // String titreTmp;
-  // String descriptionTmp;
-  // String emailTmp;
-  // String teleTmp;
-  // String adresseTmp;
-  // String description = "N/A";
-  // String email = "N/A";
-  // String tele = "N/A";
-  // String adresse = "N/A";
-  // var uid;
-  // @override
-  // ignore: must_call_super
-  // void initState() {
-  //   getEntData();
-  // }
-
-  // Future getEntData() async {
-  //   final FirebaseAuth auth = FirebaseAuth.instance;
-  //   final FirebaseUser user = await auth.currentUser();
-  //   uid = user.uid;
-
-  //   Firestore.instance
-  //       .collection('entreprise')
-  //       .document(uid)
-  //       .get()
-  //       .then((value) async {
-  //     print(uid);
-  //     if (value.exists) {
-  //       var key1 = await value.data['titre'];
-  //       var key2 = await value.data['description'];
-  //       var key3 = await value.data['email'];
-  //       var key4 = await value.data['tele'];
-  //       var key5 = await value.data['adresse'];
-  //       print(key1);
-  //       setState(() {
-  //         this.titre = key1;
-  //         this.description = key2;
-  //         this.email = key3;
-  //         this.tele = key4;
-  //         this.adresse = key5;
-  //       });
-  //     }
-  //   });
-  // }
-
-  // final picker = ImagePicker();
-
-  // Future<File> getImage(ImageSource source) async {
-  //   final pickedFile = await ImagePicker.pickImage(source: source);
-  //   if (pickedFile != null) {
-  //     return File(pickedFile.path);
-  //   }
-  //   print('naaaaani');
-  //   return null;
-  // }
-
-  // void _showImageSettingsPanel() {
-  //   showModalBottomSheet(
-  //       context: context,
-  //       builder: (context) {
-  //         return Container(
-  //           margin: EdgeInsets.all(50),
-  //           padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-  //           child: Row(
-  //             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-  //             crossAxisAlignment: CrossAxisAlignment.center,
-  //             children: [
-  //               InkWell(
-  //                 onTap: () async {
-  //                   File profileImage = await getImage(ImageSource.camera);
-  //                   if (profileImage != null) {
-  //                     profileURL = await uploadFile(profileImage);
-  //                     setState(() {
-  //                       IndexSt.entreprise?.photoURL = profileURL;
-  //                     });
-  //                   }
-  //                 },
-  //                 child: Material(
-  //                     color: Colors.black,
-  //                     borderRadius: BorderRadius.circular(10.0),
-  //                     child: Center(
-  //                         child: Padding(
-  //                       padding: const EdgeInsets.all(20.0),
-  //                       child: Icon(Icons.camera_alt,
-  //                           color: Colors.white, size: 40.0),
-  //                     ))),
-  //               ),
-  //               InkWell(
-  //                 onTap: () async {
-  //                   File profileImage = await getImage(ImageSource.gallery);
-  //                   if (profileImage != null) {
-  //                     profileURL = await uploadFile(profileImage);
-  //                     setState(() {
-  //                       IndexSt.entreprise?.photoURL = profileURL;
-  //                     });
-  //                   }
-  //                 },
-  //                 child: Material(
-  //                     color: Colors.black,
-  //                     borderRadius: BorderRadius.circular(10.0),
-  //                     child: Center(
-  //                         child: Padding(
-  //                       padding: const EdgeInsets.all(20.0),
-  //                       child:
-  //                           Icon(Icons.photo, color: Colors.white, size: 40.0),
-  //                     ))),
-  //               ),
-  //             ],
-  //           ),
-  //         );
-  //       });
-  // }
-
   void _editInfoDialog(
       String uid, String field, String fieldName, BuildContext context) {
     String _value;
@@ -273,8 +159,24 @@ class _ProfilStState extends State<ProfilSt> {
                                                 Colors.white),
                                         backgroundColor: Colors.black,
                                         value: downloadProgress.progress),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error, color: Colors.black),
+                                errorWidget: (context, url, error) => Container(
+                                    child: IconButton(
+                                  onPressed: () async {
+                                    String _uid =
+                                        Provider.of<User>(context, listen: true)
+                                            .uid;
+                                    Navigator.of(context).push(PageTransition(
+                                        type: PageTransitionType.leftToRight,
+                                        child: ImageCapture(
+                                          filePath: 'images/profile/$_uid',
+                                          collection: 'entreprise',
+                                          manyPics: false,
+                                        )));
+                                  },
+                                  icon: Icon(Icons.edit),
+                                  color: Colors.black,
+                                  iconSize: 40.0,
+                                )),
                               ),
                       ),
                     ),

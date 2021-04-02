@@ -22,10 +22,8 @@ class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle = new Text('Explore', style: pageTitle);
   String _searchString;
-  List<String> _favList;
   @override
   Widget build(BuildContext context) {
-    inspect(_favList);
     return WillPopScope(
       // ignore: missing_return
       onWillPop: () {
@@ -34,7 +32,7 @@ class _ExploreClState extends State<ExploreCl> {
             MaterialPageRoute(builder: (BuildContext context) => IndexCl()));
       },
       child: Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
+        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.black,

@@ -110,7 +110,7 @@ class _ClientOrderState extends State<ClientOrder> {
   }
 
   void changeColor(Color color) {
-    setState(() => _pickerColor = color);
+    _pickerColor = color;
   }
 
   @override
@@ -282,17 +282,15 @@ class _ClientOrderState extends State<ClientOrder> {
                       'Car Color :',
                       style: hintStyle,
                     ),
-                    FlatButton(
-                      color: _carColor,
-                      child: const Icon(
-                        Icons.directions_car,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
+                    InkWell(
+                      onTap: () {
                         showDialog(
                           context: context,
                           child: CustomAlertDialog(
-                            title: const Text('Pick a color'),
+                            title: const Text(
+                              'Pick a color',
+                              style: tileTitleStyle,
+                            ),
                             content: SingleChildScrollView(
                               child: ColorPicker(
                                 pickerColor: _pickerColor,
@@ -300,31 +298,12 @@ class _ClientOrderState extends State<ClientOrder> {
                                 showLabel: true,
                                 pickerAreaHeightPercent: 0.8,
                               ),
-                              // Use Material color picker:
-                              //
-                              // child: MaterialPicker(
-                              //   pickerColor: pickerColor,
-                              //   onColorChanged: changeColor,
-                              //   showLabel: true, // only on portrait mode
-                              // ),
-                              //
-                              // Use Block color picker:
-                              //
-                              // child: BlockPicker(
-                              //   pickerColor: currentColor,
-                              //   onColorChanged: changeColor,
-                              // ),
-                              //
-                              // child: MultipleChoiceBlockPicker(
-                              //   pickerColors: currentColors,
-                              //   onColorsChanged: changeColors,
-                              // ),
                             ),
                             actions: <Widget>[
                               FlatButton(
                                 child: const Text('Choose'),
                                 onPressed: () {
-                                  setState(() => _carColor = _pickerColor);
+                                  _carColor = _pickerColor;
                                   Navigator.of(context).pop();
                                 },
                               ),
@@ -332,6 +311,17 @@ class _ClientOrderState extends State<ClientOrder> {
                           ),
                         );
                       },
+                      child: Container(
+                        width: 10,
+                        height: 10,
+                        decoration: BoxDecoration(
+                            color: Colors.black,
+                            borderRadius: BorderRadius.circular(50)),
+                        child: const Icon(
+                          Icons.directions_car,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ],
                 ),

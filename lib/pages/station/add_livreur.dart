@@ -229,4 +229,16 @@ _clientRemoval(String email, String uid) async {
       .document(email)
       .updateData({'account': 'livreur'});
   await Firestore.instance.collection('client').document(uid).delete();
+  await Firestore.instance
+      .collection('order')
+      .where('uidclient', isEqualTo: uid)
+      .getDocuments()
+      .then((value) async {
+    for (DocumentSnapshot doc in value.documents) {
+      await Firestore.instance
+          .collection('order')
+          .document(doc.documentID)
+          .delete();
+    }
+  });
 }
