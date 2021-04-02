@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:ui';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
