@@ -3,6 +3,8 @@ import 'package:FD_flutter/modules/livreur.dart';
 import 'package:FD_flutter/pages/livreur/bbar_liv.dart';
 import 'package:FD_flutter/pages/livreur/drawer_liv.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,38 @@ class IndexLv extends StatefulWidget {
 
 class _IndexLvState extends State<IndexLv> {
   get child => null;
+  var statut = 'N/A';
+  Color cl;
+  @override
+  void initState() {
+    super.initState();
+    getStatut();
+  }
+
+  getStatut() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final FirebaseUser user = await auth.currentUser();
+    await Firestore.instance
+        .collection('livreur')
+        .document(user.uid)
+        ?.get()
+        ?.then((value) async {
+      if (value.exists) {
+        var key1 = await value.data['statut'];
+        setState(() {
+          statut = key1;
+          if (value.data['statut'] == 'actif') {
+            cl = Colors.green;
+            print('hoo');
+          } else {
+            print('haa');
+            cl = Colors.red;
+          }
+          print(statut);
+        });
+      }
+    });
+  }
 
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -78,29 +112,54 @@ class _IndexLvState extends State<IndexLv> {
               margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
               child: Column(
                 children: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text('vous statut : ',
+                              style: TextStyle(fontSize: 18)),
+                          Text(statut,
+                              style: TextStyle(color: cl, fontSize: 22)),
+                        ],
+                      ),
+                      IconButton(
+                          icon: Icon(Icons.sync_outlined),
+                          onPressed: () async {
+                            final FirebaseAuth auth = FirebaseAuth.instance;
+                            final FirebaseUser user = await auth.currentUser();
+                            if (statut == 'actif') {
+                              await Firestore.instance
+                                  .collection('livreur')
+                                  .document(user.uid)
+                                  .updateData({
+                                'statut': 'inactif',
+                              });
+                              statut = 'inactif';
+                              cl= Colors.red;
+                            } else if (statut == 'inactif') {
+                              await Firestore.instance
+                                  .collection('livreur')
+                                  .document(user.uid)
+                                  .updateData({
+                                'statut': 'actif',
+                              });
+                              statut = 'actif';
+                              cl= Colors.green;
+
+                            }
+
+                            setState(() {});
+                          })
+                    ],
+                  ),
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Commandes:',
-                          style: TextStyle(
-                              fontSize: 20, fontWeight: FontWeight.bold),
-                        ),
-                        Container(
-                          padding: EdgeInsets.fromLTRB(5.0, 2.0, 5.0, 2.0),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5.0),
-                            color: Colors.green[700],
-                          ),
-                          child: Text(
-                            'Disponible',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        )
-                      ]),
+                  Text(
+                    'Disponible commandes:',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
                   Divider(
                     height: 5,
                     thickness: 1,

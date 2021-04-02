@@ -1,7 +1,10 @@
+import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'bbar_liv.dart';
 import 'index_lv.dart';
 import 'drawer_liv.dart';
@@ -49,164 +52,174 @@ class _ProfileLivState extends State<ProfileLiv> {
           ),
           bottomNavigationBar: ButtomBarLiv(),
           drawer: DrawerLiv(),
-          body: Container(
-            padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-            child: ListView(children: [
-              Center(
-                child: Stack(
-                  children: [
-                    Container(
-                      width: 140,
-                      height: 140,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 1,
-                              color: Theme.of(context).scaffoldBackgroundColor),
-                          boxShadow: [
-                            BoxShadow(
-                                spreadRadius: 2,
-                                blurRadius: 10,
-                                color: Colors.black.withOpacity(0.1),
-                                offset: Offset(0, 7))
-                          ],
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: IndexLv.livreur?.photoURL == null
-                                ? AssetImage('assets/Liv_exp.jpg')
-                                : CachedNetworkImage(
-                                    imageUrl: IndexLv.livreur.photoURL,
-                                    imageBuilder: (context, imageProvider) =>
-                                        Container(
-                                      decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover,
-                                            colorFilter: ColorFilter.mode(
-                                                Colors.red,
-                                                BlendMode.colorBurn)),
-                                      ),
-                                    ),
-                                    placeholder: (context, url) =>
-                                        CircularProgressIndicator(),
-                                    errorWidget: (context, url, error) =>
-                                        Icon(Icons.error),
-                                  ),
-                          )),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              FadeAnimation(
-                1.2,
-                Row(
-                  children: [
-                    Text(
-                      "First name : ",
-                      style: textStyle,
-                    ),
-                    Container(
-                      child: Text(
-                        '${IndexLv.livreur.prenom}',
-                        style: strongTextStyle,
+          body: StreamBuilder<DocumentSnapshot>(
+              stream: Firestore.instance
+                  .collection('livreur')
+                  .document(Provider.of<User>(context).uid)
+                  .get()
+                  .asStream(),
+              builder: (context, snapshot) {
+                return Container(
+                  padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+                  child: ListView(children: [
+                    Center(
+                      child: Stack(
+                        children: [
+                          Container(
+                            width: 140,
+                            height: 140,
+                            decoration: BoxDecoration(
+                                border: Border.all(
+                                    width: 1,
+                                    color: Theme.of(context)
+                                        .scaffoldBackgroundColor),
+                                boxShadow: [
+                                  BoxShadow(
+                                      spreadRadius: 2,
+                                      blurRadius: 10,
+                                      color: Colors.black.withOpacity(0.1),
+                                      offset: Offset(0, 7))
+                                ],
+                                shape: BoxShape.circle,
+                                image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: snapshot?.data['photoURL'] == "" 
+                                      ? AssetImage('assets/profile.png')
+                                      : CachedNetworkImage(
+                                          imageUrl: IndexLv.livreur.photoURL,
+                                          imageBuilder:
+                                              (context, imageProvider) =>
+                                                  Container(
+                                            decoration: BoxDecoration(
+                                              image: DecorationImage(
+                                                  image: imageProvider,
+                                                  fit: BoxFit.cover,
+                                                  colorFilter: ColorFilter.mode(
+                                                      Colors.red,
+                                                      BlendMode.colorBurn)),
+                                            ),
+                                          ),
+                                          placeholder: (context, url) =>
+                                              CircularProgressIndicator(),
+                                          errorWidget: (context, url, error) =>
+                                              Icon(Icons.error),
+                                        ),
+                                )),
+                          ),
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              ),
-              Divider(
-                height: 30,
-                thickness: 1,
-              ),
-              FadeAnimation(
-                1.2,
-                Row(
-                  children: [
-                    Text(
-                      "Last name : ",
-                      style: textStyle,
                     ),
-                    Container(
-                      child: Text(
-                        '${IndexLv.livreur.nom}',
-                        style: strongTextStyle,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Divider(
-                height: 30,
-                thickness: 1,
-              ),
-              FadeAnimation(
-                1.2,
-                Row(
-                  children: [
-                    Text(
-                      "Phone : ",
-                      style: textStyle,
+                    SizedBox(
+                      height: 30,
                     ),
-                    Container(
-                      child: Text(
-                        '${IndexLv.livreur.tele}',
-                        style: strongTextStyle,
+                    FadeAnimation(
+                      1.2,
+                      Row(
+                        children: [
+                          Text(
+                            "First name : ",
+                            style: textStyle,
+                          ),
+                          Container(
+                            child: Text(
+                              '${snapshot.data['prenom']}',
+                              style: strongTextStyle,
+                            ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              ),
-              Divider(
-                height: 30,
-                thickness: 1,
-              ),
-              FadeAnimation(
-                1.2,
-                Row(
-                  children: [
-                    Text(
-                      "Email : ",
-                      style: textStyle,
                     ),
-                    Container(
-                      child: Text(
-                        '${IndexLv.livreur.email}',
-                        style: strongTextStyle,
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Divider(
-                height: 30,
-                thickness: 1,
-              ),
-              FadeAnimation(
-                1.2,
-                Row(
-                  children: [
-                    Text(
-                      "CIN : ",
-                      style: textStyle,
+                    Divider(
+                      height: 30,
+                      thickness: 1,
                     ),
-                    Container(
-                      child: Text(
-                        '${IndexLv.livreur.cin}',
-                        style: strongTextStyle,
+                    FadeAnimation(
+                      1.2,
+                      Row(
+                        children: [
+                          Text(
+                            "Last name : ",
+                            style: textStyle,
+                          ),
+                          Container(
+                            child: Text(
+                              '${snapshot.data['nom']}',
+                              style: strongTextStyle,
+                            ),
+                          )
+                        ],
                       ),
-                    )
-                  ],
-                ),
-              ),
-              Divider(
-                height: 30,
-                thickness: 1,
-              ),
-            ]),
-          )),
+                    ),
+                    Divider(
+                      height: 30,
+                      thickness: 1,
+                    ),
+                    FadeAnimation(
+                      1.2,
+                      Row(
+                        children: [
+                          Text(
+                            "Phone : ",
+                            style: textStyle,
+                          ),
+                          Container(
+                            child: Text(
+                              '${snapshot.data['tele']}',
+                              style: strongTextStyle,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      height: 30,
+                      thickness: 1,
+                    ),
+                    FadeAnimation(
+                      1.2,
+                      Row(
+                        children: [
+                          Text(
+                            "Email : ",
+                            style: textStyle,
+                          ),
+                          Container(
+                            child: Text(
+                              '${snapshot.data['email']}',
+                              style: strongTextStyle,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      height: 30,
+                      thickness: 1,
+                    ),
+                    FadeAnimation(
+                      1.2,
+                      Row(
+                        children: [
+                          Text(
+                            "CIN : ",
+                            style: textStyle,
+                          ),
+                          Container(
+                            child: Text(
+                              '${snapshot.data['cin']}',
+                              style: strongTextStyle,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Divider(
+                      height: 30,
+                      thickness: 1,
+                    ),
+                  ]),
+                );
+              })),
     );
   }
 }

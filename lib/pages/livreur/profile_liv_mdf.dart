@@ -209,7 +209,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
-                                IndexLv.livreur.photoURL == null
+                                IndexLv == null
                                     ? Container(
                                         width: 140.0,
                                         height: 140.0,
@@ -227,7 +227,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                           ),
                                         ))
                                     : CachedNetworkImage(
-                                        imageUrl: IndexSt.entreprise?.photoURL,
+                                        imageUrl: 'assets/profile.png',
                                         imageBuilder: (context,
                                                 imageProvider) =>
                                             new Container(

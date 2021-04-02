@@ -1,4 +1,5 @@
 import 'package:FD_flutter/pages/livreur/bbar_liv.dart';
+import 'package:FD_flutter/pages/livreur/drawer_liv.dart';
 import 'package:FD_flutter/pages/livreur/index_lv.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,6 +37,8 @@ class _HistoriqueLivState extends State<HistoriqueLiv> {
               ),
             ],
           ),
+          drawer: DrawerLiv(),
+        bottomNavigationBar: ButtomBarLiv(),
         ));
   }
 }

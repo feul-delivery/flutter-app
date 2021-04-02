@@ -37,7 +37,6 @@ class _RapportLivState extends State<RapportLiv> {
               SizedBox(
                 height: 10,
               ),
-              for (int i = 0; i < items.length; i++) cardRapport(i),
             ],
           ),
         ));
