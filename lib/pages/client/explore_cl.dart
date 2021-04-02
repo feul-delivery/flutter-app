@@ -1,7 +1,6 @@
 import 'dart:developer';
 import 'dart:ui';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
-import 'package:FD_flutter/pages/client/favoris_cl.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
@@ -10,7 +9,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/client/drawer_cl.dart';
 import 'package:FD_flutter/modules/user.dart';
-import 'package:like_button/like_button.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'bbar_cl.dart';
 import 'package:provider/provider.dart';
@@ -27,16 +25,6 @@ class _ExploreClState extends State<ExploreCl> {
   List<String> _favList;
   @override
   Widget build(BuildContext context) {
-    Future.delayed(Duration(seconds: 5)).then((value) async {
-      await Firestore.instance
-          .collection('client')
-          .document(Provider.of<User>(context).uid)
-          .get()
-          .then((value) async {
-        _favList = List.from(value.data['favorite']);
-      });
-    });
-
     inspect(_favList);
     return WillPopScope(
       // ignore: missing_return
@@ -267,44 +255,47 @@ class _ExploreClState extends State<ExploreCl> {
                       ),
                     ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(right: 5),
-                    child: LikeButton(
-                      isLiked: _favList
-                          .any((element) => element == document.documentID),
-                      size: 25,
-                      circleColor: CircleColor(
-                          start: Color(0xff00ddff), end: Color(0xff0099cc)),
-                      bubblesColor: BubblesColor(
-                        dotPrimaryColor: Color(0xff33b5e5),
-                        dotSecondaryColor: Color(0xff0099cc),
-                      ),
-                      likeBuilder: (bool isLiked) {
-                        _changeFav(document, Provider.of<User>(context).uid);
-                        return Icon(
-                          Icons.favorite,
-                          color: isLiked ? Colors.pink : Colors.grey,
-                          size: 25,
-                        );
-                      },
-                      countBuilder: (int count, bool isLiked, String text) {
-                        var color =
-                            isLiked ? Colors.deepPurpleAccent : Colors.grey;
-                        Widget result;
-                        if (count == 0) {
-                          result = Text(
-                            "love",
-                            style: TextStyle(color: color),
-                          );
-                        } else
-                          result = Text(
-                            text,
-                            style: TextStyle(color: color),
-                          );
-                        return result;
-                      },
-                    ),
-                  ),
+                  StreamBuilder<DocumentSnapshot>(
+                      stream: Firestore.instance
+                          .collection('client')
+                          .document(Provider.of<User>(context).uid)
+                          .get()
+                          .asStream(),
+                      builder: (context, doc) {
+                        if (doc.hasError) {
+                          return Icon(Icons.cancel, color: Colors.black);
+                        }
+                        switch (doc.connectionState) {
+                          case ConnectionState.waiting:
+                            return CircularProgressIndicator(
+                                valueColor: new AlwaysStoppedAnimation<Color>(
+                                    Colors.white),
+                                backgroundColor: Colors.black);
+                          case ConnectionState.none:
+
+                          default:
+                            if (List.from(doc.data['favorite'])
+                                .contains(document.documentID)) {
+                              return IconButton(
+                                  icon: Icon(
+                                    Icons.favorite_border,
+                                    color: Colors.black38,
+                                  ),
+                                  onPressed: () => _addStToFav(
+                                      document.documentID,
+                                      Provider.of<User>(context).uid));
+                            } else {
+                              return IconButton(
+                                  icon: Icon(
+                                    Icons.favorite,
+                                    color: Colors.pink,
+                                  ),
+                                  onPressed: () => _removeStFromFav(
+                                      document.documentID,
+                                      Provider.of<User>(context).uid));
+                            }
+                        }
+                      })
                 ],
               )
             ],
@@ -343,25 +334,27 @@ class _ExploreClState extends State<ExploreCl> {
     });
   }
 
-  Future<void> _changeFav(DocumentSnapshot document, String uid) async {
-    if (_favList.any((element) => element == document.documentID)) {
-      try {
-        await Firestore.instance.collection('client').document(uid).updateData(
-          {
-            'favorite': FieldValue.arrayRemove([document.documentID])
-          },
-        );
-      } catch (e) {
-        print(e);
-      }
-    } else {
-      try {
-        await Firestore.instance.collection('client').document(uid).setData({
-          'favorite': FieldValue.arrayUnion([document.documentID])
-        }, merge: true);
-      } catch (e) {
-        print(e);
-      }
+  void _addStToFav(String documentID, String uid) async {
+    try {
+      await Firestore.instance.collection('client').document(uid).updateData(
+        {
+          'favorite': FieldValue.arrayRemove([documentID])
+        },
+      );
+    } catch (e) {
+      print(e);
     }
+    setState(() {});
+  }
+
+  void _removeStFromFav(String documentID, String uid) async {
+    try {
+      await Firestore.instance.collection('client').document(uid).setData({
+        'favorite': FieldValue.arrayUnion([documentID])
+      }, merge: true);
+    } catch (e) {
+      print(e);
+    }
+    setState(() {});
   }
 }

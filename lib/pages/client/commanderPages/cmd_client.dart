@@ -1,6 +1,7 @@
 import 'package:FD_flutter/modules/order.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_done.dart';
+import 'package:FD_flutter/pages/client/commanderPages/online_payements.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -171,11 +172,19 @@ class _ClientOrderState extends State<ClientOrder> {
                   //   adresse: _adresse,
                   //   volume: _volume,
                   // ));
-                  Navigator.of(context).pushReplacement(PageTransition(
-                      type: PageTransitionType.leftToRight,
-                      child: OrderDone(
-                        order: _order,
-                      )));
+                  if (_order.methode == 'COD') {
+                    Navigator.of(context).pushReplacement(PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        child: OrderDone(
+                          order: _order,
+                        )));
+                  } else {
+                    Navigator.of(context).pushReplacement(PageTransition(
+                        type: PageTransitionType.leftToRight,
+                        child: OnlinePayments(
+                          order: _order,
+                        )));
+                  }
                 }
               }
             },

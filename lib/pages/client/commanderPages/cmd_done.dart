@@ -13,13 +13,14 @@ class OrderDone extends StatefulWidget {
   _OrderDoneState createState() => _OrderDoneState();
 }
 
-bool _isdone = false;
+bool _isdone;
 QuerySnapshot snapshot;
 
 class _OrderDoneState extends State<OrderDone> {
   String qrData;
   @override
   Widget build(BuildContext context) {
+    _isdone = widget.order == null ? true : false;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -104,278 +105,191 @@ class _OrderDoneState extends State<OrderDone> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
 //order infos shoud be  right here
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    child: Center(
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.date_range_sharp,
-                                      color: Colors.black54,
-                                      size: 18,
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      "Date:",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black54),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                  ],
-                                ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.date_range_sharp,
+                              color: Colors.black54,
+                              size: 18,
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "Date:",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black54),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Center(
+                              child: Text(
+                                '${widget.order.dateheurec.day}/${widget.order.dateheurec.month}/${widget.order.dateheurec.year}',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.offline_bolt,
-                                      color: Colors.black54,
-                                      size: 18,
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      "Volume:",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black54),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.list_alt,
-                                      color: Colors.black54,
-                                      size: 18,
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      "Type:",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black54),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.aspect_ratio_sharp,
-                                      color: Colors.black54,
-                                      size: 18,
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      "Matricule:",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black54),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      Icons.airport_shuttle,
-                                      color: Colors.black54,
-                                      size: 18,
-                                    ),
-                                    SizedBox(
-                                      width: 15,
-                                    ),
-                                    Text(
-                                      "Color:",
-                                      style: TextStyle(
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black54),
-                                    ),
-                                    SizedBox(
-                                      width: 10,
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Center(
-                                      child: Text(
-                                        '${widget.order.dateheurec.day}/${widget.order.dateheurec.month}/${widget.order.dateheurec.year}',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Center(
-                                      child: Text(
-                                        '${widget.order.volume}',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Center(
-                                      child: Text(
-                                        '${widget.order.idtype}',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Center(
-                                      child: Text(
-                                        '${widget.order.matricule}',
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, right: 10),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Center(
-                                      child: Icon(
-                                        Icons.color_lens,
-                                        // color: Color(widget.order.color),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.offline_bolt,
+                              color: Colors.black54,
+                              size: 18,
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "Volume:",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black54),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Center(
+                              child: Text(
+                                '${widget.order.volume}',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.list_alt,
+                              color: Colors.black54,
+                              size: 18,
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "Type:",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black54),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Center(
+                              child: Text(
+                                '${widget.order.idtype}',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.aspect_ratio_sharp,
+                              color: Colors.black54,
+                              size: 18,
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "Matricule:",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black54),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Center(
+                              child: Text(
+                                '${widget.order.matricule}',
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.color_lens,
+                              color: Colors.black54,
+                              size: 18,
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Text(
+                              "Color:",
+                              style: TextStyle(
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black54),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Center(
+                              child: Icon(
+                                Icons.airport_shuttle,
+                                // color: Color(widget.order.color),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
 
                   Padding(

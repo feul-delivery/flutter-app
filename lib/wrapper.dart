@@ -9,7 +9,6 @@ import 'package:FD_flutter/pages/station/bbar_st.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/pages/client/drawer_cl.dart';
-import 'package:FD_flutter/pages/client/favoris_cl.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
