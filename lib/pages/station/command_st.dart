@@ -116,7 +116,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
   Widget getBodyDone() {
     DateTime dateC = DateTime.parse(widget.document['dateheurec']);
     DateTime dateL = DateTime.parse(widget.document['dateheurel']);
-    int colorV = int.parse(widget.document['color'].substring(6, 16));
+    int colorV = int.parse(widget.document['color']);
     Color myColor = Color(colorV);
     print(colorV);
     return ListView(
@@ -442,7 +442,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
 
   Widget getBodyAtt() {
     DateTime dateC = DateTime.parse(widget.document['dateheurec']);
-    int colorV = int.parse(widget.document['color'].substring(6, 16));
+    int colorV = int.parse(widget.document['color']);
     Color myColor = Color(colorV);
     print(colorV);
     return ListView(
