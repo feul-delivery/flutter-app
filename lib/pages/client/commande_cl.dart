@@ -1,26 +1,12 @@
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class CommandeDetail extends StatefulWidget {
-  final int id;
-  final String code;
-  final String date;
-  final String time;
-  final String couleur;
-  final String matricule;
-  final String type;
-  final String address;
-  CommandeDetail({
-    this.id,
-    this.code,
-    this.date,
-    this.time,
-    this.couleur,
-    this.address,
-    this.matricule,
-    this.type,
-  });
+  final DocumentSnapshot document;
+  CommandeDetail({@required this.document});
   @override
   _CommandeDetailState createState() => _CommandeDetailState();
 }
@@ -90,7 +76,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
               ),
               Center(
                 child: Text(
-                  widget.code,
+                  widget.document['ordernum'],
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -129,7 +115,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
               ),
               Center(
                 child: Text(
-                  widget.date,
+                  '${DateTime.parse(widget.document['dateheurec']).day}/${DateTime.parse(widget.document['dateheurec']).month}/${DateTime.parse(widget.document['dateheurec']).year}',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -168,7 +154,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
               ),
               Center(
                 child: Text(
-                  widget.time,
+                  '${DateFormat.Hm().format(DateTime.parse(widget.document['dateheurec']))}',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -207,7 +193,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
               ),
               Center(
                 child: Text(
-                  widget.matricule,
+                  widget.document['matricule'],
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -246,8 +232,11 @@ class _CommandeDetailState extends State<CommandeDetail> {
               ),
               Center(
                 child: Text(
-                  widget.couleur,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  'Color',
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w500,
+                      color: Color(widget.document['color'])),
                 ),
               ),
             ],
@@ -285,7 +274,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
               ),
               Center(
                 child: Text(
-                  widget.type,
+                  widget.document['type'],
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -326,7 +315,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
                   child: Text(
-                    widget.address,
+                    widget.document['adresse'],
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                 ),

@@ -8,7 +8,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -49,7 +48,23 @@ class _ProfileClState extends State<ProfileCl> {
             backgroundColor: Color(0xFFFFFFFF),
             elevation: 0,
           ),
-          bottomNavigationBar: ButtomBarCl(),
+          bottomNavigationBar: BottomNavigationBar(
+              currentIndex: 2,
+              onTap: (value) {
+                if (value == 0) {}
+              },
+              type: BottomNavigationBarType.fixed,
+              items: [
+                BottomNavigationBarItem(
+                    icon: Icon(OMIcons.home),
+                    title: Text('Home', style: TextStyle())),
+                BottomNavigationBarItem(
+                    icon: Icon(OMIcons.explore),
+                    title: Text('Explore', style: TextStyle())),
+                BottomNavigationBarItem(
+                    icon: Icon(OMIcons.person),
+                    title: Text('Profile', style: TextStyle())),
+              ]),
           body: StreamBuilder<DocumentSnapshot>(
               stream: Firestore.instance
                   .collection('client')
@@ -121,14 +136,14 @@ class _ProfileClState extends State<ProfileCl> {
                               children: [
                                 Text(
                                   '${toBeginningOfSentenceCase(snapshot.data['prenom'])} ${toBeginningOfSentenceCase(snapshot.data['nom'])}',
-                                  style: GoogleFonts.openSans(
+                                  style: TextStyle(
                                       fontSize: 23,
                                       fontWeight: FontWeight.w700),
                                 ),
                                 SizedBox(height: 5),
                                 Text(
                                   '${snapshot.data['email']}'.toLowerCase(),
-                                  style: GoogleFonts.openSans(
+                                  style: TextStyle(
                                       color: Color(0xFF71747E),
                                       fontSize: 15,
                                       fontWeight: FontWeight.w400),
@@ -146,10 +161,9 @@ class _ProfileClState extends State<ProfileCl> {
                             Center(
                               child: Text(
                                 '${snapshot.data['tele']}'.toLowerCase(),
-                                style: GoogleFonts.openSans(
-                                    color: Color(0xFF050505),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ],
@@ -163,10 +177,9 @@ class _ProfileClState extends State<ProfileCl> {
                             Center(
                               child: Text(
                                 '${snapshot.data['cin']}'.toLowerCase(),
-                                style: GoogleFonts.openSans(
-                                    color: Color(0xFF050505),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ],
@@ -180,10 +193,9 @@ class _ProfileClState extends State<ProfileCl> {
                             Center(
                               child: Text(
                                 '${toBeginningOfSentenceCase(snapshot.data['ville'])}',
-                                style: GoogleFonts.openSans(
-                                    color: Color(0xFF050505),
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ],
@@ -203,25 +215,26 @@ class _ProfileClState extends State<ProfileCl> {
                     width: MediaQuery.of(context).size.width,
                     child: Column(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.only(
-                              left: 20, right: 20, top: 10, bottom: 0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Icon(OMIcons.starBorder,
-                                  color: Color(0xFF53555E), size: 25),
-                              SizedBox(width: 10),
-                              Text(
-                                'Favoris',
-                                style: GoogleFonts.openSans(
-                                    color: Color(0xFF050505),
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600),
+                        _favList.length != 0
+                            ? Padding(
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, top: 10, bottom: 0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(OMIcons.starBorder,
+                                        color: Color(0xFF53555E), size: 25),
+                                    SizedBox(width: 10),
+                                    Text(
+                                      'Favoris',
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          fontWeight: FontWeight.w400),
+                                    )
+                                  ],
+                                ),
                               )
-                            ],
-                          ),
-                        ),
+                            : Container(),
                         StreamBuilder<QuerySnapshot>(
                             stream: Firestore.instance
                                 .collection('entreprise')
@@ -270,32 +283,39 @@ class _ProfileClState extends State<ProfileCl> {
                                     ),
                                   );
                                 default:
-                                  return Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        1 /
-                                        5,
-                                    width: MediaQuery.of(context).size.width,
-                                    child: new ListView(
-                                        scrollDirection: Axis.horizontal,
-                                        children: snapshot.data?.documents
-                                            ?.map((DocumentSnapshot doc) {
-                                          inspect(_favList);
-                                          return _favList
-                                                  .contains(doc.documentID)
-                                              ? InkWell(
-                                                  radius: 50,
-                                                  onTap: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (context) =>
-                                                                StationProfilCl(
-                                                                    doc: doc)));
-                                                  },
-                                                  child: _createFavCard(doc))
-                                              : Container();
-                                        })?.toList()),
-                                  );
+                                  return _favList.length != 0
+                                      ? Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              1 /
+                                              5,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: new ListView(
+                                              scrollDirection: Axis.horizontal,
+                                              children: snapshot.data?.documents
+                                                  ?.map((DocumentSnapshot doc) {
+                                                inspect(_favList);
+                                                return _favList.contains(
+                                                        doc.documentID)
+                                                    ? InkWell(
+                                                        radius: 50,
+                                                        onTap: () {
+                                                          Navigator.push(
+                                                              context,
+                                                              MaterialPageRoute(
+                                                                  builder: (context) =>
+                                                                      StationProfilCl(
+                                                                          doc:
+                                                                              doc)));
+                                                        },
+                                                        child:
+                                                            _createFavCard(doc))
+                                                    : Container();
+                                              })?.toList()),
+                                        )
+                                      : Container();
                               }
                             }),
                         Container(
@@ -306,55 +326,63 @@ class _ProfileClState extends State<ProfileCl> {
                           )),
                           child: Column(
                             children: [
-                              InkWell(
-                                onTap: () {
-                                  Navigator.of(context).push(PageTransition(
-                                      type: PageTransitionType.rightToLeft,
-                                      child: CommandeCl()));
-                                },
-                                child: ListTile(
-                                  leading: Container(
-                                    height: MediaQuery.of(context).size.width *
-                                        1 /
-                                        12,
-                                    width: MediaQuery.of(context).size.width *
-                                        1 /
-                                        12,
-                                    decoration: BoxDecoration(
-                                        color: Color(0xFF41434F),
-                                        borderRadius: BorderRadius.circular(5)),
-                                    child: Center(
-                                        child: Icon(OMIcons.list,
-                                            color: Colors.white)),
-                                  ),
-                                  title: Text(
-                                    'Orders',
-                                    style: GoogleFonts.openSans(
-                                        color: Color(0xFF050505),
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  trailing: StreamBuilder<QuerySnapshot>(
-                                      stream: Firestore.instance
-                                          .collection('orders')
-                                          .where('uidclient',
-                                              isEqualTo:
-                                                  Provider.of<User>(context)
-                                                      .uid)
-                                          .getDocuments()
-                                          .asStream(),
-                                      builder: (context, snapshot) {
-                                        return Text(
-                                          '${snapshot.data.documents.length}'
+                              StreamBuilder<QuerySnapshot>(
+                                  stream: Firestore.instance
+                                      .collection('orders')
+                                      .where('uidclient',
+                                          isEqualTo:
+                                              Provider.of<User>(context).uid)
+                                      .getDocuments()
+                                      .asStream(),
+                                  builder: (context, snapshotOrders) {
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.of(context).push(
+                                            PageTransition(
+                                                type: PageTransitionType
+                                                    .rightToLeft,
+                                                child: CommandeCl(
+                                                  querySnapshot: snapshotOrders,
+                                                )));
+                                      },
+                                      child: ListTile(
+                                        leading: Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              1 /
+                                              12,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              1 /
+                                              12,
+                                          decoration: BoxDecoration(
+                                              color: Color(0xFF41434F),
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          child: Center(
+                                              child: Icon(OMIcons.list,
+                                                  color: Colors.white)),
+                                        ),
+                                        title: Text(
+                                          'Orders',
+                                          style: TextStyle(
+                                              color: Color(0xFF050505),
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                        trailing: Text(
+                                          '${snapshotOrders.data.documents.length}'
                                               .toLowerCase(),
-                                          style: GoogleFonts.openSans(
+                                          style: TextStyle(
                                               color: Color(0xFF71747E),
                                               fontSize: 17,
                                               fontWeight: FontWeight.w400),
-                                        );
-                                      }),
-                                ),
-                              ),
+                                        ),
+                                      ),
+                                    );
+                                  }),
                               InkWell(
                                 onTap: () {},
                                 child: ListTile(
@@ -376,14 +404,14 @@ class _ProfileClState extends State<ProfileCl> {
                                     ),
                                     title: Text(
                                       'Favoris',
-                                      style: GoogleFonts.openSans(
+                                      style: TextStyle(
                                           color: Color(0xFF050505),
                                           fontSize: 17,
-                                          fontWeight: FontWeight.w500),
+                                          fontWeight: FontWeight.w400),
                                     ),
                                     trailing: Text(
                                       '${_favList.length}'.toLowerCase(),
-                                      style: GoogleFonts.openSans(
+                                      style: TextStyle(
                                           color: Color(0xFF71747E),
                                           fontSize: 17,
                                           fontWeight: FontWeight.w400),
@@ -420,7 +448,7 @@ class _ProfileClState extends State<ProfileCl> {
         children: [
           Text(
             '${document.data['titre']}'.toUpperCase(),
-            style: GoogleFonts.openSans(
+            style: TextStyle(
                 color: Color(0xFF050505),
                 fontSize: 17,
                 fontWeight: FontWeight.w500),

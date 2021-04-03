@@ -1,9 +1,15 @@
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'commande_cl.dart';
 
 class CommandeCl extends StatefulWidget {
+  final AsyncSnapshot<QuerySnapshot> querySnapshot;
+
+  const CommandeCl({@required this.querySnapshot});
   @override
   _CommandeClState createState() => _CommandeClState();
 }
@@ -12,41 +18,41 @@ class _CommandeClState extends State<CommandeCl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Color(0xFFEFF0F5),
         appBar: AppBar(
           title: Text(
             "My orders",
             style: pageTitle,
           ),
           leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
+              icon: Icon(OMIcons.arrowBack, color: Colors.black),
               onPressed: () {
                 Navigator.pop(context);
               }),
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          elevation: 1,
+          backgroundColor: Color(0xFFFFFFFF),
         ),
         body: SafeArea(
           child: ListView(
-            padding: EdgeInsets.only(left: 10, right: 10),
+            padding: EdgeInsets.only(left: 0, right: 0),
             children: <Widget>[
               SizedBox(
-                height: 10,
+                height: 5,
               ),
-              for (int i = 0; i < items.length; i++) cardCommande(i),
+              for (DocumentSnapshot doc in widget.querySnapshot.data.documents)
+                cardCommande(doc),
             ],
           ),
         ));
   }
 
-  Card cardCommande(int i) {
+  Card cardCommande(DocumentSnapshot documentSnapshot) {
     IconData etaticon;
     Color commandColor;
-    if (items[i]['etat'] == 'delivered') {
+    if (documentSnapshot['statut'] == 'done') {
       etaticon = Icons.check;
       commandColor = Colors.green;
     }
-    if (items[i]['etat'] != 'delivered') {
+    if (documentSnapshot['etat'] != 'waiting') {
       etaticon = Icons.timer;
       commandColor = Colors.orange;
     }
@@ -63,112 +69,19 @@ class _CommandeClState extends State<CommandeCl> {
             color: Colors.white,
           ),
         ),
-        title: Text(items[i]['code']),
-        subtitle: Text("${items[i]['date']} - ${items[i]['time']}"),
+        title: Text('${documentSnapshot['ordernum']}'),
+        subtitle: Text(
+            """${DateFormat.Hm().format(DateTime.parse(documentSnapshot['dateheurec']))} - ${DateTime.parse(documentSnapshot['dateheurec']).day}/${DateTime.parse(documentSnapshot['dateheurec']).month}/${DateTime.parse(documentSnapshot['dateheurec']).year}"""),
         trailing: InkWell(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => CommandeDetail(
-                      code: items[i]['code'],
-                      date: items[i]['date'],
-                      id: items[i]['id'],
-                      time: items[i]['time'],
-                      couleur: items[i]['couleur'],
-                      address: items[i]['adresse'],
-                      matricule: items[i]['matricule'],
-                      type: items[i]['type'],
+                      document: documentSnapshot,
                     )));
           },
-          child: Icon(CupertinoIcons.chevron_right),
+          child: Text('${double.tryParse(documentSnapshot['prixtotal'])}'),
         ),
       ),
     );
   }
-
-  List items = [
-    {
-      "id": 1,
-      "code": "SSH081686",
-      "time": "11:00",
-      "date": "15/01/2021",
-      "etat": "in process",
-      "volume": "43L",
-      "couleur": "blue",
-      "matricule": "15-A-545454",
-      "type": "diesel",
-      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
-    },
-    {
-      "id": 2,
-      "code": "SSH023912",
-      "time": "16:00",
-      "date": "15/01/2021",
-      "etat": "delivered",
-      "volume": "43L",
-      "couleur": "blue",
-      "matricule": "15-A-545454",
-      "type": "diesel",
-      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
-    },
-    {
-      "id": 3,
-      "code": "PC985170",
-      "time": "12:00",
-      "date": "15/01/2021",
-      "etat": "delivered",
-      "volume": "43L",
-      "couleur": "blue",
-      "matricule": "15-A-545454",
-      "type": "diesel",
-      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
-    },
-    {
-      "id": 4,
-      "code": "PC980394",
-      "time": "17:00",
-      "date": "15/01/2021",
-      "etat": "delivered",
-      "volume": "43L",
-      "couleur": "blue",
-      "matricule": "15-A-545454",
-      "type": "diesel",
-      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
-    },
-    {
-      "id": 5,
-      "code": "PC932721",
-      "time": "19:00",
-      "date": "15/01/2021",
-      "etat": "delivered",
-      "volume": "43L",
-      "couleur": "blue",
-      "matricule": "15-A-545454",
-      "type": "diesel",
-      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
-    },
-    {
-      "id": 5,
-      "code": "PC932721",
-      "time": "19:00",
-      "date": "15/01/2021",
-      "etat": "delivered",
-      "volume": "43L",
-      "couleur": "blue",
-      "matricule": "15-A-545454",
-      "type": "diesel",
-      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
-    },
-    {
-      "id": 6,
-      "code": "PC900005",
-      "time": "06:00",
-      "date": "15/01/2021",
-      "etat": "delivered",
-      "volume": "43L",
-      "couleur": "blue",
-      "matricule": "15-A-545454",
-      "type": "diesel",
-      "adresse": "Rue N° 35467 Avenue alwafae Narjiss fes",
-    }
-  ];
 }

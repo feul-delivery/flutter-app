@@ -1,6 +1,5 @@
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/splash.dart';
-import 'package:FD_flutter/shared/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';

@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/entreprise.dart';
+import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/station/cartCommandes.dart';
 import 'package:FD_flutter/pages/station/command_st.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 
 class IndexSt extends StatefulWidget {
   static Entreprise entreprise;
@@ -19,17 +21,8 @@ class IndexSt extends StatefulWidget {
 }
 
 class _IndexStState extends State<IndexSt> {
-  var uid;
-
   void initState() {
     super.initState();
-    _getEntID();
-  }
-
-  Future _getEntID() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final FirebaseUser user = await auth.currentUser();
-    uid = user.uid;
   }
 
   @override
@@ -118,10 +111,12 @@ class _IndexStState extends State<IndexSt> {
                 StreamBuilder<QuerySnapshot>(
                   stream: Firestore.instance
                       .collection('orders')
-                      .where('uidstation', isEqualTo: uid)
+                      .where('uidstation',
+                          isEqualTo: Provider.of<User>(context).uid)
                       .where('statut', isEqualTo: 'waiting')
                       .orderBy('dateheurec', descending: true)
-                      .snapshots(),
+                      .getDocuments()
+                      .asStream(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Icon(Icons.cancel, color: Colors.black);
@@ -137,11 +132,6 @@ class _IndexStState extends State<IndexSt> {
                                     backgroundColor: Colors.black)));
                       case ConnectionState.none:
                         return Icon(Icons.error_outline, color: Colors.black);
-                      case ConnectionState.done:
-                        return Icon(
-                          Icons.done,
-                          color: Colors.black,
-                        );
                       default:
                         return new ListView(
                             scrollDirection: Axis.vertical,
