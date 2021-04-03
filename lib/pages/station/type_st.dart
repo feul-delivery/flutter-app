@@ -52,11 +52,7 @@ class _TypeStState extends State<TypeSt> {
               switch (snapshot.connectionState) {
                 case ConnectionState.waiting:
                   return SizedBox(
-                      child: Center(
-                          child: CircularProgressIndicator(
-                              valueColor: new AlwaysStoppedAnimation<Color>(
-                                  Colors.white),
-                              backgroundColor: Colors.black)));
+                      child: Center(child: customeCircularProgress));
                 case ConnectionState.none:
                   return Icon(Icons.error_outline, color: Colors.black);
                 case ConnectionState.done:

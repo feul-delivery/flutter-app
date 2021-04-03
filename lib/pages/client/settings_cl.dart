@@ -1,7 +1,10 @@
-import 'package:FD_flutter/shared/custom_alert_dialog.dart';
+import 'package:FD_flutter/pages/client/profile_mdf.dart';
+import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 
 class SettingsCl extends StatefulWidget {
   SettingsCl({Key key}) : super(key: key);
@@ -10,378 +13,329 @@ class SettingsCl extends StatefulWidget {
   _SettingsClState createState() => _SettingsClState();
 }
 
+AuthService _auth = AuthService();
+
 class _SettingsClState extends State<SettingsCl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Settings",
-            style: pageTitle,
-          ),
-          leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          elevation: 1,
+      backgroundColor: scaffoldBackground,
+      appBar: AppBar(
+        title: Text(
+          "Settings",
+          style: pageTitleX,
         ),
-        body: Container(
-          padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-          child: GestureDetector(
-            onTap: () {
-              FocusScope.of(context).unfocus();
-            },
-            child: ListView(children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.person,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "Account",
-                    style: tileTitleStyle,
-                  ),
-                ],
+        leading: IconButton(
+            icon: Icon(
+              OMIcons.arrowBack,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              Navigator.pop(context);
+            }),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
+      body: ListView(scrollDirection: Axis.vertical, children: [
+        Container(
+          margin: EdgeInsets.only(bottom: 10),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                  bottom: BorderSide(width: 1, color: Colors.grey[300]))),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.all(5),
+                margin: EdgeInsets.only(left: 10, right: 10, bottom: 5),
+                child: Text(
+                  'Account',
+                  style: pageTitleX,
+                ),
               ),
-              Divider(
-                height: 15,
-                thickness: 1,
-              ),
-              buildChangePasswordRow(context, " Change Password"),
-              buildAccountOptionRow(context, " Delete your account"),
-              Row(
-                children: [
-                  Icon(
-                    Icons.phone_iphone,
-                    color: Colors.black,
+              Material(
+                child: InkWell(
+                  onTap: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            ProfileCLModifier()));
+                  },
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.person,
+                      color: Colors.blue[700],
+                    ),
+                    title: Text(
+                      "Edit profile",
+                      style: textStyle,
+                    ),
                   ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "Application",
-                    style: tileTitleStyle,
-                  ),
-                ],
+                ),
               ),
-              Divider(
-                height: 15,
-                thickness: 1,
-              ),
-              buildRateUsRow(context, " Rate us"),
-              buildAboutUsRow(context, " About Us"),
-              Row(
-                children: [
-                  Icon(
-                    Icons.security,
-                    color: Colors.black,
+              Material(
+                child: InkWell(
+                  onTap: () {
+                    _modalChangePasswordRow(context);
+                  },
+                  child: ListTile(
+                    leading: Icon(
+                      OMIcons.lock,
+                      color: Colors.blue[700],
+                    ),
+                    title: Text(
+                      "Change password",
+                      style: textStyle,
+                    ),
                   ),
-                  SizedBox(
-                    width: 8,
-                  ),
-                  Text(
-                    "Droits",
-                    style: tileTitleStyle,
-                  ),
-                ],
+                ),
               ),
-              Divider(
-                height: 15,
-                thickness: 1,
-              ),
-              buildAccountOptionRow(context, " Privacy and Security"),
-              SizedBox(
-                height: 40,
-              ),
-            ]),
+            ],
           ),
-        ));
+        ),
+        Container(
+          margin: EdgeInsets.only(bottom: 10),
+          decoration: BoxDecoration(
+              color: Colors.white,
+              border: Border(
+                  bottom: BorderSide(width: 1, color: Colors.grey[300]))),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: EdgeInsets.all(5),
+                margin: EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
+                child: Text(
+                  'Application',
+                  style: pageTitleX,
+                ),
+              ),
+              Material(
+                child: InkWell(
+                  onTap: () {
+                    _showModalBottomRateUs(context);
+                  },
+                  child: ListTile(
+                    leading: Icon(
+                      Icons.rate_review,
+                      color: Colors.blue[700],
+                    ),
+                    title: Text(
+                      "Rate us",
+                      style: textStyle,
+                    ),
+                  ),
+                ),
+              ),
+              Material(
+                child: InkWell(
+                  onTap: () {
+                    _buildModalAboutUsRow(context);
+                  },
+                  child: ListTile(
+                    leading: Icon(
+                      OMIcons.info,
+                      color: Colors.blue[700],
+                    ),
+                    title: Text(
+                      "About us",
+                      style: textStyle,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Material(
+          child: InkWell(
+              onTap: () async {
+                _auth.signOut();
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (BuildContext context) => Wrapper()));
+              },
+              child: ListTile(
+                leading: Icon(
+                  OMIcons.exitToApp,
+                  color: Colors.blue[700],
+                ),
+                title: Text(
+                  "Sign out",
+                  style: textStyle,
+                ),
+              )),
+        )
+      ]),
+    );
   }
 }
 
-InkWell buildChangePasswordRow(BuildContext context, String title) {
-  return InkWell(
-    borderRadius: BorderRadius.circular(5.0),
-    onTap: () {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return CustomAlertDialog(
-              title: Text(title, style: smallTileGray),
-              content: Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: Colors.grey[200]))),
-                      child: TextField(
-                        decoration: InputDecoration(
-                            hintText: "Old Password",
-                            hintStyle: hintStyle,
-                            border: InputBorder.none),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: Colors.grey[200]))),
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                            hintText: "New Password",
-                            hintStyle: hintStyle,
-                            border: InputBorder.none),
-                      ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: Colors.grey[200]))),
-                      child: TextField(
-                        obscureText: true,
-                        decoration: InputDecoration(
-                            hintText: "Confirmation",
-                            hintStyle: hintStyle,
-                            border: InputBorder.none),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              actions: [
-                Row(
-                  children: [
-                    FlatButton(
-                        onPressed: () {},
-                        child: Text("Change", style: buttonStyleBlack)),
-                  ],
-                ),
-              ],
-            );
-          });
-    },
-    child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: smallTileGray,
-          ),
-          Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.black45,
-            size: 14,
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-InkWell buildAboutUsRow(BuildContext context, String title) {
-  return InkWell(
-    borderRadius: BorderRadius.circular(5.0),
-    onTap: () {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return CustomAlertDialog(
-              title: Text(
-                title,
-                style: smallTileGray,
-              ),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
+Future<void> _showModalBottomRateUs(BuildContext context) {
+  return showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (BuildContext context, setState) {
+          return Container(
+              height: MediaQuery.of(context).size.height * 1 / 4,
+              child: ListView(
                 children: [
-                  Container(
-                    width: 60,
-                    height: 60,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            width: 10,
-                            color: Theme.of(context).scaffoldBackgroundColor),
-                        boxShadow: [],
-                        shape: BoxShape.circle,
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: AssetImage('assets/Fueldelivery.png'))),
-                  ),
-                  SizedBox(
-                    height: 12,
-                  ),
-                  Text(
-                    'Build by the Flutter framework.',
-                    style: textStyle,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'Developped by:',
-                    style: textStyle,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'ELHESSBI Imad',
-                    style: textStyle,
-                  ),
-                  SizedBox(
-                    height: 5,
-                  ),
-                  Text(
-                    'ZAMOURI Iliyass',
-                    style: textStyle,
-                  ),
-                ],
-              ),
-              actions: [
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      "Close",
-                      style: buttonStyleBlack,
-                    )),
-              ],
-            );
-          });
-    },
-    child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: smallTileGray,
-          ),
-          Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.black45,
-            size: 14,
-          ),
-        ],
-      ),
-    ),
-  );
-}
-
-InkWell buildRateUsRow(BuildContext context, String title) {
-  return InkWell(
-    borderRadius: BorderRadius.circular(5.0),
-    onTap: () {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return CustomAlertDialog(
-              title: Text(title, style: smallTileGray),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  Text('Rate us', style: smallTileGray),
+                  Column(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Icon(Icons.star_border_outlined),
-                      Icon(Icons.star_border_outlined),
-                      Icon(Icons.star_border_outlined),
-                      Icon(Icons.star_border_outlined),
-                      Icon(Icons.star_border_outlined),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Icon(Icons.star_border_outlined),
+                          Icon(Icons.star_border_outlined),
+                          Icon(Icons.star_border_outlined),
+                          Icon(Icons.star_border_outlined),
+                          Icon(Icons.star_border_outlined),
+                        ],
+                      )
                     ],
-                  )
+                  ),
+                  Row(
+                    children: [
+                      FlatButton(
+                          onPressed: () {},
+                          child: Text("Envoyer", style: buttonStyleBlack)),
+                    ],
+                  ),
                 ],
-              ),
-              actions: [
-                Row(
-                  children: [
-                    FlatButton(
-                        onPressed: () {},
-                        child: Text("Envoyer", style: buttonStyleBlack)),
-                  ],
-                ),
-              ],
-            );
-          });
-    },
-    child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(title, style: smallTileGray),
-          Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.black45,
-            size: 14,
-          ),
-        ],
-      ),
-    ),
-  );
+              ));
+        });
+      });
 }
 
-InkWell buildAccountOptionRow(BuildContext context, String title) {
-  return InkWell(
-    borderRadius: BorderRadius.circular(5.0),
-    onTap: () {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return CustomAlertDialog(
-              title: Text(title, style: smallTileGray),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [],
-              ),
-              actions: [
-                FlatButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text(
-                      "Close",
-                      style: buttonStyleBlack,
-                    )),
+Future<void> _modalChangePasswordRow(BuildContext context) {
+  return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          children: [
+            Text('Change password', style: smallTileGray),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[200]))),
+                  child: TextField(
+                    decoration: InputDecoration(
+                        hintText: "Old Password",
+                        hintStyle: hintStyle,
+                        border: InputBorder.none),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[200]))),
+                  child: TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        hintText: "New Password",
+                        hintStyle: hintStyle,
+                        border: InputBorder.none),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[200]))),
+                  child: TextField(
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        hintText: "Confirmation",
+                        hintStyle: hintStyle,
+                        border: InputBorder.none),
+                  ),
+                ),
               ],
-            );
-          });
-    },
-    child: Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            title,
-            style: smallTileGray,
-          ),
-          Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.black45,
-            size: 14,
-          ),
-        ],
-      ),
-    ),
-  );
+            ),
+            Row(
+              children: [
+                FlatButton(
+                    onPressed: () {},
+                    child: Text("Change", style: buttonStyleBlack)),
+              ],
+            ),
+          ],
+        );
+      });
+}
+
+Future<void> _buildModalAboutUsRow(BuildContext context) {
+  return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return Column(
+          children: [
+            Text(
+              'About us',
+              style: smallTileGray,
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                          width: 10,
+                          color: Theme.of(context).scaffoldBackgroundColor),
+                      boxShadow: [],
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/Fueldelivery.png'))),
+                ),
+                SizedBox(
+                  height: 12,
+                ),
+                Text(
+                  'Build by the Flutter framework.',
+                  style: textStyle,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Developped by:',
+                  style: textStyle,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'ELHESSBI Imad',
+                  style: textStyle,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'ZAMOURI Iliyass',
+                  style: textStyle,
+                ),
+              ],
+            ),
+            FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(
+                  "Close",
+                  style: buttonStyleBlack,
+                )),
+          ],
+        );
+      });
 }

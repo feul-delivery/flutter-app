@@ -7,7 +7,6 @@ import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
@@ -124,12 +123,7 @@ class _IndexStState extends State<IndexSt> {
                     switch (snapshot.connectionState) {
                       case ConnectionState.waiting:
                         return SizedBox(
-                            child: Center(
-                                child: CircularProgressIndicator(
-                                    valueColor:
-                                        new AlwaysStoppedAnimation<Color>(
-                                            Colors.white),
-                                    backgroundColor: Colors.black)));
+                            child: Center(child: customeCircularProgress));
                       case ConnectionState.none:
                         return Icon(Icons.error_outline, color: Colors.black);
                       default:

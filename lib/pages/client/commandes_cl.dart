@@ -20,9 +20,10 @@ class _CommandeClState extends State<CommandeCl> {
     return Scaffold(
         backgroundColor: Color(0xFFEFF0F5),
         appBar: AppBar(
+          elevation: 1,
           title: Text(
             "My orders",
-            style: pageTitle,
+            style: pageTitleX,
           ),
           leading: IconButton(
               icon: Icon(OMIcons.arrowBack, color: Colors.black),
@@ -56,6 +57,7 @@ class _CommandeClState extends State<CommandeCl> {
       etaticon = Icons.timer;
       commandColor = Colors.orange;
     }
+    double _prixTotal = double.tryParse('${documentSnapshot['prixtotal']}');
     return Card(
       child: ListTile(
         leading: Container(
@@ -79,7 +81,7 @@ class _CommandeClState extends State<CommandeCl> {
                       document: documentSnapshot,
                     )));
           },
-          child: Text('${double.tryParse(documentSnapshot['prixtotal'])}'),
+          child: Text('${_prixTotal.toStringAsFixed(2)} Dh'),
         ),
       ),
     );

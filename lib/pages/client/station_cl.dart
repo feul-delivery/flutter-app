@@ -4,6 +4,7 @@ import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 
 class StationProfilCl extends StatefulWidget {
   final DocumentSnapshot doc;
@@ -25,7 +26,7 @@ class _StationProfilClState extends State<StationProfilCl> {
             slivers: <Widget>[
               SliverAppBar(
                 leading: IconButton(
-                    icon: Icon(Icons.arrow_back_ios),
+                    icon: Icon(OMIcons.arrowBack),
                     onPressed: () {
                       Navigator.pop(context);
                     }),
@@ -51,13 +52,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                             ),
                             placeholder: (context, url) => Container(
                               height: 200,
-                              child: Center(
-                                child: CircularProgressIndicator(
-                                  backgroundColor: Colors.black,
-                                  valueColor: new AlwaysStoppedAnimation<Color>(
-                                      Colors.white),
-                                ),
-                              ),
+                              child: Center(child: customeCircularProgress),
                             ),
                             errorWidget: (context, url, error) => Container(
                               height: 200,
@@ -75,18 +70,18 @@ class _StationProfilClState extends State<StationProfilCl> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         FadeAnimation(
-                            0.1,
+                            0.01,
                             Container(
                                 margin: EdgeInsets.all(10),
                                 padding: EdgeInsets.all(10),
                                 child: FadeAnimation(
-                                    0.1,
+                                    0.01,
                                     Center(
-                                      child:
-                                          Text(doc['titre'], style: titleStyle),
+                                      child: Text('${doc['titre']}',
+                                          style: titleStyleNew),
                                     )))),
                         FadeAnimation(
-                            0.1,
+                            0.01,
                             Row(
                               children: [
                                 Icon(Icons.article, color: Colors.black),
@@ -96,14 +91,14 @@ class _StationProfilClState extends State<StationProfilCl> {
                             )),
                         Divider(height: 15, thickness: 1),
                         SizedBox(height: 10),
-                        FadeAnimation(0.1,
+                        FadeAnimation(0.01,
                             Text(doc['description'], style: smallTileGray)),
                         FadeAnimation(
-                          0.1,
+                          0.01,
                           SizedBox(height: 20),
                         ),
                         FadeAnimation(
-                            0.1,
+                            0.01,
                             Row(
                               children: [
                                 Icon(Icons.business, color: Colors.black),
@@ -114,10 +109,10 @@ class _StationProfilClState extends State<StationProfilCl> {
                         Divider(height: 15, thickness: 1),
                         SizedBox(height: 10),
                         FadeAnimation(
-                            0.1, Text(doc['adresse'], style: smallTileGray)),
+                            0.01, Text(doc['adresse'], style: smallTileGray)),
                         SizedBox(height: 20),
                         FadeAnimation(
-                          0.1,
+                          0.01,
                           Row(
                             children: [
                               Icon(Icons.group, color: Colors.black),
@@ -129,10 +124,10 @@ class _StationProfilClState extends State<StationProfilCl> {
                         Divider(height: 15, thickness: 1),
                         SizedBox(height: 10),
                         FadeAnimation(
-                            0.1, Text("4 deliveryman", style: smallTileGray)),
+                            0.01, Text("4 deliveryman", style: smallTileGray)),
                         SizedBox(height: 20),
                         FadeAnimation(
-                          0.1,
+                          0.01,
                           Row(
                             children: [
                               Icon(Icons.phone, color: Colors.black),
@@ -144,10 +139,10 @@ class _StationProfilClState extends State<StationProfilCl> {
                         Divider(height: 15, thickness: 1),
                         SizedBox(height: 10),
                         FadeAnimation(
-                            0.1, Text(doc['tele'], style: smallTileGray)),
+                            0.01, Text(doc['tele'], style: smallTileGray)),
                         SizedBox(height: 20),
                         FadeAnimation(
-                          0.1,
+                          0.01,
                           Row(
                             children: [
                               Icon(Icons.mail, color: Colors.black),
@@ -159,10 +154,10 @@ class _StationProfilClState extends State<StationProfilCl> {
                         Divider(height: 15, thickness: 1),
                         SizedBox(height: 10),
                         FadeAnimation(
-                            0.1, Text(doc['email'], style: smallTileGray)),
+                            0.01, Text(doc['email'], style: smallTileGray)),
                         SizedBox(height: 20),
                         FadeAnimation(
-                          0.1,
+                          0.01,
                           Row(
                             children: [
                               Icon(Icons.photo, color: Colors.black),
@@ -205,7 +200,7 @@ class _StationProfilClState extends State<StationProfilCl> {
             right: MediaQuery.of(context).size.width -
                 MediaQuery.of(context).size.width * 7 / 10,
             child: FadeAnimation(
-              2,
+              0.01,
               InkWell(
                 onTap: () {
                   Navigator.push(

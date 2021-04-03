@@ -1,16 +1,16 @@
+import 'dart:developer';
 import 'dart:ui';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
+import 'package:FD_flutter/pages/client/profile_cl.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:FD_flutter/pages/client/drawer_cl.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'bbar_cl.dart';
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -19,82 +19,143 @@ class ExploreCl extends StatefulWidget {
   _ExploreClState createState() => _ExploreClState();
 }
 
+final int _currentIndex = 1;
+List<String> _favList = [];
+
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Explore', style: pageTitle);
+  Widget _appBarTitle = new Text('');
   String _searchString;
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      // ignore: missing_return
-      onWillPop: () {
-        ButtomBarCl.selectedIndex = 0;
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => IndexCl()));
-      },
-      child: Scaffold(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        appBar: AppBar(
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          title: _appBarTitle,
-          actions: <Widget>[
-            IconButton(icon: new Icon(Icons.search), onPressed: _searchPressed),
-          ],
-        ),
-        drawer: DrawerCL(),
-        body: StreamBuilder<QuerySnapshot>(
-          stream: _searchString == null
-              ? Firestore.instance.collection('entreprise').snapshots()
-              : Firestore.instance
-                  .collection('entreprise')
-                  .where('titre', isGreaterThanOrEqualTo: _searchString)
-                  .snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Icon(Icons.cancel, color: Colors.black);
-            }
+    return StreamBuilder<DocumentSnapshot>(
+        stream: Firestore.instance
+            .collection('client')
+            .document(Provider.of<User>(context).uid)
+            .get()
+            .asStream(),
+        builder: (context, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return customErrorWidget;
+            case ConnectionState.active:
+              return customeCircularProgress;
+            case ConnectionState.waiting:
+              return Container(color: Color(0xFFEFF0F5));
+              break;
 
-            switch (snapshot.connectionState) {
-              case ConnectionState.waiting:
-                return SizedBox(
-                    child: Center(
-                        child: CircularProgressIndicator(
-                            valueColor:
-                                new AlwaysStoppedAnimation<Color>(Colors.white),
-                            backgroundColor: Colors.black)));
-              case ConnectionState.none:
-                return Icon(Icons.error_outline, color: Colors.black);
-              case ConnectionState.done:
-                return Icon(Icons.done, color: Colors.black);
-              default:
-                return new ListView(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    physics: BouncingScrollPhysics(),
-                    children: snapshot.data?.documents
-                        ?.map((DocumentSnapshot document) {
-                      return InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        StationProfilCl(doc: document)));
-                          },
-                          child: createCard(document));
-                    })?.toList());
-            }
-          },
-        ),
-        bottomNavigationBar: ButtomBarCl(),
-      ),
-    );
+            default:
+              _favList = List.from(snapshot.data['favorite']);
+              inspect(_favList);
+              return Scaffold(
+                backgroundColor: Color(0xFFEFF0F5),
+                appBar: AppBar(
+                  title: _appBarTitle,
+                  elevation: 1,
+                  backgroundColor: Colors.white,
+                  actions: <Widget>[
+                    IconButton(
+                        icon: new Icon(
+                          Icons.search,
+                          color: Colors.blue[700],
+                        ),
+                        onPressed: _searchPressed),
+                  ],
+                ),
+                body: StreamBuilder<QuerySnapshot>(
+                  stream: _searchString == null
+                      ? Firestore.instance.collection('entreprise').snapshots()
+                      : Firestore.instance
+                          .collection('entreprise')
+                          .where('titre', isGreaterThanOrEqualTo: _searchString)
+                          .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Icon(Icons.cancel, color: Colors.blue[700]);
+                    }
+
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return SizedBox(
+                            child: Center(child: customeCircularProgress));
+                      case ConnectionState.none:
+                        return Icon(Icons.error_outline, color: Colors.black);
+                      case ConnectionState.done:
+                        return Icon(Icons.done, color: Colors.black);
+
+                      default:
+                        return new ListView(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            physics: BouncingScrollPhysics(),
+                            children: snapshot.data?.documents
+                                ?.map((DocumentSnapshot document) {
+                              return InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                StationProfilCl(
+                                                    doc: document)));
+                                  },
+                                  child: createCard(document));
+                            })?.toList());
+                    }
+                  },
+                ),
+                bottomNavigationBar: BottomNavigationBar(
+                    backgroundColor: Colors.white,
+                    currentIndex: _currentIndex,
+                    onTap: (value) {
+                      switch (value) {
+                        case 0:
+                          Navigator.of(context).pushReplacement(PageTransition(
+                              type: PageTransitionType.fade, child: IndexCl()));
+
+                          break;
+                        case 1:
+                          if (_currentIndex != 1)
+                            Navigator.of(context).pushReplacement(
+                                PageTransition(
+                                    type: PageTransitionType.fade,
+                                    child: ExploreCl()));
+                          break;
+                        case 2:
+                          Navigator.of(context).pushReplacement(PageTransition(
+                              type: PageTransitionType.fade,
+                              child: ProfileCl()));
+                          break;
+                      }
+                    },
+                    type: BottomNavigationBarType.fixed,
+                    items: [
+                      BottomNavigationBarItem(
+                          icon: Icon(OMIcons.home, color: Color(0xFFB9BAC3)),
+                          // ignore: deprecated_member_use
+                          title: Text('Home',
+                              style: TextStyle(color: Color(0xFFB9BAC3)))),
+                      BottomNavigationBarItem(
+                          icon: Icon(OMIcons.explore, color: Colors.blue[700]),
+                          // ignore: deprecated_member_use
+                          title: Text('Explore',
+                              style: TextStyle(
+                                color: Colors.blue[700],
+                              ))),
+                      BottomNavigationBarItem(
+                          icon: Icon(OMIcons.person, color: Color(0xFFB9BAC3)),
+                          // ignore: deprecated_member_use
+                          title: Text('Profile',
+                              style: TextStyle(color: Color(0xFFB9BAC3)))),
+                    ]),
+              );
+          }
+        });
   }
 
   Container createCard(DocumentSnapshot document) {
     return Container(
-      margin: EdgeInsets.fromLTRB(5, 5, 5, 0),
+      margin: EdgeInsets.only(top: 5),
       child: Card(
         clipBehavior: Clip.antiAlias,
         child: InkWell(
@@ -130,7 +191,6 @@ class _ExploreClState extends State<ExploreCl> {
                             '${document['adresse']}'.toLowerCase(),
                             style: TextStyle(
                                 color: Colors.black38,
-                                fontFamily: 'Gotham',
                                 fontWeight: FontWeight.w400,
                                 fontSize: 14),
                           ),
@@ -182,11 +242,7 @@ class _ExploreClState extends State<ExploreCl> {
                       placeholder: (context, url) => Container(
                         height: 200,
                         child: Center(
-                          child: CircularProgressIndicator(
-                            backgroundColor: Colors.black,
-                            valueColor:
-                                new AlwaysStoppedAnimation<Color>(Colors.white),
-                          ),
+                          child: customeCircularProgress,
                         ),
                       ),
                       errorWidget: (context, url, error) => Container(
@@ -209,64 +265,36 @@ class _ExploreClState extends State<ExploreCl> {
                   Row(
                     children: [
                       TextButton.icon(
-                        label: Text(
-                          'Order',
-                          style: TextStyle(
-                            color: Colors.blue[800],
-                            fontFamily: 'Gotham',
-                            fontWeight: FontWeight.w500,
-                            letterSpacing: 1.3,
+                        label: Container(
+                          margin: EdgeInsets.only(top: 2),
+                          child: Text(
+                            'Order',
+                            style: TextStyle(
+                              color: Colors.blue[700],
+                              fontWeight: FontWeight.w600,
+                              letterSpacing: 1.4,
+                            ),
                           ),
                         ),
                         onPressed: () {
                           Navigator.of(context).push(PageTransition(
-                              type: PageTransitionType.leftToRight,
+                              type: PageTransitionType.fade,
                               child: ClientOrder(doc: document)));
                         },
-                        icon: Icon(
-                          Icons.near_me,
-                          color: Colors.blue[800],
-                        ),
+                        icon: Icon(OMIcons.accountBalanceWallet,
+                            color: Colors.blue[700]),
                       ),
                     ],
                   ),
-                  StreamBuilder<DocumentSnapshot>(
-                      stream: Firestore.instance
-                          .collection('client')
-                          .document(Provider.of<User>(context).uid)
-                          .get()
-                          .asStream(),
-                      builder: (context, doc) {
-                        if (doc.hasError) {
-                          return Icon(Icons.cancel, color: Colors.black);
-                        }
-                        switch (doc.connectionState) {
-                          case ConnectionState.waiting:
-                            return CircularProgressIndicator(
-                                valueColor: new AlwaysStoppedAnimation<Color>(
-                                    Colors.white),
-                                backgroundColor: Colors.black);
-                          case ConnectionState.none:
-
-                          default:
-                            if (List.from(doc.data['favorite'])
-                                .contains(document.documentID)) {
-                              return IconButton(
-                                  icon: Icon(OMIcons.star,
-                                      color: Color(0xFFF8C513)),
-                                  onPressed: () => _removeStFromFav(
-                                      document.documentID,
-                                      Provider.of<User>(context).uid));
-                            } else {
-                              return IconButton(
-                                  icon:
-                                      Icon(OMIcons.star, color: Colors.black38),
-                                  onPressed: () => _addStToFav(
-                                      document.documentID,
-                                      Provider.of<User>(context).uid));
-                            }
-                        }
-                      })
+                  _favList.any((element) => element == document.documentID)
+                      ? IconButton(
+                          icon: Icon(OMIcons.star, color: Color(0xFFF8C513)),
+                          onPressed: () => _removeStFromFav(document.documentID,
+                              Provider.of<User>(context).uid))
+                      : IconButton(
+                          icon: Icon(OMIcons.star, color: Colors.black38),
+                          onPressed: () => _addStToFav(document.documentID,
+                              Provider.of<User>(context).uid)),
                 ],
               )
             ],
@@ -281,11 +309,11 @@ class _ExploreClState extends State<ExploreCl> {
       if (this._searchIcon.icon == Icons.search) {
         this._searchIcon = new Icon(Icons.close);
         this._appBarTitle = new TextField(
-          style: textStyleWhite,
+          style: textStyle,
           keyboardType: TextInputType.text,
           decoration: new InputDecoration(
             hintText: 'Type here',
-            hintStyle: hintStyleWhite,
+            hintStyle: hintStyle,
             border: InputBorder.none,
           ),
           onChanged: (value) {
@@ -298,14 +326,24 @@ class _ExploreClState extends State<ExploreCl> {
         _searchString = null;
         this._searchIcon = new Icon(Icons.search);
         this._appBarTitle = new Text(
-          'Explore',
-          style: pageTitle,
+          '',
         );
       }
     });
   }
 
   void _addStToFav(String documentID, String uid) async {
+    try {
+      await Firestore.instance.collection('client').document(uid).setData({
+        'favorite': FieldValue.arrayUnion([documentID])
+      }, merge: true);
+    } catch (e) {
+      print(e);
+    }
+    setState(() {});
+  }
+
+  void _removeStFromFav(String documentID, String uid) async {
     try {
       await Firestore.instance.collection('client').document(uid).updateData(
         {
@@ -315,17 +353,7 @@ class _ExploreClState extends State<ExploreCl> {
     } catch (e) {
       print(e);
     }
-    setState(() {});
-  }
 
-  void _removeStFromFav(String documentID, String uid) async {
-    try {
-      await Firestore.instance.collection('client').document(uid).setData({
-        'favorite': FieldValue.arrayUnion([documentID])
-      }, merge: true);
-    } catch (e) {
-      print(e);
-    }
     setState(() {});
   }
 }

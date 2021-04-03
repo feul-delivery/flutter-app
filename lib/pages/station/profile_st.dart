@@ -4,6 +4,7 @@ import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 // import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/image_capture.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -151,14 +152,9 @@ class _ProfilStState extends State<ProfilSt> {
                                           color: Colors.white,
                                           iconSize: 40.0,
                                         )),
-                                progressIndicatorBuilder: (context, url,
-                                        downloadProgress) =>
-                                    CircularProgressIndicator(
-                                        valueColor:
-                                            new AlwaysStoppedAnimation<Color>(
-                                                Colors.white),
-                                        backgroundColor: Colors.black,
-                                        value: downloadProgress.progress),
+                                progressIndicatorBuilder:
+                                    (context, url, downloadProgress) =>
+                                        customeCircularProgress,
                                 errorWidget: (context, url, error) => Container(
                                     child: IconButton(
                                   onPressed: () async {

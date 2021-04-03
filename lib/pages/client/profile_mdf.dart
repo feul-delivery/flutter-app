@@ -2,13 +2,13 @@ import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/image_capture.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
-import 'drawer_cl.dart';
 
 class ProfileCLModifier extends StatefulWidget {
   @override
@@ -52,18 +52,21 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
     _user = Provider.of<User>(context);
     return new Scaffold(
         appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(OMIcons.arrowBack, color: Colors.black),
+              onPressed: () {
+                Navigator.of(context).pop();
+              }),
           title: Text(
-            "My profile",
-            style: pageTitle,
+            "Profile",
+            style: pageTitleX,
           ),
           actions: <Widget>[
             !_status ? _getActionButtons() : new Container(),
           ],
-          centerTitle: true,
-          backgroundColor: Colors.black,
-          elevation: 1,
+          backgroundColor: Colors.white,
+          elevation: 0,
         ),
-        drawer: DrawerCL(),
         body: StreamBuilder<DocumentSnapshot>(
             stream: Firestore.instance
                 .collection('client')
@@ -78,10 +81,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
               this._sexe = snapshot.data['sexe'];
               this._tele = snapshot.data['tele'];
               this._sexe = snapshot.data['sexe'];
-              DrawerCL.photoURL = snapshot.data['photoURL'];
-              DrawerCL.email = snapshot.data['email'];
-              DrawerCL.titre =
-                  '${snapshot.data['nom']} ${snapshot.data['prenom']}';
+
               _controllerNom.text = _nom;
               _controllerPrenom.text = _prenom;
               _controllerTele.text = _tele;
@@ -143,37 +143,38 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                   ),
                                   Padding(
                                       padding: EdgeInsets.only(
-                                          top: 90.0, right: 100.0),
+                                          top: 100.0, right: 100.0),
                                       child: new Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: <Widget>[
                                           new CircleAvatar(
                                             backgroundColor: Colors.white,
-                                            radius: 25.0,
+                                            radius: 20.0,
                                             child: new IconButton(
-                                              onPressed: () async {
-                                                String _uid = Provider.of<User>(
-                                                        context,
-                                                        listen: true)
-                                                    .uid;
-                                                Navigator.of(context)
-                                                    .pushReplacement(
-                                                        PageTransition(
-                                                            type:
-                                                                PageTransitionType
-                                                                    .leftToRight,
-                                                            child: ImageCapture(
-                                                              filePath:
-                                                                  'images/profile/$_uid',
-                                                              collection:
-                                                                  'client',
-                                                              manyPics: false,
-                                                            )));
-                                              },
-                                              icon: Icon(Icons.camera_alt),
-                                              color: Colors.black,
-                                            ),
+                                                onPressed: () async {
+                                                  String _uid =
+                                                      Provider.of<User>(context,
+                                                              listen: true)
+                                                          .uid;
+                                                  Navigator.of(
+                                                          context)
+                                                      .pushReplacement(
+                                                          PageTransition(
+                                                              type: PageTransitionType
+                                                                  .leftToRight,
+                                                              child:
+                                                                  ImageCapture(
+                                                                filePath:
+                                                                    'images/profile/$_uid',
+                                                                collection:
+                                                                    'client',
+                                                                manyPics: false,
+                                                              )));
+                                                },
+                                                icon: Icon(OMIcons.camera,
+                                                    size: 22),
+                                                color: Colors.black),
                                           )
                                         ],
                                       )),
@@ -205,9 +206,13 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                               MainAxisAlignment.spaceBetween,
                                           mainAxisSize: MainAxisSize.max,
                                           children: <Widget>[
-                                            new Text(
-                                              'Personal information',
-                                              style: subTitleStyle,
+                                            Container(
+                                              margin:
+                                                  EdgeInsets.only(bottom: 2),
+                                              child: new Text(
+                                                'Personal information',
+                                                style: subTitleStyle,
+                                              ),
                                             ),
                                             _status
                                                 ? _getEditIcon()
@@ -452,11 +457,9 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
   Widget _getActionButtons() {
     return new Row(
       children: <Widget>[
+        SizedBox(width: 5),
         new IconButton(
-          icon: new Icon(
-            Icons.cancel,
-            color: Colors.white,
-          ),
+          icon: new Icon(OMIcons.cancel, color: Colors.black),
           onPressed: () {
             setState(() {
               _status = true;
@@ -464,11 +467,9 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
             });
           },
         ),
-        new TextButton(
-          child: new Text(
-            'Save',
-            style: buttonStyle,
-          ),
+        SizedBox(width: 5),
+        new IconButton(
+          icon: Icon(OMIcons.save, color: Colors.black),
           onPressed: () async {
             setState(() {
               _status = true;
@@ -520,7 +521,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
         backgroundColor: Colors.black,
         radius: 14.0,
         child: new Icon(
-          Icons.edit,
+          OMIcons.edit,
           color: Colors.white,
           size: 16.0,
         ),
