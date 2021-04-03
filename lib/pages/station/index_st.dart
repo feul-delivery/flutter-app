@@ -19,7 +19,7 @@ class IndexSt extends StatefulWidget {
 }
 
 class _IndexStState extends State<IndexSt> {
-   var uid;
+  var uid;
 
   void initState() {
     super.initState();
@@ -31,6 +31,7 @@ class _IndexStState extends State<IndexSt> {
     final FirebaseUser user = await auth.currentUser();
     uid = user.uid;
   }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -114,8 +115,6 @@ class _IndexStState extends State<IndexSt> {
                   height: 5,
                   thickness: 1,
                 ),
-
-
                 StreamBuilder<QuerySnapshot>(
                   stream: Firestore.instance
                       .collection('orders')
@@ -158,7 +157,7 @@ class _IndexStState extends State<IndexSt> {
                                             builder: (context) =>
                                                 CommandeDetailSt(document)));
                                   },
-                                  child: ToutCommandes(document,'index'));
+                                  child: ToutCommandes(document, 'index'));
                             })?.toList());
                     }
                   },

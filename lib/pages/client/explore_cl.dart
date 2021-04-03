@@ -8,9 +8,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/client/drawer_cl.dart';
 import 'package:FD_flutter/modules/user.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'bbar_cl.dart';
 import 'package:provider/provider.dart';
+import 'package:page_transition/page_transition.dart';
 
 class ExploreCl extends StatefulWidget {
   @override
@@ -37,10 +39,7 @@ class _ExploreClState extends State<ExploreCl> {
           backgroundColor: Colors.black,
           title: _appBarTitle,
           actions: <Widget>[
-            IconButton(
-              icon: new Icon(Icons.search),
-              onPressed: _searchPressed,
-            ),
+            IconButton(icon: new Icon(Icons.search), onPressed: _searchPressed),
           ],
         ),
         drawer: DrawerCL(),
@@ -67,10 +66,7 @@ class _ExploreClState extends State<ExploreCl> {
               case ConnectionState.none:
                 return Icon(Icons.error_outline, color: Colors.black);
               case ConnectionState.done:
-                return Icon(
-                  Icons.done,
-                  color: Colors.black,
-                );
+                return Icon(Icons.done, color: Colors.black);
               default:
                 return new ListView(
                     scrollDirection: Axis.vertical,
@@ -106,9 +102,7 @@ class _ExploreClState extends State<ExploreCl> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => StationProfilCl(
-                          doc: document,
-                        )));
+                    builder: (context) => StationProfilCl(doc: document)));
           },
           child: Column(
             children: [
@@ -126,9 +120,8 @@ class _ExploreClState extends State<ExploreCl> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => StationProfilCl(
-                                            doc: document,
-                                          )));
+                                      builder: (context) =>
+                                          StationProfilCl(doc: document)));
                             },
                             child: Text('${document['titre']}'.toUpperCase(),
                                 style: tileTitleStyle),
@@ -136,11 +129,10 @@ class _ExploreClState extends State<ExploreCl> {
                           Text(
                             '${document['adresse']}'.toLowerCase(),
                             style: TextStyle(
-                              color: Colors.black38,
-                              fontFamily: 'Gotham',
-                              fontWeight: FontWeight.w400,
-                              fontSize: 14,
-                            ),
+                                color: Colors.black38,
+                                fontFamily: 'Gotham',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14),
                           ),
                         ],
                       ),
@@ -154,14 +146,8 @@ class _ExploreClState extends State<ExploreCl> {
                                     await launch(tele);
                                   }
                                 },
-                                icon: Icon(
-                                  Icons.phone,
-                                  color: Colors.green,
-                                ),
-                                label: Text(
-                                  'Call',
-                                  style: textStyle,
-                                )),
+                                icon: Icon(Icons.phone, color: Colors.green),
+                                label: Text('Call', style: textStyle)),
                           ),
                           PopupMenuItem(
                             child: TextButton.icon(
@@ -171,14 +157,9 @@ class _ExploreClState extends State<ExploreCl> {
                                     await launch(email);
                                   }
                                 },
-                                icon: Icon(
-                                  Icons.mail,
-                                  color: Colors.amber[700],
-                                ),
-                                label: Text(
-                                  'Mail',
-                                  style: textStyle,
-                                )),
+                                icon:
+                                    Icon(Icons.mail, color: Colors.amber[700]),
+                                label: Text('Mail', style: textStyle)),
                           ),
                         ],
                         onSelected: (route) {
@@ -189,7 +170,7 @@ class _ExploreClState extends State<ExploreCl> {
                       ),
                     ],
                   )),
-//image of the station
+              //image of the station
               document['photoURL'] != null
                   ? CachedNetworkImage(
                       imageUrl: document['photoURL'],
@@ -238,12 +219,9 @@ class _ExploreClState extends State<ExploreCl> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ClientOrder(
-                                        doc: document,
-                                      )));
+                          Navigator.of(context).push(PageTransition(
+                              type: PageTransitionType.leftToRight,
+                              child: ClientOrder(doc: document)));
                         },
                         icon: Icon(
                           Icons.near_me,
@@ -274,20 +252,16 @@ class _ExploreClState extends State<ExploreCl> {
                             if (List.from(doc.data['favorite'])
                                 .contains(document.documentID)) {
                               return IconButton(
-                                  icon: Icon(
-                                    Icons.favorite_border,
-                                    color: Colors.black38,
-                                  ),
-                                  onPressed: () => _addStToFav(
+                                  icon: Icon(OMIcons.star,
+                                      color: Color(0xFFF8C513)),
+                                  onPressed: () => _removeStFromFav(
                                       document.documentID,
                                       Provider.of<User>(context).uid));
                             } else {
                               return IconButton(
-                                  icon: Icon(
-                                    Icons.favorite,
-                                    color: Colors.pink,
-                                  ),
-                                  onPressed: () => _removeStFromFav(
+                                  icon:
+                                      Icon(OMIcons.star, color: Colors.black38),
+                                  onPressed: () => _addStToFav(
                                       document.documentID,
                                       Provider.of<User>(context).uid));
                             }

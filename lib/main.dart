@@ -1,5 +1,6 @@
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -10,20 +11,13 @@ void main() => runApp(FuelDeliveryApp());
 class FuelDeliveryApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     return StreamProvider<User>.value(
       value: AuthService().user,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashScreen(),
         title: 'Fuel Delivery',
-        theme: ThemeData(
-          backgroundColor: Colors.black,
-          brightness: Brightness.light,
-          primaryColor: Colors.black,
-        ),
       ),
     );
   }

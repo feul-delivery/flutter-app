@@ -2,6 +2,7 @@ import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 
 class FavorisCl extends StatefulWidget {
   //static List<String> favList;
@@ -13,6 +14,8 @@ class _FavorisClState extends State<FavorisCl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
+      //Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.black,
@@ -28,148 +31,63 @@ class _FavorisClState extends State<FavorisCl> {
       ),
       body: SingleChildScrollView(
         child: StreamBuilder<QuerySnapshot>(
-            stream: null,
+            stream: Firestore.instance
+                .collection('entreprise')
+                .getDocuments()
+                .asStream(),
             builder: (context, snapshot) {
-              return Column();
+              if (snapshot.hasError) {
+                return Center(
+                    child: Icon(
+                  Icons.error,
+                  color: Colors.black,
+                ));
+              }
+
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  return Center(child: Icon(Icons.error, color: Colors.black));
+                case ConnectionState.waiting:
+                  return SizedBox(
+                      child: Center(
+                          child: CircularProgressIndicator(
+                              valueColor: new AlwaysStoppedAnimation<Color>(
+                                  Colors.black),
+                              backgroundColor: Colors.white)));
+                default:
+                  return new ListView(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      physics: BouncingScrollPhysics(),
+                      children: snapshot.data?.documents
+                          ?.map((DocumentSnapshot document) {
+                        return _createCard(document);
+                      })?.toList());
+              }
             }),
       ),
     );
   }
 
-  Container createCard(DocumentSnapshot document) {
-    return Container(
-      height: 230,
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(0),
-          child: Card(
-            clipBehavior: Clip.antiAlias,
-            child: Container(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => StationProfilCl(
-                                    doc: document,
-                                  )));
-                    },
-                    child: Stack(
-                      children: [
-                        Ink.image(
-                          height: 100,
-                          image: AssetImage(
-                            'assets/s3.jpg',
-                          ),
-                          fit: BoxFit.fitWidth,
-                        ),
-                        Positioned(
-                          bottom: 0,
-                          right: 0,
-                          child: RaisedButton(
-                            onPressed: () {},
-                          ),
-                          // child: FloatingActionButton(
-                          //   backgroundColor: Colors.white.withOpacity(0),
-                          //   onPressed: null,
-                          //   child: Icon(
-                          //     Icons.favorite,
-                          //     color: Colors.black,
-                          //   ),
-                          // ),
-                        )
-                      ],
-                    ),
-                  ),
-                  Padding(
-                      padding: const EdgeInsets.only(
-                        left: 10,
-                        top: 10,
-                        right: 10,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Total - Centre ville',
-                            style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            'Av. Mohammed V,Centre villed. Fès',
-                            style: TextStyle(color: Colors.black54),
-                          ),
-                          Container(
-                            child: Row(
-                              children: [
-                                IconButton(
-                                  onPressed: null,
-                                  icon: Icon(
-                                    Icons.phone,
-                                    color: Colors.green,
-                                  ),
-                                ),
-                                IconButton(
-                                  onPressed: null,
-                                  icon: Icon(Icons.chat),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(10),
-                                  alignment: Alignment.topCenter,
-                                  child: FlatButton(
-                                      onPressed: () {},
-                                      child: Column(
-                                        children: [
-                                          Icon(
-                                            Icons.near_me,
-                                            color: Colors.blue[800],
-                                          ),
-                                          Text(
-                                            'Order',
-                                            style: TextStyle(
-                                                color: Colors.blue[800]),
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                                Container(
-                                  padding: EdgeInsets.all(8),
-                                  alignment: Alignment.topCenter,
-                                  child: FlatButton(
-                                      onPressed: () {
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //             StationProfilCl()));
-                                      },
-                                      child: Column(
-                                        children: [
-                                          Icon(
-                                            Icons.read_more,
-                                          ),
-                                          Text(
-                                            'Details',
-                                          ),
-                                        ],
-                                      )),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      )),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+  ListTile _createCard(DocumentSnapshot document) {
+    return ListTile(
+      onTap: () {
+        Navigator.of(context).pushReplacement(PageTransition(
+            type: PageTransitionType.leftToRight,
+            child: StationProfilCl(doc: document)));
+      },
+      leading: InkWell(
+          onTap: () {
+            Navigator.of(context).pushReplacement(PageTransition(
+                type: PageTransitionType.leftToRight,
+                child: StationProfilCl(doc: document)));
+          },
+          child: Container(
+            child: Icon(Icons.near_me_sharp, color: Colors.white),
+          )),
+      title: Text('${document.data['titre']}', style: moreStyleWhite),
+      trailing: IconButton(
+          icon: Icon(Icons.favorite, color: Colors.white), onPressed: null),
     );
   }
 }

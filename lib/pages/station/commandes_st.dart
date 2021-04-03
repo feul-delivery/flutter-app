@@ -98,7 +98,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                                             builder: (context) =>
                                                 CommandeDetailSt(document)));
                                   },
-                                  child: ToutCommandes(document,'histo'));
+                                  child: ToutCommandes(document, 'histo'));
                             })?.toList());
                     }
                   },

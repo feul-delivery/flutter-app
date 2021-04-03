@@ -42,7 +42,7 @@
 //           style: TextStyle(),
 //         ),
 //         centerTitle: true,
-//         backgroundcolor: Colors.black,
+//         backgroundcolor: .black,
 //         elevation: 1,
 //       ),
 //       body: getBody(),
@@ -64,7 +64,7 @@
 //                 children: [
 //                   Icon(
 //                     Icons.format_list_numbered_sharp,
-//                     color: Colors.black54,
+//                     color: .black54,
 //                     size: 18,
 //                   ),
 //                   SizedBox(
@@ -75,7 +75,7 @@
 //                     style: TextStyle(
 //                         fontSize: 15,
 //                         fontWeight: FontWeight.w500,
-//                         color: Colors.black54),
+//                         color: .black54),
 //                   ),
 //                 ],
 //               ),
@@ -103,7 +103,7 @@
 //                 children: [
 //                   Icon(
 //                     Icons.date_range_sharp,
-//                     color: Colors.black54,
+//                     color: .black54,
 //                     size: 18,
 //                   ),
 //                   SizedBox(
@@ -114,7 +114,7 @@
 //                     style: TextStyle(
 //                         fontSize: 15,
 //                         fontWeight: FontWeight.w500,
-//                         color: Colors.black54),
+//                         color: .black54),
 //                   ),
 //                 ],
 //               ),
@@ -142,7 +142,7 @@
 //                 children: [
 //                   Icon(
 //                     Icons.timer,
-//                     color: Colors.black54,
+//                     color: .black54,
 //                     size: 18,
 //                   ),
 //                   SizedBox(
@@ -153,7 +153,7 @@
 //                     style: TextStyle(
 //                         fontSize: 15,
 //                         fontWeight: FontWeight.w500,
-//                         color: Colors.black54),
+//                         color: .black54),
 //                   ),
 //                 ],
 //               ),
@@ -181,7 +181,7 @@
 //                 children: [
 //                   Icon(
 //                     Icons.note_add,
-//                     color: Colors.black54,
+//                     color: .black54,
 //                     size: 18,
 //                   ),
 //                   SizedBox(
@@ -192,7 +192,7 @@
 //                     style: TextStyle(
 //                         fontSize: 15,
 //                         fontWeight: FontWeight.w500,
-//                         color: Colors.black54),
+//                         color: .black54),
 //                   ),
 //                 ],
 //               ),
@@ -220,7 +220,7 @@
 //                 children: [
 //                   Icon(
 //                     Icons.color_lens,
-//                     color: Colors.black54,
+//                     color: .black54,
 //                     size: 18,
 //                   ),
 //                   SizedBox(
@@ -231,7 +231,7 @@
 //                     style: TextStyle(
 //                         fontSize: 15,
 //                         fontWeight: FontWeight.w500,
-//                         color: Colors.black54),
+//                         color: .black54),
 //                   ),
 //                 ],
 //               ),
@@ -259,7 +259,7 @@
 //                 children: [
 //                   Icon(
 //                     Icons.track_changes_sharp,
-//                     color: Colors.black54,
+//                     color: .black54,
 //                     size: 18,
 //                   ),
 //                   SizedBox(
@@ -270,7 +270,7 @@
 //                     style: TextStyle(
 //                         fontSize: 15,
 //                         fontWeight: FontWeight.w500,
-//                         color: Colors.black54),
+//                         color: .black54),
 //                   ),
 //                 ],
 //               ),
@@ -298,7 +298,7 @@
 //                 children: [
 //                   Icon(
 //                     Icons.place,
-//                     color: Colors.black54,
+//                     color: .black54,
 //                     size: 18,
 //                   ),
 //                   SizedBox(
@@ -309,7 +309,7 @@
 //                     style: TextStyle(
 //                         fontSize: 15,
 //                         fontWeight: FontWeight.w500,
-//                         color: Colors.black54),
+//                         color: .black54),
 //                   ),
 //                 ],
 //               ),
@@ -340,7 +340,7 @@
 //                 children: [
 //                   Icon(
 //                     Icons.place,
-//                     color: Colors.black54,
+//                     color: .black54,
 //                     size: 18,
 //                   ),
 //                   SizedBox(
@@ -351,7 +351,7 @@
 //                     style: TextStyle(
 //                         fontSize: 15,
 //                         fontWeight: FontWeight.w500,
-//                         color: Colors.black54),
+//                         color: .black54),
 //                   ),
 //                 ],
 //               ),
@@ -374,11 +374,11 @@
 //           height: 10,
 //         ),
 //         Container(
-//             color: Colors.black,
+//             color: .black,
 //             child: FlatButton(
 //                 onPressed: () {},
 //                 child: Text('Respond to Complaint !',
-//                     style: TextStyle(color: Colors.white, fontSize: 15))))
+//                     style: TextStyle(color: .white, fontSize: 15))))
 //       ],
 //     );
 //   }

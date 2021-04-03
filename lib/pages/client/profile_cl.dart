@@ -1,15 +1,20 @@
+import 'dart:developer';
+
 import 'package:FD_flutter/modules/user.dart';
-import 'package:FD_flutter/pages/client/profile_mdf.dart';
-import 'package:FD_flutter/shared/FadeAnimation.dart';
-import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:FD_flutter/pages/client/commandes_cl.dart';
+import 'package:FD_flutter/pages/client/settings_cl.dart';
+import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import 'bbar_cl.dart';
-import 'drawer_cl.dart';
 import 'index_cl.dart';
+import 'package:page_transition/page_transition.dart';
 
 // ignore: camel_case_types
 class ProfileCl extends StatefulWidget {
@@ -17,7 +22,8 @@ class ProfileCl extends StatefulWidget {
   _ProfileClState createState() => _ProfileClState();
 }
 
-// ignore: camel_case_types
+List<String> _favList;
+
 class _ProfileClState extends State<ProfileCl> {
   @override
   Widget build(BuildContext context) {
@@ -29,32 +35,21 @@ class _ProfileClState extends State<ProfileCl> {
             MaterialPageRoute(builder: (BuildContext context) => IndexCl()));
       },
       child: Scaffold(
+          backgroundColor: Color(0xFFEFF0F5),
           appBar: AppBar(
-            title: Text(
-              "My profile",
-              style: pageTitle,
-            ),
             actions: <Widget>[
               IconButton(
-                  icon: Icon(Icons.edit),
+                  icon: Icon(OMIcons.settings, color: Color(0xFF1763B9)),
                   onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            ProfileCLModifier()));
+                    Navigator.of(context).push(PageTransition(
+                        type: PageTransitionType.bottomToTop,
+                        child: SettingsCl()));
                   })
             ],
-            leading: Builder(
-              builder: (context) => IconButton(
-                icon: Icon(Icons.menu),
-                onPressed: () => Scaffold.of(context).openDrawer(),
-              ),
-            ),
-            centerTitle: true,
-            backgroundColor: Colors.black,
-            elevation: 1,
+            backgroundColor: Color(0xFFFFFFFF),
+            elevation: 0,
           ),
           bottomNavigationBar: ButtomBarCl(),
-          drawer: DrawerCL(),
           body: StreamBuilder<DocumentSnapshot>(
               stream: Firestore.instance
                   .collection('client')
@@ -62,207 +57,376 @@ class _ProfileClState extends State<ProfileCl> {
                   .get()
                   .asStream(),
               builder: (context, snapshot) {
-                return Container(
-                  padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-                  child: ListView(children: [
-                    Center(
-                      child: Stack(
-                        children: [
-                          snapshot.data['photoURL'] == null
-                              ? Container(
-                                  width: 140,
-                                  height: 140,
-                                  child: CircleAvatar(
-                                    radius: 35.0,
-                                    backgroundImage:
-                                        AssetImage('assets/profile.png'),
+                _favList = List.from(snapshot.data['favorite']);
+                return ListView(children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1.5, color: Colors.grey[300]),
+                      ),
+                      color: Color(0xFFFFFFFF),
+                    ),
+                    padding: EdgeInsets.all(20),
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            snapshot.data['photoURL'] == null
+                                ? Container(
+                                    width: 70,
+                                    height: 70,
+                                    child: CircleAvatar(
+                                      radius: 35.0,
+                                      backgroundImage:
+                                          AssetImage('assets/profile.png'),
+                                    ),
+                                  )
+                                : CachedNetworkImage(
+                                    imageUrl: snapshot.data['photoURL'],
+                                    imageBuilder: (context, imageProvider) =>
+                                        Container(
+                                      width: 70,
+                                      height: 70,
+                                      child: CircleAvatar(
+                                          radius: 35.0,
+                                          backgroundImage: imageProvider),
+                                    ),
+                                    placeholder: (context, url) => Container(
+                                      width: 70,
+                                      height: 70,
+                                      child: CircleAvatar(
+                                          radius: 35.0,
+                                          child: CircularProgressIndicator(
+                                            backgroundColor: Colors.black,
+                                            valueColor:
+                                                new AlwaysStoppedAnimation<
+                                                    Color>(Colors.white),
+                                          )),
+                                    ),
+                                    errorWidget: (context, url, error) =>
+                                        Container(
+                                      width: 70,
+                                      height: 70,
+                                      child: CircleAvatar(
+                                          radius: 35.0,
+                                          child: Icon(Icons.error)),
+                                    ),
                                   ),
+                            SizedBox(width: 20),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${toBeginningOfSentenceCase(snapshot.data['prenom'])} ${toBeginningOfSentenceCase(snapshot.data['nom'])}',
+                                  style: GoogleFonts.openSans(
+                                      fontSize: 23,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                                SizedBox(height: 5),
+                                Text(
+                                  '${snapshot.data['email']}'.toLowerCase(),
+                                  style: GoogleFonts.openSans(
+                                      color: Color(0xFF71747E),
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400),
                                 )
-                              : CachedNetworkImage(
-                                  imageUrl: snapshot.data['photoURL'],
-                                  imageBuilder: (context, imageProvider) =>
-                                      Container(
-                                    width: 140,
-                                    height: 140,
-                                    child: CircleAvatar(
-                                        radius: 35.0,
-                                        backgroundImage: imageProvider),
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(height: 15),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(OMIcons.phoneIphone, color: Color(0xFF71747E)),
+                            SizedBox(width: 5),
+                            Center(
+                              child: Text(
+                                '${snapshot.data['tele']}'.toLowerCase(),
+                                style: GoogleFonts.openSans(
+                                    color: Color(0xFF050505),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 15),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(OMIcons.accountBox, color: Color(0xFF71747E)),
+                            SizedBox(width: 5),
+                            Center(
+                              child: Text(
+                                '${snapshot.data['cin']}'.toLowerCase(),
+                                style: GoogleFonts.openSans(
+                                    color: Color(0xFF050505),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(height: 15),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Icon(OMIcons.locationOn, color: Color(0xFF71747E)),
+                            SizedBox(width: 5),
+                            Center(
+                              child: Text(
+                                '${toBeginningOfSentenceCase(snapshot.data['ville'])}',
+                                style: GoogleFonts.openSans(
+                                    color: Color(0xFF050505),
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    decoration: BoxDecoration(
+                      border: Border(
+                        top: BorderSide(width: 1.5, color: Colors.grey[300]),
+                        bottom: BorderSide(width: 1.5, color: Colors.grey[300]),
+                      ),
+                      color: Color(0xFFFFFFFF),
+                    ),
+                    width: MediaQuery.of(context).size.width,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(
+                              left: 20, right: 20, top: 10, bottom: 0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Icon(OMIcons.starBorder,
+                                  color: Color(0xFF53555E), size: 25),
+                              SizedBox(width: 10),
+                              Text(
+                                'Favoris',
+                                style: GoogleFonts.openSans(
+                                    color: Color(0xFF050505),
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600),
+                              )
+                            ],
+                          ),
+                        ),
+                        StreamBuilder<QuerySnapshot>(
+                            stream: Firestore.instance
+                                .collection('entreprise')
+                                .getDocuments()
+                                .asStream(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return Container(
+                                  width: MediaQuery.of(context).size.height *
+                                      1 /
+                                      5,
+                                  child: Center(
+                                    child: Icon(
+                                      OMIcons.error,
+                                      color: Color(0xFF1763B9),
+                                    ),
                                   ),
-                                  placeholder: (context, url) => Container(
-                                    width: 140,
-                                    height: 140,
-                                    child: CircleAvatar(
-                                        radius: 35.0,
-                                        child: CircularProgressIndicator(
-                                          backgroundColor: Colors.black,
+                                );
+                              }
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.none:
+                                  return Container(
+                                    width: MediaQuery.of(context).size.height *
+                                        1 /
+                                        5,
+                                    child: Center(
+                                      child: Icon(
+                                        OMIcons.error,
+                                        color: Color(0xFF1763B9),
+                                      ),
+                                    ),
+                                  );
+
+                                case ConnectionState.waiting:
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        1 /
+                                        5,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Center(
+                                      child: CircularProgressIndicator(
                                           valueColor:
                                               new AlwaysStoppedAnimation<Color>(
-                                                  Colors.white),
-                                        )),
+                                                  Color(0xFF1763B9)),
+                                          backgroundColor: Colors.transparent),
+                                    ),
+                                  );
+                                default:
+                                  return Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        1 /
+                                        5,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: new ListView(
+                                        scrollDirection: Axis.horizontal,
+                                        children: snapshot.data?.documents
+                                            ?.map((DocumentSnapshot doc) {
+                                          inspect(_favList);
+                                          return _favList
+                                                  .contains(doc.documentID)
+                                              ? InkWell(
+                                                  radius: 50,
+                                                  onTap: () {
+                                                    Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder: (context) =>
+                                                                StationProfilCl(
+                                                                    doc: doc)));
+                                                  },
+                                                  child: _createFavCard(doc))
+                                              : Container();
+                                        })?.toList()),
+                                  );
+                              }
+                            }),
+                        Container(
+                          decoration: BoxDecoration(
+                              border: Border(
+                            top:
+                                BorderSide(width: 1.5, color: Colors.grey[300]),
+                          )),
+                          child: Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  Navigator.of(context).push(PageTransition(
+                                      type: PageTransitionType.rightToLeft,
+                                      child: CommandeCl()));
+                                },
+                                child: ListTile(
+                                  leading: Container(
+                                    height: MediaQuery.of(context).size.width *
+                                        1 /
+                                        12,
+                                    width: MediaQuery.of(context).size.width *
+                                        1 /
+                                        12,
+                                    decoration: BoxDecoration(
+                                        color: Color(0xFF41434F),
+                                        borderRadius: BorderRadius.circular(5)),
+                                    child: Center(
+                                        child: Icon(OMIcons.list,
+                                            color: Colors.white)),
                                   ),
-                                  errorWidget: (context, url, error) =>
-                                      Container(
-                                    width: 140,
-                                    height: 140,
-                                    child: CircleAvatar(
-                                        radius: 35.0, child: Icon(Icons.error)),
+                                  title: Text(
+                                    'Orders',
+                                    style: GoogleFonts.openSans(
+                                        color: Color(0xFF050505),
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w500),
                                   ),
+                                  trailing: StreamBuilder<QuerySnapshot>(
+                                      stream: Firestore.instance
+                                          .collection('orders')
+                                          .where('uidclient',
+                                              isEqualTo:
+                                                  Provider.of<User>(context)
+                                                      .uid)
+                                          .getDocuments()
+                                          .asStream(),
+                                      builder: (context, snapshot) {
+                                        return Text(
+                                          '${snapshot.data.documents.length}'
+                                              .toLowerCase(),
+                                          style: GoogleFonts.openSans(
+                                              color: Color(0xFF71747E),
+                                              fontSize: 17,
+                                              fontWeight: FontWeight.w400),
+                                        );
+                                      }),
                                 ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    FadeAnimation(
-                      1.2,
-                      Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.centerRight,
-                            width: MediaQuery.of(context).size.width * 1 / 4,
-                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Text(
-                              "First name :",
-                              style: textStyleWhite,
-                            ),
+                              ),
+                              InkWell(
+                                onTap: () {},
+                                child: ListTile(
+                                    leading: Container(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              1 /
+                                              12,
+                                      width: MediaQuery.of(context).size.width *
+                                          1 /
+                                          12,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xFFF8C513),
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      child: Center(
+                                          child: Icon(OMIcons.star,
+                                              color: Colors.white)),
+                                    ),
+                                    title: Text(
+                                      'Favoris',
+                                      style: GoogleFonts.openSans(
+                                          color: Color(0xFF050505),
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    trailing: Text(
+                                      '${_favList.length}'.toLowerCase(),
+                                      style: GoogleFonts.openSans(
+                                          color: Color(0xFF71747E),
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w400),
+                                    )),
+                              ),
+                            ],
                           ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                            child: Text(
-                              '${snapshot.data['prenom']}'.toUpperCase(),
-                              style: smallTileGray,
-                            ),
-                          )
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                    Divider(
-                      height: 30,
-                      thickness: 1,
-                    ),
-                    FadeAnimation(
-                      1.2,
-                      Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.centerRight,
-                            width: MediaQuery.of(context).size.width * 1 / 4,
-                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Text(
-                              "Last name :",
-                              style: textStyleWhite,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                            child: Text(
-                              '${snapshot.data['nom']}'.toUpperCase(),
-                              style: smallTileGray,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      height: 30,
-                      thickness: 1,
-                    ),
-                    FadeAnimation(
-                      1.2,
-                      Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.centerRight,
-                            width: MediaQuery.of(context).size.width * 1 / 4,
-                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Text(
-                              "Phone :",
-                              style: textStyleWhite,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                            child: Text(
-                              '${snapshot.data['tele']}'.toLowerCase(),
-                              style: smallTileGray,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      height: 30,
-                      thickness: 1,
-                    ),
-                    FadeAnimation(
-                      1.2,
-                      Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.centerRight,
-                            width: MediaQuery.of(context).size.width * 1 / 4,
-                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Text(
-                              "Email :",
-                              style: textStyleWhite,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                            child: Text(
-                              '${snapshot.data['email']}'.toLowerCase(),
-                              style: smallTileGray,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      height: 30,
-                      thickness: 1,
-                    ),
-                    FadeAnimation(
-                      1.2,
-                      Row(
-                        children: [
-                          Container(
-                            alignment: Alignment.centerRight,
-                            width: MediaQuery.of(context).size.width * 1 / 4,
-                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(50)),
-                            child: Text(
-                              "CIN :",
-                              style: textStyleWhite,
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
-                            child: Text(
-                              '${snapshot.data['cin']}'.toUpperCase(),
-                              style: smallTileGray,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ]),
-                );
+                  )
+                ]);
               })),
+    );
+  }
+
+  Container _createFavCard(DocumentSnapshot document) {
+    return Container(
+      width: MediaQuery.of(context).size.width - 80,
+      margin: EdgeInsets.only(left: 15, top: 15, bottom: 15),
+      padding: EdgeInsets.all(5),
+      decoration: BoxDecoration(
+        border: Border(
+          left: BorderSide(width: 1.5, color: Colors.grey[300]),
+          right: BorderSide(width: 1.5, color: Colors.grey[300]),
+          top: BorderSide(width: 1.5, color: Colors.grey[300]),
+          bottom: BorderSide(width: 1.5, color: Colors.grey[300]),
+        ),
+        color: Color(0xFFFFFFFF),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            '${document.data['titre']}'.toUpperCase(),
+            style: GoogleFonts.openSans(
+                color: Color(0xFF050505),
+                fontSize: 17,
+                fontWeight: FontWeight.w500),
+          )
+        ],
+      ),
     );
   }
 }

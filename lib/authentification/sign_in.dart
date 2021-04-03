@@ -359,7 +359,6 @@ class _SignInState extends State<SignIn> {
                                                       });
                                                     }
                                                   } on SocketException catch (_) {
-
                                                     showInSnackBar(
                                                         "you don\'t have a internet connection");
                                                   }
