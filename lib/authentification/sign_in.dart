@@ -4,6 +4,7 @@ import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -138,7 +139,7 @@ class _SignInState extends State<SignIn> {
                                               color: Colors.blue[700]),
                                           child: Center(
                                             child: Text(
-                                              "Submit".toUpperCase(),
+                                              "Send Email".toUpperCase(),
                                               style: buttonStyle,
                                             ),
                                           ),
@@ -275,6 +276,12 @@ class _SignInState extends State<SignIn> {
                                                 setState(() {
                                                   loading = false;
                                                 });
+                                              } else {
+                                                Navigator.pushReplacement(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            Wrapper()));
                                               }
                                               setState(() {
                                                 loading = false;

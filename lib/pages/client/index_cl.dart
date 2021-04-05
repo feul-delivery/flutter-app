@@ -25,7 +25,10 @@ class _IndexClState extends State<IndexCl> {
         title: Text(
           "Home",
           style: TextStyle(
-              fontSize: 24, fontWeight: FontWeight.w500, color: Colors.black),
+              fontSize: 24,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+              letterSpacing: 1.3),
         ),
         backgroundColor: Colors.white,
         elevation: 0,
@@ -188,9 +191,10 @@ class _IndexClState extends State<IndexCl> {
                               margin: EdgeInsets.all(5),
                               child: GestureDetector(
                                 onTap: () {
-                                  Navigator.of(context).push(MaterialPageRoute(
-                                      builder: (BuildContext context) =>
-                                          ExploreCl()));
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (BuildContext context) =>
+                                              ExploreCl()));
                                 },
                                 child: Text(
                                   'View all',

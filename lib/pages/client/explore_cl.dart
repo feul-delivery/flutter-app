@@ -62,58 +62,47 @@ class _ExploreClState extends State<ExploreCl> {
                         onPressed: _searchPressed),
                   ],
                 ),
-                body: RefreshIndicator(
-                  onRefresh: () async {
-                    return await Future.delayed(Duration(seconds: 1))
-                        .then((value) {
-                      setState(() {});
-                    });
+                body: StreamBuilder<QuerySnapshot>(
+                  stream: _searchString == null
+                      ? Firestore.instance.collection('entreprise').snapshots()
+                      : Firestore.instance
+                          .collection('entreprise')
+                          .where('titre', isGreaterThanOrEqualTo: _searchString)
+                          .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasError) {
+                      return Icon(Icons.cancel, color: Colors.blue[700]);
+                    }
+
+                    switch (snapshot.connectionState) {
+                      case ConnectionState.waiting:
+                        return SizedBox(
+                            child: Center(child: customeCircularProgress));
+                      case ConnectionState.none:
+                        return Icon(Icons.error_outline, color: Colors.black);
+                      case ConnectionState.done:
+                        return Icon(Icons.done, color: Colors.black);
+
+                      default:
+                        return new ListView(
+                            scrollDirection: Axis.vertical,
+                            shrinkWrap: true,
+                            physics: BouncingScrollPhysics(),
+                            children: snapshot.data?.documents
+                                ?.map((DocumentSnapshot document) {
+                              return InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                StationProfilCl(
+                                                    doc: document)));
+                                  },
+                                  child: createCard(document));
+                            })?.toList());
+                    }
                   },
-                  child: StreamBuilder<QuerySnapshot>(
-                    stream: _searchString == null
-                        ? Firestore.instance
-                            .collection('entreprise')
-                            .snapshots()
-                        : Firestore.instance
-                            .collection('entreprise')
-                            .where('titre',
-                                isGreaterThanOrEqualTo: _searchString)
-                            .snapshots(),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasError) {
-                        return Icon(Icons.cancel, color: Colors.blue[700]);
-                      }
-
-                      switch (snapshot.connectionState) {
-                        case ConnectionState.waiting:
-                          return SizedBox(
-                              child: Center(child: customeCircularProgress));
-                        case ConnectionState.none:
-                          return Icon(Icons.error_outline, color: Colors.black);
-                        case ConnectionState.done:
-                          return Icon(Icons.done, color: Colors.black);
-
-                        default:
-                          return new ListView(
-                              scrollDirection: Axis.vertical,
-                              shrinkWrap: true,
-                              physics: BouncingScrollPhysics(),
-                              children: snapshot.data?.documents
-                                  ?.map((DocumentSnapshot document) {
-                                return InkWell(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  StationProfilCl(
-                                                      doc: document)));
-                                    },
-                                    child: createCard(document));
-                              })?.toList());
-                      }
-                    },
-                  ),
                 ),
                 bottomNavigationBar: BottomNavigationBar(
                     backgroundColor: Colors.white,
@@ -324,7 +313,7 @@ class _ExploreClState extends State<ExploreCl> {
     setState(() {
       if (this._searchIcon.icon == Icons.search) {
         this._searchIcon = new Icon(Icons.close);
-        this._appBarTitle = new TextField(
+        this._appBarTitle = new TextFormField(
           style: textStyle,
           keyboardType: TextInputType.text,
           decoration: new InputDecoration(
@@ -341,9 +330,7 @@ class _ExploreClState extends State<ExploreCl> {
       } else {
         _searchString = null;
         this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text(
-          '',
-        );
+        this._appBarTitle = new Text('Explore', style: pageTitleX);
       }
     });
   }

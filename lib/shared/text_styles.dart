@@ -40,9 +40,9 @@ const buttonRegisterStyle = TextStyle(
     fontSize: 17,
     letterSpacing: 2.0);
 const moreStyle = TextStyle(
-  color: Colors.black,
-  fontWeight: FontWeight.w300,
-);
+    color: Colors.black,
+    fontWeight: FontWeight.w300,
+    fontStyle: FontStyle.italic);
 const moreStyleWhite = TextStyle(
   color: Colors.white,
   fontWeight: FontWeight.w300,

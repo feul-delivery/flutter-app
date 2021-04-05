@@ -10,7 +10,7 @@ class AuthService {
   // create user obj based on firebase user
   User _userFromFirebaseUser(FirebaseUser user) {
     return user != null
-        ? User(uid: user.uid, account: type, email: user.email)
+        ? User(uid: user.uid, account: AuthService.type, email: user.email)
         : null;
   }
 
@@ -22,18 +22,19 @@ class AuthService {
 
   // sign in with email and password
   Future signInWithEmailAndPassword(String email, String password) async {
-    FirebaseUser user;
+    FirebaseUser _user;
     try {
-      type = await _getAccountType(email);
-      _result = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      type = await _getAccountType(email).whenComplete(() async {
+        _result = await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+      });
     } catch (error) {
       _findError(error.code);
       return null;
     }
-    user = _result.user;
+    _user = _result.user;
     return _userFromFirebaseUser(
-      user,
+      _user,
     );
   }
 

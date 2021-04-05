@@ -57,9 +57,12 @@ class _ImageCaptureState extends State<ImageCapture> {
       // Select an image from the camera or gallery
       bottomNavigationBar: BottomAppBar(
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 SizedBox(
                   width: 10,
@@ -102,7 +105,8 @@ class _ImageCaptureState extends State<ImageCapture> {
       ),
 
       // Preview the image and crop it
-      body: SafeArea(
+      body: Container(
+        height: MediaQuery.of(context).size.height,
         child: ListView(
           children: <Widget>[
             if (_imageFile != null) ...[

@@ -46,43 +46,41 @@ class _CommandeClState extends State<CommandeCl> {
         ));
   }
 
-  Card cardCommande(DocumentSnapshot documentSnapshot) {
+  Widget cardCommande(DocumentSnapshot documentSnapshot) {
     IconData etaticon;
     Color commandColor;
     if (documentSnapshot['statut'] == 'done') {
-      etaticon = Icons.check;
+      etaticon = OMIcons.check;
       commandColor = Colors.green;
     }
     if (documentSnapshot['etat'] != 'waiting') {
-      etaticon = Icons.timer;
+      etaticon = OMIcons.timer;
       commandColor = Colors.orange;
     }
     double _prixTotal = double.tryParse('${documentSnapshot['prixtotal']}');
-    return Card(
-      child: ListTile(
-        leading: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: commandColor,
-            borderRadius: BorderRadius.circular(50),
-          ),
-          child: Icon(
-            etaticon,
-            color: Colors.white,
-          ),
+    return ListTile(
+      leading: Container(
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: commandColor,
+          borderRadius: BorderRadius.circular(50),
         ),
-        title: Text('${documentSnapshot['ordernum']}'),
-        subtitle: Text(
-            """${DateFormat.Hm().format(DateTime.parse(documentSnapshot['dateheurec']))} - ${DateTime.parse(documentSnapshot['dateheurec']).day}/${DateTime.parse(documentSnapshot['dateheurec']).month}/${DateTime.parse(documentSnapshot['dateheurec']).year}"""),
-        trailing: InkWell(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => CommandeDetail(
-                      document: documentSnapshot,
-                    )));
-          },
-          child: Text('${_prixTotal.toStringAsFixed(2)} Dh'),
+        child: Icon(
+          etaticon,
+          color: Colors.white,
         ),
+      ),
+      title: Text('${documentSnapshot['ordernum']}'),
+      subtitle: Text(
+          """${DateFormat.Hm().format(DateTime.parse(documentSnapshot['dateheurec']))} - ${DateTime.parse(documentSnapshot['dateheurec']).day}/${DateTime.parse(documentSnapshot['dateheurec']).month}/${DateTime.parse(documentSnapshot['dateheurec']).year}"""),
+      trailing: InkWell(
+        onTap: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (BuildContext context) => CommandeDetail(
+                    document: documentSnapshot,
+                  )));
+        },
+        child: Text('${_prixTotal.toStringAsFixed(2)} Dh'),
       ),
     );
   }
