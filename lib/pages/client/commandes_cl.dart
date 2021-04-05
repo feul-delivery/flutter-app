@@ -47,40 +47,34 @@ class _CommandeClState extends State<CommandeCl> {
   }
 
   Widget cardCommande(DocumentSnapshot documentSnapshot) {
-    IconData etaticon;
-    Color commandColor;
-    if (documentSnapshot['statut'] == 'done') {
-      etaticon = OMIcons.check;
-      commandColor = Colors.green;
-    }
-    if (documentSnapshot['etat'] != 'waiting') {
-      etaticon = OMIcons.timer;
-      commandColor = Colors.orange;
-    }
     double _prixTotal = double.tryParse('${documentSnapshot['prixtotal']}');
-    return ListTile(
-      leading: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: commandColor,
-          borderRadius: BorderRadius.circular(50),
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (BuildContext context) => CommandeDetail(
+                  document: documentSnapshot,
+                )));
+      },
+      child: ListTile(
+        leading: Container(
+          padding: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            color: documentSnapshot['statut'] == 'waiting'
+                ? Colors.orange
+                : Colors.green,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Icon(
+            documentSnapshot['statut'] == 'waiting'
+                ? OMIcons.timer
+                : OMIcons.check,
+            color: Colors.white,
+          ),
         ),
-        child: Icon(
-          etaticon,
-          color: Colors.white,
-        ),
-      ),
-      title: Text('${documentSnapshot['ordernum']}'),
-      subtitle: Text(
-          """${DateFormat.Hm().format(DateTime.parse(documentSnapshot['dateheurec']))} - ${DateTime.parse(documentSnapshot['dateheurec']).day}/${DateTime.parse(documentSnapshot['dateheurec']).month}/${DateTime.parse(documentSnapshot['dateheurec']).year}"""),
-      trailing: InkWell(
-        onTap: () {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (BuildContext context) => CommandeDetail(
-                    document: documentSnapshot,
-                  )));
-        },
-        child: Text('${_prixTotal.toStringAsFixed(2)} Dh'),
+        title: Text('${documentSnapshot['ordernum']}'),
+        subtitle: Text(
+            """${DateFormat.Hm().format(DateTime.parse(documentSnapshot['dateheurec']))} - ${DateTime.parse(documentSnapshot['dateheurec']).day}/${DateTime.parse(documentSnapshot['dateheurec']).month}/${DateTime.parse(documentSnapshot['dateheurec']).year}"""),
+        trailing: Text('${_prixTotal.toStringAsFixed(2)} Dh'),
       ),
     );
   }

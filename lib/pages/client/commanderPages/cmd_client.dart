@@ -54,7 +54,7 @@ class _ClientOrderState extends State<ClientOrder> {
                         InkWell(
                           onTap: () {
                             if (_methd == pmethode.google) {
-                              _methode = 'GPAY';
+                              _methode = 'BANK';
                             } else {
                               _methode = 'COD';
                             }

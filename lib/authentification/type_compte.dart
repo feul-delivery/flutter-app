@@ -15,7 +15,7 @@ class _TypeCompteState extends State<TypeCompte> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: Color(0xFFEFF0F5),
         appBar: AppBar(
           title: Text(
             "Account type",

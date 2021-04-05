@@ -41,7 +41,7 @@ class _StarterPageState extends State<StarterPage>
     });
 
     _animationController.forward().then(
-          (f) => Navigator.push(
+          (f) => Navigator.pushReplacement(
               context,
               PageTransition(
                   type: PageTransitionType.fade, child: Authenticate())),
@@ -92,31 +92,33 @@ class _StarterPageState extends State<StarterPage>
                             color: Colors.white, height: 1.4, fontSize: 18),
                       )),
                   SizedBox(
-                    height: 100,
+                    height: MediaQuery.of(context).size.height * 0.60,
                   ),
                   FadeAnimation(
                     1.4,
                     ScaleTransition(
                         scale: _animation,
                         child: Center(
-                          child: Container(
-                              width: 150,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: Colors.white,
-                              ),
-                              child: AnimatedOpacity(
-                                opacity: _textVisible ? 1.0 : 0.0,
-                                duration: Duration(milliseconds: 50),
-                                child: MaterialButton(
-                                  onPressed: () => _onTap(),
-                                  minWidth: double.infinity,
-                                  child: Text(
-                                    "Start",
-                                    style: buttonStyleBlack,
-                                  ),
+                          child: InkWell(
+                            onTap: () => _onTap(),
+                            child: Container(
+                                width: 150,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Colors.white,
                                 ),
-                              )),
+                                child: AnimatedOpacity(
+                                  opacity: _textVisible ? 1.0 : 0.0,
+                                  duration: Duration(milliseconds: 50),
+                                  child: Center(
+                                    child: Text(
+                                      "Start".toUpperCase(),
+                                      style: buttonStyleBlack,
+                                    ),
+                                  ),
+                                )),
+                          ),
                         )),
                   ),
                   SizedBox(

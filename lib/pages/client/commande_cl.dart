@@ -2,6 +2,7 @@ import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class CommandeDetail extends StatefulWidget {
@@ -15,18 +16,18 @@ class _CommandeDetailState extends State<CommandeDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFEFF0F5),
       appBar: AppBar(
         title: Text(
           "Details",
-          style: pageTitle,
+          style: pageTitleX,
         ),
         leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
+            icon: Icon(OMIcons.arrowBack, color: Colors.black),
             onPressed: () {
               Navigator.pop(context);
             }),
-        centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         elevation: 1,
         actions: [
           IconButton(
@@ -76,7 +77,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
               ),
               Center(
                 child: Text(
-                  widget.document['ordernum'],
+                  '${widget.document['ordernum']}',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -193,7 +194,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
               ),
               Center(
                 child: Text(
-                  widget.document['matricule'],
+                  '${widget.document['matricule']}',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -236,7 +237,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: Color(widget.document['color'])),
+                      color: Color(int.tryParse(widget.document['color']))),
                 ),
               ),
             ],
@@ -274,7 +275,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
               ),
               Center(
                 child: Text(
-                  widget.document['type'],
+                  '${widget.document['type']}',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -315,7 +316,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
                   child: Text(
-                    widget.document['adresse'],
+                    '${widget.document['adresse']}',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -328,7 +329,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                   height: MediaQuery.of(context).size.width * 2 / 3,
                   width: MediaQuery.of(context).size.width * 2 / 3,
                   child: QrImage(
-                    data: '96LWayplp1ex1rnKKkWkYy4Zd6s2',
+                    data: '${widget.document.documentID}',
                     //   embeddedImage: AssetImage('assets/profile.png'),
                     //   embeddedImageStyle:
                     //       QrEmbeddedImageStyle(size: Size(100, 100)),
