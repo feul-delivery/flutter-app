@@ -7,9 +7,6 @@ import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
-  final Function toggleView;
-  SignIn({this.toggleView});
-
   @override
   _SignInState createState() => _SignInState();
 }
@@ -32,97 +29,146 @@ class _SignInState extends State<SignIn> {
         ? Loading()
         : Scaffold(
             key: _mScaffoldState,
-            body: Container(
-              padding: EdgeInsets.only(top: 80),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-                Colors.black87,
-                Colors.black54,
-                Colors.black45
-              ])),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(15),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        FadeAnimation(
-                            0.2,
-                            Text(
-                              "Login",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 40,
-                                fontFamily: 'Gotham',
-                                fontWeight: FontWeight.w500,
-                              ),
-                            )),
-                        SizedBox(
-                          height: 10,
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                FadeAnimation(
+                    0.1,
+                    Container(
+                      margin: EdgeInsets.all(15),
+                      child: Text(
+                        "Welcome Back",
+                        style: TextStyle(
+                          color: Colors.blue[700],
+                          fontSize: 50,
+                          fontWeight: FontWeight.w900,
                         ),
-                        FadeAnimation(
-                            0.2,
-                            Text(
-                              "Welcome back",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontFamily: 'Gotham',
-                                fontWeight: FontWeight.w300,
-                              ),
-                            )),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20))),
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.all(30),
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 10,
-                              ),
-                              _password == 3
-                                  ? Container(
-                                      padding: EdgeInsets.all(20),
+                      ),
+                    )),
+                SizedBox(
+                  height: 15,
+                ),
+                SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _password == 3
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.all(5),
+                                  margin: EdgeInsets.only(
+                                      left: 10, right: 10, bottom: 5),
+                                  child: Text(
+                                    'Forgot your password?',
+                                    style: pageTitleX,
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                  child: TextFormField(
+                                    textInputAction: TextInputAction.done,
+                                    decoration: InputDecoration(
+                                      hintText: "Email",
+                                      hintStyle: hintStyle,
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 15),
+                                    ),
+                                    validator: (val) {
+                                      if (val.isEmpty ||
+                                          !val.contains('@') ||
+                                          !val.contains('.')) {
+                                        return 'Please enter a valid email address.';
+                                      }
+                                      return null;
+                                    },
+                                    keyboardType: TextInputType.emailAddress,
+                                    onChanged: (val) {
+                                      setState(() => email = val);
+                                    },
+                                  ),
+                                ),
+                                Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          setState(() {
+                                            _password = 0;
+                                          });
+                                        },
+                                        child: Container(
+                                          height: 45,
+                                          margin:
+                                              EdgeInsets.fromLTRB(5, 7, 5, 7),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.45,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.white),
+                                          child: Center(
+                                            child: Text(
+                                              "Cancel".toUpperCase(),
+                                              style: buttonStyleBlack,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Container(
+                                          height: 45,
+                                          margin:
+                                              EdgeInsets.fromLTRB(5, 7, 5, 7),
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.45,
+                                          decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              color: Colors.blue[700]),
+                                          child: Center(
+                                            child: Text(
+                                              "Submit".toUpperCase(),
+                                              style: buttonStyle,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ]),
+                              ],
+                            )
+                          : Column(
+                              children: <Widget>[
+                                FadeAnimation(
+                                    0.1,
+                                    Form(
+                                      key: _formKey,
                                       child: Column(
-                                        children: [
-                                          Text(
-                                            "Forgot your password?",
-                                            style: textStyle,
-                                          ),
-                                          SizedBox(
-                                            height: 20.0,
-                                          ),
+                                        children: <Widget>[
                                           Container(
-                                            padding: EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color: Colors.black38,
-                                                      blurRadius: 20,
-                                                      offset: Offset(0, 10))
-                                                ]),
+                                            margin: EdgeInsets.fromLTRB(
+                                                15, 7, 15, 7),
                                             child: TextFormField(
                                               textInputAction:
-                                                  TextInputAction.done,
+                                                  TextInputAction.next,
                                               decoration: InputDecoration(
-                                                  hintText: "Email",
-                                                  hintStyle: hintStyle,
-                                                  border: InputBorder.none),
+                                                hintText: "Email",
+                                                hintStyle: hintStyle,
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 10,
+                                                        vertical: 15),
+                                              ),
                                               validator: (val) {
                                                 if (val.isEmpty ||
                                                     !val.contains('@') ||
@@ -138,311 +184,140 @@ class _SignInState extends State<SignIn> {
                                               },
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: 20.0,
-                                          ),
-                                          Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.end,
-                                              children: [
-                                                FlatButton(
+                                          Container(
+                                            margin: EdgeInsets.fromLTRB(
+                                                15, 7, 15, 7),
+                                            child: TextFormField(
+                                              obscureText: _isObscure,
+                                              decoration: InputDecoration(
+                                                hintText: "Password",
+                                                hintStyle: hintStyle,
+                                                suffixIcon: IconButton(
+                                                    icon: Icon(
+                                                      _isObscure
+                                                          ? Icons.visibility
+                                                          : Icons
+                                                              .visibility_off,
+                                                      color: _isObscure
+                                                          ? Color(0xFFB9BAC3)
+                                                          : Colors.blue[700],
+                                                    ),
                                                     onPressed: () {
                                                       setState(() {
-                                                        _password = 0;
+                                                        _isObscure =
+                                                            !_isObscure;
                                                       });
-                                                    },
-                                                    child: Text(
-                                                      'Close',
-                                                      style: hintStyle,
-                                                    )),
-                                                InkWell(
-                                                  onTap: () {},
-                                                  child: Container(
-                                                    height: 30,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            1 /
-                                                            5,
-                                                    padding:
-                                                        EdgeInsets.fromLTRB(0.0,
-                                                            10.0, 0.0, 10.0),
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(50),
-                                                        color: Colors.black),
-                                                    child: Center(
-                                                      child: Text(
-                                                        "Submit",
-                                                        style: buttonStyle,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ]),
-                                        ],
-                                      ))
-                                  : Column(
-                                      children: <Widget>[
-                                        FadeAnimation(
-                                            0.2,
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white,
-                                                  borderRadius:
-                                                      BorderRadius.circular(20),
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                        color: Colors.black38,
-                                                        blurRadius: 20,
-                                                        offset: Offset(0, 10))
-                                                  ]),
-                                              child: Form(
-                                                key: _formKey,
-                                                child: Column(
-                                                  children: <Widget>[
-                                                    Container(
-                                                      padding:
-                                                          EdgeInsets.all(10),
-                                                      decoration: BoxDecoration(
-                                                          border: Border(
-                                                              bottom: BorderSide(
-                                                                  color: Colors
-                                                                          .grey[
-                                                                      200]))),
-                                                      child: TextFormField(
-                                                        textInputAction:
-                                                            TextInputAction
-                                                                .next,
-                                                        decoration:
-                                                            InputDecoration(
-                                                                hintText:
-                                                                    "Email",
-                                                                hintStyle:
-                                                                    hintStyle,
-                                                                border:
-                                                                    InputBorder
-                                                                        .none),
-                                                        validator: (val) {
-                                                          if (val.isEmpty ||
-                                                              !val.contains(
-                                                                  '@') ||
-                                                              !val.contains(
-                                                                  '.')) {
-                                                            return 'Please enter a valid email address.';
-                                                          }
-                                                          return null;
-                                                        },
-                                                        keyboardType:
-                                                            TextInputType
-                                                                .emailAddress,
-                                                        onChanged: (val) {
-                                                          setState(() =>
-                                                              email = val);
-                                                        },
-                                                      ),
-                                                    ),
-                                                    Container(
-                                                      padding:
-                                                          EdgeInsets.all(10),
-                                                      decoration: BoxDecoration(
-                                                          border: Border(
-                                                              bottom: BorderSide(
-                                                                  color: Colors
-                                                                          .grey[
-                                                                      200]))),
-                                                      child: TextFormField(
-                                                        obscureText: _isObscure,
-                                                        decoration:
-                                                            InputDecoration(
-                                                                hintText:
-                                                                    "Password",
-                                                                hintStyle:
-                                                                    hintStyle,
-                                                                suffixIcon:
-                                                                    IconButton(
-                                                                        icon:
-                                                                            Icon(
-                                                                          _isObscure
-                                                                              ? Icons.visibility
-                                                                              : Icons.visibility_off,
-                                                                          color: _isObscure
-                                                                              ? Colors.black54
-                                                                              : Colors.black,
-                                                                        ),
-                                                                        onPressed:
-                                                                            () {
-                                                                          setState(
-                                                                              () {
-                                                                            _isObscure =
-                                                                                !_isObscure;
-                                                                          });
-                                                                        }),
-                                                                border:
-                                                                    InputBorder
-                                                                        .none),
-                                                        validator: (val) => val
-                                                                    .length <
-                                                                6
-                                                            ? 'Enter a password 6+ chars long'
-                                                            : null,
-                                                        onChanged: (val) {
-                                                          setState(() =>
-                                                              password = val);
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                                    }),
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 10.0,
+                                                        vertical: 15.0),
                                               ),
-                                            )),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        errorMessage == ''
-                                            ? SizedBox(
-                                                height: 15,
-                                              )
-                                            : FadeAnimation(
-                                                0.2,
-                                                Text(
-                                                  errorMessage,
-                                                  style: TextStyle(
-                                                      color: Colors.red,
-                                                      fontFamily: 'Gotham',
-                                                      fontSize: 14,
-                                                      fontWeight:
-                                                          FontWeight.w400),
-                                                ),
-                                              ),
-                                        SizedBox(
-                                          height: 15,
-                                        ),
-                                        FadeAnimation(
-                                            0.2,
-                                            InkWell(
-                                              onTap: () async {
-                                                if (_formKey.currentState
-                                                    .validate()) {
-                                                  try {
-                                                    final result =
-                                                        await InternetAddress
-                                                            .lookup(
-                                                                'google.com');
-                                                    if (result.isNotEmpty &&
-                                                        result[0]
-                                                            .rawAddress
-                                                            .isNotEmpty) {
-                                                      setState(
-                                                          () => loading = true);
-                                                      dynamic user = await _auth
-                                                          .signInWithEmailAndPassword(
-                                                              email, password);
-                                                      if (user == null) {
-                                                        errorMessage =
-                                                            AuthService.error;
-                                                        if (errorMessage ==
-                                                            "Your password is wrong.") {
-                                                          setState(() {
-                                                            _password++;
-                                                          });
-                                                        }
-
-                                                        setState(() {
-                                                          loading = false;
-                                                        });
-                                                      }
-                                                      setState(() {
-                                                        loading = false;
-                                                      });
-                                                    }
-                                                  } on SocketException catch (_) {
-                                                    showInSnackBar(
-                                                        "you don\'t have a internet connection");
-                                                  }
-                                                }
+                                              validator: (val) => val.length < 6
+                                                  ? 'Enter a password 6+ chars long'
+                                                  : null,
+                                              onChanged: (val) {
+                                                setState(() => password = val);
                                               },
-                                              child: Container(
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    1 /
-                                                    3,
-                                                padding: EdgeInsets.fromLTRB(
-                                                    20.0, 20.0, 20.0, 20.0),
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            50),
-                                                    color: Colors.black),
-                                                child: Center(
-                                                  child: Text(
-                                                    "Log in",
-                                                    style: buttonStyle,
-                                                  ),
-                                                ),
-                                              ),
-                                            )),
-                                      ],
-                                    ),
-                              Column(
-                                children: [
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  FadeAnimation(
-                                      0.2,
-                                      Text(
-                                        "you are new here?",
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontFamily: 'Gotham',
-                                          fontWeight: FontWeight.w300,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    )),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                errorMessage == ''
+                                    ? SizedBox(
+                                        height: 15,
+                                      )
+                                    : FadeAnimation(
+                                        0.1,
+                                        Text(
+                                          errorMessage,
+                                          style: TextStyle(
+                                              color: Colors.red,
+                                              fontFamily: 'Gotham',
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w400),
                                         ),
-                                      )),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  FadeAnimation(
-                                      0.2,
-                                      InkWell(
-                                        hoverColor: Colors.black,
-                                        onTap: () => widget.toggleView(),
-                                        child: Container(
-                                          height: 50,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              2 /
-                                              3,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(50),
-                                              color: Colors.blue[900]),
-                                          child: Center(
-                                              child: Text(
-                                                  "Create a new account",
-                                                  style: buttonRegisterStyle)),
+                                      ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                                FadeAnimation(
+                                    0.1,
+                                    InkWell(
+                                      onTap: () async {
+                                        if (_formKey.currentState.validate()) {
+                                          try {
+                                            final result =
+                                                await InternetAddress.lookup(
+                                                    'google.com');
+                                            if (result.isNotEmpty &&
+                                                result[0]
+                                                    .rawAddress
+                                                    .isNotEmpty) {
+                                              setState(() => loading = true);
+                                              dynamic user = await _auth
+                                                  .signInWithEmailAndPassword(
+                                                      email, password);
+                                              if (user == null) {
+                                                errorMessage =
+                                                    AuthService.error;
+                                                if (errorMessage ==
+                                                    "Your password is wrong.") {
+                                                  setState(() {
+                                                    _password++;
+                                                  });
+                                                }
+
+                                                setState(() {
+                                                  loading = false;
+                                                });
+                                              }
+                                              setState(() {
+                                                loading = false;
+                                              });
+                                            }
+                                          } on SocketException catch (_) {
+                                            showInSnackBar(
+                                                "Check your internet connection");
+                                          }
+                                        }
+                                      },
+                                      child: Container(
+                                        height: 45,
+                                        margin:
+                                            EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            color: Colors.blue[700]),
+                                        child: Center(
+                                          child: Text(
+                                            "Log in".toUpperCase(),
+                                            style: buttonStyle,
+                                          ),
                                         ),
-                                      ))
-                                ],
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                                      ),
+                                    )),
+                              ],
+                            ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           );
   }
 
   void showInSnackBar(String value) {
-    SnackBar snackBar = new SnackBar(content: new Text(value));
+    SnackBar snackBar = new SnackBar(
+        backgroundColor: Colors.white,
+        content: new Text(value, style: textStyle));
     _mScaffoldState.currentState.showSnackBar(snackBar);
   }
 }

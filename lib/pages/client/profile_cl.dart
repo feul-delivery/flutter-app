@@ -471,32 +471,68 @@ class _ProfileClState extends State<ProfileCl> {
             }));
   }
 
-  Container _createFavCard(DocumentSnapshot document) {
-    return Container(
-      width: MediaQuery.of(context).size.width - 80,
-      margin: EdgeInsets.only(left: 15, top: 15, bottom: 15),
-      padding: EdgeInsets.all(5),
-      decoration: BoxDecoration(
-        border: Border(
-          left: BorderSide(width: 1, color: Colors.grey[300]),
-          right: BorderSide(width: 1, color: Colors.grey[300]),
-          top: BorderSide(width: 1, color: Colors.grey[300]),
-          bottom: BorderSide(width: 1, color: Colors.grey[300]),
+  Widget _createFavCard(DocumentSnapshot document) {
+    return Material(
+      color: Color(0xFFFFFFFF),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 4 / 5,
+        margin: EdgeInsets.only(left: 15, top: 15, bottom: 15),
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => StationProfilCl(doc: document)));
+          },
+          child: Stack(
+            children: [
+              document['photoURL'] != null
+                  ? CachedNetworkImage(
+                      imageUrl: document['photoURL'],
+                      imageBuilder: (context, imageProvider) => Ink.image(
+                        image: imageProvider,
+                        fit: BoxFit.fill,
+                      ),
+                      placeholder: (context, url) => Container(
+                        height: 200,
+                        child: Center(
+                          child: customeCircularProgress,
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        height: 200,
+                        child: Center(
+                          child: Icon(Icons.error, color: Colors.black),
+                        ),
+                      ),
+                    )
+                  : Container(
+                      height: 200,
+                      child: Center(
+                        child: Icon(Icons.error, color: Colors.black),
+                      ),
+                    ),
+              Padding(
+                  padding: const EdgeInsets.only(
+                    left: 10,
+                    top: 10,
+                    right: 10,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: <Widget>[
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Text(
+                          '${document['titre']}'.toUpperCase(),
+                          style: buttonStyle,
+                        ),
+                      ),
+                    ],
+                  )),
+            ],
+          ),
         ),
-        color: Color(0xFFFFFFFF),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            '${document.data['titre']}'.toUpperCase(),
-            style: TextStyle(
-                color: Color(0xFF050505),
-                fontSize: 17,
-                fontWeight: FontWeight.w500),
-          )
-        ],
       ),
     );
   }

@@ -9,9 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 
 class Register extends StatefulWidget {
-  final Function toggleView;
-  Register({this.toggleView});
-
   @override
   _RegisterState createState() => _RegisterState();
 }
@@ -34,270 +31,176 @@ class _RegisterState extends State<Register> {
             key: _mScaffoldState,
             resizeToAvoidBottomInset: true,
             backgroundColor: Colors.white,
-            body: Container(
-              padding: EdgeInsets.only(top: 40),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-                Colors.black87,
-                Colors.black54,
-                Colors.black45
-              ])),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(top: 20),
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        FadeAnimation(
-                            1,
-                            Text(
-                              "Sign up",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 40),
-                            )),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        FadeAnimation(
-                            1.3,
-                            Text(
-                              "Create an account, it's free",
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 18),
-                            )),
-                      ],
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(20),
-                              topRight: Radius.circular(20))),
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(30.0, 10.0, 30.0, 10.0),
-                          child: Column(
-                            children: <Widget>[
-                              SizedBox(
-                                height: 10,
-                              ),
-                              FadeAnimation(
-                                  1.4,
-                                  Container(
-                                    decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius: BorderRadius.circular(10),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black38,
-                                              blurRadius: 20,
-                                              offset: Offset(0, 10))
-                                        ]),
-                                    child: Form(
-                                      key: _formKey,
-                                      child: Column(
-                                        children: <Widget>[
-                                          Container(
-                                            padding: EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                                border: Border(
-                                                    bottom: BorderSide(
-                                                        color:
-                                                            Colors.grey[200]))),
-                                            child: TextFormField(
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              decoration: InputDecoration(
-                                                  hintText: "Email",
-                                                  hintStyle: hintStyle,
-                                                  border: InputBorder.none),
-                                              validator: (val) {
-                                                if (val.isEmpty ||
-                                                    !val.contains('@') ||
-                                                    !val.contains('.')) {
-                                                  return 'Please enter a valid email address.';
-                                                }
-                                                return null;
-                                              },
-                                              keyboardType:
-                                                  TextInputType.emailAddress,
-                                              onChanged: (val) {
-                                                setState(() => email = val);
-                                              },
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                                border: Border(
-                                                    bottom: BorderSide(
-                                                        color:
-                                                            Colors.grey[200]))),
-                                            child: TextFormField(
-                                              textInputAction:
-                                                  TextInputAction.next,
-                                              obscureText: _isObscure,
-                                              decoration: InputDecoration(
-                                                  hintText: "Password",
-                                                  suffixIcon: IconButton(
-                                                      icon: Icon(
-                                                        _isObscure
-                                                            ? Icons.visibility
-                                                            : Icons
-                                                                .visibility_off,
-                                                        color: _isObscure
-                                                            ? Colors.black54
-                                                            : Colors.black,
-                                                      ),
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          _isObscure =
-                                                              !_isObscure;
-                                                        });
-                                                      }),
-                                                  hintStyle: hintStyle,
-                                                  border: InputBorder.none),
-                                              validator: (val) => val.length < 6
-                                                  ? 'enter a password 8+ chars long.'
-                                                  : null,
-                                              onChanged: (val) {
-                                                setState(() => password = val);
-                                              },
-                                            ),
-                                          ),
-                                          Container(
-                                            padding: EdgeInsets.all(10),
-                                            decoration: BoxDecoration(
-                                                border: Border(
-                                                    bottom: BorderSide(
-                                                        color:
-                                                            Colors.grey[200]))),
-                                            child: TextFormField(
-                                              obscureText: true,
-                                              decoration: InputDecoration(
-                                                  hintText: "Confirmation",
-                                                  hintStyle: hintStyle,
-                                                  border: InputBorder.none),
-                                              validator: (val) => val !=
-                                                      password
-                                                  ? 'confirmation do not match the password.'
-                                                  : null,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  )),
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Text(
-                                error,
-                                style: TextStyle(
-                                    color: Colors.red,
-                                    fontFamily: 'Gotham',
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              FadeAnimation(
-                                  1.2,
-                                  InkWell(
-                                    onTap: () async {
-                                      if (_formKey.currentState.validate()) {
-                                        try {
-                                          final result =
-                                              await InternetAddress.lookup(
-                                                  'google.com');
-                                          if (result.isNotEmpty &&
-                                              result[0].rawAddress.isNotEmpty) {
-                                            setState(() => loading = true);
-                                            dynamic result = await _auth
-                                                .registerWithEmailAndPassword(
-                                                    email, password);
-                                            if (result == null) {
-                                              setState(() {
-                                                loading = false;
-                                                error =
-                                                    'Please supply a valid email';
-                                              });
-                                            } else {
-                                              Navigator.pushReplacement(
-                                                  context,
-                                                  PageTransition(
-                                                      type: PageTransitionType
-                                                          .fade,
-                                                      child: TypeCompte()));
-                                            }
-                                          }
-                                        } on SocketException catch (_) {
-                                          showInSnackBar(
-                                              "you don\'t have a internet connection");
-                                        }
-                                      }
-                                    },
-                                    child: Container(
-                                      height: 50,
-                                      width: MediaQuery.of(context).size.width *
-                                          1 /
-                                          3,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          color: Colors.black),
-                                      child: Center(
-                                        child: Text(
-                                          "Register",
-                                          style: buttonStyle,
-                                        ),
-                                      ),
-                                    ),
-                                  )),
-                              SizedBox(
-                                height: 30,
-                              ),
-                              FadeAnimation(
-                                  1.2,
-                                  Column(
-                                    children: <Widget>[
-                                      Text(
-                                        "Already have an account?",
-                                        style: TextStyle(
-                                          color: Colors.grey,
-                                          fontFamily: 'Gotham',
-                                          fontWeight: FontWeight.w300,
-                                        ),
-                                      ),
-                                      FlatButton(
-                                        onPressed: () => widget.toggleView(),
-                                        child: Text(
-                                          "Login",
-                                          style: TextStyle(
-                                              fontSize: 17,
-                                              fontFamily: 'Gotham',
-                                              color: Colors.black87,
-                                              fontWeight: FontWeight.w500,
-                                              letterSpacing: 1.2),
-                                        ),
-                                      ),
-                                    ],
-                                  ))
-                            ],
-                          ),
+            body: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                FadeAnimation(
+                    0.1,
+                    Container(
+                      margin: EdgeInsets.all(15),
+                      child: Text(
+                        "Create an account,",
+                        style: TextStyle(
+                          color: Colors.blue[700],
+                          fontSize: 50,
+                          fontWeight: FontWeight.w900,
                         ),
                       ),
-                    ),
-                  )
-                ],
-              ),
+                    )),
+                SingleChildScrollView(
+                  child: Column(
+                    children: <Widget>[
+                      SizedBox(
+                        height: 10,
+                      ),
+                      FadeAnimation(
+                          0.1,
+                          Form(
+                            key: _formKey,
+                            child: Column(
+                              children: <Widget>[
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                  child: TextFormField(
+                                    textInputAction: TextInputAction.next,
+                                    decoration: InputDecoration(
+                                      hintText: "Email",
+                                      hintStyle: hintStyle,
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 10.0, vertical: 15.0),
+                                    ),
+                                    validator: (val) {
+                                      if (val.isEmpty ||
+                                          !val.contains('@') ||
+                                          !val.contains('.')) {
+                                        return 'Please enter a valid email address.';
+                                      }
+                                      return null;
+                                    },
+                                    keyboardType: TextInputType.emailAddress,
+                                    onChanged: (val) {
+                                      setState(() => email = val);
+                                    },
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                  child: TextFormField(
+                                    textInputAction: TextInputAction.next,
+                                    obscureText: _isObscure,
+                                    decoration: InputDecoration(
+                                      hintText: "Password",
+                                      suffixIcon: IconButton(
+                                          icon: Icon(
+                                            _isObscure
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                            color: _isObscure
+                                                ? Color(0xFFB9BAC3)
+                                                : Colors.blue[700],
+                                          ),
+                                          onPressed: () {
+                                            setState(() {
+                                              _isObscure = !_isObscure;
+                                            });
+                                          }),
+                                      hintStyle: hintStyle,
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 10.0, vertical: 15.0),
+                                    ),
+                                    validator: (val) => val.length < 6
+                                        ? 'enter a password 8+ chars long.'
+                                        : null,
+                                    onChanged: (val) {
+                                      setState(() => password = val);
+                                    },
+                                  ),
+                                ),
+                                Container(
+                                  margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                  child: TextFormField(
+                                    obscureText: true,
+                                    decoration: InputDecoration(
+                                      hintText: "Confirmation",
+                                      hintStyle: hintStyle,
+                                      contentPadding: EdgeInsets.symmetric(
+                                          horizontal: 10.0, vertical: 15.0),
+                                    ),
+                                    validator: (val) => val != password
+                                        ? 'confirmation do not match the password.'
+                                        : null,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        error,
+                        style: TextStyle(
+                            color: Colors.red,
+                            fontFamily: 'Gotham',
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      FadeAnimation(
+                          1.2,
+                          InkWell(
+                            onTap: () async {
+                              if (_formKey.currentState.validate()) {
+                                try {
+                                  final result = await InternetAddress.lookup(
+                                      'google.com');
+                                  if (result.isNotEmpty &&
+                                      result[0].rawAddress.isNotEmpty) {
+                                    setState(() => loading = true);
+                                    dynamic result = await _auth
+                                        .registerWithEmailAndPassword(
+                                            email, password);
+                                    if (result == null) {
+                                      setState(() {
+                                        loading = false;
+                                        error = 'Please supply a valid email';
+                                      });
+                                    } else {
+                                      Navigator.pushReplacement(
+                                          context,
+                                          PageTransition(
+                                              type: PageTransitionType.fade,
+                                              child: TypeCompte()));
+                                    }
+                                  }
+                                } on SocketException catch (_) {
+                                  showInSnackBar(
+                                      "you don\'t have a internet connection");
+                                }
+                              }
+                            },
+                            child: Container(
+                              height: 45,
+                              margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: Colors.blue[700]),
+                              child: Center(
+                                child: Text(
+                                  "Register".toUpperCase(),
+                                  style: buttonStyle,
+                                ),
+                              ),
+                            ),
+                          )),
+                    ],
+                  ),
+                ),
+              ],
             ),
           );
   }

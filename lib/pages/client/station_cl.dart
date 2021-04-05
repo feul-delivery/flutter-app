@@ -42,22 +42,27 @@ class _StationProfilClState extends State<StationProfilCl> {
                                     fit: BoxFit.cover)),
                             child: Container(),
                           )
-                        : CachedNetworkImage(
-                            imageUrl: doc.data['photoURL'],
-                            imageBuilder: (context, imageProvider) => Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: imageProvider, fit: BoxFit.cover)),
-                              child: Container(),
-                            ),
-                            placeholder: (context, url) => Container(
-                              height: 200,
-                              child: Center(child: customeCircularProgress),
-                            ),
-                            errorWidget: (context, url, error) => Container(
-                              height: 200,
-                              child: Center(
-                                child: Icon(Icons.error, color: Colors.black),
+                        : Hero(
+                            tag: doc.documentID,
+                            child: CachedNetworkImage(
+                              imageUrl: doc.data['photoURL'],
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover)),
+                                child: Container(),
+                              ),
+                              placeholder: (context, url) => Container(
+                                height: 200,
+                                child: Center(child: customeCircularProgress),
+                              ),
+                              errorWidget: (context, url, error) => Container(
+                                height: 200,
+                                child: Center(
+                                  child: Icon(Icons.error, color: Colors.black),
+                                ),
                               ),
                             ),
                           )),

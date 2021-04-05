@@ -71,24 +71,19 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 215, 0, 0),
+      backgroundColor: Color(0xFFEFF0F5),
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
-              width: 200,
-              height: 200,
-              child: Image(
-                image: AssetImage('assets/fdsplash.png'),
-                fit: BoxFit.fill,
+              width: MediaQuery.of(context).size.width * 2 / 3,
+              height: MediaQuery.of(context).size.width * 2 / 3,
+              child: Hero(
+                tag: 'logo',
+                child: Image(
+                  image: AssetImage('assets/splash.png'),
+                  fit: BoxFit.fill,
+                ),
               )),
-          Text(
-            'Fuel Delivery',
-            style: TextStyle(
-                fontFamily: 'Gotham',
-                fontWeight: FontWeight.w700,
-                fontSize: 50,
-                color: Color.fromRGBO(246, 204, 7, 1)),
-          ),
         ]),
       ),
     );

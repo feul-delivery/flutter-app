@@ -180,27 +180,50 @@ Future<void> _showModalBottomRateUs(BuildContext context) {
               height: MediaQuery.of(context).size.height * 1 / 4,
               child: ListView(
                 children: [
-                  Text('Rate us', style: smallTileGray),
+                  Container(
+                      padding: EdgeInsets.all(5),
+                      margin: EdgeInsets.only(
+                          left: 10, right: 10, bottom: 5, top: 10),
+                      child: Text('Rate us', style: pageTitleX)),
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Icon(Icons.star_border_outlined),
-                          Icon(Icons.star_border_outlined),
-                          Icon(Icons.star_border_outlined),
-                          Icon(Icons.star_border_outlined),
-                          Icon(Icons.star_border_outlined),
-                        ],
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      FlatButton(
-                          onPressed: () {},
-                          child: Text("Envoyer", style: buttonStyleBlack)),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 4 / 5,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Icon(Icons.star_border_outlined),
+                            Icon(Icons.star_border_outlined),
+                            Icon(Icons.star_border_outlined),
+                            Icon(Icons.star_border_outlined),
+                            Icon(Icons.star_border_outlined),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      InkWell(
+                        onTap: () async {},
+                        child: Container(
+                          height: 45,
+                          margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                          width: MediaQuery.of(context).size.width,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: Colors.blue[700]),
+                          child: Center(
+                            child: Text(
+                              "Submit".toUpperCase(),
+                              style: buttonStyle,
+                            ),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
@@ -210,61 +233,131 @@ Future<void> _showModalBottomRateUs(BuildContext context) {
 }
 
 Future<void> _modalChangePasswordRow(BuildContext context) {
+  bool _isObscure = true;
+  final _formKey = GlobalKey<FormState>();
+  String _password;
   return showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Change password', style: smallTileGray),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[200]))),
-                  child: TextField(
-                    decoration: InputDecoration(
-                        hintText: "Old Password",
-                        hintStyle: hintStyle,
-                        border: InputBorder.none),
+            Container(
+                padding: EdgeInsets.all(5),
+                margin:
+                    EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 10),
+                child: Text('Change password', style: pageTitleX)),
+            SingleChildScrollView(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 10,
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[200]))),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        hintText: "New Password",
-                        hintStyle: hintStyle,
-                        border: InputBorder.none),
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        Container(
+                          margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                          child: TextFormField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              hintText: "Old password",
+                              hintStyle: hintStyle,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 15.0),
+                            ),
+                            validator: (val) => val != _password
+                                ? 'confirmation do not match the password.'
+                                : null,
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                          child: TextFormField(
+                            textInputAction: TextInputAction.next,
+                            obscureText: _isObscure,
+                            decoration: InputDecoration(
+                              hintText: "Password",
+                              suffixIcon: IconButton(
+                                  icon: Icon(
+                                    _isObscure
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: _isObscure
+                                        ? Color(0xFFB9BAC3)
+                                        : Colors.blue[700],
+                                  ),
+                                  onPressed: () {
+                                    // setState(() {
+                                    //   _isObscure = !_isObscure;
+                                    // });
+                                  }),
+                              hintStyle: hintStyle,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 15.0),
+                            ),
+                            validator: (val) => val.length < 6
+                                ? 'enter a password 8+ chars long.'
+                                : null,
+                            onChanged: (val) {
+                              // setState(() => password = val);
+                            },
+                          ),
+                        ),
+                        Container(
+                          margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                          child: TextFormField(
+                            obscureText: true,
+                            decoration: InputDecoration(
+                              hintText: "Confirmation",
+                              hintStyle: hintStyle,
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 10.0, vertical: 15.0),
+                            ),
+                            validator: (val) => val != _password
+                                ? 'confirmation do not match the password.'
+                                : null,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                      border:
-                          Border(bottom: BorderSide(color: Colors.grey[200]))),
-                  child: TextField(
-                    obscureText: true,
-                    decoration: InputDecoration(
-                        hintText: "Confirmation",
-                        hintStyle: hintStyle,
-                        border: InputBorder.none),
+                  SizedBox(
+                    height: 15,
                   ),
-                ),
-              ],
-            ),
-            Row(
-              children: [
-                FlatButton(
-                    onPressed: () {},
-                    child: Text("Change", style: buttonStyleBlack)),
-              ],
+                  Text(
+                    '',
+                    style: TextStyle(
+                        color: Colors.red,
+                        fontFamily: 'Gotham',
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () async {
+                      if (_formKey.currentState.validate()) {}
+                    },
+                    child: Container(
+                      height: 45,
+                      margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.blue[700]),
+                      child: Center(
+                        child: Text(
+                          "Validate".toUpperCase(),
+                          style: buttonStyle,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         );
@@ -276,13 +369,15 @@ Future<void> _buildModalAboutUsRow(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'About us',
-              style: smallTileGray,
-            ),
+            Container(
+                padding: EdgeInsets.all(5),
+                margin:
+                    EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 10),
+                child: Text('About us', style: pageTitleX)),
             Column(
-              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
                   width: 60,
@@ -305,36 +400,28 @@ Future<void> _buildModalAboutUsRow(BuildContext context) {
                   style: textStyle,
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 7,
                 ),
                 Text(
                   'Developped by:',
                   style: textStyle,
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 7,
                 ),
                 Text(
                   'ELHESSBI Imad',
-                  style: textStyle,
+                  style: titleStyleNew,
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 7,
                 ),
                 Text(
                   'ZAMOURI Iliyass',
-                  style: textStyle,
+                  style: titleStyleNew,
                 ),
               ],
             ),
-            FlatButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: Text(
-                  "Close",
-                  style: buttonStyleBlack,
-                )),
           ],
         );
       });

@@ -24,7 +24,7 @@ List<String> _favList = [];
 
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('');
+  Widget _appBarTitle = new Text('Explore', style: pageTitleX);
   String _searchString;
   @override
   Widget build(BuildContext context) {
@@ -62,47 +62,58 @@ class _ExploreClState extends State<ExploreCl> {
                         onPressed: _searchPressed),
                   ],
                 ),
-                body: StreamBuilder<QuerySnapshot>(
-                  stream: _searchString == null
-                      ? Firestore.instance.collection('entreprise').snapshots()
-                      : Firestore.instance
-                          .collection('entreprise')
-                          .where('titre', isGreaterThanOrEqualTo: _searchString)
-                          .snapshots(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Icon(Icons.cancel, color: Colors.blue[700]);
-                    }
-
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                        return SizedBox(
-                            child: Center(child: customeCircularProgress));
-                      case ConnectionState.none:
-                        return Icon(Icons.error_outline, color: Colors.black);
-                      case ConnectionState.done:
-                        return Icon(Icons.done, color: Colors.black);
-
-                      default:
-                        return new ListView(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            physics: BouncingScrollPhysics(),
-                            children: snapshot.data?.documents
-                                ?.map((DocumentSnapshot document) {
-                              return InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                StationProfilCl(
-                                                    doc: document)));
-                                  },
-                                  child: createCard(document));
-                            })?.toList());
-                    }
+                body: RefreshIndicator(
+                  onRefresh: () async {
+                    return await Future.delayed(Duration(seconds: 1))
+                        .then((value) {
+                      setState(() {});
+                    });
                   },
+                  child: StreamBuilder<QuerySnapshot>(
+                    stream: _searchString == null
+                        ? Firestore.instance
+                            .collection('entreprise')
+                            .snapshots()
+                        : Firestore.instance
+                            .collection('entreprise')
+                            .where('titre',
+                                isGreaterThanOrEqualTo: _searchString)
+                            .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Icon(Icons.cancel, color: Colors.blue[700]);
+                      }
+
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                          return SizedBox(
+                              child: Center(child: customeCircularProgress));
+                        case ConnectionState.none:
+                          return Icon(Icons.error_outline, color: Colors.black);
+                        case ConnectionState.done:
+                          return Icon(Icons.done, color: Colors.black);
+
+                        default:
+                          return new ListView(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              physics: BouncingScrollPhysics(),
+                              children: snapshot.data?.documents
+                                  ?.map((DocumentSnapshot document) {
+                                return InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  StationProfilCl(
+                                                      doc: document)));
+                                    },
+                                    child: createCard(document));
+                              })?.toList());
+                      }
+                    },
+                  ),
                 ),
                 bottomNavigationBar: BottomNavigationBar(
                     backgroundColor: Colors.white,
@@ -232,23 +243,28 @@ class _ExploreClState extends State<ExploreCl> {
                   )),
               //image of the station
               document['photoURL'] != null
-                  ? CachedNetworkImage(
-                      imageUrl: document['photoURL'],
-                      imageBuilder: (context, imageProvider) => Ink.image(
-                        height: 200,
-                        image: imageProvider,
-                        fit: BoxFit.fitWidth,
-                      ),
-                      placeholder: (context, url) => Container(
-                        height: 200,
-                        child: Center(
-                          child: customeCircularProgress,
+                  ? Hero(
+                      tag: document.documentID,
+                      child: CachedNetworkImage(
+                        imageUrl: document['photoURL'],
+                        imageBuilder: (context, imageProvider) => Material(
+                          child: Ink.image(
+                            height: 200,
+                            image: imageProvider,
+                            fit: BoxFit.fitWidth,
+                          ),
                         ),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        height: 200,
-                        child: Center(
-                          child: Icon(Icons.error, color: Colors.black),
+                        placeholder: (context, url) => Container(
+                          height: 200,
+                          child: Center(
+                            child: customeCircularProgress,
+                          ),
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                          height: 200,
+                          child: Center(
+                            child: Icon(Icons.error, color: Colors.black),
+                          ),
                         ),
                       ),
                     )
