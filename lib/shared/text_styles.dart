@@ -16,6 +16,11 @@ const pageTitle = TextStyle(
 );
 const pageTitleX =
     TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: Colors.black);
+const pageTitleXW = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    color: Colors.white,
+    letterSpacing: 1.2);
 const hintStyle = TextStyle(
   color: Colors.black54,
   fontWeight: FontWeight.w300,
