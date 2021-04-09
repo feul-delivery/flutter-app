@@ -5,11 +5,8 @@ import 'package:FD_flutter/pages/livreur/drawer_liv.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-//import '../../wrapper.dart';
 
 class IndexLv extends StatefulWidget {
   static Livreur livreur;
@@ -136,7 +133,7 @@ class _IndexLvState extends State<IndexLv> {
                                 'statut': 'inactif',
                               });
                               statut = 'inactif';
-                              cl= Colors.red;
+                              cl = Colors.red;
                             } else if (statut == 'inactif') {
                               await Firestore.instance
                                   .collection('livreur')
@@ -145,8 +142,7 @@ class _IndexLvState extends State<IndexLv> {
                                 'statut': 'actif',
                               });
                               statut = 'actif';
-                              cl= Colors.green;
-
+                              cl = Colors.green;
                             }
 
                             setState(() {});

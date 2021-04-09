@@ -63,6 +63,7 @@ class _ProfilStState extends State<ProfilSt> {
                             .collection('entreprise')
                             .document(uid)
                             .updateData({field: _value});
+                        Navigator.of(context).pop();
                       },
                       child: Text('Change',
                           style: TextStyle(color: Colors.black))),
@@ -84,26 +85,20 @@ class _ProfilStState extends State<ProfilSt> {
     User _user = Provider.of<User>(context, listen: true);
     return Scaffold(
       backgroundColor: Color(0xFFEFF0F5),
-      body: StreamBuilder<DocumentSnapshot>(
-          stream: Firestore.instance
-              .collection('entreprise')
-              .document(_user.uid)
-              .get()
-              .asStream(),
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              return Container(
-                width: MediaQuery.of(context).size.height * 1 / 5,
-                child: Center(
-                  child: Icon(
-                    OMIcons.error,
-                    color: Color(0xFF1763B9),
-                  ),
-                ),
-              );
-            }
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
+      body: RefreshIndicator(
+        onRefresh: () async {
+          return await Future.delayed(Duration(seconds: 1)).then((value) {
+            setState(() {});
+          });
+        },
+        child: StreamBuilder<DocumentSnapshot>(
+            stream: Firestore.instance
+                .collection('entreprise')
+                .document(_user.uid)
+                .get()
+                .asStream(),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
                 return Container(
                   width: MediaQuery.of(context).size.height * 1 / 5,
                   child: Center(
@@ -113,566 +108,521 @@ class _ProfilStState extends State<ProfilSt> {
                     ),
                   ),
                 );
+              }
+              switch (snapshot.connectionState) {
+                case ConnectionState.none:
+                  return Container(
+                    width: MediaQuery.of(context).size.height * 1 / 5,
+                    child: Center(
+                      child: Icon(
+                        OMIcons.error,
+                        color: Color(0xFF1763B9),
+                      ),
+                    ),
+                  );
 
-              case ConnectionState.waiting:
-                return Container(
-                  height: MediaQuery.of(context).size.height * 1 / 5,
-                  width: MediaQuery.of(context).size.width,
-                  child: Center(
-                    child: customeCircularProgress,
-                  ),
-                );
-              case ConnectionState.active:
-                return Container(
-                  height: MediaQuery.of(context).size.height * 1 / 5,
-                  width: MediaQuery.of(context).size.width,
-                  child: Center(
-                    child: customeCircularProgress,
-                  ),
-                );
-              default:
-                _imagesList =
-                    List<Map<dynamic, dynamic>>.from(snapshot.data['images'])
-                        .toList();
-                return Stack(
-                  children: <Widget>[
-                    CustomScrollView(
-                      slivers: <Widget>[
-                        SliverAppBar(
-                          expandedHeight: 200,
-                          backgroundColor:
-                              Theme.of(context).scaffoldBackgroundColor,
-                          flexibleSpace: FlexibleSpaceBar(
-                            collapseMode: CollapseMode.pin,
-                            background: snapshot.data['photoURL'] == null
-                                ? Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image:
-                                                AssetImage('assets/total.png'),
-                                            fit: BoxFit.cover)),
-                                    child: IconButton(
-                                      onPressed: () async {
-                                        Navigator.of(context).push(
-                                            PageTransition(
-                                                type: PageTransitionType
-                                                    .leftToRight,
-                                                child: ImageCapture(
-                                                  filePath:
-                                                      'images/profile/${_user.uid}',
-                                                  manyPics: false,
-                                                  collection: 'entreprise',
-                                                )));
-                                      },
-                                      icon: Icon(Icons.edit),
-                                      color: Colors.white,
-                                      iconSize: 40.0,
-                                    ))
-                                : CachedNetworkImage(
-                                    imageUrl: snapshot.data['photoURL'],
-                                    imageBuilder: (context, imageProvider) =>
-                                        Container(
-                                            decoration: BoxDecoration(
-                                                image: DecorationImage(
-                                                    image: imageProvider,
-                                                    fit: BoxFit.cover)),
-                                            child: IconButton(
-                                              onPressed: () async {
-                                                String _uid =
-                                                    snapshot.data.documentID;
-                                                Navigator.of(context).push(
-                                                    PageTransition(
-                                                        type: PageTransitionType
-                                                            .leftToRight,
-                                                        child: ImageCapture(
-                                                          filePath:
-                                                              'images/profile/$_uid',
-                                                          collection:
-                                                              'entreprise',
-                                                          manyPics: false,
-                                                        )));
-                                              },
-                                              icon: Icon(Icons.edit),
-                                              color: Colors.white,
-                                              iconSize: 40.0,
-                                            )),
-                                    progressIndicatorBuilder:
-                                        (context, url, downloadProgress) =>
-                                            customeCircularProgress,
-                                    errorWidget: (context, url, error) =>
-                                        Container(
-                                            child: IconButton(
-                                      onPressed: () async {
-                                        String _uid = Provider.of<User>(context,
-                                                listen: true)
-                                            .uid;
-                                        Navigator.of(context).push(
-                                            PageTransition(
-                                                type: PageTransitionType
-                                                    .leftToRight,
-                                                child: ImageCapture(
-                                                  filePath:
-                                                      'images/profile/$_uid',
-                                                  collection: 'entreprise',
-                                                  manyPics: false,
-                                                )));
-                                      },
-                                      icon: Icon(Icons.edit),
-                                      color: Colors.black,
-                                      iconSize: 40.0,
-                                    )),
-                                  ),
+                case ConnectionState.waiting:
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 1 / 5,
+                    width: MediaQuery.of(context).size.width,
+                    child: Center(
+                      child: customeCircularProgress,
+                    ),
+                  );
+                case ConnectionState.active:
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 1 / 5,
+                    width: MediaQuery.of(context).size.width,
+                    child: Center(
+                      child: customeCircularProgress,
+                    ),
+                  );
+                default:
+                  _imagesList =
+                      List<Map<dynamic, dynamic>>.from(snapshot.data['images'])
+                          .toList();
+                  return Stack(
+                    children: <Widget>[
+                      CustomScrollView(
+                        slivers: <Widget>[
+                          SliverAppBar(
+                            expandedHeight: 200,
+                            backgroundColor:
+                                Theme.of(context).scaffoldBackgroundColor,
+                            flexibleSpace: FlexibleSpaceBar(
+                              collapseMode: CollapseMode.pin,
+                              background: snapshot.data['photoURL'] == null
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/total.png'),
+                                              fit: BoxFit.cover)),
+                                      child: IconButton(
+                                        onPressed: () async {
+                                          Navigator.of(context).push(
+                                              PageTransition(
+                                                  type: PageTransitionType
+                                                      .leftToRight,
+                                                  child: ImageCapture(
+                                                    filePath:
+                                                        'images/profile/${_user.uid}',
+                                                    manyPics: false,
+                                                    collection: 'entreprise',
+                                                  )));
+                                        },
+                                        icon: Icon(Icons.edit),
+                                        color: Colors.white,
+                                        iconSize: 40.0,
+                                      ))
+                                  : CachedNetworkImage(
+                                      imageUrl: snapshot.data['photoURL'],
+                                      imageBuilder: (context, imageProvider) =>
+                                          Container(
+                                              decoration: BoxDecoration(
+                                                  image: DecorationImage(
+                                                      image: imageProvider,
+                                                      fit: BoxFit.cover)),
+                                              child: IconButton(
+                                                onPressed: () async {
+                                                  String _uid =
+                                                      snapshot.data.documentID;
+                                                  Navigator.of(context).push(
+                                                      PageTransition(
+                                                          type:
+                                                              PageTransitionType
+                                                                  .leftToRight,
+                                                          child: ImageCapture(
+                                                            filePath:
+                                                                'images/profile/$_uid',
+                                                            collection:
+                                                                'entreprise',
+                                                            manyPics: false,
+                                                          )));
+                                                },
+                                                icon: Icon(Icons.edit),
+                                                color: Colors.white,
+                                                iconSize: 40.0,
+                                              )),
+                                      progressIndicatorBuilder:
+                                          (context, url, downloadProgress) =>
+                                              customeCircularProgress,
+                                      errorWidget: (context, url, error) =>
+                                          Container(
+                                              child: IconButton(
+                                        onPressed: () async {
+                                          String _uid = Provider.of<User>(
+                                                  context,
+                                                  listen: true)
+                                              .uid;
+                                          Navigator.of(context).push(
+                                              PageTransition(
+                                                  type: PageTransitionType
+                                                      .leftToRight,
+                                                  child: ImageCapture(
+                                                    filePath:
+                                                        'images/profile/$_uid',
+                                                    collection: 'entreprise',
+                                                    manyPics: false,
+                                                  )));
+                                        },
+                                        icon: Icon(Icons.edit),
+                                        color: Colors.black,
+                                        iconSize: 40.0,
+                                      )),
+                                    ),
+                            ),
                           ),
-                        ),
-                        SliverList(
-                          delegate: SliverChildListDelegate([
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 20,
-                                right: 20,
-                                bottom: 20,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Container(
-                                    child: Padding(
-                                      padding: EdgeInsets.all(10),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: <Widget>[
-                                          FadeAnimation(
-                                              1,
-                                              Column(children: [
-                                                SizedBox(
-                                                  height: 20,
-                                                ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      '${snapshot.data['titre']}',
-                                                      style: TextStyle(
-                                                          color: Colors.grey,
-                                                          fontWeight:
-                                                              FontWeight.bold,
-                                                          fontSize: 25),
-                                                    ),
-                                                    InkWell(
-                                                      onTap: () {
-                                                        _editInfoDialog(
-                                                            _user.uid,
-                                                            'titre',
-                                                            'Title',
-                                                            context);
-                                                      },
-                                                      child: Row(
-                                                        children: [
-                                                          Icon(
-                                                            Icons.edit,
-                                                            size: 13,
-                                                            color: Colors.black,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 4,
-                                                          ),
-                                                          Text(
-                                                            "Edit",
-                                                            style: TextStyle(
+                          SliverList(
+                            delegate: SliverChildListDelegate([
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  left: 20,
+                                  right: 20,
+                                  bottom: 20,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
+                                          children: <Widget>[
+                                            FadeAnimation(
+                                                1,
+                                                Column(children: [
+                                                  SizedBox(
+                                                    height: 20,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Text(
+                                                        '${snapshot.data['titre']}',
+                                                        style: TextStyle(
+                                                            color: Colors.grey,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            fontSize: 25),
+                                                      ),
+                                                      InkWell(
+                                                        onTap: () {
+                                                          _editInfoDialog(
+                                                              _user.uid,
+                                                              'titre',
+                                                              'Title',
+                                                              context);
+                                                        },
+                                                        child: Row(
+                                                          children: [
+                                                            Icon(
+                                                              Icons.edit,
+                                                              size: 13,
                                                               color:
                                                                   Colors.black,
-                                                              fontSize: 13,
                                                             ),
-                                                          ),
-                                                        ],
+                                                            SizedBox(
+                                                              width: 4,
+                                                            ),
+                                                            Text(
+                                                              "Edit",
+                                                              style: TextStyle(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 13,
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
-                                                    ),
-                                                  ],
+                                                    ],
+                                                  ),
+                                                ])),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    FadeAnimation(
+                                      1.2,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Icon(
+                                                Icons.article,
+                                                color: Colors.black,
+                                              ),
+                                              SizedBox(
+                                                width: 8,
+                                              ),
+                                              Text(
+                                                "Description",
+                                                style: TextStyle(
+                                                    color: Colors.grey,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ],
+                                          ),
+                                          InkWell(
+                                            onTap: () {
+                                              _editInfoDialog(
+                                                  _user.uid,
+                                                  'description',
+                                                  'Description',
+                                                  context);
+                                            },
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.edit,
+                                                  size: 13,
+                                                  color: Colors.black,
                                                 ),
-                                              ])),
-                                          SizedBox(
-                                            height: 20,
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(
+                                                  "Edit",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 13,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
                                     ),
-                                  ),
-                                  FadeAnimation(
-                                    1.2,
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.article,
-                                              color: Colors.black,
-                                            ),
-                                            SizedBox(
-                                              width: 8,
-                                            ),
-                                            Text(
-                                              "Description",
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            _editInfoDialog(
-                                                _user.uid,
-                                                'description',
-                                                'Description',
-                                                context);
-                                          },
-                                          child: Row(
+                                    Divider(
+                                      height: 15,
+                                      thickness: 2,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    FadeAnimation(
+                                        1.2,
+                                        Text(
+                                          '${snapshot.data['description']}',
+                                          style: TextStyle(
+                                              color: Colors.grey, height: 1.4),
+                                        )),
+                                    FadeAnimation(
+                                      1.2,
+                                      SizedBox(
+                                        height: 20,
+                                      ),
+                                    ),
+                                    FadeAnimation(
+                                      1.2,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
                                             children: [
                                               Icon(
-                                                Icons.edit,
-                                                size: 13,
+                                                Icons.business,
                                                 color: Colors.black,
                                               ),
                                               SizedBox(
-                                                width: 4,
+                                                width: 8,
                                               ),
                                               Text(
-                                                "Edit",
+                                                "Address",
                                                 style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 13,
-                                                ),
+                                                    color: Colors.grey,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      ],
+                                          InkWell(
+                                            onTap: () {
+                                              _editInfoDialog(
+                                                  _user.uid,
+                                                  'adresse',
+                                                  'Address',
+                                                  context);
+                                            },
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.edit,
+                                                  size: 13,
+                                                  color: Colors.black,
+                                                ),
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(
+                                                  "Edit",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 13,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 15,
-                                    thickness: 2,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  FadeAnimation(
-                                      1.2,
-                                      Text(
-                                        '${snapshot.data['description']}',
-                                        style: TextStyle(
-                                            color: Colors.grey, height: 1.4),
-                                      )),
-                                  FadeAnimation(
-                                    1.2,
+                                    Divider(
+                                      height: 15,
+                                      thickness: 2,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    FadeAnimation(
+                                        1.2,
+                                        Text(
+                                          '${snapshot.data['adresse']}',
+                                          style: TextStyle(color: Colors.grey),
+                                        )),
                                     SizedBox(
                                       height: 20,
                                     ),
-                                  ),
-                                  FadeAnimation(
-                                    1.2,
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.business,
-                                              color: Colors.black,
-                                            ),
-                                            SizedBox(
-                                              width: 8,
-                                            ),
-                                            Text(
-                                              "Address",
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            _editInfoDialog(_user.uid,
-                                                'adresse', 'Address', context);
-                                          },
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.edit,
-                                                size: 13,
-                                                color: Colors.black,
-                                              ),
-                                              SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                "Edit",
-                                                style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 13,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(
-                                    height: 15,
-                                    thickness: 2,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  FadeAnimation(
+                                    FadeAnimation(
                                       1.2,
-                                      Text(
-                                        '${snapshot.data['adresse']}',
-                                        style: TextStyle(color: Colors.grey),
-                                      )),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  FadeAnimation(
-                                    1.2,
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.phone,
-                                              color: Colors.black,
-                                            ),
-                                            SizedBox(
-                                              width: 8,
-                                            ),
-                                            Text(
-                                              "Phone",
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            _editInfoDialog(_user.uid, 'tele',
-                                                'phone', context);
-                                          },
-                                          child: Row(
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
                                             children: [
                                               Icon(
-                                                Icons.edit,
-                                                size: 13,
+                                                Icons.phone,
                                                 color: Colors.black,
                                               ),
                                               SizedBox(
-                                                width: 4,
+                                                width: 8,
                                               ),
                                               Text(
-                                                "Edit",
+                                                "Phone",
                                                 style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 13,
-                                                ),
+                                                    color: Colors.grey,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      ],
+                                          InkWell(
+                                            onTap: () {
+                                              _editInfoDialog(_user.uid, 'tele',
+                                                  'phone', context);
+                                            },
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.edit,
+                                                  size: 13,
+                                                  color: Colors.black,
+                                                ),
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(
+                                                  "Edit",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 13,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 15,
-                                    thickness: 2,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  FadeAnimation(
+                                    Divider(
+                                      height: 15,
+                                      thickness: 2,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    FadeAnimation(
+                                        1.2,
+                                        Text(
+                                          '${snapshot.data['tele']}',
+                                          style: TextStyle(color: Colors.grey),
+                                        )),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    FadeAnimation(
                                       1.2,
-                                      Text(
-                                        '${snapshot.data['tele']}',
-                                        style: TextStyle(color: Colors.grey),
-                                      )),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  FadeAnimation(
-                                    1.2,
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.mail,
-                                              color: Colors.black,
-                                            ),
-                                            SizedBox(
-                                              width: 8,
-                                            ),
-                                            Text(
-                                              "Email",
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            _editInfoDialog(_user.uid, 'email',
-                                                'email', context);
-                                          },
-                                          child: Row(
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Row(
                                             children: [
                                               Icon(
-                                                Icons.edit,
-                                                size: 13,
+                                                Icons.photo,
                                                 color: Colors.black,
                                               ),
                                               SizedBox(
-                                                width: 4,
+                                                width: 8,
                                               ),
                                               Text(
-                                                "Edit",
+                                                "Images",
                                                 style: TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 13,
-                                                ),
+                                                    color: Colors.grey,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.bold),
                                               ),
                                             ],
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Divider(
-                                    height: 15,
-                                    thickness: 2,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  FadeAnimation(
-                                      1.2,
-                                      Text(
-                                        '${snapshot.data['email']}',
-                                        style: TextStyle(color: Colors.grey),
-                                      )),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  FadeAnimation(
-                                    1.2,
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Icon(
-                                              Icons.photo,
-                                              color: Colors.black,
-                                            ),
-                                            SizedBox(
-                                              width: 8,
-                                            ),
-                                            Text(
-                                              "Images",
-                                              style: TextStyle(
-                                                  color: Colors.grey,
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        InkWell(
-                                          onTap: () {
-                                            //page where images will be taking care of
-                                            Navigator.of(context).push(
-                                                PageTransition(
-                                                    child: ImagesSt(
-                                                      userUID: snapshot
-                                                          .data.documentID,
-                                                    ),
-                                                    type: PageTransitionType
-                                                        .fade));
-                                          },
-                                          child: Row(
-                                            children: [
-                                              Icon(
-                                                Icons.edit,
-                                                size: 13,
-                                                color: Colors.black,
-                                              ),
-                                              SizedBox(
-                                                width: 4,
-                                              ),
-                                              Text(
-                                                "Edit Images",
-                                                style: TextStyle(
+                                          InkWell(
+                                            onTap: () {
+                                              //page where images will be taking care of
+                                              Navigator.of(context).push(
+                                                  PageTransition(
+                                                      child: ImagesSt(
+                                                        userUID: snapshot
+                                                            .data.documentID,
+                                                      ),
+                                                      type: PageTransitionType
+                                                          .fade));
+                                            },
+                                            child: Row(
+                                              children: [
+                                                Icon(
+                                                  Icons.edit,
+                                                  size: 13,
                                                   color: Colors.black,
-                                                  fontSize: 13,
                                                 ),
-                                              ),
-                                            ],
+                                                SizedBox(
+                                                  width: 4,
+                                                ),
+                                                Text(
+                                                  "Edit Images",
+                                                  style: TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 13,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                  Divider(
-                                    height: 15,
-                                    thickness: 2,
-                                  ),
-                                  SizedBox(
-                                    height: 10,
-                                  ),
-                                  FadeAnimation(
-                                      1.8,
-                                      Container(
-                                        height: 200,
-                                        child: ListView(
-                                          scrollDirection: Axis.horizontal,
-                                          children: _imagesList
-                                              .map((e) => makeVideo(
-                                                  imageURL: e['photoURL']))
-                                              .toList(),
-                                        ),
-                                      )),
-                                  SizedBox(
-                                    height: 60,
-                                  )
-                                ],
-                              ),
-                            )
-                          ]),
-                        )
-                      ],
-                    ),
-                  ],
-                );
-            }
-          }),
+                                    Divider(
+                                      height: 15,
+                                      thickness: 2,
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    FadeAnimation(
+                                        1.8,
+                                        Container(
+                                          height: 200,
+                                          child: ListView(
+                                            scrollDirection: Axis.horizontal,
+                                            children: _imagesList
+                                                .map((e) => makeVideo(
+                                                    imageURL: e['photoURL']))
+                                                .toList(),
+                                          ),
+                                        )),
+                                    SizedBox(
+                                      height: 60,
+                                    )
+                                  ],
+                                ),
+                              )
+                            ]),
+                          )
+                        ],
+                      ),
+                    ],
+                  );
+              }
+            }),
+      ),
     );
   }
 
@@ -697,7 +647,7 @@ class _ProfilStState extends State<ProfilSt> {
           ),
         ),
       ),
-      aspectRatio: 1.5 / 1,
+      aspectRatio: 16 / 9,
     );
   }
 }

@@ -122,7 +122,7 @@ class _ImagesStState extends State<ImagesSt> {
                 crossAxisCount: 1,
                 mainAxisSpacing: 16,
                 crossAxisSpacing: 16,
-                childAspectRatio: 1,
+                childAspectRatio: 16 / 9,
                 children: _imagesList
                     .map((e) => CachedNetworkImage(
                           imageUrl: e['photoURL'],

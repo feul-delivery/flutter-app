@@ -261,7 +261,7 @@ class _StationProfilClState extends State<StationProfilCl> {
           ),
         ),
       ),
-      aspectRatio: 1.5 / 1,
+      aspectRatio: 16 / 9,
     );
   }
 }

@@ -38,7 +38,7 @@ class _IndexStState extends State<IndexSt> {
                     onTap: () => exit(0),
                     child: Text(
                       'Yes',
-                      style: buttonStyle,
+                      style: buttonStyleBlack,
                     ),
                   ),
                   SizedBox(height: 16),
@@ -59,98 +59,99 @@ class _IndexStState extends State<IndexSt> {
             false;
       },
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: scaffoldBackground,
         appBar: AppBar(
           title: Text("Home", style: pageTitle),
           backgroundColor: Colors.black,
           centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.refresh),
-                onPressed: () {
-                  setState(() {
-                    Navigator.of(context).pushReplacement(PageTransition(
-                        type: PageTransitionType.fade, child: Wrapper()));
-                  });
-                })
-          ],
         ),
-        body: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Container(
-            margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
-            child: Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 10,
-                ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Orders',
-                        style: subTitleStyle,
-                      ),
-                      Container(
-                        padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20.0),
-                          color: Colors.green,
+        body: RefreshIndicator(
+          onRefresh: () async {
+            return await Future.delayed(Duration(seconds: 2)).then((val) {
+              setState(() {
+                Navigator.of(context).pushReplacement(PageTransition(
+                    type: PageTransitionType.fade, child: Wrapper()));
+              });
+            });
+          },
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Orders',
+                          style: subTitleStyle,
                         ),
-                        child: Text(
-                          'Live',
-                          style: moreStyleWhite,
-                        ),
-                      )
-                    ]),
-                Divider(
-                  height: 5,
-                  thickness: 1,
-                ),
-                StreamBuilder<QuerySnapshot>(
-                  stream: Firestore.instance
-                      .collection('orders')
-                      .where('uidstation',
-                          isEqualTo: Provider.of<User>(context).uid)
-                      .where('statut', isEqualTo: 'waiting')
-                      .orderBy('dateheurec', descending: true)
-                      .getDocuments()
-                      .asStream(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasError) {
-                      return Icon(Icons.cancel, color: Colors.black);
-                    }
-                    switch (snapshot.connectionState) {
-                      case ConnectionState.waiting:
-                        return SizedBox(
-                            child: Center(child: customeCircularProgress));
-                      case ConnectionState.none:
-                        return Icon(Icons.error_outline, color: Colors.black);
-                      default:
-                        return new ListView(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            physics: BouncingScrollPhysics(),
-                            children: snapshot.data?.documents
-                                ?.map((DocumentSnapshot document) {
-                              return InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                CommandeDetailSt(document)));
-                                  },
-                                  child: ToutCommandes(document, 'index'));
-                            })?.toList());
-                    }
-                  },
-                ),
-              ],
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10.0, 5.0, 10.0, 5.0),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Colors.green,
+                          ),
+                          child: Text(
+                            'Live',
+                            style: moreStyleWhite,
+                          ),
+                        )
+                      ]),
+                  Divider(
+                    height: 5,
+                    thickness: 1,
+                  ),
+                  StreamBuilder<QuerySnapshot>(
+                    stream: Firestore.instance
+                        .collection('orders')
+                        .where('uidstation',
+                            isEqualTo: Provider.of<User>(context).uid)
+                        .where('statut', isEqualTo: 'waiting')
+                        .orderBy('dateheurec', descending: true)
+                        .getDocuments()
+                        .asStream(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Icon(Icons.cancel, color: Colors.black);
+                      }
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                          return SizedBox(
+                              child: Center(child: customeCircularProgress));
+                        case ConnectionState.none:
+                          return Icon(Icons.error_outline, color: Colors.black);
+                        default:
+                          return new ListView(
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              physics: BouncingScrollPhysics(),
+                              children: snapshot.data?.documents
+                                  ?.map((DocumentSnapshot document) {
+                                return InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  CommandeDetailSt(document)));
+                                    },
+                                    child: ToutCommandes(document, 'index'));
+                              })?.toList());
+                      }
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
         drawer: DrawerSt(),
+        
         bottomNavigationBar: ButtomBarSt(),
       ),
     );

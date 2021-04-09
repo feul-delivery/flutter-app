@@ -1,8 +1,6 @@
 import 'dart:io';
-import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
