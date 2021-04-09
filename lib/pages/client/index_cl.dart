@@ -83,18 +83,18 @@ class _IndexClState extends State<IndexCl> {
             children: <Widget>[
               Container(
                 decoration: BoxDecoration(
-                    color: Colors.white,
+                    color: Colors.blue[500],
                     border: Border(
                         bottom: BorderSide(width: 1, color: Colors.grey[300]))),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
                       padding: EdgeInsets.all(5),
                       margin: EdgeInsets.only(left: 10, right: 10, bottom: 5),
                       child: Text(
-                        'The best of the week',
-                        style: pageTitleX,
+                        'The best of the week'.toUpperCase(),
+                        style: pageTitleXW,
                       ),
                     ),
                     Material(
