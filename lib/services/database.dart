@@ -166,6 +166,7 @@ class DatabaseService {
     String email,
     String address,
     List<dynamic> types,
+    List<dynamic> images
   }) async {
     if (types == null) {
       return await entrepriseCollection.document(uid).setData({
@@ -182,7 +183,8 @@ class DatabaseService {
         'tele': tele,
         'email': email,
         'adresse': address,
-        'type': types
+        'type': types,
+        'images' : images
       }, merge: true);
     }
   }

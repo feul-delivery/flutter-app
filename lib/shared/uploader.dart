@@ -70,16 +70,15 @@ class _UploaderState extends State<Uploader> {
     });
   }
 
-  _addFileToFirestore() async {
+  _addFileToFirestore(BuildContext context) async {
     _photoURL = await (await _uploadTask.onComplete).ref.getDownloadURL();
     if (widget.isMany) {
       addToImages();
     } else {
       updateUser();
     }
-
-    Navigator.of(context).pushReplacement(
-        PageTransition(type: PageTransitionType.fade, child: Wrapper()));
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => Wrapper()));
   }
 
   @override
@@ -94,51 +93,9 @@ class _UploaderState extends State<Uploader> {
             double progressPercent = event != null
                 ? event.bytesTransferred / event.totalByteCount
                 : 0;
-
+            if (_uploadTask.isComplete) _addFileToFirestore(context);
             return Column(
               children: [
-                if (_uploadTask.isComplete)
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.all(10),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Uploading completed successfuly',
-                                style: TextStyle(fontFamily: 'Gotham')),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Icon(Icons.done)
-                          ],
-                        ),
-                      ),
-                      InkWell(
-                        borderRadius: BorderRadius.circular(50),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 1 / 4,
-                          height: 30,
-                          margin: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                              color: Colors.black,
-                              borderRadius: BorderRadius.circular(50)),
-                          child: Center(
-                            child: Text('Done', style: buttonStyle),
-                          ),
-                        ),
-                        onTap: () async {
-                          _addFileToFirestore();
-                        },
-                      ),
-                      SizedBox(
-                        height: 20,
-                      )
-                    ],
-                  ),
-
                 if (_uploadTask.isPaused)
                   FlatButton(
                     child: Icon(OMIcons.playArrow),

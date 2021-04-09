@@ -16,9 +16,13 @@ class ImagesSt extends StatefulWidget {
 
 List<Map<dynamic, dynamic>> _imagesList;
 
-void _deleteImage(Map<dynamic, dynamic> image, String uid) {
+void _deleteImage(
+    Map<dynamic, dynamic> image, String uid, BuildContext context) {
   Firestore.instance.collection('entreprise').document(uid).updateData({
     'images': FieldValue.arrayRemove([image])
+  }).whenComplete(() {
+    Navigator.of(context)
+        .pushReplacement(MaterialPageRoute(builder: (context) => Wrapper()));
   });
 }
 
@@ -128,7 +132,8 @@ class _ImagesStState extends State<ImagesSt> {
                                       image: imageProvider, fit: BoxFit.cover)),
                               child: IconButton(
                                 onPressed: () async {
-                                  _deleteImage(e, snapshot.data.documentID);
+                                  _deleteImage(
+                                      e, snapshot.data.documentID, context);
                                 },
                                 icon: Icon(Icons.delete),
                                 color: Colors.white,

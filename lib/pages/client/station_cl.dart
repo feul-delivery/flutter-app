@@ -9,15 +9,17 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 class StationProfilCl extends StatefulWidget {
   final DocumentSnapshot doc;
   StationProfilCl({@required this.doc});
-
   @override
   _StationProfilClState createState() => _StationProfilClState();
 }
+
+List<Map<dynamic, dynamic>> _imagesList;
 
 class _StationProfilClState extends State<StationProfilCl> {
   @override
   Widget build(BuildContext context) {
     var doc = widget.doc;
+    _imagesList = List<Map<dynamic, dynamic>>.from(doc.data['images']).toList();
     return Scaffold(
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       body: Stack(
@@ -161,34 +163,39 @@ class _StationProfilClState extends State<StationProfilCl> {
                         FadeAnimation(
                             0.01, Text(doc['email'], style: smallTileGray)),
                         SizedBox(height: 20),
-                        FadeAnimation(
-                          0.01,
-                          Row(
-                            children: [
-                              Icon(Icons.photo, color: Colors.black),
-                              SizedBox(width: 8),
-                              Text("Pictures", style: tileTitleStyle),
-                            ],
-                          ),
-                        ),
-                        Divider(height: 15, thickness: 1),
-                        SizedBox(height: 10),
-                        FadeAnimation(
-                            1.8,
-                            Container(
-                              height: 200,
-                              child: ListView(
-                                scrollDirection: Axis.horizontal,
-                                children: <Widget>[
-                                  makeVideo(imageURL: 'assets/s4.png'),
-                                  makeVideo(imageURL: 'assets/s4.png'),
-                                  makeVideo(imageURL: 'assets/s4.png'),
+                        _imagesList.length != 0
+                            ? Column(
+                                children: [
+                                  FadeAnimation(
+                                    0.01,
+                                    Row(
+                                      children: [
+                                        Icon(Icons.photo, color: Colors.black),
+                                        SizedBox(width: 8),
+                                        Text("Pictures", style: tileTitleStyle),
+                                      ],
+                                    ),
+                                  ),
+                                  Divider(height: 15, thickness: 1),
+                                  SizedBox(height: 10),
+                                  FadeAnimation(
+                                      1.8,
+                                      Container(
+                                        height: 200,
+                                        child: ListView(
+                                          scrollDirection: Axis.horizontal,
+                                          children: _imagesList
+                                              .map((e) => makeVideo(
+                                                  imageURL: e['photoURL']))
+                                              .toList(),
+                                        ),
+                                      )),
+                                  SizedBox(
+                                    height: 60,
+                                  )
                                 ],
-                              ),
-                            )),
-                        SizedBox(
-                          height: 60,
-                        )
+                              )
+                            : Container(),
                       ],
                     ),
                   )

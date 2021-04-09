@@ -2,6 +2,7 @@ import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 
 class AddLivreur extends StatefulWidget {
@@ -20,12 +21,17 @@ class _AddLivreurState extends State<AddLivreur> {
     final User _user = Provider.of<User>(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xFFEFF0F5),
         title: Text(
           "New Deliveryman",
-          style: pageTitle,
+          style: pageTitleX,
         ),
-        centerTitle: true,
+        leading: IconButton(
+          icon: Icon(OMIcons.arrowBack, color: Colors.black),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
       ),
       body: Column(
         children: [
