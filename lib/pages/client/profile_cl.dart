@@ -123,6 +123,14 @@ class _ProfileClState extends State<ProfileCl> {
                       child: customeCircularProgress,
                     ),
                   );
+                case ConnectionState.active:
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 1 / 5,
+                    width: MediaQuery.of(context).size.width,
+                    child: Center(
+                      child: customeCircularProgress,
+                    ),
+                  );
                 default:
                   _favList = List.from(snapshotClient.data['favorite']);
                   return ListView(shrinkWrap: true, children: [

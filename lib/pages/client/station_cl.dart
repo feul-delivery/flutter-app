@@ -180,9 +180,9 @@ class _StationProfilClState extends State<StationProfilCl> {
                               child: ListView(
                                 scrollDirection: Axis.horizontal,
                                 children: <Widget>[
-                                  makeVideo(image: 'assets/s4.png'),
-                                  makeVideo(image: 'assets/s4.png'),
-                                  makeVideo(image: 'assets/s4.png'),
+                                  makeVideo(imageURL: 'assets/s4.png'),
+                                  makeVideo(imageURL: 'assets/s4.png'),
+                                  makeVideo(imageURL: 'assets/s4.png'),
                                 ],
                               ),
                             )),
@@ -199,11 +199,11 @@ class _StationProfilClState extends State<StationProfilCl> {
           Positioned.fill(
             bottom: 20,
             top: MediaQuery.of(context).size.height -
-                MediaQuery.of(context).size.height * 1 / 12,
+                MediaQuery.of(context).size.height * 0.075,
             left: MediaQuery.of(context).size.width -
-                MediaQuery.of(context).size.width * 7 / 10,
+                MediaQuery.of(context).size.width * 0.7,
             right: MediaQuery.of(context).size.width -
-                MediaQuery.of(context).size.width * 7 / 10,
+                MediaQuery.of(context).size.width * 0.7,
             child: FadeAnimation(
               0.01,
               InkWell(
@@ -233,16 +233,28 @@ class _StationProfilClState extends State<StationProfilCl> {
     );
   }
 
-  Widget makeVideo({image}) {
+  Widget makeVideo({imageURL}) {
     return AspectRatio(
-      aspectRatio: 1.5 / 1,
-      child: Container(
-        margin: EdgeInsets.only(right: 20),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            image:
-                DecorationImage(image: AssetImage(image), fit: BoxFit.cover)),
+      child: CachedNetworkImage(
+        imageUrl: imageURL,
+        imageBuilder: (context, imageProvider) => Container(
+          margin: EdgeInsets.only(right: 20),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              image: DecorationImage(image: imageProvider, fit: BoxFit.cover)),
+        ),
+        placeholder: (context, url) => Container(
+          height: 200,
+          child: Center(child: customeCircularProgress),
+        ),
+        errorWidget: (context, url, error) => Container(
+          height: 200,
+          child: Center(
+            child: Icon(Icons.error, color: Colors.black),
+          ),
+        ),
       ),
+      aspectRatio: 1.5 / 1,
     );
   }
 }

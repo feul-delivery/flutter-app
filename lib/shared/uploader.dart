@@ -1,14 +1,16 @@
 import 'dart:io';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/modules/user.dart';
-import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class Uploader extends StatefulWidget {
+  final String dateAjoute;
   final File file;
   final String filePath;
   final String collection;
@@ -17,7 +19,8 @@ class Uploader extends StatefulWidget {
       {@required this.file,
       @required this.filePath,
       @required this.collection,
-      @required this.isMany});
+      @required this.isMany,
+      this.dateAjoute});
 
   @override
   _UploaderState createState() => _UploaderState();
@@ -39,15 +42,44 @@ class _UploaderState extends State<Uploader> {
         .updateData({'photoURL': _photoURL});
   }
 
+  void addToImages() async {
+    String _uid = Provider.of<User>(context).uid;
+    Map<dynamic, dynamic> _imageSet = {
+      'photoURL': _photoURL,
+      'dateAjoute': widget.dateAjoute
+    };
+    await Firestore.instance
+        .collection(widget.collection)
+        .document(_uid)
+        .updateData({
+      'images': FieldValue.arrayUnion([_imageSet])
+    });
+  }
+
   /// Starts an upload task
   void _startUpload() {
-    /// Unique file name for the file'images/profile/${DateTime.now()}.png'
-    String filePath = widget.filePath;
-    _reference = _storage.ref().child(filePath);
+    String _filePath = widget.filePath;
+    if (widget.isMany) {
+      _filePath = _filePath + widget.dateAjoute;
+    }
+
+    _reference = _storage.ref().child(_filePath);
 
     setState(() {
       _uploadTask = _reference.putFile(widget.file);
     });
+  }
+
+  _addFileToFirestore() async {
+    _photoURL = await (await _uploadTask.onComplete).ref.getDownloadURL();
+    if (widget.isMany) {
+      addToImages();
+    } else {
+      updateUser();
+    }
+
+    Navigator.of(context).pushReplacement(
+        PageTransition(type: PageTransitionType.fade, child: Wrapper()));
   }
 
   @override
@@ -98,12 +130,7 @@ class _UploaderState extends State<Uploader> {
                           ),
                         ),
                         onTap: () async {
-                          _photoURL = await (await _uploadTask.onComplete)
-                              .ref
-                              .getDownloadURL();
-                          updateUser();
-                          Navigator.of(context).pushReplacement(PageTransition(
-                              type: PageTransitionType.fade, child: Wrapper()));
+                          _addFileToFirestore();
                         },
                       ),
                       SizedBox(
@@ -114,13 +141,13 @@ class _UploaderState extends State<Uploader> {
 
                 if (_uploadTask.isPaused)
                   FlatButton(
-                    child: Icon(Icons.play_arrow),
+                    child: Icon(OMIcons.playArrow),
                     onPressed: _uploadTask.resume,
                   ),
 
                 if (_uploadTask.isInProgress)
                   FlatButton(
-                    child: Icon(Icons.pause),
+                    child: Icon(OMIcons.pause),
                     onPressed: _uploadTask.pause,
                   ),
 

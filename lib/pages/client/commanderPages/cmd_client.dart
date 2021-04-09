@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:FD_flutter/modules/order.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_done.dart';
@@ -6,6 +8,7 @@ import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/services.dart';
@@ -48,7 +51,7 @@ class _ClientOrderState extends State<ClientOrder> {
                           margin: EdgeInsets.all(20),
                           child: Text(
                             'Payment',
-                            style: pageTitle,
+                            style: pageTitleX,
                           ),
                         ),
                         InkWell(
@@ -87,17 +90,21 @@ class _ClientOrderState extends State<ClientOrder> {
                                 value: pmethode.livraison,
                                 groupValue: _methd,
                                 onChanged: (pmethode valeur) {
-                                  _methd = valeur;
+                                  setState(() {
+                                    _methd = valeur;
+                                  });
                                 }),
                           ),
                           ListTile(
-                            title: Text('G-Pay'),
+                            title: Text('Credit Card'),
                             leading: Radio(
                                 activeColor: Colors.black,
                                 value: pmethode.google,
                                 groupValue: _methd,
                                 onChanged: (pmethode valeur) {
-                                  _methd = valeur;
+                                  setState(() {
+                                    _methd = valeur;
+                                  });
                                 }),
                           )
                         ],
@@ -125,22 +132,33 @@ class _ClientOrderState extends State<ClientOrder> {
     int _orderNum = 1;
     DatabaseService _auth = DatabaseService();
     return Scaffold(
+      backgroundColor: Color(0xFFEFF0F5),
       appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            OMIcons.arrowBack,
+            color: Colors.black,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: Text(
           "Order",
-          style: pageTitle,
+          style: pageTitleX,
         ),
         actions: [
           IconButton(
               icon: Icon(
                 Icons.payment,
-                color: Colors.white,
+                color: Colors.black,
               ),
               onPressed: () => _showModalSheetPayment(context)),
           SizedBox(
             width: 10.0,
           ),
-          IconButton(
+          TextButton(
+            child: Text('Next', style: tileTitleStyle),
             onPressed: () async {
               if (_methode == null) {
                 _showModalSheetPayment(context);
@@ -156,22 +174,12 @@ class _ClientOrderState extends State<ClientOrder> {
                     idtype: _type['libelle'],
                     dateheurec: DateTime.now(),
                     color: _carColor.value,
+                    methode: _methode,
                     matricule: _matricule,
                     adresse: _adresse,
                     volume: _volume,
                   );
-                  // inspect(Order(
-                  //   idorder: _orderNum,
-                  //   prixtotal: _volume * _type['prix'],
-                  //   uidentreprise: doc.documentID,
-                  //   uidclient: user.uid,
-                  //   idtype: _type['libelle'],
-                  //   dateheurec: DateTime.now(),
-                  //   color: _carColor.toString(),
-                  //   matricule: _matricule,
-                  //   adresse: _adresse,
-                  //   volume: _volume,
-                  // ));
+                  inspect(_order);
                   if (_order.methode == 'COD') {
                     Navigator.of(context).pushReplacement(PageTransition(
                         type: PageTransitionType.leftToRight,
@@ -188,13 +196,9 @@ class _ClientOrderState extends State<ClientOrder> {
                 }
               }
             },
-            icon: Icon(Icons.navigate_next),
-          ),
-          SizedBox(
-            width: 10.0,
           ),
         ],
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         elevation: 1,
       ),
       body: Container(
@@ -312,14 +316,16 @@ class _ClientOrderState extends State<ClientOrder> {
                         );
                       },
                       child: Container(
-                        width: 10,
-                        height: 10,
+                        width: 40,
+                        height: 40,
                         decoration: BoxDecoration(
                             color: Colors.black,
                             borderRadius: BorderRadius.circular(50)),
-                        child: const Icon(
-                          Icons.directions_car,
-                          color: Colors.white,
+                        child: Center(
+                          child: const Icon(
+                            Icons.directions_car,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                     ),
