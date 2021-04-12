@@ -4,6 +4,7 @@ import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Authenticate extends StatefulWidget {
   @override
@@ -14,6 +15,27 @@ class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFFEFF0F5),
+        elevation: 0,
+        actions: [
+          InkWell(
+              radius: 50,
+              onTap: () async {
+                SplashScreen.lang == 'FR'
+                    ? _langChangeState('EN')
+                    : _langChangeState('FR');
+                Navigator.pushReplacement(context,
+                    MaterialPageRoute(builder: (context) => SplashScreen()));
+              },
+              child: Container(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.all(5),
+                child: Text(SplashScreen.lang == 'FR' ? '🇫🇷' : '🇺🇸',
+                    style: TextStyle(fontSize: 25)),
+              ))
+        ],
+      ),
       body: Container(
         color: Color(0xFFEFF0F5),
         child: Column(
@@ -84,4 +106,9 @@ class _AuthenticateState extends State<Authenticate> {
       ),
     );
   }
+}
+
+Future<void> _langChangeState(String lang) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString('lang', lang);
 }

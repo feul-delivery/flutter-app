@@ -3,18 +3,19 @@ import 'package:FD_flutter/shared/StarterPage.dart';
 import 'package:flutter/material.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:page_transition/page_transition.dart';
 import 'dart:async';
 import '../wrapper.dart';
 
 class SplashScreen extends StatefulWidget {
   static Map<String, String> mapLang;
+  static String lang;
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
   bool _isFirstTime = true;
+
   @override
   void initState() {
     super.initState();
@@ -24,8 +25,8 @@ class _SplashScreenState extends State<SplashScreen> {
       setState(() {
         AuthService.type = _type;
       });
-      String _lang = await _getUserLangFromSharedPref();
-      if (_lang == 'FR') {
+      SplashScreen.lang = await _getUserLangFromSharedPref();
+      if (SplashScreen.lang == 'FR') {
         setState(() {
           SplashScreen.mapLang = mapFR;
         });

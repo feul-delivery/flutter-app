@@ -692,41 +692,50 @@ Future<void> _buildModalChangeLang(BuildContext context) {
   return showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-                padding: EdgeInsets.all(5),
-                margin:
-                    EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 10),
-                child: Text('${SplashScreen.mapLang['aboutus']}',
-                    style: pageTitleX)),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InkWell(
-                    onTap: () {
-                      _langChangeState('FR');
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => SplashScreen()));
-                    },
-                    child: Container(
-                      child: Center(
-                          child: Text('🇫🇷 ${SplashScreen.mapLang['fr']}')),
-                    )),
-                InkWell(
-                    onTap: () {
-                      _langChangeState('EN');
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => SplashScreen()));
-                    },
-                    child: Container(
-                      child: Center(
-                          child: Text('🇺🇸 ${SplashScreen.mapLang['en']}')),
-                    ))
-              ],
-            ),
-          ],
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  padding: EdgeInsets.all(5),
+                  margin:
+                      EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 10),
+                  child: Text('${SplashScreen.mapLang['changelang']}',
+                      style: pageTitleX)),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  InkWell(
+                      onTap: () {
+                        _langChangeState('FR');
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => SplashScreen()));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.all(20),
+                        padding: EdgeInsets.all(10),
+                        child: Center(
+                            child: Text('🇫🇷 ${SplashScreen.mapLang['fr']}',
+                                style: buttonStyleBlack)),
+                      )),
+                  InkWell(
+                      onTap: () {
+                        _langChangeState('EN');
+                        Navigator.of(context).pushReplacement(MaterialPageRoute(
+                            builder: (context) => SplashScreen()));
+                      },
+                      child: Container(
+                        margin: EdgeInsets.all(20),
+                        padding: EdgeInsets.all(10),
+                        child: Center(
+                            child: Text('🇺🇸 ${SplashScreen.mapLang['en']}',
+                                style: buttonStyleBlack)),
+                      ))
+                ],
+              ),
+            ],
+          ),
         );
       });
 }
