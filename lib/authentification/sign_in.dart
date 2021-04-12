@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _SignInState extends State<SignIn> {
                     Container(
                       margin: EdgeInsets.all(15),
                       child: Text(
-                        "Welcome Back",
+                        "${SplashScreen.mapLang['welcomeback']}",
                         style: TextStyle(
                           color: Colors.blue[700],
                           fontSize: 50,
@@ -65,7 +66,7 @@ class _SignInState extends State<SignIn> {
                                   margin: EdgeInsets.only(
                                       left: 10, right: 10, bottom: 5),
                                   child: Text(
-                                    'Forgot your password?',
+                                    '${SplashScreen.mapLang['forgetpassword']}',
                                     style: pageTitleX,
                                   ),
                                 ),
@@ -83,7 +84,7 @@ class _SignInState extends State<SignIn> {
                                       if (val.isEmpty ||
                                           !val.contains('@') ||
                                           !val.contains('.')) {
-                                        return 'Please enter a valid email address.';
+                                        return '${SplashScreen.mapLang['emailvalidator']}';
                                       }
                                       return null;
                                     },
@@ -117,7 +118,8 @@ class _SignInState extends State<SignIn> {
                                               color: Colors.white),
                                           child: Center(
                                             child: Text(
-                                              "Cancel".toUpperCase(),
+                                              "${SplashScreen.mapLang['cancel']}"
+                                                  .toUpperCase(),
                                               style: buttonStyleBlack,
                                             ),
                                           ),
@@ -139,7 +141,8 @@ class _SignInState extends State<SignIn> {
                                               color: Colors.blue[700]),
                                           child: Center(
                                             child: Text(
-                                              "Send Email".toUpperCase(),
+                                              "${SplashScreen.mapLang['sendemail']}"
+                                                  .toUpperCase(),
                                               style: buttonStyle,
                                             ),
                                           ),
@@ -174,7 +177,7 @@ class _SignInState extends State<SignIn> {
                                                 if (val.isEmpty ||
                                                     !val.contains('@') ||
                                                     !val.contains('.')) {
-                                                  return 'Please enter a valid email address.';
+                                                  return '${SplashScreen.mapLang['emailvalidator']}';
                                                 }
                                                 return null;
                                               },
@@ -191,7 +194,8 @@ class _SignInState extends State<SignIn> {
                                             child: TextFormField(
                                               obscureText: _isObscure,
                                               decoration: InputDecoration(
-                                                hintText: "Password",
+                                                hintText:
+                                                    "${SplashScreen.mapLang['password']}",
                                                 hintStyle: hintStyle,
                                                 suffixIcon: IconButton(
                                                     icon: Icon(
@@ -215,7 +219,7 @@ class _SignInState extends State<SignIn> {
                                                         vertical: 15.0),
                                               ),
                                               validator: (val) => val.length < 6
-                                                  ? 'Enter a password 6+ chars long'
+                                                  ? '${SplashScreen.mapLang['passwordvalidator']}'
                                                   : null,
                                               onChanged: (val) {
                                                 setState(() => password = val);
@@ -236,11 +240,7 @@ class _SignInState extends State<SignIn> {
                                         0.1,
                                         Text(
                                           errorMessage,
-                                          style: TextStyle(
-                                              color: Colors.red,
-                                              fontFamily: 'Gotham',
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w400),
+                                          style: errorTextStyle,
                                         ),
                                       ),
                                 SizedBox(
@@ -267,7 +267,7 @@ class _SignInState extends State<SignIn> {
                                                 errorMessage =
                                                     AuthService.error;
                                                 if (errorMessage ==
-                                                    "Your password is wrong.") {
+                                                    "${SplashScreen.mapLang['ERROR_WRONG_PASSWORD']}") {
                                                   setState(() {
                                                     _password++;
                                                   });
@@ -289,7 +289,7 @@ class _SignInState extends State<SignIn> {
                                             }
                                           } on SocketException catch (_) {
                                             showInSnackBar(
-                                                "Check your internet connection");
+                                                "${SplashScreen.mapLang['nointernet']}");
                                           }
                                         }
                                       },
@@ -305,7 +305,8 @@ class _SignInState extends State<SignIn> {
                                             color: Colors.blue[700]),
                                         child: Center(
                                           child: Text(
-                                            "Log in".toUpperCase(),
+                                            "${SplashScreen.mapLang['login']}"
+                                                .toUpperCase(),
                                             style: buttonStyle,
                                           ),
                                         ),

@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:FD_flutter/pages/client/profile_cl.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class _IndexClState extends State<IndexCl> {
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
         title: Text(
-          "Home",
+          "${SplashScreen.mapLang['home']}",
           style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.w700,
@@ -60,16 +61,17 @@ class _IndexClState extends State<IndexCl> {
             BottomNavigationBarItem(
                 icon: Icon(OMIcons.home, color: Colors.blue[700]),
                 // ignore: deprecated_member_use
-                title: Text('Home', style: TextStyle(color: Colors.blue[700]))),
+                title: Text('${SplashScreen.mapLang['home']}',
+                    style: TextStyle(color: Colors.blue[700]))),
             BottomNavigationBarItem(
                 icon: Icon(OMIcons.explore, color: Color(0xFFB9BAC3)),
                 // ignore: deprecated_member_use
-                title: Text('Explore',
+                title: Text('${SplashScreen.mapLang['explore']}',
                     style: TextStyle(color: Color(0xFFB9BAC3)))),
             BottomNavigationBarItem(
                 icon: Icon(OMIcons.person, color: Color(0xFFB9BAC3)),
                 // ignore: deprecated_member_use
-                title: Text('Profile',
+                title: Text('${SplashScreen.mapLang['profile']}',
                     style: TextStyle(color: Color(0xFFB9BAC3)))),
           ]),
       body: RefreshIndicator(
@@ -93,7 +95,7 @@ class _IndexClState extends State<IndexCl> {
                       padding: EdgeInsets.all(5),
                       margin: EdgeInsets.only(left: 10, right: 10, bottom: 5),
                       child: Text(
-                        'The best of the week'.toUpperCase(),
+                        '${SplashScreen.mapLang['bestweek']}'.toUpperCase(),
                         style: pageTitleXW,
                       ),
                     ),
@@ -180,7 +182,7 @@ class _IndexClState extends State<IndexCl> {
                             padding: EdgeInsets.all(5),
                             margin: EdgeInsets.only(left: 10, right: 10),
                             child: Text(
-                              'Close to you',
+                              '${SplashScreen.mapLang['closetoyou']}',
                               style: pageTitleX,
                             ),
                           ),
@@ -197,7 +199,7 @@ class _IndexClState extends State<IndexCl> {
                                               ExploreCl()));
                                 },
                                 child: Text(
-                                  'View all',
+                                  '${SplashScreen.mapLang['viewall']}',
                                   style: moreStyle,
                                 ),
                               ),

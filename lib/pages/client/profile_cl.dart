@@ -6,6 +6,7 @@ import 'package:FD_flutter/pages/client/explore_cl.dart';
 import 'package:FD_flutter/pages/client/favoris_cl.dart';
 import 'package:FD_flutter/pages/client/settings_cl.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -72,17 +73,17 @@ class _ProfileClState extends State<ProfileCl> {
               BottomNavigationBarItem(
                   icon: Icon(OMIcons.home, color: Color(0xFFB9BAC3)),
                   // ignore: deprecated_member_use
-                  title:
-                      Text('Home', style: TextStyle(color: Color(0xFFB9BAC3)))),
+                  title: Text('${SplashScreen.mapLang['home']}',
+                      style: TextStyle(color: Color(0xFFB9BAC3)))),
               BottomNavigationBarItem(
                   icon: Icon(OMIcons.explore, color: Color(0xFFB9BAC3)),
                   // ignore: deprecated_member_use
-                  title: Text('Explore',
+                  title: Text('${SplashScreen.mapLang['explore']}',
                       style: TextStyle(color: Color(0xFFB9BAC3)))),
               BottomNavigationBarItem(
                   icon: Icon(OMIcons.person, color: Colors.blue[700]),
                   // ignore: deprecated_member_use
-                  title: Text('Profile',
+                  title: Text('${SplashScreen.mapLang['profile']}',
                       style: TextStyle(color: Colors.blue[700]))),
             ]),
         body: StreamBuilder<DocumentSnapshot>(
@@ -288,7 +289,7 @@ class _ProfileClState extends State<ProfileCl> {
                                       Container(
                                         margin: EdgeInsets.only(top: 2.0),
                                         child: Text(
-                                          'Favoris',
+                                          '${SplashScreen.mapLang['favorite']}',
                                           textAlign: TextAlign.left,
                                           style: TextStyle(
                                               fontSize: 20,
@@ -458,7 +459,7 @@ class _ProfileClState extends State<ProfileCl> {
                                                                 Colors.white)),
                                                   ),
                                                   title: Text(
-                                                    'Orders',
+                                                    '${SplashScreen.mapLang['orders']}',
                                                     style: TextStyle(
                                                         color:
                                                             Color(0xFF050505),
@@ -514,7 +515,7 @@ class _ProfileClState extends State<ProfileCl> {
                                                     color: Colors.white)),
                                           ),
                                           title: Text(
-                                            'Favoris',
+                                            '${SplashScreen.mapLang['favorite']}',
                                             style: TextStyle(
                                                 color: Color(0xFF050505),
                                                 fontSize: 17,

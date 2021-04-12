@@ -1,3 +1,4 @@
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -22,7 +23,7 @@ class _CommandeClState extends State<CommandeCl> {
         appBar: AppBar(
           elevation: 1,
           title: Text(
-            "My orders",
+            "${SplashScreen.mapLang['orders']}",
             style: pageTitleX,
           ),
           leading: IconButton(

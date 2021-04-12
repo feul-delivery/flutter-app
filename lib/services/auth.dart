@@ -1,4 +1,5 @@
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -39,39 +40,40 @@ class AuthService {
   }
 
 //  Update elail of the current user
-  Future updateEmail(String email) async {
+  Future updateEmail(String email, String oldEmail) async {
     FirebaseUser _firebaseUser = await _auth.currentUser();
     String _uid = _firebaseUser.uid;
     await _result.user.updateEmail(email);
     Firestore.instance.document(_uid).updateData({'email': email});
-  }
-
-  Future updatePassword(String password) async {
-    await _result.user.updatePassword(password);
+    Firestore.instance.collection('user').document(oldEmail).delete();
+    Firestore.instance
+        .collection('user')
+        .document(email)
+        .setData({'account': type});
   }
 
   _findError(dynamic code) {
     switch (code) {
       case "ERROR_INVALID_EMAIL":
-        error = "Your email address appears to be malformed.";
+        error = "${SplashScreen.mapLang['ERROR_INVALID_EMAIL']}";
         break;
       case "ERROR_WRONG_PASSWORD":
-        error = "Your password is wrong.";
+        error = "${SplashScreen.mapLang['ERROR_WRONG_PASSWORD']}";
         break;
       case "ERROR_USER_NOT_FOUND":
-        error = "User with this email doesn't exist.";
+        error = "${SplashScreen.mapLang['ERROR_USER_NOT_FOUND']}";
         break;
       case "ERROR_USER_DISABLED":
-        error = "User with this email has been disabled.";
+        error = "${SplashScreen.mapLang['ERROR_USER_DISABLED']}";
         break;
       case "ERROR_TOO_MANY_REQUESTS":
-        error = "Too many requests. Try again later.";
+        error = "${SplashScreen.mapLang['ERROR_TOO_MANY_REQUESTS']}";
         break;
       case "ERROR_OPERATION_NOT_ALLOWED":
-        error = "Signing in with Email and Password is not enabled.";
+        error = "${SplashScreen.mapLang['ERROR_OPERATION_NOT_ALLOWED']}";
         break;
       default:
-        error = "An undefined Error happened.";
+        error = "${SplashScreen.mapLang['UNDEFINED_ERROR']}";
     }
   }
 

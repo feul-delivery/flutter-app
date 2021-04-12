@@ -1,5 +1,6 @@
 import 'package:FD_flutter/authentification/register.dart';
 import 'package:FD_flutter/authentification/sign_in.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -48,7 +49,7 @@ class _AuthenticateState extends State<Authenticate> {
                           color: Colors.blue[700]),
                       child: Center(
                         child: Text(
-                          "Sign in".toUpperCase(),
+                          "${SplashScreen.mapLang['signin']}".toUpperCase(),
                           style: buttonStyle,
                         ),
                       ),
@@ -69,7 +70,7 @@ class _AuthenticateState extends State<Authenticate> {
                           color: Colors.white),
                       child: Center(
                         child: Text(
-                          "Register".toUpperCase(),
+                          "${SplashScreen.mapLang['register']}".toUpperCase(),
                           style: buttonStyleBlack,
                         ),
                       ),

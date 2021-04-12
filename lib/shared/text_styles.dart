@@ -4,7 +4,11 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 const scaffoldBackground = Color(0xFFEFF0F5);
 const titleStyleNew =
     TextStyle(letterSpacing: 1.2, fontSize: 25, fontWeight: FontWeight.w900);
-
+const errorTextStyle = TextStyle(
+    color: Colors.red,
+    fontFamily: 'Gotham',
+    fontSize: 14,
+    fontWeight: FontWeight.w400);
 const titleStyle = TextStyle(
   fontWeight: FontWeight.w700,
   fontSize: 20,

@@ -1,6 +1,7 @@
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/image_capture.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
@@ -58,7 +59,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                 Navigator.of(context).pop();
               }),
           title: Text(
-            "Profile",
+            "${SplashScreen.mapLang['profile']}",
             style: pageTitleX,
           ),
           actions: <Widget>[
@@ -256,7 +257,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                                   margin: EdgeInsets.only(
                                                       bottom: 2),
                                                   child: new Text(
-                                                    'Personal information',
+                                                    '${SplashScreen.mapLang['personalinfo']}',
                                                     style: subTitleStyle,
                                                   ),
                                                 ),
@@ -282,7 +283,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             Expanded(
                                               child: Container(
                                                 child: new Text(
-                                                  'First name:',
+                                                  '${SplashScreen.mapLang['firstname']}:',
                                                   style: tileTitleStyle,
                                                 ),
                                               ),
@@ -291,7 +292,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             Expanded(
                                               child: Container(
                                                 child: new Text(
-                                                  'Last name:',
+                                                  '${SplashScreen.mapLang['lastname']}:',
                                                   style: tileTitleStyle,
                                                 ),
                                               ),
@@ -349,7 +350,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                               mainAxisSize: MainAxisSize.min,
                                               children: <Widget>[
                                                 new Text(
-                                                  'Phone:',
+                                                  '${SplashScreen.mapLang['phone']}:',
                                                   style: tileTitleStyle,
                                                 ),
                                               ],
@@ -394,7 +395,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             Expanded(
                                               child: Container(
                                                 child: new Text(
-                                                  'City:',
+                                                  '${SplashScreen.mapLang['city']}:',
                                                   style: tileTitleStyle,
                                                 ),
                                               ),
@@ -451,7 +452,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                         children: [
                                           Container(
                                             child: new Text(
-                                              'Sexe:',
+                                              '${SplashScreen.mapLang['sexe']}:',
                                               style: tileTitleStyle,
                                             ),
                                           ),

@@ -1,4 +1,5 @@
 import 'package:FD_flutter/shared/FadeAnimation.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -110,7 +111,8 @@ class _StationProfilClState extends State<StationProfilCl> {
                               children: [
                                 Icon(Icons.business, color: Colors.black),
                                 SizedBox(width: 8),
-                                Text("Address", style: tileTitleStyle),
+                                Text("${SplashScreen.mapLang['address']}",
+                                    style: tileTitleStyle),
                               ],
                             )),
                         Divider(height: 15, thickness: 1),
@@ -124,14 +126,30 @@ class _StationProfilClState extends State<StationProfilCl> {
                             children: [
                               Icon(Icons.group, color: Colors.black),
                               SizedBox(width: 8),
-                              Text("Delivery", style: tileTitleStyle),
+                              Text("${SplashScreen.mapLang['deliverymen']}",
+                                  style: tileTitleStyle),
                             ],
                           ),
                         ),
                         Divider(height: 15, thickness: 1),
                         SizedBox(height: 10),
                         FadeAnimation(
-                            0.01, Text("4 deliveryman", style: smallTileGray)),
+                            0.01,
+                            StreamBuilder<QuerySnapshot>(
+                                stream: Firestore.instance
+                                    .collection('livreur')
+                                    .where('uidentreprise',
+                                        isEqualTo: doc.documentID)
+                                    .getDocuments()
+                                    .asStream(),
+                                builder: (context, snapshotLv) {
+                                  if (snapshotLv.connectionState ==
+                                      ConnectionState.done)
+                                    return Text(
+                                        "${snapshotLv.data.documents.length} ${SplashScreen.mapLang['deliverymen']}",
+                                        style: smallTileGray);
+                                  return Container();
+                                })),
                         SizedBox(height: 20),
                         FadeAnimation(
                           0.01,
@@ -139,7 +157,8 @@ class _StationProfilClState extends State<StationProfilCl> {
                             children: [
                               Icon(Icons.phone, color: Colors.black),
                               SizedBox(width: 8),
-                              Text("Phone", style: tileTitleStyle)
+                              Text("${SplashScreen.mapLang['phone']}",
+                                  style: tileTitleStyle)
                             ],
                           ),
                         ),
@@ -172,7 +191,9 @@ class _StationProfilClState extends State<StationProfilCl> {
                                       children: [
                                         Icon(Icons.photo, color: Colors.black),
                                         SizedBox(width: 8),
-                                        Text("Pictures", style: tileTitleStyle),
+                                        Text(
+                                            "${SplashScreen.mapLang['pictures']}",
+                                            style: tileTitleStyle),
                                       ],
                                     ),
                                   ),
@@ -228,7 +249,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                       borderRadius: BorderRadius.circular(50),
                       color: Colors.green.shade400),
                   child: Text(
-                    "Place an order",
+                    "${SplashScreen.mapLang['placeorder']}",
                     style: buttonStyle,
                   ),
                 ),

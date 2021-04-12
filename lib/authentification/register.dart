@@ -4,6 +4,7 @@ import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -40,7 +41,7 @@ class _RegisterState extends State<Register> {
                     Container(
                       margin: EdgeInsets.all(15),
                       child: Text(
-                        "Create an account,",
+                        "${SplashScreen.mapLang['createaccount']},",
                         style: TextStyle(
                           color: Colors.blue[700],
                           fontSize: 50,
@@ -74,7 +75,7 @@ class _RegisterState extends State<Register> {
                                       if (val.isEmpty ||
                                           !val.contains('@') ||
                                           !val.contains('.')) {
-                                        return 'Please enter a valid email address.';
+                                        return '${SplashScreen.mapLang['emailvalidator']}';
                                       }
                                       return null;
                                     },
@@ -90,7 +91,8 @@ class _RegisterState extends State<Register> {
                                     textInputAction: TextInputAction.next,
                                     obscureText: _isObscure,
                                     decoration: InputDecoration(
-                                      hintText: "Password",
+                                      hintText:
+                                          "${SplashScreen.mapLang['password']}",
                                       suffixIcon: IconButton(
                                           icon: Icon(
                                             _isObscure
@@ -110,7 +112,7 @@ class _RegisterState extends State<Register> {
                                           horizontal: 10.0, vertical: 15.0),
                                     ),
                                     validator: (val) => val.length < 6
-                                        ? 'enter a password 8+ chars long.'
+                                        ? '${SplashScreen.mapLang['passwordvalidator']}'
                                         : null,
                                     onChanged: (val) {
                                       setState(() => password = val);
@@ -128,7 +130,7 @@ class _RegisterState extends State<Register> {
                                           horizontal: 10.0, vertical: 15.0),
                                     ),
                                     validator: (val) => val != password
-                                        ? 'confirmation do not match the password.'
+                                        ? '${SplashScreen.mapLang['passwordmatch']}'
                                         : null,
                                   ),
                                 ),
@@ -166,7 +168,8 @@ class _RegisterState extends State<Register> {
                                     if (result == null) {
                                       setState(() {
                                         loading = false;
-                                        error = 'Please supply a valid email';
+                                        error =
+                                            '${SplashScreen.mapLang['emailvalidator']}';
                                       });
                                     } else {
                                       Navigator.pushReplacement(
@@ -178,7 +181,7 @@ class _RegisterState extends State<Register> {
                                   }
                                 } on SocketException catch (_) {
                                   showInSnackBar(
-                                      "you don\'t have a internet connection");
+                                      "${SplashScreen.mapLang['nointernet']}");
                                 }
                               }
                             },
@@ -191,7 +194,8 @@ class _RegisterState extends State<Register> {
                                   color: Colors.blue[700]),
                               child: Center(
                                 child: Text(
-                                  "Register".toUpperCase(),
+                                  "${SplashScreen.mapLang['register']}"
+                                      .toUpperCase(),
                                   style: buttonStyle,
                                 ),
                               ),

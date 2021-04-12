@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:FD_flutter/pages/client/station_cl.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +28,7 @@ class _FavorisClState extends State<FavorisCl> {
         elevation: 1,
         backgroundColor: Color(0xFFFFFFFF),
         title: Text(
-          'Favorites',
+          '${SplashScreen.mapLang['favorite']}',
           style: pageTitleX,
         ),
         leading: IconButton(

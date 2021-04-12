@@ -1,6 +1,7 @@
 import 'package:FD_flutter/pages/client/initial_profil_cl.dart';
 import 'package:FD_flutter/pages/station/initial_profil_st.dart';
 import 'package:FD_flutter/services/database.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +19,7 @@ class _TypeCompteState extends State<TypeCompte> {
         backgroundColor: Color(0xFFEFF0F5),
         appBar: AppBar(
           title: Text(
-            "Account type",
+            "${SplashScreen.mapLang['accounttype']}",
             style: pageTitle,
           ),
           backgroundColor: Colors.black,
@@ -63,7 +64,7 @@ class _TypeCompteState extends State<TypeCompte> {
                         children: <Widget>[
                           Column(
                             children: <Widget>[
-                              Text('Customer',
+                              Text('${SplashScreen.mapLang['customer']}',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w700,
@@ -115,7 +116,7 @@ class _TypeCompteState extends State<TypeCompte> {
                         children: <Widget>[
                           Column(
                             children: <Widget>[
-                              Text('Entreprise',
+                              Text('${SplashScreen.mapLang['enterprise']}',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w700,

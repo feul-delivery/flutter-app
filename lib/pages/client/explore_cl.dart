@@ -4,6 +4,7 @@ import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/client/profile_cl.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,7 +25,8 @@ List<String> _favList = [];
 
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Explore', style: pageTitleX);
+  Widget _appBarTitle =
+      new Text('${SplashScreen.mapLang['explore']}', style: pageTitleX);
   String _searchString;
   @override
   Widget build(BuildContext context) {
@@ -133,19 +135,19 @@ class _ExploreClState extends State<ExploreCl> {
                       BottomNavigationBarItem(
                           icon: Icon(OMIcons.home, color: Color(0xFFB9BAC3)),
                           // ignore: deprecated_member_use
-                          title: Text('Home',
+                          title: Text('${SplashScreen.mapLang['home']}',
                               style: TextStyle(color: Color(0xFFB9BAC3)))),
                       BottomNavigationBarItem(
                           icon: Icon(OMIcons.explore, color: Colors.blue[700]),
                           // ignore: deprecated_member_use
-                          title: Text('Explore',
+                          title: Text('${SplashScreen.mapLang['explore']}',
                               style: TextStyle(
                                 color: Colors.blue[700],
                               ))),
                       BottomNavigationBarItem(
                           icon: Icon(OMIcons.person, color: Color(0xFFB9BAC3)),
                           // ignore: deprecated_member_use
-                          title: Text('Profile',
+                          title: Text('${SplashScreen.mapLang['profile']}',
                               style: TextStyle(color: Color(0xFFB9BAC3)))),
                     ]),
               );
@@ -207,7 +209,8 @@ class _ExploreClState extends State<ExploreCl> {
                                   }
                                 },
                                 icon: Icon(Icons.phone, color: Colors.green),
-                                label: Text('Call', style: textStyle)),
+                                label: Text('${SplashScreen.mapLang['call']}',
+                                    style: textStyle)),
                           ),
                           PopupMenuItem(
                             child: TextButton.icon(
@@ -219,7 +222,8 @@ class _ExploreClState extends State<ExploreCl> {
                                 },
                                 icon:
                                     Icon(Icons.mail, color: Colors.amber[700]),
-                                label: Text('Mail', style: textStyle)),
+                                label: Text('${SplashScreen.mapLang['mail']}',
+                                    style: textStyle)),
                           ),
                         ],
                         onSelected: (route) {
@@ -273,7 +277,7 @@ class _ExploreClState extends State<ExploreCl> {
                         label: Container(
                           margin: EdgeInsets.only(top: 2),
                           child: Text(
-                            'Order',
+                            '${SplashScreen.mapLang['order']}',
                             style: TextStyle(
                               color: Colors.blue[700],
                               fontWeight: FontWeight.w600,
@@ -317,7 +321,7 @@ class _ExploreClState extends State<ExploreCl> {
           style: textStyle,
           keyboardType: TextInputType.text,
           decoration: new InputDecoration(
-            hintText: 'Type here',
+            hintText: '${SplashScreen.mapLang['typehere']}',
             hintStyle: hintStyle,
             border: InputBorder.none,
           ),
@@ -330,7 +334,8 @@ class _ExploreClState extends State<ExploreCl> {
       } else {
         _searchString = null;
         this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle = new Text('Explore', style: pageTitleX);
+        this._appBarTitle =
+            new Text('${SplashScreen.mapLang['explore']}', style: pageTitleX);
       }
     });
   }
