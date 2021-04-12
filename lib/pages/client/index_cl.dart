@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 import 'package:FD_flutter/pages/client/profile_cl.dart';
 import 'package:FD_flutter/shared/splash.dart';
@@ -20,225 +21,230 @@ final int _currentIndex = 0;
 class _IndexClState extends State<IndexCl> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: scaffoldBackground,
-      appBar: AppBar(
-        title: Text(
-          "${SplashScreen.mapLang['home']}",
-          style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-              letterSpacing: 1.3),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-          elevation: 1,
-          type: BottomNavigationBarType.fixed,
+    return WillPopScope(
+      onWillPop: () => exit(0),
+      child: Scaffold(
+        backgroundColor: scaffoldBackground,
+        appBar: AppBar(
+          title: Text(
+            "${SplashScreen.mapLang['home']}",
+            style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
+                letterSpacing: 1.3),
+          ),
           backgroundColor: Colors.white,
-          currentIndex: _currentIndex,
-          onTap: (value) {
-            switch (value) {
-              case 0:
-                Navigator.of(context).pushReplacement(PageTransition(
-                    type: PageTransitionType.leftToRight, child: IndexCl()));
+          elevation: 0,
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+            elevation: 1,
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.white,
+            currentIndex: _currentIndex,
+            onTap: (value) {
+              switch (value) {
+                case 0:
+                  Navigator.of(context).pushReplacement(PageTransition(
+                      type: PageTransitionType.leftToRight, child: IndexCl()));
 
-                break;
-              case 1:
-                Navigator.of(context).pushReplacement(PageTransition(
-                    type: PageTransitionType.fade, child: ExploreCl()));
-                break;
-              case 2:
-                Navigator.of(context).pushReplacement(PageTransition(
-                    type: PageTransitionType.fade, child: ProfileCl()));
+                  break;
+                case 1:
+                  Navigator.of(context).pushReplacement(PageTransition(
+                      type: PageTransitionType.fade, child: ExploreCl()));
+                  break;
+                case 2:
+                  Navigator.of(context).pushReplacement(PageTransition(
+                      type: PageTransitionType.fade, child: ProfileCl()));
 
-                break;
-            }
+                  break;
+              }
+            },
+            items: [
+              BottomNavigationBarItem(
+                  icon: Icon(OMIcons.home, color: Colors.blue[700]),
+                  // ignore: deprecated_member_use
+                  title: Text('${SplashScreen.mapLang['home']}',
+                      style: TextStyle(color: Colors.blue[700]))),
+              BottomNavigationBarItem(
+                  icon: Icon(OMIcons.explore, color: Color(0xFFB9BAC3)),
+                  // ignore: deprecated_member_use
+                  title: Text('${SplashScreen.mapLang['explore']}',
+                      style: TextStyle(color: Color(0xFFB9BAC3)))),
+              BottomNavigationBarItem(
+                  icon: Icon(OMIcons.person, color: Color(0xFFB9BAC3)),
+                  // ignore: deprecated_member_use
+                  title: Text('${SplashScreen.mapLang['profile']}',
+                      style: TextStyle(color: Color(0xFFB9BAC3)))),
+            ]),
+        body: RefreshIndicator(
+          onRefresh: () async {
+            return await Future.delayed(Duration(seconds: 1)).then((value) {
+              setState(() {});
+            });
           },
-          items: [
-            BottomNavigationBarItem(
-                icon: Icon(OMIcons.home, color: Colors.blue[700]),
-                // ignore: deprecated_member_use
-                title: Text('${SplashScreen.mapLang['home']}',
-                    style: TextStyle(color: Colors.blue[700]))),
-            BottomNavigationBarItem(
-                icon: Icon(OMIcons.explore, color: Color(0xFFB9BAC3)),
-                // ignore: deprecated_member_use
-                title: Text('${SplashScreen.mapLang['explore']}',
-                    style: TextStyle(color: Color(0xFFB9BAC3)))),
-            BottomNavigationBarItem(
-                icon: Icon(OMIcons.person, color: Color(0xFFB9BAC3)),
-                // ignore: deprecated_member_use
-                title: Text('${SplashScreen.mapLang['profile']}',
-                    style: TextStyle(color: Color(0xFFB9BAC3)))),
-          ]),
-      body: RefreshIndicator(
-        onRefresh: () async {
-          return await Future.delayed(Duration(seconds: 1)).then((value) {
-            setState(() {});
-          });
-        },
-        child: SingleChildScrollView(
-          child: Column(
-            children: <Widget>[
-              Container(
-                decoration: BoxDecoration(
-                    color: Colors.blue[500],
-                    border: Border(
-                        bottom: BorderSide(width: 1, color: Colors.grey[300]))),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.only(left: 10, right: 10, bottom: 5),
-                      child: Text(
-                        '${SplashScreen.mapLang['bestweek']}'.toUpperCase(),
-                        style: pageTitleXW,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.blue[500],
+                      border: Border(
+                          bottom:
+                              BorderSide(width: 1, color: Colors.grey[300]))),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(5),
+                        margin: EdgeInsets.only(left: 10, right: 10, bottom: 5),
+                        child: Text(
+                          '${SplashScreen.mapLang['bestweek']}'.toUpperCase(),
+                          style: pageTitleXW,
+                        ),
                       ),
-                    ),
-                    Material(
-                      child: InkWell(
-                        onTap: () {},
-                        child: Container(
-                          child: Column(
-                            children: <Widget>[
-                              Stack(
-                                children: [
-                                  Container(
-                                    child: ClipRRect(
-                                      child: Image.asset(
-                                        'assets/s3.jpg',
-                                        alignment: Alignment.center,
-                                        fit: BoxFit.cover,
-                                        width:
-                                            MediaQuery.of(context).size.width,
+                      Material(
+                        child: InkWell(
+                          onTap: () {},
+                          child: Container(
+                            child: Column(
+                              children: <Widget>[
+                                Stack(
+                                  children: [
+                                    Container(
+                                      child: ClipRRect(
+                                        child: Image.asset(
+                                          'assets/s3.jpg',
+                                          alignment: Alignment.center,
+                                          fit: BoxFit.cover,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Positioned(
-                                    bottom: 15,
-                                    left: 15,
-                                    child: Container(
-                                      padding: EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(10)),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          //'${document['titre']}',
-                                          Text('Total Maroc',
+                                    Positioned(
+                                      bottom: 15,
+                                      left: 15,
+                                      child: Container(
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            //'${document['titre']}',
+                                            Text('Total Maroc',
+                                                style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontFamily: 'Gotham',
+                                                  fontWeight: FontWeight.w400,
+                                                  fontSize: 24,
+                                                )),
+                                            SizedBox(height: 5),
+                                            Text(
+                                              // '${document['adresse']}',
+                                              'Route sefrou, marjane 30000',
                                               style: TextStyle(
                                                 color: Colors.black54,
                                                 fontFamily: 'Gotham',
                                                 fontWeight: FontWeight.w400,
-                                                fontSize: 24,
-                                              )),
-                                          SizedBox(height: 5),
-                                          Text(
-                                            // '${document['adresse']}',
-                                            'Route sefrou, marjane 30000',
-                                            style: TextStyle(
-                                              color: Colors.black54,
-                                              fontFamily: 'Gotham',
-                                              fontWeight: FontWeight.w400,
-                                              fontSize: 14,
+                                                fontSize: 14,
+                                              ),
                                             ),
-                                          ),
-                                        ],
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ],
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border(
-                        bottom: BorderSide(width: 1, color: Colors.grey[300]),
-                        top: BorderSide(width: 1, color: Colors.grey[300]),
-                      )),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Container(
-                            padding: EdgeInsets.all(5),
-                            margin: EdgeInsets.only(left: 10, right: 10),
-                            child: Text(
-                              '${SplashScreen.mapLang['closetoyou']}',
-                              style: pageTitleX,
-                            ),
-                          ),
-                          Opacity(
-                            opacity: 0.8,
-                            child: Container(
-                              padding: EdgeInsets.all(5),
-                              margin: EdgeInsets.all(5),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              ExploreCl()));
-                                },
-                                child: Text(
-                                  '${SplashScreen.mapLang['viewall']}',
-                                  style: moreStyle,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      StreamBuilder<QuerySnapshot>(
-                        stream: Firestore.instance
-                            .collection('entreprise')
-                            .snapshots(),
-                        builder: (context, snapshot) {
-                          if (snapshot.hasError) {
-                            return customErrorWidget;
-                          }
-                          switch (snapshot.connectionState) {
-                            case ConnectionState.waiting:
-                              return SizedBox(
-                                  child:
-                                      Center(child: customeCircularProgress));
-                            case ConnectionState.none:
-                              return Container(child: customErrorWidget);
-                            default:
-                              return new ListView(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  physics: BouncingScrollPhysics(),
-                                  children: snapshot.data?.documents
-                                      ?.map((DocumentSnapshot document) {
-                                    return _createSmallCard(document, context);
-                                  })?.toList());
-                          }
-                        },
                       ),
                     ],
                   ),
                 ),
-              )
-            ],
+                Container(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border(
+                          bottom: BorderSide(width: 1, color: Colors.grey[300]),
+                          top: BorderSide(width: 1, color: Colors.grey[300]),
+                        )),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Container(
+                              padding: EdgeInsets.all(5),
+                              margin: EdgeInsets.only(left: 10, right: 10),
+                              child: Text(
+                                '${SplashScreen.mapLang['closetoyou']}',
+                                style: pageTitleX,
+                              ),
+                            ),
+                            Opacity(
+                              opacity: 0.8,
+                              child: Container(
+                                padding: EdgeInsets.all(5),
+                                margin: EdgeInsets.all(5),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).pushReplacement(
+                                        MaterialPageRoute(
+                                            builder: (BuildContext context) =>
+                                                ExploreCl()));
+                                  },
+                                  child: Text(
+                                    '${SplashScreen.mapLang['viewall']}',
+                                    style: moreStyle,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        StreamBuilder<QuerySnapshot>(
+                          stream: Firestore.instance
+                              .collection('entreprise')
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasError) {
+                              return customErrorWidget;
+                            }
+                            switch (snapshot.connectionState) {
+                              case ConnectionState.waiting:
+                                return SizedBox(
+                                    child:
+                                        Center(child: customeCircularProgress));
+                              case ConnectionState.none:
+                                return Container(child: customErrorWidget);
+                              default:
+                                return new ListView(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    physics: BouncingScrollPhysics(),
+                                    children: snapshot.data?.documents
+                                        ?.map((DocumentSnapshot document) {
+                                      return _createSmallCard(
+                                          document, context);
+                                    })?.toList());
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),
