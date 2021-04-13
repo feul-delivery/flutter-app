@@ -64,9 +64,10 @@ class _RegisterState extends State<Register> {
                                 Container(
                                   margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                   child: TextFormField(
+                                    style: TextStyle(fontSize: 18),
                                     textInputAction: TextInputAction.next,
                                     decoration: InputDecoration(
-                                      hintText: "Email",
+                                      hintText: "email",
                                       hintStyle: hintStyle,
                                       contentPadding: EdgeInsets.symmetric(
                                           horizontal: 10.0, vertical: 15.0),
@@ -88,6 +89,7 @@ class _RegisterState extends State<Register> {
                                 Container(
                                   margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                   child: TextFormField(
+                                    style: TextStyle(fontSize: 18),
                                     textInputAction: TextInputAction.next,
                                     obscureText: _isObscure,
                                     decoration: InputDecoration(
@@ -122,9 +124,10 @@ class _RegisterState extends State<Register> {
                                 Container(
                                   margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                   child: TextFormField(
+                                    style: TextStyle(fontSize: 18),
                                     obscureText: true,
                                     decoration: InputDecoration(
-                                      hintText: "Confirmation",
+                                      hintText: "confirmation",
                                       hintStyle: hintStyle,
                                       contentPadding: EdgeInsets.symmetric(
                                           horizontal: 10.0, vertical: 15.0),

@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:FD_flutter/authentification/register.dart';
 import 'package:FD_flutter/authentification/sign_in.dart';
 import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,21 +22,39 @@ class _AuthenticateState extends State<Authenticate> {
         backgroundColor: Color(0xFFEFF0F5),
         elevation: 0,
         actions: [
-          InkWell(
-              radius: 50,
-              onTap: () async {
-                SplashScreen.lang == 'FR'
-                    ? _langChangeState('EN')
-                    : _langChangeState('FR');
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => SplashScreen()));
-              },
-              child: Container(
-                margin: EdgeInsets.all(5),
-                padding: EdgeInsets.all(5),
-                child: Text(SplashScreen.lang == 'FR' ? '🇫🇷' : '🇺🇸',
-                    style: TextStyle(fontSize: 25)),
-              ))
+          Container(
+              margin: EdgeInsets.all(5),
+              child: InkWell(
+                onTap: () async {
+                  SplashScreen.lang == 'FR'
+                      ? _langChangeState('EN')
+                      : _langChangeState('FR');
+                  Navigator.pushReplacement(context,
+                      MaterialPageRoute(builder: (context) => SplashScreen()));
+                },
+                // child: BackdropFilter(
+                //   filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
+                child: Container(
+                  margin: EdgeInsets.all(2),
+                  padding: EdgeInsets.all(5),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Icon(OMIcons.language, color: Colors.blue[700]),
+                        Container(
+                          margin: EdgeInsets.only(top: 2.2),
+                          child: Text(SplashScreen.lang == 'FR' ? 'FR' : 'US',
+                              style: TextStyle(
+                                  color: Colors.blue[700],
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 15,
+                                  decorationColor: Colors.blue[700])),
+                        ),
+                      ]),
+                ),
+              )),
+          // )
         ],
       ),
       body: Container(

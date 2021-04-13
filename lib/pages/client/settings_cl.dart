@@ -578,9 +578,9 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                               if (_formKey.currentState.validate()) {
                                 String _email =
                                     Provider.of<User>(context).email;
-                                var result;
+                                var _result;
                                 try {
-                                  result = await FirebaseAuth.instance
+                                  _result = await FirebaseAuth.instance
                                       .signInWithEmailAndPassword(
                                           email: _email, password: _password);
                                 } catch (e) {
@@ -588,9 +588,10 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                                     _error = "${SplashScreen.mapLang['error']}";
                                   });
                                 }
-                                inspect(result);
-                                if (result.user.email == _email) {
+                                inspect(_result);
+                                if (_result.user.email == _email) {
                                   AuthService _auth = AuthService();
+                                  _result.user.updateEmail(_email);
                                   _auth.updateEmail(_email, _emailOld);
                                   Navigator.of(context).pop();
                                 }

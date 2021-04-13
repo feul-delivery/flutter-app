@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 5), () async {
+    Future.delayed(Duration(seconds: 2), () async {
 //where the user type will be backapped
       String _type = await _getUserTypeFromSharedPref();
       setState(() {

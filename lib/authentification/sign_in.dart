@@ -73,9 +73,10 @@ class _SignInState extends State<SignIn> {
                                 Container(
                                   margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                   child: TextFormField(
+                                    style: TextStyle(fontSize: 18),
                                     textInputAction: TextInputAction.done,
                                     decoration: InputDecoration(
-                                      hintText: "Email",
+                                      hintText: "email",
                                       hintStyle: hintStyle,
                                       contentPadding: EdgeInsets.symmetric(
                                           horizontal: 10, vertical: 15),
@@ -163,10 +164,11 @@ class _SignInState extends State<SignIn> {
                                             margin: EdgeInsets.fromLTRB(
                                                 15, 7, 15, 7),
                                             child: TextFormField(
+                                              style: TextStyle(fontSize: 18),
                                               textInputAction:
                                                   TextInputAction.next,
                                               decoration: InputDecoration(
-                                                hintText: "Email",
+                                                hintText: "email",
                                                 hintStyle: hintStyle,
                                                 contentPadding:
                                                     EdgeInsets.symmetric(
@@ -192,6 +194,7 @@ class _SignInState extends State<SignIn> {
                                             margin: EdgeInsets.fromLTRB(
                                                 15, 7, 15, 7),
                                             child: TextFormField(
+                                              style: TextStyle(fontSize: 18),
                                               obscureText: _isObscure,
                                               decoration: InputDecoration(
                                                 hintText:

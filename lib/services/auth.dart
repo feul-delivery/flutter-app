@@ -43,8 +43,10 @@ class AuthService {
   Future updateEmail(String email, String oldEmail) async {
     FirebaseUser _firebaseUser = await _auth.currentUser();
     String _uid = _firebaseUser.uid;
-    await _result.user.updateEmail(email);
-    Firestore.instance.document(_uid).updateData({'email': email});
+    Firestore.instance
+        .collection(type)
+        .document(_uid)
+        .updateData({'email': email});
     Firestore.instance.collection('user').document(oldEmail).delete();
     Firestore.instance
         .collection('user')
