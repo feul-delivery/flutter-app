@@ -35,7 +35,7 @@ class AuthService {
     }
     _user = _result.user;
     return _userFromFirebaseUser(
-      _user,
+      _user
     );
   }
 
