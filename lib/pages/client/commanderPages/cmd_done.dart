@@ -20,9 +20,9 @@ class _OrderDoneState extends State<OrderDone> {
   String qrData;
   @override
   Widget build(BuildContext context) {
-    _isdone = widget.order == null ? true : false;
+    if (_isdone == null) _isdone = widget.order == null ? true : false;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: scaffoldBackground,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
@@ -102,292 +102,308 @@ class _OrderDoneState extends State<OrderDone> {
               ),
             if (!_isdone)
               Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-//order infos shoud be  right here
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.date_range_sharp,
-                              color: Colors.black54,
-                              size: 18,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text(
-                              "Date:",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Center(
-                              child: Text(
-                                '${widget.order.dateheurec.day}/${widget.order.dateheurec.month}/${widget.order.dateheurec.year}',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        ),
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(10),
+                      child: Text(
+                        'Order Details',
+                        style: titleStyle,
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.offline_bolt,
-                              color: Colors.black54,
-                              size: 18,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text(
-                              "Volume:",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Center(
-                              child: Text(
-                                '${widget.order.volume}',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.list_alt,
-                              color: Colors.black54,
-                              size: 18,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text(
-                              "Type:",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Center(
-                              child: Text(
-                                '${widget.order.idtype}',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.aspect_ratio_sharp,
-                              color: Colors.black54,
-                              size: 18,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text(
-                              "Matricule:",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Center(
-                              child: Text(
-                                '${widget.order.matricule}',
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10, right: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.color_lens,
-                              color: Colors.black54,
-                              size: 18,
-                            ),
-                            SizedBox(
-                              width: 15,
-                            ),
-                            Text(
-                              "Color:",
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black54),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Center(
-                              child: Icon(
-                                Icons.airport_shuttle,
-                                // color: Color(widget.order.color),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, right: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Total:",
-                          style: TextStyle(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black54),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Center(
-                          child: Text(
-                            '${widget.order.prixtotal} Dh',
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black54),
-                          ),
-                        ),
-                      ],
                     ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                      radius: 50.0,
-                      onTap: () async {
-                        Firestore.instance
-                            .collection('orders')
-                            .document()
-                            .setData({
-                          'ordernum': widget.order.idorder,
-                          'volume': widget.order.volume,
-                          'adresse': widget.order.adresse,
-                          'dateheurec': DateTime.now().toString(),
-                          'dateheurel': DateTime(0000, 0, 0).toString(),
-                          'matricule': widget.order.matricule,
-                          'color': widget.order.color,
-                          'prixtotal': widget.order.prixtotal,
-                          'statut': 'waiting',
-                          'methode': widget.order.methode,
-                          'uidclient': widget.order.uidclient,
-                          'uidstation': widget.order.uidentreprise,
-                          'uidlivreur': '',
-                          'idtype': widget.order.idtype,
-                        });
-
-                        // await _databaseService.newOrderData(
-                        //     widget.order.idorder,
-                        //     widget.order.volume,
-                        //     widget.order.adresse,
-                        //     DateTime.now().toString(),
-                        //     DateTime(0000, 0, 0).toString(),
-                        //     widget.order.matricule,
-                        //     widget.order.color,
-                        //     widget.order.prixtotal,
-                        //     'Waiting',
-                        //     widget.order.methode,
-                        //     widget.order.uidclient,
-                        //     widget.order.uidentreprise,
-                        //     '',
-                        //     widget.order.idtype);
-                        // ignore: missing_return
-                        // snapshot.documents.firstWhere((element) {
-                        //   if (element.data['ordernum'] ==
-                        //           widget.order.idorder &&
-                        //       element.data['uidclient'] ==
-                        //           widget.order.uidclient)
-                        //     qrData = element.documentID;
-                        // });
-                        setState(() {
-                          _isdone = true;
-                        });
-                      },
-                      child: Container(
-                        height: 40,
-                        width: MediaQuery.of(context).size.width * 1 / 4,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(50),
-                            color: Colors.black),
-                        child: Center(
-                          child: Text(
-                            'Confirm',
-                            style: buttonStyle,
+                    Container(
+                      margin: EdgeInsets.all(20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 1 / 3,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.date_range_sharp,
+                                        color: Colors.black45,
+                                        size: 18,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Date:",
+                                        style: smallTileGray,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Center(
+                                  child: Text(
+                                    '${widget.order.dateheurec.day}/${widget.order.dateheurec.month}/${widget.order.dateheurec.year}',
+                                    style: tileTitleStyle,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      )),
-                ],
-              ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 1 / 3,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.offline_bolt,
+                                        color: Colors.black45,
+                                        size: 18,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Volume:",
+                                        style: smallTileGray,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Center(
+                                  child: Text(
+                                    '${widget.order.volume}',
+                                    style: tileTitleStyle,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 1 / 3,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.list_alt,
+                                        color: Colors.black45,
+                                        size: 18,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Type:",
+                                        style: smallTileGray,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Center(
+                                  child: Text(
+                                    '${widget.order.idtype}',
+                                    textAlign: TextAlign.start,
+                                    style: tileTitleStyle,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 1 / 3,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.aspect_ratio_sharp,
+                                        color: Colors.black45,
+                                        size: 18,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Matricule:",
+                                        style: smallTileGray,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Center(
+                                  child: Text(
+                                    '${widget.order.matricule}',
+                                    style: tileTitleStyle,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10, right: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 1 / 3,
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.color_lens,
+                                        color: Colors.black45,
+                                        size: 18,
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Text(
+                                        "Color:",
+                                        style: smallTileGray,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                Center(
+                                  child: Icon(
+                                    Icons.airport_shuttle,
+                                    color: Color(widget.order.color),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 1 / 2,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10)),
+                      margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Total:",
+                            style: smallTileGray,
+                          ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          Center(
+                            child: Text(
+                              '${widget.order.prixtotal.toStringAsFixed(2)} Dh',
+                              style: tileTitleStyle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                        radius: 50.0,
+                        onTap: () async {
+                          Firestore.instance
+                              .collection('orders')
+                              .document()
+                              .setData({
+                            'ordernum': widget.order.idorder,
+                            'volume': widget.order.volume,
+                            'adresse': widget.order.adresse,
+                            'dateheurec': DateTime.now().toString(),
+                            'dateheurel': DateTime(0000, 0, 0).toString(),
+                            'matricule': widget.order.matricule,
+                            'color': widget.order.color,
+                            'prixtotal': widget.order.prixtotal,
+                            'statut': 'waiting',
+                            'methode': widget.order.methode,
+                            'uidclient': widget.order.uidclient,
+                            'uidstation': widget.order.uidentreprise,
+                            'uidlivreur': '',
+                            'idtype': widget.order.idtype,
+                          });
+
+                          // await _databaseService.newOrderData(
+                          //     widget.order.idorder,
+                          //     widget.order.volume,
+                          //     widget.order.adresse,
+                          //     DateTime.now().toString(),
+                          //     DateTime(0000, 0, 0).toString(),
+                          //     widget.order.matricule,
+                          //     widget.order.color,
+                          //     widget.order.prixtotal,
+                          //     'Waiting',
+                          //     widget.order.methode,
+                          //     widget.order.uidclient,
+                          //     widget.order.uidentreprise,
+                          //     '',
+                          //     widget.order.idtype);
+                          // ignore: missing_return
+                          // snapshot.documents.firstWhere((element) {
+                          //   if (element.data['ordernum'] ==
+                          //           widget.order.idorder &&
+                          //       element.data['uidclient'] ==
+                          //           widget.order.uidclient)
+                          //     qrData = element.documentID;
+                          // });
+                          setState(() {
+                            _isdone = true;
+                          });
+                        },
+                        child: Container(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width * 1 / 4,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.black),
+                          child: Center(
+                            child: Text(
+                              'Confirm',
+                              style: buttonStyle,
+                            ),
+                          ),
+                        )),
+                  ])
           ],
         ),
       ),

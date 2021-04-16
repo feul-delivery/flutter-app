@@ -151,7 +151,7 @@ class _ClientOrderState extends State<ClientOrder> {
         actions: [
           IconButton(
               icon: Icon(
-                Icons.payment,
+                OMIcons.payment,
                 color: Colors.black,
               ),
               onPressed: () => _showModalSheetPayment(context)),
