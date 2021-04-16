@@ -25,6 +25,7 @@ class _AuthenticateState extends State<Authenticate> {
           Container(
               margin: EdgeInsets.all(5),
               child: InkWell(
+                borderRadius: BorderRadius.circular(50.0),
                 onTap: () async {
                   SplashScreen.lang == 'FR'
                       ? _langChangeState('EN')
@@ -67,8 +68,8 @@ class _AuthenticateState extends State<Authenticate> {
               child: Container(
                   margin: EdgeInsets.fromLTRB(
                       20, MediaQuery.of(context).size.height * 0.25, 20, 20),
-                  width: MediaQuery.of(context).size.width * 1 / 2,
-                  height: MediaQuery.of(context).size.width * 1 / 2,
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  height: MediaQuery.of(context).size.width * 0.45,
                   child: Hero(
                       tag: 'logo', child: Image.asset('assets/splash.png'))),
             ),

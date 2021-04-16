@@ -18,15 +18,15 @@
 //         type: BottomNavigationBarType.fixed,
 //         items: [
 //           BottomNavigationBarItem(
-//               icon: Icon(OMIcons.home),
+//               icon: Icon(AntDesign.home),
 //               // ignore: deprecated_member_use
 //               title: Text('Home', style: GoogleFonts.openSans())),
 //           BottomNavigationBarItem(
-//               icon: Icon(OMIcons.explore),
+//               icon: Icon(AntDesign.explore),
 //               // ignore: deprecated_member_use
 //               title: Text('Explore', style: GoogleFonts.openSans())),
 //           BottomNavigationBarItem(
-//               icon: Icon(OMIcons.person),
+//               icon: Icon(AntDesign.person),
 //               // ignore: deprecated_member_use
 //               title: Text('Profile', style: GoogleFonts.openSans())),
 //         ]);

@@ -12,6 +12,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
@@ -36,7 +38,7 @@ class _ProfileClState extends State<ProfileCl> {
         appBar: AppBar(
           actions: <Widget>[
             IconButton(
-                icon: Icon(OMIcons.settings, color: Colors.blue[700]),
+                icon: Icon(AntDesign.setting, color: Colors.blue[700]),
                 onPressed: () {
                   Navigator.of(context).push(PageTransition(
                       type: PageTransitionType.bottomToTop,
@@ -201,6 +203,7 @@ class _ProfileClState extends State<ProfileCl> {
                                     style: TextStyle(
                                         color: Color(0xFF71747E),
                                         fontSize: 15,
+                                        fontFamily: 'Quarion',
                                         fontWeight: FontWeight.w400),
                                   )
                                 ],

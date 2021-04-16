@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:FD_flutter/wrapper.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -96,13 +97,13 @@ class _UploaderState extends State<Uploader> {
               children: [
                 if (_uploadTask.isPaused)
                   FlatButton(
-                    child: Icon(OMIcons.playArrow),
+                    child: Icon(AntDesign.upload),
                     onPressed: _uploadTask.resume,
                   ),
 
                 if (_uploadTask.isInProgress)
                   FlatButton(
-                    child: Icon(OMIcons.pause),
+                    child: Icon(AntDesign.pause),
                     onPressed: _uploadTask.pause,
                   ),
 

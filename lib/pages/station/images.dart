@@ -4,6 +4,7 @@ import 'package:FD_flutter/wrapper.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
 class ImagesSt extends StatefulWidget {
@@ -35,7 +36,7 @@ class _ImagesStState extends State<ImagesSt> {
         backgroundColor: Colors.white,
         elevation: 1,
         leading: IconButton(
-            icon: Icon(OMIcons.arrowBack, color: Colors.black),
+            icon: Icon(AntDesign.arrowleft, color: Colors.black),
             onPressed: () {
               Navigator.of(context).pop();
             }),

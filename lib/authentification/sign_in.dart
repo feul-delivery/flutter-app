@@ -251,66 +251,75 @@ class _SignInState extends State<SignIn> {
                                 ),
                                 FadeAnimation(
                                     0.1,
-                                    InkWell(
-                                      onTap: () async {
-                                        if (_formKey.currentState.validate()) {
-                                          try {
-                                            final result =
-                                                await InternetAddress.lookup(
-                                                    'google.com');
-                                            if (result.isNotEmpty &&
-                                                result[0]
-                                                    .rawAddress
-                                                    .isNotEmpty) {
-                                              setState(() => loading = true);
-                                              dynamic user = await _auth
-                                                  .signInWithEmailAndPassword(
-                                                      email, password);
-                                              if (user == null) {
-                                                errorMessage =
-                                                    AuthService.error;
-                                                if (errorMessage ==
-                                                    "${SplashScreen.mapLang['ERROR_WRONG_PASSWORD']}") {
+                                    Container(
+                                      margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                      child: Material(
+                                        child: InkWell(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                          onTap: () async {
+                                            if (_formKey.currentState
+                                                .validate()) {
+                                              try {
+                                                final result =
+                                                    await InternetAddress
+                                                        .lookup('google.com');
+                                                if (result.isNotEmpty &&
+                                                    result[0]
+                                                        .rawAddress
+                                                        .isNotEmpty) {
+                                                  setState(
+                                                      () => loading = true);
+                                                  dynamic user = await _auth
+                                                      .signInWithEmailAndPassword(
+                                                          email, password);
+                                                  if (user == null) {
+                                                    errorMessage =
+                                                        AuthService.error;
+                                                    if (errorMessage ==
+                                                        "${SplashScreen.mapLang['ERROR_WRONG_PASSWORD']}") {
+                                                      setState(() {
+                                                        _password++;
+                                                      });
+                                                    }
+
+                                                    setState(() {
+                                                      loading = false;
+                                                    });
+                                                  } else {
+                                                    Navigator.pushReplacement(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                            builder:
+                                                                (context) =>
+                                                                    Wrapper()));
+                                                  }
                                                   setState(() {
-                                                    _password++;
+                                                    loading = false;
                                                   });
                                                 }
-
-                                                setState(() {
-                                                  loading = false;
-                                                });
-                                              } else {
-                                                Navigator.pushReplacement(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            Wrapper()));
+                                              } on SocketException catch (_) {
+                                                showInSnackBar(
+                                                    "${SplashScreen.mapLang['nointernet']}");
                                               }
-                                              setState(() {
-                                                loading = false;
-                                              });
                                             }
-                                          } on SocketException catch (_) {
-                                            showInSnackBar(
-                                                "${SplashScreen.mapLang['nointernet']}");
-                                          }
-                                        }
-                                      },
-                                      child: Container(
-                                        height: 45,
-                                        margin:
-                                            EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            color: Colors.blue[700]),
-                                        child: Center(
-                                          child: Text(
-                                            "${SplashScreen.mapLang['login']}"
-                                                .toUpperCase(),
-                                            style: buttonStyle,
+                                          },
+                                          child: Container(
+                                            height: 45,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                color: Colors.blue[700]),
+                                            child: Center(
+                                              child: Text(
+                                                "${SplashScreen.mapLang['login']}"
+                                                    .toUpperCase(),
+                                                style: buttonStyle,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),

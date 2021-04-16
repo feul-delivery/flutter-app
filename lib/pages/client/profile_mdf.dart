@@ -3,6 +3,7 @@ import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/image_capture.dart';
 import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -54,7 +55,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
     return new Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              icon: Icon(OMIcons.arrowBack, color: Colors.black),
+              icon: Icon(AntDesign.arrowleft, color: Colors.black),
               onPressed: () {
                 Navigator.of(context).pop();
               }),

@@ -25,18 +25,11 @@ class _IndexClState extends State<IndexCl> {
       onWillPop: () => exit(0),
       child: Scaffold(
         backgroundColor: scaffoldBackground,
-        // appBar: AppBar(
-        //   title: Text(
-        //     "${SplashScreen.mapLang['home']}",
-        //     style: TextStyle(
-        //         fontSize: 24,
-        //         fontWeight: FontWeight.w700,
-        //         color: Colors.black,
-        //         letterSpacing: 1.3),
-        //   ),
-        //   backgroundColor: Colors.white,
-        //   elevation: 0,
-        // ),
+        appBar: AppBar(
+          title: Text('${SplashScreen.mapLang['home']}', style: pageTitleX),
+          backgroundColor: Colors.white,
+          elevation: 0,
+        ),
         bottomNavigationBar: BottomNavigationBar(
             elevation: 1,
             type: BottomNavigationBarType.fixed,
@@ -97,9 +90,9 @@ class _IndexClState extends State<IndexCl> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Container(
-                          padding: EdgeInsets.all(5),
+                          padding: EdgeInsets.only(top: 5.0),
                           margin:
-                              EdgeInsets.only(left: 10, right: 10, bottom: 5),
+                              EdgeInsets.only(left: 10, right: 10, bottom: 2),
                           child: Text(
                             '${SplashScreen.mapLang['bestweek']}'.toUpperCase(),
                             style: pageTitleXW,
@@ -207,8 +200,14 @@ class _IndexClState extends State<IndexCl> {
                                                   ExploreCl()));
                                     },
                                     child: Text(
-                                      '${SplashScreen.mapLang['viewall']}',
-                                      style: moreStyle,
+                                      '${SplashScreen.mapLang['viewall']}'
+                                          .toUpperCase(),
+                                      style: TextStyle(
+                                        fontFamily: 'Quarion',
+                                        fontSize: 12,
+                                        color: Colors.blue[700],
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ),
