@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';

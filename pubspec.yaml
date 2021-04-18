@@ -29,6 +29,7 @@ dependencies:
   # google_maps_flutter: ^0.5.21+15
   location: ^2.3.5
   geolocator:
+  geocoder: ^0.2.1
   # flutter_html: 1.1.1
   # webview_flutter: 
   # flutter_markdown: 

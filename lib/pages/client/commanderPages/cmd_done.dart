@@ -22,7 +22,7 @@ class _OrderDoneState extends State<OrderDone> {
   Widget build(BuildContext context) {
     if (_isdone == null) _isdone = widget.order == null ? true : false;
     return Scaffold(
-      backgroundColor: scaffoldBackground,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,

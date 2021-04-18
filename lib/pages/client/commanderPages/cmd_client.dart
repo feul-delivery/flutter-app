@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:FD_flutter/modules/order.dart';
@@ -9,6 +10,8 @@ import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:FD_flutter/shared/splash.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:location/location.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
@@ -25,16 +28,51 @@ class ClientOrder extends StatefulWidget {
   _ClientOrderState createState() => _ClientOrderState();
 }
 
-class _ClientOrderState extends State<ClientOrder> {
-  double _volume;
-  Map<dynamic, dynamic> _type;
-  String _adresse;
-  String _matricule;
-  String _methode;
-  Color _pickerColor = Color(0xffff6b81);
-  Color _carColor = Color(0xffff6b81);
-  pmethode _methd = pmethode.livraison;
+TextEditingController _txtAddress = TextEditingController();
+StreamSubscription _locationSubscription;
+Location _locationTracker = Location();
 
+Future<String> getAddressFromCoordinates(Coordinates coordinates) async {
+  var addresses =
+      await Geocoder.local.findAddressesFromCoordinates(coordinates);
+  var first = addresses.first;
+  print("${first.featureName} : ${first.addressLine}");
+  return first.addressLine;
+}
+
+String _adr = "";
+
+Future<Coordinates> _getCurrentLocation() async {
+  var _location;
+  try {
+    _location = await _locationTracker.getLocation();
+
+    if (_locationSubscription != null) {
+      _locationSubscription.cancel();
+    }
+
+    _locationSubscription =
+        _locationTracker.onLocationChanged().listen((newLocalData) {
+      _location = newLocalData;
+    });
+    return Coordinates(_location.latitude, _location.longitude);
+  } on PlatformException catch (e) {
+    if (e.code == 'PERMISSION_DENIED') {
+      return null;
+    }
+  }
+}
+
+double _volume;
+Map<dynamic, dynamic> _type;
+String _adresse;
+String _matricule;
+String _methode;
+Color _pickerColor = Color(0xffff6b81);
+Color _carColor = Color(0xffff6b81);
+pmethode _methd = pmethode.livraison;
+
+class _ClientOrderState extends State<ClientOrder> {
   Future<void> _showModalSheetPayment(BuildContext context) {
     return showModalBottomSheet(
         isScrollControlled: true,
@@ -132,6 +170,7 @@ class _ClientOrderState extends State<ClientOrder> {
     final user = Provider.of<User>(context);
     int _orderNum = 1;
     DatabaseService _auth = DatabaseService();
+    _adr == "" ? _adr = "" : _adresse = _adr;
     return Scaffold(
       backgroundColor: Color(0xFFEFF0F5),
       appBar: AppBar(
@@ -252,22 +291,25 @@ class _ClientOrderState extends State<ClientOrder> {
                       : null,
                 ),
               ),
-              Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    border:
-                        Border(bottom: BorderSide(color: Colors.grey[200]))),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      labelText: "${SplashScreen.mapLang['address']}",
-                      labelStyle: hintStyle,
-                      border: InputBorder.none),
-                  onChanged: (value) => _adresse = value,
-                  validator: (value) => value.isEmpty
-                      ? '${SplashScreen.mapLang['required']}'
-                      : null,
-                ),
-              ),
+              _adr != ""
+                  ? Container()
+                  : Container(
+                      padding: EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                          border: Border(
+                              bottom: BorderSide(color: Colors.grey[200]))),
+                      child: TextFormField(
+                        controller: _txtAddress,
+                        decoration: InputDecoration(
+                            labelText: "${SplashScreen.mapLang['address']}",
+                            labelStyle: hintStyle,
+                            border: InputBorder.none),
+                        onChanged: (value) => _adresse = value,
+                        validator: (value) => value.isEmpty
+                            ? '${SplashScreen.mapLang['required']}'
+                            : null,
+                      ),
+                    ),
               Container(
                 padding: EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -346,6 +388,58 @@ class _ClientOrderState extends State<ClientOrder> {
             ],
           ),
         ),
+      ),
+      floatingActionButton: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          _adr == ""
+              ? Container()
+              : Container(
+                  padding: EdgeInsets.all(10),
+                  height: 50,
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color:
+                            Colors.grey[400].withOpacity(0.5), //color of shadow
+                        spreadRadius: 5, //spread radius
+                        blurRadius: 5, // blur radius
+                        offset: Offset(0, 2), // changes position of shadow
+                        //first paramerter of offset is left-right
+                        //second parameter is top to down
+                      ),
+                    ],
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(50),
+                    // border: Border(bottom: BorderSide(color: Colors.grey[200])),
+                  ),
+                  child: Center(child: Text(_adr, style: textStyle))),
+          SizedBox(width: 5),
+          _adr != ""
+              ? FloatingActionButton(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    OMIcons.cancel,
+                    color: Colors.black,
+                  ),
+                  onPressed: () async {
+                    setState(() {
+                      _adr = "";
+                    });
+                  })
+              : FloatingActionButton(
+                  backgroundColor: Colors.white,
+                  child: Icon(
+                    OMIcons.myLocation,
+                    color: Colors.black,
+                  ),
+                  onPressed: () async {
+                    Coordinates _crd = await _getCurrentLocation();
+                    _adr = await getAddressFromCoordinates(_crd);
+                    setState(() {});
+                  }),
+        ],
       ),
     );
   }
