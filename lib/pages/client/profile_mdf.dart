@@ -177,10 +177,16 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                                                 Colors.white),
                                                         value: downloadProgress
                                                             .progress),
-                                                errorWidget: (context, url,
-                                                        error) =>
-                                                    Icon(Icons.error,
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Container(
+                                                  width: 150.0,
+                                                  height: 150.0,
+                                                  child: Center(
+                                                    child: Icon(Icons.error,
                                                         color: Colors.black),
+                                                  ),
+                                                ),
                                               ),
                                             ],
                                           ),

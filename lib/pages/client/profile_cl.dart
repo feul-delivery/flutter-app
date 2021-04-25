@@ -150,17 +150,7 @@ class _ProfileClState extends State<ProfileCl> {
                         children: [
                           Row(
                             children: [
-                              snapshotClient.data['photoURL'] == null
-                                  ? Container(
-                                      width: 70,
-                                      height: 70,
-                                      child: CircleAvatar(
-                                        radius: 35.0,
-                                        backgroundImage:
-                                            AssetImage('assets/profile.png'),
-                                      ),
-                                    )
-                                  : CachedNetworkImage(
+                            CachedNetworkImage(
                                       imageUrl: snapshotClient.data['photoURL'],
                                       imageBuilder: (context, imageProvider) =>
                                           Container(
@@ -173,17 +163,17 @@ class _ProfileClState extends State<ProfileCl> {
                                       placeholder: (context, url) => Container(
                                         width: 70,
                                         height: 70,
-                                        child: CircleAvatar(
+                                        child: Center(child:CircleAvatar(
                                             radius: 35.0,
-                                            child: customeCircularProgress),
+                                            child: customeCircularProgress)),
                                       ),
                                       errorWidget: (context, url, error) =>
                                           Container(
                                         width: 70,
                                         height: 70,
-                                        child: CircleAvatar(
+                                        child: Center(child:CircleAvatar(
                                             radius: 35.0,
-                                            child: Icon(Icons.error)),
+                                            child: Icon(Icons.error))),
                                       ),
                                     ),
                               SizedBox(width: 20),
