@@ -1,8 +1,10 @@
+import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'commande_cl.dart';
@@ -49,13 +51,74 @@ class _CommandeClState extends State<CommandeCl> {
 
   Widget cardCommande(DocumentSnapshot documentSnapshot) {
     double _prixTotal = double.tryParse('${documentSnapshot['prixtotal']}');
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-            builder: (BuildContext context) => CommandeDetail(
-                  document: documentSnapshot,
-                )));
-      },
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.20,
+      actions: [
+        IconSlideAction(
+          caption: '${SplashScreen.mapLang['show']}',
+          color: Colors.white,
+          icon: OMIcons.list,
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (BuildContext context) => CommandeDetail(
+                      document: documentSnapshot,
+                    )));
+          },
+        ),
+      ],
+      secondaryActions: [
+        if (documentSnapshot['statut'] == 'waiting' &&
+            documentSnapshot['uidlivreur'] == '')
+          IconSlideAction(
+            caption: '${SplashScreen.mapLang['cancel']}',
+            color: Colors.red,
+            icon: OMIcons.cancel,
+            onTap: () {
+              showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return CustomAlertDialog(
+                      title: Text(
+                          '${SplashScreen.mapLang['cancel']} ${SplashScreen.mapLang['order']}',
+                          style: pageTitleX),
+                      content: Text('${SplashScreen.mapLang['areyousure']}',
+                          style: textStyle),
+                      actions: [
+                        InkWell(
+                            onTap: () {
+                              Firestore.instance
+                                  .collection('orders')
+                                  .document(documentSnapshot.documentID)
+                                  .delete();
+                              Navigator.of(context).pop();
+                            },
+                            child: Center(
+                              child: Container(
+                                padding: EdgeInsets.fromLTRB(15, 5, 15, 5),
+                                decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.circular(50)),
+                                child: Text(
+                                  '${SplashScreen.mapLang['confirm']}',
+                                  style: buttonStyle,
+                                ),
+                              ),
+                            )),
+                        FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text(
+                              '${SplashScreen.mapLang['cancel']}',
+                              style: smallTileGray,
+                            )),
+                      ],
+                    );
+                  });
+            },
+          )
+      ],
       child: ListTile(
         leading: Container(
           padding: EdgeInsets.all(10),

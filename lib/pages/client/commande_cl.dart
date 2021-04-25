@@ -277,7 +277,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                 ),
                 Center(
                   child: Text(
-                    '${widget.document['type']}',
+                    '${widget.document['idtype']}',
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                 ),

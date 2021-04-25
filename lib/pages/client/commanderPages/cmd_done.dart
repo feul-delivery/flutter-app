@@ -4,7 +4,7 @@ import 'package:FD_flutter/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+// import 'package:qr_flutter/qr_flutter.dart';
 
 class OrderDone extends StatefulWidget {
   final Order order;

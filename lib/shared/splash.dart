@@ -187,6 +187,7 @@ Map<String, String> mapFR = {
   'pickcolor': 'Choisissez une couleur',
   'matricule': 'Matricule',
   'choose': 'Choisir',
+  'confirm': 'Confirmer',
   'modepay': 'Mode de paiement',
   'viewall': 'Voir tout',
   'LOCATION_PERMISSION_DENIED':
@@ -194,7 +195,9 @@ Map<String, String> mapFR = {
   'dragchoose': 'Faites glisser pour choisir',
   'detail': 'Détail',
   'number': 'Numéro',
-  'ftype': 'Type de carburant'
+  'ftype': 'Type de carburant',
+  'show': 'Afficher',
+  'areyousure': 'êtes-vous sûr?'
 };
 Map<String, String> mapEN = {
   'home': 'Home',
@@ -269,6 +272,7 @@ Map<String, String> mapEN = {
   'cod': 'Cash on delivery',
   'card': 'Credit Card',
   'next': 'Next',
+  'confirm': 'Confirm',
   'required': 'Required',
   'carcolor': 'Car Color',
   'pickcolor': 'Pick a color',
@@ -280,5 +284,7 @@ Map<String, String> mapEN = {
       "L'accès au service de localisation a été refusé",
   'dragchoose': 'Drag to choose',
   'number': 'Number',
-  'ftype': 'Fuel type'
+  'ftype': 'Fuel type',
+  'show': 'Show',
+  'areyousure': 'are you sure?'
 };
