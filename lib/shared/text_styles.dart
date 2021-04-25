@@ -25,6 +25,11 @@ const pageTitleX = TextStyle(
     fontWeight: FontWeight.w500,
     fontFamily: 'Quarion',
     color: Colors.black);
+const pageTitleW = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Quarion',
+    color: Colors.white);
 const pageTitleXW = TextStyle(
     fontSize: 20,
     fontFamily: 'Quarion',

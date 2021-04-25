@@ -12,19 +12,20 @@ class Order {
   String uidclient;
   String uidentreprise;
   String idtype;
-  Order({
-    this.idorder,
-    this.volume,
-    this.adresse,
-    this.dateheurec,
-    this.dateheurel,
-    this.matricule,
-    this.color,
-    this.prixtotal,
-    this.statut,
-    this.methode,
-    this.uidclient,
-    this.uidentreprise,
-    this.idtype,
-  });
+  Map<String, double> coordinates;
+  Order(
+      {this.idorder,
+      this.volume,
+      this.adresse,
+      this.dateheurec,
+      this.dateheurel,
+      this.matricule,
+      this.color,
+      this.prixtotal,
+      this.statut,
+      this.methode,
+      this.uidclient,
+      this.uidentreprise,
+      this.idtype,
+      this.coordinates});
 }

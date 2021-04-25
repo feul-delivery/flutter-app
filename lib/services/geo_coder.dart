@@ -1,9 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:geocoder/geocoder.dart';
-import 'package:location/location.dart';
 
 class GeoCoder extends StatefulWidget {
   GeoCoder({Key key}) : super(key: key);

@@ -159,15 +159,14 @@ class DatabaseService {
     return ordersCollection.snapshots();
   }
 
-  Future<void> updateEntrepriseData({
-    String titre,
-    String description,
-    String tele,
-    String email,
-    String address,
-    List<dynamic> types,
-    List<dynamic> images
-  }) async {
+  Future<void> updateEntrepriseData(
+      {String titre,
+      String description,
+      String tele,
+      String email,
+      String address,
+      List<dynamic> types,
+      List<dynamic> images}) async {
     if (types == null) {
       return await entrepriseCollection.document(uid).setData({
         'titre': titre,
@@ -184,7 +183,7 @@ class DatabaseService {
         'email': email,
         'adresse': address,
         'type': types,
-        'images' : images
+        'images': images
       }, merge: true);
     }
   }

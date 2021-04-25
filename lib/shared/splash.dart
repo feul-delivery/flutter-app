@@ -176,6 +176,7 @@ Map<String, String> mapFR = {
   'sexe': 'Sexe',
   'address': 'Adresse',
   'deliverymen': 'Livreurs',
+  'time': "Heure",
   'placeorder': 'Passer une commande',
   'finish': 'Terminer',
   'cod': 'Paiement à la livraison',
@@ -184,10 +185,16 @@ Map<String, String> mapFR = {
   'required': 'Champs obligatoires',
   'carcolor': 'Couleur de la voiture',
   'pickcolor': 'Choisissez une couleur',
-  'matricule': 'Matriicule',
+  'matricule': 'Matricule',
   'choose': 'Choisir',
   'modepay': 'Mode de paiement',
-  'viewall': 'Voir tout'
+  'viewall': 'Voir tout',
+  'LOCATION_PERMISSION_DENIED':
+      'Access to the location service has been declined',
+  'dragchoose': 'Faites glisser pour choisir',
+  'detail': 'Détail',
+  'number': 'Numéro',
+  'ftype': 'Type de carburant'
 };
 Map<String, String> mapEN = {
   'home': 'Home',
@@ -208,6 +215,7 @@ Map<String, String> mapEN = {
   'settings': 'Settings',
   'changepassword': 'change password',
   'account': 'Account',
+  'detail': 'Detail',
   'signout': 'Sign out',
   'passwordvalidator': 'enter a password 6+ chars long.',
   'passwordmatch': 'confirmation do not match the password.',
@@ -256,6 +264,7 @@ Map<String, String> mapEN = {
   'address': 'Address',
   'deliverymen': 'Deliverymen',
   'placeorder': 'Place an order',
+  'time': "Time",
   'finish': 'Finish',
   'cod': 'Cash on delivery',
   'card': 'Credit Card',
@@ -266,5 +275,10 @@ Map<String, String> mapEN = {
   'matricule': 'Registration number',
   'choose': 'Choose',
   'modepay': 'Payment method',
-  'viewall': 'View all'
+  'viewall': 'View all',
+  'LOCATION_PERMISSION_DENIED':
+      "L'accès au service de localisation a été refusé",
+  'dragchoose': 'Drag to choose',
+  'number': 'Number',
+  'ftype': 'Fuel type'
 };

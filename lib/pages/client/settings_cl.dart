@@ -218,60 +218,81 @@ Future<void> _showModalBottomRateUs(BuildContext context) {
       builder: (context) {
         return StatefulBuilder(builder: (BuildContext context, setState) {
           return SingleChildScrollView(
-            child: Container(
-                height: MediaQuery.of(context).size.height * 1 / 4,
-                child: ListView(
-                  children: [
-                    Container(
-                        padding: EdgeInsets.all(5),
-                        margin: EdgeInsets.only(
-                            left: 10, right: 10, bottom: 5, top: 10),
-                        child: Text('${SplashScreen.mapLang['rateus']}',
-                            style: pageTitleX)),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
+            child: Column(
+              children: [
+                Container(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.all(10),
+                    child: Container(
+                      height: 5,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      // margin: EdgeInsets.symmetric(
+                      //     vertical: 0,
+                      //     horizontal:
+                      //         MediaQuery.of(context).size.width * 0.3),
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(50)),
+                    )),
+                Container(
+                    height: MediaQuery.of(context).size.height * 1 / 4,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(
-                          height: 10,
-                        ),
                         Container(
-                          width: MediaQuery.of(context).size.width * 4 / 5,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Icon(Icons.star_border_outlined),
-                              Icon(Icons.star_border_outlined),
-                              Icon(Icons.star_border_outlined),
-                              Icon(Icons.star_border_outlined),
-                              Icon(Icons.star_border_outlined),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InkWell(
-                          onTap: () async {},
-                          child: Container(
-                            height: 45,
-                            margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.blue[700]),
-                            child: Center(
-                              child: Text(
-                                "${SplashScreen.mapLang['submit']}"
-                                    .toUpperCase(),
-                                style: buttonStyle,
+                            padding: EdgeInsets.all(5),
+                            margin: EdgeInsets.only(
+                                left: 10, right: 10, bottom: 5, top: 10),
+                            child: Text('${SplashScreen.mapLang['rateus']}',
+                                style: pageTitleX)),
+                        Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Container(
+                              width: MediaQuery.of(context).size.width * 4 / 5,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Icon(Icons.star_border_outlined),
+                                  Icon(Icons.star_border_outlined),
+                                  Icon(Icons.star_border_outlined),
+                                  Icon(Icons.star_border_outlined),
+                                  Icon(Icons.star_border_outlined),
+                                ],
                               ),
                             ),
-                          ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            InkWell(
+                              onTap: () async {},
+                              child: Container(
+                                height: 45,
+                                margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.blue[700]),
+                                child: Center(
+                                  child: Text(
+                                    "${SplashScreen.mapLang['submit']}"
+                                        .toUpperCase(),
+                                    style: buttonStyle,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
-                    ),
-                  ],
-                )),
+                    )),
+              ],
+            ),
           );
         });
       });
@@ -293,158 +314,180 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
+                      width: MediaQuery.of(context).size.width * 0.3,
                       padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.only(
-                          left: 10, right: 10, bottom: 5, top: 10),
-                      child: Text('${SplashScreen.mapLang['changepassword']}',
-                          style: pageTitleX)),
-                  SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                child: TextFormField(
-                                  obscureText: true,
-                                  decoration: InputDecoration(
-                                    hintText:
-                                        "${SplashScreen.mapLang['oldpassword']}",
-                                    hintStyle: hintStyle,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 10.0, vertical: 15.0),
+                      margin: EdgeInsets.all(10),
+                      child: Container(
+                        height: 5,
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        // margin: EdgeInsets.symmetric(
+                        //     vertical: 0,
+                        //     horizontal:
+                        //         MediaQuery.of(context).size.width * 0.3),
+                        decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(50)),
+                      )),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          padding: EdgeInsets.all(5),
+                          margin: EdgeInsets.only(
+                              left: 10, right: 10, bottom: 5, top: 10),
+                          child: Text(
+                              '${SplashScreen.mapLang['changepassword']}',
+                              style: pageTitleX)),
+                      SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                    child: TextFormField(
+                                      obscureText: true,
+                                      decoration: InputDecoration(
+                                        hintText:
+                                            "${SplashScreen.mapLang['oldpassword']}",
+                                        hintStyle: hintStyle,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 15.0),
+                                      ),
+                                      onChanged: (value) {
+                                        _passwodOld = value;
+                                      },
+                                      validator: (val) => val.length < 6
+                                          ? '${SplashScreen.mapLang['passwordvalidator']}'
+                                          : null,
+                                    ),
                                   ),
-                                  onChanged: (value) {
-                                    _passwodOld = value;
-                                  },
-                                  validator: (val) => val.length < 6
-                                      ? '${SplashScreen.mapLang['passwordvalidator']}'
-                                      : null,
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                child: TextFormField(
-                                  textInputAction: TextInputAction.next,
-                                  obscureText: _isObscure,
-                                  decoration: InputDecoration(
-                                    hintText:
-                                        "${SplashScreen.mapLang['password']}",
-                                    suffixIcon: IconButton(
-                                        icon: Icon(
-                                          _isObscure
-                                              ? Icons.visibility
-                                              : Icons.visibility_off,
-                                          color: _isObscure
-                                              ? Color(0xFFB9BAC3)
-                                              : Colors.blue[700],
-                                        ),
-                                        onPressed: () {
-                                          setState(() {
-                                            _isObscure = !_isObscure;
-                                          });
-                                        }),
-                                    hintStyle: hintStyle,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 10.0, vertical: 15.0),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                    child: TextFormField(
+                                      textInputAction: TextInputAction.next,
+                                      obscureText: _isObscure,
+                                      decoration: InputDecoration(
+                                        hintText:
+                                            "${SplashScreen.mapLang['password']}",
+                                        suffixIcon: IconButton(
+                                            icon: Icon(
+                                              _isObscure
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                              color: _isObscure
+                                                  ? Color(0xFFB9BAC3)
+                                                  : Colors.blue[700],
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                _isObscure = !_isObscure;
+                                              });
+                                            }),
+                                        hintStyle: hintStyle,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 15.0),
+                                      ),
+                                      validator: (val) => val.length < 6
+                                          ? '${SplashScreen.mapLang['passwordvalidator']}'
+                                          : null,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          _password = val;
+                                        });
+                                      },
+                                    ),
                                   ),
-                                  validator: (val) => val.length < 6
-                                      ? '${SplashScreen.mapLang['passwordvalidator']}'
-                                      : null,
-                                  onChanged: (val) {
-                                    setState(() {
-                                      _password = val;
-                                    });
-                                  },
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                child: TextFormField(
-                                  obscureText: true,
-                                  decoration: InputDecoration(
-                                    hintText: "Confirmation",
-                                    hintStyle: hintStyle,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 10.0, vertical: 15.0),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                    child: TextFormField(
+                                      obscureText: true,
+                                      decoration: InputDecoration(
+                                        hintText: "Confirmation",
+                                        hintStyle: hintStyle,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 15.0),
+                                      ),
+                                      validator: (val) => val != _password
+                                          ? '${SplashScreen.mapLang['passwordmatch']}'
+                                          : null,
+                                    ),
                                   ),
-                                  validator: (val) => val != _password
-                                      ? '${SplashScreen.mapLang['passwordmatch']}'
-                                      : null,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          _error,
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontFamily: 'Gotham',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            if (_password == _passwodOld) {
-                              setState(() {
-                                _error =
-                                    "${SplashScreen.mapLang['changenewpassword']}";
-                              });
-                            } else {
-                              if (_formKey.currentState.validate()) {
-                                String _email =
-                                    Provider.of<User>(context).email;
-                                var result;
-                                try {
-                                  result = await FirebaseAuth.instance
-                                      .signInWithEmailAndPassword(
-                                          email: _email, password: _passwodOld);
-                                } catch (e) {
-                                  setState(() {
-                                    _error = "${SplashScreen.mapLang['error']}";
-                                  });
-                                }
-                                inspect(result);
-                                if (result.user.email == _email) {
-                                  result.user.updatePassword(_password);
-                                  Navigator.of(context).pop();
-                                }
-                              }
-                            }
-                          },
-                          child: Container(
-                            height: 45,
-                            margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.blue[700]),
-                            child: Center(
-                              child: Text(
-                                "${SplashScreen.mapLang['validate']}"
-                                    .toUpperCase(),
-                                style: buttonStyle,
+                                ],
                               ),
                             ),
-                          ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              _error,
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontFamily: 'Gotham',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                if (_password == _passwodOld) {
+                                  setState(() {
+                                    _error =
+                                        "${SplashScreen.mapLang['changenewpassword']}";
+                                  });
+                                } else {
+                                  if (_formKey.currentState.validate()) {
+                                    String _email =
+                                        Provider.of<User>(context).email;
+                                    var result;
+                                    try {
+                                      result = await FirebaseAuth.instance
+                                          .signInWithEmailAndPassword(
+                                              email: _email,
+                                              password: _passwodOld);
+                                    } catch (e) {
+                                      setState(() {
+                                        _error =
+                                            "${SplashScreen.mapLang['error']}";
+                                      });
+                                    }
+                                    inspect(result);
+                                    if (result.user.email == _email) {
+                                      result.user.updatePassword(_password);
+                                      Navigator.of(context).pop();
+                                    }
+                                  }
+                                }
+                              },
+                              child: Container(
+                                height: 45,
+                                margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.blue[700]),
+                                child: Center(
+                                  child: Text(
+                                    "${SplashScreen.mapLang['validate']}"
+                                        .toUpperCase(),
+                                    style: buttonStyle,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -467,158 +510,180 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
           return Padding(
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.only(
-                          left: 10, right: 10, bottom: 5, top: 10),
-                      child: Text('${SplashScreen.mapLang['changeemail']}',
-                          style: pageTitleX)),
-                  SingleChildScrollView(
-                    child: Column(
-                      children: <Widget>[
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Form(
-                          key: _formKey,
-                          child: Column(
-                            children: <Widget>[
-                              Container(
-                                margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                child: TextFormField(
-                                  textInputAction: TextInputAction.next,
-                                  decoration: InputDecoration(
-                                    hintText:
-                                        "${SplashScreen.mapLang['newemail']}",
-                                    hintStyle: hintStyle,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 10.0, vertical: 15.0),
+            child: Column(
+              children: [
+                Container(
+                    width: MediaQuery.of(context).size.width * 0.3,
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.all(10),
+                    child: Container(
+                      height: 5,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      // margin: EdgeInsets.symmetric(
+                      //     vertical: 0,
+                      //     horizontal:
+                      //         MediaQuery.of(context).size.width * 0.3),
+                      decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(50)),
+                    )),
+                SingleChildScrollView(
+                  scrollDirection: Axis.vertical,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          padding: EdgeInsets.all(5),
+                          margin: EdgeInsets.only(
+                              left: 10, right: 10, bottom: 5, top: 10),
+                          child: Text('${SplashScreen.mapLang['changeemail']}',
+                              style: pageTitleX)),
+                      SingleChildScrollView(
+                        child: Column(
+                          children: <Widget>[
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                    child: TextFormField(
+                                      textInputAction: TextInputAction.next,
+                                      decoration: InputDecoration(
+                                        hintText:
+                                            "${SplashScreen.mapLang['newemail']}",
+                                        hintStyle: hintStyle,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 15.0),
+                                      ),
+                                      validator: (val) {
+                                        if (val.isEmpty ||
+                                            !val.contains('@') ||
+                                            !val.contains('.')) {
+                                          return '${SplashScreen.mapLang['emailvalidator']}';
+                                        }
+                                        return null;
+                                      },
+                                      keyboardType: TextInputType.emailAddress,
+                                      onChanged: (val) {
+                                        setState(() => _email = val);
+                                      },
+                                    ),
                                   ),
-                                  validator: (val) {
-                                    if (val.isEmpty ||
-                                        !val.contains('@') ||
-                                        !val.contains('.')) {
-                                      return '${SplashScreen.mapLang['emailvalidator']}';
-                                    }
-                                    return null;
-                                  },
-                                  keyboardType: TextInputType.emailAddress,
-                                  onChanged: (val) {
-                                    setState(() => _email = val);
-                                  },
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                child: TextFormField(
-                                  textInputAction: TextInputAction.next,
-                                  decoration: InputDecoration(
-                                    hintText: "Confirmation",
-                                    hintStyle: hintStyle,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 10.0, vertical: 15.0),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                    child: TextFormField(
+                                      textInputAction: TextInputAction.next,
+                                      decoration: InputDecoration(
+                                        hintText: "Confirmation",
+                                        hintStyle: hintStyle,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 15.0),
+                                      ),
+                                      validator: (val) => val != _email
+                                          ? '${SplashScreen.mapLang['passwordmatch']}'
+                                          : null,
+                                      keyboardType: TextInputType.emailAddress,
+                                    ),
                                   ),
-                                  validator: (val) => val != _email
-                                      ? '${SplashScreen.mapLang['passwordmatch']}'
-                                      : null,
-                                  keyboardType: TextInputType.emailAddress,
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                child: TextFormField(
-                                  textInputAction: TextInputAction.next,
-                                  obscureText: _isObscure,
-                                  decoration: InputDecoration(
-                                    hintText:
-                                        "${SplashScreen.mapLang['password']}",
-                                    hintStyle: hintStyle,
-                                    contentPadding: EdgeInsets.symmetric(
-                                        horizontal: 10.0, vertical: 15.0),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                    child: TextFormField(
+                                      textInputAction: TextInputAction.next,
+                                      obscureText: _isObscure,
+                                      decoration: InputDecoration(
+                                        hintText:
+                                            "${SplashScreen.mapLang['password']}",
+                                        hintStyle: hintStyle,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 15.0),
+                                      ),
+                                      validator: (val) => val == null
+                                          ? '${SplashScreen.mapLang['enterpassword']}'
+                                          : null,
+                                      onChanged: (val) {
+                                        _password = val;
+                                      },
+                                    ),
                                   ),
-                                  validator: (val) => val == null
-                                      ? '${SplashScreen.mapLang['enterpassword']}'
-                                      : null,
-                                  onChanged: (val) {
-                                    _password = val;
-                                  },
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 15,
-                        ),
-                        Text(
-                          _error,
-                          style: TextStyle(
-                              color: Colors.red,
-                              fontFamily: 'Gotham',
-                              fontSize: 14,
-                              fontWeight: FontWeight.w400),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        InkWell(
-                          onTap: () async {
-                            String _emailOld = Provider.of<User>(context).email;
-                            if (_email == _emailOld) {
-                              setState(() {
-                                _error =
-                                    "${SplashScreen.mapLang['changenewemail']}";
-                              });
-                            } else {
-                              if (_formKey.currentState.validate()) {
-                                String _email =
-                                    Provider.of<User>(context).email;
-                                var _result;
-                                try {
-                                  _result = await FirebaseAuth.instance
-                                      .signInWithEmailAndPassword(
-                                          email: _email, password: _password);
-                                } catch (e) {
-                                  setState(() {
-                                    _error = "${SplashScreen.mapLang['error']}";
-                                  });
-                                }
-                                inspect(_result);
-                                if (_result.user.email == _email) {
-                                  AuthService _auth = AuthService();
-                                  _result.user.updateEmail(_email);
-                                  _auth.updateEmail(_email, _emailOld);
-                                  Navigator.of(context).pop();
-                                }
-                              }
-                            }
-                          },
-                          child: Container(
-                            height: 45,
-                            margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: Colors.blue[700]),
-                            child: Center(
-                              child: Text(
-                                "${SplashScreen.mapLang['validate']}"
-                                    .toUpperCase(),
-                                style: buttonStyle,
+                                ],
                               ),
                             ),
-                          ),
+                            SizedBox(
+                              height: 15,
+                            ),
+                            Text(
+                              _error,
+                              style: TextStyle(
+                                  color: Colors.red,
+                                  fontFamily: 'Gotham',
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            InkWell(
+                              onTap: () async {
+                                String _emailOld =
+                                    Provider.of<User>(context).email;
+                                if (_email == _emailOld) {
+                                  setState(() {
+                                    _error =
+                                        "${SplashScreen.mapLang['changenewemail']}";
+                                  });
+                                } else {
+                                  if (_formKey.currentState.validate()) {
+                                    String _email =
+                                        Provider.of<User>(context).email;
+                                    var _result;
+                                    try {
+                                      _result = await FirebaseAuth.instance
+                                          .signInWithEmailAndPassword(
+                                              email: _email,
+                                              password: _password);
+                                    } catch (e) {
+                                      setState(() {
+                                        _error =
+                                            "${SplashScreen.mapLang['error']}";
+                                      });
+                                    }
+                                    inspect(_result);
+                                    if (_result.user.email == _email) {
+                                      AuthService _auth = AuthService();
+                                      _result.user.updateEmail(_email);
+                                      _auth.updateEmail(_email, _emailOld);
+                                      Navigator.of(context).pop();
+                                    }
+                                  }
+                                }
+                              },
+                              child: Container(
+                                height: 45,
+                                margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                width: MediaQuery.of(context).size.width,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5),
+                                    color: Colors.blue[700]),
+                                child: Center(
+                                  child: Text(
+                                    "${SplashScreen.mapLang['validate']}"
+                                        .toUpperCase(),
+                                    style: buttonStyle,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         });
@@ -629,62 +694,84 @@ Future<void> _buildModalAboutUsRow(BuildContext context) {
   return showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-                padding: EdgeInsets.all(5),
-                margin:
-                    EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 10),
-                child: Text('${SplashScreen.mapLang['aboutus']}',
-                    style: pageTitleX)),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+        return SingleChildScrollView(
+          child: Container(
+            color: scaffoldBackground,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  width: 60,
-                  height: 60,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          width: 10,
-                          color: Theme.of(context).scaffoldBackgroundColor),
-                      boxShadow: [],
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image: AssetImage('assets/Fueldelivery.png'))),
-                ),
-                SizedBox(
-                  height: 12,
-                ),
-                Text(
-                  'Build by the Flutter framework.',
-                  style: textStyle,
-                ),
-                SizedBox(
-                  height: 7,
-                ),
-                Text(
-                  'Developped by:',
-                  style: textStyle,
-                ),
-                SizedBox(
-                  height: 7,
-                ),
-                Text(
-                  'ELHESSBI Imad',
-                  style: titleStyleNew,
-                ),
-                SizedBox(
-                  height: 7,
-                ),
-                Text(
-                  'ZAMOURI Iliyass',
-                  style: titleStyleNew,
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.only(
+                        left: 10, right: 10, bottom: 5, top: 10),
+                    child: Text('${SplashScreen.mapLang['aboutus']}',
+                        style: pageTitleX)),
+                Container(
+                  margin: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
+                  child: Center(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 0,
+                                      color: Theme.of(context)
+                                          .scaffoldBackgroundColor),
+                                  boxShadow: [],
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: AssetImage(
+                                          'assets/Fueldelivery.png'))),
+                            ),
+                            Column(
+                              children: [
+                                Text("Fuel Delivery"),
+                                SizedBox(
+                                  height: 12,
+                                ),
+                                Text(
+                                  'Build by the Flutter framework.',
+                                  style: textStyle,
+                                ),
+                              ],
+                            )
+                          ],
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Text(
+                          'Developped by:',
+                          style: textStyle,
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Text(
+                          'ELHESSBI Imad',
+                          style: titleStyleNew,
+                        ),
+                        SizedBox(
+                          height: 7,
+                        ),
+                        Text(
+                          'ZAMOURI Iliyass',
+                          style: titleStyleNew,
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ],
             ),
-          ],
+          ),
         );
       });
 }

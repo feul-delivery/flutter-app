@@ -91,13 +91,13 @@ class _OrderDoneState extends State<OrderDone> {
                   SizedBox(
                     height: 30,
                   ),
-                  Container(
-                    height: MediaQuery.of(context).size.width * 2 / 3,
-                    width: MediaQuery.of(context).size.width * 2 / 3,
-                    child: QrImage(
-                      data: qrData,
-                    ),
-                  ),
+                  // Container(
+                  //   height: MediaQuery.of(context).size.width * 2 / 3,
+                  //   width: MediaQuery.of(context).size.width * 2 / 3,
+                  //   child: QrImage(
+                  //     data: qrData,
+                  //   ),
+                  // ),
                 ],
               ),
             if (!_isdone)
@@ -361,6 +361,7 @@ class _OrderDoneState extends State<OrderDone> {
                             'uidstation': widget.order.uidentreprise,
                             'uidlivreur': '',
                             'idtype': widget.order.idtype,
+                            'coordinates': widget.order.coordinates
                           });
 
                           // await _databaseService.newOrderData(

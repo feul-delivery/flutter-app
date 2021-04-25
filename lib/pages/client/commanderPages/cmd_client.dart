@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:developer';
-
 import 'package:FD_flutter/modules/order.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_done.dart';
@@ -9,6 +8,7 @@ import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 import 'package:FD_flutter/shared/splash.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoder/geocoder.dart';
 import 'package:location/location.dart';
@@ -28,7 +28,6 @@ class ClientOrder extends StatefulWidget {
   _ClientOrderState createState() => _ClientOrderState();
 }
 
-TextEditingController _txtAddress = TextEditingController();
 StreamSubscription _locationSubscription;
 Location _locationTracker = Location();
 
@@ -41,8 +40,9 @@ Future<String> getAddressFromCoordinates(Coordinates coordinates) async {
 }
 
 String _adr = "";
+Map<String, double> _coordinates = {};
 
-Future<Coordinates> _getCurrentLocation() async {
+Future<Coordinates> getCurrentLocation() async {
   var _location;
   try {
     _location = await _locationTracker.getLocation();
@@ -55,6 +55,10 @@ Future<Coordinates> _getCurrentLocation() async {
         _locationTracker.onLocationChanged().listen((newLocalData) {
       _location = newLocalData;
     });
+    _coordinates = {
+      'latitude': _location.latitude,
+      'longitude': _location.longitude
+    };
     return Coordinates(_location.latitude, _location.longitude);
   } on PlatformException catch (e) {
     if (e.code == 'PERMISSION_DENIED') {
@@ -197,9 +201,10 @@ class _ClientOrderState extends State<ClientOrder> {
           SizedBox(
             width: 10.0,
           ),
-          TextButton(
-            child:
-                Text('${SplashScreen.mapLang['next']}', style: tileTitleStyle),
+          IconButton(
+            icon:
+                Icon(CupertinoIcons.text_badge_checkmark, color: Colors.black),
+            // Text('${SplashScreen.mapLang['next']}', style: tileTitleStyle),
             onPressed: () async {
               if (_methode == null) {
                 _showModalSheetPayment(context);
@@ -208,18 +213,18 @@ class _ClientOrderState extends State<ClientOrder> {
                   _orderNum =
                       _orderNum + await _auth.countOrdersDocuments(user.uid);
                   Order _order = Order(
-                    idorder: _orderNum,
-                    prixtotal: _volume * _type['prix'],
-                    uidentreprise: doc.documentID,
-                    uidclient: user.uid,
-                    idtype: _type['libelle'],
-                    dateheurec: DateTime.now(),
-                    color: _carColor.value,
-                    methode: _methode,
-                    matricule: _matricule,
-                    adresse: _adresse,
-                    volume: _volume,
-                  );
+                      idorder: _orderNum,
+                      prixtotal: _volume * _type['prix'],
+                      uidentreprise: doc.documentID,
+                      uidclient: user.uid,
+                      idtype: _type['libelle'],
+                      dateheurec: DateTime.now(),
+                      color: _carColor.value,
+                      methode: _methode,
+                      matricule: _matricule,
+                      adresse: _adresse,
+                      volume: _volume,
+                      coordinates: _coordinates);
                   inspect(_order);
                   if (_order.methode == 'COD') {
                     Navigator.of(context).pushReplacement(PageTransition(
@@ -299,7 +304,6 @@ class _ClientOrderState extends State<ClientOrder> {
                           border: Border(
                               bottom: BorderSide(color: Colors.grey[200]))),
                       child: TextFormField(
-                        controller: _txtAddress,
                         decoration: InputDecoration(
                             labelText: "${SplashScreen.mapLang['address']}",
                             labelStyle: hintStyle,
@@ -397,17 +401,14 @@ class _ClientOrderState extends State<ClientOrder> {
               ? Container()
               : Container(
                   padding: EdgeInsets.all(10),
-                  height: 50,
+                  height: 55,
                   decoration: BoxDecoration(
                     boxShadow: [
                       BoxShadow(
-                        color:
-                            Colors.grey[400].withOpacity(0.5), //color of shadow
-                        spreadRadius: 5, //spread radius
-                        blurRadius: 5, // blur radius
-                        offset: Offset(0, 2), // changes position of shadow
-                        //first paramerter of offset is left-right
-                        //second parameter is top to down
+                        color: Colors.grey[400].withOpacity(0.5),
+                        spreadRadius: 1,
+                        blurRadius: 1,
+                        offset: Offset(0, 1),
                       ),
                     ],
                     color: Colors.white,
@@ -418,6 +419,7 @@ class _ClientOrderState extends State<ClientOrder> {
           SizedBox(width: 5),
           _adr != ""
               ? FloatingActionButton(
+                  elevation: 1,
                   backgroundColor: Colors.white,
                   child: Icon(
                     OMIcons.cancel,
@@ -429,15 +431,27 @@ class _ClientOrderState extends State<ClientOrder> {
                     });
                   })
               : FloatingActionButton(
+                  elevation: 1,
                   backgroundColor: Colors.white,
                   child: Icon(
                     OMIcons.myLocation,
                     color: Colors.black,
                   ),
                   onPressed: () async {
-                    Coordinates _crd = await _getCurrentLocation();
-                    _adr = await getAddressFromCoordinates(_crd);
-                    setState(() {});
+                    Coordinates _crd = await getCurrentLocation();
+                    if (_crd == null) {
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        duration: Duration(seconds: 1),
+                        content: Text(
+                          "${SplashScreen.mapLang["LOCATION_PERMISSION_DENIED"]}",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.black,
+                      ));
+                    } else {
+                      _adr = await getAddressFromCoordinates(_crd);
+                      setState(() {});
+                    }
                   }),
         ],
       ),

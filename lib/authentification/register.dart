@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
@@ -7,7 +6,6 @@ import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -175,11 +173,10 @@ class _RegisterState extends State<Register> {
                                             '${SplashScreen.mapLang['emailvalidator']}';
                                       });
                                     } else {
-                                      Navigator.pushReplacement(
-                                          context,
-                                          PageTransition(
-                                              type: PageTransitionType.fade,
-                                              child: TypeCompte()));
+                                      Navigator.of(context).pushReplacement(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TypeCompte()));
                                     }
                                   }
                                 } on SocketException catch (_) {
