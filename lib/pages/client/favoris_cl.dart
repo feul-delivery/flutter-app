@@ -5,6 +5,7 @@ import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -50,48 +51,43 @@ class _FavorisClState extends State<FavorisCl> {
   }
 
   Widget _createCard(DocumentSnapshot document) {
-    return InkWell(
-      onTap: () {
-        Navigator.of(context).pushReplacement(PageTransition(
-            type: PageTransitionType.leftToRight,
-            child: StationProfilCl(doc: document)));
-      },
-      child: ListTile(
-        tileColor: Colors.white,
-        leading: Container(
-          child: Icon(OMIcons.star, color: Color(0xFFF8C513)),
-        ),
-        title: Text('${document.data['titre']}', style: textStyle),
-        trailing: PopupMenuButton(
-          itemBuilder: (BuildContext bc) => [
-            PopupMenuItem(
-              child: TextButton.icon(
-                  onPressed: () async {
-                    var tele = 'tel:${document['tele']}';
-                    if (await canLaunch(tele)) {
-                      await launch(tele);
-                    }
-                  },
-                  icon: Icon(Icons.phone, color: Colors.green),
-                  label: Text('Call', style: textStyle)),
-            ),
-            PopupMenuItem(
-              child: TextButton.icon(
-                  onPressed: () async {
-                    var email = 'mailto:${document['email']}';
-                    if (await canLaunch(email)) {
-                      await launch(email);
-                    }
-                  },
-                  icon: Icon(Icons.mail, color: Colors.amber[700]),
-                  label: Text('Mail', style: textStyle)),
-            ),
-          ],
-          onSelected: (route) {
-            print(route);
-            // Note You must create respective pages for navigation
-            Navigator.pushNamed(context, route);
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.15,
+      actions: [
+        IconSlideAction(
+          color: Colors.amber[700],
+          iconWidget: Icon(OMIcons.mail, color: Colors.white),
+          onTap: () async {
+            var email = 'mailto:${document['email']}';
+            if (await canLaunch(email)) {
+              await launch(email);
+            }
           },
+        ),
+        IconSlideAction(
+          color: Colors.green,
+          iconWidget: Icon(OMIcons.call, color: Colors.white),
+          onTap: () async {
+            var tele = 'tel:${document['tele']}';
+            if (await canLaunch(tele)) {
+              await launch(tele);
+            }
+          },
+        ),
+      ],
+      child: InkWell(
+        onTap: () {
+          Navigator.of(context).pushReplacement(PageTransition(
+              type: PageTransitionType.leftToRight,
+              child: StationProfilCl(doc: document)));
+        },
+        child: ListTile(
+          tileColor: Colors.white,
+          leading: Container(
+            child: Icon(OMIcons.star, color: Color(0xFFF8C513)),
+          ),
+          title: Text('${document.data['titre']}', style: textStyle),
         ),
       ),
     );

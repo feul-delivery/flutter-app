@@ -58,6 +58,12 @@ const buttonStyleBlack = TextStyle(
   fontWeight: FontWeight.w500,
   letterSpacing: 1.3,
 );
+TextStyle buttonStyleBlue = TextStyle(
+  fontFamily: 'Quarion',
+  color: Colors.blue[700],
+  fontWeight: FontWeight.w500,
+  letterSpacing: 1.3,
+);
 const buttonRegisterStyle = TextStyle(
     fontFamily: 'Quarion',
     color: Colors.white,

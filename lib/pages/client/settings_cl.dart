@@ -20,6 +20,7 @@ class SettingsCl extends StatefulWidget {
   _SettingsClState createState() => _SettingsClState();
 }
 
+// final GlobalKey<ScaffoldState> _mScaffoldState = new GlobalKey<ScaffoldState>();
 AuthService _auth = AuthService();
 
 class _SettingsClState extends State<SettingsCl> {
@@ -777,56 +778,90 @@ Future<void> _buildModalAboutUsRow(BuildContext context) {
 }
 
 Future<void> _buildModalChangeLang(BuildContext context) {
+  bool _isUsed = false;
   return showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                  padding: EdgeInsets.all(5),
-                  margin:
-                      EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 10),
-                  child: Text('${SplashScreen.mapLang['changelang']}',
-                      style: pageTitleX)),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  InkWell(
-                      onTap: () {
-                        _langChangeState('FR');
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => SplashScreen()));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.all(20),
-                        padding: EdgeInsets.all(10),
+        return StatefulBuilder(builder: (BuildContext context, setState) {
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _isUsed == true
+                    ? Container(
+                        height: 30,
+                        color: Colors.red,
                         child: Center(
-                            child: Text('🇫🇷 ${SplashScreen.mapLang['fr']}',
-                                style: buttonStyleBlack)),
-                      )),
-                  InkWell(
-                      onTap: () {
-                        _langChangeState('EN');
-                        Navigator.of(context).pushReplacement(MaterialPageRoute(
-                            builder: (context) => SplashScreen()));
-                      },
-                      child: Container(
-                        margin: EdgeInsets.all(20),
-                        padding: EdgeInsets.all(10),
-                        child: Center(
-                            child: Text('🇺🇸 ${SplashScreen.mapLang['en']}',
-                                style: buttonStyleBlack)),
-                      ))
-                ],
-              ),
-            ],
-          ),
-        );
+                            child: Text('${SplashScreen.mapLang['usedlang']}',
+                                style: textStyleWhite)))
+                    : Container(),
+                Container(
+                    padding: EdgeInsets.all(5),
+                    margin: EdgeInsets.only(
+                        left: 10, right: 10, bottom: 5, top: 10),
+                    child: Text('${SplashScreen.mapLang['changelang']}',
+                        style: pageTitleX)),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    InkWell(
+                        onTap: () {
+                          if (SplashScreen.mapLang['en'] != 'Anglais') {
+                            _langChangeState('FR');
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => SplashScreen()));
+                          } else {
+                            // Navigator.of(context).pop();
+                            setState(() {
+                              _isUsed = true;
+                            });
+                          }
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(20),
+                          padding: EdgeInsets.all(10),
+                          child: Center(
+                              child: Text('🇫🇷 ${SplashScreen.mapLang['fr']}',
+                                  style: buttonStyleBlack)),
+                        )),
+                    InkWell(
+                        onTap: () {
+                          if (SplashScreen.mapLang['en'] != 'English') {
+                            _langChangeState('EN');
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => SplashScreen()));
+                          } else {
+                            // Navigator.of(context).pop();
+                            setState(() {
+                              _isUsed = true;
+                            });
+                          }
+                        },
+                        child: Container(
+                          margin: EdgeInsets.all(20),
+                          padding: EdgeInsets.all(10),
+                          child: Center(
+                              child: Text('🇺🇸 ${SplashScreen.mapLang['en']}',
+                                  style: buttonStyleBlack)),
+                        ))
+                  ],
+                ),
+              ],
+            ),
+          );
+        });
       });
 }
+
+// void showInSnackBar(String value, BuildContext context) {
+//   SnackBar snackBar = new SnackBar(
+//       backgroundColor: Colors.white,
+//       content: new Text(value, style: textStyle));
+//   _mScaffoldState.currentState.showSnackBar(snackBar);
+// }
 
 Future<void> _langChangeState(String lang) async {
   final prefs = await SharedPreferences.getInstance();

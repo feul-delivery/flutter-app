@@ -197,7 +197,10 @@ Map<String, String> mapFR = {
   'number': 'Numéro',
   'ftype': 'Type de carburant',
   'show': 'Afficher',
-  'areyousure': 'êtes-vous sûr?'
+  'areyousure': 'êtes-vous sûr?',
+  'usedlang': 'vous utilisez déjà cette langue',
+  'accesslocation': "nous avons besoin d'accéder à votre emplacement",
+  'locateme': 'Localiser moi'
 };
 Map<String, String> mapEN = {
   'home': 'Home',
@@ -286,5 +289,8 @@ Map<String, String> mapEN = {
   'number': 'Number',
   'ftype': 'Fuel type',
   'show': 'Show',
-  'areyousure': 'are you sure?'
+  'areyousure': 'are you sure?',
+  'usedlang': 'you are already using this language',
+  'accesslocation': 'we need access to your location',
+  'locateme': 'Locate me'
 };
