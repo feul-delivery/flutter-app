@@ -14,6 +14,7 @@ class StationProfilCl extends StatefulWidget {
   _StationProfilClState createState() => _StationProfilClState();
 }
 
+int _lvCount = 0;
 List<Map<dynamic, dynamic>> _imagesList;
 
 class _StationProfilClState extends State<StationProfilCl> {
@@ -145,10 +146,14 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 builder: (context, snapshotLv) {
                                   if (snapshotLv.connectionState ==
                                       ConnectionState.done)
-                                    return Text(
-                                        "${snapshotLv.data.documents.length} ${SplashScreen.mapLang['deliverymen']}",
-                                        style: smallTileGray);
-                                  return Container();
+                                    _lvCount = snapshotLv.data.documents.length;
+                                  return _lvCount > 0
+                                      ? Text(
+                                          "${snapshotLv.data.documents.length} ${SplashScreen.mapLang['deliverymen']}",
+                                          style: smallTileGray)
+                                      : Text(
+                                          "${SplashScreen.mapLang['stnolv']}",
+                                          style: smallTileGray);
                                 })),
                         SizedBox(height: 20),
                         FadeAnimation(
@@ -224,38 +229,40 @@ class _StationProfilClState extends State<StationProfilCl> {
               )
             ],
           ),
-          Positioned.fill(
-            bottom: 20,
-            top: MediaQuery.of(context).size.height -
-                MediaQuery.of(context).size.height * 0.075,
-            left: MediaQuery.of(context).size.width -
-                MediaQuery.of(context).size.width * 0.7,
-            right: MediaQuery.of(context).size.width -
-                MediaQuery.of(context).size.width * 0.7,
-            child: FadeAnimation(
-              0.01,
-              InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ClientOrder(
-                                doc: doc,
-                              )));
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.green.shade400),
-                  child: Text(
-                    "${SplashScreen.mapLang['placeorder']}",
-                    style: buttonStyle,
+          _lvCount > 0
+              ? Positioned.fill(
+                  bottom: 20,
+                  top: MediaQuery.of(context).size.height -
+                      MediaQuery.of(context).size.height * 0.075,
+                  left: MediaQuery.of(context).size.width -
+                      MediaQuery.of(context).size.width * 0.7,
+                  right: MediaQuery.of(context).size.width -
+                      MediaQuery.of(context).size.width * 0.7,
+                  child: FadeAnimation(
+                    0.01,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => new ClientOrder(
+                                      doc: doc,
+                                    )));
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.green.shade400),
+                        child: Text(
+                          "${SplashScreen.mapLang['placeorder']}",
+                          style: buttonStyle,
+                        ),
+                      ),
+                    ),
                   ),
-                ),
-              ),
-            ),
-          )
+                )
+              : Container(),
         ],
       ),
     );

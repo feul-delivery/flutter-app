@@ -200,7 +200,9 @@ Map<String, String> mapFR = {
   'areyousure': 'êtes-vous sûr?',
   'usedlang': 'vous utilisez déjà cette langue',
   'accesslocation': "nous avons besoin d'accéder à votre emplacement",
-  'locateme': 'Localiser moi'
+  'locateme': 'Localiser moi',
+  'delete': 'Effacer',
+  'stnolv': "cette station n'a pas de livreurs"
 };
 Map<String, String> mapEN = {
   'home': 'Home',
@@ -292,5 +294,7 @@ Map<String, String> mapEN = {
   'areyousure': 'are you sure?',
   'usedlang': 'you are already using this language',
   'accesslocation': 'we need access to your location',
-  'locateme': 'Locate me'
+  'locateme': 'Locate me',
+  'delete': 'Delete',
+  'stnolv': 'this station does not have delivery men'
 };

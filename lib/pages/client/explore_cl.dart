@@ -184,7 +184,7 @@ class _ExploreClState extends State<ExploreCl> {
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) =>
-                                          StationProfilCl(doc: document)));
+                                          new StationProfilCl(doc: document)));
                             },
                             child: Text('${document['titre']}'.toUpperCase(),
                                 style: tileTitleStyle),
@@ -288,7 +288,7 @@ class _ExploreClState extends State<ExploreCl> {
                         onPressed: () {
                           Navigator.of(context).push(PageTransition(
                               type: PageTransitionType.fade,
-                              child: ClientOrder(doc: document)));
+                              child: new ClientOrder(doc: document)));
                         },
                         icon: Icon(OMIcons.accountBalanceWallet,
                             color: Colors.blue[700]),

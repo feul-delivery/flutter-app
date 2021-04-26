@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FavorisCl extends StatefulWidget {
@@ -16,6 +18,18 @@ class FavorisCl extends StatefulWidget {
   const FavorisCl({@required this.snapshotFavoris, @required this.favList});
   @override
   _FavorisClState createState() => _FavorisClState();
+}
+
+void _removeStFromFav(String documentID, String uid) async {
+  try {
+    await Firestore.instance.collection('client').document(uid).updateData(
+      {
+        'favorite': FieldValue.arrayRemove([documentID])
+      },
+    );
+  } catch (e) {
+    print(e);
+  }
 }
 
 class _FavorisClState extends State<FavorisCl> {
@@ -38,15 +52,16 @@ class _FavorisClState extends State<FavorisCl> {
               Navigator.pop(context);
             }),
       ),
-      body: ListView(
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          children:
-              widget.snapshotFavoris.documents.map((DocumentSnapshot document) {
-            return widget.favList.contains(document.documentID)
-                ? _createCard(document)
-                : Container();
-          }).toList()),
+      body: SafeArea(
+        child: ListView(
+            scrollDirection: Axis.vertical,
+            children: widget.snapshotFavoris.documents
+                .map((DocumentSnapshot document) {
+              return widget.favList.contains(document.documentID)
+                  ? _createCard(document)
+                  : Container();
+            }).toList()),
+      ),
     );
   }
 
@@ -54,6 +69,18 @@ class _FavorisClState extends State<FavorisCl> {
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.15,
+      secondaryActions: [
+        IconSlideAction(
+          color: Colors.red,
+          caption: '${SplashScreen.mapLang['delete']}',
+          icon: OMIcons.delete,
+          onTap: () {
+            _removeStFromFav(
+                document.documentID, Provider.of<User>(context).uid);
+            Navigator.pop(context);
+          },
+        ),
+      ],
       actions: [
         IconSlideAction(
           color: Colors.amber[700],
