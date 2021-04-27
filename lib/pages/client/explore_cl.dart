@@ -201,30 +201,51 @@ class _ExploreClState extends State<ExploreCl> {
                       PopupMenuButton(
                         itemBuilder: (BuildContext bc) => [
                           PopupMenuItem(
-                            child: TextButton.icon(
-                                onPressed: () async {
-                                  var tele = 'tel:${document['tele']}';
-                                  if (await canLaunch(tele)) {
-                                    await launch(tele);
-                                  }
-                                },
-                                icon: Icon(Icons.phone, color: Colors.green),
-                                label: Text('${SplashScreen.mapLang['call']}',
-                                    style: textStyle)),
+                            child: InkWell(
+                              onTap: () async {
+                                var tele = 'tel:${document['tele']}';
+                                if (await canLaunch(tele)) {
+                                  await launch(tele);
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(2, 4, 2, 4),
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.phone, color: Colors.green),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text('${SplashScreen.mapLang['call']}',
+                                        style: textStyle)
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                           PopupMenuItem(
-                            child: TextButton.icon(
-                                onPressed: () async {
-                                  var email = 'mailto:${document['email']}';
-                                  if (await canLaunch(email)) {
-                                    await launch(email);
-                                  }
-                                },
-                                icon:
+                            child: InkWell(
+                              onTap: () async {
+                                var email = 'mailto:${document['email']}';
+                                if (await canLaunch(email)) {
+                                  await launch(email);
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.fromLTRB(2, 4, 2, 4),
+                                child: Row(
+                                  children: [
                                     Icon(Icons.mail, color: Colors.amber[700]),
-                                label: Text('${SplashScreen.mapLang['mail']}',
-                                    style: textStyle)),
-                          ),
+                                    SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text('${SplashScreen.mapLang['mail']}',
+                                        style: textStyle)
+                                  ],
+                                ),
+                              ),
+                            ),
+                          )
                         ],
                         onSelected: (route) {
                           print(route);
@@ -234,40 +255,33 @@ class _ExploreClState extends State<ExploreCl> {
                       ),
                     ],
                   )),
-              //image of the station
-              document['photoURL'] != null
-                  ? Hero(
-                      tag: document.documentID,
-                      child: CachedNetworkImage(
-                        imageUrl: document['photoURL'],
-                        imageBuilder: (context, imageProvider) => Material(
-                          child: Ink.image(
-                            height: 200,
-                            image: imageProvider,
-                            fit: BoxFit.fitWidth,
-                          ),
-                        ),
-                        placeholder: (context, url) => Container(
-                          height: 200,
-                          child: Center(
-                            child: customeCircularProgress,
-                          ),
-                        ),
-                        errorWidget: (context, url, error) => Container(
-                          height: 200,
-                          child: Center(
-                            child: Icon(Icons.error, color: Colors.black),
-                          ),
-                        ),
-                      ),
-                    )
-                  : Container(
+              Hero(
+                tag: document.documentID,
+                child: CachedNetworkImage(
+                  imageUrl:
+                      document['photoURL'] == null ? "" : document['photoURL'],
+                  imageBuilder: (context, imageProvider) => Material(
+                    child: Ink.image(
                       height: 200,
-                      child: Center(
-                        child: Icon(Icons.error, color: Colors.black),
-                      ),
+                      image: imageProvider,
+                      fit: BoxFit.fitWidth,
                     ),
-
+                  ),
+                  placeholder: (context, url) => Container(
+                    height: 200,
+                    child: Center(
+                      child: customeCircularProgress,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    height: 200,
+                    color: Colors.black,
+                    child: Center(
+                      child: Icon(Icons.error, color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [

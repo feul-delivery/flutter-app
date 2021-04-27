@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/services/auth.dart';
@@ -20,7 +19,6 @@ class SettingsCl extends StatefulWidget {
   _SettingsClState createState() => _SettingsClState();
 }
 
-// final GlobalKey<ScaffoldState> _mScaffoldState = new GlobalKey<ScaffoldState>();
 AuthService _auth = AuthService();
 
 class _SettingsClState extends State<SettingsCl> {

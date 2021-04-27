@@ -189,11 +189,13 @@ Map<String, String> mapFR = {
   'choose': 'Choisir',
   'confirm': 'Confirmer',
   'modepay': 'Mode de paiement',
+  'pay': 'Payer',
   'viewall': 'Voir tout',
   'LOCATION_PERMISSION_DENIED':
       'Access to the location service has been declined',
   'dragchoose': 'Faites glisser pour choisir',
   'detail': 'Détail',
+  'orderdetail': 'Détail du commande',
   'number': 'Numéro',
   'ftype': 'Type de carburant',
   'show': 'Afficher',
@@ -202,7 +204,8 @@ Map<String, String> mapFR = {
   'accesslocation': "nous avons besoin d'accéder à votre emplacement",
   'locateme': 'Localiser moi',
   'delete': 'Effacer',
-  'stnolv': "cette station n'a pas de livreurs"
+  'stnolv': "cette station n'a pas de livreurs",
+  'deliveredASAP': 'sera livré dès que possible'
 };
 Map<String, String> mapEN = {
   'home': 'Home',
@@ -224,6 +227,7 @@ Map<String, String> mapEN = {
   'changepassword': 'change password',
   'account': 'Account',
   'detail': 'Detail',
+  'orderdetail': 'Order detail',
   'signout': 'Sign out',
   'passwordvalidator': 'enter a password 6+ chars long.',
   'passwordmatch': 'confirmation do not match the password.',
@@ -284,6 +288,7 @@ Map<String, String> mapEN = {
   'matricule': 'Registration number',
   'choose': 'Choose',
   'modepay': 'Payment method',
+  'pay': 'Pay',
   'viewall': 'View all',
   'LOCATION_PERMISSION_DENIED':
       "L'accès au service de localisation a été refusé",
@@ -296,5 +301,6 @@ Map<String, String> mapEN = {
   'accesslocation': 'we need access to your location',
   'locateme': 'Locate me',
   'delete': 'Delete',
-  'stnolv': 'this station does not have delivery men'
+  'stnolv': 'this station does not have delivery men',
+  'deliveredASAP': 'will be delivered ASAP'
 };

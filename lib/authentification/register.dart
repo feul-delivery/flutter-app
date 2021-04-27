@@ -6,6 +6,7 @@ import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 
 class Register extends StatefulWidget {
   @override
@@ -21,6 +22,7 @@ class _RegisterState extends State<Register> {
   bool loading = false;
   String email = '';
   String password = '';
+  String passwordConf = '';
   bool _isObscure = true;
   @override
   Widget build(BuildContext context) {
@@ -65,6 +67,12 @@ class _RegisterState extends State<Register> {
                                     style: TextStyle(fontSize: 18),
                                     textInputAction: TextInputAction.next,
                                     decoration: InputDecoration(
+                                      prefixIcon: email.isEmpty ||
+                                              !email.contains('@') ||
+                                              !email.contains('.')
+                                          ? Icon(OMIcons.personAdd)
+                                          : Icon(OMIcons.person,
+                                              color: Colors.green),
                                       hintText: "email",
                                       hintStyle: hintStyle,
                                       contentPadding: EdgeInsets.symmetric(
@@ -91,6 +99,10 @@ class _RegisterState extends State<Register> {
                                     textInputAction: TextInputAction.next,
                                     obscureText: _isObscure,
                                     decoration: InputDecoration(
+                                      prefixIcon: password.length > 7
+                                          ? Icon(OMIcons.lock,
+                                              color: Colors.green)
+                                          : Icon(OMIcons.lockOpen),
                                       hintText:
                                           "${SplashScreen.mapLang['password']}",
                                       suffixIcon: IconButton(
@@ -111,7 +123,7 @@ class _RegisterState extends State<Register> {
                                       contentPadding: EdgeInsets.symmetric(
                                           horizontal: 10.0, vertical: 15.0),
                                     ),
-                                    validator: (val) => val.length < 6
+                                    validator: (val) => val.length < 8
                                         ? '${SplashScreen.mapLang['passwordvalidator']}'
                                         : null,
                                     onChanged: (val) {
@@ -125,11 +137,22 @@ class _RegisterState extends State<Register> {
                                     style: TextStyle(fontSize: 18),
                                     obscureText: true,
                                     decoration: InputDecoration(
+                                      prefixIcon: passwordConf != password &&
+                                              passwordConf.length > 0
+                                          ? Icon(OMIcons.cancel,
+                                              color: Colors.red)
+                                          : Icon(OMIcons.done,
+                                              color: Colors.green),
                                       hintText: "confirmation",
                                       hintStyle: hintStyle,
                                       contentPadding: EdgeInsets.symmetric(
                                           horizontal: 10.0, vertical: 15.0),
                                     ),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        passwordConf = value;
+                                      });
+                                    },
                                     validator: (val) => val != password
                                         ? '${SplashScreen.mapLang['passwordmatch']}'
                                         : null,

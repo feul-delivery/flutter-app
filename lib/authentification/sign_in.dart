@@ -6,6 +6,7 @@ import 'package:FD_flutter/shared/loading.dart';
 import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
+import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:flutter/material.dart';
 
 class SignIn extends StatefulWidget {
@@ -168,6 +169,8 @@ class _SignInState extends State<SignIn> {
                                               textInputAction:
                                                   TextInputAction.next,
                                               decoration: InputDecoration(
+                                                prefixIcon:
+                                                    Icon(OMIcons.person),
                                                 hintText: "email",
                                                 hintStyle: hintStyle,
                                                 contentPadding:
@@ -197,6 +200,9 @@ class _SignInState extends State<SignIn> {
                                               style: TextStyle(fontSize: 18),
                                               obscureText: _isObscure,
                                               decoration: InputDecoration(
+                                                prefixIcon: password.length < 6
+                                                    ? Icon(OMIcons.lock)
+                                                    : Icon(OMIcons.lockOpen),
                                                 hintText:
                                                     "${SplashScreen.mapLang['password']}",
                                                 hintStyle: hintStyle,

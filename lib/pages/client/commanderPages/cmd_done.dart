@@ -1,4 +1,5 @@
 import 'package:FD_flutter/modules/order.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -54,19 +55,17 @@ class _OrderDoneState extends State<OrderDone> {
                   Container(
                     height: MediaQuery.of(context).size.width * 1 / 3,
                     width: MediaQuery.of(context).size.width * 1 / 3,
-                    child: Material(
-                        borderRadius: BorderRadius.circular(100),
-                        color: Colors.green[300],
-                        child: Padding(
-                          padding: const EdgeInsets.all(40.0),
-                          child: Center(
-                            child: Icon(
-                              Icons.check_circle,
-                              color: Colors.white,
-                              size: 60,
-                            ),
-                          ),
-                        )),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Colors.green[300],
+                    ),
+                    child: Center(
+                      child: Icon(
+                        Icons.check_circle,
+                        color: Colors.white,
+                        size: 60,
+                      ),
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.all(20),
@@ -81,7 +80,7 @@ class _OrderDoneState extends State<OrderDone> {
                     ),
                   ),
                   Text(
-                    'will be delivered ASAP',
+                    "${SplashScreen.mapLang['deliveredASAP']}",
                     style: TextStyle(
                         color: Colors.black26,
                         fontFamily: 'Gotham',
@@ -109,7 +108,7 @@ class _OrderDoneState extends State<OrderDone> {
                       padding: EdgeInsets.all(10),
                       margin: EdgeInsets.all(10),
                       child: Text(
-                        'Order Details',
+                        '${SplashScreen.mapLang['orderdetail']} :',
                         style: titleStyle,
                       ),
                     ),
@@ -138,7 +137,7 @@ class _OrderDoneState extends State<OrderDone> {
                                         width: 10,
                                       ),
                                       Text(
-                                        "Date:",
+                                        "Date :",
                                         style: smallTileGray,
                                       ),
                                     ],
@@ -176,7 +175,7 @@ class _OrderDoneState extends State<OrderDone> {
                                         width: 10,
                                       ),
                                       Text(
-                                        "Volume:",
+                                        "Volume :",
                                         style: smallTileGray,
                                       ),
                                     ],
@@ -214,7 +213,7 @@ class _OrderDoneState extends State<OrderDone> {
                                         width: 10,
                                       ),
                                       Text(
-                                        "Type:",
+                                        "${SplashScreen.mapLang['ftype']} :",
                                         style: smallTileGray,
                                       ),
                                     ],
@@ -253,7 +252,7 @@ class _OrderDoneState extends State<OrderDone> {
                                         width: 10,
                                       ),
                                       Text(
-                                        "Matricule:",
+                                        "${SplashScreen.mapLang['matricule']} :",
                                         style: smallTileGray,
                                       ),
                                     ],
@@ -291,7 +290,7 @@ class _OrderDoneState extends State<OrderDone> {
                                         width: 10,
                                       ),
                                       Text(
-                                        "Color:",
+                                        "${SplashScreen.mapLang['carcolor']} :",
                                         style: smallTileGray,
                                       ),
                                     ],
@@ -322,7 +321,7 @@ class _OrderDoneState extends State<OrderDone> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "Total:",
+                            "Total : ",
                             style: smallTileGray,
                           ),
                           SizedBox(
@@ -399,7 +398,7 @@ class _OrderDoneState extends State<OrderDone> {
                               color: Colors.black),
                           child: Center(
                             child: Text(
-                              'Confirm',
+                              "${SplashScreen.mapLang['confirm']}",
                               style: buttonStyle,
                             ),
                           ),

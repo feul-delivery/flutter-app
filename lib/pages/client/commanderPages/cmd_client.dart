@@ -64,6 +64,7 @@ Future<Coordinates> getCurrentLocation() async {
     if (e.code == 'PERMISSION_DENIED') {
       return null;
     }
+    return null;
   }
 }
 
