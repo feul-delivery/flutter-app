@@ -98,7 +98,8 @@ class Language {
     'stnolv': "cette station n'a pas de livreurs",
     'deliveredASAP': 'sera livré dès que possible',
     'open': 'Ouvrir',
-    'imagenotfound': "impossible de charger l'image"
+    'imagenotfound': "impossible de charger l'image",
+    'invalidnumber': 'numéro invalide'
   };
   static Map<String, String> mapEN = {
     'home': 'Home',
@@ -197,7 +198,8 @@ class Language {
     'stnolv': 'this station does not have delivery men',
     'deliveredASAP': 'will be delivered ASAP',
     'open': 'Open',
-    'imagenotfound': "unable to load image"
+    'imagenotfound': "unable to load image",
+    'invalidnumber': 'invalid number'
   };
   static toggleLang(String lang) {
     if (lang == 'EN') {

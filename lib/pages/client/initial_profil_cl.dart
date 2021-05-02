@@ -5,7 +5,6 @@ import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:FD_flutter/wrapper.dart';
 
@@ -153,12 +152,24 @@ class _initialProfileclState extends State<InitialProfilecl>
                                     new Flexible(
                                       child: new TextFormField(
                                         decoration: InputDecoration(
+                                            prefixIcon:
+                                                Text('+212', style: hintStyle),
                                             border: const OutlineInputBorder(),
                                             labelText:
                                                 "${Language.mapLang['phone']}"),
-                                        validator: (val) => val.isEmpty
-                                            ? "${Language.mapLang['required']}"
-                                            : null,
+                                        validator: (val) {
+                                          if (val.isEmpty)
+                                            return "${Language.mapLang['required']}";
+                                          else if (RegExp("[0-9]")
+                                                  .hasMatch(val) ||
+                                              val.length == 9 ||
+                                              val.substring(0, 1) == '6' ||
+                                              val.substring(0, 1) == '7' ||
+                                              val.substring(0, 1) == '5')
+                                            return null;
+                                          else
+                                            return "${Language.mapLang['invalidnumber']}";
+                                        },
                                         onChanged: (val) {
                                           setState(() => phone = val);
                                         },
