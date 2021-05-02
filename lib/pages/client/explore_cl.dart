@@ -1,10 +1,8 @@
 import 'dart:developer';
 import 'dart:ui';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
-import 'package:FD_flutter/pages/client/index_cl.dart';
-import 'package:FD_flutter/pages/client/profile_cl.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -20,13 +18,12 @@ class ExploreCl extends StatefulWidget {
   _ExploreClState createState() => _ExploreClState();
 }
 
-final int _currentIndex = 1;
 List<String> _favList = [];
 
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle =
-      new Text('${SplashScreen.mapLang['explore']}', style: pageTitleX);
+      new Text('${Language.mapLang['explore']}', style: pageTitleX);
   String _searchString;
   @override
   Widget build(BuildContext context) {
@@ -106,50 +103,6 @@ class _ExploreClState extends State<ExploreCl> {
                     }
                   },
                 ),
-                bottomNavigationBar: BottomNavigationBar(
-                    backgroundColor: Colors.white,
-                    currentIndex: _currentIndex,
-                    onTap: (value) {
-                      switch (value) {
-                        case 0:
-                          Navigator.of(context).pushReplacement(PageTransition(
-                              type: PageTransitionType.fade, child: IndexCl()));
-
-                          break;
-                        case 1:
-                          if (_currentIndex != 1)
-                            Navigator.of(context).pushReplacement(
-                                PageTransition(
-                                    type: PageTransitionType.fade,
-                                    child: ExploreCl()));
-                          break;
-                        case 2:
-                          Navigator.of(context).pushReplacement(PageTransition(
-                              type: PageTransitionType.fade,
-                              child: ProfileCl()));
-                          break;
-                      }
-                    },
-                    type: BottomNavigationBarType.fixed,
-                    items: [
-                      BottomNavigationBarItem(
-                          icon: Icon(OMIcons.home, color: Color(0xFFB9BAC3)),
-                          // ignore: deprecated_member_use
-                          title: Text('${SplashScreen.mapLang['home']}',
-                              style: TextStyle(color: Color(0xFFB9BAC3)))),
-                      BottomNavigationBarItem(
-                          icon: Icon(OMIcons.explore, color: Colors.blue[700]),
-                          // ignore: deprecated_member_use
-                          title: Text('${SplashScreen.mapLang['explore']}',
-                              style: TextStyle(
-                                color: Colors.blue[700],
-                              ))),
-                      BottomNavigationBarItem(
-                          icon: Icon(OMIcons.person, color: Color(0xFFB9BAC3)),
-                          // ignore: deprecated_member_use
-                          title: Text('${SplashScreen.mapLang['profile']}',
-                              style: TextStyle(color: Color(0xFFB9BAC3)))),
-                    ]),
               );
           }
         });
@@ -216,7 +169,7 @@ class _ExploreClState extends State<ExploreCl> {
                                     SizedBox(
                                       width: 5,
                                     ),
-                                    Text('${SplashScreen.mapLang['call']}',
+                                    Text('${Language.mapLang['call']}',
                                         style: textStyle)
                                   ],
                                 ),
@@ -239,7 +192,7 @@ class _ExploreClState extends State<ExploreCl> {
                                     SizedBox(
                                       width: 5,
                                     ),
-                                    Text('${SplashScreen.mapLang['mail']}',
+                                    Text('${Language.mapLang['mail']}',
                                         style: textStyle)
                                   ],
                                 ),
@@ -291,7 +244,7 @@ class _ExploreClState extends State<ExploreCl> {
                         label: Container(
                           margin: EdgeInsets.only(top: 2),
                           child: Text(
-                            '${SplashScreen.mapLang['order']}',
+                            '${Language.mapLang['order']}',
                             style: TextStyle(
                               color: Colors.blue[700],
                               fontWeight: FontWeight.w600,
@@ -335,7 +288,7 @@ class _ExploreClState extends State<ExploreCl> {
           style: textStyle,
           keyboardType: TextInputType.text,
           decoration: new InputDecoration(
-            hintText: '${SplashScreen.mapLang['typehere']}',
+            hintText: '${Language.mapLang['typehere']}',
             hintStyle: hintStyle,
             border: InputBorder.none,
           ),
@@ -349,7 +302,7 @@ class _ExploreClState extends State<ExploreCl> {
         _searchString = null;
         this._searchIcon = new Icon(Icons.search);
         this._appBarTitle =
-            new Text('${SplashScreen.mapLang['explore']}', style: pageTitleX);
+            new Text('${Language.mapLang['explore']}', style: pageTitleX);
       }
     });
   }

@@ -1,6 +1,6 @@
 import 'package:FD_flutter/modules/order.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_done.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:square_in_app_payments/in_app_payments.dart';
@@ -32,7 +32,7 @@ class _OnlinePaymentsState extends State<OnlinePayments> {
               padding: EdgeInsets.all(10),
               margin: EdgeInsets.all(10),
               child: Text(
-                "${SplashScreen.mapLang['orderdetail']}",
+                "${Language.mapLang['orderdetail']}",
                 style: titleStyle,
               ),
             ),
@@ -134,7 +134,7 @@ class _OnlinePaymentsState extends State<OnlinePayments> {
                                 width: 10,
                               ),
                               Text(
-                                "${SplashScreen.mapLang['ftype']} :",
+                                "${Language.mapLang['ftype']} :",
                                 style: smallTileGray,
                               ),
                             ],
@@ -172,7 +172,7 @@ class _OnlinePaymentsState extends State<OnlinePayments> {
                                 width: 10,
                               ),
                               Text(
-                                "${SplashScreen.mapLang['matricule']} :",
+                                "${Language.mapLang['matricule']} :",
                                 style: smallTileGray,
                               ),
                             ],
@@ -209,7 +209,7 @@ class _OnlinePaymentsState extends State<OnlinePayments> {
                                 width: 10,
                               ),
                               Text(
-                                "${SplashScreen.mapLang['carcolor']} :",
+                                "${Language.mapLang['carcolor']} :",
                                 style: smallTileGray,
                               ),
                             ],
@@ -274,7 +274,7 @@ class _OnlinePaymentsState extends State<OnlinePayments> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          "${SplashScreen.mapLang['pay']}",
+                          "${Language.mapLang['pay']}",
                           style: buttonStyle,
                         ),
                         Icon(

@@ -1,4 +1,4 @@
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
         title: Text(
-          "${SplashScreen.mapLang['detail']}",
+          "${Language.mapLang['detail']}",
           style: pageTitleX,
         ),
         leading: IconButton(
@@ -69,7 +69,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       width: 15,
                     ),
                     Text(
-                      "${SplashScreen.mapLang['number']} :",
+                      "${Language.mapLang['number']} :",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -147,7 +147,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       width: 15,
                     ),
                     Text(
-                      "${SplashScreen.mapLang['time']} :",
+                      "${Language.mapLang['time']} :",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -186,7 +186,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       width: 15,
                     ),
                     Text(
-                      "${SplashScreen.mapLang['matricule']} :",
+                      "${Language.mapLang['matricule']} :",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -225,7 +225,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       width: 15,
                     ),
                     Text(
-                      "${SplashScreen.mapLang['carcolor']} :",
+                      "${Language.mapLang['carcolor']} :",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -264,7 +264,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       width: 15,
                     ),
                     Text(
-                      "${SplashScreen.mapLang['ftype']} :",
+                      "${Language.mapLang['ftype']} :",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -303,7 +303,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       width: 15,
                     ),
                     Text(
-                      "${SplashScreen.mapLang['address']}",
+                      "${Language.mapLang['address']}",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,

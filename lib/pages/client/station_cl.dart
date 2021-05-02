@@ -1,5 +1,5 @@
 import 'package:FD_flutter/shared/FadeAnimation.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/pages/client/commanderPages/cmd_client.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -121,7 +121,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                     children: [
                                       Icon(Icons.business, color: Colors.black),
                                       SizedBox(width: 8),
-                                      Text("${SplashScreen.mapLang['address']}",
+                                      Text("${Language.mapLang['address']}",
                                           style: tileTitleStyle),
                                     ],
                                   )),
@@ -136,8 +136,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                   children: [
                                     Icon(Icons.group, color: Colors.black),
                                     SizedBox(width: 8),
-                                    Text(
-                                        "${SplashScreen.mapLang['deliverymen']}",
+                                    Text("${Language.mapLang['deliverymen']}",
                                         style: tileTitleStyle),
                                   ],
                                 ),
@@ -148,10 +147,9 @@ class _StationProfilClState extends State<StationProfilCl> {
                                   0.01,
                                   _lvCount > 0
                                       ? Text(
-                                          "$_lvCount ${SplashScreen.mapLang['deliverymen']}",
+                                          "$_lvCount ${Language.mapLang['deliverymen']}",
                                           style: smallTileGray)
-                                      : Text(
-                                          "${SplashScreen.mapLang['stnolv']}",
+                                      : Text("${Language.mapLang['stnolv']}",
                                           style: smallTileGray)),
                               SizedBox(height: 20),
                               FadeAnimation(
@@ -160,7 +158,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                   children: [
                                     Icon(Icons.phone, color: Colors.black),
                                     SizedBox(width: 8),
-                                    Text("${SplashScreen.mapLang['phone']}",
+                                    Text("${Language.mapLang['phone']}",
                                         style: tileTitleStyle)
                                   ],
                                 ),
@@ -196,7 +194,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                                   color: Colors.black),
                                               SizedBox(width: 8),
                                               Text(
-                                                  "${SplashScreen.mapLang['pictures']}",
+                                                  "${Language.mapLang['pictures']}",
                                                   style: tileTitleStyle),
                                             ],
                                           ),
@@ -256,7 +254,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                   borderRadius: BorderRadius.circular(50),
                                   color: Colors.green.shade400),
                               child: Text(
-                                "${SplashScreen.mapLang['placeorder']}",
+                                "${Language.mapLang['placeorder']}",
                                 style: buttonStyle,
                               ),
                             ),

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
@@ -41,7 +41,7 @@ class _SignInState extends State<SignIn> {
                     Container(
                       margin: EdgeInsets.all(15),
                       child: Text(
-                        "${SplashScreen.mapLang['welcomeback']}",
+                        "${Language.mapLang['welcomeback']}",
                         style: TextStyle(
                           color: Colors.blue[700],
                           fontSize: 50,
@@ -67,7 +67,7 @@ class _SignInState extends State<SignIn> {
                                   margin: EdgeInsets.only(
                                       left: 10, right: 10, bottom: 5),
                                   child: Text(
-                                    '${SplashScreen.mapLang['forgetpassword']}',
+                                    '${Language.mapLang['forgetpassword']}',
                                     style: pageTitleX,
                                   ),
                                 ),
@@ -86,7 +86,7 @@ class _SignInState extends State<SignIn> {
                                       if (val.isEmpty ||
                                           !val.contains('@') ||
                                           !val.contains('.')) {
-                                        return '${SplashScreen.mapLang['emailvalidator']}';
+                                        return '${Language.mapLang['emailvalidator']}';
                                       }
                                       return null;
                                     },
@@ -120,7 +120,7 @@ class _SignInState extends State<SignIn> {
                                               color: Colors.white),
                                           child: Center(
                                             child: Text(
-                                              "${SplashScreen.mapLang['cancel']}"
+                                              "${Language.mapLang['cancel']}"
                                                   .toUpperCase(),
                                               style: buttonStyleBlack,
                                             ),
@@ -143,7 +143,7 @@ class _SignInState extends State<SignIn> {
                                               color: Colors.blue[700]),
                                           child: Center(
                                             child: Text(
-                                              "${SplashScreen.mapLang['sendemail']}"
+                                              "${Language.mapLang['sendemail']}"
                                                   .toUpperCase(),
                                               style: buttonStyle,
                                             ),
@@ -182,7 +182,7 @@ class _SignInState extends State<SignIn> {
                                                 if (val.isEmpty ||
                                                     !val.contains('@') ||
                                                     !val.contains('.')) {
-                                                  return '${SplashScreen.mapLang['emailvalidator']}';
+                                                  return '${Language.mapLang['emailvalidator']}';
                                                 }
                                                 return null;
                                               },
@@ -204,7 +204,7 @@ class _SignInState extends State<SignIn> {
                                                     ? Icon(OMIcons.lock)
                                                     : Icon(OMIcons.lockOpen),
                                                 hintText:
-                                                    "${SplashScreen.mapLang['password']}",
+                                                    "${Language.mapLang['password']}",
                                                 hintStyle: hintStyle,
                                                 suffixIcon: IconButton(
                                                     icon: Icon(
@@ -228,7 +228,7 @@ class _SignInState extends State<SignIn> {
                                                         vertical: 15.0),
                                               ),
                                               validator: (val) => val.length < 6
-                                                  ? '${SplashScreen.mapLang['passwordvalidator']}'
+                                                  ? '${Language.mapLang['passwordvalidator']}'
                                                   : null,
                                               onChanged: (val) {
                                                 setState(() => password = val);
@@ -283,7 +283,7 @@ class _SignInState extends State<SignIn> {
                                                     errorMessage =
                                                         AuthService.error;
                                                     if (errorMessage ==
-                                                        "${SplashScreen.mapLang['ERROR_WRONG_PASSWORD']}") {
+                                                        "${Language.mapLang['ERROR_WRONG_PASSWORD']}") {
                                                       setState(() {
                                                         _password++;
                                                       });
@@ -306,7 +306,7 @@ class _SignInState extends State<SignIn> {
                                                 }
                                               } on SocketException catch (_) {
                                                 showInSnackBar(
-                                                    "${SplashScreen.mapLang['nointernet']}");
+                                                    "${Language.mapLang['nointernet']}");
                                               }
                                             }
                                           },
@@ -321,7 +321,7 @@ class _SignInState extends State<SignIn> {
                                                 color: Colors.blue[700]),
                                             child: Center(
                                               child: Text(
-                                                "${SplashScreen.mapLang['login']}"
+                                                "${Language.mapLang['login']}"
                                                     .toUpperCase(),
                                                 style: buttonStyle,
                                               ),

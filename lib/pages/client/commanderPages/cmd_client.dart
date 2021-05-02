@@ -6,7 +6,7 @@ import 'package:FD_flutter/pages/client/commanderPages/cmd_done.dart';
 import 'package:FD_flutter/pages/client/commanderPages/online_payements.dart';
 import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -94,7 +94,7 @@ class _ClientOrderState extends State<ClientOrder> {
                         Container(
                           margin: EdgeInsets.all(20),
                           child: Text(
-                            '${SplashScreen.mapLang['modepay']}',
+                            '${Language.mapLang['modepay']}',
                             style: pageTitleX,
                           ),
                         ),
@@ -115,7 +115,7 @@ class _ClientOrderState extends State<ClientOrder> {
                             padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
                             child: Center(
                               child: Text(
-                                '${SplashScreen.mapLang['finish']}',
+                                '${Language.mapLang['finish']}',
                                 style: buttonStyle,
                               ),
                             ),
@@ -128,7 +128,7 @@ class _ClientOrderState extends State<ClientOrder> {
                       child: Column(
                         children: [
                           ListTile(
-                            title: Text('${SplashScreen.mapLang['cod']}'),
+                            title: Text('${Language.mapLang['cod']}'),
                             leading: Radio(
                                 activeColor: Colors.black,
                                 value: pmethode.livraison,
@@ -140,7 +140,7 @@ class _ClientOrderState extends State<ClientOrder> {
                                 }),
                           ),
                           ListTile(
-                            title: Text('${SplashScreen.mapLang['card']}'),
+                            title: Text('${Language.mapLang['card']}'),
                             leading: Radio(
                                 activeColor: Colors.black,
                                 value: pmethode.google,
@@ -189,7 +189,7 @@ class _ClientOrderState extends State<ClientOrder> {
           },
         ),
         title: Text(
-          "${SplashScreen.mapLang['placeorder']}",
+          "${Language.mapLang['placeorder']}",
           style: pageTitleX,
         ),
         actions: [
@@ -205,7 +205,7 @@ class _ClientOrderState extends State<ClientOrder> {
           IconButton(
             icon:
                 Icon(CupertinoIcons.text_badge_checkmark, color: Colors.black),
-            // Text('${SplashScreen.mapLang['next']}', style: tileTitleStyle),
+            // Text('${Language.mapLang['next']}', style: tileTitleStyle),
             onPressed: () async {
               if (_methode == null) {
                 _showModalSheetPayment(context);
@@ -269,9 +269,8 @@ class _ClientOrderState extends State<ClientOrder> {
                       labelStyle: hintStyle,
                       border: InputBorder.none),
                   keyboardType: TextInputType.number,
-                  validator: (value) => value == null
-                      ? '${SplashScreen.mapLang['required']}'
-                      : null,
+                  validator: (value) =>
+                      value == null ? '${Language.mapLang['required']}' : null,
                 ),
               ),
               Container(
@@ -292,9 +291,8 @@ class _ClientOrderState extends State<ClientOrder> {
                     );
                   }).toList(),
                   onChanged: (val) => _type = val,
-                  validator: (value) => value.isEmpty
-                      ? '${SplashScreen.mapLang['required']}'
-                      : null,
+                  validator: (value) =>
+                      value.isEmpty ? '${Language.mapLang['required']}' : null,
                 ),
               ),
               _adr != ""
@@ -306,12 +304,12 @@ class _ClientOrderState extends State<ClientOrder> {
                               bottom: BorderSide(color: Colors.grey[200]))),
                       child: TextFormField(
                         decoration: InputDecoration(
-                            labelText: "${SplashScreen.mapLang['address']}",
+                            labelText: "${Language.mapLang['address']}",
                             labelStyle: hintStyle,
                             border: InputBorder.none),
                         onChanged: (value) => _adresse = value,
                         validator: (value) => value.isEmpty
-                            ? '${SplashScreen.mapLang['required']}'
+                            ? '${Language.mapLang['required']}'
                             : null,
                       ),
                     ),
@@ -322,13 +320,12 @@ class _ClientOrderState extends State<ClientOrder> {
                         Border(bottom: BorderSide(color: Colors.grey[200]))),
                 child: TextFormField(
                   decoration: InputDecoration(
-                      labelText: "${SplashScreen.mapLang['matricule']}",
+                      labelText: "${Language.mapLang['matricule']}",
                       labelStyle: hintStyle,
                       border: InputBorder.none),
                   onChanged: (value) => _matricule = value,
-                  validator: (value) => value.isEmpty
-                      ? '${SplashScreen.mapLang['required']}'
-                      : null,
+                  validator: (value) =>
+                      value.isEmpty ? '${Language.mapLang['required']}' : null,
                 ),
               ),
               Container(
@@ -340,7 +337,7 @@ class _ClientOrderState extends State<ClientOrder> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${SplashScreen.mapLang['carcolor']}',
+                      '${Language.mapLang['carcolor']}',
                       style: hintStyle,
                     ),
                     InkWell(
@@ -349,7 +346,7 @@ class _ClientOrderState extends State<ClientOrder> {
                           context: context,
                           child: CustomAlertDialog(
                             title: Text(
-                              '${SplashScreen.mapLang['pickcolor']}',
+                              '${Language.mapLang['pickcolor']}',
                               style: tileTitleStyle,
                             ),
                             content: SingleChildScrollView(
@@ -362,8 +359,7 @@ class _ClientOrderState extends State<ClientOrder> {
                             ),
                             actions: <Widget>[
                               FlatButton(
-                                child:
-                                    Text('${SplashScreen.mapLang['choose']}'),
+                                child: Text('${Language.mapLang['choose']}'),
                                 onPressed: () {
                                   _carColor = _pickerColor;
                                   Navigator.of(context).pop();
@@ -444,7 +440,7 @@ class _ClientOrderState extends State<ClientOrder> {
                       Scaffold.of(context).showSnackBar(SnackBar(
                         duration: Duration(seconds: 1),
                         content: Text(
-                          "${SplashScreen.mapLang["LOCATION_PERMISSION_DENIED"]}",
+                          "${Language.mapLang["LOCATION_PERMISSION_DENIED"]}",
                           style: TextStyle(color: Colors.white),
                         ),
                         backgroundColor: Colors.black,

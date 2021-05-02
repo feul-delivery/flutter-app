@@ -2,7 +2,8 @@ import 'dart:developer';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/services/auth.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/map_api.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -28,7 +29,7 @@ class _SettingsClState extends State<SettingsCl> {
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
         title: Text(
-          "${SplashScreen.mapLang['settings']}",
+          "${Language.mapLang['settings']}",
           style: pageTitleX,
         ),
         leading: IconButton(
@@ -39,6 +40,18 @@ class _SettingsClState extends State<SettingsCl> {
             onPressed: () {
               Navigator.pop(context);
             }),
+        actions: [
+          InkWell(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => Maps(
+                          title: "Google Maps",
+                        )));
+              },
+              child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+                  child: Icon(OMIcons.myLocation, color: Colors.black)))
+        ],
         backgroundColor: Colors.white,
         elevation: 0,
       ),
@@ -56,7 +69,7 @@ class _SettingsClState extends State<SettingsCl> {
                 padding: EdgeInsets.all(5),
                 margin: EdgeInsets.only(left: 10, right: 10, bottom: 5),
                 child: Text(
-                  '${SplashScreen.mapLang['account']}',
+                  '${Language.mapLang['account']}',
                   style: pageTitleX,
                 ),
               ),
@@ -73,7 +86,7 @@ class _SettingsClState extends State<SettingsCl> {
                       color: Colors.blue[700],
                     ),
                     title: Text(
-                      "${SplashScreen.mapLang['editprofile']}",
+                      "${Language.mapLang['editprofile']}",
                       style: textStyle,
                     ),
                   ),
@@ -90,7 +103,7 @@ class _SettingsClState extends State<SettingsCl> {
                       color: Colors.blue[700],
                     ),
                     title: Text(
-                      "${SplashScreen.mapLang['changeemail']}",
+                      "${Language.mapLang['changeemail']}",
                       style: textStyle,
                     ),
                   ),
@@ -107,7 +120,7 @@ class _SettingsClState extends State<SettingsCl> {
                       color: Colors.blue[700],
                     ),
                     title: Text(
-                      "${SplashScreen.mapLang['changepassword']}",
+                      "${Language.mapLang['changepassword']}",
                       style: textStyle,
                     ),
                   ),
@@ -144,7 +157,7 @@ class _SettingsClState extends State<SettingsCl> {
                       color: Colors.blue[700],
                     ),
                     title: Text(
-                      "${SplashScreen.mapLang['changelang']}",
+                      "${Language.mapLang['changelang']}",
                       style: textStyle,
                     ),
                   ),
@@ -161,7 +174,7 @@ class _SettingsClState extends State<SettingsCl> {
                       color: Colors.blue[700],
                     ),
                     title: Text(
-                      "${SplashScreen.mapLang['rateus']}",
+                      "${Language.mapLang['rateus']}",
                       style: textStyle,
                     ),
                   ),
@@ -178,7 +191,7 @@ class _SettingsClState extends State<SettingsCl> {
                       color: Colors.blue[700],
                     ),
                     title: Text(
-                      "${SplashScreen.mapLang['aboutus']}",
+                      "${Language.mapLang['aboutus']}",
                       style: textStyle,
                     ),
                   ),
@@ -200,7 +213,7 @@ class _SettingsClState extends State<SettingsCl> {
                   color: Colors.blue[700],
                 ),
                 title: Text(
-                  "${SplashScreen.mapLang['signout']}",
+                  "${Language.mapLang['signout']}",
                   style: textStyle,
                 ),
               )),
@@ -243,7 +256,7 @@ Future<void> _showModalBottomRateUs(BuildContext context) {
                             padding: EdgeInsets.all(5),
                             margin: EdgeInsets.only(
                                 left: 10, right: 10, bottom: 5, top: 10),
-                            child: Text('${SplashScreen.mapLang['rateus']}',
+                            child: Text('${Language.mapLang['rateus']}',
                                 style: pageTitleX)),
                         Column(
                           mainAxisSize: MainAxisSize.min,
@@ -279,7 +292,7 @@ Future<void> _showModalBottomRateUs(BuildContext context) {
                                     color: Colors.blue[700]),
                                 child: Center(
                                   child: Text(
-                                    "${SplashScreen.mapLang['submit']}"
+                                    "${Language.mapLang['submit']}"
                                         .toUpperCase(),
                                     style: buttonStyle,
                                   ),
@@ -336,8 +349,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                           padding: EdgeInsets.all(5),
                           margin: EdgeInsets.only(
                               left: 10, right: 10, bottom: 5, top: 10),
-                          child: Text(
-                              '${SplashScreen.mapLang['changepassword']}',
+                          child: Text('${Language.mapLang['changepassword']}',
                               style: pageTitleX)),
                       SingleChildScrollView(
                         child: Column(
@@ -355,7 +367,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                       obscureText: true,
                                       decoration: InputDecoration(
                                         hintText:
-                                            "${SplashScreen.mapLang['oldpassword']}",
+                                            "${Language.mapLang['oldpassword']}",
                                         hintStyle: hintStyle,
                                         contentPadding: EdgeInsets.symmetric(
                                             horizontal: 10.0, vertical: 15.0),
@@ -364,7 +376,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                         _passwodOld = value;
                                       },
                                       validator: (val) => val.length < 6
-                                          ? '${SplashScreen.mapLang['passwordvalidator']}'
+                                          ? '${Language.mapLang['passwordvalidator']}'
                                           : null,
                                     ),
                                   ),
@@ -375,7 +387,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                       obscureText: _isObscure,
                                       decoration: InputDecoration(
                                         hintText:
-                                            "${SplashScreen.mapLang['password']}",
+                                            "${Language.mapLang['password']}",
                                         suffixIcon: IconButton(
                                             icon: Icon(
                                               _isObscure
@@ -395,7 +407,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                             horizontal: 10.0, vertical: 15.0),
                                       ),
                                       validator: (val) => val.length < 6
-                                          ? '${SplashScreen.mapLang['passwordvalidator']}'
+                                          ? '${Language.mapLang['passwordvalidator']}'
                                           : null,
                                       onChanged: (val) {
                                         setState(() {
@@ -415,7 +427,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                             horizontal: 10.0, vertical: 15.0),
                                       ),
                                       validator: (val) => val != _password
-                                          ? '${SplashScreen.mapLang['passwordmatch']}'
+                                          ? '${Language.mapLang['passwordmatch']}'
                                           : null,
                                     ),
                                   ),
@@ -441,7 +453,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                 if (_password == _passwodOld) {
                                   setState(() {
                                     _error =
-                                        "${SplashScreen.mapLang['changenewpassword']}";
+                                        "${Language.mapLang['changenewpassword']}";
                                   });
                                 } else {
                                   if (_formKey.currentState.validate()) {
@@ -455,8 +467,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                               password: _passwodOld);
                                     } catch (e) {
                                       setState(() {
-                                        _error =
-                                            "${SplashScreen.mapLang['error']}";
+                                        _error = "${Language.mapLang['error']}";
                                       });
                                     }
                                     inspect(result);
@@ -476,7 +487,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                     color: Colors.blue[700]),
                                 child: Center(
                                   child: Text(
-                                    "${SplashScreen.mapLang['validate']}"
+                                    "${Language.mapLang['validate']}"
                                         .toUpperCase(),
                                     style: buttonStyle,
                                   ),
@@ -535,7 +546,7 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                           padding: EdgeInsets.all(5),
                           margin: EdgeInsets.only(
                               left: 10, right: 10, bottom: 5, top: 10),
-                          child: Text('${SplashScreen.mapLang['changeemail']}',
+                          child: Text('${Language.mapLang['changeemail']}',
                               style: pageTitleX)),
                       SingleChildScrollView(
                         child: Column(
@@ -553,7 +564,7 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                                       textInputAction: TextInputAction.next,
                                       decoration: InputDecoration(
                                         hintText:
-                                            "${SplashScreen.mapLang['newemail']}",
+                                            "${Language.mapLang['newemail']}",
                                         hintStyle: hintStyle,
                                         contentPadding: EdgeInsets.symmetric(
                                             horizontal: 10.0, vertical: 15.0),
@@ -562,7 +573,7 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                                         if (val.isEmpty ||
                                             !val.contains('@') ||
                                             !val.contains('.')) {
-                                          return '${SplashScreen.mapLang['emailvalidator']}';
+                                          return '${Language.mapLang['emailvalidator']}';
                                         }
                                         return null;
                                       },
@@ -583,7 +594,7 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                                             horizontal: 10.0, vertical: 15.0),
                                       ),
                                       validator: (val) => val != _email
-                                          ? '${SplashScreen.mapLang['passwordmatch']}'
+                                          ? '${Language.mapLang['passwordmatch']}'
                                           : null,
                                       keyboardType: TextInputType.emailAddress,
                                     ),
@@ -595,13 +606,13 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                                       obscureText: _isObscure,
                                       decoration: InputDecoration(
                                         hintText:
-                                            "${SplashScreen.mapLang['password']}",
+                                            "${Language.mapLang['password']}",
                                         hintStyle: hintStyle,
                                         contentPadding: EdgeInsets.symmetric(
                                             horizontal: 10.0, vertical: 15.0),
                                       ),
                                       validator: (val) => val == null
-                                          ? '${SplashScreen.mapLang['enterpassword']}'
+                                          ? '${Language.mapLang['enterpassword']}'
                                           : null,
                                       onChanged: (val) {
                                         _password = val;
@@ -632,7 +643,7 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                                 if (_email == _emailOld) {
                                   setState(() {
                                     _error =
-                                        "${SplashScreen.mapLang['changenewemail']}";
+                                        "${Language.mapLang['changenewemail']}";
                                   });
                                 } else {
                                   if (_formKey.currentState.validate()) {
@@ -646,8 +657,7 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                                               password: _password);
                                     } catch (e) {
                                       setState(() {
-                                        _error =
-                                            "${SplashScreen.mapLang['error']}";
+                                        _error = "${Language.mapLang['error']}";
                                       });
                                     }
                                     inspect(_result);
@@ -669,7 +679,7 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                                     color: Colors.blue[700]),
                                 child: Center(
                                   child: Text(
-                                    "${SplashScreen.mapLang['validate']}"
+                                    "${Language.mapLang['validate']}"
                                         .toUpperCase(),
                                     style: buttonStyle,
                                   ),
@@ -703,7 +713,7 @@ Future<void> _buildModalAboutUsRow(BuildContext context) {
                     padding: EdgeInsets.all(5),
                     margin: EdgeInsets.only(
                         left: 10, right: 10, bottom: 5, top: 10),
-                    child: Text('${SplashScreen.mapLang['aboutus']}',
+                    child: Text('${Language.mapLang['aboutus']}',
                         style: pageTitleX)),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
@@ -790,14 +800,14 @@ Future<void> _buildModalChangeLang(BuildContext context) {
                         height: 30,
                         color: Colors.red,
                         child: Center(
-                            child: Text('${SplashScreen.mapLang['usedlang']}',
+                            child: Text('${Language.mapLang['usedlang']}',
                                 style: textStyleWhite)))
                     : Container(),
                 Container(
                     padding: EdgeInsets.all(5),
                     margin: EdgeInsets.only(
                         left: 10, right: 10, bottom: 5, top: 10),
-                    child: Text('${SplashScreen.mapLang['changelang']}',
+                    child: Text('${Language.mapLang['changelang']}',
                         style: pageTitleX)),
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -805,11 +815,8 @@ Future<void> _buildModalChangeLang(BuildContext context) {
                   children: [
                     InkWell(
                         onTap: () {
-                          if (SplashScreen.mapLang['en'] != 'Anglais') {
+                          if (Language.mapLang['en'] != 'Anglais') {
                             _langChangeState('FR');
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => SplashScreen()));
                           } else {
                             // Navigator.of(context).pop();
                             setState(() {
@@ -821,16 +828,13 @@ Future<void> _buildModalChangeLang(BuildContext context) {
                           margin: EdgeInsets.all(20),
                           padding: EdgeInsets.all(10),
                           child: Center(
-                              child: Text('🇫🇷 ${SplashScreen.mapLang['fr']}',
+                              child: Text('🇫🇷 ${Language.mapLang['fr']}',
                                   style: buttonStyleBlack)),
                         )),
                     InkWell(
                         onTap: () {
-                          if (SplashScreen.mapLang['en'] != 'English') {
+                          if (Language.mapLang['en'] != 'English') {
                             _langChangeState('EN');
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => SplashScreen()));
                           } else {
                             // Navigator.of(context).pop();
                             setState(() {
@@ -842,7 +846,7 @@ Future<void> _buildModalChangeLang(BuildContext context) {
                           margin: EdgeInsets.all(20),
                           padding: EdgeInsets.all(10),
                           child: Center(
-                              child: Text('🇺🇸 ${SplashScreen.mapLang['en']}',
+                              child: Text('🇺🇸 ${Language.mapLang['en']}',
                                   style: buttonStyleBlack)),
                         ))
                   ],

@@ -1,5 +1,5 @@
 import 'package:FD_flutter/modules/user.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -34,9 +34,7 @@ class AuthService {
       return null;
     }
     _user = _result.user;
-    return _userFromFirebaseUser(
-      _user
-    );
+    return _userFromFirebaseUser(_user);
   }
 
 //  Update elail of the current user
@@ -57,25 +55,25 @@ class AuthService {
   _findError(dynamic code) {
     switch (code) {
       case "ERROR_INVALID_EMAIL":
-        error = "${SplashScreen.mapLang['ERROR_INVALID_EMAIL']}";
+        error = "${Language.mapLang['ERROR_INVALID_EMAIL']}";
         break;
       case "ERROR_WRONG_PASSWORD":
-        error = "${SplashScreen.mapLang['ERROR_WRONG_PASSWORD']}";
+        error = "${Language.mapLang['ERROR_WRONG_PASSWORD']}";
         break;
       case "ERROR_USER_NOT_FOUND":
-        error = "${SplashScreen.mapLang['ERROR_USER_NOT_FOUND']}";
+        error = "${Language.mapLang['ERROR_USER_NOT_FOUND']}";
         break;
       case "ERROR_USER_DISABLED":
-        error = "${SplashScreen.mapLang['ERROR_USER_DISABLED']}";
+        error = "${Language.mapLang['ERROR_USER_DISABLED']}";
         break;
       case "ERROR_TOO_MANY_REQUESTS":
-        error = "${SplashScreen.mapLang['ERROR_TOO_MANY_REQUESTS']}";
+        error = "${Language.mapLang['ERROR_TOO_MANY_REQUESTS']}";
         break;
       case "ERROR_OPERATION_NOT_ALLOWED":
-        error = "${SplashScreen.mapLang['ERROR_OPERATION_NOT_ALLOWED']}";
+        error = "${Language.mapLang['ERROR_OPERATION_NOT_ALLOWED']}";
         break;
       default:
-        error = "${SplashScreen.mapLang['UNDEFINED_ERROR']}";
+        error = "${Language.mapLang['UNDEFINED_ERROR']}";
     }
   }
 

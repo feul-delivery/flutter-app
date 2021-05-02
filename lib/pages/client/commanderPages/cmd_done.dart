@@ -1,5 +1,5 @@
 import 'package:FD_flutter/modules/order.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -80,7 +80,7 @@ class _OrderDoneState extends State<OrderDone> {
                     ),
                   ),
                   Text(
-                    "${SplashScreen.mapLang['deliveredASAP']}",
+                    "${Language.mapLang['deliveredASAP']}",
                     style: TextStyle(
                         color: Colors.black26,
                         fontFamily: 'Gotham',
@@ -108,7 +108,7 @@ class _OrderDoneState extends State<OrderDone> {
                       padding: EdgeInsets.all(10),
                       margin: EdgeInsets.all(10),
                       child: Text(
-                        '${SplashScreen.mapLang['orderdetail']} :',
+                        '${Language.mapLang['orderdetail']} :',
                         style: titleStyle,
                       ),
                     ),
@@ -213,7 +213,7 @@ class _OrderDoneState extends State<OrderDone> {
                                         width: 10,
                                       ),
                                       Text(
-                                        "${SplashScreen.mapLang['ftype']} :",
+                                        "${Language.mapLang['ftype']} :",
                                         style: smallTileGray,
                                       ),
                                     ],
@@ -252,7 +252,7 @@ class _OrderDoneState extends State<OrderDone> {
                                         width: 10,
                                       ),
                                       Text(
-                                        "${SplashScreen.mapLang['matricule']} :",
+                                        "${Language.mapLang['matricule']} :",
                                         style: smallTileGray,
                                       ),
                                     ],
@@ -290,7 +290,7 @@ class _OrderDoneState extends State<OrderDone> {
                                         width: 10,
                                       ),
                                       Text(
-                                        "${SplashScreen.mapLang['carcolor']} :",
+                                        "${Language.mapLang['carcolor']} :",
                                         style: smallTileGray,
                                       ),
                                     ],
@@ -398,7 +398,7 @@ class _OrderDoneState extends State<OrderDone> {
                               color: Colors.black),
                           child: Center(
                             child: Text(
-                              "${SplashScreen.mapLang['confirm']}",
+                              "${Language.mapLang['confirm']}",
                               style: buttonStyle,
                             ),
                           ),

@@ -1,7 +1,7 @@
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/services/database.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -43,8 +43,7 @@ class _initialProfileclState extends State<InitialProfilecl>
             centerTitle: false,
             backgroundColor: Colors.white,
             elevation: 1,
-            title:
-                Text("${SplashScreen.mapLang['profile']}", style: pageTitleX),
+            title: Text("${Language.mapLang['profile']}", style: pageTitleX),
             leading: IconButton(
                 icon: Icon(OMIcons.arrowBack, color: Colors.black),
                 onPressed: () => Navigator.of(context).pop()),
@@ -80,7 +79,7 @@ class _initialProfileclState extends State<InitialProfilecl>
                           decoration: BoxDecoration(
                               color: Colors.black,
                               borderRadius: BorderRadius.circular(20)),
-                          child: Text("${SplashScreen.mapLang['finish']}",
+                          child: Text("${Language.mapLang['finish']}",
                               style: buttonStyle))))
             ]),
         body: new Container(
@@ -110,10 +109,10 @@ class _initialProfileclState extends State<InitialProfilecl>
                                         decoration: InputDecoration(
                                           border: const OutlineInputBorder(),
                                           labelText:
-                                              "${SplashScreen.mapLang['firstname']}",
+                                              "${Language.mapLang['firstname']}",
                                         ),
                                         validator: (val) => val.isEmpty
-                                            ? "${SplashScreen.mapLang['required']}"
+                                            ? "${Language.mapLang['required']}"
                                             : null,
                                         onChanged: (val) {
                                           setState(() => prenom = val);
@@ -133,10 +132,10 @@ class _initialProfileclState extends State<InitialProfilecl>
                                         decoration: InputDecoration(
                                           border: const OutlineInputBorder(),
                                           labelText:
-                                              "${SplashScreen.mapLang['lastname']}",
+                                              "${Language.mapLang['lastname']}",
                                         ),
                                         validator: (val) => val.isEmpty
-                                            ? "${SplashScreen.mapLang['required']}"
+                                            ? "${Language.mapLang['required']}"
                                             : null,
                                         onChanged: (val) {
                                           setState(() => nom = val);
@@ -156,9 +155,9 @@ class _initialProfileclState extends State<InitialProfilecl>
                                         decoration: InputDecoration(
                                             border: const OutlineInputBorder(),
                                             labelText:
-                                                "${SplashScreen.mapLang['phone']}"),
+                                                "${Language.mapLang['phone']}"),
                                         validator: (val) => val.isEmpty
-                                            ? "${SplashScreen.mapLang['required']}"
+                                            ? "${Language.mapLang['required']}"
                                             : null,
                                         onChanged: (val) {
                                           setState(() => phone = val);
@@ -178,9 +177,9 @@ class _initialProfileclState extends State<InitialProfilecl>
                                         decoration: InputDecoration(
                                             border: const OutlineInputBorder(),
                                             labelText:
-                                                "${SplashScreen.mapLang['city']}"),
+                                                "${Language.mapLang['city']}"),
                                         validator: (val) => val.isEmpty
-                                            ? "${SplashScreen.mapLang['required']}"
+                                            ? "${Language.mapLang['required']}"
                                             : null,
                                         onChanged: (val) {
                                           setState(() => ville = val);
@@ -205,7 +204,7 @@ class _initialProfileclState extends State<InitialProfilecl>
                                                   const OutlineInputBorder(),
                                               hintText: "Cin"),
                                           validator: (val) => val.isEmpty
-                                              ? "${SplashScreen.mapLang['required']}"
+                                              ? "${Language.mapLang['required']}"
                                               : null,
                                           onChanged: (val) {
                                             setState(() => cin = val);

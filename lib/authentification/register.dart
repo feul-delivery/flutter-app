@@ -3,7 +3,7 @@ import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
@@ -41,7 +41,7 @@ class _RegisterState extends State<Register> {
                     Container(
                       margin: EdgeInsets.all(15),
                       child: Text(
-                        "${SplashScreen.mapLang['createaccount']},",
+                        "${Language.mapLang['createaccount']},",
                         style: TextStyle(
                           color: Colors.blue[700],
                           fontSize: 50,
@@ -82,7 +82,7 @@ class _RegisterState extends State<Register> {
                                       if (val.isEmpty ||
                                           !val.contains('@') ||
                                           !val.contains('.')) {
-                                        return '${SplashScreen.mapLang['emailvalidator']}';
+                                        return '${Language.mapLang['emailvalidator']}';
                                       }
                                       return null;
                                     },
@@ -104,7 +104,7 @@ class _RegisterState extends State<Register> {
                                               color: Colors.green)
                                           : Icon(OMIcons.lockOpen),
                                       hintText:
-                                          "${SplashScreen.mapLang['password']}",
+                                          "${Language.mapLang['password']}",
                                       suffixIcon: IconButton(
                                           icon: Icon(
                                             _isObscure
@@ -124,7 +124,7 @@ class _RegisterState extends State<Register> {
                                           horizontal: 10.0, vertical: 15.0),
                                     ),
                                     validator: (val) => val.length < 8
-                                        ? '${SplashScreen.mapLang['passwordvalidator']}'
+                                        ? '${Language.mapLang['passwordvalidator']}'
                                         : null,
                                     onChanged: (val) {
                                       setState(() => password = val);
@@ -154,7 +154,7 @@ class _RegisterState extends State<Register> {
                                       });
                                     },
                                     validator: (val) => val != password
-                                        ? '${SplashScreen.mapLang['passwordmatch']}'
+                                        ? '${Language.mapLang['passwordmatch']}'
                                         : null,
                                   ),
                                 ),
@@ -193,7 +193,7 @@ class _RegisterState extends State<Register> {
                                       setState(() {
                                         loading = false;
                                         error =
-                                            '${SplashScreen.mapLang['emailvalidator']}';
+                                            '${Language.mapLang['emailvalidator']}';
                                       });
                                     } else {
                                       Navigator.of(context).pushReplacement(
@@ -204,7 +204,7 @@ class _RegisterState extends State<Register> {
                                   }
                                 } on SocketException catch (_) {
                                   showInSnackBar(
-                                      "${SplashScreen.mapLang['nointernet']}");
+                                      "${Language.mapLang['nointernet']}");
                                 }
                               }
                             },
@@ -217,7 +217,7 @@ class _RegisterState extends State<Register> {
                                   color: Colors.blue[700]),
                               child: Center(
                                 child: Text(
-                                  "${SplashScreen.mapLang['register']}"
+                                  "${Language.mapLang['register']}"
                                       .toUpperCase(),
                                   style: buttonStyle,
                                 ),

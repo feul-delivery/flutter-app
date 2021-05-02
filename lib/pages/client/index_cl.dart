@@ -2,20 +2,24 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
-import 'package:FD_flutter/pages/client/profile_cl.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
 import 'package:flutter/services.dart';
+import 'package:focused_menu/focused_menu.dart';
+import 'package:focused_menu/modals.dart';
 import 'package:geocoder/model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'explore_cl.dart';
+import 'package:provider/provider.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:FD_flutter/modules/user.dart';
+import 'commanderPages/cmd_client.dart';
 
 class IndexCl extends StatefulWidget {
   @override
@@ -23,7 +27,6 @@ class IndexCl extends StatefulWidget {
 }
 
 Coordinates _locationCoordinates;
-final int _currentIndex = 0;
 Future<String> _getDistance(
     Coordinates locationFrom, Map<dynamic, dynamic> locationTo) async {
   return (Geolocator.distanceBetween(
@@ -68,50 +71,10 @@ class _IndexClState extends State<IndexCl> {
       child: Scaffold(
         backgroundColor: scaffoldBackground,
         appBar: AppBar(
-          title: Text('${SplashScreen.mapLang['home']}', style: pageTitleX),
+          title: Text('${Language.mapLang['home']}', style: pageTitleX),
           backgroundColor: Colors.white,
           elevation: 0,
         ),
-        bottomNavigationBar: BottomNavigationBar(
-            elevation: 1,
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.white,
-            currentIndex: _currentIndex,
-            onTap: (value) {
-              switch (value) {
-                case 0:
-                  Navigator.of(context).pushReplacement(PageTransition(
-                      type: PageTransitionType.leftToRight, child: IndexCl()));
-
-                  break;
-                case 1:
-                  Navigator.of(context).pushReplacement(PageTransition(
-                      type: PageTransitionType.fade, child: ExploreCl()));
-                  break;
-                case 2:
-                  Navigator.of(context).pushReplacement(PageTransition(
-                      type: PageTransitionType.fade, child: ProfileCl()));
-
-                  break;
-              }
-            },
-            items: [
-              BottomNavigationBarItem(
-                  icon: Icon(OMIcons.home, color: Colors.blue[700]),
-                  // ignore: deprecated_member_use
-                  title: Text('${SplashScreen.mapLang['home']}',
-                      style: TextStyle(color: Colors.blue[700]))),
-              BottomNavigationBarItem(
-                  icon: Icon(OMIcons.explore, color: Color(0xFFB9BAC3)),
-                  // ignore: deprecated_member_use
-                  title: Text('${SplashScreen.mapLang['explore']}',
-                      style: TextStyle(color: Color(0xFFB9BAC3)))),
-              BottomNavigationBarItem(
-                  icon: Icon(OMIcons.person, color: Color(0xFFB9BAC3)),
-                  // ignore: deprecated_member_use
-                  title: Text('${SplashScreen.mapLang['profile']}',
-                      style: TextStyle(color: Color(0xFFB9BAC3)))),
-            ]),
         body: RefreshIndicator(
           onRefresh: () async {
             return await Future.delayed(Duration(seconds: 1)).then((value) {
@@ -136,7 +99,7 @@ class _IndexClState extends State<IndexCl> {
                           margin:
                               EdgeInsets.only(left: 10, right: 10, bottom: 2),
                           child: Text(
-                            '${SplashScreen.mapLang['bestweek']}'.toUpperCase(),
+                            '${Language.mapLang['bestweek']}'.toUpperCase(),
                             style: pageTitleXW,
                           ),
                         ),
@@ -225,7 +188,7 @@ class _IndexClState extends State<IndexCl> {
                                 padding: EdgeInsets.all(5),
                                 margin: EdgeInsets.only(left: 10, right: 10),
                                 child: Text(
-                                  '${SplashScreen.mapLang['closetoyou']}',
+                                  '${Language.mapLang['closetoyou']}',
                                   style: pageTitleX,
                                 ),
                               ),
@@ -242,7 +205,7 @@ class _IndexClState extends State<IndexCl> {
                                                   ExploreCl()));
                                     },
                                     child: Text(
-                                      '${SplashScreen.mapLang['viewall']}'
+                                      '${Language.mapLang['viewall']}'
                                           .toUpperCase(),
                                       style: TextStyle(
                                         fontFamily: 'Quarion',
@@ -267,7 +230,7 @@ class _IndexClState extends State<IndexCl> {
                                               CrossAxisAlignment.center,
                                           children: [
                                         Text(
-                                          '${SplashScreen.mapLang['accesslocation']}',
+                                          '${Language.mapLang['accesslocation']}',
                                           style: textStyle,
                                         ),
                                         TextButton.icon(
@@ -278,7 +241,7 @@ class _IndexClState extends State<IndexCl> {
                                             icon: Icon(OMIcons.myLocation,
                                                 color: Colors.blue[700]),
                                             label: Text(
-                                              '${SplashScreen.mapLang['locateme']}',
+                                              '${Language.mapLang['locateme']}',
                                               style: buttonStyleBlue,
                                             ))
                                       ])))
@@ -338,8 +301,59 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
                 border: Border(
                   top: BorderSide(width: 1, color: Colors.grey[300]),
                 )),
-            child: InkWell(
-              onTap: () {
+            child: FocusedMenuHolder(
+              // radius: 20,
+              // menuWidth: MediaQuery.of(context).size.width,
+              // blurSize: 5.0,
+              // menuItemExtent: 45,
+              // menuBoxDecoration: BoxDecoration(
+              //     color: Colors.grey,
+              //     borderRadius: BorderRadius.all(Radius.circular(15.0))),
+              // duration: Duration(milliseconds: 100),
+              // animateMenuItems: true,
+              // blurBackgroundColor: Colors.black54,
+              // bottomOffsetHeight: 100,
+              // openWithTap: true,
+              menuItems: <FocusedMenuItem>[
+                FocusedMenuItem(
+                    title: Text('${Language.mapLang['order']}',
+                        style: TextStyle(
+                          color: Colors.blue[700],
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 1.4,
+                        )),
+                    trailingIcon: Icon(OMIcons.accountBalanceWallet,
+                        color: Colors.blue[700]),
+                    onPressed: () => Navigator.of(context).push(PageTransition(
+                        type: PageTransitionType.fade,
+                        child: new ClientOrder(doc: document)))),
+                FocusedMenuItem(
+                    title: Text("${Language.mapLang['open']}"),
+                    trailingIcon: Icon(Icons.open_in_new),
+                    onPressed: () {
+                      // Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenTwo()));
+                    }),
+                // FocusedMenuItem(
+                //     title: Text("Share"),
+                //     trailingIcon: Icon(Icons.share),
+                //     onPressed: () {}),
+                FocusedMenuItem(
+                    title: Text("${Language.mapLang['favorite']}"),
+                    trailingIcon: Icon(Icons.favorite_border),
+                    onPressed: () => _addStToFav(
+                        document.documentID, Provider.of<User>(context).uid)),
+                // FocusedMenuItem(
+                //     title: Text(
+                //       "Delete",
+                //       style: TextStyle(color: Colors.redAccent),
+                //     ),
+                //     trailingIcon: Icon(
+                //       Icons.delete,
+                //       color: Colors.redAccent,
+                //     ),
+                //     onPressed: () {}),
+              ],
+              onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -448,4 +462,14 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
           ),
         )
       : Container();
+}
+
+void _addStToFav(String documentID, String uid) async {
+  try {
+    await Firestore.instance.collection('client').document(uid).setData({
+      'favorite': FieldValue.arrayUnion([documentID])
+    }, merge: true);
+  } catch (e) {
+    print(e);
+  }
 }

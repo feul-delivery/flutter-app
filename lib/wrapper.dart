@@ -2,7 +2,7 @@ import 'package:FD_flutter/authentification/authenticate.dart';
 import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/admin/index_admin.dart';
-import 'package:FD_flutter/pages/client/index_cl.dart';
+import 'package:FD_flutter/pages/client/home.dart';
 import 'package:FD_flutter/pages/livreur/index_lv.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
@@ -39,7 +39,7 @@ class Wrapper extends StatelessWidget {
       switch (AuthService.type) {
         case "client":
           {
-            return IndexCl();
+            return HomeCl();
           }
           break;
 

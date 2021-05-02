@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:FD_flutter/authentification/register.dart';
 import 'package:FD_flutter/authentification/sign_in.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
@@ -27,11 +27,9 @@ class _AuthenticateState extends State<Authenticate> {
               child: InkWell(
                 borderRadius: BorderRadius.circular(50.0),
                 onTap: () async {
-                  SplashScreen.lang == 'FR'
+                  Language.lang == 'FR'
                       ? _langChangeState('EN')
                       : _langChangeState('FR');
-                  Navigator.pushReplacement(context,
-                      MaterialPageRoute(builder: (context) => SplashScreen()));
                 },
                 // child: BackdropFilter(
                 //   filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
@@ -45,7 +43,7 @@ class _AuthenticateState extends State<Authenticate> {
                         Icon(OMIcons.language, color: Colors.blue[700]),
                         Container(
                           margin: EdgeInsets.only(top: 2.2),
-                          child: Text(SplashScreen.lang == 'FR' ? 'FR' : 'US',
+                          child: Text(Language.lang == 'FR' ? 'FR' : 'US',
                               style: TextStyle(
                                   color: Colors.blue[700],
                                   fontWeight: FontWeight.w900,
@@ -93,7 +91,7 @@ class _AuthenticateState extends State<Authenticate> {
                           color: Colors.blue[700]),
                       child: Center(
                         child: Text(
-                          "${SplashScreen.mapLang['signin']}".toUpperCase(),
+                          "${Language.mapLang['signin']}".toUpperCase(),
                           style: buttonStyle,
                         ),
                       ),
@@ -114,7 +112,7 @@ class _AuthenticateState extends State<Authenticate> {
                           color: Colors.white),
                       child: Center(
                         child: Text(
-                          "${SplashScreen.mapLang['register']}".toUpperCase(),
+                          "${Language.mapLang['register']}".toUpperCase(),
                           style: buttonStyleBlack,
                         ),
                       ),

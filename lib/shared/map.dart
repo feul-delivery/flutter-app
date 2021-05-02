@@ -14,7 +14,7 @@
 
 // class FireMapState extends State<FireMap> {
 //   GoogleMapController mapController;
-//   Location location = new Location();
+//  Location location = new Location();
 
 //   Firestore firestore = Firestore.instance;
 //   Geoflutterfire geo = Geoflutterfire();

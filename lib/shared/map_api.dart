@@ -1,119 +1,125 @@
-// import 'dart:async';
-// import 'dart:typed_data';
+import 'dart:async';
+import 'dart:typed_data';
 
-// import 'package:flutter/services.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:flutter/material.dart';
-// import 'package:location/location.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:flutter/services.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:flutter/material.dart';
+import 'package:location/location.dart';
 
-// class Maps extends StatefulWidget {
-//   final String title;
-//   Maps({@required this.title});
+class Maps extends StatefulWidget {
+  final String title;
+  Maps({@required this.title});
 
-//   @override
-//   _MapsState createState() => _MapsState();
-// }
+  @override
+  _MapsState createState() => _MapsState();
+}
 
-// class _MapsState extends State<Maps> {
-//   StreamSubscription _locationSubscription;
-//   Location _locationTracker = Location();
-//   Marker marker;
-//   Circle circle;
-//   GoogleMapController _controller;
+class _MapsState extends State<Maps> {
+  StreamSubscription _locationSubscription;
+  Location _locationTracker = Location();
+  Marker marker;
+  Circle circle;
+  GoogleMapController _controller;
 
-//   static final CameraPosition initialLocation = CameraPosition(
-//     target: LatLng(37.42796133580664, -122.085749655962),
-//     zoom: 14.4746,
-//   );
+  static final CameraPosition initialLocation = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.4746,
+  );
 
-//   Future<Uint8List> getMarker() async {
-//     ByteData byteData =
-//         await DefaultAssetBundle.of(context).load("assets/profile.png");
-//     return byteData.buffer.asUint8List();
-//   }
+  Future<Uint8List> getMarker() async {
+    ByteData byteData =
+        await DefaultAssetBundle.of(context).load("assets/car_top32.png");
+    return byteData.buffer.asUint8List();
+  }
 
-//   void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
-//     LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
-//     this.setState(() {
-//       marker = Marker(
-//           markerId: MarkerId("home"),
-//           position: latlng,
-//           rotation: newLocalData.heading,
-//           draggable: false,
-//           zIndex: 2,
-//           flat: true,
-//           anchor: Offset(0.5, 0.5),
-//           icon: BitmapDescriptor.fromBytes(imageData));
-//       circle = Circle(
-//           circleId: CircleId("car"),
-//           radius: newLocalData.accuracy,
-//           zIndex: 1,
-//           strokeColor: Colors.blue,
-//           center: latlng,
-//           fillColor: Colors.blue.withAlpha(70));
-//     });
-//   }
+  void updateMarkerAndCircle(LocationData newLocalData, Uint8List imageData) {
+    LatLng latlng = LatLng(newLocalData.latitude, newLocalData.longitude);
+    this.setState(() {
+      marker = Marker(
+          markerId: MarkerId("home"),
+          position: latlng,
+          rotation: newLocalData.heading,
+          draggable: false,
+          zIndex: 2,
+          flat: true,
+          anchor: Offset(0.5, 0.5),
+          icon: BitmapDescriptor.fromBytes(imageData));
+      circle = Circle(
+          circleId: CircleId("car"),
+          radius: newLocalData.accuracy,
+          zIndex: 1,
+          strokeColor: Colors.white60,
+          center: latlng,
+          fillColor: Colors.black.withAlpha(70));
+    });
+  }
 
-//   void getCurrentLocation() async {
-//     try {
-//       Uint8List imageData = await getMarker();
-//       var location = await _locationTracker.getLocation();
+  void getCurrentLocation() async {
+    try {
+      Uint8List imageData = await getMarker();
+      var location = await _locationTracker.getLocation();
 
-//       updateMarkerAndCircle(location, imageData);
+      updateMarkerAndCircle(location, imageData);
 
-//       if (_locationSubscription != null) {
-//         _locationSubscription.cancel();
-//       }
+      if (_locationSubscription != null) {
+        _locationSubscription.cancel();
+      }
 
-//       _locationSubscription =
-//           _locationTracker.onLocationChanged().listen((newLocalData) {
-//         if (_controller != null) {
-//           _controller.animateCamera(CameraUpdate.newCameraPosition(
-//               new CameraPosition(
-//                   bearing: 192.8334901395799,
-//                   target: LatLng(newLocalData.latitude, newLocalData.longitude),
-//                   tilt: 0,
-//                   zoom: 18.00)));
-//           updateMarkerAndCircle(newLocalData, imageData);
-//         }
-//       });
-//     } on PlatformException catch (e) {
-//       if (e.code == 'PERMISSION_DENIED') {
-//         debugPrint("Permission Denied");
-//       }
-//     }
-//   }
+      _locationSubscription =
+          _locationTracker.onLocationChanged().listen((newLocalData) {
+        if (_controller != null) {
+          _controller.animateCamera(CameraUpdate.newCameraPosition(
+              new CameraPosition(
+                  bearing: 192.8334901395799,
+                  target: LatLng(newLocalData.latitude, newLocalData.longitude),
+                  tilt: 0,
+                  zoom: 18.00)));
+          updateMarkerAndCircle(newLocalData, imageData);
+        }
+      });
+    } on PlatformException catch (e) {
+      if (e.code == 'PERMISSION_DENIED') {
+        debugPrint("Permission Denied");
+      }
+    }
+  }
 
-//   @override
-//   void dispose() {
-//     if (_locationSubscription != null) {
-//       _locationSubscription.cancel();
-//     }
-//     super.dispose();
-//   }
+  @override
+  void dispose() {
+    if (_locationSubscription != null) {
+      _locationSubscription.cancel();
+    }
+    super.dispose();
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.title),
-//       ),
-//       body: Center(
-//         child: GoogleMap(
-//           mapType: MapType.hybrid,
-//           initialCameraPosition: initialLocation,
-//           markers: Set.of((marker != null) ? [marker] : []),
-//           circles: Set.of((circle != null) ? [circle] : []),
-//           onMapCreated: (GoogleMapController controller) {
-//             _controller = controller;
-//           },
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//           child: Icon(Icons.location_searching),
-//           onPressed: () {
-//             getCurrentLocation();
-//           }),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(widget.title, style: pageTitleX),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: GoogleMap(
+          zoomControlsEnabled: false,
+          mapType: MapType.terrain,
+          initialCameraPosition: initialLocation,
+          markers: Set.of((marker != null) ? [marker] : []),
+          circles: Set.of((circle != null) ? [circle] : []),
+          onMapCreated: (GoogleMapController controller) {
+            _controller = controller;
+          },
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+          elevation: 1,
+          backgroundColor: Colors.white,
+          child: Icon(Icons.location_searching, color: Colors.black),
+          onPressed: () {
+            getCurrentLocation();
+          }),
+    );
+  }
+}

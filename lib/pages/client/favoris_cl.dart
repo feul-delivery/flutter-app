@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/station_cl.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +43,7 @@ class _FavorisClState extends State<FavorisCl> {
         elevation: 1,
         backgroundColor: Color(0xFFFFFFFF),
         title: Text(
-          '${SplashScreen.mapLang['favorite']}',
+          '${Language.mapLang['favorite']}',
           style: pageTitleX,
         ),
         leading: IconButton(
@@ -72,7 +72,7 @@ class _FavorisClState extends State<FavorisCl> {
       secondaryActions: [
         IconSlideAction(
           color: Colors.red,
-          caption: '${SplashScreen.mapLang['delete']}',
+          caption: '${Language.mapLang['delete']}',
           icon: OMIcons.delete,
           onTap: () {
             _removeStFromFav(

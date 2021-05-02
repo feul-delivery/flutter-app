@@ -1,5 +1,5 @@
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -25,7 +25,7 @@ class _CommandeClState extends State<CommandeCl> {
         appBar: AppBar(
           elevation: 1,
           title: Text(
-            "${SplashScreen.mapLang['orders']}",
+            "${Language.mapLang['orders']}",
             style: pageTitleX,
           ),
           leading: IconButton(
@@ -56,7 +56,7 @@ class _CommandeClState extends State<CommandeCl> {
       actionExtentRatio: 0.20,
       actions: [
         IconSlideAction(
-          caption: '${SplashScreen.mapLang['show']}',
+          caption: '${Language.mapLang['show']}',
           color: Colors.white,
           icon: OMIcons.list,
           onTap: () {
@@ -71,7 +71,7 @@ class _CommandeClState extends State<CommandeCl> {
         if (documentSnapshot['statut'] == 'waiting' &&
             documentSnapshot['uidlivreur'] == '')
           IconSlideAction(
-            caption: '${SplashScreen.mapLang['cancel']}',
+            caption: '${Language.mapLang['cancel']}',
             color: Colors.red,
             icon: OMIcons.cancel,
             onTap: () {
@@ -80,9 +80,9 @@ class _CommandeClState extends State<CommandeCl> {
                   builder: (BuildContext context) {
                     return CustomAlertDialog(
                       title: Text(
-                          '${SplashScreen.mapLang['cancel']} ${SplashScreen.mapLang['order']}',
+                          '${Language.mapLang['cancel']} ${Language.mapLang['order']}',
                           style: pageTitleX),
-                      content: Text('${SplashScreen.mapLang['areyousure']}',
+                      content: Text('${Language.mapLang['areyousure']}',
                           style: textStyle),
                       actions: [
                         InkWell(
@@ -100,7 +100,7 @@ class _CommandeClState extends State<CommandeCl> {
                                     color: Colors.black,
                                     borderRadius: BorderRadius.circular(50)),
                                 child: Text(
-                                  '${SplashScreen.mapLang['confirm']}',
+                                  '${Language.mapLang['confirm']}',
                                   style: buttonStyle,
                                 ),
                               ),
@@ -110,7 +110,7 @@ class _CommandeClState extends State<CommandeCl> {
                               Navigator.of(context).pop();
                             },
                             child: Text(
-                              '${SplashScreen.mapLang['cancel']}',
+                              '${Language.mapLang['cancel']}',
                               style: smallTileGray,
                             )),
                       ],

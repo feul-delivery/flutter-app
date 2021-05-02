@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:FD_flutter/pages/client/initial_profil_cl.dart';
 import 'package:FD_flutter/pages/station/initial_profil_st.dart';
-import 'package:FD_flutter/shared/splash.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -22,7 +22,7 @@ class _TypeCompteState extends State<TypeCompte> {
           backgroundColor: scaffoldBackground,
           appBar: AppBar(
             title: Text(
-              "${SplashScreen.mapLang['accounttype']}",
+              "${Language.mapLang['accounttype']}",
               style: pageTitleW,
             ),
             leading: Container(),
@@ -34,7 +34,7 @@ class _TypeCompteState extends State<TypeCompte> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                '${SplashScreen.mapLang['dragchoose']}'.toUpperCase(),
+                '${Language.mapLang['dragchoose']}'.toUpperCase(),
                 style: titleStyle,
               ),
               SizedBox(
@@ -45,7 +45,7 @@ class _TypeCompteState extends State<TypeCompte> {
                 actionExtentRatio: 0.25,
                 actions: <Widget>[
                   IconSlideAction(
-                    caption: '${SplashScreen.mapLang['choose']}',
+                    caption: '${Language.mapLang['choose']}',
                     color: Colors.blue[500],
                     icon: OMIcons.check,
                     onTap: () async {
@@ -79,7 +79,7 @@ class _TypeCompteState extends State<TypeCompte> {
                                 size: 50,
                               ),
                             ),
-                            Text('${SplashScreen.mapLang['customer']}',
+                            Text('${Language.mapLang['customer']}',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w700,
@@ -104,7 +104,7 @@ class _TypeCompteState extends State<TypeCompte> {
               Slidable(
                 secondaryActions: <Widget>[
                   IconSlideAction(
-                    caption: '${SplashScreen.mapLang['choose']}',
+                    caption: '${Language.mapLang['choose']}',
                     color: Colors.black,
                     icon: OMIcons.check,
                     onTap: () async {
@@ -150,7 +150,7 @@ class _TypeCompteState extends State<TypeCompte> {
                               ))),
                           Row(
                             children: [
-                              Text('${SplashScreen.mapLang['enterprise']}',
+                              Text('${Language.mapLang['enterprise']}',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontWeight: FontWeight.w700,
