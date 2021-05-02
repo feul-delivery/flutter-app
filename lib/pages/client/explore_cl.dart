@@ -226,11 +226,21 @@ class _ExploreClState extends State<ExploreCl> {
                       child: customeCircularProgress,
                     ),
                   ),
-                  errorWidget: (context, url, error) => Container(
-                    height: 200,
-                    color: Colors.black,
-                    child: Center(
-                      child: Icon(Icons.error, color: Colors.white),
+                  errorWidget: (context, url, error) => Material(
+                    child: Container(
+                      height: 200,
+                      color: Colors.black,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.error, color: Colors.white),
+                            SizedBox(height: 5),
+                            Text('${Language.mapLang['imagenotfound']}',
+                                style: textStyleWhite)
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ),

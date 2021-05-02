@@ -45,7 +45,7 @@ class _initialProfileclState extends State<InitialProfilecl>
             elevation: 1,
             title: Text("${Language.mapLang['profile']}", style: pageTitleX),
             leading: IconButton(
-                icon: Icon(OMIcons.arrowBack, color: Colors.black),
+                icon: Icon(Icons.west, color: Colors.black),
                 onPressed: () => Navigator.of(context).pop()),
             actions: <Widget>[
               InkWell(

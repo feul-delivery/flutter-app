@@ -9,6 +9,7 @@ import 'package:FD_flutter/wrapper.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,7 +35,7 @@ class _SettingsClState extends State<SettingsCl> {
         ),
         leading: IconButton(
             icon: Icon(
-              OMIcons.arrowBack,
+              Icons.west,
               color: Colors.black,
             ),
             onPressed: () {
@@ -208,13 +209,14 @@ class _SettingsClState extends State<SettingsCl> {
                     builder: (BuildContext context) => Wrapper()));
               },
               child: ListTile(
-                leading: Icon(
-                  OMIcons.exitToApp,
-                  color: Colors.blue[700],
-                ),
+                leading: Icon(OMIcons.exitToApp, color: Colors.redAccent),
                 title: Text(
                   "${Language.mapLang['signout']}",
-                  style: textStyle,
+                  style: TextStyle(
+                      fontFamily: 'Quarion',
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.w500,
+                      letterSpacing: 1.3),
                 ),
               )),
         )
@@ -817,6 +819,9 @@ Future<void> _buildModalChangeLang(BuildContext context) {
                         onTap: () {
                           if (Language.mapLang['en'] != 'Anglais') {
                             _langChangeState('FR');
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => SplashScreen()));
                           } else {
                             // Navigator.of(context).pop();
                             setState(() {
@@ -835,6 +840,9 @@ Future<void> _buildModalChangeLang(BuildContext context) {
                         onTap: () {
                           if (Language.mapLang['en'] != 'English') {
                             _langChangeState('EN');
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (context) => SplashScreen()));
                           } else {
                             // Navigator.of(context).pop();
                             setState(() {

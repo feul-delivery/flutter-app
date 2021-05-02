@@ -25,7 +25,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
           style: pageTitleX,
         ),
         leading: IconButton(
-            icon: Icon(OMIcons.arrowBack, color: Colors.black),
+            icon: Icon(Icons.west, color: Colors.black),
             onPressed: () {
               Navigator.pop(context);
             }),

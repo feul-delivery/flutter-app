@@ -39,7 +39,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                   slivers: <Widget>[
                     SliverAppBar(
                       leading: IconButton(
-                          icon: Icon(AntDesign.arrowleft),
+                          icon: Icon(Icons.west_rounded),
                           onPressed: () {
                             Navigator.pop(context);
                           }),
@@ -66,11 +66,23 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 height: 200,
                                 child: Center(child: customeCircularProgress),
                               ),
-                              errorWidget: (context, url, error) => Container(
-                                height: 200,
-                                color: Colors.black,
-                                child: Center(
-                                  child: Icon(Icons.error, color: Colors.white),
+                              errorWidget: (context, url, error) => Material(
+                                child: Container(
+                                  height: 200,
+                                  color: Colors.black,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.error, color: Colors.white),
+                                        SizedBox(height: 5),
+                                        Text(
+                                            '${Language.mapLang['imagenotfound']}',
+                                            style: textStyleWhite)
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

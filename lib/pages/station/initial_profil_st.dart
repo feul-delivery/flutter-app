@@ -39,7 +39,7 @@ class _initialProfileStState extends State<InitialProfileSt>
         backgroundColor: scaffoldBackground,
         appBar: AppBar(
           leading: IconButton(
-              icon: Icon(OMIcons.arrowBack),
+              icon: Icon(Icons.west),
               onPressed: () => Navigator.of(context).pop()),
           title: Text(
             "${Language.mapLang['profile']}",

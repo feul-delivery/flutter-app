@@ -97,7 +97,8 @@ class Language {
     'delete': 'Effacer',
     'stnolv': "cette station n'a pas de livreurs",
     'deliveredASAP': 'sera livré dès que possible',
-    'open': 'Ouvrir'
+    'open': 'Ouvrir',
+    'imagenotfound': "impossible de charger l'image"
   };
   static Map<String, String> mapEN = {
     'home': 'Home',
@@ -195,7 +196,8 @@ class Language {
     'delete': 'Delete',
     'stnolv': 'this station does not have delivery men',
     'deliveredASAP': 'will be delivered ASAP',
-    'open': 'Open'
+    'open': 'Open',
+    'imagenotfound': "unable to load image"
   };
   static toggleLang(String lang) {
     if (lang == 'EN') {

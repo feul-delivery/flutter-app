@@ -47,7 +47,7 @@ class _FavorisClState extends State<FavorisCl> {
           style: pageTitleX,
         ),
         leading: IconButton(
-            icon: Icon(OMIcons.arrowBack, color: Colors.black),
+            icon: Icon(Icons.west, color: Colors.black),
             onPressed: () {
               Navigator.pop(context);
             }),

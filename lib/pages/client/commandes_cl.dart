@@ -29,7 +29,7 @@ class _CommandeClState extends State<CommandeCl> {
             style: pageTitleX,
           ),
           leading: IconButton(
-              icon: Icon(OMIcons.arrowBack, color: Colors.black),
+              icon: Icon(Icons.west, color: Colors.black),
               onPressed: () {
                 Navigator.pop(context);
               }),

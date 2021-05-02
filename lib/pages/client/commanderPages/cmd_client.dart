@@ -181,7 +181,7 @@ class _ClientOrderState extends State<ClientOrder> {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(
-            OMIcons.arrowBack,
+            Icons.west,
             color: Colors.black,
           ),
           onPressed: () {
