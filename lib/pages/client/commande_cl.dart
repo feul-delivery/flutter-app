@@ -19,16 +19,13 @@ class _CommandeDetailState extends State<CommandeDetail> {
     return Scaffold(
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
-        title: Text(
-          "${Language.mapLang['detail']}",
-          style: pageTitleX,
-        ),
+        title: Text("${Language.mapLang['detail']}", style: pageTitleW),
         leading: IconButton(
-            icon: Icon(Icons.west, color: Colors.black),
+            icon: Icon(Icons.west, color: buttonColor),
             onPressed: () {
               Navigator.pop(context);
             }),
-        backgroundColor: Colors.white,
+        backgroundColor: darkGray,
         elevation: 1,
         actions: [
           IconButton(
@@ -43,7 +40,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
               },
               icon: Icon(
                 Icons.new_releases,
-                color: Colors.black,
+                color: buttonColor,
               )),
         ],
       ),
@@ -61,7 +58,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                   children: [
                     Icon(
                       Icons.format_list_numbered_sharp,
-                      color: Colors.black54,
+                      color: buttonColor,
                       size: 18,
                     ),
                     SizedBox(
@@ -72,7 +69,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black54),
+                          color: buttonColor),
                     ),
                   ],
                 ),
@@ -82,7 +79,10 @@ class _CommandeDetailState extends State<CommandeDetail> {
                 Center(
                   child: Text(
                     '${widget.document['ordernum']}',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white70),
                   ),
                 ),
               ],
@@ -100,7 +100,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                   children: [
                     Icon(
                       Icons.date_range_sharp,
-                      color: Colors.black54,
+                      color: buttonColor,
                       size: 18,
                     ),
                     SizedBox(
@@ -111,7 +111,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black54),
+                          color: buttonColor),
                     ),
                   ],
                 ),
@@ -121,7 +121,10 @@ class _CommandeDetailState extends State<CommandeDetail> {
                 Center(
                   child: Text(
                     '${DateTime.parse(widget.document['dateheurec']).day.toString()}/${DateTime.parse(widget.document['dateheurec']).month.toString()}/${DateTime.parse(widget.document['dateheurec']).year.toString()}',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white70),
                   ),
                 ),
               ],
@@ -139,7 +142,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                   children: [
                     Icon(
                       Icons.timer,
-                      color: Colors.black54,
+                      color: buttonColor,
                       size: 18,
                     ),
                     SizedBox(
@@ -150,7 +153,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black54),
+                          color: buttonColor),
                     ),
                   ],
                 ),
@@ -160,7 +163,10 @@ class _CommandeDetailState extends State<CommandeDetail> {
                 Center(
                   child: Text(
                     '${DateFormat.Hm().format(DateTime.parse(widget.document['dateheurec']))}',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white70),
                   ),
                 ),
               ],
@@ -178,7 +184,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                   children: [
                     Icon(
                       Icons.note_add,
-                      color: Colors.black54,
+                      color: buttonColor,
                       size: 18,
                     ),
                     SizedBox(
@@ -189,7 +195,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black54),
+                          color: buttonColor),
                     ),
                   ],
                 ),
@@ -199,7 +205,10 @@ class _CommandeDetailState extends State<CommandeDetail> {
                 Center(
                   child: Text(
                     '${widget.document['matricule']}',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white70),
                   ),
                 ),
               ],
@@ -217,7 +226,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                   children: [
                     Icon(
                       Icons.color_lens,
-                      color: Colors.black54,
+                      color: buttonColor,
                       size: 18,
                     ),
                     SizedBox(
@@ -228,7 +237,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black54),
+                          color: buttonColor),
                     ),
                   ],
                 ),
@@ -256,7 +265,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                   children: [
                     Icon(
                       Icons.track_changes_sharp,
-                      color: Colors.black54,
+                      color: buttonColor,
                       size: 18,
                     ),
                     SizedBox(
@@ -267,7 +276,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black54),
+                          color: buttonColor),
                     ),
                   ],
                 ),
@@ -277,7 +286,10 @@ class _CommandeDetailState extends State<CommandeDetail> {
                 Center(
                   child: Text(
                     '${widget.document['idtype']}',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.white70),
                   ),
                 ),
               ],
@@ -295,7 +307,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                   children: [
                     Icon(
                       Icons.place,
-                      color: Colors.black54,
+                      color: buttonColor,
                       size: 18,
                     ),
                     SizedBox(
@@ -306,7 +318,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
-                          color: Colors.black54),
+                          color: buttonColor),
                     ),
                   ],
                 ),
@@ -318,8 +330,10 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     padding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
                     child: Text(
                       '${widget.document['adresse']}',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white70),
                     ),
                   ),
                 ),
@@ -331,6 +345,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     height: MediaQuery.of(context).size.width * 2 / 3,
                     width: MediaQuery.of(context).size.width * 2 / 3,
                     child: QrImage(
+                      foregroundColor: buttonColor,
                       data: '${widget.document.documentID}',
                       //   embeddedImage: AssetImage('assets/profile.png'),
                       //   embeddedImageStyle:

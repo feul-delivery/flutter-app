@@ -21,20 +21,19 @@ class _CommandeClState extends State<CommandeCl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFEFF0F5),
+        backgroundColor: darkGray,
         appBar: AppBar(
-          elevation: 1,
-          title: Text(
-            "${Language.mapLang['orders']}",
-            style: pageTitleX,
-          ),
-          leading: IconButton(
-              icon: Icon(Icons.west, color: Colors.black),
-              onPressed: () {
-                Navigator.pop(context);
-              }),
-          backgroundColor: Color(0xFFFFFFFF),
-        ),
+            elevation: 1,
+            title: Text(
+              "${Language.mapLang['orders']}",
+              style: pageTitleW,
+            ),
+            leading: IconButton(
+                icon: Icon(Icons.west, color: Colors.white),
+                onPressed: () {
+                  Navigator.pop(context);
+                }),
+            backgroundColor: buttonColor),
         body: SafeArea(
           child: ListView(
             padding: EdgeInsets.only(left: 0, right: 0),
@@ -57,7 +56,7 @@ class _CommandeClState extends State<CommandeCl> {
       actions: [
         IconSlideAction(
           caption: '${Language.mapLang['show']}',
-          color: Colors.white,
+          color: scaffoldBackground,
           icon: OMIcons.list,
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(

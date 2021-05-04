@@ -38,16 +38,13 @@ class _FavorisClState extends State<FavorisCl> {
     inspect(widget.favList);
     inspect(widget.snapshotFavoris);
     return Scaffold(
-      backgroundColor: Color(0xFFEFF0F5),
+      backgroundColor: darkGray,
       appBar: AppBar(
         elevation: 1,
-        backgroundColor: Color(0xFFFFFFFF),
-        title: Text(
-          '${Language.mapLang['favorite']}',
-          style: pageTitleX,
-        ),
+        backgroundColor: buttonColor,
+        title: Text('${Language.mapLang['favorite']}', style: pageTitleW),
         leading: IconButton(
-            icon: Icon(Icons.west, color: Colors.black),
+            icon: Icon(Icons.west, color: Colors.white),
             onPressed: () {
               Navigator.pop(context);
             }),
@@ -110,7 +107,7 @@ class _FavorisClState extends State<FavorisCl> {
               child: StationProfilCl(doc: document)));
         },
         child: ListTile(
-          tileColor: Colors.white,
+          tileColor: scaffoldBackground,
           leading: Container(
             child: Icon(OMIcons.star, color: Color(0xFFF8C513)),
           ),

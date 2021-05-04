@@ -370,29 +370,25 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
                 Stack(
                   children: [
                     document['photoURL'] != null
-                        ? Hero(
-                            tag: document.documentID,
-                            child: CachedNetworkImage(
-                              imageUrl: document['photoURL'],
-                              imageBuilder: (context, imageProvider) =>
-                                  Material(
-                                child: Ink.image(
-                                  height: 200,
-                                  image: imageProvider,
-                                  fit: BoxFit.fitWidth,
-                                ),
-                              ),
-                              placeholder: (context, url) => Container(
+                        ? CachedNetworkImage(
+                            imageUrl: document['photoURL'],
+                            imageBuilder: (context, imageProvider) => Material(
+                              child: Ink.image(
                                 height: 200,
-                                child: Center(
-                                  child: customeCircularProgress,
-                                ),
+                                image: imageProvider,
+                                fit: BoxFit.fitWidth,
                               ),
-                              errorWidget: (context, url, error) => Container(
-                                height: 200,
-                                child: Center(
-                                  child: Icon(Icons.error, color: Colors.black),
-                                ),
+                            ),
+                            placeholder: (context, url) => Container(
+                              height: 200,
+                              child: Center(
+                                child: customeCircularProgress,
+                              ),
+                            ),
+                            errorWidget: (context, url, error) => Container(
+                              height: 200,
+                              child: Center(
+                                child: Icon(Icons.error, color: Colors.black),
                               ),
                             ),
                           )

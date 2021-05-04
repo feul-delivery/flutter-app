@@ -52,40 +52,34 @@ class _StationProfilClState extends State<StationProfilCl> {
                       backgroundColor: buttonColor,
                       flexibleSpace: FlexibleSpaceBar(
                           collapseMode: CollapseMode.pin,
-                          background: Hero(
-                            tag: doc.documentID,
-                            child: CachedNetworkImage(
-                              imageUrl: doc.data['photoURL'] == null
-                                  ? ""
-                                  : doc.data['photoURL'],
-                              imageBuilder: (context, imageProvider) =>
-                                  Container(
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: imageProvider,
-                                        fit: BoxFit.cover)),
-                                child: Container(),
-                              ),
-                              placeholder: (context, url) => Container(
+                          background: CachedNetworkImage(
+                            imageUrl: doc.data['photoURL'] == null
+                                ? ""
+                                : doc.data['photoURL'],
+                            imageBuilder: (context, imageProvider) => Container(
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                      image: imageProvider, fit: BoxFit.cover)),
+                              child: Container(),
+                            ),
+                            placeholder: (context, url) => Container(
+                              height: 200,
+                              child: Center(child: customeCircularProgress),
+                            ),
+                            errorWidget: (context, url, error) => Material(
+                              child: Container(
                                 height: 200,
-                                child: Center(child: customeCircularProgress),
-                              ),
-                              errorWidget: (context, url, error) => Material(
-                                child: Container(
-                                  height: 200,
-                                  color: buttonColor,
-                                  child: Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(Icons.error, color: Colors.white),
-                                        SizedBox(height: 5),
-                                        Text(
-                                            '${Language.mapLang['imagenotfound']}',
-                                            style: textStyleWhite)
-                                      ],
-                                    ),
+                                color: buttonColor,
+                                child: Center(
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.error, color: Colors.white),
+                                      SizedBox(height: 5),
+                                      Text(
+                                          '${Language.mapLang['imagenotfound']}',
+                                          style: textStyleWhite)
+                                    ],
                                   ),
                                 ),
                               ),

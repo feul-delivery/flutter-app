@@ -14,45 +14,36 @@ class HomeCl extends StatefulWidget {
 }
 
 int _currentIndex = 0;
+final _pages = [IndexCl(), ExploreCl(), ProfileCl()];
 
 class _HomeClState extends State<HomeCl> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _currentIndex == 0
-          ? IndexCl()
-          : _currentIndex == 1
-              ? ExploreCl()
-              : ProfileCl(),
+      body: Stack(
+          children: _pages
+              .asMap()
+              .map(
+                (i, page) => MapEntry(
+                  i,
+                  Offstage(
+                    offstage: _currentIndex != i,
+                    child: page,
+                  ),
+                ),
+              )
+              .values
+              .toList()),
       bottomNavigationBar: BottomNavigationBar(
           elevation: 2,
           type: BottomNavigationBarType.fixed,
           backgroundColor: scaffoldBackground,
           currentIndex: _currentIndex,
-          onTap: (value) {
-            switch (value) {
-              case 0:
-                setState(() {
-                  _currentIndex = 0;
-                });
-                break;
-              case 1:
-                setState(() {
-                  _currentIndex = 1;
-                });
-                break;
-              case 2:
-                setState(() {
-                  _currentIndex = 2;
-                });
-                break;
-            }
-          },
+          onTap: (i) => setState(() => _currentIndex = i),
           items: [
             BottomNavigationBarItem(
-                icon: Icon(OMIcons.home,
-                    color:
-                        _currentIndex == 0 ? buttonColor : Color(0xFFB9BAC3)),
+                icon: Icon(Icons.home_outlined, color: Color(0xFFB9BAC3)),
+                activeIcon: Icon(Icons.home, color: buttonColor),
                 // ignore: deprecated_member_use
                 title: Text('${Language.mapLang['home']}',
                     style: TextStyle(
@@ -60,9 +51,8 @@ class _HomeClState extends State<HomeCl> {
                             ? buttonColor
                             : Color(0xFFB9BAC3)))),
             BottomNavigationBarItem(
-                icon: Icon(OMIcons.explore,
-                    color:
-                        _currentIndex == 1 ? buttonColor : Color(0xFFB9BAC3)),
+                icon: Icon(Icons.explore_outlined, color: Color(0xFFB9BAC3)),
+                activeIcon: Icon(Icons.explore, color: buttonColor),
                 // ignore: deprecated_member_use
                 title: Text('${Language.mapLang['explore']}',
                     style: TextStyle(
@@ -70,9 +60,8 @@ class _HomeClState extends State<HomeCl> {
                             ? buttonColor
                             : Color(0xFFB9BAC3)))),
             BottomNavigationBarItem(
-                icon: Icon(OMIcons.person,
-                    color:
-                        _currentIndex == 2 ? buttonColor : Color(0xFFB9BAC3)),
+                icon: Icon(Icons.person_outline, color: Color(0xFFB9BAC3)),
+                activeIcon: Icon(Icons.person, color: buttonColor),
                 // ignore: deprecated_member_use
                 title: Text('${Language.mapLang['profile']}',
                     style: TextStyle(

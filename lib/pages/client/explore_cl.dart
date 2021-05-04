@@ -203,38 +203,35 @@ class _ExploreClState extends State<ExploreCl> {
                       ),
                     ],
                   )),
-              Hero(
-                tag: document.documentID,
-                child: CachedNetworkImage(
-                  imageUrl:
-                      document['photoURL'] == null ? "" : document['photoURL'],
-                  imageBuilder: (context, imageProvider) => Material(
-                    child: Ink.image(
-                      height: 200,
-                      image: imageProvider,
-                      fit: BoxFit.fitWidth,
-                    ),
-                  ),
-                  placeholder: (context, url) => Container(
+              CachedNetworkImage(
+                imageUrl:
+                    document['photoURL'] == null ? "" : document['photoURL'],
+                imageBuilder: (context, imageProvider) => Material(
+                  child: Ink.image(
                     height: 200,
-                    child: Center(
-                      child: customeCircularProgress,
-                    ),
+                    image: imageProvider,
+                    fit: BoxFit.fitWidth,
                   ),
-                  errorWidget: (context, url, error) => Material(
-                    child: Container(
-                      height: 200,
-                      color: darkGray,
-                      child: Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.error, color: Colors.white),
-                            SizedBox(height: 5),
-                            Text('${Language.mapLang['imagenotfound']}',
-                                style: textStyleWhite)
-                          ],
-                        ),
+                ),
+                placeholder: (context, url) => Container(
+                  height: 200,
+                  child: Center(
+                    child: customeCircularProgress,
+                  ),
+                ),
+                errorWidget: (context, url, error) => Material(
+                  child: Container(
+                    height: 200,
+                    color: darkGray,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.error, color: Colors.white),
+                          SizedBox(height: 5),
+                          Text('${Language.mapLang['imagenotfound']}',
+                              style: textStyleWhite)
+                        ],
                       ),
                     ),
                   ),
