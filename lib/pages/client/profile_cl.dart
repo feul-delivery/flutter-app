@@ -28,28 +28,28 @@ QuerySnapshot _snapshotFavoris;
 class _ProfileClState extends State<ProfileCl> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Color(0xFFEFF0F5),
-        appBar: AppBar(
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(AntDesign.setting, color: Colors.blue[700]),
-                onPressed: () {
-                  Navigator.of(context).push(PageTransition(
-                      type: PageTransitionType.bottomToTop,
-                      child: SettingsCl()));
-                })
-          ],
-          backgroundColor: Color(0xFFFFFFFF),
-          elevation: 0,
-        ),
-        body: RefreshIndicator(
-          onRefresh: () {
-            return Future.delayed(Duration(seconds: 1)).then((value) {
-              setState(() {});
-            });
-          },
-          child: StreamBuilder<DocumentSnapshot>(
+    return RefreshIndicator(
+      onRefresh: () {
+        return Future.delayed(Duration(seconds: 1)).then((value) {
+          setState(() {});
+        });
+      },
+      child: Scaffold(
+          backgroundColor: darkGray,
+          // appBar: AppBar(
+          //   actions: <Widget>[
+          //     IconButton(
+          //         icon: Icon(AntDesign.setting, color: buttonColor),
+          //         onPressed: () {
+          //           Navigator.of(context).push(PageTransition(
+          //               type: PageTransitionType.bottomToTop,
+          //               child: SettingsCl()));
+          //         })
+          //   ],
+          //   backgroundColor: Color(0xFFe5e5e5),
+          //   elevation: 0,
+          // ),
+          body: StreamBuilder<DocumentSnapshot>(
               stream: Firestore.instance
                   .collection('client')
                   .document(Provider.of<User>(context).uid)
@@ -100,17 +100,36 @@ class _ProfileClState extends State<ProfileCl> {
                     return ListView(shrinkWrap: true, children: [
                       Container(
                         decoration: BoxDecoration(
+                          color: scaffoldBackground,
                           border: Border(
                             bottom:
-                                BorderSide(width: 1, color: Colors.grey[300]),
+                                BorderSide(width: 1, color: Colors.grey[500]),
                           ),
-                          color: Color(0xFFFFFFFF),
                         ),
-                        padding: EdgeInsets.all(20),
+                        padding: EdgeInsets.only(left: 20, bottom: 20),
                         width: MediaQuery.of(context).size.width,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
+                            Container(
+                              alignment: Alignment.centerRight,
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                    borderRadius: BorderRadius.circular(50),
+                                    onTap: () {
+                                      Navigator.of(context).push(PageTransition(
+                                          type: PageTransitionType.bottomToTop,
+                                          child: SettingsCl()));
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.all(10),
+                                      child: Icon(AntDesign.setting,
+                                          color: buttonColor),
+                                    )),
+                              ),
+                            ),
+                            SizedBox(height: 15),
                             Row(
                               children: [
                                 CachedNetworkImage(
@@ -168,17 +187,15 @@ class _ProfileClState extends State<ProfileCl> {
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                Icon(OMIcons.phoneIphone,
-                                    color: Color(0xFFB9BAC3)),
+                                Icon(OMIcons.phone,
+                                    color: Color(0xFFB9BAC3), size: 20),
                                 SizedBox(width: 5),
-                                Center(
+                                Container(
+                                  padding: EdgeInsets.only(top: 2),
                                   child: Text(
-                                    '${snapshotClient.data['tele']}'
-                                        .toLowerCase(),
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                  ),
+                                      '${snapshotClient.data['tele']}'
+                                          .toLowerCase(),
+                                      style: smallTileP),
                                 ),
                               ],
                             ),
@@ -187,17 +204,13 @@ class _ProfileClState extends State<ProfileCl> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Icon(OMIcons.accountBox,
-                                    color: Color(0xFFB9BAC3)),
+                                    color: Color(0xFFB9BAC3), size: 20),
                                 SizedBox(width: 5),
                                 Center(
-                                  child: Text(
-                                    '${snapshotClient.data['cin']}'
-                                        .toLowerCase(),
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                ),
+                                    child: Text(
+                                        '${snapshotClient.data['cin']}'
+                                            .toUpperCase(),
+                                        style: smallTileP)),
                               ],
                             ),
                             SizedBox(height: 15),
@@ -205,15 +218,12 @@ class _ProfileClState extends State<ProfileCl> {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 Icon(OMIcons.locationOn,
-                                    color: Color(0xFFB9BAC3)),
+                                    color: Color(0xFFB9BAC3), size: 20),
                                 SizedBox(width: 5),
                                 Center(
                                   child: Text(
-                                    '${toBeginningOfSentenceCase(snapshotClient.data['ville'])}',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                  ),
+                                      '${toBeginningOfSentenceCase(snapshotClient.data['ville'])}',
+                                      style: smallTileP),
                                 ),
                               ],
                             ),
@@ -223,12 +233,12 @@ class _ProfileClState extends State<ProfileCl> {
                       SizedBox(height: 10),
                       Container(
                         decoration: BoxDecoration(
+                          color: scaffoldBackground,
                           border: Border(
-                            top: BorderSide(width: 1, color: Colors.grey[300]),
+                            top: BorderSide(width: 1, color: Colors.grey[500]),
                             bottom:
-                                BorderSide(width: 1, color: Colors.grey[300]),
+                                BorderSide(width: 1, color: Colors.grey[500]),
                           ),
-                          color: Color(0xFFFFFFFF),
                         ),
                         width: MediaQuery.of(context).size.width,
                         child: Column(
@@ -239,7 +249,7 @@ class _ProfileClState extends State<ProfileCl> {
                                         left: 20,
                                         right: 20,
                                         top: 10,
-                                        bottom: 0),
+                                        bottom: 10),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.start,
@@ -254,9 +264,7 @@ class _ProfileClState extends State<ProfileCl> {
                                           child: Text(
                                             '${Language.mapLang['favorite']}',
                                             textAlign: TextAlign.left,
-                                            style: TextStyle(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w400),
+                                            style: pageTitleW,
                                           ),
                                         )
                                       ],
@@ -314,6 +322,7 @@ class _ProfileClState extends State<ProfileCl> {
                                       _snapshotFavoris = snapshotFavoris.data;
                                       return _favList.length != 0
                                           ? Container(
+                                              color: darkGray,
                                               height: MediaQuery.of(context)
                                                       .size
                                                       .height *
@@ -354,9 +363,9 @@ class _ProfileClState extends State<ProfileCl> {
                             Container(
                               decoration: BoxDecoration(
                                   border: Border(
-                                top: BorderSide(
-                                    width: 1, color: Colors.grey[300]),
-                              )),
+                                      // top: BorderSide(
+                                      //     width: 1, color: Colors.grey[300]),
+                                      )),
                               child: SingleChildScrollView(
                                 child: ListView(
                                   shrinkWrap: true,
@@ -385,6 +394,7 @@ class _ProfileClState extends State<ProfileCl> {
 
                                             default:
                                               return new Material(
+                                                color: Colors.transparent,
                                                 child: InkWell(
                                                   onTap: () {
                                                     Navigator.of(context).push(
@@ -413,7 +423,7 @@ class _ProfileClState extends State<ProfileCl> {
                                                               12,
                                                       decoration: BoxDecoration(
                                                           color:
-                                                              Color(0xFF41434F),
+                                                              Color(0xFF7648C7),
                                                           borderRadius:
                                                               BorderRadius
                                                                   .circular(5)),
@@ -426,8 +436,7 @@ class _ProfileClState extends State<ProfileCl> {
                                                     title: Text(
                                                       '${Language.mapLang['orders']}',
                                                       style: TextStyle(
-                                                          color:
-                                                              Color(0xFF050505),
+                                                          color: Colors.white,
                                                           fontSize: 17,
                                                           fontWeight:
                                                               FontWeight.w400),
@@ -448,6 +457,7 @@ class _ProfileClState extends State<ProfileCl> {
                                           }
                                         }),
                                     new Material(
+                                      color: Colors.transparent,
                                       child: InkWell(
                                         onTap: () {
                                           Navigator.of(context).push(
@@ -483,7 +493,7 @@ class _ProfileClState extends State<ProfileCl> {
                                             title: Text(
                                               '${Language.mapLang['favorite']}',
                                               style: TextStyle(
-                                                  color: Color(0xFF050505),
+                                                  color: Colors.white,
                                                   fontSize: 17,
                                                   fontWeight: FontWeight.w400),
                                             ),
@@ -506,13 +516,13 @@ class _ProfileClState extends State<ProfileCl> {
                       )
                     ]);
                 }
-              }),
-        ));
+              })),
+    );
   }
 
   Widget _createFavCard(DocumentSnapshot document) {
     return Material(
-      color: Color(0xFFFFFFFF),
+      color: Colors.transparent,
       child: Container(
         width: MediaQuery.of(context).size.width * 4 / 5,
         margin: EdgeInsets.only(left: 15, top: 15, bottom: 15),
@@ -551,24 +561,38 @@ class _ProfileClState extends State<ProfileCl> {
                         child: Icon(Icons.error, color: Colors.black),
                       ),
                     ),
-              Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10,
-                    top: 10,
-                    right: 10,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Text(
-                          '${document['titre']}'.toUpperCase(),
-                          style: buttonStyle,
+              Container(
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment(
+                      -0.02, 1.0), // 10% of the width, so there are ten blinds.
+                  colors: <Color>[
+                    darkGray,
+                    Colors.transparent,
+                  ], // red to yellow
+                  // tileMode: TileMode
+                  //     .repeated, // repeats the gradient over the canvas
+                )),
+                child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 10,
+                      top: 10,
+                      right: 10,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Text(
+                            '${document['titre']}'.toUpperCase(),
+                            style: buttonStyle,
+                          ),
                         ),
-                      ),
-                    ],
-                  )),
+                      ],
+                    )),
+              ),
             ],
           ),
         ),

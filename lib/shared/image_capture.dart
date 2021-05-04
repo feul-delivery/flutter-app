@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/shared/uploader.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -56,8 +57,10 @@ class _ImageCaptureState extends State<ImageCapture> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: scaffoldBackground,
       // Select an image from the camera or gallery
       bottomNavigationBar: BottomAppBar(
+        color: buttonColor,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,14 +73,14 @@ class _ImageCaptureState extends State<ImageCapture> {
                   width: 10,
                 ),
                 IconButton(
-                  icon: Icon(Icons.photo_camera),
+                  icon: Icon(Icons.photo_camera, color: Colors.white),
                   onPressed: () => _pickImage(ImageSource.camera),
                 ),
                 SizedBox(
                   width: 10,
                 ),
                 IconButton(
-                  icon: Icon(Icons.photo_library),
+                  icon: Icon(Icons.photo_library, color: Colors.white),
                   onPressed: () => _pickImage(ImageSource.gallery),
                 ),
               ],
@@ -86,14 +89,14 @@ class _ImageCaptureState extends State<ImageCapture> {
                 ? Row(
                     children: <Widget>[
                       IconButton(
-                        icon: Icon(Icons.crop),
+                        icon: Icon(Icons.crop, color: Colors.white),
                         onPressed: _cropImage,
                       ),
                       SizedBox(
                         width: 10,
                       ),
                       IconButton(
-                        icon: Icon(Icons.refresh),
+                        icon: Icon(Icons.refresh, color: Colors.white),
                         onPressed: _clear,
                       ),
                       SizedBox(

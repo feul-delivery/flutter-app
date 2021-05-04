@@ -25,11 +25,12 @@ dependencies:
     sdk: flutter
   firebase_auth: ^0.14.0+5
   cloud_firestore: ^0.12.9+4
-  # google_fonts: 
+  google_fonts: 
   google_maps_flutter: 
   location: ^2.3.5
   geolocator:
   geocoder: ^0.2.1
+  flutter_svg: 
   # google_geocoding:
   dio:
   flutter_polyline_points:

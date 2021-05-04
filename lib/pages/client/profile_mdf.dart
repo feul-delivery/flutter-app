@@ -3,7 +3,6 @@ import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/image_capture.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -53,20 +52,21 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
   Widget build(BuildContext context) {
     _user = Provider.of<User>(context);
     return new Scaffold(
+        backgroundColor: scaffoldBackground,
         appBar: AppBar(
           leading: IconButton(
-              icon: Icon(AntDesign.arrowleft, color: Colors.black),
+              icon: Icon(Icons.west_rounded, color: buttonColor),
               onPressed: () {
                 Navigator.of(context).pop();
               }),
           title: Text(
             "${Language.mapLang['profile']}",
-            style: pageTitleX,
+            style: pageTitleO,
           ),
           actions: <Widget>[
             !_status ? _getActionButtons() : new Container(),
           ],
-          backgroundColor: Colors.white,
+          backgroundColor: scaffoldBackground,
           elevation: 0,
         ),
         body: StreamBuilder<DocumentSnapshot>(
@@ -122,383 +122,355 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                   _controllerCin.text = _cin;
                   _controllerVille.text = _ville;
                   _controllerSexe.text = _sexe;
-                  return new Container(
-                    color: Colors.white,
-                    child: new ListView(
-                      children: <Widget>[
-                        Column(
-                          children: <Widget>[
-                            new Container(
-                              margin: EdgeInsets.all(20),
-                              height: 250.0,
-                              color: Colors.white,
-                              child: new Column(
-                                children: <Widget>[
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 20.0),
-                                    child: new Stack(
-                                        fit: StackFit.loose,
-                                        children: <Widget>[
-                                          new Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: <Widget>[
-                                              CachedNetworkImage(
-                                                imageUrl:
-                                                    snapshot.data['photoURL'],
-                                                imageBuilder: (context,
-                                                        imageProvider) =>
-                                                    new Container(
-                                                        width: 150.0,
-                                                        height: 150.0,
-                                                        decoration:
-                                                            new BoxDecoration(
-                                                          shape:
-                                                              BoxShape.circle,
-                                                          image:
-                                                              new DecorationImage(
-                                                            image: imageProvider ??
-                                                                AssetImage(
-                                                                    'assets/profile.png'),
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        )),
-                                                progressIndicatorBuilder: (context,
-                                                        url,
-                                                        downloadProgress) =>
-                                                    CircularProgressIndicator(
-                                                        backgroundColor:
-                                                            Colors.white,
-                                                        valueColor:
-                                                            new AlwaysStoppedAnimation<
-                                                                    Color>(
-                                                                Colors.white),
-                                                        value: downloadProgress
-                                                            .progress),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Container(
+                  return new ListView(
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          new Container(
+                            margin: EdgeInsets.all(20),
+                            height: 250.0,
+                            child: new Column(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.only(top: 20.0),
+                                  child:
+                                      new Stack(fit: StackFit.loose, children: <
+                                          Widget>[
+                                    new Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        CachedNetworkImage(
+                                          imageUrl: snapshot.data['photoURL'],
+                                          imageBuilder: (context,
+                                                  imageProvider) =>
+                                              new Container(
                                                   width: 150.0,
                                                   height: 150.0,
-                                                  child: Center(
-                                                    child: Icon(Icons.error,
-                                                        color: Colors.black),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                                  decoration: new BoxDecoration(
+                                                    shape: BoxShape.circle,
+                                                    image: new DecorationImage(
+                                                      image: imageProvider ??
+                                                          AssetImage(
+                                                              'assets/profile.png'),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  )),
+                                          progressIndicatorBuilder: (context,
+                                                  url, downloadProgress) =>
+                                              CircularProgressIndicator(
+                                                  backgroundColor: Colors.white,
+                                                  valueColor:
+                                                      new AlwaysStoppedAnimation<
+                                                          Color>(Colors.white),
+                                                  value: downloadProgress
+                                                      .progress),
+                                          errorWidget: (context, url, error) =>
+                                              Container(
+                                            width: 150.0,
+                                            height: 150.0,
+                                            child: Center(
+                                              child: Icon(Icons.error,
+                                                  color: Colors.white),
+                                            ),
                                           ),
-                                          Padding(
-                                              padding: EdgeInsets.only(
-                                                  top: 100.0, right: 100.0),
-                                              child: new Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: <Widget>[
-                                                  new CircleAvatar(
-                                                    backgroundColor:
-                                                        Colors.white,
-                                                    radius: 20.0,
-                                                    child: new IconButton(
-                                                        onPressed: () async {
-                                                          String _uid =
-                                                              Provider.of<User>(
-                                                                      context,
-                                                                      listen:
-                                                                          true)
-                                                                  .uid;
-                                                          Navigator.of(context)
-                                                              .pushReplacement(
-                                                                  PageTransition(
-                                                                      type: PageTransitionType
-                                                                          .leftToRight,
-                                                                      child:
-                                                                          ImageCapture(
-                                                                        filePath:
-                                                                            'images/profile/$_uid',
-                                                                        collection:
-                                                                            'client',
-                                                                        manyPics:
-                                                                            false,
-                                                                      )));
-                                                        },
-                                                        icon: Icon(
-                                                            OMIcons.camera,
-                                                            size: 22),
-                                                        color: Colors.black),
-                                                  )
-                                                ],
-                                              )),
-                                        ]),
-                                  )
-                                ],
-                              ),
-                            ),
-                            new Container(
-                              color: Color(0xffFFFFFF),
-                              child: Padding(
-                                padding: EdgeInsets.only(bottom: 25.0),
-                                child: new Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: <Widget>[
-                                    Container(
+                                        ),
+                                      ],
+                                    ),
+                                    Padding(
                                         padding: EdgeInsets.only(
-                                            left: 25.0,
-                                            right: 25.0,
-                                            top: 25.0,
-                                            bottom: 10.0),
-                                        child: Column(
+                                            top: 100.0, right: 100.0),
+                                        child: new Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.center,
-                                          children: [
-                                            new Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      bottom: 2),
-                                                  child: new Text(
-                                                    '${Language.mapLang['personalinfo']}',
-                                                    style: subTitleStyle,
-                                                  ),
-                                                ),
-                                                _status
-                                                    ? _getEditIcon()
-                                                    : new Container()
-                                              ],
-                                            ),
-                                            Divider(
-                                              height: 10,
-                                              thickness: 1,
-                                            ),
-                                          ],
-                                        )),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 25.0, right: 25.0, top: 25.0),
-                                        child: new Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
                                           children: <Widget>[
-                                            Expanded(
-                                              child: Container(
-                                                child: new Text(
-                                                  '${Language.mapLang['firstname']}:',
-                                                  style: tileTitleStyle,
-                                                ),
-                                              ),
-                                              flex: 2,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                child: new Text(
-                                                  '${Language.mapLang['lastname']}:',
-                                                  style: tileTitleStyle,
-                                                ),
-                                              ),
-                                              flex: 2,
-                                            ),
-                                          ],
-                                        )),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 25.0, right: 25.0, top: 2.0),
-                                        child: new Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: <Widget>[
-                                            Flexible(
-                                              child: new TextField(
-                                                style: hintStyle,
-                                                controller: _controllerPrenom,
-                                                enabled: !_status,
-                                                autofocus: !_status,
-                                                onChanged: (val) {
-                                                  _prenomTmp = val;
-                                                },
-                                              ),
-                                              flex: 2,
-                                            ),
-                                            Flexible(
-                                              child: Padding(
-                                                padding: EdgeInsets.only(
-                                                    right: 10.0),
-                                                child: new TextField(
-                                                  style: hintStyle,
-                                                  controller: _controllerNom,
-                                                  enabled: !_status,
-                                                  autofocus: !_status,
-                                                  onChanged: (val) {
-                                                    _nomTmp = val;
+                                            new CircleAvatar(
+                                              backgroundColor: Colors.white,
+                                              radius: 20.0,
+                                              child: new IconButton(
+                                                  onPressed: () async {
+                                                    String _uid =
+                                                        Provider.of<User>(
+                                                                context,
+                                                                listen: true)
+                                                            .uid;
+                                                    Navigator.of(context)
+                                                        .pushReplacement(
+                                                            PageTransition(
+                                                                type: PageTransitionType
+                                                                    .leftToRight,
+                                                                child:
+                                                                    ImageCapture(
+                                                                  filePath:
+                                                                      'images/profile/$_uid',
+                                                                  collection:
+                                                                      'client',
+                                                                  manyPics:
+                                                                      false,
+                                                                )));
                                                   },
-                                                ),
-                                              ),
-                                              flex: 2,
-                                            ),
+                                                  icon: Icon(OMIcons.camera,
+                                                      size: 22),
+                                                  color: buttonColor),
+                                            )
                                           ],
                                         )),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 25.0, right: 25.0, top: 25.0),
-                                        child: new Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: <Widget>[
-                                            new Column(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: <Widget>[
-                                                new Text(
-                                                  '${Language.mapLang['phone']}:',
-                                                  style: tileTitleStyle,
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        )),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 25.0, right: 25.0, top: 2.0),
-                                        child: new Row(
-                                          mainAxisSize: MainAxisSize.max,
-                                          children: <Widget>[
-                                            new Flexible(
-                                              child: new TextField(
-                                                style: hintStyle,
-                                                controller: _controllerTele,
-                                                enabled: !_status,
-                                                onChanged: (val) {
-                                                  _teleTmp = val;
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        )),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 25.0, right: 25.0, top: 25.0),
-                                        child: new Row(
-                                          mainAxisSize: MainAxisSize.max,
+                                  ]),
+                                )
+                              ],
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 25.0),
+                            child: new Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: <Widget>[
+                                Container(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0,
+                                        right: 25.0,
+                                        top: 25.0,
+                                        bottom: 10.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        new Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: <Widget>[
-                                            Expanded(
-                                              child: Container(
-                                                child: new Text(
-                                                  'CIN:',
-                                                  style: tileTitleStyle,
-                                                ),
-                                              ),
-                                              flex: 2,
-                                            ),
-                                            Expanded(
-                                              child: Container(
-                                                child: new Text(
-                                                  '${Language.mapLang['city']}:',
-                                                  style: tileTitleStyle,
-                                                ),
-                                              ),
-                                              flex: 2,
-                                            ),
-                                          ],
-                                        )),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            left: 25.0, right: 25.0, top: 2.0),
-                                        child: new Row(
+                                              MainAxisAlignment.spaceBetween,
                                           mainAxisSize: MainAxisSize.max,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
                                           children: <Widget>[
-                                            Flexible(
-                                              child: Padding(
-                                                padding: EdgeInsets.only(
-                                                    right: 10.0),
-                                                child: new TextField(
-                                                  style: hintStyle,
-                                                  controller: _controllerCin,
-                                                  enabled: !_status,
-                                                  onChanged: (val) {
-                                                    _cinTmp = val;
-                                                  },
-                                                ),
+                                            Container(
+                                              margin:
+                                                  EdgeInsets.only(bottom: 2),
+                                              child: new Text(
+                                                '${Language.mapLang['personalinfo']}',
+                                                style: subTitleStyle,
                                               ),
-                                              flex: 2,
                                             ),
-                                            Flexible(
-                                              child: new TextField(
-                                                style: hintStyle,
-                                                controller: _controllerVille,
-                                                enabled: !_status,
-                                                onChanged: (val) {
-                                                  _villeTmp = val;
-                                                },
-                                              ),
-                                              flex: 2,
-                                            ),
+                                            _status
+                                                ? _getEditIcon()
+                                                : new Container()
                                           ],
-                                        )),
-                                    //add sexe here as dropdown
-                                    Container(
-                                      margin: EdgeInsets.only(top: 20),
-                                      padding: EdgeInsets.only(
-                                          left: 25.0, right: 25.0, top: 2.0),
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            child: new Text(
-                                              '${Language.mapLang['sexe']}:',
-                                              style: tileTitleStyle,
-                                            ),
+                                        ),
+                                        Divider(
+                                            color: scaffoldLightGray,
+                                            height: 10,
+                                            thickness: 1),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 25.0),
+                                    child: new Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: new Text(
+                                            '${Language.mapLang['firstname']}:',
+                                            style: tileTitleStyleW,
                                           ),
-                                          DropdownButtonFormField(
-                                            value: '${snapshot.data['sexe']}',
-                                            decoration: InputDecoration(
-                                                enabled: !_status,
-                                                border: InputBorder.none),
-                                            hint: Text(
-                                              '$_sexe',
+                                          flex: 2,
+                                        ),
+                                        Expanded(
+                                          child: new Text(
+                                            '${Language.mapLang['lastname']}:',
+                                            style: tileTitleStyleW,
+                                          ),
+                                          flex: 2,
+                                        ),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 25.0),
+                                    child: new Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Flexible(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 10.0),
+                                            child: new TextField(
                                               style: hintStyle,
+                                              controller: _controllerPrenom,
+                                              enabled: !_status,
+                                              autofocus: !_status,
+                                              onChanged: (val) {
+                                                _prenomTmp = val;
+                                              },
                                             ),
-                                            items: _status == false
-                                                ? _sexeTypes.map((sexe) {
-                                                    return DropdownMenuItem(
-                                                      value: sexe.toLowerCase(),
-                                                      child: Text(
-                                                        '$sexe',
-                                                        style: hintStyle,
-                                                      ),
-                                                    );
-                                                  }).toList()
-                                                : null,
-                                            onChanged: (val) => _sexeTmp = val,
-                                            validator: (value) => value.isEmpty
-                                                ? 'Required'
-                                                : null,
                                           ),
-                                        ],
+                                          flex: 2,
+                                        ),
+                                        Flexible(
+                                          child: new TextField(
+                                            style: hintStyle,
+                                            controller: _controllerNom,
+                                            enabled: !_status,
+                                            autofocus: !_status,
+                                            onChanged: (val) {
+                                              _nomTmp = val;
+                                            },
+                                          ),
+                                          flex: 2,
+                                        ),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 25.0),
+                                    child: new Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: <Widget>[
+                                        new Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: <Widget>[
+                                            new Text(
+                                              '${Language.mapLang['phone']}:',
+                                              style: tileTitleStyleW,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 2.0),
+                                    child: new Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      children: <Widget>[
+                                        new Flexible(
+                                          child: new TextField(
+                                            style: hintStyle,
+                                            controller: _controllerTele,
+                                            enabled: !_status,
+                                            onChanged: (val) {
+                                              _teleTmp = val;
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 25.0),
+                                    child: new Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Expanded(
+                                          child: new Text(
+                                            'Cin:',
+                                            style: tileTitleStyleW,
+                                          ),
+                                          flex: 2,
+                                        ),
+                                        Expanded(
+                                          child: new Text(
+                                            '${Language.mapLang['city']}:',
+                                            style: tileTitleStyleW,
+                                          ),
+                                          flex: 2,
+                                        ),
+                                      ],
+                                    )),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 25.0, right: 25.0, top: 2.0),
+                                    child: new Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      children: <Widget>[
+                                        Flexible(
+                                          child: Padding(
+                                            padding:
+                                                EdgeInsets.only(right: 10.0),
+                                            child: new TextField(
+                                              style: hintStyle,
+                                              controller: _controllerCin,
+                                              enabled: !_status,
+                                              onChanged: (val) {
+                                                _cinTmp = val;
+                                              },
+                                            ),
+                                          ),
+                                          flex: 2,
+                                        ),
+                                        Flexible(
+                                          child: new TextField(
+                                            style: hintStyle,
+                                            controller: _controllerVille,
+                                            enabled: !_status,
+                                            onChanged: (val) {
+                                              _villeTmp = val;
+                                            },
+                                          ),
+                                          flex: 2,
+                                        ),
+                                      ],
+                                    )),
+                                //add sexe here as dropdown
+                                Container(
+                                  margin: EdgeInsets.only(top: 20),
+                                  padding: EdgeInsets.only(
+                                      left: 25.0, right: 25.0, top: 2.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        child: new Text(
+                                          '${Language.mapLang['sexe']}:',
+                                          style: tileTitleStyleW,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                      DropdownButtonFormField(
+                                        dropdownColor: scaffoldBackground,
+                                        value: '${snapshot.data['sexe']}',
+                                        decoration: InputDecoration(
+                                            enabled: !_status,
+                                            border: InputBorder.none),
+                                        hint: Text(
+                                          '$_sexe',
+                                          style: hintStyle,
+                                        ),
+                                        items: _status == false
+                                            ? _sexeTypes.map((sexe) {
+                                                return DropdownMenuItem(
+                                                  value: sexe.toLowerCase(),
+                                                  child: Text(
+                                                    '$sexe',
+                                                    style: hintStyle,
+                                                  ),
+                                                );
+                                              }).toList()
+                                            : null,
+                                        onChanged: (val) => _sexeTmp = val,
+                                        validator: (value) =>
+                                            value.isEmpty ? 'Required' : null,
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
                   );
               }
             }));
@@ -516,7 +488,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
       children: <Widget>[
         SizedBox(width: 5),
         new IconButton(
-          icon: new Icon(OMIcons.cancel, color: Colors.black),
+          icon: new Icon(OMIcons.cancel, color: Colors.white),
           onPressed: () {
             setState(() {
               _status = true;
@@ -526,7 +498,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
         ),
         SizedBox(width: 5),
         new IconButton(
-          icon: Icon(OMIcons.save, color: Colors.black),
+          icon: Icon(OMIcons.save, color: Colors.white),
           onPressed: () async {
             setState(() {
               _status = true;
@@ -573,21 +545,31 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
   }
 
   Widget _getEditIcon() {
-    return new GestureDetector(
-      child: new CircleAvatar(
-        backgroundColor: Colors.black,
-        radius: 14.0,
-        child: new Icon(
-          OMIcons.edit,
-          color: Colors.white,
-          size: 16.0,
+    return Material(
+      color: Colors.transparent,
+      child: new InkWell(
+        borderRadius: BorderRadius.circular(50),
+        child: Row(
+          children: [
+            new CircleAvatar(
+              backgroundColor: buttonColor,
+              radius: 14.0,
+              child: new Icon(
+                OMIcons.edit,
+                color: Colors.white,
+                size: 16.0,
+              ),
+            ),
+            SizedBox(width: 5),
+            Text('${Language.mapLang['edit']}', style: textStyleWhite)
+          ],
         ),
+        onTap: () {
+          setState(() {
+            _status = false;
+          });
+        },
       ),
-      onTap: () {
-        setState(() {
-          _status = false;
-        });
-      },
     );
   }
 }

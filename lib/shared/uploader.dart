@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:FD_flutter/shared/lang.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:FD_flutter/modules/user.dart';
@@ -96,31 +98,48 @@ class _UploaderState extends State<Uploader> {
               children: [
                 if (_uploadTask.isPaused)
                   FlatButton(
-                    child: Icon(AntDesign.upload),
+                    child: Icon(AntDesign.upload, color: Colors.white),
                     onPressed: _uploadTask.resume,
                   ),
 
                 if (_uploadTask.isInProgress)
                   FlatButton(
-                    child: Icon(AntDesign.pause),
+                    child: Icon(AntDesign.pause, color: Colors.white),
                     onPressed: _uploadTask.pause,
                   ),
 
                 // Progress bar
                 LinearProgressIndicator(value: progressPercent),
-                Text(
-                  '${(progressPercent * 100).toStringAsFixed(2)} % ',
-                  style: TextStyle(fontFamily: 'Gotham'),
-                ),
+                Text('${(progressPercent * 100).toStringAsFixed(2)} % ',
+                    style: smallTileP),
               ],
             );
           });
     } else {
       // Allows user to decide when to start the upload
-      return FlatButton.icon(
-        label: Text('Upload'),
-        icon: Icon(Icons.cloud_upload),
-        onPressed: _startUpload,
+      return Container(
+        height: 30,
+        margin: EdgeInsets.symmetric(
+            vertical: 20, horizontal: MediaQuery.of(context).size.width * 0.3),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: buttonColor,
+        ),
+        child: Material(
+          color: Colors.transparent,
+          child: InkWell(
+            onTap: _startUpload,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(Icons.cloud_upload, color: Colors.white),
+                SizedBox(width: 5),
+                Text('${Language.mapLang['upload']}', style: buttonStyle)
+              ],
+            ),
+          ),
+        ),
       );
     }
   }

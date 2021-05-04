@@ -1,7 +1,9 @@
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/StarterPage.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:async';
 import 'package:FD_flutter/shared/lang.dart';
 import '../wrapper.dart';
@@ -89,18 +91,22 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFEFF0F5),
+      backgroundColor: scaffoldBackground,
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Container(
-              width: MediaQuery.of(context).size.width * 2 / 3,
-              height: MediaQuery.of(context).size.width * 2 / 3,
+              width: MediaQuery.of(context).size.width * 0.60,
+              height: MediaQuery.of(context).size.width * 0.60,
               child: Hero(
                 tag: 'logo',
                 child: Image(
                   image: AssetImage('assets/splash.png'),
                   fit: BoxFit.fill,
                 ),
+//                  child:SvgPicture.asset(
+//   'assets/logo.svg',
+//   semanticsLabel: 'Logo'
+// )
               )),
         ]),
       ),

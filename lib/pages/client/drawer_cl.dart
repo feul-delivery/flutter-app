@@ -88,7 +88,7 @@
 //             child: ListTile(
 //               leading: Icon(
 //                 Icons.home,
-//                 color: Colors.blue[700],
+//                 color: buttonColor,
 //               ),
 //               title: Text(
 //                 "Home",
@@ -106,7 +106,7 @@
 //             child: ListTile(
 //               leading: Icon(
 //                 Icons.person,
-//                 color: Colors.blue[700],
+//                 color: buttonColor,
 //               ),
 //               title: Text(
 //                 "My profile",
@@ -124,7 +124,7 @@
 //             child: ListTile(
 //               leading: Icon(
 //                 Icons.favorite,
-//                 color: Colors.blue[700],
+//                 color: buttonColor,
 //               ),
 //               title: Text(
 //                 "Favorites",

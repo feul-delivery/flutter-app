@@ -23,7 +23,7 @@ List<String> _favList = [];
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
   Widget _appBarTitle =
-      new Text('${Language.mapLang['explore']}', style: pageTitleX);
+      new Text('${Language.mapLang['explore']}', style: pageTitleO);
   String _searchString;
   @override
   Widget build(BuildContext context) {
@@ -47,16 +47,16 @@ class _ExploreClState extends State<ExploreCl> {
               _favList = List.from(snapshot.data['favorite']);
               inspect(_favList);
               return Scaffold(
-                backgroundColor: Color(0xFFEFF0F5),
+                backgroundColor: darkGray,
                 appBar: AppBar(
                   title: _appBarTitle,
-                  elevation: 1,
-                  backgroundColor: Colors.white,
+                  elevation: 0,
+                  backgroundColor: darkGray,
                   actions: <Widget>[
                     IconButton(
                         icon: new Icon(
                           Icons.search,
-                          color: Colors.blue[700],
+                          color: buttonColor,
                         ),
                         onPressed: _searchPressed),
                   ],
@@ -70,7 +70,7 @@ class _ExploreClState extends State<ExploreCl> {
                           .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return Icon(Icons.cancel, color: Colors.blue[700]);
+                      return Icon(Icons.cancel, color: buttonColor);
                     }
 
                     switch (snapshot.connectionState) {
@@ -112,6 +112,7 @@ class _ExploreClState extends State<ExploreCl> {
     return Container(
       margin: EdgeInsets.only(top: 5),
       child: Card(
+        color: scaffoldBackground,
         clipBehavior: Clip.antiAlias,
         child: InkWell(
           onTap: () {
@@ -131,27 +132,21 @@ class _ExploreClState extends State<ExploreCl> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          new StationProfilCl(doc: document)));
-                            },
-                            child: Text('${document['titre']}'.toUpperCase(),
-                                style: tileTitleStyle),
-                          ),
+                          Text('${document['titre']}'.toUpperCase(),
+                              style: smallTileName),
                           Text(
                             '${document['adresse']}'.toLowerCase(),
                             style: TextStyle(
-                                color: Colors.black38,
+                                color: Colors.white24,
+                                fontFamily: 'Quarion',
                                 fontWeight: FontWeight.w400,
                                 fontSize: 14),
                           ),
                         ],
                       ),
                       PopupMenuButton(
+                        icon: Icon(Icons.menu_rounded, color: Colors.white),
+                        color: Colors.white,
                         itemBuilder: (BuildContext bc) => [
                           PopupMenuItem(
                             child: InkWell(
@@ -229,7 +224,7 @@ class _ExploreClState extends State<ExploreCl> {
                   errorWidget: (context, url, error) => Material(
                     child: Container(
                       height: 200,
-                      color: Colors.black,
+                      color: darkGray,
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -256,7 +251,7 @@ class _ExploreClState extends State<ExploreCl> {
                           child: Text(
                             '${Language.mapLang['order']}',
                             style: TextStyle(
-                              color: Colors.blue[700],
+                              color: buttonColor,
                               fontWeight: FontWeight.w600,
                               letterSpacing: 1.4,
                             ),
@@ -268,7 +263,7 @@ class _ExploreClState extends State<ExploreCl> {
                               child: new ClientOrder(doc: document)));
                         },
                         icon: Icon(OMIcons.accountBalanceWallet,
-                            color: Colors.blue[700]),
+                            color: buttonColor),
                       ),
                     ],
                   ),
@@ -295,24 +290,26 @@ class _ExploreClState extends State<ExploreCl> {
       if (this._searchIcon.icon == Icons.search) {
         this._searchIcon = new Icon(Icons.close);
         this._appBarTitle = new TextFormField(
-          style: textStyle,
+          cursorColor: grayColor,
+          cursorHeight: 25,
+          cursorWidth: 1,
+          style: TextStyle(fontSize: 18, color: Colors.white),
           keyboardType: TextInputType.text,
           decoration: new InputDecoration(
             hintText: '${Language.mapLang['typehere']}',
             hintStyle: hintStyle,
             border: InputBorder.none,
+            contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           ),
           onChanged: (value) {
-            setState(() {
-              _searchString = value;
-            });
+            _searchString = value;
           },
         );
       } else {
         _searchString = null;
         this._searchIcon = new Icon(Icons.search);
         this._appBarTitle =
-            new Text('${Language.mapLang['explore']}', style: pageTitleX);
+            new Text('${Language.mapLang['explore']}', style: pageTitleO);
       }
     });
   }

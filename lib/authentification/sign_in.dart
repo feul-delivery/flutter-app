@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/shared/loading.dart';
@@ -31,6 +30,7 @@ class _SignInState extends State<SignIn> {
     return loading
         ? Loading()
         : Scaffold(
+            backgroundColor: scaffoldBackground,
             key: _mScaffoldState,
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -43,10 +43,9 @@ class _SignInState extends State<SignIn> {
                       child: Text(
                         "${Language.mapLang['welcomeback']}",
                         style: TextStyle(
-                          color: Colors.blue[700],
-                          fontSize: 50,
-                          fontWeight: FontWeight.w900,
-                        ),
+                            color: Colors.white,
+                            fontSize: 50,
+                            fontWeight: FontWeight.w900),
                       ),
                     )),
                 SizedBox(
@@ -68,13 +67,14 @@ class _SignInState extends State<SignIn> {
                                       left: 10, right: 10, bottom: 5),
                                   child: Text(
                                     '${Language.mapLang['forgetpassword']}',
-                                    style: pageTitleX,
+                                    style: subTitleStyle,
                                   ),
                                 ),
                                 Container(
                                   margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                   child: TextFormField(
-                                    style: TextStyle(fontSize: 18),
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
                                     textInputAction: TextInputAction.done,
                                     decoration: InputDecoration(
                                       hintText: "email",
@@ -100,52 +100,60 @@ class _SignInState extends State<SignIn> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
-                                      InkWell(
-                                        onTap: () {
-                                          setState(() {
-                                            _password = 0;
-                                          });
-                                        },
-                                        child: Container(
-                                          height: 45,
-                                          margin:
-                                              EdgeInsets.fromLTRB(5, 7, 5, 7),
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.45,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              color: Colors.white),
-                                          child: Center(
-                                            child: Text(
-                                              "${Language.mapLang['cancel']}"
-                                                  .toUpperCase(),
-                                              style: buttonStyleBlack,
+                                      Container(
+                                        height: 45,
+                                        margin: EdgeInsets.fromLTRB(5, 7, 5, 7),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.45,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            color: Colors.white),
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            onTap: () {
+                                              setState(() {
+                                                _password = 0;
+                                              });
+                                            },
+                                            child: Center(
+                                              child: Text(
+                                                "${Language.mapLang['cancel']}"
+                                                    .toUpperCase(),
+                                                style: buttonStyleBlack,
+                                              ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                      InkWell(
-                                        onTap: () {},
-                                        child: Container(
-                                          height: 45,
-                                          margin:
-                                              EdgeInsets.fromLTRB(5, 7, 5, 7),
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.45,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              color: Colors.blue[700]),
-                                          child: Center(
-                                            child: Text(
-                                              "${Language.mapLang['sendemail']}"
-                                                  .toUpperCase(),
-                                              style: buttonStyle,
+                                      Container(
+                                        height: 45,
+                                        margin: EdgeInsets.fromLTRB(5, 7, 5, 7),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.45,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            color: buttonColor),
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            onTap: () {
+                                              showInSnackBar("email sent");
+                                            },
+                                            child: Center(
+                                              child: Text(
+                                                "${Language.mapLang['sendemail']}"
+                                                    .toUpperCase(),
+                                                style: buttonStyle,
+                                              ),
                                             ),
                                           ),
                                         ),
@@ -165,12 +173,17 @@ class _SignInState extends State<SignIn> {
                                             margin: EdgeInsets.fromLTRB(
                                                 15, 7, 15, 7),
                                             child: TextFormField(
-                                              style: TextStyle(fontSize: 18),
+                                              cursorColor: grayColor,
+                                              cursorHeight: 25,
+                                              cursorWidth: 1,
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.white),
                                               textInputAction:
                                                   TextInputAction.next,
                                               decoration: InputDecoration(
-                                                prefixIcon:
-                                                    Icon(OMIcons.person),
+                                                prefixIcon: Icon(OMIcons.person,
+                                                    color: grayColor),
                                                 hintText: "email",
                                                 hintStyle: hintStyle,
                                                 contentPadding:
@@ -197,12 +210,19 @@ class _SignInState extends State<SignIn> {
                                             margin: EdgeInsets.fromLTRB(
                                                 15, 7, 15, 7),
                                             child: TextFormField(
-                                              style: TextStyle(fontSize: 18),
+                                              cursorColor: grayColor,
+                                              cursorHeight: 25,
+                                              cursorWidth: 1,
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.white),
                                               obscureText: _isObscure,
                                               decoration: InputDecoration(
-                                                prefixIcon: password.length < 6
-                                                    ? Icon(OMIcons.lock)
-                                                    : Icon(OMIcons.lockOpen),
+                                                prefixIcon: password.length < 8
+                                                    ? Icon(OMIcons.lock,
+                                                        color: grayColor)
+                                                    : Icon(OMIcons.lockOpen,
+                                                        color: buttonColor),
                                                 hintText:
                                                     "${Language.mapLang['password']}",
                                                 hintStyle: hintStyle,
@@ -213,8 +233,8 @@ class _SignInState extends State<SignIn> {
                                                           : Icons
                                                               .visibility_off,
                                                       color: _isObscure
-                                                          ? Color(0xFFB9BAC3)
-                                                          : Colors.blue[700],
+                                                          ? grayColor
+                                                          : buttonColor,
                                                     ),
                                                     onPressed: () {
                                                       setState(() {
@@ -259,10 +279,17 @@ class _SignInState extends State<SignIn> {
                                     0.1,
                                     Container(
                                       margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                      height: 45,
+                                      width: MediaQuery.of(context).size.width,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          color: buttonColor),
                                       child: Material(
+                                        color: Colors.transparent,
                                         child: InkWell(
                                           borderRadius:
-                                              BorderRadius.circular(10.0),
+                                              BorderRadius.circular(5.0),
                                           onTap: () async {
                                             if (_formKey.currentState
                                                 .validate()) {
@@ -310,21 +337,11 @@ class _SignInState extends State<SignIn> {
                                               }
                                             }
                                           },
-                                          child: Container(
-                                            height: 45,
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                                color: Colors.blue[700]),
-                                            child: Center(
-                                              child: Text(
-                                                "${Language.mapLang['login']}"
-                                                    .toUpperCase(),
-                                                style: buttonStyle,
-                                              ),
+                                          child: Center(
+                                            child: Text(
+                                              "${Language.mapLang['login']}"
+                                                  .toUpperCase(),
+                                              style: buttonStyle,
                                             ),
                                           ),
                                         ),

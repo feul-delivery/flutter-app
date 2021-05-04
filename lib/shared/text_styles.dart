@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
-const scaffoldBackground = Color(0xFFEFF0F5);
-const titleStyleNew =
-    TextStyle(fontSize: 24, fontFamily: 'Quarion', fontWeight: FontWeight.w600);
+const scaffoldBackground = Color(0xFF353531);
+const buttonColor = Color(0xFFEC4E20);
+const grayColor = Color(0xFFB9BAC3);
+const scaffoldLightGray = Color(0xFFEFF0F5);
+const darkGray = Color(0xFF212121);
+const titleStyleNew = TextStyle(
+    fontSize: 24,
+    color: Colors.white,
+    letterSpacing: 1.05,
+    fontFamily: 'Quarion',
+    fontWeight: FontWeight.w600);
 const errorTextStyle = TextStyle(
     color: Colors.red,
     fontFamily: 'Quarion',
@@ -25,6 +33,11 @@ const pageTitleX = TextStyle(
     fontWeight: FontWeight.w500,
     fontFamily: 'Quarion',
     color: Colors.black);
+const pageTitleO = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'Quarion',
+    color: buttonColor);
 const pageTitleW = TextStyle(
     fontSize: 20,
     fontWeight: FontWeight.w500,
@@ -37,18 +50,24 @@ const pageTitleXW = TextStyle(
     color: Colors.white,
     letterSpacing: 1.2);
 const hintStyle = TextStyle(
-  color: Colors.black54,
+  color: Colors.white,
   fontFamily: 'Quarion',
   fontWeight: FontWeight.w300,
 );
-const hintStyleWhite = TextStyle(
-  color: Colors.white,
+const hintStyleB = TextStyle(
+  color: Colors.black,
   fontFamily: 'Quarion',
   fontWeight: FontWeight.w200,
 );
 const buttonStyle = TextStyle(
   fontFamily: 'Quarion',
   color: Colors.white,
+  fontWeight: FontWeight.w500,
+  letterSpacing: 1.3,
+);
+const buttonStyleO = TextStyle(
+  fontFamily: 'Quarion',
+  color: buttonColor,
   fontWeight: FontWeight.w500,
   letterSpacing: 1.3,
 );
@@ -98,7 +117,7 @@ const strongTextStyle = TextStyle(
 );
 const subTitleStyle = TextStyle(
   fontFamily: 'Quarion',
-  color: Colors.black,
+  color: Colors.white,
   fontWeight: FontWeight.w400,
   fontSize: 20,
 );
@@ -107,6 +126,11 @@ const tileTitleStyle = TextStyle(
     fontWeight: FontWeight.w400,
     fontFamily: 'Quarion',
     color: Colors.black);
+const tileTitleStyleW = TextStyle(
+    fontSize: 18.5,
+    fontWeight: FontWeight.w400,
+    fontFamily: 'Quarion',
+    color: Colors.white);
 
 const filterStyle =
     TextStyle(fontFamily: 'Quarion', fontSize: 17.0, color: Colors.black);
@@ -121,26 +145,27 @@ const tileItemStyle = TextStyle(
 const smallTileName = TextStyle(
     fontSize: 17,
     fontFamily: 'Quarion',
-    fontWeight: FontWeight.w800,
-    color: Colors.black);
+    fontWeight: FontWeight.w500,
+    color: Colors.white);
 const smallTileP = TextStyle(
     fontSize: 16,
     fontFamily: 'Quarion',
     fontWeight: FontWeight.w400,
-    color: Colors.black);
+    color: Colors.white);
 const smallTileGray = TextStyle(
     fontSize: 16,
     fontFamily: 'Quarion',
     fontWeight: FontWeight.w400,
-    color: Colors.black45);
+    color: Colors.white54);
 
 Widget customeCircularProgress = Container(
     padding: EdgeInsets.all(5),
     decoration: BoxDecoration(
-        color: Colors.blue[700], borderRadius: BorderRadius.circular(50)),
+        color: Colors.transparent, borderRadius: BorderRadius.circular(50)),
     child: CircularProgressIndicator(
+        strokeWidth: 3,
         valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-        backgroundColor: Colors.blue[700]));
+        backgroundColor: buttonColor));
 Widget customErrorWidget = Center(
     child: Container(
   padding: EdgeInsets.all(5),

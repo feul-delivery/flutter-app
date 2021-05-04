@@ -17,6 +17,7 @@ class FuelDeliveryApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Fuel Delivery',
+        theme: ThemeData(primarySwatch: Colors.deepOrange),
         routes: {
           '/': (context) => SplashScreen(),
           '/wrapper': (context) => Wrapper(),

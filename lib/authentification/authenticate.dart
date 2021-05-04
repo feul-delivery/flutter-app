@@ -5,6 +5,7 @@ import 'package:FD_flutter/authentification/sign_in.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -18,8 +19,9 @@ class _AuthenticateState extends State<Authenticate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: scaffoldBackground,
       appBar: AppBar(
-        backgroundColor: Color(0xFFEFF0F5),
+        backgroundColor: scaffoldBackground,
         elevation: 0,
         actions: [
           Container(
@@ -40,15 +42,15 @@ class _AuthenticateState extends State<Authenticate> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Icon(OMIcons.language, color: Colors.blue[700]),
+                        Icon(OMIcons.language, color: Colors.white),
                         Container(
                           margin: EdgeInsets.only(top: 2.2),
                           child: Text(Language.lang == 'FR' ? 'FR' : 'US',
                               style: TextStyle(
-                                  color: Colors.blue[700],
+                                  color: Colors.white,
                                   fontWeight: FontWeight.w900,
                                   fontSize: 15,
-                                  decorationColor: Colors.blue[700])),
+                                  decorationColor: Colors.white)),
                         ),
                       ]),
                 ),
@@ -57,7 +59,6 @@ class _AuthenticateState extends State<Authenticate> {
         ],
       ),
       body: Container(
-        color: Color(0xFFEFF0F5),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -69,7 +70,12 @@ class _AuthenticateState extends State<Authenticate> {
                   width: MediaQuery.of(context).size.width * 0.45,
                   height: MediaQuery.of(context).size.width * 0.45,
                   child: Hero(
-                      tag: 'logo', child: Image.asset('assets/splash.png'))),
+                      tag: 'logo',
+                      child: Text('Fuel Delivery',
+                          style: GoogleFonts.aBeeZee(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w800,
+                              fontSize: 50)))),
             ),
             Expanded(
                 child: Align(
@@ -77,43 +83,52 @@ class _AuthenticateState extends State<Authenticate> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  InkWell(
-                    onTap: () async {
-                      Navigator.of(context).push(PageTransition(
-                          type: PageTransitionType.fade, child: SignIn()));
-                    },
-                    child: Container(
-                      height: 45,
-                      margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                      width: MediaQuery.of(context).size.width,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.blue[700]),
-                      child: Center(
-                        child: Text(
-                          "${Language.mapLang['signin']}".toUpperCase(),
-                          style: buttonStyle,
+                  Container(
+                    height: 45,
+                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: buttonColor),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(5.0),
+                        onTap: () async {
+                          Navigator.of(context).push(PageTransition(
+                              type: PageTransitionType.fade, child: SignIn()));
+                        },
+                        child: Center(
+                          child: Text(
+                            "${Language.mapLang['signin']}".toUpperCase(),
+                            style: buttonStyle,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  InkWell(
-                    onTap: () async {
-                      Navigator.of(context).push(PageTransition(
-                          type: PageTransitionType.fade, child: Register()));
-                    },
-                    child: Container(
-                      height: 45,
-                      width: MediaQuery.of(context).size.width,
-                      margin: EdgeInsets.fromLTRB(
-                          15, 7, 15, MediaQuery.of(context).size.width * 0.15),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white),
-                      child: Center(
-                        child: Text(
-                          "${Language.mapLang['register']}".toUpperCase(),
-                          style: buttonStyleBlack,
+                  Container(
+                    height: 45,
+                    width: MediaQuery.of(context).size.width,
+                    margin: EdgeInsets.fromLTRB(
+                        15, 7, 15, MediaQuery.of(context).size.width * 0.15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: Colors.white),
+                    child: Material(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(5.0),
+                        onTap: () async {
+                          Navigator.of(context).push(PageTransition(
+                              type: PageTransitionType.fade,
+                              child: Register()));
+                        },
+                        child: Center(
+                          child: Text(
+                            "${Language.mapLang['register']}".toUpperCase(),
+                            style: buttonStyleBlack,
+                          ),
                         ),
                       ),
                     ),

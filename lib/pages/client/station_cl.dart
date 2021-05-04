@@ -31,7 +31,7 @@ class _StationProfilClState extends State<StationProfilCl> {
           if (snapshotLv.connectionState == ConnectionState.done)
             _lvCount = snapshotLv.data.documents.length;
           return Scaffold(
-            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+            backgroundColor: scaffoldBackground,
             body: Stack(
               children: <Widget>[
                 CustomScrollView(
@@ -42,9 +42,14 @@ class _StationProfilClState extends State<StationProfilCl> {
                           onPressed: () {
                             Navigator.pop(context);
                           }),
+                      title: Padding(
+                        padding: const EdgeInsets.only(top: 7.0),
+                        child: Center(
+                          child: Text('${doc['titre']}', style: pageTitleXW),
+                        ),
+                      ),
                       expandedHeight: 200,
-                      backgroundColor:
-                          Theme.of(context).scaffoldBackgroundColor,
+                      backgroundColor: buttonColor,
                       flexibleSpace: FlexibleSpaceBar(
                           collapseMode: CollapseMode.pin,
                           background: Hero(
@@ -68,7 +73,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                               errorWidget: (context, url, error) => Material(
                                 child: Container(
                                   height: 200,
-                                  color: Colors.black,
+                                  color: buttonColor,
                                   child: Center(
                                     child: Column(
                                       mainAxisAlignment:
@@ -90,33 +95,24 @@ class _StationProfilClState extends State<StationProfilCl> {
                     SliverList(
                       delegate: SliverChildListDelegate([
                         Padding(
-                          padding:
-                              EdgeInsets.only(left: 20, right: 20, bottom: 20),
+                          padding: EdgeInsets.all(20),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               FadeAnimation(
                                   0.01,
-                                  Container(
-                                      margin: EdgeInsets.all(10),
-                                      padding: EdgeInsets.all(10),
-                                      child: FadeAnimation(
-                                          0.01,
-                                          Center(
-                                            child: Text('${doc['titre']}',
-                                                style: titleStyleNew),
-                                          )))),
-                              FadeAnimation(
-                                  0.01,
                                   Row(
                                     children: [
-                                      Icon(Icons.article, color: Colors.black),
+                                      Icon(Icons.article, color: buttonColor),
                                       SizedBox(width: 8),
                                       Text("Description",
-                                          style: tileTitleStyle),
+                                          style: tileTitleStyleW),
                                     ],
                                   )),
-                              Divider(height: 15, thickness: 1),
+                              Divider(
+                                  height: 15,
+                                  thickness: 1,
+                                  color: Colors.white),
                               SizedBox(height: 10),
                               FadeAnimation(
                                   0.01,
@@ -130,13 +126,16 @@ class _StationProfilClState extends State<StationProfilCl> {
                                   0.01,
                                   Row(
                                     children: [
-                                      Icon(Icons.business, color: Colors.black),
+                                      Icon(Icons.business, color: buttonColor),
                                       SizedBox(width: 8),
                                       Text("${Language.mapLang['address']}",
-                                          style: tileTitleStyle),
+                                          style: tileTitleStyleW),
                                     ],
                                   )),
-                              Divider(height: 15, thickness: 1),
+                              Divider(
+                                  height: 15,
+                                  thickness: 1,
+                                  color: Colors.white),
                               SizedBox(height: 10),
                               FadeAnimation(0.01,
                                   Text(doc['adresse'], style: smallTileGray)),
@@ -145,14 +144,17 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 0.01,
                                 Row(
                                   children: [
-                                    Icon(Icons.group, color: Colors.black),
+                                    Icon(Icons.group, color: buttonColor),
                                     SizedBox(width: 8),
                                     Text("${Language.mapLang['deliverymen']}",
-                                        style: tileTitleStyle),
+                                        style: tileTitleStyleW),
                                   ],
                                 ),
                               ),
-                              Divider(height: 15, thickness: 1),
+                              Divider(
+                                  height: 15,
+                                  thickness: 1,
+                                  color: Colors.white),
                               SizedBox(height: 10),
                               FadeAnimation(
                                   0.01,
@@ -167,14 +169,17 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 0.01,
                                 Row(
                                   children: [
-                                    Icon(Icons.phone, color: Colors.black),
+                                    Icon(Icons.phone, color: buttonColor),
                                     SizedBox(width: 8),
                                     Text("${Language.mapLang['phone']}",
-                                        style: tileTitleStyle)
+                                        style: tileTitleStyleW)
                                   ],
                                 ),
                               ),
-                              Divider(height: 15, thickness: 1),
+                              Divider(
+                                  height: 15,
+                                  thickness: 1,
+                                  color: Colors.white),
                               SizedBox(height: 10),
                               FadeAnimation(0.01,
                                   Text(doc['tele'], style: smallTileGray)),
@@ -183,13 +188,16 @@ class _StationProfilClState extends State<StationProfilCl> {
                                 0.01,
                                 Row(
                                   children: [
-                                    Icon(Icons.mail, color: Colors.black),
+                                    Icon(Icons.mail, color: buttonColor),
                                     SizedBox(width: 8),
-                                    Text("Email", style: tileTitleStyle),
+                                    Text("Email", style: tileTitleStyleW),
                                   ],
                                 ),
                               ),
-                              Divider(height: 15, thickness: 1),
+                              Divider(
+                                  height: 15,
+                                  thickness: 1,
+                                  color: Colors.white),
                               SizedBox(height: 10),
                               FadeAnimation(0.01,
                                   Text(doc['email'], style: smallTileGray)),
@@ -202,15 +210,18 @@ class _StationProfilClState extends State<StationProfilCl> {
                                           Row(
                                             children: [
                                               Icon(Icons.photo,
-                                                  color: Colors.black),
+                                                  color: buttonColor),
                                               SizedBox(width: 8),
                                               Text(
                                                   "${Language.mapLang['pictures']}",
-                                                  style: tileTitleStyle),
+                                                  style: tileTitleStyleW),
                                             ],
                                           ),
                                         ),
-                                        Divider(height: 15, thickness: 1),
+                                        Divider(
+                                            height: 15,
+                                            thickness: 1,
+                                            color: Colors.white),
                                         SizedBox(height: 10),
                                         FadeAnimation(
                                             1.8,
@@ -250,23 +261,28 @@ class _StationProfilClState extends State<StationProfilCl> {
                             MediaQuery.of(context).size.width * 0.7,
                         child: FadeAnimation(
                           0.01,
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => new ClientOrder(
-                                            doc: doc,
-                                          )));
-                            },
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Colors.green.shade400),
-                              child: Text(
-                                "${Language.mapLang['placeorder']}",
-                                style: buttonStyle,
+                          Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: buttonColor),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(50),
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => new ClientOrder(
+                                                doc: doc,
+                                              )));
+                                },
+                                child: Center(
+                                  child: Text(
+                                    "${Language.mapLang['placeorder']}",
+                                    style: buttonStyle,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -296,7 +312,7 @@ class _StationProfilClState extends State<StationProfilCl> {
         errorWidget: (context, url, error) => Container(
           height: 200,
           child: Center(
-            child: Icon(Icons.error, color: Colors.black),
+            child: Icon(Icons.error, color: buttonColor),
           ),
         ),
       ),

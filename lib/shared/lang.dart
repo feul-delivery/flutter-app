@@ -17,6 +17,7 @@ class Language {
     'cancel': 'Annuler',
     'createaccount': 'Créer un Compte',
     'editprofile': 'Modifier le profil',
+    'edit': 'Modifier',
     'changeemail': "Changer l'e-mail",
     'settings': 'Les paramètres',
     'changepassword': 'Changer le mot de passe',
@@ -98,6 +99,7 @@ class Language {
     'stnolv': "cette station n'a pas de livreurs",
     'deliveredASAP': 'sera livré dès que possible',
     'open': 'Ouvrir',
+    'upload': 'télécharger',
     'imagenotfound': "impossible de charger l'image",
     'invalidnumber': 'numéro invalide'
   };
@@ -116,6 +118,8 @@ class Language {
     'login': 'Log in',
     'createaccount': 'Create an account',
     'editprofile': 'Edit profile',
+    'edit': 'Edit',
+    'upload': 'upload',
     'changeemail': "Change email",
     'settings': 'Settings',
     'changepassword': 'change password',

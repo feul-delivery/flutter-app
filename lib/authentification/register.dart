@@ -31,7 +31,7 @@ class _RegisterState extends State<Register> {
         : Scaffold(
             key: _mScaffoldState,
             resizeToAvoidBottomInset: true,
-            backgroundColor: Colors.white,
+            backgroundColor: scaffoldBackground,
             body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,10 +43,9 @@ class _RegisterState extends State<Register> {
                       child: Text(
                         "${Language.mapLang['createaccount']},",
                         style: TextStyle(
-                          color: Colors.blue[700],
-                          fontSize: 50,
-                          fontWeight: FontWeight.w900,
-                        ),
+                            color: Colors.white,
+                            fontSize: 50,
+                            fontWeight: FontWeight.w900),
                       ),
                     )),
                 SingleChildScrollView(
@@ -64,13 +63,18 @@ class _RegisterState extends State<Register> {
                                 Container(
                                   margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                   child: TextFormField(
-                                    style: TextStyle(fontSize: 18),
+                                    cursorColor: grayColor,
+                                    cursorHeight: 25,
+                                    cursorWidth: 1,
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
                                     textInputAction: TextInputAction.next,
                                     decoration: InputDecoration(
                                       prefixIcon: email.isEmpty ||
                                               !email.contains('@') ||
                                               !email.contains('.')
-                                          ? Icon(OMIcons.personAdd)
+                                          ? Icon(OMIcons.personAdd,
+                                              color: grayColor)
                                           : Icon(OMIcons.person,
                                               color: Colors.green),
                                       hintText: "email",
@@ -95,14 +99,19 @@ class _RegisterState extends State<Register> {
                                 Container(
                                   margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                   child: TextFormField(
-                                    style: TextStyle(fontSize: 18),
+                                    cursorColor: grayColor,
+                                    cursorHeight: 25,
+                                    cursorWidth: 1,
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
                                     textInputAction: TextInputAction.next,
                                     obscureText: _isObscure,
                                     decoration: InputDecoration(
                                       prefixIcon: password.length > 7
                                           ? Icon(OMIcons.lock,
                                               color: Colors.green)
-                                          : Icon(OMIcons.lockOpen),
+                                          : Icon(OMIcons.lockOpen,
+                                              color: grayColor),
                                       hintText:
                                           "${Language.mapLang['password']}",
                                       suffixIcon: IconButton(
@@ -111,8 +120,8 @@ class _RegisterState extends State<Register> {
                                                 ? Icons.visibility
                                                 : Icons.visibility_off,
                                             color: _isObscure
-                                                ? Color(0xFFB9BAC3)
-                                                : Colors.blue[700],
+                                                ? grayColor
+                                                : buttonColor,
                                           ),
                                           onPressed: () {
                                             setState(() {
@@ -134,12 +143,16 @@ class _RegisterState extends State<Register> {
                                 Container(
                                   margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                   child: TextFormField(
-                                    style: TextStyle(fontSize: 18),
+                                    cursorColor: grayColor,
+                                    cursorHeight: 25,
+                                    cursorWidth: 1,
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.white),
                                     obscureText: true,
                                     decoration: InputDecoration(
                                       prefixIcon: passwordConf != password &&
                                               passwordConf.length > 0
-                                          ? Icon(OMIcons.cancel,
+                                          ? Icon(OMIcons.clear,
                                               color: Colors.red)
                                           : Icon(OMIcons.done,
                                               color: Colors.green),
@@ -153,7 +166,8 @@ class _RegisterState extends State<Register> {
                                         passwordConf = value;
                                       });
                                     },
-                                    validator: (val) => val != password
+                                    validator: (val) => val != password ||
+                                            val.length == 0
                                         ? '${Language.mapLang['passwordmatch']}'
                                         : null,
                                   ),
@@ -161,65 +175,59 @@ class _RegisterState extends State<Register> {
                               ],
                             ),
                           )),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        error,
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontFamily: 'Gotham',
-                            fontSize: 14,
-                            fontWeight: FontWeight.w400),
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 15),
+                      Text(error, style: errorTextStyle),
+                      SizedBox(height: 10),
                       FadeAnimation(
-                          1.2,
-                          InkWell(
-                            onTap: () async {
-                              if (_formKey.currentState.validate()) {
-                                try {
-                                  final result = await InternetAddress.lookup(
-                                      'google.com');
-                                  if (result.isNotEmpty &&
-                                      result[0].rawAddress.isNotEmpty) {
-                                    setState(() => loading = true);
-                                    dynamic result = await _auth
-                                        .registerWithEmailAndPassword(
-                                            email, password);
-                                    if (result == null) {
-                                      setState(() {
-                                        loading = false;
-                                        error =
-                                            '${Language.mapLang['emailvalidator']}';
-                                      });
-                                    } else {
-                                      Navigator.of(context).pushReplacement(
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  TypeCompte()));
+                          0.1,
+                          Container(
+                            height: 45,
+                            margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: buttonColor),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(5),
+                                onTap: () async {
+                                  if (_formKey.currentState.validate()) {
+                                    try {
+                                      final result =
+                                          await InternetAddress.lookup(
+                                              'google.com');
+                                      if (result.isNotEmpty &&
+                                          result[0].rawAddress.isNotEmpty) {
+                                        setState(() => loading = true);
+                                        dynamic result = await _auth
+                                            .registerWithEmailAndPassword(
+                                                email, password);
+                                        if (result == null) {
+                                          setState(() {
+                                            loading = false;
+                                            error =
+                                                '${Language.mapLang['emailvalidator']}';
+                                          });
+                                        } else {
+                                          Navigator.of(context).pushReplacement(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      TypeCompte()));
+                                        }
+                                      }
+                                    } on SocketException catch (_) {
+                                      showInSnackBar(
+                                          "${Language.mapLang['nointernet']}");
                                     }
                                   }
-                                } on SocketException catch (_) {
-                                  showInSnackBar(
-                                      "${Language.mapLang['nointernet']}");
-                                }
-                              }
-                            },
-                            child: Container(
-                              height: 45,
-                              margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                              width: MediaQuery.of(context).size.width,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: Colors.blue[700]),
-                              child: Center(
-                                child: Text(
-                                  "${Language.mapLang['register']}"
-                                      .toUpperCase(),
-                                  style: buttonStyle,
+                                },
+                                child: Center(
+                                  child: Text(
+                                    "${Language.mapLang['register']}"
+                                        .toUpperCase(),
+                                    style: buttonStyle,
+                                  ),
                                 ),
                               ),
                             ),

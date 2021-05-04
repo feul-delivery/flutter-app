@@ -31,13 +31,10 @@ class _SettingsClState extends State<SettingsCl> {
       appBar: AppBar(
         title: Text(
           "${Language.mapLang['settings']}",
-          style: pageTitleX,
+          style: pageTitleO,
         ),
         leading: IconButton(
-            icon: Icon(
-              Icons.west,
-              color: Colors.black,
-            ),
+            icon: Icon(Icons.west, color: buttonColor),
             onPressed: () {
               Navigator.pop(context);
             }),
@@ -51,30 +48,33 @@ class _SettingsClState extends State<SettingsCl> {
               },
               child: Padding(
                   padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                  child: Icon(OMIcons.myLocation, color: Colors.black)))
+                  child: Icon(OMIcons.myLocation, color: buttonColor)))
         ],
-        backgroundColor: Colors.white,
+        backgroundColor: scaffoldBackground,
         elevation: 0,
       ),
       body: ListView(scrollDirection: Axis.vertical, children: [
         Container(
           margin: EdgeInsets.only(bottom: 10),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border(
-                  bottom: BorderSide(width: 1, color: Colors.grey[300]))),
+          // decoration: BoxDecoration(
+          //     border: Border(bottom: BorderSide(width: 2, color: buttonColor))),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.all(5),
-                margin: EdgeInsets.only(left: 10, right: 10, bottom: 5),
-                child: Text(
-                  '${Language.mapLang['account']}',
-                  style: pageTitleX,
+                width: MediaQuery.of(context).size.width,
+                color: buttonColor,
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.only(left: 10, right: 10),
+                  child: Text(
+                    '${Language.mapLang['account']}',
+                    style: pageTitleW,
+                  ),
                 ),
               ),
               Material(
+                color: scaffoldBackground,
                 child: InkWell(
                   onTap: () {
                     Navigator.of(context).push(MaterialPageRoute(
@@ -84,16 +84,17 @@ class _SettingsClState extends State<SettingsCl> {
                   child: ListTile(
                     leading: Icon(
                       Icons.person,
-                      color: Colors.blue[700],
+                      color: buttonColor,
                     ),
                     title: Text(
                       "${Language.mapLang['editprofile']}",
-                      style: textStyle,
+                      style: textStyleWhite,
                     ),
                   ),
                 ),
               ),
               Material(
+                color: scaffoldBackground,
                 child: InkWell(
                   onTap: () {
                     _modalChangeEmailRow(context);
@@ -101,16 +102,17 @@ class _SettingsClState extends State<SettingsCl> {
                   child: ListTile(
                     leading: Icon(
                       OMIcons.email,
-                      color: Colors.blue[700],
+                      color: buttonColor,
                     ),
                     title: Text(
                       "${Language.mapLang['changeemail']}",
-                      style: textStyle,
+                      style: textStyleWhite,
                     ),
                   ),
                 ),
               ),
               Material(
+                color: scaffoldBackground,
                 child: InkWell(
                   onTap: () {
                     _modalChangePasswordRow(context);
@@ -118,11 +120,11 @@ class _SettingsClState extends State<SettingsCl> {
                   child: ListTile(
                     leading: Icon(
                       OMIcons.lock,
-                      color: Colors.blue[700],
+                      color: buttonColor,
                     ),
                     title: Text(
                       "${Language.mapLang['changepassword']}",
-                      style: textStyle,
+                      style: textStyleWhite,
                     ),
                   ),
                 ),
@@ -132,22 +134,22 @@ class _SettingsClState extends State<SettingsCl> {
         ),
         Container(
           margin: EdgeInsets.only(bottom: 10),
-          decoration: BoxDecoration(
-              color: Colors.white,
-              border: Border(
-                  bottom: BorderSide(width: 1, color: Colors.grey[300]))),
+          // decoration: BoxDecoration(
+          //     border: Border(bottom: BorderSide(width: 2, color: buttonColor))),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.all(5),
-                margin: EdgeInsets.only(left: 10, right: 10, bottom: 5, top: 5),
-                child: Text(
-                  'Application',
-                  style: pageTitleX,
+                width: MediaQuery.of(context).size.width,
+                color: buttonColor,
+                child: Container(
+                  padding: EdgeInsets.all(5),
+                  margin: EdgeInsets.only(left: 10, right: 10),
+                  child: Text('Application', style: pageTitleW),
                 ),
               ),
               Material(
+                color: scaffoldBackground,
                 child: InkWell(
                   onTap: () {
                     _buildModalChangeLang(context);
@@ -155,16 +157,17 @@ class _SettingsClState extends State<SettingsCl> {
                   child: ListTile(
                     leading: Icon(
                       OMIcons.language,
-                      color: Colors.blue[700],
+                      color: buttonColor,
                     ),
                     title: Text(
                       "${Language.mapLang['changelang']}",
-                      style: textStyle,
+                      style: textStyleWhite,
                     ),
                   ),
                 ),
               ),
               Material(
+                color: scaffoldBackground,
                 child: InkWell(
                   onTap: () {
                     _showModalBottomRateUs(context);
@@ -172,16 +175,17 @@ class _SettingsClState extends State<SettingsCl> {
                   child: ListTile(
                     leading: Icon(
                       OMIcons.rateReview,
-                      color: Colors.blue[700],
+                      color: buttonColor,
                     ),
                     title: Text(
                       "${Language.mapLang['rateus']}",
-                      style: textStyle,
+                      style: textStyleWhite,
                     ),
                   ),
                 ),
               ),
               Material(
+                color: scaffoldBackground,
                 child: InkWell(
                   onTap: () {
                     _buildModalAboutUsRow(context);
@@ -189,11 +193,11 @@ class _SettingsClState extends State<SettingsCl> {
                   child: ListTile(
                     leading: Icon(
                       OMIcons.info,
-                      color: Colors.blue[700],
+                      color: buttonColor,
                     ),
                     title: Text(
                       "${Language.mapLang['aboutus']}",
-                      style: textStyle,
+                      style: textStyleWhite,
                     ),
                   ),
                 ),
@@ -202,6 +206,7 @@ class _SettingsClState extends State<SettingsCl> {
           ),
         ),
         Material(
+          color: darkGray,
           child: InkWell(
               onTap: () async {
                 _auth.signOut();
@@ -209,12 +214,12 @@ class _SettingsClState extends State<SettingsCl> {
                     builder: (BuildContext context) => Wrapper()));
               },
               child: ListTile(
-                leading: Icon(OMIcons.exitToApp, color: Colors.redAccent),
+                leading: Icon(OMIcons.exitToApp, color: Colors.red[900]),
                 title: Text(
                   "${Language.mapLang['signout']}",
                   style: TextStyle(
                       fontFamily: 'Quarion',
-                      color: Colors.redAccent,
+                      color: Colors.red[900],
                       fontWeight: FontWeight.w500,
                       letterSpacing: 1.3),
                 ),
@@ -291,7 +296,7 @@ Future<void> _showModalBottomRateUs(BuildContext context) {
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
-                                    color: Colors.blue[700]),
+                                    color: buttonColor),
                                 child: Center(
                                   child: Text(
                                     "${Language.mapLang['submit']}"
@@ -322,39 +327,40 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (BuildContext context, setState) {
-          return Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  Container(
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      padding: EdgeInsets.all(5),
-                      margin: EdgeInsets.all(10),
-                      child: Container(
-                        height: 5,
+          return SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Container(
+              color: scaffoldBackground,
+              child: Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Column(
+                  children: [
+                    Container(
                         width: MediaQuery.of(context).size.width * 0.3,
-                        // margin: EdgeInsets.symmetric(
-                        //     vertical: 0,
-                        //     horizontal:
-                        //         MediaQuery.of(context).size.width * 0.3),
-                        decoration: BoxDecoration(
-                            color: Colors.grey,
-                            borderRadius: BorderRadius.circular(50)),
-                      )),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          padding: EdgeInsets.all(5),
-                          margin: EdgeInsets.only(
-                              left: 10, right: 10, bottom: 5, top: 10),
-                          child: Text('${Language.mapLang['changepassword']}',
-                              style: pageTitleX)),
-                      SingleChildScrollView(
-                        child: Column(
+                        padding: EdgeInsets.all(5),
+                        margin: EdgeInsets.all(10),
+                        child: Container(
+                          height: 5,
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          // margin: EdgeInsets.symmetric(
+                          //     vertical: 0,
+                          //     horizontal:
+                          //         MediaQuery.of(context).size.width * 0.3),
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(50)),
+                        )),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            padding: EdgeInsets.all(5),
+                            margin: EdgeInsets.only(
+                                left: 10, right: 10, bottom: 5, top: 10),
+                            child: Text('${Language.mapLang['changepassword']}',
+                                style: pageTitleW)),
+                        Column(
                           children: <Widget>[
                             SizedBox(
                               height: 10,
@@ -366,6 +372,11 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                   Container(
                                     margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                     child: TextFormField(
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.white),
+                                      cursorColor: grayColor,
+                                      cursorHeight: 25,
+                                      cursorWidth: 1,
                                       obscureText: true,
                                       decoration: InputDecoration(
                                         hintText:
@@ -385,6 +396,11 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                   Container(
                                     margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                     child: TextFormField(
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.white),
+                                      cursorColor: grayColor,
+                                      cursorHeight: 25,
+                                      cursorWidth: 1,
                                       textInputAction: TextInputAction.next,
                                       obscureText: _isObscure,
                                       decoration: InputDecoration(
@@ -397,7 +413,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                                   : Icons.visibility_off,
                                               color: _isObscure
                                                   ? Color(0xFFB9BAC3)
-                                                  : Colors.blue[700],
+                                                  : buttonColor,
                                             ),
                                             onPressed: () {
                                               setState(() {
@@ -421,6 +437,11 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                   Container(
                                     margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                     child: TextFormField(
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.white),
+                                      cursorColor: grayColor,
+                                      cursorHeight: 25,
+                                      cursorWidth: 1,
                                       obscureText: true,
                                       decoration: InputDecoration(
                                         hintText: "Confirmation",
@@ -486,7 +507,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
-                                    color: Colors.blue[700]),
+                                    color: buttonColor),
                                 child: Center(
                                   child: Text(
                                     "${Language.mapLang['validate']}"
@@ -498,10 +519,10 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                             ),
                           ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           );
@@ -519,182 +540,209 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
       context: context,
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (BuildContext context, setState) {
-          return Padding(
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: Column(
-              children: [
-                Container(
-                    width: MediaQuery.of(context).size.width * 0.3,
-                    padding: EdgeInsets.all(5),
-                    margin: EdgeInsets.all(10),
-                    child: Container(
-                      height: 5,
-                      width: MediaQuery.of(context).size.width * 0.3,
-                      // margin: EdgeInsets.symmetric(
-                      //     vertical: 0,
-                      //     horizontal:
-                      //         MediaQuery.of(context).size.width * 0.3),
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.circular(50)),
-                    )),
-                SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                          padding: EdgeInsets.all(5),
-                          margin: EdgeInsets.only(
-                              left: 10, right: 10, bottom: 5, top: 10),
-                          child: Text('${Language.mapLang['changeemail']}',
-                              style: pageTitleX)),
-                      SingleChildScrollView(
-                        child: Column(
-                          children: <Widget>[
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Form(
-                              key: _formKey,
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                    child: TextFormField(
-                                      textInputAction: TextInputAction.next,
-                                      decoration: InputDecoration(
-                                        hintText:
-                                            "${Language.mapLang['newemail']}",
-                                        hintStyle: hintStyle,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 10.0, vertical: 15.0),
-                                      ),
-                                      validator: (val) {
-                                        if (val.isEmpty ||
-                                            !val.contains('@') ||
-                                            !val.contains('.')) {
-                                          return '${Language.mapLang['emailvalidator']}';
-                                        }
-                                        return null;
-                                      },
-                                      keyboardType: TextInputType.emailAddress,
-                                      onChanged: (val) {
-                                        setState(() => _email = val);
-                                      },
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                    child: TextFormField(
-                                      textInputAction: TextInputAction.next,
-                                      decoration: InputDecoration(
-                                        hintText: "Confirmation",
-                                        hintStyle: hintStyle,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 10.0, vertical: 15.0),
-                                      ),
-                                      validator: (val) => val != _email
-                                          ? '${Language.mapLang['passwordmatch']}'
-                                          : null,
-                                      keyboardType: TextInputType.emailAddress,
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                    child: TextFormField(
-                                      textInputAction: TextInputAction.next,
-                                      obscureText: _isObscure,
-                                      decoration: InputDecoration(
-                                        hintText:
-                                            "${Language.mapLang['password']}",
-                                        hintStyle: hintStyle,
-                                        contentPadding: EdgeInsets.symmetric(
-                                            horizontal: 10.0, vertical: 15.0),
-                                      ),
-                                      validator: (val) => val == null
-                                          ? '${Language.mapLang['enterpassword']}'
-                                          : null,
-                                      onChanged: (val) {
-                                        _password = val;
-                                      },
-                                    ),
-                                  ),
-                                ],
+          return SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Container(
+              color: scaffoldBackground,
+              child: Padding(
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                child: Column(
+                  children: [
+                    Container(
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        padding: EdgeInsets.all(5),
+                        margin: EdgeInsets.all(10),
+                        child: Container(
+                          height: 5,
+                          width: MediaQuery.of(context).size.width * 0.3,
+                          // margin: EdgeInsets.symmetric(
+                          //     vertical: 0,
+                          //     horizontal:
+                          //         MediaQuery.of(context).size.width * 0.3),
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.circular(50)),
+                        )),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            padding: EdgeInsets.all(5),
+                            margin: EdgeInsets.only(
+                                left: 10, right: 10, bottom: 5, top: 10),
+                            child: Text('${Language.mapLang['changeemail']}',
+                                style: pageTitleW)),
+                        SingleChildScrollView(
+                          child: Column(
+                            children: <Widget>[
+                              SizedBox(
+                                height: 10,
                               ),
-                            ),
-                            SizedBox(
-                              height: 15,
-                            ),
-                            Text(
-                              _error,
-                              style: TextStyle(
-                                  color: Colors.red,
-                                  fontFamily: 'Gotham',
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            InkWell(
-                              onTap: () async {
-                                String _emailOld =
-                                    Provider.of<User>(context).email;
-                                if (_email == _emailOld) {
-                                  setState(() {
-                                    _error =
-                                        "${Language.mapLang['changenewemail']}";
-                                  });
-                                } else {
-                                  if (_formKey.currentState.validate()) {
-                                    String _email =
-                                        Provider.of<User>(context).email;
-                                    var _result;
-                                    try {
-                                      _result = await FirebaseAuth.instance
-                                          .signInWithEmailAndPassword(
-                                              email: _email,
-                                              password: _password);
-                                    } catch (e) {
-                                      setState(() {
-                                        _error = "${Language.mapLang['error']}";
-                                      });
-                                    }
-                                    inspect(_result);
-                                    if (_result.user.email == _email) {
-                                      AuthService _auth = AuthService();
-                                      _result.user.updateEmail(_email);
-                                      _auth.updateEmail(_email, _emailOld);
-                                      Navigator.of(context).pop();
-                                    }
-                                  }
-                                }
-                              },
-                              child: Container(
+                              Form(
+                                key: _formKey,
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                      child: TextFormField(
+                                        style: TextStyle(
+                                            fontSize: 18, color: Colors.white),
+                                        cursorColor: grayColor,
+                                        cursorHeight: 25,
+                                        cursorWidth: 1,
+                                        textInputAction: TextInputAction.next,
+                                        decoration: InputDecoration(
+                                          hintText:
+                                              "${Language.mapLang['newemail']}",
+                                          hintStyle: hintStyle,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 10.0, vertical: 15.0),
+                                        ),
+                                        validator: (val) {
+                                          if (val.isEmpty ||
+                                              !val.contains('@') ||
+                                              !val.contains('.')) {
+                                            return '${Language.mapLang['emailvalidator']}';
+                                          }
+                                          return null;
+                                        },
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                        onChanged: (val) {
+                                          setState(() => _email = val);
+                                        },
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                      child: TextFormField(
+                                        cursorColor: grayColor,
+                                        cursorHeight: 25,
+                                        cursorWidth: 1,
+                                        style: TextStyle(
+                                            fontSize: 18, color: Colors.white),
+                                        textInputAction: TextInputAction.next,
+                                        decoration: InputDecoration(
+                                          hintText: "Confirmation",
+                                          hintStyle: hintStyle,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 10.0, vertical: 15.0),
+                                        ),
+                                        validator: (val) => val != _email
+                                            ? '${Language.mapLang['passwordmatch']}'
+                                            : null,
+                                        keyboardType:
+                                            TextInputType.emailAddress,
+                                      ),
+                                    ),
+                                    Container(
+                                      margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                      child: TextFormField(
+                                        style: TextStyle(
+                                            fontSize: 18, color: Colors.white),
+                                        cursorColor: grayColor,
+                                        cursorHeight: 25,
+                                        cursorWidth: 1,
+                                        textInputAction: TextInputAction.next,
+                                        obscureText: _isObscure,
+                                        decoration: InputDecoration(
+                                          hintText:
+                                              "${Language.mapLang['password']}",
+                                          hintStyle: hintStyle,
+                                          contentPadding: EdgeInsets.symmetric(
+                                              horizontal: 10.0, vertical: 15.0),
+                                        ),
+                                        validator: (val) => val == null
+                                            ? '${Language.mapLang['enterpassword']}'
+                                            : null,
+                                        onChanged: (val) {
+                                          _password = val;
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              SizedBox(
+                                height: 15,
+                              ),
+                              Text(
+                                _error,
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontFamily: 'Gotham',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Container(
                                 height: 45,
                                 margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
                                 width: MediaQuery.of(context).size.width,
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(5),
-                                    color: Colors.blue[700]),
-                                child: Center(
-                                  child: Text(
-                                    "${Language.mapLang['validate']}"
-                                        .toUpperCase(),
-                                    style: buttonStyle,
+                                    color: buttonColor),
+                                child: Material(
+                                  color: Colors.transparent,
+                                  child: InkWell(
+                                    borderRadius: BorderRadius.circular(5),
+                                    onTap: () async {
+                                      String _emailOld =
+                                          Provider.of<User>(context).email;
+                                      if (_email == _emailOld) {
+                                        setState(() {
+                                          _error =
+                                              "${Language.mapLang['changenewemail']}";
+                                        });
+                                      } else {
+                                        if (_formKey.currentState.validate()) {
+                                          String _email =
+                                              Provider.of<User>(context).email;
+                                          var _result;
+                                          try {
+                                            _result = await FirebaseAuth
+                                                .instance
+                                                .signInWithEmailAndPassword(
+                                                    email: _email,
+                                                    password: _password);
+                                          } catch (e) {
+                                            setState(() {
+                                              _error =
+                                                  "${Language.mapLang['error']}";
+                                            });
+                                          }
+                                          inspect(_result);
+                                          if (_result.user.email == _email) {
+                                            AuthService _auth = AuthService();
+                                            _result.user.updateEmail(_email);
+                                            _auth.updateEmail(
+                                                _email, _emailOld);
+                                            Navigator.of(context).pop();
+                                          }
+                                        }
+                                      }
+                                    },
+                                    child: Center(
+                                      child: Text(
+                                        "${Language.mapLang['validate']}"
+                                            .toUpperCase(),
+                                        style: buttonStyle,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
           );
         });
@@ -716,51 +764,51 @@ Future<void> _buildModalAboutUsRow(BuildContext context) {
                     margin: EdgeInsets.only(
                         left: 10, right: 10, bottom: 5, top: 10),
                     child: Text('${Language.mapLang['aboutus']}',
-                        style: pageTitleX)),
+                        style: pageTitleW)),
                 Container(
                   margin: EdgeInsets.symmetric(vertical: 20, horizontal: 0),
                   child: Center(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Container(
-                              width: 60,
-                              height: 60,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 0,
-                                      color: Theme.of(context)
-                                          .scaffoldBackgroundColor),
-                                  boxShadow: [],
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: AssetImage(
-                                          'assets/Fueldelivery.png'))),
-                            ),
-                            Column(
-                              children: [
-                                Text("Fuel Delivery"),
-                                SizedBox(
-                                  height: 12,
-                                ),
-                                Text(
-                                  'Build by the Flutter framework.',
-                                  style: textStyle,
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 7,
-                        ),
+                        // Row(
+                        //   mainAxisAlignment: MainAxisAlignment.center,
+                        //   children: [
+                        //     Container(
+                        //       width: 60,
+                        //       height: 60,
+                        //       decoration: BoxDecoration(
+                        //           border: Border.all(
+                        //               width: 0,
+                        //               color: Theme.of(context)
+                        //                   .scaffoldBackgroundColor),
+                        //           boxShadow: [],
+                        //           shape: BoxShape.circle,
+                        //           image: DecorationImage(
+                        //               fit: BoxFit.cover,
+                        //               image: AssetImage(
+                        //                   'assets/Fueldelivery.png'))),
+                        //     ),
+                        //     Column(
+                        //       children: [
+                        //         Text("Fuel Delivery"),
+                        //         SizedBox(
+                        //           height: 12,
+                        //         ),
+                        //         Text(
+                        //           'Build by the Flutter framework.',
+                        //           style: textStyleWhite,
+                        //         ),
+                        //       ],
+                        //     )
+                        //   ],
+                        // ),
+                        // SizedBox(
+                        //   height: 7,
+                        // ),
                         Text(
                           'Developped by:',
-                          style: textStyle,
+                          style: textStyleWhite,
                         ),
                         SizedBox(
                           height: 7,
@@ -794,72 +842,90 @@ Future<void> _buildModalChangeLang(BuildContext context) {
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (BuildContext context, setState) {
           return SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                _isUsed == true
-                    ? Container(
-                        height: 30,
-                        color: Colors.red,
-                        child: Center(
-                            child: Text('${Language.mapLang['usedlang']}',
-                                style: textStyleWhite)))
-                    : Container(),
-                Container(
-                    padding: EdgeInsets.all(5),
-                    margin: EdgeInsets.only(
-                        left: 10, right: 10, bottom: 5, top: 10),
-                    child: Text('${Language.mapLang['changelang']}',
-                        style: pageTitleX)),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          if (Language.mapLang['en'] != 'Anglais') {
-                            _langChangeState('FR');
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => SplashScreen()));
-                          } else {
-                            // Navigator.of(context).pop();
-                            setState(() {
-                              _isUsed = true;
-                            });
-                          }
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(20),
-                          padding: EdgeInsets.all(10),
+            child: Container(
+              color: scaffoldBackground,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _isUsed == true
+                      ? Container(
+                          height: 30,
+                          color: buttonColor,
                           child: Center(
-                              child: Text('🇫🇷 ${Language.mapLang['fr']}',
-                                  style: buttonStyleBlack)),
-                        )),
-                    InkWell(
-                        onTap: () {
-                          if (Language.mapLang['en'] != 'English') {
-                            _langChangeState('EN');
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (context) => SplashScreen()));
-                          } else {
-                            // Navigator.of(context).pop();
-                            setState(() {
-                              _isUsed = true;
-                            });
-                          }
-                        },
-                        child: Container(
-                          margin: EdgeInsets.all(20),
-                          padding: EdgeInsets.all(10),
-                          child: Center(
-                              child: Text('🇺🇸 ${Language.mapLang['en']}',
-                                  style: buttonStyleBlack)),
-                        ))
-                  ],
-                ),
-              ],
+                              child: Text('${Language.mapLang['usedlang']}',
+                                  style: textStyleWhite)))
+                      : Container(),
+                  Container(
+                      padding: EdgeInsets.all(5),
+                      margin: EdgeInsets.only(
+                          left: 10, right: 10, bottom: 5, top: 10),
+                      child: Text('${Language.mapLang['changelang']}',
+                          style: pageTitleO)),
+                  Container(
+                    margin: EdgeInsets.symmetric(vertical: 20),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                              borderRadius: BorderRadius.circular(30),
+                              onTap: () {
+                                if (Language.mapLang['en'] != 'Anglais') {
+                                  _langChangeState('FR');
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SplashScreen()));
+                                } else {
+                                  // Navigator.of(context).pop();
+                                  setState(() {
+                                    _isUsed = true;
+                                  });
+                                }
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10),
+                                child: Center(
+                                    child: Text(
+                                        '🇫🇷 ${Language.mapLang['fr']}',
+                                        style: buttonStyle)),
+                              )),
+                        ),
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                              borderRadius: BorderRadius.circular(30),
+                              onTap: () {
+                                if (Language.mapLang['en'] != 'English') {
+                                  _langChangeState('EN');
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              SplashScreen()));
+                                } else {
+                                  // Navigator.of(context).pop();
+                                  setState(() {
+                                    _isUsed = true;
+                                  });
+                                }
+                              },
+                              child: Container(
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.all(10),
+                                child: Center(
+                                    child: Text(
+                                        '🇺🇸 ${Language.mapLang['en']}',
+                                        style: buttonStyle)),
+                              )),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         });
@@ -869,7 +935,7 @@ Future<void> _buildModalChangeLang(BuildContext context) {
 // void showInSnackBar(String value, BuildContext context) {
 //   SnackBar snackBar = new SnackBar(
 //       backgroundColor: Colors.white,
-//       content: new Text(value, style: textStyle));
+//       content: new Text(value, style: textStyleWhite));
 //   _mScaffoldState.currentState.showSnackBar(snackBar);
 // }
 

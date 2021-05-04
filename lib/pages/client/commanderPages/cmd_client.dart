@@ -177,34 +177,28 @@ class _ClientOrderState extends State<ClientOrder> {
     DatabaseService _auth = DatabaseService();
     _adr == "" ? _adr = "" : _adresse = _adr;
     return Scaffold(
-      backgroundColor: Color(0xFFEFF0F5),
+      backgroundColor: darkGray,
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(
-            Icons.west,
-            color: Colors.black,
-          ),
+          icon: Icon(Icons.west_rounded, color: Colors.white),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         title: Text(
           "${Language.mapLang['placeorder']}",
-          style: pageTitleX,
+          style: pageTitleW,
         ),
         actions: [
           IconButton(
-              icon: Icon(
-                OMIcons.payment,
-                color: Colors.black,
-              ),
+              icon: Icon(OMIcons.payment, color: Colors.white),
               onPressed: () => _showModalSheetPayment(context)),
           SizedBox(
             width: 10.0,
           ),
           IconButton(
             icon:
-                Icon(CupertinoIcons.text_badge_checkmark, color: Colors.black),
+                Icon(CupertinoIcons.text_badge_checkmark, color: Colors.white),
             // Text('${Language.mapLang['next']}', style: tileTitleStyle),
             onPressed: () async {
               if (_methode == null) {
@@ -245,7 +239,7 @@ class _ClientOrderState extends State<ClientOrder> {
             },
           ),
         ],
-        backgroundColor: Colors.white,
+        backgroundColor: buttonColor,
         elevation: 1,
       ),
       body: Container(
@@ -261,12 +255,18 @@ class _ClientOrderState extends State<ClientOrder> {
                     border:
                         Border(bottom: BorderSide(color: Colors.grey[200]))),
                 child: TextFormField(
+                  cursorColor: grayColor,
+                  cursorHeight: 25,
+                  cursorWidth: 1,
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                   onChanged: (value) {
                     _volume = double.tryParse(value) ?? 0.0;
                   },
                   decoration: InputDecoration(
-                      labelText: "Volume",
-                      labelStyle: hintStyle,
+                      hintText: "Volume",
+                      hintStyle: hintStyle,
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                       border: InputBorder.none),
                   keyboardType: TextInputType.number,
                   validator: (value) =>
@@ -280,14 +280,13 @@ class _ClientOrderState extends State<ClientOrder> {
                         Border(bottom: BorderSide(color: Colors.grey[200]))),
                 child: DropdownButtonFormField(
                   value: _type,
+                  dropdownColor: scaffoldBackground,
                   decoration: InputDecoration(border: InputBorder.none),
                   items: _types.map((type) {
                     return DropdownMenuItem(
                       value: type,
-                      child: Text(
-                        '${type['libelle']} - ${type['prix']} DH/L',
-                        style: hintStyle,
-                      ),
+                      child: Text('${type['libelle']} - ${type['prix']} DH/L',
+                          style: hintStyle),
                     );
                   }).toList(),
                   onChanged: (val) => _type = val,
@@ -303,9 +302,15 @@ class _ClientOrderState extends State<ClientOrder> {
                           border: Border(
                               bottom: BorderSide(color: Colors.grey[200]))),
                       child: TextFormField(
+                        cursorColor: grayColor,
+                        cursorHeight: 25,
+                        cursorWidth: 1,
+                        style: TextStyle(fontSize: 16, color: Colors.white),
                         decoration: InputDecoration(
-                            labelText: "${Language.mapLang['address']}",
-                            labelStyle: hintStyle,
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 10, vertical: 15),
+                            hintText: "${Language.mapLang['address']}",
+                            hintStyle: hintStyle,
                             border: InputBorder.none),
                         onChanged: (value) => _adresse = value,
                         validator: (value) => value.isEmpty
@@ -319,10 +324,16 @@ class _ClientOrderState extends State<ClientOrder> {
                     border:
                         Border(bottom: BorderSide(color: Colors.grey[200]))),
                 child: TextFormField(
+                  cursorColor: grayColor,
+                  cursorHeight: 25,
+                  cursorWidth: 1,
+                  style: TextStyle(fontSize: 16, color: Colors.white),
                   decoration: InputDecoration(
-                      labelText: "${Language.mapLang['matricule']}",
-                      labelStyle: hintStyle,
-                      border: InputBorder.none),
+                      hintText: "${Language.mapLang['matricule']}",
+                      hintStyle: hintStyle,
+                      border: InputBorder.none,
+                      contentPadding:
+                          EdgeInsets.symmetric(horizontal: 10, vertical: 15)),
                   onChanged: (value) => _matricule = value,
                   validator: (value) =>
                       value.isEmpty ? '${Language.mapLang['required']}' : null,
@@ -340,45 +351,48 @@ class _ClientOrderState extends State<ClientOrder> {
                       '${Language.mapLang['carcolor']}',
                       style: hintStyle,
                     ),
-                    InkWell(
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          child: CustomAlertDialog(
-                            title: Text(
-                              '${Language.mapLang['pickcolor']}',
-                              style: tileTitleStyle,
-                            ),
-                            content: SingleChildScrollView(
-                              child: ColorPicker(
-                                pickerColor: _pickerColor,
-                                onColorChanged: changeColor,
-                                showLabel: true,
-                                pickerAreaHeightPercent: 0.8,
+                    Container(
+                      width: 40,
+                      height: 40,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(50)),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(50),
+                          onTap: () {
+                            showDialog(
+                              context: context,
+                              child: CustomAlertDialog(
+                                title: Text(
+                                  '${Language.mapLang['pickcolor']}',
+                                  style: tileTitleStyle,
+                                ),
+                                content: SingleChildScrollView(
+                                  child: ColorPicker(
+                                    pickerColor: _pickerColor,
+                                    onColorChanged: changeColor,
+                                    showLabel: true,
+                                    pickerAreaHeightPercent: 0.8,
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child:
+                                        Text('${Language.mapLang['choose']}'),
+                                    onPressed: () {
+                                      _carColor = _pickerColor;
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
                               ),
-                            ),
-                            actions: <Widget>[
-                              FlatButton(
-                                child: Text('${Language.mapLang['choose']}'),
-                                onPressed: () {
-                                  _carColor = _pickerColor;
-                                  Navigator.of(context).pop();
-                                },
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                      child: Container(
-                        width: 40,
-                        height: 40,
-                        decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(50)),
-                        child: Center(
-                          child: const Icon(
-                            Icons.directions_car,
-                            color: Colors.white,
+                            );
+                          },
+                          child: Center(
+                            child: const Icon(Icons.directions_car,
+                                color: buttonColor),
                           ),
                         ),
                       ),
@@ -418,10 +432,7 @@ class _ClientOrderState extends State<ClientOrder> {
               ? FloatingActionButton(
                   elevation: 1,
                   backgroundColor: Colors.white,
-                  child: Icon(
-                    OMIcons.cancel,
-                    color: Colors.black,
-                  ),
+                  child: Icon(OMIcons.cancel, color: buttonColor),
                   onPressed: () async {
                     setState(() {
                       _adr = "";
@@ -429,10 +440,10 @@ class _ClientOrderState extends State<ClientOrder> {
                   })
               : FloatingActionButton(
                   elevation: 1,
-                  backgroundColor: Colors.white,
+                  backgroundColor: buttonColor,
                   child: Icon(
                     OMIcons.myLocation,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                   onPressed: () async {
                     Coordinates _crd = await getCurrentLocation();

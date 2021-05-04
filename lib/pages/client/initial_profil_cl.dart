@@ -24,6 +24,7 @@ class _initialProfileclState extends State<InitialProfilecl>
     super.initState();
   }
 
+  List<String> _sexeTypes = ['female', 'male'];
   final _formKey = GlobalKey<FormState>();
   String nom = '';
   String prenom = '';
@@ -225,24 +226,69 @@ class _initialProfileclState extends State<InitialProfilecl>
                                       flex: 2,
                                     ),
                                     Flexible(
-                                      child: new TextFormField(
-                                        decoration: const InputDecoration(
-                                            border: const OutlineInputBorder(),
-                                            hintText: "sexe (F ou M)"),
-                                        validator: (val) {
-                                          if (val != "male" &&
-                                              val != "female") {
-                                            return 'This field is required';
-                                          } else {
-                                            return null;
-                                          }
-                                        },
-                                        onChanged: (val) {
-                                          setState(() => sexe = val);
-                                        },
-                                      ),
                                       flex: 2,
+                                      child: Container(
+                                        margin: EdgeInsets.only(top: 20),
+                                        padding: EdgeInsets.only(
+                                            left: 25.0, right: 25.0, top: 2.0),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Container(
+                                              child: new Text(
+                                                '${Language.mapLang['sexe']}:',
+                                                style: tileTitleStyleW,
+                                              ),
+                                            ),
+                                            DropdownButtonFormField(
+                                              dropdownColor: scaffoldBackground,
+                                              decoration: InputDecoration(
+                                                  border: InputBorder.none),
+                                              hint: Text(
+                                                '${Language.mapLang['sexe']}',
+                                                style: hintStyle,
+                                              ),
+                                              items: _sexeTypes.map((sexe) {
+                                                return DropdownMenuItem(
+                                                  value: sexe.toLowerCase(),
+                                                  child: Text(
+                                                    '$sexe',
+                                                    style: hintStyle,
+                                                  ),
+                                                );
+                                              }).toList(),
+                                              onChanged: (val) => sexe = val,
+                                              validator: (value) =>
+                                                  value.isEmpty
+                                                      ? 'Required'
+                                                      : null,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
                                     ),
+                                    // Flexible(
+                                    //   child: new TextFormField(
+                                    //     decoration: const InputDecoration(
+                                    //         border: const OutlineInputBorder(),
+                                    //         hintText: "sexe (F ou M)"),
+                                    //     validator: (val) {
+                                    //       if (val != "male" &&
+                                    //           val != "female") {
+                                    //         return 'This field is required';
+                                    //       } else {
+                                    //         return null;
+                                    //       }
+                                    //     },
+                                    //     onChanged: (val) {
+                                    //       setState(() => sexe = val);
+                                    //     },
+                                    //   ),
+                                    //   flex: 2,
+                                    // ),
                                   ],
                                 )),
                           ],

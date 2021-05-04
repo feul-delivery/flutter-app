@@ -2,6 +2,7 @@ import 'package:FD_flutter/pages/client/explore_cl.dart';
 import 'package:FD_flutter/pages/client/index_cl.dart';
 import 'package:FD_flutter/pages/client/profile_cl.dart';
 import 'package:FD_flutter/shared/lang.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
@@ -24,9 +25,9 @@ class _HomeClState extends State<HomeCl> {
               ? ExploreCl()
               : ProfileCl(),
       bottomNavigationBar: BottomNavigationBar(
-          elevation: 1,
+          elevation: 2,
           type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
+          backgroundColor: scaffoldBackground,
           currentIndex: _currentIndex,
           onTap: (value) {
             switch (value) {
@@ -50,36 +51,33 @@ class _HomeClState extends State<HomeCl> {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(OMIcons.home,
-                    color: _currentIndex == 0
-                        ? Colors.blue[700]
-                        : Color(0xFFB9BAC3)),
+                    color:
+                        _currentIndex == 0 ? buttonColor : Color(0xFFB9BAC3)),
                 // ignore: deprecated_member_use
                 title: Text('${Language.mapLang['home']}',
                     style: TextStyle(
                         color: _currentIndex == 0
-                            ? Colors.blue[700]
+                            ? buttonColor
                             : Color(0xFFB9BAC3)))),
             BottomNavigationBarItem(
                 icon: Icon(OMIcons.explore,
-                    color: _currentIndex == 1
-                        ? Colors.blue[700]
-                        : Color(0xFFB9BAC3)),
+                    color:
+                        _currentIndex == 1 ? buttonColor : Color(0xFFB9BAC3)),
                 // ignore: deprecated_member_use
                 title: Text('${Language.mapLang['explore']}',
                     style: TextStyle(
                         color: _currentIndex == 1
-                            ? Colors.blue[700]
+                            ? buttonColor
                             : Color(0xFFB9BAC3)))),
             BottomNavigationBarItem(
                 icon: Icon(OMIcons.person,
-                    color: _currentIndex == 2
-                        ? Colors.blue[700]
-                        : Color(0xFFB9BAC3)),
+                    color:
+                        _currentIndex == 2 ? buttonColor : Color(0xFFB9BAC3)),
                 // ignore: deprecated_member_use
                 title: Text('${Language.mapLang['profile']}',
                     style: TextStyle(
                         color: _currentIndex == 2
-                            ? Colors.blue[700]
+                            ? buttonColor
                             : Color(0xFFB9BAC3)))),
           ]),
     );
