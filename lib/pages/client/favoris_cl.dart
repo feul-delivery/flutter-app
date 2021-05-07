@@ -104,14 +104,14 @@ class _FavorisClState extends State<FavorisCl> {
         onTap: () {
           Navigator.of(context).pushReplacement(PageTransition(
               type: PageTransitionType.leftToRight,
-              child: StationProfilCl(doc: document)));
+              child: StationProfilCl(doc: document, fromWhere: 'fav')));
         },
         child: ListTile(
           tileColor: scaffoldBackground,
           leading: Container(
             child: Icon(OMIcons.star, color: Color(0xFFF8C513)),
           ),
-          title: Text('${document.data['titre']}', style: textStyle),
+          title: Text('${document.data['titre']}', style: tileTitleStyleW),
         ),
       ),
     );

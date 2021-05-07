@@ -119,26 +119,33 @@ class _CommandeClState extends State<CommandeCl> {
           )
       ],
       child: ListTile(
-        leading: Container(
-          padding: EdgeInsets.all(10),
-          decoration: BoxDecoration(
-            color: documentSnapshot['statut'] == 'waiting'
-                ? Colors.orange
-                : Colors.green,
-            borderRadius: BorderRadius.circular(50),
+          leading: Container(
+            padding: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: documentSnapshot['statut'] == 'waiting'
+                  ? Colors.orange
+                  : Colors.green,
+              borderRadius: BorderRadius.circular(50),
+            ),
+            child: Icon(
+              documentSnapshot['statut'] == 'waiting'
+                  ? OMIcons.timer
+                  : OMIcons.check,
+              color: Colors.white,
+            ),
           ),
-          child: Icon(
-            documentSnapshot['statut'] == 'waiting'
-                ? OMIcons.timer
-                : OMIcons.check,
-            color: Colors.white,
+          title: Text(
+            '${documentSnapshot['ordernum']}',
+            style: tileTitleStyleW,
           ),
-        ),
-        title: Text('${documentSnapshot['ordernum']}'),
-        subtitle: Text(
-            """${DateFormat.Hm().format(DateTime.parse(documentSnapshot['dateheurec']))} - ${DateTime.parse(documentSnapshot['dateheurec']).day}/${DateTime.parse(documentSnapshot['dateheurec']).month}/${DateTime.parse(documentSnapshot['dateheurec']).year}"""),
-        trailing: Text('${_prixTotal.toStringAsFixed(2)} Dh'),
-      ),
+          subtitle: Text(
+            """${DateFormat.Hm().format(DateTime.parse(documentSnapshot['dateheurec']))} - ${DateTime.parse(documentSnapshot['dateheurec']).day}/${DateTime.parse(documentSnapshot['dateheurec']).month}/${DateTime.parse(documentSnapshot['dateheurec']).year}""",
+            style: smallTileGray,
+          ),
+          trailing: Text(
+            '${_prixTotal.toStringAsFixed(2)} Dh',
+            style: moreStyleWhite,
+          )),
     );
   }
 }

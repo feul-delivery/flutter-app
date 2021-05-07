@@ -70,27 +70,22 @@ class _ProfileClState extends State<ProfileCl> {
                 switch (snapshotClient.connectionState) {
                   case ConnectionState.none:
                     return Container(
-                      width: MediaQuery.of(context).size.height * 1 / 5,
+                      color: darkGray,
                       child: Center(
-                        child: Icon(
-                          OMIcons.error,
-                          color: Color(0xFF1763B9),
-                        ),
+                        child: Icon(OMIcons.error, color: Colors.white54),
                       ),
                     );
 
                   case ConnectionState.waiting:
                     return Container(
-                      height: MediaQuery.of(context).size.height * 1 / 5,
-                      width: MediaQuery.of(context).size.width,
+                      color: darkGray,
                       child: Center(
                         child: customeCircularProgress,
                       ),
                     );
                   case ConnectionState.active:
                     return Container(
-                      height: MediaQuery.of(context).size.height * 1 / 5,
-                      width: MediaQuery.of(context).size.width,
+                      color: darkGray,
                       child: Center(
                         child: customeCircularProgress,
                       ),
@@ -133,7 +128,10 @@ class _ProfileClState extends State<ProfileCl> {
                             Row(
                               children: [
                                 CachedNetworkImage(
-                                  imageUrl: snapshotClient.data['photoURL'],
+                                  imageUrl:
+                                      snapshotClient?.data['photoURL'] == null
+                                          ? ''
+                                          : snapshotClient?.data['photoURL'],
                                   imageBuilder: (context, imageProvider) =>
                                       Container(
                                     width: 70,
@@ -157,7 +155,21 @@ class _ProfileClState extends State<ProfileCl> {
                                     child: Center(
                                         child: CircleAvatar(
                                             radius: 35.0,
-                                            child: Icon(Icons.error))),
+                                            backgroundColor: darkGray,
+                                            child: Container(
+                                              margin: EdgeInsets.only(top: 3),
+                                              child: Text(
+                                                  '${snapshotClient.data['nom']}'
+                                                      .substring(0, 1)
+                                                      .toUpperCase(),
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                      fontSize: 35,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      fontFamily: 'Quarion')),
+                                            ))),
                                   ),
                                 ),
                                 SizedBox(width: 20),
@@ -326,8 +338,7 @@ class _ProfileClState extends State<ProfileCl> {
                                               height: MediaQuery.of(context)
                                                       .size
                                                       .height *
-                                                  1 /
-                                                  5,
+                                                  0.25,
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width,
@@ -341,19 +352,7 @@ class _ProfileClState extends State<ProfileCl> {
                                                     inspect(_favList);
                                                     return _favList.contains(
                                                             doc.documentID)
-                                                        ? InkWell(
-                                                            radius: 50,
-                                                            onTap: () {
-                                                              Navigator.push(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder: (context) =>
-                                                                          StationProfilCl(
-                                                                              doc: doc)));
-                                                            },
-                                                            child:
-                                                                _createFavCard(
-                                                                    doc))
+                                                        ? _createFavCard(doc)
                                                         : Container();
                                                   })?.toList()),
                                             )
@@ -524,43 +523,42 @@ class _ProfileClState extends State<ProfileCl> {
     return Material(
       color: Colors.transparent,
       child: Container(
-        width: MediaQuery.of(context).size.width * 4 / 5,
+        height: MediaQuery.of(context).size.width * 0.40,
+        width: MediaQuery.of(context).size.width * 0.75,
         margin: EdgeInsets.only(left: 15, top: 15, bottom: 15),
         child: InkWell(
           onTap: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => StationProfilCl(doc: document)));
+                    builder: (context) =>
+                        StationProfilCl(doc: document, fromWhere: 'profile')));
           },
           child: Stack(
             children: [
-              document['photoURL'] != null
-                  ? CachedNetworkImage(
-                      imageUrl: document['photoURL'],
-                      imageBuilder: (context, imageProvider) => Ink.image(
-                        image: imageProvider,
-                        fit: BoxFit.fill,
-                      ),
-                      placeholder: (context, url) => Container(
-                        height: 200,
-                        child: Center(
-                          child: customeCircularProgress,
-                        ),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        height: 200,
-                        child: Center(
-                          child: Icon(Icons.error, color: Colors.black),
-                        ),
-                      ),
-                    )
-                  : Container(
-                      height: 200,
-                      child: Center(
-                        child: Icon(Icons.error, color: Colors.black),
-                      ),
+              Hero(
+                tag: '${document.documentID}profile',
+                child: CachedNetworkImage(
+                  imageUrl:
+                      document['photoURL'] == null ? '' : document['photoURL'],
+                  imageBuilder: (context, imageProvider) => Ink.image(
+                    image: imageProvider,
+                    fit: BoxFit.fill,
+                  ),
+                  placeholder: (context, url) => Container(
+                    height: 200,
+                    child: Center(
+                      child: customeCircularProgress,
                     ),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    height: 200,
+                    child: Center(
+                      child: Icon(Icons.error, color: Colors.black),
+                    ),
+                  ),
+                ),
+              ),
               Container(
                 decoration: BoxDecoration(
                     gradient: LinearGradient(

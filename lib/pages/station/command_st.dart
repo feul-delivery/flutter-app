@@ -712,8 +712,7 @@ Future<void> _clientDetailSheet(
                           stream: Firestore.instance
                               .collection('client')
                               .document(id)
-                              ?.get()
-                              ?.asStream(),
+                              .snapshots(),
                           builder: (context, snapshot) {
                             return Column(
                               mainAxisAlignment: MainAxisAlignment.start,

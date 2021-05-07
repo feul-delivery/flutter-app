@@ -157,7 +157,11 @@ const smallTileGray = TextStyle(
     fontFamily: 'Quarion',
     fontWeight: FontWeight.w400,
     color: Colors.white54);
-
+const smallTileB = TextStyle(
+    fontSize: 16,
+    fontFamily: 'Quarion',
+    fontWeight: FontWeight.w400,
+    color: Colors.black54);
 Widget customeCircularProgress = Container(
     padding: EdgeInsets.all(5),
     decoration: BoxDecoration(

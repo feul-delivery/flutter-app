@@ -3,9 +3,9 @@ import 'dart:ui';
 import 'package:FD_flutter/authentification/register.dart';
 import 'package:FD_flutter/authentification/sign_in.dart';
 import 'package:FD_flutter/shared/lang.dart';
+import 'package:FD_flutter/shared/splash.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,6 +32,8 @@ class _AuthenticateState extends State<Authenticate> {
                   Language.lang == 'FR'
                       ? _langChangeState('EN')
                       : _langChangeState('FR');
+                  Navigator.of(context).push(PageTransition(
+                      type: PageTransitionType.fade, child: SplashScreen()));
                 },
                 // child: BackdropFilter(
                 //   filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
@@ -70,12 +72,22 @@ class _AuthenticateState extends State<Authenticate> {
                   width: MediaQuery.of(context).size.width * 0.45,
                   height: MediaQuery.of(context).size.width * 0.45,
                   child: Hero(
-                      tag: 'logo',
-                      child: Text('Fuel Delivery',
-                          style: GoogleFonts.aBeeZee(
-                              color: Colors.white,
-                              fontWeight: FontWeight.w800,
-                              fontSize: 50)))),
+                    tag: 'logo',
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      height: MediaQuery.of(context).size.width * 0.45,
+                      child: Image(
+                        image: AssetImage('assets/splash.png'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+
+                    // Text('Fuel Delivery',
+                    //     style: GoogleFonts.aBeeZee(
+                    //         color: Colors.white,
+                    //         fontWeight: FontWeight.w800,
+                    //         fontSize: 50))
+                  )),
             ),
             Expanded(
                 child: Align(

@@ -158,19 +158,8 @@ class _initialProfileclState extends State<InitialProfilecl>
                                             border: const OutlineInputBorder(),
                                             labelText:
                                                 "${Language.mapLang['phone']}"),
-                                        validator: (val) {
-                                          if (val.isEmpty)
-                                            return "${Language.mapLang['required']}";
-                                          else if (RegExp("[0-9]")
-                                                  .hasMatch(val) ||
-                                              val.length == 9 ||
-                                              val.substring(0, 1) == '6' ||
-                                              val.substring(0, 1) == '7' ||
-                                              val.substring(0, 1) == '5')
-                                            return null;
-                                          else
-                                            return "${Language.mapLang['invalidnumber']}";
-                                        },
+                                        validator: (val) =>
+                                            _validateNumber(val),
                                         onChanged: (val) {
                                           setState(() => phone = val);
                                         },
@@ -309,4 +298,25 @@ class _initialProfileclState extends State<InitialProfilecl>
     myFocusNode.dispose();
     super.dispose();
   }
+}
+
+String _validateNumber(String val) {
+  if (val.isEmpty)
+    return "${Language.mapLang['required']}";
+  else if (RegExp("[0-9]").hasMatch(val)) {
+    switch (val.substring(0, 1)) {
+      case '6':
+        return null;
+        break;
+      case '7':
+        return null;
+        break;
+      case '5':
+        return null;
+        break;
+      default:
+        return "${Language.mapLang['invalidnumber']}";
+    }
+  }
+  return null;
 }

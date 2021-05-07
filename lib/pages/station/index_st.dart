@@ -113,8 +113,7 @@ class _IndexStState extends State<IndexSt> {
                             isEqualTo: Provider.of<User>(context).uid)
                         .where('statut', isEqualTo: 'waiting')
                         .orderBy('dateheurec', descending: true)
-                        .getDocuments()
-                        .asStream(),
+                        .snapshots(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
                         return Icon(Icons.cancel, color: Colors.black);
@@ -151,7 +150,6 @@ class _IndexStState extends State<IndexSt> {
           ),
         ),
         drawer: DrawerSt(),
-        
         bottomNavigationBar: ButtomBarSt(),
       ),
     );

@@ -183,7 +183,7 @@ class Language {
     'required': 'Required',
     'carcolor': 'Car Color',
     'pickcolor': 'Pick a color',
-    'matricule': 'Registration number',
+    'matricule': 'Reg. N°',
     'choose': 'Choose',
     'modepay': 'Payment method',
     'pay': 'Pay',

@@ -4,7 +4,6 @@ import 'package:FD_flutter/pages/client/profile_cl.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:outline_material_icons/outline_material_icons.dart';
 
 class HomeCl extends StatefulWidget {
   HomeCl({Key key}) : super(key: key);

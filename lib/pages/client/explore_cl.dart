@@ -22,46 +22,50 @@ List<String> _favList = [];
 
 class _ExploreClState extends State<ExploreCl> {
   Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle =
-      new Text('${Language.mapLang['explore']}', style: pageTitleO);
+  Widget _appBarTitle = new Container(
+      margin: EdgeInsets.only(top: 3),
+      child: Text('${Language.mapLang['explore']}', style: pageTitleO));
   String _searchString;
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<DocumentSnapshot>(
-        stream: Firestore.instance
-            .collection('client')
-            .document(Provider.of<User>(context).uid)
-            .get()
-            .asStream(),
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              return customErrorWidget;
-            case ConnectionState.active:
-              return customeCircularProgress;
-            case ConnectionState.waiting:
-              return Container(color: Color(0xFFEFF0F5));
-              break;
+    return Scaffold(
+      backgroundColor: darkGray,
+      appBar: AppBar(
+        leading: Icon(Icons.language_rounded, color: buttonColor),
+        title: _appBarTitle,
+        elevation: 0,
+        backgroundColor: darkGray,
+        actions: <Widget>[
+          IconButton(
+              icon: new Icon(
+                Icons.search,
+                color: buttonColor,
+              ),
+              onPressed: _searchPressed),
+        ],
+      ),
+      body: StreamBuilder<DocumentSnapshot>(
+          stream: Firestore.instance
+              .collection('client')
+              .document(Provider.of<User>(context).uid)
+              .get()
+              .asStream(),
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              return Center(child: Icon(Icons.cancel, color: buttonColor));
+            }
 
-            default:
-              _favList = List.from(snapshot.data['favorite']);
-              inspect(_favList);
-              return Scaffold(
-                backgroundColor: darkGray,
-                appBar: AppBar(
-                  title: _appBarTitle,
-                  elevation: 0,
-                  backgroundColor: darkGray,
-                  actions: <Widget>[
-                    IconButton(
-                        icon: new Icon(
-                          Icons.search,
-                          color: buttonColor,
-                        ),
-                        onPressed: _searchPressed),
-                  ],
-                ),
-                body: StreamBuilder<QuerySnapshot>(
+            switch (snapshot.connectionState) {
+              case ConnectionState.waiting:
+                return SizedBox(child: Center(child: customeCircularProgress));
+              case ConnectionState.none:
+                return Center(
+                    child: Icon(Icons.error_outline, color: Colors.white54));
+
+              default:
+                _favList = List.from(snapshot.data['favorite']);
+                inspect(_favList);
+                return StreamBuilder<QuerySnapshot>(
                   stream: _searchString == null
                       ? Firestore.instance.collection('entreprise').snapshots()
                       : Firestore.instance
@@ -70,7 +74,8 @@ class _ExploreClState extends State<ExploreCl> {
                           .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
-                      return Icon(Icons.cancel, color: buttonColor);
+                      return Center(
+                          child: Icon(Icons.cancel, color: buttonColor));
                     }
 
                     switch (snapshot.connectionState) {
@@ -78,9 +83,12 @@ class _ExploreClState extends State<ExploreCl> {
                         return SizedBox(
                             child: Center(child: customeCircularProgress));
                       case ConnectionState.none:
-                        return Icon(Icons.error_outline, color: Colors.black);
+                        return Center(
+                            child: Icon(Icons.error_outline,
+                                color: Colors.white54));
                       case ConnectionState.done:
-                        return Icon(Icons.done, color: Colors.black);
+                        return Center(
+                            child: Icon(Icons.done, color: Colors.white54));
 
                       default:
                         return new ListView(
@@ -89,23 +97,14 @@ class _ExploreClState extends State<ExploreCl> {
                             physics: BouncingScrollPhysics(),
                             children: snapshot.data?.documents
                                 ?.map((DocumentSnapshot document) {
-                              return InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                StationProfilCl(
-                                                    doc: document)));
-                                  },
-                                  child: createCard(document));
+                              return createCard(document);
                             })?.toList());
                     }
                   },
-                ),
-              );
-          }
-        });
+                );
+            }
+          }),
+    );
   }
 
   Container createCard(DocumentSnapshot document) {
@@ -119,7 +118,10 @@ class _ExploreClState extends State<ExploreCl> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => StationProfilCl(doc: document)));
+                    builder: (context) => StationProfilCl(
+                          doc: document,
+                          fromWhere: 'explore',
+                        )));
           },
           child: Column(
             children: [
@@ -140,7 +142,7 @@ class _ExploreClState extends State<ExploreCl> {
                                 color: Colors.white24,
                                 fontFamily: 'Quarion',
                                 fontWeight: FontWeight.w400,
-                                fontSize: 14),
+                                fontSize: 12),
                           ),
                         ],
                       ),
@@ -203,35 +205,38 @@ class _ExploreClState extends State<ExploreCl> {
                       ),
                     ],
                   )),
-              CachedNetworkImage(
-                imageUrl:
-                    document['photoURL'] == null ? "" : document['photoURL'],
-                imageBuilder: (context, imageProvider) => Material(
-                  child: Ink.image(
-                    height: 200,
-                    image: imageProvider,
-                    fit: BoxFit.fitWidth,
+              Hero(
+                tag: '${document.documentID}explore',
+                child: CachedNetworkImage(
+                  imageUrl:
+                      document['photoURL'] == null ? "" : document['photoURL'],
+                  imageBuilder: (context, imageProvider) => Material(
+                    child: Ink.image(
+                      height: 200,
+                      image: imageProvider,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
-                ),
-                placeholder: (context, url) => Container(
-                  height: 200,
-                  child: Center(
-                    child: customeCircularProgress,
-                  ),
-                ),
-                errorWidget: (context, url, error) => Material(
-                  child: Container(
+                  placeholder: (context, url) => Container(
                     height: 200,
-                    color: darkGray,
                     child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.error, color: Colors.white),
-                          SizedBox(height: 5),
-                          Text('${Language.mapLang['imagenotfound']}',
-                              style: textStyleWhite)
-                        ],
+                      child: customeCircularProgress,
+                    ),
+                  ),
+                  errorWidget: (context, url, error) => Material(
+                    child: Container(
+                      height: 200,
+                      color: darkGray,
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(Icons.error, color: Colors.white),
+                            SizedBox(height: 5),
+                            Text('${Language.mapLang['imagenotfound']}',
+                                style: textStyleWhite)
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -305,8 +310,9 @@ class _ExploreClState extends State<ExploreCl> {
       } else {
         _searchString = null;
         this._searchIcon = new Icon(Icons.search);
-        this._appBarTitle =
-            new Text('${Language.mapLang['explore']}', style: pageTitleO);
+        this._appBarTitle = new Container(
+            margin: EdgeInsets.only(top: 3),
+            child: Text('${Language.mapLang['explore']}', style: pageTitleO));
       }
     });
   }

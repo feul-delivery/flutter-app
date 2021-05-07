@@ -86,213 +86,199 @@ class _IndexClState extends State<IndexCl> {
           //   backgroundColor: scaffoldBackground,
           //   elevation: 0,
           // ),
-          body: Column(
-            children: [
-              Container(
-                  color: scaffoldBackground,
-                  alignment: Alignment.centerLeft,
-                  margin:
-                      EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-                  padding: EdgeInsets.all(15),
-                  child:
-                      Text('${Language.mapLang['home']}', style: pageTitleO)),
-              SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          color: buttonColor,
-                          width: double.infinity,
-                          padding: EdgeInsets.only(top: 5.0),
-                          margin: EdgeInsets.only(bottom: 2),
-                          child: Center(
-                            child: Text(
-                              '${Language.mapLang['bestweek']}'.toUpperCase(),
-                              style: pageTitleXW,
-                            ),
-                          ),
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                    color: scaffoldBackground,
+                    alignment: Alignment.centerLeft,
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).padding.top),
+                    padding: EdgeInsets.all(15),
+                    child:
+                        Text('${Language.mapLang['home']}', style: pageTitleO)),
+                Container(
+                  color: buttonColor,
+                  width: double.infinity,
+                  padding: EdgeInsets.only(top: 5.0),
+                  margin: EdgeInsets.only(bottom: 2),
+                  child: Center(
+                    child: Text(
+                      '${Language.mapLang['bestweek']}'.toUpperCase(),
+                      style: pageTitleXW,
+                    ),
+                  ),
+                ),
+                Stack(
+                  children: [
+                    Container(
+                      child: ClipRRect(
+                        child: Image.asset(
+                          'assets/s3.jpg',
+                          alignment: Alignment.center,
+                          fit: BoxFit.cover,
+                          width: MediaQuery.of(context).size.width,
                         ),
-                        Stack(
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 0,
+                      right: 0,
+                      child: Container(
+                        padding: EdgeInsets.only(
+                            top: 15, left: 10, right: 10, bottom: 10),
+                        decoration: BoxDecoration(
+                            gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment(-0.02,
+                              .8), // 10% of the width, so there are ten blinds.
+                          colors: <Color>[
+                            Colors.transparent,
+                            buttonColor
+                          ], // red to yellow
+                          // tileMode: TileMode
+                          //     .repeated, // repeats the gradient over the canvas
+                        )),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              child: ClipRRect(
-                                child: Image.asset(
-                                  'assets/s3.jpg',
-                                  alignment: Alignment.center,
-                                  fit: BoxFit.cover,
-                                  width: MediaQuery.of(context).size.width,
-                                ),
+                            //'${document['titre']}',
+                            Text('Total Maroc',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'Gotham',
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 24,
+                                )),
+                            SizedBox(height: 5),
+                            Text(
+                              // '${document['adresse']}',
+                              'Route sefrou, marjane 30000',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Gotham',
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14,
                               ),
                             ),
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: Container(
-                                padding: EdgeInsets.only(
-                                    top: 15, left: 10, right: 10, bottom: 10),
-                                decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment(-0.02,
-                                      .8), // 10% of the width, so there are ten blinds.
-                                  colors: <Color>[
-                                    Colors.transparent,
-                                    buttonColor
-                                  ], // red to yellow
-                                  // tileMode: TileMode
-                                  //     .repeated, // repeats the gradient over the canvas
-                                )),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    //'${document['titre']}',
-                                    Text('Total Maroc',
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontFamily: 'Gotham',
-                                          fontWeight: FontWeight.w400,
-                                          fontSize: 24,
-                                        )),
-                                    SizedBox(height: 5),
-                                    Text(
-                                      // '${document['adresse']}',
-                                      'Route sefrou, marjane 30000',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Gotham',
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            )
                           ],
                         ),
-                      ],
-                    ), // decoration: BoxDecoration(
-                    //     color: Colors.white,
-                    //     border: Border(
-                    //       bottom: BorderSide(width: 1, color: Colors.grey[300]),
-                    //       top: BorderSide(width: 1, color: Colors.grey[300]),
-                    //     )),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Container(
-                          color: scaffoldBackground,
-                          child: Material(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (BuildContext context) =>
-                                            ExploreCl()));
-                              },
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.all(5),
-                                    margin:
-                                        EdgeInsets.only(left: 10, right: 10),
-                                    child: Text(
-                                      '${Language.mapLang['closetoyou']}',
-                                      style: pageTitleW,
-                                    ),
-                                  ),
-                                  Opacity(
-                                    opacity: 0.8,
-                                    child: Container(
-                                      padding: EdgeInsets.all(5),
-                                      margin: EdgeInsets.all(5),
-                                      child: Text(
-                                        '${Language.mapLang['viewall']}'
-                                            .toUpperCase(),
-                                        style: TextStyle(
-                                          fontFamily: 'Quarion',
-                                          fontSize: 12,
-                                          color: buttonColor,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        _locationCoordinates == null
-                            ? Container(
-                                height: MediaQuery.of(context).size.width,
-                                child: Center(
-                                    child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                      Text(
-                                        '${Language.mapLang['accesslocation']}',
-                                        style: textStyleWhite,
-                                      ),
-                                      TextButton.icon(
-                                          onPressed: () async {
-                                            await _getCurrentLocation();
-                                            setState(() {});
-                                          },
-                                          icon: Icon(OMIcons.myLocation,
-                                              color: buttonColor),
-                                          label: Text(
-                                            '${Language.mapLang['locateme']}',
-                                            style: buttonStyleO,
-                                          ))
-                                    ])))
-                            : StreamBuilder<QuerySnapshot>(
-                                stream: Firestore.instance
-                                    .collection('entreprise')
-                                    .snapshots(),
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasError) {
-                                    return customErrorWidget;
-                                  }
-                                  switch (snapshot.connectionState) {
-                                    case ConnectionState.waiting:
-                                      return SizedBox(
-                                          child: Center(
-                                              child: customeCircularProgress));
-                                    case ConnectionState.none:
-                                      return Container(
-                                          child: customErrorWidget);
-                                    default:
-                                      return new ListView(
-                                          scrollDirection: Axis.vertical,
-                                          shrinkWrap: true,
-                                          physics: BouncingScrollPhysics(),
-                                          children: snapshot.data?.documents
-                                              ?.map(
-                                                  (DocumentSnapshot document) {
-                                            inspect(document['coordinates']);
-
-                                            return _createSmallCard(
-                                                document, context);
-                                          })?.toList());
-                                  }
-                                },
-                              ),
-                      ],
+                      ),
                     )
                   ],
+                ), // decoration: BoxDecoration(
+                //     color: Colors.white,
+                //     border: Border(
+                //       bottom: BorderSide(width: 1, color: Colors.grey[300]),
+                //       top: BorderSide(width: 1, color: Colors.grey[300]),
+                //     )),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      color: scaffoldBackground,
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        ExploreCl()));
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Container(
+                                padding: EdgeInsets.all(5),
+                                margin: EdgeInsets.only(left: 10, right: 10),
+                                child: Text(
+                                  '${Language.mapLang['closetoyou']}',
+                                  style: pageTitleW,
+                                ),
+                              ),
+                              Opacity(
+                                opacity: 0.8,
+                                child: Container(
+                                  padding: EdgeInsets.all(5),
+                                  margin: EdgeInsets.all(5),
+                                  child: Text(
+                                    '${Language.mapLang['viewall']}'
+                                        .toUpperCase(),
+                                    style: TextStyle(
+                                      fontFamily: 'Quarion',
+                                      fontSize: 12,
+                                      color: buttonColor,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                    _locationCoordinates == null
+                        ? Container(
+                            height: MediaQuery.of(context).size.width,
+                            child: Center(
+                                child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                  Text(
+                                    '${Language.mapLang['accesslocation']}',
+                                    style: textStyleWhite,
+                                  ),
+                                  TextButton.icon(
+                                      onPressed: () async {
+                                        await _getCurrentLocation();
+                                        setState(() {});
+                                      },
+                                      icon: Icon(OMIcons.myLocation,
+                                          color: buttonColor),
+                                      label: Text(
+                                        '${Language.mapLang['locateme']}',
+                                        style: buttonStyleO,
+                                      ))
+                                ])))
+                        : StreamBuilder<QuerySnapshot>(
+                            stream: Firestore.instance
+                                .collection('entreprise')
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return customErrorWidget;
+                              }
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.waiting:
+                                  return SizedBox(
+                                      child: Center(
+                                          child: customeCircularProgress));
+                                case ConnectionState.none:
+                                  return Container(child: customErrorWidget);
+                                default:
+                                  return new ListView(
+                                      scrollDirection: Axis.vertical,
+                                      shrinkWrap: true,
+                                      physics: BouncingScrollPhysics(),
+                                      children: snapshot.data?.documents
+                                          ?.map((DocumentSnapshot document) {
+                                        inspect(document['coordinates']);
+
+                                        return _createSmallCard(
+                                            document, context);
+                                      })?.toList());
+                              }
+                            },
+                          ),
+                  ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -362,7 +348,8 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => StationProfilCl(doc: document)));
+                      builder: (context) =>
+                          StationProfilCl(doc: document, fromWhere: 'index')));
             },
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
@@ -370,25 +357,29 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
                 Stack(
                   children: [
                     document['photoURL'] != null
-                        ? CachedNetworkImage(
-                            imageUrl: document['photoURL'],
-                            imageBuilder: (context, imageProvider) => Material(
-                              child: Ink.image(
+                        ? Hero(
+                            tag: '${document.documentID}index',
+                            child: CachedNetworkImage(
+                              imageUrl: document['photoURL'],
+                              imageBuilder: (context, imageProvider) =>
+                                  Material(
+                                child: Ink.image(
+                                  height: 200,
+                                  image: imageProvider,
+                                  fit: BoxFit.fitWidth,
+                                ),
+                              ),
+                              placeholder: (context, url) => Container(
                                 height: 200,
-                                image: imageProvider,
-                                fit: BoxFit.fitWidth,
+                                child: Center(
+                                  child: customeCircularProgress,
+                                ),
                               ),
-                            ),
-                            placeholder: (context, url) => Container(
-                              height: 200,
-                              child: Center(
-                                child: customeCircularProgress,
-                              ),
-                            ),
-                            errorWidget: (context, url, error) => Container(
-                              height: 200,
-                              child: Center(
-                                child: Icon(Icons.error, color: Colors.black),
+                              errorWidget: (context, url, error) => Container(
+                                height: 200,
+                                child: Center(
+                                  child: Icon(Icons.error, color: Colors.black),
+                                ),
                               ),
                             ),
                           )

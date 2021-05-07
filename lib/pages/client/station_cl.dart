@@ -8,7 +8,8 @@ import 'package:flutter/material.dart';
 
 class StationProfilCl extends StatefulWidget {
   final DocumentSnapshot doc;
-  StationProfilCl({@required this.doc});
+  final String fromWhere;
+  StationProfilCl({@required this.doc, @required this.fromWhere});
   @override
   _StationProfilClState createState() => _StationProfilClState();
 }
@@ -25,8 +26,7 @@ class _StationProfilClState extends State<StationProfilCl> {
         stream: Firestore.instance
             .collection('livreur')
             .where('uidentreprise', isEqualTo: doc.documentID)
-            .getDocuments()
-            .asStream(),
+            .snapshots(),
         builder: (context, snapshotLv) {
           if (snapshotLv.connectionState == ConnectionState.done)
             _lvCount = snapshotLv.data.documents.length;
@@ -51,40 +51,46 @@ class _StationProfilClState extends State<StationProfilCl> {
                       expandedHeight: 200,
                       backgroundColor: buttonColor,
                       flexibleSpace: FlexibleSpaceBar(
-                          collapseMode: CollapseMode.pin,
-                          background: CachedNetworkImage(
-                            imageUrl: doc.data['photoURL'] == null
-                                ? ""
-                                : doc.data['photoURL'],
-                            imageBuilder: (context, imageProvider) => Container(
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                      image: imageProvider, fit: BoxFit.cover)),
-                              child: Container(),
-                            ),
-                            placeholder: (context, url) => Container(
-                              height: 200,
-                              child: Center(child: customeCircularProgress),
-                            ),
-                            errorWidget: (context, url, error) => Material(
-                              child: Container(
+                        collapseMode: CollapseMode.pin,
+                        background: Hero(
+                            tag: '${doc.documentID}${widget.fromWhere}',
+                            child: CachedNetworkImage(
+                              imageUrl: doc.data['photoURL'] == null
+                                  ? ""
+                                  : doc.data['photoURL'],
+                              imageBuilder: (context, imageProvider) =>
+                                  Container(
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: imageProvider,
+                                        fit: BoxFit.cover)),
+                                child: Container(),
+                              ),
+                              placeholder: (context, url) => Container(
                                 height: 200,
-                                color: buttonColor,
-                                child: Center(
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(Icons.error, color: Colors.white),
-                                      SizedBox(height: 5),
-                                      Text(
-                                          '${Language.mapLang['imagenotfound']}',
-                                          style: textStyleWhite)
-                                    ],
+                                child: Center(child: customeCircularProgress),
+                              ),
+                              errorWidget: (context, url, error) => Material(
+                                child: Container(
+                                  height: 200,
+                                  color: buttonColor,
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(Icons.error, color: Colors.white),
+                                        SizedBox(height: 5),
+                                        Text(
+                                            '${Language.mapLang['imagenotfound']}',
+                                            style: textStyleWhite)
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          )),
+                            )),
+                      ),
                     ),
                     SliverList(
                       delegate: SliverChildListDelegate([
@@ -245,10 +251,8 @@ class _StationProfilClState extends State<StationProfilCl> {
                   ],
                 ),
                 _lvCount > 0
-                    ? Positioned.fill(
+                    ? Positioned(
                         bottom: 20,
-                        top: MediaQuery.of(context).size.height -
-                            MediaQuery.of(context).size.height * 0.075,
                         left: MediaQuery.of(context).size.width -
                             MediaQuery.of(context).size.width * 0.7,
                         right: MediaQuery.of(context).size.width -
@@ -256,6 +260,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                         child: FadeAnimation(
                           0.01,
                           Container(
+                            height: 40,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
                                 color: buttonColor),

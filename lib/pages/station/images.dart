@@ -73,8 +73,7 @@ class _ImagesStState extends State<ImagesSt> {
         stream: Firestore.instance
             .collection('entreprise')
             .document(widget.userUID)
-            .get()
-            .asStream(),
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Container(

@@ -85,7 +85,7 @@ class _ClientOrderState extends State<ClientOrder> {
         builder: (context) {
           return StatefulBuilder(builder: (BuildContext context, setState) {
             return Container(
-                height: MediaQuery.of(context).size.height * 1 / 4,
+                height: MediaQuery.of(context).size.height * 0.30,
                 child: ListView(
                   children: [
                     Row(
@@ -242,165 +242,170 @@ class _ClientOrderState extends State<ClientOrder> {
         backgroundColor: buttonColor,
         elevation: 1,
       ),
-      body: Container(
-        padding: EdgeInsets.all(10),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    border:
-                        Border(bottom: BorderSide(color: Colors.grey[200]))),
-                child: TextFormField(
-                  cursorColor: grayColor,
-                  cursorHeight: 25,
-                  cursorWidth: 1,
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                  onChanged: (value) {
-                    _volume = double.tryParse(value) ?? 0.0;
-                  },
-                  decoration: InputDecoration(
-                      hintText: "Volume",
-                      hintStyle: hintStyle,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                      border: InputBorder.none),
-                  keyboardType: TextInputType.number,
-                  validator: (value) =>
-                      value == null ? '${Language.mapLang['required']}' : null,
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.all(10),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[200]))),
+                  child: TextFormField(
+                    cursorColor: grayColor,
+                    cursorHeight: 25,
+                    cursorWidth: 1,
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    onChanged: (value) {
+                      _volume = double.tryParse(value) ?? 0.0;
+                    },
+                    decoration: InputDecoration(
+                        hintText: "Volume",
+                        hintStyle: hintStyle,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                        border: InputBorder.none),
+                    keyboardType: TextInputType.number,
+                    validator: (value) => value == null
+                        ? '${Language.mapLang['required']}'
+                        : null,
+                  ),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    border:
-                        Border(bottom: BorderSide(color: Colors.grey[200]))),
-                child: DropdownButtonFormField(
-                  value: _type,
-                  dropdownColor: scaffoldBackground,
-                  decoration: InputDecoration(border: InputBorder.none),
-                  items: _types.map((type) {
-                    return DropdownMenuItem(
-                      value: type,
-                      child: Text('${type['libelle']} - ${type['prix']} DH/L',
-                          style: hintStyle),
-                    );
-                  }).toList(),
-                  onChanged: (val) => _type = val,
-                  validator: (value) =>
-                      value.isEmpty ? '${Language.mapLang['required']}' : null,
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[200]))),
+                  child: DropdownButtonFormField(
+                    value: _type,
+                    dropdownColor: scaffoldBackground,
+                    decoration: InputDecoration(border: InputBorder.none),
+                    items: _types.map((type) {
+                      return DropdownMenuItem(
+                        value: type,
+                        child: Text('${type['libelle']} - ${type['prix']} DH/L',
+                            style: hintStyle),
+                      );
+                    }).toList(),
+                    onChanged: (val) => _type = val,
+                    validator: (value) => value.isEmpty
+                        ? '${Language.mapLang['required']}'
+                        : null,
+                  ),
                 ),
-              ),
-              _adr != ""
-                  ? Container()
-                  : Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                          border: Border(
-                              bottom: BorderSide(color: Colors.grey[200]))),
-                      child: TextFormField(
-                        cursorColor: grayColor,
-                        cursorHeight: 25,
-                        cursorWidth: 1,
-                        style: TextStyle(fontSize: 16, color: Colors.white),
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 15),
-                            hintText: "${Language.mapLang['address']}",
-                            hintStyle: hintStyle,
-                            border: InputBorder.none),
-                        onChanged: (value) => _adresse = value,
-                        validator: (value) => value.isEmpty
-                            ? '${Language.mapLang['required']}'
-                            : null,
+                _adr != ""
+                    ? Container()
+                    : Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(color: Colors.grey[200]))),
+                        child: TextFormField(
+                          cursorColor: grayColor,
+                          cursorHeight: 25,
+                          cursorWidth: 1,
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                          decoration: InputDecoration(
+                              contentPadding: EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 15),
+                              hintText: "${Language.mapLang['address']}",
+                              hintStyle: hintStyle,
+                              border: InputBorder.none),
+                          onChanged: (value) => _adresse = value,
+                          validator: (value) => value.isEmpty
+                              ? '${Language.mapLang['required']}'
+                              : null,
+                        ),
                       ),
-                    ),
-              Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    border:
-                        Border(bottom: BorderSide(color: Colors.grey[200]))),
-                child: TextFormField(
-                  cursorColor: grayColor,
-                  cursorHeight: 25,
-                  cursorWidth: 1,
-                  style: TextStyle(fontSize: 16, color: Colors.white),
-                  decoration: InputDecoration(
-                      hintText: "${Language.mapLang['matricule']}",
-                      hintStyle: hintStyle,
-                      border: InputBorder.none,
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 15)),
-                  onChanged: (value) => _matricule = value,
-                  validator: (value) =>
-                      value.isEmpty ? '${Language.mapLang['required']}' : null,
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[200]))),
+                  child: TextFormField(
+                    cursorColor: grayColor,
+                    cursorHeight: 25,
+                    cursorWidth: 1,
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                    decoration: InputDecoration(
+                        hintText: "${Language.mapLang['matricule']}",
+                        hintStyle: hintStyle,
+                        border: InputBorder.none,
+                        contentPadding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 15)),
+                    onChanged: (value) => _matricule = value,
+                    validator: (value) => value.isEmpty
+                        ? '${Language.mapLang['required']}'
+                        : null,
+                  ),
                 ),
-              ),
-              Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
-                    border:
-                        Border(bottom: BorderSide(color: Colors.grey[200]))),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${Language.mapLang['carcolor']}',
-                      style: hintStyle,
-                    ),
-                    Container(
-                      width: 40,
-                      height: 40,
-                      decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(50)),
-                      child: Material(
-                        color: Colors.transparent,
-                        child: InkWell(
-                          borderRadius: BorderRadius.circular(50),
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              child: CustomAlertDialog(
-                                title: Text(
-                                  '${Language.mapLang['pickcolor']}',
-                                  style: tileTitleStyle,
-                                ),
-                                content: SingleChildScrollView(
-                                  child: ColorPicker(
-                                    pickerColor: _pickerColor,
-                                    onColorChanged: changeColor,
-                                    showLabel: true,
-                                    pickerAreaHeightPercent: 0.8,
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border:
+                          Border(bottom: BorderSide(color: Colors.grey[200]))),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        '${Language.mapLang['carcolor']}',
+                        style: hintStyle,
+                      ),
+                      Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(50)),
+                        child: Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            borderRadius: BorderRadius.circular(50),
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                child: CustomAlertDialog(
+                                  title: Text(
+                                    '${Language.mapLang['pickcolor']}',
+                                    style: tileTitleStyle,
                                   ),
-                                ),
-                                actions: <Widget>[
-                                  FlatButton(
-                                    child:
-                                        Text('${Language.mapLang['choose']}'),
-                                    onPressed: () {
-                                      _carColor = _pickerColor;
-                                      Navigator.of(context).pop();
-                                    },
+                                  content: SingleChildScrollView(
+                                    child: ColorPicker(
+                                      pickerColor: _pickerColor,
+                                      onColorChanged: changeColor,
+                                      showLabel: true,
+                                      pickerAreaHeightPercent: 0.8,
+                                    ),
                                   ),
-                                ],
-                              ),
-                            );
-                          },
-                          child: Center(
-                            child: const Icon(Icons.directions_car,
-                                color: buttonColor),
+                                  actions: <Widget>[
+                                    FlatButton(
+                                      child:
+                                          Text('${Language.mapLang['choose']}'),
+                                      onPressed: () {
+                                        _carColor = _pickerColor;
+                                        Navigator.of(context).pop();
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                            child: Center(
+                              child: const Icon(Icons.directions_car,
+                                  color: buttonColor),
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

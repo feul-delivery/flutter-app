@@ -3,6 +3,7 @@ import 'package:FD_flutter/services/database.dart';
 import 'package:FD_flutter/shared/image_capture.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:blur/blur.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -47,6 +48,8 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
 //temps
   List<String> _sexeTypes = ['female', 'male'];
 
+  bool _deleteIMG = false;
+
   User _user;
   @override
   Widget build(BuildContext context) {
@@ -73,8 +76,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
             stream: Firestore.instance
                 .collection('client')
                 .document(_user.uid)
-                .get()
-                .asStream(),
+                .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Container(
@@ -142,81 +144,236 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: <Widget>[
-                                        CachedNetworkImage(
-                                          imageUrl: snapshot.data['photoURL'],
-                                          imageBuilder: (context,
-                                                  imageProvider) =>
-                                              new Container(
-                                                  width: 150.0,
-                                                  height: 150.0,
-                                                  decoration: new BoxDecoration(
-                                                    shape: BoxShape.circle,
-                                                    image: new DecorationImage(
-                                                      image: imageProvider ??
-                                                          AssetImage(
-                                                              'assets/profile.png'),
-                                                      fit: BoxFit.cover,
+                                        GestureDetector(
+                                          onLongPress: () {
+                                            setState(() {
+                                              _deleteIMG = !_deleteIMG;
+                                            });
+                                          },
+                                          child: _deleteIMG == false
+                                              ? CachedNetworkImage(
+                                                  imageUrl:
+                                                      snapshot.data['photoURL'],
+                                                  imageBuilder: (context,
+                                                          imageProvider) =>
+                                                      new Container(
+                                                          width: 150.0,
+                                                          height: 150.0,
+                                                          decoration:
+                                                              new BoxDecoration(
+                                                            shape:
+                                                                BoxShape.circle,
+                                                            image:
+                                                                new DecorationImage(
+                                                              image: imageProvider ??
+                                                                  AssetImage(
+                                                                      'assets/profile.png'),
+                                                              fit: BoxFit.cover,
+                                                            ),
+                                                          )),
+                                                  progressIndicatorBuilder: (context,
+                                                          url,
+                                                          downloadProgress) =>
+                                                      CircularProgressIndicator(
+                                                          backgroundColor:
+                                                              Colors.white,
+                                                          valueColor:
+                                                              new AlwaysStoppedAnimation<
+                                                                      Color>(
+                                                                  Colors.white),
+                                                          value:
+                                                              downloadProgress
+                                                                  .progress),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Container(
+                                                    width: 150.0,
+                                                    height: 150.0,
+                                                    decoration: BoxDecoration(
+                                                        color: darkGray,
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(75)),
+                                                    child: Center(
+                                                      child: Container(
+                                                        margin: EdgeInsets.only(
+                                                            top: 5),
+                                                        child: Text(
+                                                            '$_nom'
+                                                                .substring(0, 1)
+                                                                .toUpperCase(),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                            style: TextStyle(
+                                                                fontSize: 80,
+                                                                color: Colors
+                                                                    .white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w800,
+                                                                fontFamily:
+                                                                    'Quarion')),
+                                                      ),
                                                     ),
-                                                  )),
-                                          progressIndicatorBuilder: (context,
-                                                  url, downloadProgress) =>
-                                              CircularProgressIndicator(
-                                                  backgroundColor: Colors.white,
-                                                  valueColor:
-                                                      new AlwaysStoppedAnimation<
-                                                          Color>(Colors.white),
-                                                  value: downloadProgress
-                                                      .progress),
-                                          errorWidget: (context, url, error) =>
-                                              Container(
-                                            width: 150.0,
-                                            height: 150.0,
-                                            child: Center(
-                                              child: Icon(Icons.error,
-                                                  color: Colors.white),
-                                            ),
-                                          ),
+                                                  ),
+                                                )
+                                              : Blur(
+                                                  colorOpacity: 0,
+                                                  blur: 10.0,
+                                                  blurColor: Colors.transparent,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          120),
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: snapshot
+                                                        .data['photoURL'],
+                                                    imageBuilder: (context,
+                                                            imageProvider) =>
+                                                        new Container(
+                                                            width: 150.0,
+                                                            height: 150.0,
+                                                            decoration:
+                                                                new BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              image:
+                                                                  new DecorationImage(
+                                                                image: imageProvider ??
+                                                                    AssetImage(
+                                                                        'assets/profile.png'),
+                                                                fit: BoxFit
+                                                                    .cover,
+                                                              ),
+                                                            )),
+                                                    progressIndicatorBuilder: (context,
+                                                            url,
+                                                            downloadProgress) =>
+                                                        CircularProgressIndicator(
+                                                            backgroundColor:
+                                                                Colors.white,
+                                                            valueColor:
+                                                                new AlwaysStoppedAnimation<
+                                                                        Color>(
+                                                                    Colors
+                                                                        .white),
+                                                            value:
+                                                                downloadProgress
+                                                                    .progress),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            Container(
+                                                      width: 150.0,
+                                                      height: 150.0,
+                                                      decoration: BoxDecoration(
+                                                          color: darkGray,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      75)),
+                                                      child: Center(
+                                                        child: Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  top: 5),
+                                                          child: Text(
+                                                              '$_nom'
+                                                                  .substring(
+                                                                      0, 1)
+                                                                  .toUpperCase(),
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .center,
+                                                              style: TextStyle(
+                                                                  fontSize: 80,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w800,
+                                                                  fontFamily:
+                                                                      'Quarion')),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
                                         ),
                                       ],
                                     ),
-                                    Padding(
-                                        padding: EdgeInsets.only(
-                                            top: 100.0, right: 100.0),
-                                        child: new Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: <Widget>[
-                                            new CircleAvatar(
-                                              backgroundColor: Colors.white,
-                                              radius: 20.0,
-                                              child: new IconButton(
-                                                  onPressed: () async {
-                                                    String _uid =
-                                                        Provider.of<User>(
-                                                                context,
-                                                                listen: true)
-                                                            .uid;
-                                                    Navigator.of(context)
-                                                        .pushReplacement(
-                                                            PageTransition(
-                                                                type: PageTransitionType
-                                                                    .leftToRight,
-                                                                child:
-                                                                    ImageCapture(
-                                                                  filePath:
-                                                                      'images/profile/$_uid',
-                                                                  collection:
-                                                                      'client',
-                                                                  manyPics:
-                                                                      false,
-                                                                )));
-                                                  },
-                                                  icon: Icon(OMIcons.camera,
-                                                      size: 22),
-                                                  color: buttonColor),
-                                            )
-                                          ],
-                                        )),
+                                    _deleteIMG == false
+                                        ? Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 100.0, right: 100.0),
+                                            child: new Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                new CircleAvatar(
+                                                  backgroundColor: Colors.white,
+                                                  radius: 20.0,
+                                                  child: new IconButton(
+                                                      onPressed: () async {
+                                                        String _uid =
+                                                            Provider.of<User>(
+                                                                    context,
+                                                                    listen:
+                                                                        true)
+                                                                .uid;
+                                                        Navigator.of(context)
+                                                            .pushReplacement(
+                                                                PageTransition(
+                                                                    type: PageTransitionType
+                                                                        .leftToRight,
+                                                                    child:
+                                                                        ImageCapture(
+                                                                      filePath:
+                                                                          'images/profile/$_uid',
+                                                                      collection:
+                                                                          'client',
+                                                                      manyPics:
+                                                                          false,
+                                                                    )));
+                                                      },
+                                                      icon: Icon(OMIcons.camera,
+                                                          size: 22),
+                                                      color: buttonColor),
+                                                )
+                                              ],
+                                            ))
+                                        : Padding(
+                                            padding: EdgeInsets.only(
+                                                top: 100.0, right: 100.0),
+                                            child: new Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: <Widget>[
+                                                new CircleAvatar(
+                                                    backgroundColor:
+                                                        Colors.red.shade700,
+                                                    radius: 20.0,
+                                                    child: new IconButton(
+                                                        onPressed: () async {
+                                                          String _uid =
+                                                              Provider.of<User>(
+                                                                      context,
+                                                                      listen:
+                                                                          true)
+                                                                  .uid;
+                                                          Firestore.instance
+                                                              .collection(
+                                                                  'client')
+                                                              .document(_uid)
+                                                              .updateData({
+                                                            'photoURL': ''
+                                                          });
+                                                          setState(() {});
+                                                        },
+                                                        icon: Icon(
+                                                            OMIcons.delete,
+                                                            size: 22),
+                                                        color: Colors.white))
+                                              ],
+                                            )),
                                   ]),
                                 )
                               ],

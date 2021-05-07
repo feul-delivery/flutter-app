@@ -52,8 +52,7 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
                           isEqualTo: Provider.of<User>(context).uid)
                       .where('statut', isEqualTo: 'done')
                       .orderBy('dateheurec', descending: true)
-                      .getDocuments()
-                      .asStream(),
+                      .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
                       return Icon(Icons.cancel, color: Colors.black);

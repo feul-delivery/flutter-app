@@ -95,8 +95,7 @@ class _ProfilStState extends State<ProfilSt> {
             stream: Firestore.instance
                 .collection('entreprise')
                 .document(_user.uid)
-                .get()
-                .asStream(),
+                .snapshots(),
             builder: (context, snapshot) {
               if (snapshot.hasError) {
                 return Container(
