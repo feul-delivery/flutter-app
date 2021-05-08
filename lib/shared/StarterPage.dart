@@ -1,4 +1,5 @@
 import 'package:FD_flutter/authentification/authenticate.dart';
+import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/shared/FadeAnimation.dart';
@@ -51,97 +52,104 @@ class _StarterPageState extends State<StarterPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
+      body: Container(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage('assets/gas_station.jpg'),
+                fit: BoxFit.fitHeight)),
         child: Container(
           decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage('assets/pgstation.png'),
-                  fit: BoxFit.cover)),
-          child: Container(
-            decoration: BoxDecoration(
-                gradient:
-                    LinearGradient(begin: Alignment.bottomCenter, colors: [
-              Colors.black.withOpacity(.9),
-              Colors.black.withOpacity(.8),
-              Colors.black.withOpacity(.2),
-            ])),
-            child: Padding(
-              padding: EdgeInsets.all(20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  FadeAnimation(
-                      .8,
-                      Text(
-                        'Fuel Delivery',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'Gotham',
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold),
-                      )),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  FadeAnimation(
-                      1,
-                      Text(
-                        "Get the fuel delivered to your door.",
-                        style: TextStyle(
-                            color: Colors.white, height: 1.4, fontSize: 18),
-                      )),
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.60,
-                  ),
-                  FadeAnimation(
-                    1.4,
-                    ScaleTransition(
-                        scale: _animation,
-                        child: Center(
-                          child: InkWell(
-                            onTap: () => _onTap(),
-                            child: Container(
-                                width: 150,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50),
-                                  color: Colors.white,
-                                ),
+              gradient: LinearGradient(begin: Alignment.bottomCenter, colors: [
+            Colors.black.withOpacity(.9),
+            Colors.black.withOpacity(.8),
+            Colors.black.withOpacity(.2),
+          ])),
+          child: Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                FadeAnimation(
+                    .8,
+                    Text(
+                      'Fuel Delivery',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: 'Quarion',
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold),
+                    )),
+                SizedBox(
+                  height: 15,
+                ),
+                FadeAnimation(
+                    1,
+                    Text(
+                      "${Language.mapLang['fueltodoor']}",
+                      style: TextStyle(
+                          fontFamily: 'Quarion',
+                          color: Colors.white,
+                          height: 1.4,
+                          fontSize: 18),
+                    )),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.60,
+                ),
+                FadeAnimation(
+                  1.4,
+                  ScaleTransition(
+                      scale: _animation,
+                      child: Center(
+                        child: Container(
+                            width: 150,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.white,
+                            ),
+                            child: Material(
+                              color: Colors.transparent,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(50),
+                                onTap: () => _onTap(),
                                 child: AnimatedOpacity(
                                   opacity: _textVisible ? 1.0 : 0.0,
                                   duration: Duration(milliseconds: 50),
                                   child: Center(
                                     child: Text(
-                                      "Start".toUpperCase(),
+                                      "${Language.mapLang['start']}"
+                                          .toUpperCase(),
                                       style: buttonStyleBlack,
                                     ),
                                   ),
-                                )),
-                          ),
-                        )),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  FadeAnimation(
-                      1.5,
-                      AnimatedOpacity(
-                        opacity: _textVisible ? 1.0 : 0.0,
-                        duration: Duration(milliseconds: 50),
-                        child: Align(
-                          child: Text(
-                            "Working 24/7",
-                            style:
-                                TextStyle(color: Colors.white70, fontSize: 15),
-                          ),
-                        ),
+                                ),
+                              ),
+                            )),
                       )),
-                  SizedBox(
-                    height: 30,
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                FadeAnimation(
+                    1.5,
+                    AnimatedOpacity(
+                      opacity: _textVisible ? 1.0 : 0.0,
+                      duration: Duration(milliseconds: 50),
+                      child: Align(
+                        child: Text(
+                          "${Language.mapLang['work24/7']}",
+                          style: TextStyle(
+                              fontFamily: 'Quarion',
+                              color: Colors.white70,
+                              fontSize: 15),
+                        ),
+                      ),
+                    )),
+                SizedBox(
+                  height: 30,
+                ),
+              ],
             ),
           ),
         ),

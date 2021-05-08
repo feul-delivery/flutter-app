@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TypeCompte extends StatefulWidget {
   @override
@@ -19,34 +20,32 @@ class _TypeCompteState extends State<TypeCompte> {
     return WillPopScope(
       onWillPop: () => exit(0),
       child: Scaffold(
-          backgroundColor: scaffoldBackground,
+          backgroundColor: darkGray,
           appBar: AppBar(
             title: Text(
               "${Language.mapLang['accounttype']}",
               style: pageTitleW,
             ),
             leading: Container(),
-            backgroundColor: Colors.blue[700],
+            backgroundColor: scaffoldBackground,
             centerTitle: true,
           ),
           body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text(
-                '${Language.mapLang['dragchoose']}'.toUpperCase(),
-                style: titleStyle,
-              ),
+              Text('${Language.mapLang['dragchoose']}'.toUpperCase(),
+                  style: pageTitleW),
               SizedBox(
                 height: 20,
               ),
               Slidable(
                 actionPane: SlidableDrawerActionPane(),
-                actionExtentRatio: 0.25,
+                actionExtentRatio: 1,
                 actions: <Widget>[
                   IconSlideAction(
                     caption: '${Language.mapLang['choose']}',
-                    color: Colors.blue[500],
+                    color: buttonColor,
                     icon: OMIcons.check,
                     onTap: () async {
                       Navigator.push(
@@ -59,7 +58,7 @@ class _TypeCompteState extends State<TypeCompte> {
                 ],
                 child: Container(
                   decoration:
-                      new BoxDecoration(color: Colors.white, boxShadow: [
+                      new BoxDecoration(color: scaffoldBackground, boxShadow: [
                     BoxShadow(
                         color: Colors.black.withOpacity(0.3),
                         blurRadius: 10,
@@ -70,24 +69,30 @@ class _TypeCompteState extends State<TypeCompte> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Row(
-                          children: [
-                            RotatedBox(
-                              quarterTurns: 2,
-                              child: Icon(
-                                Icons.play_arrow,
-                                size: 50,
+                        Shimmer.fromColors(
+                          baseColor: scaffoldBackground,
+                          highlightColor: Colors.white,
+                          child: Row(
+                            children: [
+                              RotatedBox(
+                                quarterTurns: 2,
+                                child: Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
                               ),
-                            ),
-                            Text('${Language.mapLang['customer']}',
-                                style: TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w700,
-                                    fontSize: 34.0)),
-                          ],
+                              Text('${Language.mapLang['customer']}',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Quarion',
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 34.0)),
+                            ],
+                          ),
                         ),
                         Material(
-                            color: Colors.blue,
+                            color: buttonColor,
                             borderRadius: BorderRadius.circular(24.0),
                             child: Center(
                                 child: Padding(
@@ -117,11 +122,11 @@ class _TypeCompteState extends State<TypeCompte> {
                   ),
                 ],
                 actionPane: SlidableDrawerActionPane(),
-                actionExtentRatio: 0.25,
+                actionExtentRatio: 1,
                 child: InkWell(
                   child: Container(
                     decoration: new BoxDecoration(
-                        color: Colors.white,
+                        color: scaffoldBackground,
                         borderRadius: BorderRadiusDirectional.horizontal(
                             start: Radius.lerp(Radius.zero, Radius.zero, 10)),
                         boxShadow: [
@@ -148,18 +153,25 @@ class _TypeCompteState extends State<TypeCompte> {
                                   color: Colors.white,
                                 ),
                               ))),
-                          Row(
-                            children: [
-                              Text('${Language.mapLang['enterprise']}',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 34.0)),
-                              Icon(
-                                Icons.play_arrow,
-                                size: 50,
-                              ),
-                            ],
+                          Shimmer.fromColors(
+                            direction: ShimmerDirection.rtl,
+                            baseColor: scaffoldBackground,
+                            highlightColor: Colors.white,
+                            child: Row(
+                              children: [
+                                Text('${Language.mapLang['enterprise']}',
+                                    style: TextStyle(
+                                        color: Colors.white,
+                                        fontFamily: 'Quarion',
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 34.0)),
+                                Icon(
+                                  Icons.play_arrow,
+                                  color: Colors.white,
+                                  size: 50,
+                                ),
+                              ],
+                            ),
                           )
                         ]),
                   ),

@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:FD_flutter/authentification/register.dart';
@@ -21,6 +22,7 @@ class _AuthenticateState extends State<Authenticate> {
     return Scaffold(
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
+        leading: SizedBox.shrink(),
         backgroundColor: scaffoldBackground,
         elevation: 0,
         actions: [
@@ -60,95 +62,101 @@ class _AuthenticateState extends State<Authenticate> {
           // )
         ],
       ),
-      body: Container(
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Container(
-                  margin: EdgeInsets.fromLTRB(
-                      20, MediaQuery.of(context).size.height * 0.25, 20, 20),
-                  width: MediaQuery.of(context).size.width * 0.45,
-                  height: MediaQuery.of(context).size.width * 0.45,
-                  child: Hero(
-                    tag: 'logo',
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      height: MediaQuery.of(context).size.width * 0.45,
-                      child: Image(
-                        image: AssetImage('assets/splash.png'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-
-                    // Text('Fuel Delivery',
-                    //     style: GoogleFonts.aBeeZee(
-                    //         color: Colors.white,
-                    //         fontWeight: FontWeight.w800,
-                    //         fontSize: 50))
-                  )),
-            ),
-            Expanded(
-                child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Container(
-                    height: 45,
-                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: buttonColor),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(5.0),
-                        onTap: () async {
-                          Navigator.of(context).push(PageTransition(
-                              type: PageTransitionType.fade, child: SignIn()));
-                        },
-                        child: Center(
-                          child: Text(
-                            "${Language.mapLang['signin']}".toUpperCase(),
-                            style: buttonStyle,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 45,
-                    width: MediaQuery.of(context).size.width,
+      body: WillPopScope(
+        onWillPop: () {
+          exit(0);
+        },
+        child: Container(
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Center(
+                child: Container(
                     margin: EdgeInsets.fromLTRB(
-                        15, 7, 15, MediaQuery.of(context).size.width * 0.15),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: Colors.white),
-                    child: Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(5.0),
-                        onTap: () async {
-                          Navigator.of(context).push(PageTransition(
-                              type: PageTransitionType.fade,
-                              child: Register()));
-                        },
-                        child: Center(
-                          child: Text(
-                            "${Language.mapLang['register']}".toUpperCase(),
-                            style: buttonStyleBlack,
+                        20, MediaQuery.of(context).size.height * 0.25, 20, 20),
+                    width: MediaQuery.of(context).size.width * 0.45,
+                    height: MediaQuery.of(context).size.width * 0.45,
+                    child: Hero(
+                      tag: 'logo',
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.45,
+                        height: MediaQuery.of(context).size.width * 0.45,
+                        child: Image(
+                          image: AssetImage('assets/splash.png'),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+
+                      // Text('Fuel Delivery',
+                      //     style: GoogleFonts.aBeeZee(
+                      //         color: Colors.white,
+                      //         fontWeight: FontWeight.w800,
+                      //         fontSize: 50))
+                    )),
+              ),
+              Expanded(
+                  child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Container(
+                      height: 45,
+                      margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: buttonColor),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(5.0),
+                          onTap: () async {
+                            Navigator.of(context).push(PageTransition(
+                                type: PageTransitionType.fade,
+                                child: SignIn()));
+                          },
+                          child: Center(
+                            child: Text(
+                              "${Language.mapLang['signin']}".toUpperCase(),
+                              style: buttonStyle,
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-            ))
-          ],
+                    Container(
+                      height: 45,
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.fromLTRB(
+                          15, 7, 15, MediaQuery.of(context).size.width * 0.15),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: Colors.white),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          borderRadius: BorderRadius.circular(5.0),
+                          onTap: () async {
+                            Navigator.of(context).push(PageTransition(
+                                type: PageTransitionType.fade,
+                                child: Register()));
+                          },
+                          child: Center(
+                            child: Text(
+                              "${Language.mapLang['register']}".toUpperCase(),
+                              style: buttonStyleBlack,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ))
+            ],
+          ),
         ),
       ),
     );

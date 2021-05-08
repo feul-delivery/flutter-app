@@ -157,17 +157,20 @@ class _ProfileClState extends State<ProfileCl> {
                                             radius: 35.0,
                                             backgroundColor: darkGray,
                                             child: Container(
-                                              margin: EdgeInsets.only(top: 3),
+                                              margin: EdgeInsets.only(top: 5),
                                               child: Text(
-                                                  '${snapshotClient.data['nom']}'
-                                                      .substring(0, 1)
-                                                      .toUpperCase(),
+                                                  '${snapshotClient.data['prenom']}'
+                                                          .substring(0, 1)
+                                                          .toUpperCase() +
+                                                      '${snapshotClient.data['nom']}'
+                                                          .substring(0, 1)
+                                                          .toUpperCase(),
                                                   textAlign: TextAlign.center,
                                                   style: TextStyle(
                                                       fontSize: 35,
                                                       color: Colors.white,
                                                       fontWeight:
-                                                          FontWeight.w800,
+                                                          FontWeight.w500,
                                                       fontFamily: 'Quarion')),
                                             ))),
                                   ),
@@ -205,7 +208,7 @@ class _ProfileClState extends State<ProfileCl> {
                                 Container(
                                   padding: EdgeInsets.only(top: 2),
                                   child: Text(
-                                      '${snapshotClient.data['tele']}'
+                                      '+212${snapshotClient.data['tele']}'
                                           .toLowerCase(),
                                       style: smallTileP),
                                 ),

@@ -4,6 +4,7 @@ import 'package:FD_flutter/shared/image_capture.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:blur/blur.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -197,20 +198,25 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                                     child: Center(
                                                       child: Container(
                                                         margin: EdgeInsets.only(
-                                                            top: 5),
+                                                            top: 7),
                                                         child: Text(
-                                                            '$_nom'
-                                                                .substring(0, 1)
-                                                                .toUpperCase(),
+                                                            _prenom
+                                                                    .substring(
+                                                                        0, 1)
+                                                                    .toUpperCase() +
+                                                                _nom
+                                                                    .substring(
+                                                                        0, 1)
+                                                                    .toUpperCase(),
                                                             textAlign: TextAlign
                                                                 .center,
                                                             style: TextStyle(
-                                                                fontSize: 80,
+                                                                fontSize: 70,
                                                                 color: Colors
                                                                     .white,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w800,
+                                                                        .w500,
                                                                 fontFamily:
                                                                     'Quarion')),
                                                       ),
@@ -274,22 +280,28 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                                         child: Container(
                                                           margin:
                                                               EdgeInsets.only(
-                                                                  top: 5),
+                                                                  top: 7),
                                                           child: Text(
-                                                              '$_nom'
-                                                                  .substring(
-                                                                      0, 1)
-                                                                  .toUpperCase(),
+                                                              _prenom
+                                                                      .substring(
+                                                                          0,
+                                                                          1)
+                                                                      .toUpperCase() +
+                                                                  _nom
+                                                                      .substring(
+                                                                          0,
+                                                                          1)
+                                                                      .toUpperCase(),
                                                               textAlign:
                                                                   TextAlign
                                                                       .center,
                                                               style: TextStyle(
-                                                                  fontSize: 80,
+                                                                  fontSize: 70,
                                                                   color: Colors
                                                                       .white,
                                                                   fontWeight:
                                                                       FontWeight
-                                                                          .w800,
+                                                                          .w500,
                                                                   fontFamily:
                                                                       'Quarion')),
                                                         ),
@@ -445,7 +457,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                     )),
                                 Padding(
                                     padding: EdgeInsets.only(
-                                        left: 25.0, right: 25.0, top: 25.0),
+                                        left: 25.0, right: 25.0, top: 10.0),
                                     child: new Row(
                                       mainAxisSize: MainAxisSize.max,
                                       mainAxisAlignment:
@@ -456,6 +468,15 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             padding:
                                                 EdgeInsets.only(right: 10.0),
                                             child: new TextField(
+                                              cursorColor: grayColor,
+                                              cursorHeight: 25,
+                                              cursorWidth: 1,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 10.0,
+                                                        vertical: 15.0),
+                                              ),
                                               style: hintStyle,
                                               controller: _controllerPrenom,
                                               enabled: !_status,
@@ -469,6 +490,15 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                         ),
                                         Flexible(
                                           child: new TextField(
+                                            cursorColor: grayColor,
+                                            cursorHeight: 25,
+                                            cursorWidth: 1,
+                                            decoration: InputDecoration(
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 10.0,
+                                                      vertical: 15.0),
+                                            ),
                                             style: hintStyle,
                                             controller: _controllerNom,
                                             enabled: !_status,
@@ -508,6 +538,24 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                       children: <Widget>[
                                         new Flexible(
                                           child: new TextField(
+                                            cursorColor: grayColor,
+                                            cursorHeight: 25,
+                                            cursorWidth: 1,
+                                            decoration: InputDecoration(
+                                              prefixIcon: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 10.0,
+                                                    top: 15.0,
+                                                    bottom: 10.0),
+                                                child: Text('+212',
+                                                    style: hintStyle.copyWith(
+                                                        fontSize: 16)),
+                                              ),
+                                              contentPadding:
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 10.0,
+                                                      vertical: 15.0),
+                                            ),
                                             style: hintStyle,
                                             controller: _controllerTele,
                                             enabled: !_status,
@@ -535,7 +583,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                         ),
                                         Expanded(
                                           child: new Text(
-                                            '${Language.mapLang['city']}:',
+                                            '${Language.mapLang['sexe']}:',
                                             style: tileTitleStyleW,
                                           ),
                                           flex: 2,
@@ -555,6 +603,15 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                             padding:
                                                 EdgeInsets.only(right: 10.0),
                                             child: new TextField(
+                                              cursorColor: grayColor,
+                                              cursorHeight: 25,
+                                              cursorWidth: 1,
+                                              decoration: InputDecoration(
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 10.0,
+                                                        vertical: 15.0),
+                                              ),
                                               style: hintStyle,
                                               controller: _controllerCin,
                                               enabled: !_status,
@@ -566,62 +623,107 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                           flex: 2,
                                         ),
                                         Flexible(
-                                          child: new TextField(
-                                            style: hintStyle,
-                                            controller: _controllerVille,
-                                            enabled: !_status,
-                                            onChanged: (val) {
-                                              _villeTmp = val;
-                                            },
+                                          child: new Container(
+                                            padding:
+                                                EdgeInsets.only(right: 10.0),
+                                            child: DropdownButtonFormField(
+                                              dropdownColor: scaffoldBackground,
+                                              value: '${snapshot.data['sexe']}',
+                                              decoration: InputDecoration(
+                                                  enabled: !_status,
+                                                  border:
+                                                      const OutlineInputBorder()),
+                                              hint: Text(
+                                                '$_sexe',
+                                                style: hintStyle,
+                                              ),
+                                              items: _status == false
+                                                  ? _sexeTypes.map((sexe) {
+                                                      return DropdownMenuItem(
+                                                        value:
+                                                            sexe.toLowerCase(),
+                                                        child: Text(
+                                                          '$sexe',
+                                                          style: hintStyle,
+                                                        ),
+                                                      );
+                                                    }).toList()
+                                                  : null,
+                                              onChanged: (val) =>
+                                                  _sexeTmp = val,
+                                              validator: (value) =>
+                                                  value.isEmpty
+                                                      ? 'Required'
+                                                      : null,
+                                            ),
                                           ),
                                           flex: 2,
                                         ),
                                       ],
                                     )),
-                                //add sexe here as dropdown
-                                Container(
-                                  margin: EdgeInsets.only(top: 20),
+                                Padding(
                                   padding: EdgeInsets.only(
-                                      left: 25.0, right: 25.0, top: 2.0),
+                                      left: 25.0, right: 25.0, top: 25.0),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Container(
-                                        child: new Text(
-                                          '${Language.mapLang['sexe']}:',
-                                          style: tileTitleStyleW,
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 5.0),
+                                        child: Container(
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: new Text(
+                                            '${Language.mapLang['city']}:',
+                                            style: tileTitleStyleW,
+                                            textAlign: TextAlign.left,
+                                          ),
                                         ),
                                       ),
-                                      DropdownButtonFormField(
-                                        dropdownColor: scaffoldBackground,
-                                        value: '${snapshot.data['sexe']}',
-                                        decoration: InputDecoration(
-                                            enabled: !_status,
-                                            border: InputBorder.none),
-                                        hint: Text(
-                                          '$_sexe',
-                                          style: hintStyle,
+                                      new DropdownSearch<String>(
+                                        enabled: !_status,
+                                        dropDownButton: Icon(
+                                          Icons.arrow_drop_down,
+                                          color: Colors.white24,
+                                          size: 20,
                                         ),
-                                        items: _status == false
-                                            ? _sexeTypes.map((sexe) {
-                                                return DropdownMenuItem(
-                                                  value: sexe.toLowerCase(),
-                                                  child: Text(
-                                                    '$sexe',
-                                                    style: hintStyle,
-                                                  ),
-                                                );
-                                              }).toList()
-                                            : null,
-                                        onChanged: (val) => _sexeTmp = val,
-                                        validator: (value) =>
-                                            value.isEmpty ? 'Required' : null,
+                                        mode: Mode.BOTTOM_SHEET,
+                                        popupBackgroundColor:
+                                            scaffoldBackground,
+                                        showClearButton: true,
+                                        showSearchBox: true,
+                                        showSelectedItem: true,
+                                        searchBoxDecoration: InputDecoration(
+                                            contentPadding:
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 10.0,
+                                                    vertical: 15.0),
+                                            border: InputBorder.none,
+                                            labelText:
+                                                "${Language.mapLang['typehere']}",
+                                            labelStyle: hintStyle),
+                                        items: cities,
+                                        clearButton: Icon(Icons.clear,
+                                            color: Colors.white24),
+                                        dropdownSearchDecoration:
+                                            InputDecoration(
+                                                labelStyle: hintStyle,
+                                                contentPadding:
+                                                    EdgeInsets.symmetric(
+                                                        horizontal: 10.0,
+                                                        vertical: 15.0),
+                                                border:
+                                                    const OutlineInputBorder(),
+                                                hintText: _ville,
+                                                hintStyle: hintStyle),
+                                        onChanged: (val) {
+                                          _villeTmp = val;
+                                        },
                                       ),
                                     ],
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           )

@@ -9,6 +9,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
@@ -57,7 +58,7 @@ class _ExploreClState extends State<ExploreCl> {
 
             switch (snapshot.connectionState) {
               case ConnectionState.waiting:
-                return SizedBox(child: Center(child: customeCircularProgress));
+                return _shimmerExplore();
               case ConnectionState.none:
                 return Center(
                     child: Icon(Icons.error_outline, color: Colors.white54));
@@ -80,8 +81,7 @@ class _ExploreClState extends State<ExploreCl> {
 
                     switch (snapshot.connectionState) {
                       case ConnectionState.waiting:
-                        return SizedBox(
-                            child: Center(child: customeCircularProgress));
+                        return _shimmerExplore();
                       case ConnectionState.none:
                         return Center(
                             child: Icon(Icons.error_outline,
@@ -340,5 +340,25 @@ class _ExploreClState extends State<ExploreCl> {
     }
 
     setState(() {});
+  }
+
+  _shimmerExplore() {
+    return Shimmer(
+      enabled: true,
+      gradient: LinearGradient(
+        colors: <Color>[darkGray, scaffoldBackground],
+      ),
+      child: ListView(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          physics: BouncingScrollPhysics(),
+          children: [
+            for (int i = 0; i < 4; i++)
+              Card(
+                  clipBehavior: Clip.antiAlias,
+                  child: Container(
+                      height: 250, width: MediaQuery.of(context).size.width))
+          ]),
+    );
   }
 }

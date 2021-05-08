@@ -61,9 +61,11 @@ dependencies:
   flutter_slidable:
   focused_menu:
   blur:
+  shimmer:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   intl: ^0.15.8
+  dropdown_search:
   outline_material_icons: ^0.1.0
   font_awesome_flutter: ^8.2.0
   shared_preferences: ^0.5.12+4

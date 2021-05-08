@@ -15,11 +15,14 @@ import 'package:geocoder/model.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
+import 'package:shimmer/shimmer.dart';
 import 'explore_cl.dart';
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'commanderPages/cmd_client.dart';
+
+Coordinates _locationCoordinates;
 
 class IndexCl extends StatefulWidget {
   @override
@@ -31,7 +34,6 @@ void initState() {
   _getCurrentLocation();
 }
 
-Coordinates _locationCoordinates;
 Future<String> _getDistance(
     Coordinates locationFrom, Map<dynamic, dynamic> locationTo) async {
   return (Geolocator.distanceBetween(
@@ -255,9 +257,7 @@ class _IndexClState extends State<IndexCl> {
                               }
                               switch (snapshot.connectionState) {
                                 case ConnectionState.waiting:
-                                  return SizedBox(
-                                      child: Center(
-                                          child: customeCircularProgress));
+                                  return _shimmerCards(context);
                                 case ConnectionState.none:
                                   return Container(child: customErrorWidget);
                                 default:
@@ -454,6 +454,23 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
           ),
         )
       : Container();
+}
+
+_shimmerCards(BuildContext ctx) {
+  return Shimmer(
+    enabled: true,
+    gradient: LinearGradient(
+      colors: <Color>[darkGray, scaffoldBackground],
+    ),
+    child: ListView(
+        scrollDirection: Axis.vertical,
+        shrinkWrap: true,
+        physics: BouncingScrollPhysics(),
+        children: [
+          for (int i = 0; i < 4; i++)
+            Container(height: 200, width: MediaQuery.of(ctx).size.width)
+        ]),
+  );
 }
 
 void _addStToFav(String documentID, String uid) async {

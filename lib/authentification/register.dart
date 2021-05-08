@@ -241,7 +241,9 @@ class _RegisterState extends State<Register> {
   }
 
   void showInSnackBar(String value) {
-    SnackBar snackBar = new SnackBar(content: new Text(value));
+    SnackBar snackBar = new SnackBar(
+        backgroundColor: Colors.white,
+        content: new Text(value, style: textStyle));
     _mScaffoldState.currentState.showSnackBar(snackBar);
   }
 }

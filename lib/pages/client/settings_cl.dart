@@ -206,10 +206,11 @@ class _SettingsClState extends State<SettingsCl> {
           ),
         ),
         Material(
-          color: darkGray,
+          color: Colors.transparent,
           child: InkWell(
               onTap: () async {
                 _auth.signOut();
+
                 Navigator.of(context).pushReplacement(MaterialPageRoute(
                     builder: (BuildContext context) => Wrapper()));
               },

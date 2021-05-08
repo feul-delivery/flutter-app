@@ -2,6 +2,7 @@ import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthService {
   FirebaseAuth _auth = FirebaseAuth.instance;
@@ -95,10 +96,17 @@ class AuthService {
   Future signOut() async {
     try {
       type = null;
+      _typeAccountChangeStateSharedPrefs();
       return await _auth.signOut();
     } catch (error) {
       print(error.toString());
     }
+  }
+
+  Future<void> _typeAccountChangeStateSharedPrefs() async {
+    print("shared pref");
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('typeAccount', null);
   }
 
   Future<String> _getAccountType(String email) async {
