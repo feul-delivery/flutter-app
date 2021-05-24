@@ -93,7 +93,7 @@ class _IndexClState extends State<IndexCl> {
               children: [
                 Container(
                     color: scaffoldBackground,
-                    alignment: Alignment.centerLeft,
+                    alignment: Alignment.center,
                     margin: EdgeInsets.only(
                         top: MediaQuery.of(context).padding.top),
                     padding: EdgeInsets.all(15),
