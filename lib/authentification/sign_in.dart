@@ -32,27 +32,29 @@ class _SignInState extends State<SignIn> {
         : Scaffold(
             backgroundColor: scaffoldBackground,
             key: _mScaffoldState,
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                FadeAnimation(
-                    0.1,
-                    Container(
-                      margin: EdgeInsets.all(15),
-                      child: Text(
-                        "${Language.mapLang['welcomeback']}",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 50,
-                            fontWeight: FontWeight.w900),
-                      ),
-                    )),
-                SizedBox(
-                  height: 15,
-                ),
-                SingleChildScrollView(
-                  child: Column(
+            body: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+               padding: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.width/3, 0, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  FadeAnimation(
+                      0.1,
+                      Container(
+                        margin: EdgeInsets.all(15),
+                        child: Text(
+                          "${Language.mapLang['welcomeback']}",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 50,
+                              fontWeight: FontWeight.w900),
+                        ),
+                      )),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Column(
                     children: [
                       SizedBox(
                         height: 10,
@@ -351,8 +353,8 @@ class _SignInState extends State<SignIn> {
                             ),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
   }

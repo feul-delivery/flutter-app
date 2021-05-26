@@ -32,24 +32,26 @@ class _RegisterState extends State<Register> {
             key: _mScaffoldState,
             resizeToAvoidBottomInset: true,
             backgroundColor: scaffoldBackground,
-            body: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                FadeAnimation(
-                    0.1,
-                    Container(
-                      margin: EdgeInsets.all(15),
-                      child: Text(
-                        "${Language.mapLang['createaccount']},",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 50,
-                            fontWeight: FontWeight.w900),
-                      ),
-                    )),
-                SingleChildScrollView(
-                  child: Column(
+            body: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              padding: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.width/8, 0, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  FadeAnimation(
+                      0.1,
+                      Container(
+                        margin: EdgeInsets.all(15),
+                        child: Text(
+                          "${Language.mapLang['createaccount']},",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 50,
+                              fontWeight: FontWeight.w900),
+                        ),
+                      )),
+                  Column(
                     children: <Widget>[
                       SizedBox(
                         height: 10,
@@ -234,8 +236,8 @@ class _RegisterState extends State<Register> {
                           )),
                     ],
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
   }

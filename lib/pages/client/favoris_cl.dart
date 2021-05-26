@@ -102,7 +102,7 @@ class _FavorisClState extends State<FavorisCl> {
       ],
       child: InkWell(
         onTap: () {
-          Navigator.of(context).pushReplacement(PageTransition(
+          Navigator.of(context).push(PageTransition(
               type: PageTransitionType.leftToRight,
               child: StationProfilCl(doc: document, fromWhere: 'fav')));
         },

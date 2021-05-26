@@ -2,13 +2,14 @@ class Language {
   static Map<String, String> mapLang;
   static String lang;
   static Map<String, String> mapFR = {
+    'yep':'oui',
     'home': 'Accueil',
     'hello': 'Bonjour',
     'explore': 'Explorer',
     'profile': 'Profil',
     'title': 'titre',
     'change': 'Modifier',
-    'orders': 'Commandes',
+    'orders': 'mes Commandes',
     'order': 'Commander',
     'signin': 'Se connecter',
     'register': "S'inscrire",
@@ -111,12 +112,13 @@ class Language {
   };
   static Map<String, String> mapEN = {
     'home': 'Home',
+    'yep': 'yes',
     'hello': 'Hello',
     'title': 'title',
     'change': 'Change',
     'explore': 'Explore',
     'profile': 'Profile',
-    'orders': 'Orders',
+    'orders': 'My Orders',
     'order': 'Order',
     'signin': 'Sign in',
     'register': "Register",

@@ -17,6 +17,8 @@ import 'package:location/location.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:shimmer/shimmer.dart';
 import 'explore_cl.dart';
+import 'package:FD_flutter/shared/custom_alert_dialog.dart';
+
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/modules/user.dart';
@@ -74,7 +76,42 @@ class _IndexClState extends State<IndexCl> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () => exit(0),
+      onWillPop: () {
+          return showDialog(
+                context: context,
+                builder: (context) => new CustomAlertDialog(
+                  title: new Text("${Language.mapLang['areyousure']}"),
+                  
+                  actions: <Widget>[
+                    Row(children: [
+                      new FlatButton(
+                        onPressed: () => exit(0),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              right: 0.0, bottom: 0.0, top: 10),
+                          child: Text(
+                            "oui",
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
+                      new FlatButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              right: 0.0, bottom: 0.0, top: 10),
+                          child: Text(
+                            'Cancel',
+                            style: TextStyle(color: Colors.black),
+                          ),
+                        ),
+                      ),
+                    ]),
+                  ],
+                ),
+              ) ??
+              false;
+        },
       child: RefreshIndicator(
         onRefresh: () async {
           return await Future.delayed(Duration(seconds: 1)).then((value) {

@@ -64,6 +64,13 @@ class _IndexStState extends State<IndexSt> {
           title: Text("Home", style: pageTitle),
           backgroundColor: Colors.black,
           centerTitle: true,
+           actions: [
+            IconButton(
+              onPressed: () {setState((){});
+              },
+              icon: Icon(Icons.refresh),
+            )
+          ],
         ),
         body: RefreshIndicator(
           onRefresh: () async {
