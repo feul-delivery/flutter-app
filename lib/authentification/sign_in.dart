@@ -34,7 +34,8 @@ class _SignInState extends State<SignIn> {
             key: _mScaffoldState,
             body: SingleChildScrollView(
               physics: BouncingScrollPhysics(),
-               padding: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.width/3, 0, 0),
+              padding: EdgeInsets.fromLTRB(
+                  0, MediaQuery.of(context).size.width / 3, 0, 0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -326,6 +326,7 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
   String _error = "";
   return showModalBottomSheet(
       context: context,
+      isScrollControlled: true,
       builder: (BuildContext context) {
         return StatefulBuilder(builder: (BuildContext context, setState) {
           return SingleChildScrollView(

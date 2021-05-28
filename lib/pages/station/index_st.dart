@@ -59,7 +59,7 @@ class _IndexStState extends State<IndexSt> {
             false;
       },
       child: Scaffold(
-        backgroundColor: scaffoldBackground,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text("Home", style: pageTitle),
           backgroundColor: Colors.black,

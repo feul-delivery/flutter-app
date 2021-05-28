@@ -38,6 +38,7 @@ class _LivreurStState extends State<LivreurSt> {
             MaterialPageRoute(builder: (BuildContext context) => IndexSt()));
       },
       child: Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           actions: [
             IconButton(

@@ -72,17 +72,6 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
           centerTitle: true,
           backgroundColor: Colors.black,
           elevation: 1,
-          actions: [
-            IconButton(
-                onPressed: () {
-                  _clientDetailSheet(
-                      context, widget.document['uidclient'], clNom, clNum);
-                },
-                icon: Icon(
-                  Icons.info_outline,
-                  color: Colors.white,
-                )),
-          ],
         ),
         body: getBodyDone(),
       );

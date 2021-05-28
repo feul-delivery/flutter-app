@@ -33,6 +33,16 @@ class _CommandeClState extends State<CommandeCl> {
                 onPressed: () {
                   Navigator.pop(context);
                 }),
+            actions: <Widget>[
+              IconButton(
+                  icon: new Icon(
+                    Icons.refresh,
+                    color: buttonColor,
+                  ),
+                  onPressed: () {
+                    setState(() {});
+                  }),
+            ],
             backgroundColor: buttonColor),
         body: SafeArea(
           child: ListView(

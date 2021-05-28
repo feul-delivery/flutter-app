@@ -84,7 +84,7 @@ class _ProfilStState extends State<ProfilSt> {
   Widget build(BuildContext context) {
     User _user = Provider.of<User>(context, listen: true);
     return Scaffold(
-      backgroundColor: Color(0xFFEFF0F5),
+      backgroundColor: Color(0xFFFF0F5),
       body: RefreshIndicator(
         onRefresh: () async {
           return await Future.delayed(Duration(seconds: 1)).then((value) {

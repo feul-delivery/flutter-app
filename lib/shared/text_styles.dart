@@ -25,7 +25,7 @@ const titleStyle = TextStyle(
 );
 const pageTitle = TextStyle(
   fontWeight: FontWeight.w300,
-  color: Colors.black,
+  color: Colors.white,
   fontFamily: 'Quarion',
 );
 const pageTitleX = TextStyle(
@@ -117,7 +117,7 @@ const strongTextStyle = TextStyle(
 );
 const subTitleStyle = TextStyle(
   fontFamily: 'Quarion',
-  color: Colors.white,
+  color: Colors.black,
   fontWeight: FontWeight.w400,
   fontSize: 20,
 );
