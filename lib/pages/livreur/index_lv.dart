@@ -97,7 +97,7 @@ class _IndexLvState extends State<IndexLv> {
             ),
             title: Text('${Language.mapLang['home']}', style: pageTitleO),
             backgroundColor: Colors.white,
-            elevation: 0.5,
+            elevation: showStatut ? 0 : 1,
             centerTitle: true,
             actions: <Widget>[
               IconButton(
@@ -206,8 +206,13 @@ class _IndexLvState extends State<IndexLv> {
                           return Icon(Icons.error_outline, color: Colors.black);
 
                         default:
-                          for (int i = 0; i < items.length; i++)
-                            return CommandeWidget(commande: items[i]);
+                          return Column(children: [
+                            for (DocumentSnapshot document
+                                in snapshot.data.documents)
+                              InkWell(
+                                  onTap: () => print('go to commande page'),
+                                  child: CommandeWidget(commande: document))
+                          ]);
                       }
                     })
               ]),
@@ -217,35 +222,4 @@ class _IndexLvState extends State<IndexLv> {
           bottomNavigationBar: ButtomBarLiv(),
         ));
   }
-
-  List items = [
-    {
-      "nom": "Mr Benarafa",
-      "volume": "10L",
-      "type": "Gas-oil",
-      "adresse": "Monfleuri 2, Lycée Technique, Fès",
-      "statut": ""
-    },
-    {
-      "nom": "Mr Bennani",
-      "volume": "50L",
-      "type": "Gas-oil",
-      "adresse": "Monfleuri 1, Rue el karama, Fès",
-      "statut": ""
-    },
-    {
-      "nom": " Mr Wardi",
-      "volume": "43L",
-      "type": "Gas-oil",
-      "adresse": "Monfleuri 2, Lycée Technique, Fès",
-      "statut": "En attend"
-    },
-    {
-      "nom": "Mme Twati",
-      "volume": "43L",
-      "type": "Gas-oil",
-      "statut": "En attend",
-      "adresse": "Barid Banque, Bensoda, Fès",
-    },
-  ];
 }

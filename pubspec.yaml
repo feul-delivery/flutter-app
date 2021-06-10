@@ -55,6 +55,7 @@ dependencies:
   flutter_colorpicker:
   square_in_app_payments: ^1.2.3
   barcode_scan:
+  timeago:
   latlng:
   qr_flutter:
   url_launcher:

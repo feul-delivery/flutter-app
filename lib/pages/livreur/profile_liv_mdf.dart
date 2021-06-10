@@ -3,15 +3,16 @@ import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/livreur/bbar_liv.dart';
 import 'package:FD_flutter/pages/livreur/index_lv.dart';
 import 'package:FD_flutter/services/database.dart';
+import 'package:FD_flutter/shared/image_capture.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'drawer_liv.dart';
+import 'package:page_transition/page_transition.dart';
 
 String profileURL;
 
@@ -87,77 +88,10 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
     });
   }
 
-  final picker = ImagePicker();
-
-  Future<File> getImage(ImageSource source) async {
-    final pickedFile = await ImagePicker.pickImage(source: source);
-    if (pickedFile != null) {
-      return File(pickedFile.path);
-    }
-    print('');
-    return null;
-  }
-
-  void _showImageSettingsPanel() {
-    showModalBottomSheet(
-        context: context,
-        builder: (context) {
-          return Container(
-            margin: EdgeInsets.all(50),
-            padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                InkWell(
-                  onTap: () async {
-                    File profileImage = await getImage(ImageSource.camera);
-                    if (profileImage != null) {
-                      // profileURL = await uploadFile(profileImage);
-                      setState(() {
-                        IndexLv.livreur.photoURL = profileURL;
-                      });
-                    }
-                  },
-                  child: Material(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Icon(Icons.camera_alt,
-                            color: Colors.white, size: 40.0),
-                      ))),
-                ),
-                InkWell(
-                  onTap: () async {
-                    File profileImage = await getImage(ImageSource.gallery);
-                    if (profileImage != null) {
-                      // profileURL = await uploadFile(profileImage);
-                      setState(() {
-                        IndexLv.livreur.photoURL = profileURL;
-                      });
-                    }
-                  },
-                  child: Material(
-                      color: Colors.black,
-                      borderRadius: BorderRadius.circular(10.0),
-                      child: Center(
-                          child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child:
-                            Icon(Icons.photo, color: Colors.white, size: 40.0),
-                      ))),
-                ),
-              ],
-            ),
-          );
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
             "My profile",
@@ -165,7 +99,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
           ),
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.home),
+                icon: Icon(Icons.home, color: Colors.white),
                 onPressed: () {
                   ButtomBarLiv.selectedIndex = 0;
                   Navigator.of(context).push(MaterialPageRoute(
@@ -179,7 +113,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
             ),
           ),
           centerTitle: true,
-          backgroundColor: Colors.black,
+          backgroundColor: buttonColor,
           elevation: 1,
         ),
         drawer: DrawerLiv(),
@@ -257,13 +191,27 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
                                     new CircleAvatar(
-                                      backgroundColor: Colors.black,
+                                      backgroundColor: buttonColor,
                                       radius: 25.0,
                                       child: new IconButton(
-                                        onPressed: () async {
-                                          _showImageSettingsPanel();
+                                        onPressed: () {
+                                          String _uid = Provider.of<User>(
+                                                  context,
+                                                  listen: true)
+                                              .uid;
+                                          Navigator.of(context).pushReplacement(
+                                              PageTransition(
+                                                  type: PageTransitionType
+                                                      .leftToRight,
+                                                  child: ImageCapture(
+                                                    filePath:
+                                                        'images/profile/$_uid',
+                                                    collection: 'livreur',
+                                                    manyPics: false,
+                                                  )));
                                         },
-                                        icon: Icon(Icons.camera_alt),
+                                        icon: Icon(Icons.camera_alt,
+                                            color: Colors.white),
                                         color: Colors.white,
                                       ),
                                     )
@@ -296,9 +244,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                     children: <Widget>[
                                       new Text(
                                         'Personal informations',
-                                        style: TextStyle(
-                                            fontSize: 18.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: subTitleStyle,
                                       ),
                                     ],
                                   ),
@@ -325,9 +271,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                     children: <Widget>[
                                       new Text(
                                         'Last name:',
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: tileTitleStyle,
                                       ),
                                     ],
                                   ),
@@ -343,8 +287,8 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                     child: new TextField(
                                       controller: _controller1,
                                       decoration: InputDecoration(
-                                        hintText: '$nom',
-                                      ),
+                                          hintText: '$nom',
+                                          hintStyle: hintStyleB),
                                       enabled: !_status,
                                       autofocus: !_status,
                                       onChanged: (val) {
@@ -366,9 +310,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                     children: <Widget>[
                                       new Text(
                                         'First name:',
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: tileTitleStyle,
                                       ),
                                     ],
                                   ),
@@ -384,8 +326,8 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                     child: new TextField(
                                       controller: _controller2,
                                       decoration: InputDecoration(
-                                        hintText: "$prenom",
-                                      ),
+                                          hintText: "$prenom",
+                                          hintStyle: hintStyleB),
                                       enabled: !_status,
                                       autofocus: !_status,
                                       onChanged: (val) {
@@ -407,9 +349,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                     children: <Widget>[
                                       new Text(
                                         'Phone:',
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: tileTitleStyle,
                                       ),
                                     ],
                                   ),
@@ -424,8 +364,9 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                   new Flexible(
                                     child: new TextField(
                                       controller: _controller4,
-                                      decoration:
-                                          InputDecoration(hintText: "$tele"),
+                                      decoration: InputDecoration(
+                                          hintText: "$tele",
+                                          hintStyle: hintStyleB),
                                       enabled: !_status,
                                       onChanged: (val) {
                                         setState(() => teleTmp = val);
@@ -445,9 +386,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                     child: Container(
                                       child: new Text(
                                         'CIN:',
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: tileTitleStyle,
                                       ),
                                     ),
                                     flex: 2,
@@ -456,9 +395,7 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                     child: Container(
                                       child: new Text(
                                         'City:',
-                                        style: TextStyle(
-                                            fontSize: 16.0,
-                                            fontWeight: FontWeight.bold),
+                                        style: tileTitleStyle,
                                       ),
                                     ),
                                     flex: 2,
@@ -477,8 +414,9 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                       padding: EdgeInsets.only(right: 10.0),
                                       child: new TextField(
                                         controller: _controller5,
-                                        decoration:
-                                            InputDecoration(hintText: "$cin"),
+                                        decoration: InputDecoration(
+                                            hintText: "$cin",
+                                            hintStyle: hintStyleB),
                                         enabled: !_status,
                                         onChanged: (val) {
                                           setState(() => cinTmp = val);
@@ -490,8 +428,9 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                   Flexible(
                                     child: new TextField(
                                       controller: _controller6,
-                                      decoration:
-                                          InputDecoration(hintText: "$ville"),
+                                      decoration: InputDecoration(
+                                          hintText: "$ville",
+                                          hintStyle: hintStyleB),
                                       enabled: !_status,
                                       onChanged: (val) {
                                         setState(() => villeTmp = val);
@@ -524,55 +463,52 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
       padding: EdgeInsets.only(left: 25.0, right: 25.0, top: 45.0),
       child: new Row(
         mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(right: 10.0, left: 10),
-              child: Container(
-                  child: new RaisedButton(
-                child: new Text("Save"),
-                textColor: Colors.white,
-                color: Colors.black,
-                onPressed: () async {
-                  setState(() {
-                    _status = true;
-                    FocusScope.of(context).requestFocus(new FocusNode());
+            child: Container(
+                child: new RaisedButton(
+              child: new Text("Save"),
+              textColor: Colors.white,
+              color: buttonColor,
+              onPressed: () async {
+                setState(() {
+                  _status = true;
+                  FocusScope.of(context).requestFocus(new FocusNode());
 
-                    if (nomTmp != null) {
-                      nom = nomTmp;
-                    }
-                    if (prenomTmp != null) {
-                      prenom = prenomTmp;
-                    }
-                    if (teleTmp != null) {
-                      tele = teleTmp;
-                    }
-                    if (cinTmp != null) {
-                      cin = cinTmp;
-                    }
-                    if (villeTmp != null) {
-                      ville = villeTmp;
-                    }
-                    _controller1.clear();
-                    _controller2.clear();
-                    _controller3.clear();
-                    _controller4.clear();
-                    _controller5.clear();
-                    _controller6.clear();
-                  });
-                  final FirebaseAuth auth = FirebaseAuth.instance;
-                  final FirebaseUser user = await auth.currentUser();
-                  final uid = user.uid;
-                  final DatabaseService _auth = DatabaseService(uid: uid);
-                  email = Provider.of<User>(context, listen: true).email;
-                  await _auth.updateClientData(
-                      nom, prenom, email, sexe, cin, tele, ville);
-                },
-                shape: new RoundedRectangleBorder(
-                    borderRadius: new BorderRadius.circular(10.0)),
-              )),
-            ),
+                  if (nomTmp != null) {
+                    nom = nomTmp;
+                  }
+                  if (prenomTmp != null) {
+                    prenom = prenomTmp;
+                  }
+                  if (teleTmp != null) {
+                    tele = teleTmp;
+                  }
+                  if (cinTmp != null) {
+                    cin = cinTmp;
+                  }
+                  if (villeTmp != null) {
+                    ville = villeTmp;
+                  }
+                  _controller1.clear();
+                  _controller2.clear();
+                  _controller3.clear();
+                  _controller4.clear();
+                  _controller5.clear();
+                  _controller6.clear();
+                });
+                final FirebaseAuth auth = FirebaseAuth.instance;
+                final FirebaseUser user = await auth.currentUser();
+                final uid = user.uid;
+                final DatabaseService _auth = DatabaseService(uid: uid);
+                email = Provider.of<User>(context, listen: true).email;
+                await _auth.updateClientData(
+                    nom, prenom, email, sexe, cin, tele, ville);
+              },
+              shape: new RoundedRectangleBorder(
+                  borderRadius: new BorderRadius.circular(10.0)),
+            )),
             flex: 2,
           ),
           Expanded(
@@ -602,17 +538,14 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
   }
 
   Widget _getEditIcon() {
-    return new GestureDetector(
-      child: new CircleAvatar(
-        backgroundColor: Colors.black,
-        radius: 14.0,
-        child: new Icon(
-          Icons.edit,
-          color: Colors.white,
-          size: 16.0,
-        ),
+    return new IconButton(
+      color: Colors.black26,
+      icon: new Icon(
+        Icons.edit,
+        color: buttonColor,
+        size: 16.0,
       ),
-      onTap: () {
+      onPressed: () {
         setState(() {
           _status = false;
         });

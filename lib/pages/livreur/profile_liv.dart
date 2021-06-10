@@ -26,14 +26,18 @@ class _ProfileLivState extends State<ProfileLiv> {
             MaterialPageRoute(builder: (BuildContext context) => IndexLv()));
       },
       child: Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
             title: Text(
               "My profile",
-              style: pageTitle,
+              style: pageTitleO,
             ),
             actions: <Widget>[
               IconButton(
-                  icon: Icon(Icons.edit),
+                  icon: Icon(
+                    Icons.edit,
+                    color: buttonColor,
+                  ),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) =>
@@ -42,12 +46,15 @@ class _ProfileLivState extends State<ProfileLiv> {
             ],
             leading: Builder(
               builder: (context) => IconButton(
-                icon: Icon(Icons.menu),
+                icon: Icon(
+                  Icons.menu,
+                  color: buttonColor,
+                ),
                 onPressed: () => Scaffold.of(context).openDrawer(),
               ),
             ),
             centerTitle: true,
-            backgroundColor: Colors.black,
+            backgroundColor: Colors.white,
             elevation: 1,
           ),
           bottomNavigationBar: ButtomBarLiv(),
@@ -65,46 +72,33 @@ class _ProfileLivState extends State<ProfileLiv> {
                     Center(
                       child: Stack(
                         children: [
-                          Container(
-                            width: 140,
-                            height: 140,
-                            decoration: BoxDecoration(
-                                border: Border.all(
-                                    width: 1,
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor),
-                                boxShadow: [
-                                  BoxShadow(
-                                      spreadRadius: 2,
-                                      blurRadius: 10,
-                                      color: Colors.black.withOpacity(0.1),
-                                      offset: Offset(0, 7))
-                                ],
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  fit: BoxFit.cover,
-                                  image: snapshot?.data['photoURL'] == "" 
-                                      ? AssetImage('assets/profile.png')
-                                      : CachedNetworkImage(
-                                          imageUrl: IndexLv.livreur.photoURL,
-                                          imageBuilder:
-                                              (context, imageProvider) =>
-                                                  Container(
-                                            decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                                  image: imageProvider,
-                                                  fit: BoxFit.cover,
-                                                  colorFilter: ColorFilter.mode(
-                                                      Colors.red,
-                                                      BlendMode.colorBurn)),
-                                            ),
-                                          ),
-                                          placeholder: (context, url) =>
-                                              CircularProgressIndicator(),
-                                          errorWidget: (context, url, error) =>
-                                              Icon(Icons.error),
-                                        ),
-                                )),
+                          CachedNetworkImage(
+                            imageUrl: snapshot?.data['photoURL'] == null
+                                ? ''
+                                : snapshot?.data['photoURL'],
+                            imageBuilder: (context, imageProvider) => Container(
+                              width: 140,
+                              height: 140,
+                              decoration: BoxDecoration(
+                                  border: Border.all(
+                                      width: 1,
+                                      color: Theme.of(context)
+                                          .scaffoldBackgroundColor),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        spreadRadius: 2,
+                                        blurRadius: 10,
+                                        color: Colors.black.withOpacity(0.1),
+                                        offset: Offset(0, 7))
+                                  ],
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                      fit: BoxFit.cover, image: imageProvider)),
+                            ),
+                            placeholder: (context, url) =>
+                                CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                Icon(Icons.error),
                           ),
                         ],
                       ),

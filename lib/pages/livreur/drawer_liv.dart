@@ -29,33 +29,20 @@ class _DrawerLivState extends State<DrawerLiv> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                IndexLv.livreur?.photoURL == null
-                    ? CircleAvatar(
-                        radius: 35.0,
-                        backgroundImage: AssetImage('assets/profile.png'))
-                    : CachedNetworkImage(
-                        imageUrl: IndexLv.livreur.photoURL,
-                        imageBuilder: (context, imageProvider) => Container(
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                                image: imageProvider,
-                                fit: BoxFit.cover,
-                                colorFilter: ColorFilter.mode(
-                                    Colors.red, BlendMode.colorBurn)),
-                          ),
-                        ),
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      ),
+                CachedNetworkImage(
+                  imageUrl: IndexLv.livreur?.photoURL == null
+                      ? ''
+                      : IndexLv.livreur?.photoURL,
+                  imageBuilder: (context, imageProvider) => CircleAvatar(
+                      radius: 35.0, backgroundImage: imageProvider),
+                  placeholder: (context, url) => CircularProgressIndicator(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
                 Column(
                   children: [
                     Text(
                       "${IndexLv.livreur?.nom} ${IndexLv.livreur?.prenom}",
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.w800,
-                      ),
+                      style: subTitleStyle,
                     ),
                     SizedBox(
                       height: 5.0,
@@ -84,7 +71,7 @@ class _DrawerLivState extends State<DrawerLiv> {
           },
           leading: Icon(
             Icons.home,
-            color: Colors.black,
+            color: buttonColor,
           ),
           title: Text(
             "Home",
@@ -98,27 +85,27 @@ class _DrawerLivState extends State<DrawerLiv> {
           },
           leading: Icon(
             Icons.person,
-            color: Colors.black,
+            color: buttonColor,
           ),
           title: Text(
             "My profile",
             style: textStyle,
           ),
         ),
-        ListTile(
-          onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-                builder: (BuildContext context) => RapportLiv()));
-          },
-          leading: Icon(
-            Icons.receipt,
-            color: Colors.black,
-          ),
-          title: Text(
-            "Rapport",
-            style: textStyle,
-          ),
-        ),
+        // ListTile(
+        //   onTap: () {
+        //     Navigator.of(context).push(MaterialPageRoute(
+        //         builder: (BuildContext context) => RapportLiv()));
+        //   },
+        //   leading: Icon(
+        //     Icons.receipt,
+        //     color: buttonColor,
+        //   ),
+        //   title: Text(
+        //     "Rapport",
+        //     style: textStyle,
+        //   ),
+        // ),
         ListTile(
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
@@ -126,7 +113,7 @@ class _DrawerLivState extends State<DrawerLiv> {
           },
           leading: Icon(
             Icons.settings,
-            color: Colors.black,
+            color: buttonColor,
           ),
           title: Text(
             "Settings",
@@ -140,17 +127,21 @@ class _DrawerLivState extends State<DrawerLiv> {
             height: 40,
             margin: EdgeInsets.symmetric(horizontal: 45, vertical: 20),
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: Colors.black),
-            child: Center(
-              child: FlatButton(
-                onPressed: () async {
+                borderRadius: BorderRadius.circular(20), color: buttonColor),
+            child: Material(
+              borderRadius: BorderRadius.circular(20),
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () async {
                   await _auth.signOut();
                   Navigator.of(context).pushReplacement(MaterialPageRoute(
                       builder: (BuildContext context) => new Wrapper()));
                 },
-                child: Text(
-                  "Déconnecté",
-                  style: buttonStyle,
+                child: Center(
+                  child: Text(
+                    "Déconnecté",
+                    style: buttonStyle,
+                  ),
                 ),
               ),
             ),
