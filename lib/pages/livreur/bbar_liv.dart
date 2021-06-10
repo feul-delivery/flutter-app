@@ -1,3 +1,4 @@
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
@@ -125,12 +126,12 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
 
   _select(int index) {
     ButtomBarLiv.selectedIndex = index;
-    indicatorAlignX = -1 + -(2 / (items.length - 1) * index);
+    indicatorAlignX = double.parse('${index - 1}');
   }
 
   Widget _buildItemWidget(Item item, bool isSelected) {
     return Container(
-      color: Colors.white,
+      color: buttonColor,
       height: BAR_HEIGHT,
       width: width / items.length,
       child: Stack(
@@ -140,7 +141,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
             opacity: isSelected ? 0.0 : 1.0,
             duration: duration,
             curve: Curves.linear,
-            child: Text(item.title),
+            child: Text(item.title, style: textStyleWhite),
           ),
           AnimatedAlign(
             duration: duration,

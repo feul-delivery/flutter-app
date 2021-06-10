@@ -3,6 +3,7 @@ import 'package:FD_flutter/authentification/type_compte.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/admin/index_admin.dart';
 import 'package:FD_flutter/pages/client/home.dart';
+import 'package:FD_flutter/pages/livreur/bbar_liv.dart';
 import 'package:FD_flutter/pages/livreur/index_lv.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
 import 'package:FD_flutter/pages/station/index_st.dart';
@@ -22,6 +23,12 @@ class Wrapper extends StatelessWidget {
     ButtomBarSt.selectedIndexSt = 0;
     DatabaseService databaseService = DatabaseService();
     IndexSt.entreprise = await databaseService.entrepriseData();
+  }
+
+  _getLivreur() async {
+    ButtomBarLiv.selectedIndex = 0;
+    DatabaseService databaseService = DatabaseService();
+    IndexLv.livreur = await databaseService.livreurData();
   }
 
   @override
@@ -55,6 +62,7 @@ class Wrapper extends StatelessWidget {
           break;
         case "livreur":
           {
+            _getLivreur();
             return IndexLv();
           }
           break;

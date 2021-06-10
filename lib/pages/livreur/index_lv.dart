@@ -1,16 +1,20 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/livreur.dart';
+import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/livreur/bbar_liv.dart';
 import 'package:FD_flutter/pages/livreur/drawer_liv.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
+import 'package:FD_flutter/shared/lang.dart';
+import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'widgets/commande_widget.dart';
 
 class IndexLv extends StatefulWidget {
   static Livreur livreur;
-  IndexLv({Key key}) : super(key: key);
+  IndexLv({Key key});
 
   @override
   _IndexLvState createState() => _IndexLvState();
@@ -19,7 +23,7 @@ class IndexLv extends StatefulWidget {
 class _IndexLvState extends State<IndexLv> {
   get child => null;
   var statut = 'N/A';
-  Color cl;
+  bool showStatut = false;
   @override
   void initState() {
     super.initState();
@@ -38,18 +42,12 @@ class _IndexLvState extends State<IndexLv> {
         var key1 = await value.data['statut'];
         setState(() {
           statut = key1;
-          if (value.data['statut'] == 'actif') {
-            cl = Colors.green;
-            print('hoo');
-          } else {
-            print('haa');
-            cl = Colors.red;
-          }
-          print(statut);
         });
       }
     });
   }
+
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -90,16 +88,25 @@ class _IndexLvState extends State<IndexLv> {
               false;
         },
         child: Scaffold(
+          key: _scaffoldKey,
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: Text("Home"),
-            backgroundColor: Colors.black,
+            leading: IconButton(
+              icon: Icon(Icons.menu, color: buttonColor),
+              onPressed: () => _scaffoldKey.currentState.openDrawer(),
+            ),
+            title: Text('${Language.mapLang['home']}', style: pageTitleO),
+            backgroundColor: Colors.white,
+            elevation: 0.5,
             centerTitle: true,
             actions: <Widget>[
               IconButton(
-                  icon: Icon(Icons.refresh),
+                  icon: Icon(showStatut ? Icons.unfold_less : Icons.unfold_more,
+                      color: buttonColor),
                   onPressed: () {
-                    setState(() {});
+                    setState(() {
+                      showStatut = !showStatut;
+                    });
                   })
             ],
           ),
@@ -107,177 +114,108 @@ class _IndexLvState extends State<IndexLv> {
             physics: BouncingScrollPhysics(),
             child: Container(
               margin: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text('vous statut : ',
-                              style: TextStyle(fontSize: 18)),
-                          Text(statut,
-                              style: TextStyle(color: cl, fontSize: 22)),
-                        ],
-                      ),
-                      IconButton(
-                          icon: Icon(Icons.sync_outlined),
-                          onPressed: () async {
-                            final FirebaseAuth auth = FirebaseAuth.instance;
-                            final FirebaseUser user = await auth.currentUser();
-                            if (statut == 'actif') {
-                              await Firestore.instance
-                                  .collection('livreur')
-                                  .document(user.uid)
-                                  .updateData({
-                                'statut': 'inactif',
-                              });
-                              statut = 'inactif';
-                              cl = Colors.red;
-                            } else if (statut == 'inactif') {
-                              await Firestore.instance
-                                  .collection('livreur')
-                                  .document(user.uid)
-                                  .updateData({
-                                'statut': 'actif',
-                              });
-                              statut = 'actif';
-                              cl = Colors.green;
-                            }
+              child: Column(children: <Widget>[
+                showStatut
+                    ? Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 7),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              children: [
+                                Text('Statut: ',
+                                    style: TextStyle(fontSize: 18)),
+                                Container(
+                                    width: 10,
+                                    height: 10,
+                                    decoration: BoxDecoration(
+                                        color: statut == 'inactif'
+                                            ? Colors.red
+                                            : Colors.green,
+                                        borderRadius:
+                                            BorderRadius.circular(50)))
+                              ],
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                                  color: buttonColor,
+                                  borderRadius: BorderRadius.circular(50)),
+                              child: IconButton(
+                                  icon: Icon(Icons.sync_outlined,
+                                      color: Colors.white),
+                                  onPressed: () async {
+                                    final FirebaseAuth auth =
+                                        FirebaseAuth.instance;
+                                    final FirebaseUser user =
+                                        await auth.currentUser();
+                                    if (statut == 'actif') {
+                                      await Firestore.instance
+                                          .collection('livreur')
+                                          .document(user.uid)
+                                          .updateData({
+                                        'statut': 'inactif',
+                                      });
+                                      statut = 'inactif';
+                                    } else if (statut == 'inactif') {
+                                      await Firestore.instance
+                                          .collection('livreur')
+                                          .document(user.uid)
+                                          .updateData({
+                                        'statut': 'actif',
+                                      });
+                                      statut = 'actif';
+                                    }
 
-                            setState(() {});
-                          })
-                    ],
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    'Disponible commandes:',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                  Divider(
-                    height: 5,
-                    thickness: 1,
-                  ),
-                  for (int i = 0; i < items.length; i++) commandeEnLine(i),
-                ],
-              ),
+                                    setState(() {});
+                                  }),
+                            )
+                          ],
+                        ),
+                      )
+                    : SizedBox.shrink(),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  alignment: Alignment.centerLeft,
+                  child: Text('Disponible commandes:', style: tileTitleStyle),
+                ),
+                Divider(
+                  height: 5,
+                  thickness: 1,
+                  color: buttonColor,
+                ),
+                StreamBuilder<QuerySnapshot>(
+                    stream: Firestore.instance
+                        .collection('orders')
+                        .where('uidstation',
+                            isEqualTo: IndexLv.livreur.uidentreprise)
+                        .where('statut', isEqualTo: 'waiting')
+                        .orderBy('dateheurec', descending: true)
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasError) {
+                        return Icon(Icons.cancel, color: Colors.black);
+                      }
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                          return SizedBox(
+                              child: Center(child: customeCircularProgress));
+                        case ConnectionState.none:
+                          return Icon(Icons.error_outline, color: Colors.black);
+
+                        default:
+                          for (int i = 0; i < items.length; i++)
+                            return CommandeWidget(commande: items[i]);
+                      }
+                    })
+              ]),
             ),
           ),
           drawer: DrawerLiv(),
           bottomNavigationBar: ButtomBarLiv(),
         ));
-  }
-
-  Container commandeEnLine(int i) {
-    return Container(
-      child: Column(
-        children: [
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            decoration: new BoxDecoration(
-                color: Colors.white70,
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.4),
-                      blurRadius: 20,
-                      offset: Offset(0, 10))
-                ]),
-            child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(items[i]['nom'],
-                                  style: TextStyle(
-                                      color: Colors.black, fontSize: 15))),
-                        ),
-                        Container(
-                            height: 25,
-                            margin: EdgeInsets.symmetric(horizontal: 5),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Colors.black,
-                            )),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Text('Volume:',
-                                      style:
-                                          TextStyle(color: Colors.grey[800])),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Container(
-                                  child: Text(items[i]['volume'],
-                                      style:
-                                          TextStyle(color: Colors.grey[600])),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  child: Text('Type:',
-                                      style:
-                                          TextStyle(color: Colors.grey[800])),
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Container(
-                                  child: Text(items[i]['type'],
-                                      style:
-                                          TextStyle(color: Colors.grey[600])),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Text('Address:',
-                                      style:
-                                          TextStyle(color: Colors.grey[800])),
-                                ),
-                                Container(
-                                  child: Text(items[i]['adresse'],
-                                      style:
-                                          TextStyle(color: Colors.grey[600])),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
-                )),
-          )
-        ],
-      ),
-    );
   }
 
   List items = [

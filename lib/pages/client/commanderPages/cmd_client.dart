@@ -84,78 +84,83 @@ class _ClientOrderState extends State<ClientOrder> {
         context: context,
         builder: (context) {
           return StatefulBuilder(builder: (BuildContext context, setState) {
-            return Container(
-                height: MediaQuery.of(context).size.height * 0.30,
-                child: ListView(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Container(
-                          margin: EdgeInsets.all(20),
-                          child: Text(
-                            '${Language.mapLang['modepay']}',
-                            style: pageTitleX,
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            if (_methd == pmethode.google) {
-                              _methode = 'BANK';
-                            } else {
-                              _methode = 'COD';
-                            }
-                            Navigator.of(context).pop();
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.black,
-                                borderRadius: BorderRadius.circular(50)),
-                            margin: EdgeInsets.all(10),
-                            padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
-                            child: Center(
+            return SingleChildScrollView(
+              child: Container(
+                  color: scaffoldBackground,
+                  child: Column(
+                    children: [
+                      Container(
+                        color: buttonColor,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Container(
+                              margin: EdgeInsets.all(20),
                               child: Text(
-                                '${Language.mapLang['finish']}',
-                                style: buttonStyle,
+                                '${Language.mapLang['modepay']}',
+                                style: pageTitleX,
                               ),
                             ),
-                          ),
+                            InkWell(
+                              onTap: () {
+                                if (_methd == pmethode.google) {
+                                  _methode = 'BANK';
+                                } else {
+                                  _methode = 'COD';
+                                }
+                                Navigator.of(context).pop();
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: scaffoldBackground,
+                                    borderRadius: BorderRadius.circular(50)),
+                                margin: EdgeInsets.all(10),
+                                padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
+                                child: Center(
+                                  child: Text(
+                                    '${Language.mapLang['finish']}',
+                                    style: buttonStyle,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      child: Column(
-                        children: [
-                          ListTile(
-                            title: Text('${Language.mapLang['cod']}'),
-                            leading: Radio(
-                                activeColor: Colors.black,
-                                value: pmethode.livraison,
-                                groupValue: _methd,
-                                onChanged: (pmethode valeur) {
-                                  setState(() {
-                                    _methd = valeur;
-                                  });
-                                }),
-                          ),
-                          ListTile(
-                            title: Text('${Language.mapLang['card']}'),
-                            leading: Radio(
-                                activeColor: Colors.black,
-                                value: pmethode.google,
-                                groupValue: _methd,
-                                onChanged: (pmethode valeur) {
-                                  setState(() {
-                                    _methd = valeur;
-                                  });
-                                }),
-                          )
-                        ],
                       ),
-                    ),
-                  ],
-                ));
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        child: Column(
+                          children: [
+                            ListTile(
+                              title: Text('${Language.mapLang['cod']}'),
+                              leading: Radio(
+                                  activeColor: Colors.black,
+                                  value: pmethode.livraison,
+                                  groupValue: _methd,
+                                  onChanged: (pmethode valeur) {
+                                    setState(() {
+                                      _methd = valeur;
+                                    });
+                                  }),
+                            ),
+                            ListTile(
+                              title: Text('${Language.mapLang['card']}'),
+                              leading: Radio(
+                                  activeColor: Colors.black,
+                                  value: pmethode.google,
+                                  groupValue: _methd,
+                                  onChanged: (pmethode valeur) {
+                                    setState(() {
+                                      _methd = valeur;
+                                    });
+                                  }),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  )),
+            );
           });
         });
   }

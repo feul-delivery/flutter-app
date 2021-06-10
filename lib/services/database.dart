@@ -1,5 +1,6 @@
 import 'package:FD_flutter/modules/client.dart';
 import 'package:FD_flutter/modules/entreprise.dart';
+import 'package:FD_flutter/modules/livreur.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -259,6 +260,46 @@ class DatabaseService {
         tele: phone,
         email: email,
         ville: ville,
+        photoURL: photoURL);
+  }
+
+  Future<Livreur> livreurData() async {
+    String nom;
+    String prenom;
+    String email;
+    String cin;
+    String phone;
+    String statut;
+    String sexe;
+    String photoURL;
+    String uidEntreprise;
+    final FirebaseAuth _auth = FirebaseAuth.instance;
+    final FirebaseUser user = await _auth.currentUser();
+    final uid = user.uid;
+    await Firestore.instance
+        .collection('livreur')
+        .document(uid)
+        .get()
+        .then((value) async {
+      nom = await value.data['nom'];
+      prenom = await value.data['prenom'];
+      email = await value.data['email'];
+      statut = await value.data['statut'];
+      cin = await value.data['cin'];
+      phone = await value.data['tele'];
+      sexe = await value.data['sexe'];
+      photoURL = await value.data['photoURL'];
+      uidEntreprise = await value.data['uidentreprise'];
+    });
+    return Livreur(
+        sexe: sexe,
+        nom: nom,
+        cin: cin,
+        prenom: prenom,
+        tele: phone,
+        email: email,
+        statut: statut,
+        uidentreprise: uidEntreprise,
         photoURL: photoURL);
   }
 }

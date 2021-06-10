@@ -32,211 +32,213 @@ class _RegisterState extends State<Register> {
             key: _mScaffoldState,
             resizeToAvoidBottomInset: true,
             backgroundColor: scaffoldBackground,
-            body: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              padding: EdgeInsets.fromLTRB(0,MediaQuery.of(context).size.width/8, 0, 0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  FadeAnimation(
-                      0.1,
-                      Container(
-                        margin: EdgeInsets.all(15),
-                        child: Text(
-                          "${Language.mapLang['createaccount']},",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 50,
-                              fontWeight: FontWeight.w900),
+            body: Center(
+              child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    FadeAnimation(
+                        0.1,
+                        Container(
+                          margin: EdgeInsets.all(15),
+                          child: Text(
+                            "${Language.mapLang['createaccount']},",
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 50,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        )),
+                    Column(
+                      children: <Widget>[
+                        SizedBox(
+                          height: 10,
                         ),
-                      )),
-                  Column(
-                    children: <Widget>[
-                      SizedBox(
-                        height: 10,
-                      ),
-                      FadeAnimation(
-                          0.1,
-                          Form(
-                            key: _formKey,
-                            child: Column(
-                              children: <Widget>[
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                  child: TextFormField(
-                                    cursorColor: grayColor,
-                                    cursorHeight: 25,
-                                    cursorWidth: 1,
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.white),
-                                    textInputAction: TextInputAction.next,
-                                    decoration: InputDecoration(
-                                      prefixIcon: email.isEmpty ||
-                                              !email.contains('@') ||
-                                              !email.contains('.')
-                                          ? Icon(OMIcons.personAdd,
-                                              color: grayColor)
-                                          : Icon(OMIcons.person,
-                                              color: Colors.green),
-                                      hintText: "email",
-                                      hintStyle: hintStyle,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 10.0, vertical: 15.0),
-                                    ),
-                                    validator: (val) {
-                                      if (val.isEmpty ||
-                                          !val.contains('@') ||
-                                          !val.contains('.')) {
-                                        return '${Language.mapLang['emailvalidator']}';
-                                      }
-                                      return null;
-                                    },
-                                    keyboardType: TextInputType.emailAddress,
-                                    onChanged: (val) {
-                                      setState(() => email = val);
-                                    },
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                  child: TextFormField(
-                                    cursorColor: grayColor,
-                                    cursorHeight: 25,
-                                    cursorWidth: 1,
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.white),
-                                    textInputAction: TextInputAction.next,
-                                    obscureText: _isObscure,
-                                    decoration: InputDecoration(
-                                      prefixIcon: password.length > 7
-                                          ? Icon(OMIcons.lock,
-                                              color: Colors.green)
-                                          : Icon(OMIcons.lockOpen,
-                                              color: grayColor),
-                                      hintText:
-                                          "${Language.mapLang['password']}",
-                                      suffixIcon: IconButton(
-                                          icon: Icon(
-                                            _isObscure
-                                                ? Icons.visibility
-                                                : Icons.visibility_off,
-                                            color: _isObscure
-                                                ? grayColor
-                                                : buttonColor,
-                                          ),
-                                          onPressed: () {
-                                            setState(() {
-                                              _isObscure = !_isObscure;
-                                            });
-                                          }),
-                                      hintStyle: hintStyle,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 10.0, vertical: 15.0),
-                                    ),
-                                    validator: (val) => val.length < 8
-                                        ? '${Language.mapLang['passwordvalidator']}'
-                                        : null,
-                                    onChanged: (val) {
-                                      setState(() => password = val);
-                                    },
-                                  ),
-                                ),
-                                Container(
-                                  margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                                  child: TextFormField(
-                                    cursorColor: grayColor,
-                                    cursorHeight: 25,
-                                    cursorWidth: 1,
-                                    style: TextStyle(
-                                        fontSize: 18, color: Colors.white),
-                                    obscureText: true,
-                                    decoration: InputDecoration(
-                                      prefixIcon: passwordConf != password &&
-                                              passwordConf.length > 0
-                                          ? Icon(OMIcons.clear,
-                                              color: Colors.red)
-                                          : Icon(OMIcons.done,
-                                              color: Colors.green),
-                                      hintText: "confirmation",
-                                      hintStyle: hintStyle,
-                                      contentPadding: EdgeInsets.symmetric(
-                                          horizontal: 10.0, vertical: 15.0),
-                                    ),
-                                    onChanged: (value) {
-                                      setState(() {
-                                        passwordConf = value;
-                                      });
-                                    },
-                                    validator: (val) => val != password ||
-                                            val.length == 0
-                                        ? '${Language.mapLang['passwordmatch']}'
-                                        : null,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          )),
-                      SizedBox(height: 15),
-                      Text(error, style: errorTextStyle),
-                      SizedBox(height: 10),
-                      FadeAnimation(
-                          0.1,
-                          Container(
-                            height: 45,
-                            margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
-                            width: MediaQuery.of(context).size.width,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(5),
-                                color: buttonColor),
-                            child: Material(
-                              color: Colors.transparent,
-                              child: InkWell(
-                                borderRadius: BorderRadius.circular(5),
-                                onTap: () async {
-                                  if (_formKey.currentState.validate()) {
-                                    try {
-                                      final result =
-                                          await InternetAddress.lookup(
-                                              'google.com');
-                                      if (result.isNotEmpty &&
-                                          result[0].rawAddress.isNotEmpty) {
-                                        setState(() => loading = true);
-                                        dynamic result = await _auth
-                                            .registerWithEmailAndPassword(
-                                                email, password);
-                                        if (result == null) {
-                                          setState(() {
-                                            loading = false;
-                                            error =
-                                                '${Language.mapLang['emailvalidator']}';
-                                          });
-                                        } else {
-                                          Navigator.of(context).pushReplacement(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      TypeCompte()));
+                        FadeAnimation(
+                            0.1,
+                            Form(
+                              key: _formKey,
+                              child: Column(
+                                children: <Widget>[
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                    child: TextFormField(
+                                      cursorColor: grayColor,
+                                      cursorHeight: 25,
+                                      cursorWidth: 1,
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.white),
+                                      textInputAction: TextInputAction.next,
+                                      decoration: InputDecoration(
+                                        prefixIcon: email.isEmpty ||
+                                                !email.contains('@') ||
+                                                !email.contains('.')
+                                            ? Icon(OMIcons.personAdd,
+                                                color: grayColor)
+                                            : Icon(OMIcons.person,
+                                                color: Colors.green),
+                                        hintText: "email",
+                                        hintStyle: hintStyle,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 15.0),
+                                      ),
+                                      validator: (val) {
+                                        if (val.isEmpty ||
+                                            !val.contains('@') ||
+                                            !val.contains('.')) {
+                                          return '${Language.mapLang['emailvalidator']}';
                                         }
+                                        return null;
+                                      },
+                                      keyboardType: TextInputType.emailAddress,
+                                      onChanged: (val) {
+                                        setState(() => email = val);
+                                      },
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                    child: TextFormField(
+                                      cursorColor: grayColor,
+                                      cursorHeight: 25,
+                                      cursorWidth: 1,
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.white),
+                                      textInputAction: TextInputAction.next,
+                                      obscureText: _isObscure,
+                                      decoration: InputDecoration(
+                                        prefixIcon: password.length > 7
+                                            ? Icon(OMIcons.lock,
+                                                color: Colors.green)
+                                            : Icon(OMIcons.lockOpen,
+                                                color: grayColor),
+                                        hintText:
+                                            "${Language.mapLang['password']}",
+                                        suffixIcon: IconButton(
+                                            icon: Icon(
+                                              _isObscure
+                                                  ? Icons.visibility
+                                                  : Icons.visibility_off,
+                                              color: _isObscure
+                                                  ? grayColor
+                                                  : buttonColor,
+                                            ),
+                                            onPressed: () {
+                                              setState(() {
+                                                _isObscure = !_isObscure;
+                                              });
+                                            }),
+                                        hintStyle: hintStyle,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 15.0),
+                                      ),
+                                      validator: (val) => val.length < 8
+                                          ? '${Language.mapLang['passwordvalidator']}'
+                                          : null,
+                                      onChanged: (val) {
+                                        setState(() => password = val);
+                                      },
+                                    ),
+                                  ),
+                                  Container(
+                                    margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                                    child: TextFormField(
+                                      cursorColor: grayColor,
+                                      cursorHeight: 25,
+                                      cursorWidth: 1,
+                                      style: TextStyle(
+                                          fontSize: 18, color: Colors.white),
+                                      obscureText: true,
+                                      decoration: InputDecoration(
+                                        prefixIcon: passwordConf != password &&
+                                                passwordConf.length > 0
+                                            ? Icon(OMIcons.clear,
+                                                color: Colors.red)
+                                            : Icon(OMIcons.done,
+                                                color: Colors.green),
+                                        hintText: "confirmation",
+                                        hintStyle: hintStyle,
+                                        contentPadding: EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 15.0),
+                                      ),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          passwordConf = value;
+                                        });
+                                      },
+                                      validator: (val) => val != password ||
+                                              val.length == 0
+                                          ? '${Language.mapLang['passwordmatch']}'
+                                          : null,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            )),
+                        SizedBox(height: 15),
+                        Text(error, style: errorTextStyle),
+                        SizedBox(height: 10),
+                        FadeAnimation(
+                            0.1,
+                            Container(
+                              height: 45,
+                              margin: EdgeInsets.fromLTRB(15, 7, 15, 7),
+                              width: MediaQuery.of(context).size.width,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(5),
+                                  color: buttonColor),
+                              child: Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  borderRadius: BorderRadius.circular(5),
+                                  onTap: () async {
+                                    if (_formKey.currentState.validate()) {
+                                      try {
+                                        final result =
+                                            await InternetAddress.lookup(
+                                                'google.com');
+                                        if (result.isNotEmpty &&
+                                            result[0].rawAddress.isNotEmpty) {
+                                          setState(() => loading = true);
+                                          dynamic result = await _auth
+                                              .registerWithEmailAndPassword(
+                                                  email, password);
+                                          if (result == null) {
+                                            setState(() {
+                                              loading = false;
+                                              error =
+                                                  '${Language.mapLang['emailvalidator']}';
+                                            });
+                                          } else {
+                                            Navigator.of(context)
+                                                .pushReplacement(
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            TypeCompte()));
+                                          }
+                                        }
+                                      } on SocketException catch (_) {
+                                        showInSnackBar(
+                                            "${Language.mapLang['nointernet']}");
                                       }
-                                    } on SocketException catch (_) {
-                                      showInSnackBar(
-                                          "${Language.mapLang['nointernet']}");
                                     }
-                                  }
-                                },
-                                child: Center(
-                                  child: Text(
-                                    "${Language.mapLang['register']}"
-                                        .toUpperCase(),
-                                    style: buttonStyle,
+                                  },
+                                  child: Center(
+                                    child: Text(
+                                      "${Language.mapLang['register']}"
+                                          .toUpperCase(),
+                                      style: buttonStyle,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          )),
-                    ],
-                  ),
-                ],
+                            )),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           );

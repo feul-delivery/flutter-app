@@ -11,14 +11,9 @@ class HistoriqueLiv extends StatefulWidget {
 }
 
 class _HistoriqueLivState extends State<HistoriqueLiv> {
-  // ignore: unused_field
-  Icon _searchIcon = new Icon(Icons.search);
-  Widget _appBarTitle = new Text('Historique', style: pageTitle);
-  get _searchPressed => null;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-
         // ignore: missing_return
         onWillPop: () {
           ButtomBarLiv.selectedIndex = 0;
@@ -26,19 +21,14 @@ class _HistoriqueLivState extends State<HistoriqueLiv> {
               MaterialPageRoute(builder: (BuildContext context) => IndexLv()));
         },
         child: Scaffold(
+          backgroundColor: Colors.white,
           appBar: AppBar(
-            centerTitle: true,
-            backgroundColor: Colors.black,
-            title: _appBarTitle,
-            actions: <Widget>[
-              IconButton(
-                icon: new Icon(Icons.search),
-                onPressed: _searchPressed,
-              ),
-            ],
+            title: Text('Historique', style: pageTitleO),
+            elevation: 0,
+            backgroundColor: Colors.white,
           ),
           drawer: DrawerLiv(),
-        bottomNavigationBar: ButtomBarLiv(),
+          bottomNavigationBar: ButtomBarLiv(),
         ));
   }
 }
