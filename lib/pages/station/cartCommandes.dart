@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class ToutCommandes extends StatefulWidget {
   final DocumentSnapshot document;
@@ -17,6 +18,7 @@ class _ToutCommandesState extends State<ToutCommandes> {
   void initState() {
     super.initState();
     getNom();
+    timeago.setLocaleMessages('fr', timeago.FrMessages());
   }
 
   Future getNom() async {
@@ -40,8 +42,6 @@ class _ToutCommandesState extends State<ToutCommandes> {
   Widget build(BuildContext context) {
     var document = widget.document;
     DateTime date = DateTime.parse(document['dateheurec']);
-    final dateNow = DateTime.now();
-    String ago = dateNow.difference(date).inMinutes.toString();
     if (widget.xox == 'histo') {
       return Container(
         child: Column(
@@ -245,7 +245,7 @@ class _ToutCommandesState extends State<ToutCommandes> {
                                   const EdgeInsets.only(left: 5.0, right: 5.0),
                               child: Center(
                                   child: Text(
-                                '$ago min ago',
+                                timeago.format(date, locale: 'fr'),
                                 style: TextStyle(color: Colors.white),
                               )),
                             ),

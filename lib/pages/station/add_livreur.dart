@@ -19,6 +19,7 @@ class _AddLivreurState extends State<AddLivreur> {
   Widget build(BuildContext context) {
     final User _user = Provider.of<User>(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Color(0xFFEFF0F5),
         title: Text(
@@ -47,7 +48,7 @@ class _AddLivreurState extends State<AddLivreur> {
                 decoration: InputDecoration(
                     border: const UnderlineInputBorder(),
                     labelText: "Type an email",
-                    labelStyle: hintStyle,
+                    labelStyle: hintStyleB,
                     suffixIcon: IconButton(
                       onPressed: () => searchController.clear(),
                       icon: Icon(Icons.clear),

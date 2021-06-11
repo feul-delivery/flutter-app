@@ -1,6 +1,7 @@
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:FD_flutter/pages/livreur/commande_details.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class CommandeWidget extends StatefulWidget {
@@ -15,21 +16,27 @@ class _CommandeWidgetState extends State<CommandeWidget> {
   @override
   Widget build(BuildContext context) {
     timeago.setLocaleMessages('fr', timeago.FrMessages());
-    return Column(
-      children: [
-        SizedBox(
-          height: 20,
-        ),
-        Container(
-          decoration: new BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-              boxShadow: [
-                BoxShadow(
-                    color: buttonColor.withOpacity(0.4),
-                    blurRadius: 20,
-                    offset: Offset(0, 10))
-              ]),
+    return Container(
+      margin: EdgeInsets.only(top: 20),
+      decoration: new BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+                color: buttonColor.withOpacity(0.4),
+                blurRadius: 20,
+                offset: Offset(0, 10))
+          ]),
+      child: Material(
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => CommandeDetailLv(widget.commande),
+            ));
+          },
+          borderRadius: BorderRadius.circular(20),
           child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -99,7 +106,7 @@ class _CommandeWidgetState extends State<CommandeWidget> {
                                   style: TextStyle(color: Colors.grey[800])),
                             ),
                             Container(
-                              child: Text(widget.commande['adresse'],
+                              child: Text(widget.commande['adresse'].toString(),
                                   style: TextStyle(color: Colors.grey[600])),
                             ),
                           ],
@@ -109,8 +116,8 @@ class _CommandeWidgetState extends State<CommandeWidget> {
                   )
                 ],
               )),
-        )
-      ],
+        ),
+      ),
     );
   }
 }

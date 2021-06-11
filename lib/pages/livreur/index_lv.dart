@@ -209,9 +209,7 @@ class _IndexLvState extends State<IndexLv> {
                           return Column(children: [
                             for (DocumentSnapshot document
                                 in snapshot.data.documents)
-                              InkWell(
-                                  onTap: () => print('go to commande page'),
-                                  child: CommandeWidget(commande: document))
+                              CommandeWidget(commande: document)
                           ]);
                       }
                     })

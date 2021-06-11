@@ -103,11 +103,10 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
   }
 
   Widget getBodyDone() {
-    DateTime dateC = DateTime.parse(widget.document['dateheurec']);
-    DateTime dateL = DateTime.parse(widget.document['dateheurel']);
-    int colorV = int.parse(widget.document['color']);
+    DateTime dateC = DateTime.parse(widget.document['dateheurec'].toString());
+    DateTime dateL = DateTime.parse(widget.document['dateheurel'].toString());
+    int colorV = int.tryParse(widget.document['color'].toString());
     Color myColor = Color(colorV);
-    print(colorV);
     return ListView(
       children: <Widget>[
         SizedBox(
@@ -298,7 +297,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
               ),
               Center(
                 child: Text(
-                  widget.document['matricule'],
+                  widget.document['matricule'].toString(),
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -376,7 +375,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
               ),
               Center(
                 child: Text(
-                  widget.document['idtype'],
+                  widget.document['idtype'].toString(),
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                 ),
               ),
@@ -417,7 +416,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
                 child: Padding(
                   padding: const EdgeInsets.fromLTRB(28, 0, 28, 0),
                   child: Text(
-                    widget.document['adresse'],
+                    widget.document['adresse'].toString(),
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -431,7 +430,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
 
   Widget getBodyAtt() {
     DateTime dateC = DateTime.parse(widget.document['dateheurec']);
-    int colorV = int.parse(widget.document['color']);
+    int colorV = int.parse(widget.document['color'].toString());
     Color myColor = Color(colorV);
     print(colorV);
     return ListView(
@@ -679,7 +678,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
 }
 
 Future<void> _clientDetailSheet(
-    BuildContext context, var id, var nom, var num) {
+    BuildContext context, String id, var nom, var num) {
   return showModalBottomSheet(
       isScrollControlled: true,
       context: context,
