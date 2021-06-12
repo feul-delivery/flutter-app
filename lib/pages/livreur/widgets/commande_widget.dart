@@ -72,12 +72,10 @@ class _CommandeWidgetState extends State<CommandeWidget> {
                             ),
                             Container(
                               child: Text(
-                                  timeago
-                                      .format(
-                                          DateTime.parse(
-                                              widget.commande['dateheurel']),
-                                          locale: 'fr')
-                                      .toString(),
+                                  timeago.format(
+                                      DateTime.parse(
+                                          widget.commande['dateheurec']),
+                                      locale: 'fr'),
                                   style: TextStyle(color: Colors.orange[600])),
                             ),
                           ],

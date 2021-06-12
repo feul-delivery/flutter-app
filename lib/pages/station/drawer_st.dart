@@ -178,7 +178,7 @@ class DrawerSt extends StatelessWidget {
                 ),
                 onPressed: () {
                   _auth.signOut();
-                  Navigator.pushReplacement(
+                  Navigator.push(
                       context,
                       PageTransition(
                           type: PageTransitionType.fade, child: SettingsSt()));

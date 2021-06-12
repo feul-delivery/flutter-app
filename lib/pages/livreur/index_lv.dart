@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:FD_flutter/modules/livreur.dart';
-import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/livreur/bbar_liv.dart';
 import 'package:FD_flutter/pages/livreur/drawer_liv.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
@@ -101,7 +100,10 @@ class _IndexLvState extends State<IndexLv> {
             centerTitle: true,
             actions: <Widget>[
               IconButton(
-                  icon: Icon(showStatut ? Icons.unfold_less : Icons.unfold_more,
+                  icon: Icon(
+                      showStatut
+                          ? Icons.close_fullscreen_rounded
+                          : Icons.open_in_full_rounded,
                       color: buttonColor),
                   onPressed: () {
                     setState(() {
@@ -139,11 +141,11 @@ class _IndexLvState extends State<IndexLv> {
                             ),
                             Container(
                               decoration: BoxDecoration(
-                                  color: buttonColor,
+                                  color: Colors.white70,
                                   borderRadius: BorderRadius.circular(50)),
                               child: IconButton(
                                   icon: Icon(Icons.sync_outlined,
-                                      color: Colors.white),
+                                      color: buttonColor),
                                   onPressed: () async {
                                     final FirebaseAuth auth =
                                         FirebaseAuth.instance;

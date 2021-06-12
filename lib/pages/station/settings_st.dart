@@ -24,6 +24,7 @@ class _SettingsStState extends State<SettingsSt> {
           elevation: 1,
         ),
         body: Container(
+          color: Colors.white,
           padding: EdgeInsets.only(left: 15, top: 25, right: 15),
           child: GestureDetector(
             onTap: () {

@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CommandeDetail extends StatefulWidget {
   final DocumentSnapshot document;
@@ -27,22 +26,6 @@ class _CommandeDetailState extends State<CommandeDetail> {
             }),
         backgroundColor: darkGray,
         elevation: 1,
-        actions: [
-          IconButton(
-              onPressed: () async {
-                Map<dynamic, dynamic> _coordinates =
-                    widget.document['coordinates'];
-                var _mapURL =
-                    'https://www.google.com/maps?saddr=Your+Location&daddr=${_coordinates['latitude']},${_coordinates['longitude']}';
-                if (await canLaunch(_mapURL)) {
-                  await launch(_mapURL);
-                }
-              },
-              icon: Icon(
-                Icons.new_releases,
-                color: buttonColor,
-              )),
-        ],
       ),
       body: ListView(
         children: <Widget>[
