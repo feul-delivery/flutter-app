@@ -4,6 +4,7 @@ import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:FD_flutter/shared/lang.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CommandeDetailLv extends StatefulWidget {
   final DocumentSnapshot document;
@@ -42,50 +43,25 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                 Icons.person_outline_rounded,
                 color: buttonColor,
               )),
+          IconButton(
+              onPressed: () async {
+                Map<dynamic, dynamic> _coordinates =
+                    widget.document['coordinates'];
+                var _mapURL =
+                    'https://www.google.com/maps?saddr=Your+Location&daddr=${_coordinates['latitude']},${_coordinates['longitude']}';
+                if (await canLaunch(_mapURL)) {
+                  await launch(_mapURL);
+                }
+              },
+              icon: Icon(
+                Icons.location_on_outlined,
+                color: buttonColor,
+              )),
         ],
       ),
       backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
-          SizedBox(
-            height: 10,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 20, right: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.format_list_numbered_sharp,
-                      color: Colors.black54,
-                      size: 18,
-                    ),
-                    SizedBox(
-                      width: 15,
-                    ),
-                    Text(
-                      "Ref:",
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black54),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Center(
-                  child: Text(
-                    widget.document.reference.documentID,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ],
-            ),
-          ),
           SizedBox(
             height: 20,
           ),
@@ -190,15 +166,17 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                           fontWeight: FontWeight.w500,
                           color: Colors.black54),
                     ),
-                    SizedBox(
-                      width: 60,
-                    ),
-                    Container(
-                      width: 60,
-                      height: 17,
-                      color: myColor,
-                    ),
                   ],
+                ),
+                SizedBox(
+                  width: 60,
+                ),
+                Center(
+                  child: Icon(
+                    Icons.airport_shuttle_rounded,
+                    color: myColor,
+                    size: 36,
+                  ),
                 ),
               ],
             ),
