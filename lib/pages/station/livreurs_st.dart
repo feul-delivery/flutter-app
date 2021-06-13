@@ -2,7 +2,9 @@ import 'package:FD_flutter/pages/station/add_livreur.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:FD_flutter/shared/lang.dart';
+import 'package:FD_flutter/modules/user.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
@@ -15,19 +17,7 @@ class LivreurSt extends StatefulWidget {
 }
 
 class _LivreurStState extends State<LivreurSt> {
-  var uid;
-
-  void initState() {
-    super.initState();
-    _getEntID();
-  }
-
-  Future _getEntID() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final FirebaseUser user = await auth.currentUser();
-    uid = user.uid;
-  }
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -38,20 +28,31 @@ class _LivreurStState extends State<LivreurSt> {
             MaterialPageRoute(builder: (BuildContext context) => IndexSt()));
       },
       child: Scaffold(
+        key: _scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(
+              Icons.menu,
+              color: buttonColor,
+            ),
+            onPressed: () => _scaffoldKey.currentState.openDrawer(),
+          ),
           actions: [
             IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (BuildContext context) => AddLivreur()));
               },
-              icon: Icon(Icons.group_add),
+              icon: Icon(
+                Icons.group_add,
+                color: buttonColor,
+              ),
             )
           ],
           title: Text(
             "Livreurs",
-            style: pageTitle,
+            style: pageTitleO,
           ),
           centerTitle: true,
           backgroundColor: Colors.black,
@@ -66,7 +67,8 @@ class _LivreurStState extends State<LivreurSt> {
                 StreamBuilder<QuerySnapshot>(
                   stream: Firestore.instance
                       .collection('livreur')
-                      .where('uidentreprise', isEqualTo: uid)
+                      .where('uidentreprise',
+                          isEqualTo: Provider.of<User>(context).uid)
                       .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
@@ -108,12 +110,6 @@ class _LivreurStState extends State<LivreurSt> {
 
   Container livreurList(DocumentSnapshot document) {
     DateTime date = DateTime.parse(document['dateajoute']);
-    Color col;
-    if (document['statut'] == 'actif') {
-      col = Colors.green;
-    } else {
-      col = Colors.red;
-    }
     print(date);
     return Container(
       decoration: new BoxDecoration(
@@ -121,7 +117,7 @@ class _LivreurStState extends State<LivreurSt> {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-                color: Colors.black.withOpacity(0.4),
+                color: buttonColor.withOpacity(0.4),
                 blurRadius: 20,
                 offset: Offset(0, 10))
           ]),
@@ -132,30 +128,60 @@ class _LivreurStState extends State<LivreurSt> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                height: MediaQuery.of(context).size.width / 5,
-                width: MediaQuery.of(context).size.width / 5,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(10.0),
-                  child: document['photoURL'] == ""
-                      ? CircleAvatar(
-                          radius: 50.0,
-                          backgroundImage: AssetImage('assets/profile.png'),
-                        )
-                      : CachedNetworkImage(
-                          imageUrl: document['photoURL'],
-                          imageBuilder: (context, imageProvider) =>
-                              CircleAvatar(
-                                  radius: 30.0, backgroundImage: imageProvider),
-                          placeholder: (context, url) => CircleAvatar(
-                              radius: 30.0, child: CircularProgressIndicator()),
-                          errorWidget: (context, url, error) => CircleAvatar(
-                              radius: 30.0, child: Icon(Icons.error)),
-                        ),
-                )),
+            Stack(
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    height: MediaQuery.of(context).size.width / 5,
+                    width: MediaQuery.of(context).size.width / 5,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10.0),
+                      child: CachedNetworkImage(
+                        imageUrl: document['photoURL'] == null
+                            ? ''
+                            : document['photoURL'],
+                        imageBuilder: (context, imageProvider) => CircleAvatar(
+                            radius: 30.0, backgroundImage: imageProvider),
+                        placeholder: (context, url) => CircleAvatar(
+                            radius: 30.0, child: CircularProgressIndicator()),
+                        errorWidget: (context, url, error) => CircleAvatar(
+                            radius: 30.0,
+                            backgroundColor: darkGray,
+                            child: Container(
+                              margin: EdgeInsets.only(top: 5),
+                              child: Text(
+                                  '${document['prenom']}'
+                                          .substring(0, 1)
+                                          .toUpperCase() +
+                                      '${document['nom']}'
+                                          .substring(0, 1)
+                                          .toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Quarion')),
+                            )),
+                      ),
+                    )),
+                Positioned(
+                  bottom: 2,
+                  right: 2,
+                  child: Container(
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                        color: document['statut'] == 'inactif'
+                            ? Colors.red
+                            : Colors.green,
+                        borderRadius: BorderRadius.circular(50)),
+                  ),
+                )
+              ],
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -175,7 +201,7 @@ class _LivreurStState extends State<LivreurSt> {
                         child: Center(
                             child: Text(
                           'Since: ${date.day}/${date.month}/${date.year}',
-                          style: TextStyle(color: Colors.white),
+                          style: textStyle.copyWith(color: buttonColor),
                         )),
                       ),
                     ),
@@ -198,7 +224,7 @@ class _LivreurStState extends State<LivreurSt> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
-                                  child: Text('CIN: ',
+                                  child: Text('email:',
                                       style:
                                           TextStyle(color: Colors.grey[800])),
                                 ),
@@ -206,7 +232,7 @@ class _LivreurStState extends State<LivreurSt> {
                                   width: 30,
                                 ),
                                 Container(
-                                  child: Text(document['cin'],
+                                  child: Text(document['email'],
                                       style:
                                           TextStyle(color: Colors.grey[600])),
                                 ),
@@ -219,7 +245,7 @@ class _LivreurStState extends State<LivreurSt> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                              child: Text('Phone:',
+                              child: Text('${Language.mapLang['phone']}:',
                                   style: TextStyle(color: Colors.grey[800])),
                             ),
                             SizedBox(
@@ -228,22 +254,6 @@ class _LivreurStState extends State<LivreurSt> {
                             Container(
                               child: Text(document['tele'],
                                   style: TextStyle(color: Colors.grey[600])),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Container(
-                              child: Text('Status:',
-                                  style: TextStyle(color: Colors.grey[800])),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              child: Text(document['statut'],
-                                  style: TextStyle(color: col)),
                             ),
                           ],
                         ),
