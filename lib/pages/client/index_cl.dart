@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
+import 'ClientProvider.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,16 +25,9 @@ import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'commanderPages/cmd_client.dart';
 
-Coordinates _locationCoordinates;
-
 class IndexCl extends StatefulWidget {
   @override
   _IndexClState createState() => _IndexClState();
-}
-
-@override
-void initState() {
-  _getCurrentLocation();
 }
 
 Future<String> _getDistance(
@@ -50,7 +44,7 @@ Future<String> _getDistance(
 
 StreamSubscription _locationSubscription;
 Location _locationTracker = Location();
-Future<void> _getCurrentLocation() async {
+Future<Coordinates> _getCurrentLocation() async {
   var _location;
   try {
     _location = await _locationTracker.getLocation();
@@ -63,8 +57,8 @@ Future<void> _getCurrentLocation() async {
         _locationTracker.onLocationChanged().listen((newLocalData) {
       _location = newLocalData;
     });
-    _locationCoordinates =
-        new Coordinates(_location.latitude, _location.longitude);
+
+    return new Coordinates(_location.latitude, _location.longitude);
   } on PlatformException catch (e) {
     if (e.code == 'PERMISSION_DENIED') {
       return null;
@@ -72,46 +66,52 @@ Future<void> _getCurrentLocation() async {
   }
 }
 
+final GlobalKey<ScaffoldState> _mScaffoldState = new GlobalKey<ScaffoldState>();
+
 class _IndexClState extends State<IndexCl> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () {
-          return showDialog(
-                context: context,
-                builder: (context) => new CustomAlertDialog(
-                  title: new Text("${Language.mapLang['areyousure']}"),
-                  
-                  actions: <Widget>[
-                    Row(children: [
-                      new FlatButton(
-                        onPressed: () => exit(0),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              right: 0.0, bottom: 0.0, top: 10),
-                          child: Text(
-                            "oui",
-                            style: TextStyle(color: Colors.black),
-                          ),
+        return showDialog(
+              context: context,
+              builder: (context) => new CustomAlertDialog(
+                title: new Text("${Language.mapLang['areyousure']}"),
+                actions: <Widget>[
+                  Row(children: [
+                    new FlatButton(
+                      onPressed: () => exit(0),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 0.0, bottom: 0.0, top: 10),
+                        child: Text(
+                          "oui",
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
-                      new FlatButton(
-                        onPressed: () => Navigator.of(context).pop(false),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              right: 0.0, bottom: 0.0, top: 10),
-                          child: Text(
-                            'Cancel',
-                            style: TextStyle(color: Colors.black),
-                          ),
+                    ),
+                    new FlatButton(
+                      onPressed: () => Navigator.of(context).pop(false),
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            right: 0.0, bottom: 0.0, top: 10),
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
-                    ]),
-                  ],
-                ),
-              ) ??
-              false;
-        },
+                    ),
+                  ]),
+                ],
+              ),
+            ) ??
+            false;
+      },
       child: RefreshIndicator(
         onRefresh: () async {
           return await Future.delayed(Duration(seconds: 1)).then((value) {
@@ -119,7 +119,7 @@ class _IndexClState extends State<IndexCl> {
           });
         },
         child: Scaffold(
-          backgroundColor: scaffoldBackground,
+          backgroundColor: scaffoldBackground, key: _mScaffoldState,
           // appBar: AppBar(
           //   title: ,
           //   backgroundColor: scaffoldBackground,
@@ -259,7 +259,8 @@ class _IndexClState extends State<IndexCl> {
                         ),
                       ),
                     ),
-                    _locationCoordinates == null
+                    Provider.of<ClientProvider>(context).locationCoordinates ==
+                            null
                         ? Container(
                             height: MediaQuery.of(context).size.width,
                             child: Center(
@@ -270,12 +271,15 @@ class _IndexClState extends State<IndexCl> {
                                     children: [
                                   Text(
                                     '${Language.mapLang['accesslocation']}',
-                                    style: textStyleWhite,
+                                    style:
+                                        textStyle.copyWith(color: Colors.white),
                                   ),
                                   TextButton.icon(
                                       onPressed: () async {
-                                        await _getCurrentLocation();
-                                        setState(() {});
+                                        Provider.of<ClientProvider>(context,
+                                                listen: false)
+                                            .setCoordinates(
+                                                await _getCurrentLocation());
                                       },
                                       icon: Icon(OMIcons.myLocation,
                                           color: buttonColor),
@@ -352,9 +356,21 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
                       )),
                   trailingIcon:
                       Icon(OMIcons.accountBalanceWallet, color: buttonColor),
-                  onPressed: () => Navigator.of(context).push(PageTransition(
-                      type: PageTransitionType.fade,
-                      child: new ClientOrder(doc: document)))),
+                  onPressed: () {
+                    Firestore.instance
+                        .collection('livreur')
+                        .where('uidentreprise', isEqualTo: document.documentID)
+                        .getDocuments()
+                        .then((value) {
+                      if (value.documents.length > 0) {
+                        Navigator.of(context).push(PageTransition(
+                            type: PageTransitionType.fade,
+                            child: new ClientOrder(doc: document)));
+                      } else {
+                        showInSnackBar("${Language.mapLang['stnolv']}");
+                      }
+                    });
+                  }),
               FocusedMenuItem(
                   title: Text("${Language.mapLang['open']}"),
                   trailingIcon: Icon(Icons.open_in_new),
@@ -469,7 +485,9 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
                             Padding(
                               padding: const EdgeInsets.only(top: 2.0),
                               child: FutureBuilder(
-                                future: _getDistance(_locationCoordinates,
+                                future: _getDistance(
+                                    Provider.of<ClientProvider>(context)
+                                        .locationCoordinates,
                                     document['coordinates']),
                                 builder: (BuildContext context,
                                     AsyncSnapshot<String> snapshot) {
@@ -491,6 +509,13 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
           ),
         )
       : Container();
+}
+
+void showInSnackBar(String value) {
+  SnackBar snackBar = new SnackBar(
+      backgroundColor: Colors.white,
+      content: new Text(value, style: textStyle));
+  _mScaffoldState.currentState.showSnackBar(snackBar);
 }
 
 _shimmerCards(BuildContext ctx) {

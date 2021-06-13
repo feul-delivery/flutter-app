@@ -21,15 +21,25 @@ class ExploreCl extends StatefulWidget {
 
 List<String> _favList = [];
 
+String searchTerm;
+// TextEditingController searchController = new TextEditingController();
+
 class _ExploreClState extends State<ExploreCl> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   Icon _searchIcon = new Icon(Icons.search);
+  final GlobalKey<ScaffoldState> _mScaffoldState =
+      new GlobalKey<ScaffoldState>();
   Widget _appBarTitle = new Container(
       margin: EdgeInsets.only(top: 3),
       child: Text('${Language.mapLang['explore']}', style: pageTitleO));
-  String _searchString;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _mScaffoldState,
       backgroundColor: darkGray,
       appBar: AppBar(
         leading: Icon(Icons.language_rounded, color: buttonColor),
@@ -67,11 +77,11 @@ class _ExploreClState extends State<ExploreCl> {
                 _favList = List.from(snapshot.data['favorite']);
                 inspect(_favList);
                 return StreamBuilder<QuerySnapshot>(
-                  stream: _searchString == null
+                  stream: searchTerm == null
                       ? Firestore.instance.collection('entreprise').snapshots()
                       : Firestore.instance
                           .collection('entreprise')
-                          .where('titre', isGreaterThanOrEqualTo: _searchString)
+                          .where('titre', isGreaterThanOrEqualTo: searchTerm)
                           .snapshots(),
                   builder: (context, snapshot) {
                     if (snapshot.hasError) {
@@ -234,7 +244,7 @@ class _ExploreClState extends State<ExploreCl> {
                             Icon(Icons.error, color: Colors.white),
                             SizedBox(height: 5),
                             Text('${Language.mapLang['imagenotfound']}',
-                                style: textStyleWhite)
+                                style: textStyle.copyWith(color: Colors.white))
                           ],
                         ),
                       ),
@@ -260,9 +270,20 @@ class _ExploreClState extends State<ExploreCl> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(PageTransition(
-                              type: PageTransitionType.fade,
-                              child: new ClientOrder(doc: document)));
+                          Firestore.instance
+                              .collection('livreur')
+                              .where('uidentreprise',
+                                  isEqualTo: document.documentID)
+                              .getDocuments()
+                              .then((value) {
+                            if (value.documents.length > 0) {
+                              Navigator.of(context).push(PageTransition(
+                                  type: PageTransitionType.fade,
+                                  child: new ClientOrder(doc: document)));
+                            } else {
+                              showInSnackBar("${Language.mapLang['stnolv']}");
+                            }
+                          });
                         },
                         icon: Icon(OMIcons.accountBalanceWallet,
                             color: buttonColor),
@@ -296,19 +317,20 @@ class _ExploreClState extends State<ExploreCl> {
           cursorHeight: 25,
           cursorWidth: 1,
           style: TextStyle(fontSize: 18, color: Colors.white),
-          keyboardType: TextInputType.text,
+          textInputAction: TextInputAction.search,
+          onFieldSubmitted: (val) {
+            setState(() {
+              searchTerm = val;
+            });
+          },
           decoration: new InputDecoration(
             hintText: '${Language.mapLang['typehere']}',
             hintStyle: hintStyle,
             border: InputBorder.none,
             contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
           ),
-          onChanged: (value) {
-            _searchString = value;
-          },
         );
       } else {
-        _searchString = null;
         this._searchIcon = new Icon(Icons.search);
         this._appBarTitle = new Container(
             margin: EdgeInsets.only(top: 3),
@@ -360,5 +382,12 @@ class _ExploreClState extends State<ExploreCl> {
                       height: 250, width: MediaQuery.of(context).size.width))
           ]),
     );
+  }
+
+  void showInSnackBar(String value) {
+    SnackBar snackBar = new SnackBar(
+        backgroundColor: Colors.white,
+        content: new Text(value, style: textStyle));
+    _mScaffoldState.currentState.showSnackBar(snackBar);
   }
 }
