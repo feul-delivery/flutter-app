@@ -76,7 +76,7 @@ class _TypeStState extends State<TypeSt> {
                               duration: Duration(seconds: 1),
                               content: Text(
                                 'Are you sure',
-                                style: textStyleWhite,
+                                style: textStyle.copyWith(color: Colors.white),
                               ),
                               backgroundColor: Colors.black,
                               action: SnackBarAction(

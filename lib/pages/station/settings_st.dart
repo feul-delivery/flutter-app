@@ -4,8 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class SettingsSt extends StatefulWidget {
-  SettingsSt({Key key}) : super(key: key);
-
   @override
   _SettingsStState createState() => _SettingsStState();
 }
@@ -20,7 +18,7 @@ class _SettingsStState extends State<SettingsSt> {
             style: pageTitle,
           ),
           centerTitle: true,
-          backgroundColor: Colors.black,
+          backgroundColor: buttonColor,
           elevation: 1,
         ),
         body: Container(
@@ -35,7 +33,7 @@ class _SettingsStState extends State<SettingsSt> {
                 children: [
                   Icon(
                     Icons.person,
-                    color: Colors.black,
+                    color: buttonColor,
                   ),
                   SizedBox(
                     width: 8,
@@ -56,7 +54,7 @@ class _SettingsStState extends State<SettingsSt> {
                 children: [
                   Icon(
                     Icons.phone_iphone,
-                    color: Colors.black,
+                    color: buttonColor,
                   ),
                   SizedBox(
                     width: 8,
@@ -77,7 +75,7 @@ class _SettingsStState extends State<SettingsSt> {
                 children: [
                   Icon(
                     Icons.security,
-                    color: Colors.black,
+                    color: buttonColor,
                   ),
                   SizedBox(
                     width: 8,
@@ -163,13 +161,13 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                     FlatButton(
                         onPressed: () {},
                         child: Text("Change",
-                            style: TextStyle(color: Colors.black))),
+                            style: TextStyle(color: buttonColor))),
                     FlatButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
                         child: Text("Cancel",
-                            style: TextStyle(color: Colors.black))),
+                            style: TextStyle(color: buttonColor))),
                   ],
                 ),
               ],
@@ -222,7 +220,7 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
                           BoxShadow(
                               spreadRadius: 2,
                               blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1),
+                              color: buttonColor.withOpacity(0.1),
                               offset: Offset(0, 10))
                         ],
                         shape: BoxShape.circle,
@@ -258,7 +256,7 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
                     },
                     child: Text(
                       "Close",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: buttonColor),
                     )),
               ],
             );
@@ -319,11 +317,11 @@ InkWell buildRateUsRow(BuildContext context, String title) {
                           Navigator.of(context).pop();
                         },
                         child: Text("Cancel",
-                            style: TextStyle(color: Colors.black))),
+                            style: TextStyle(color: buttonColor))),
                     FlatButton(
                         onPressed: () {},
-                        child: Text("Send",
-                            style: TextStyle(color: Colors.black))),
+                        child:
+                            Text("Send", style: TextStyle(color: buttonColor))),
                   ],
                 ),
               ],
@@ -373,7 +371,7 @@ InkWell buildAccountOptionRow(BuildContext context, String title) {
                     },
                     child: Text(
                       "Close",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: buttonColor),
                     )),
               ],
             );

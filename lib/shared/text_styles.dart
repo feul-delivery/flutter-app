@@ -104,11 +104,7 @@ const textStyle = TextStyle(
   color: Colors.black,
   fontWeight: FontWeight.w400,
 );
-const textStyleWhite = TextStyle(
-  fontFamily: 'Quarion',
-  color: Colors.white,
-  fontWeight: FontWeight.w400,
-);
+
 const strongTextStyle = TextStyle(
   fontFamily: 'Quarion',
   color: Colors.black,
@@ -118,6 +114,12 @@ const strongTextStyle = TextStyle(
 const subTitleStyle = TextStyle(
   fontFamily: 'Quarion',
   color: Colors.black,
+  fontWeight: FontWeight.w400,
+  fontSize: 20,
+);
+const subTitleStyleW = TextStyle(
+  fontFamily: 'Quarion',
+  color: Colors.white,
   fontWeight: FontWeight.w400,
   fontSize: 20,
 );
