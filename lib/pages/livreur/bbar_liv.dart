@@ -61,7 +61,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
       height: BAR_HEIGHT,
       width: width,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: buttonColor,
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
@@ -141,7 +141,8 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
             opacity: isSelected ? 0.0 : 1.0,
             duration: duration,
             curve: Curves.linear,
-            child: Text(item.title, style: textStyleWhite),
+            child: Text(item.title,
+                style: textStyle.copyWith(color: Colors.white)),
           ),
           AnimatedAlign(
             duration: duration,

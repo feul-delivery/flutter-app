@@ -59,7 +59,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
       height: BAR_HEIGHT,
       width: width,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Colors.black,
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
@@ -112,7 +112,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
               curve: Curves.linear,
               duration: duration,
               child: Container(
-                color: Colors.black,
+                color: buttonColor,
                 width: width / items.length,
                 height: INDICATOR_HEIGHT,
               ),
@@ -125,12 +125,12 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
 
   _select(int index) {
     ButtomBarSt.selectedIndexSt = index;
-    indicatorAlignX = -1 + -(2 / (items.length - 1) * index);
+    indicatorAlignX = double.parse('${index - 1}');
   }
 
   Widget _buildItemWidget(Item item, bool isSelected) {
     return Container(
-      color: Colors.white,
+      color: Colors.black,
       height: BAR_HEIGHT,
       width: width / items.length,
       child: Stack(
@@ -142,14 +142,14 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
               curve: Curves.linear,
               child: Text(
                 item.title,
-                style: textStyle,
+                style: textStyle.copyWith(color: buttonColor.withOpacity(0.6)),
               )),
           AnimatedAlign(
             duration: duration,
             alignment: isSelected ? Alignment.center : Alignment(0, 2.6),
             child: Icon(
               item.icon,
-              color: Colors.black,
+              color: buttonColor,
             ),
           ),
         ],

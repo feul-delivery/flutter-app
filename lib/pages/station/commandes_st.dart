@@ -30,13 +30,6 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
           title: Text("Orders"),
           backgroundColor: Colors.black,
           centerTitle: true,
-          actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.refresh_rounded),
-                onPressed: () {
-                  setState(() {});
-                })
-          ],
         ),
         body: SingleChildScrollView(
           physics: BouncingScrollPhysics(),

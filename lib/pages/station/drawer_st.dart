@@ -12,7 +12,6 @@ import '../../wrapper.dart';
 import 'bbar_st.dart';
 
 class DrawerSt extends StatelessWidget {
-  DrawerSt({Key key}) : super(key: key);
   final AuthService _auth = AuthService();
   @override
   Widget build(BuildContext context) {
@@ -177,7 +176,6 @@ class DrawerSt extends StatelessWidget {
                   color: Colors.black,
                 ),
                 onPressed: () {
-                  _auth.signOut();
                   Navigator.push(
                       context,
                       PageTransition(
