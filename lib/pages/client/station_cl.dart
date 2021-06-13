@@ -83,7 +83,8 @@ class _StationProfilClState extends State<StationProfilCl> {
                                         SizedBox(height: 5),
                                         Text(
                                             '${Language.mapLang['imagenotfound']}',
-                                            style: textStyleWhite)
+                                            style: textStyle.copyWith(
+                                                color: Colors.white))
                                       ],
                                     ),
                                   ),

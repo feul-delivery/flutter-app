@@ -417,7 +417,7 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                                   EdgeInsets.only(bottom: 2),
                                               child: new Text(
                                                 '${Language.mapLang['personalinfo']}',
-                                                style: subTitleStyle,
+                                                style: subTitleStyleW,
                                               ),
                                             ),
                                             _status
@@ -820,7 +820,8 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
               ),
             ),
             SizedBox(width: 5),
-            Text('${Language.mapLang['edit']}', style: textStyleWhite)
+            Text('${Language.mapLang['edit']}',
+                style: textStyle.copyWith(color: Colors.white))
           ],
         ),
         onTap: () {

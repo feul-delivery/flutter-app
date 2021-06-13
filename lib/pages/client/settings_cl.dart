@@ -88,7 +88,7 @@ class _SettingsClState extends State<SettingsCl> {
                     ),
                     title: Text(
                       "${Language.mapLang['editprofile']}",
-                      style: textStyleWhite,
+                      style: textStyle.copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -106,7 +106,7 @@ class _SettingsClState extends State<SettingsCl> {
                     ),
                     title: Text(
                       "${Language.mapLang['changeemail']}",
-                      style: textStyleWhite,
+                      style: textStyle.copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -124,7 +124,7 @@ class _SettingsClState extends State<SettingsCl> {
                     ),
                     title: Text(
                       "${Language.mapLang['changepassword']}",
-                      style: textStyleWhite,
+                      style: textStyle.copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -161,7 +161,7 @@ class _SettingsClState extends State<SettingsCl> {
                     ),
                     title: Text(
                       "${Language.mapLang['changelang']}",
-                      style: textStyleWhite,
+                      style: textStyle.copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -179,7 +179,7 @@ class _SettingsClState extends State<SettingsCl> {
                     ),
                     title: Text(
                       "${Language.mapLang['rateus']}",
-                      style: textStyleWhite,
+                      style: textStyle.copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -197,7 +197,7 @@ class _SettingsClState extends State<SettingsCl> {
                     ),
                     title: Text(
                       "${Language.mapLang['aboutus']}",
-                      style: textStyleWhite,
+                      style: textStyle.copyWith(color: Colors.white),
                     ),
                   ),
                 ),
@@ -799,7 +799,7 @@ Future<void> _buildModalAboutUsRow(BuildContext context) {
                         //         ),
                         //         Text(
                         //           'Build by the Flutter framework.',
-                        //           style: textStyleWhite,
+                        //           style: textStyle.copyWith(color: Colors.white),
                         //         ),
                         //       ],
                         //     )
@@ -810,7 +810,7 @@ Future<void> _buildModalAboutUsRow(BuildContext context) {
                         // ),
                         Text(
                           'Developped by:',
-                          style: textStyleWhite,
+                          style: textStyle.copyWith(color: Colors.white),
                         ),
                         SizedBox(
                           height: 7,
@@ -855,7 +855,8 @@ Future<void> _buildModalChangeLang(BuildContext context) {
                           color: buttonColor,
                           child: Center(
                               child: Text('${Language.mapLang['usedlang']}',
-                                  style: textStyleWhite)))
+                                  style:
+                                      textStyle.copyWith(color: Colors.white))))
                       : Container(),
                   Container(
                       padding: EdgeInsets.all(5),
@@ -937,7 +938,7 @@ Future<void> _buildModalChangeLang(BuildContext context) {
 // void showInSnackBar(String value, BuildContext context) {
 //   SnackBar snackBar = new SnackBar(
 //       backgroundColor: Colors.white,
-//       content: new Text(value, style: textStyleWhite));
+//       content: new Text(value, style: textStyle.copyWith(color: Colors.white)));
 //   _mScaffoldState.currentState.showSnackBar(snackBar);
 // }
 
