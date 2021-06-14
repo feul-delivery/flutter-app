@@ -53,7 +53,7 @@ class _initialProfileclState extends State<InitialProfilecl>
                   margin: EdgeInsets.only(right: 5, top: 10, bottom: 10),
                   width: 75.0,
                   decoration: BoxDecoration(
-                      color: scaffoldBackground,
+                      color: Colors.transparent,
                       borderRadius: BorderRadius.circular(20)),
                   child: Material(
                     color: Colors.transparent,

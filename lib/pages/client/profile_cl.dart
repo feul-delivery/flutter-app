@@ -404,10 +404,8 @@ class _ProfileClState extends State<ProfileCl> {
                                                             type:
                                                                 PageTransitionType
                                                                     .rightToLeft,
-                                                            child: CommandeCl(
-                                                              querySnapshot:
-                                                                  snapshotOrders,
-                                                            )));
+                                                            child:
+                                                                CommandeCl()));
                                                   },
                                                   child: ListTile(
                                                     leading: Container(

@@ -651,10 +651,10 @@ class _ProfileCLModifierState extends State<ProfileCLModifier>
                                                   : null,
                                               onChanged: (val) =>
                                                   _sexeTmp = val,
-                                              validator: (value) =>
-                                                  value.isEmpty
-                                                      ? 'Required'
-                                                      : null,
+                                              validator: (value) => value
+                                                      .isEmpty
+                                                  ? '${Language.mapLang['required']}'
+                                                  : null,
                                             ),
                                           ),
                                           flex: 2,

@@ -44,6 +44,7 @@ Future<String> _getDistance(
 
 StreamSubscription _locationSubscription;
 Location _locationTracker = Location();
+// ignore: missing_return
 Future<Coordinates> _getCurrentLocation() async {
   var _location;
   try {
@@ -136,6 +137,49 @@ class _IndexClState extends State<IndexCl> {
                     padding: EdgeInsets.all(15),
                     child:
                         Text('${Language.mapLang['home']}', style: pageTitleO)),
+                // Container(
+                //   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                //   width: MediaQuery.of(context).size.width,
+                //   decoration: BoxDecoration(color: Colors.red[700]),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text(
+                //         'you have a working request',
+                //         style: textStyle.copyWith(color: Colors.white),
+                //       ),
+                //       Row(
+                //         children: [
+                //           Container(
+                //             padding: EdgeInsets.fromLTRB(5, 4, 5, 4),
+                //             decoration: BoxDecoration(
+                //                 color: Colors.white,
+                //                 borderRadius: BorderRadius.circular(20)),
+                //             child: Material(
+                //               borderRadius: BorderRadius.circular(20),
+                //               color: Colors.transparent,
+                //               child: InkWell(
+                //                 borderRadius: BorderRadius.circular(20),
+                //                 child: Text(
+                //                   'accept',
+                //                   style:
+                //                       buttonStyle.copyWith(color: Colors.black),
+                //                 ),
+                //                 onTap: () {
+                //                   print("accepted");
+                //                 },
+                //               ),
+                //             ),
+                //           ),
+                //           SizedBox(width: 7),
+                //           InkWell(
+                //               child: Icon(Icons.clear, color: Colors.white),
+                //               onTap: () => null),
+                //         ],
+                //       )
+                //     ],
+                //   ),
+                // ),
                 Container(
                   color: buttonColor,
                   width: double.infinity,
@@ -148,6 +192,7 @@ class _IndexClState extends State<IndexCl> {
                     ),
                   ),
                 ),
+
                 Stack(
                   children: [
                     Container(
@@ -216,6 +261,7 @@ class _IndexClState extends State<IndexCl> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
+                      height: 35,
                       color: scaffoldBackground,
                       child: Material(
                         color: Colors.transparent,
