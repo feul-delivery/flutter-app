@@ -328,7 +328,7 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     height: MediaQuery.of(context).size.width * 2 / 3,
                     width: MediaQuery.of(context).size.width * 2 / 3,
                     child: QrImage(
-                      foregroundColor: buttonColor,
+                      foregroundColor: Colors.white,
                       data: '${widget.document.documentID}',
                       //   embeddedImage: AssetImage('assets/profile.png'),
                       //   embeddedImageStyle:

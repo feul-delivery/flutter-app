@@ -8,11 +8,10 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'commande_cl.dart';
+import 'package:provider/provider.dart';
+import 'package:FD_flutter/modules/user.dart';
 
 class CommandeCl extends StatefulWidget {
-  final AsyncSnapshot<QuerySnapshot> querySnapshot;
-
-  const CommandeCl({@required this.querySnapshot});
   @override
   _CommandeClState createState() => _CommandeClState();
 }
@@ -45,21 +44,44 @@ class _CommandeClState extends State<CommandeCl> {
             ],
             backgroundColor: buttonColor),
         body: SafeArea(
-          child: ListView(
-            padding: EdgeInsets.only(left: 0, right: 0),
-            children: <Widget>[
-              SizedBox(
-                height: 5,
-              ),
-              for (DocumentSnapshot doc in widget.querySnapshot.data.documents)
-                cardCommande(doc),
-            ],
-          ),
+          child: StreamBuilder<QuerySnapshot>(
+              stream: Firestore.instance
+                  .collection('orders')
+                  .where('uidclient', isEqualTo: Provider.of<User>(context).uid)
+                  .orderBy('ordernum')
+                  .getDocuments()
+                  .asStream(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(child: Icon(Icons.cancel, color: buttonColor));
+                }
+
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return Center(child: customeCircularProgress);
+                  case ConnectionState.none:
+                    return Center(
+                        child:
+                            Icon(Icons.error_outline, color: Colors.white54));
+
+                  default:
+                    return ListView(
+                      padding: EdgeInsets.only(left: 0, right: 0),
+                      children: <Widget>[
+                        SizedBox(
+                          height: 5,
+                        ),
+                        for (DocumentSnapshot doc in snapshot.data.documents)
+                          cardCommande(doc),
+                      ],
+                    );
+                }
+              }),
         ));
   }
 
-  Widget cardCommande(DocumentSnapshot documentSnapshot) {
-    double _prixTotal = double.tryParse('${documentSnapshot['prixtotal']}');
+  Widget cardCommande(DocumentSnapshot snapshot) {
+    double _prixTotal = double.tryParse('${snapshot['prixtotal']}');
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.20,
@@ -71,14 +93,13 @@ class _CommandeClState extends State<CommandeCl> {
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (BuildContext context) => CommandeDetail(
-                      document: documentSnapshot,
+                      document: snapshot,
                     )));
           },
         ),
       ],
       secondaryActions: [
-        if (documentSnapshot['statut'] == 'waiting' &&
-            documentSnapshot['uidlivreur'] == '')
+        if (snapshot['statut'] == 'waiting' && snapshot['uidlivreur'] == '')
           IconSlideAction(
             caption: '${Language.mapLang['cancel']}',
             color: Colors.red,
@@ -98,7 +119,7 @@ class _CommandeClState extends State<CommandeCl> {
                             onTap: () {
                               Firestore.instance
                                   .collection('orders')
-                                  .document(documentSnapshot.documentID)
+                                  .document(snapshot.documentID)
                                   .delete();
                               Navigator.of(context).pop();
                             },
@@ -132,24 +153,22 @@ class _CommandeClState extends State<CommandeCl> {
           leading: Container(
             padding: EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: documentSnapshot['statut'] == 'waiting'
+              color: snapshot['statut'] == 'waiting'
                   ? Colors.orange
                   : Colors.green,
               borderRadius: BorderRadius.circular(50),
             ),
             child: Icon(
-              documentSnapshot['statut'] == 'waiting'
-                  ? OMIcons.timer
-                  : OMIcons.check,
+              snapshot['statut'] == 'waiting' ? OMIcons.timer : OMIcons.check,
               color: Colors.white,
             ),
           ),
           title: Text(
-            '${documentSnapshot['ordernum']}',
+            '${snapshot['ordernum']}',
             style: tileTitleStyleW,
           ),
           subtitle: Text(
-            """${DateFormat.Hm().format(DateTime.parse(documentSnapshot['dateheurec']))} - ${DateTime.parse(documentSnapshot['dateheurec']).day}/${DateTime.parse(documentSnapshot['dateheurec']).month}/${DateTime.parse(documentSnapshot['dateheurec']).year}""",
+            """${DateFormat.Hm().format(DateTime.parse(snapshot['dateheurec']))} - ${DateTime.parse(snapshot['dateheurec']).day}/${DateTime.parse(snapshot['dateheurec']).month}/${DateTime.parse(snapshot['dateheurec']).year}""",
             style: smallTileGray,
           ),
           trailing: Text(

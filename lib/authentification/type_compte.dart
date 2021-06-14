@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shimmer/shimmer.dart';
 
 class TypeCompte extends StatefulWidget {
   @override
@@ -69,27 +68,23 @@ class _TypeCompteState extends State<TypeCompte> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        Shimmer.fromColors(
-                          baseColor: scaffoldBackground,
-                          highlightColor: Colors.white,
-                          child: Row(
-                            children: [
-                              RotatedBox(
-                                quarterTurns: 2,
-                                child: Icon(
-                                  Icons.play_arrow,
-                                  color: Colors.white,
-                                  size: 50,
-                                ),
+                        Row(
+                          children: [
+                            RotatedBox(
+                              quarterTurns: 2,
+                              child: Icon(
+                                Icons.play_arrow,
+                                color: Colors.white,
+                                size: 50,
                               ),
-                              Text('${Language.mapLang['customer']}',
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontFamily: 'Quarion',
-                                      fontWeight: FontWeight.w700,
-                                      fontSize: 34.0)),
-                            ],
-                          ),
+                            ),
+                            Text('${Language.mapLang['customer']}',
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: 'Quarion',
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 34.0)),
+                          ],
                         ),
                         Material(
                             color: buttonColor,
@@ -153,25 +148,20 @@ class _TypeCompteState extends State<TypeCompte> {
                                   color: Colors.white,
                                 ),
                               ))),
-                          Shimmer.fromColors(
-                            direction: ShimmerDirection.rtl,
-                            baseColor: scaffoldBackground,
-                            highlightColor: Colors.white,
-                            child: Row(
-                              children: [
-                                Text('${Language.mapLang['enterprise']}',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontFamily: 'Quarion',
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 34.0)),
-                                Icon(
-                                  Icons.play_arrow,
-                                  color: Colors.white,
-                                  size: 50,
-                                ),
-                              ],
-                            ),
+                          Row(
+                            children: [
+                              Text('${Language.mapLang['enterprise']}',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontFamily: 'Quarion',
+                                      fontWeight: FontWeight.w700,
+                                      fontSize: 34.0)),
+                              Icon(
+                                Icons.play_arrow,
+                                color: Colors.white,
+                                size: 50,
+                              ),
+                            ],
                           )
                         ]),
                   ),

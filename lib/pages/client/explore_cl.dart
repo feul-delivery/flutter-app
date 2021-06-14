@@ -144,10 +144,9 @@ class _ExploreClState extends State<ExploreCl> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text('${document['titre']}'.toUpperCase(),
-                              style: smallTileName),
+                          Text('${document['titre']}', style: smallTileName),
                           Text(
-                            '${document['adresse']}'.toLowerCase(),
+                            '${document['adresse']}',
                             style: TextStyle(
                                 color: Colors.white24,
                                 fontFamily: 'Quarion',
