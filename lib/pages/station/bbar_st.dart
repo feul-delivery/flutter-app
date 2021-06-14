@@ -13,9 +13,9 @@ class ButtomBarSt extends StatefulWidget {
 
 class _ButtomBarStState extends State<ButtomBarSt> {
   final List<Item> items = [
-    Item('Home', Icons.new_releases_outlined),
-    Item('Orders', Icons.history_outlined),
-    Item('Deliverymen', Icons.group_outlined),
+    Item('Accueil', Icons.new_releases_outlined),
+    Item('Commandes', Icons.history_outlined),
+    Item('Livreurs', Icons.group_outlined),
   ];
 
   @override
@@ -59,7 +59,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
       height: BAR_HEIGHT,
       width: width,
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
@@ -112,7 +112,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
               curve: Curves.linear,
               duration: duration,
               child: Container(
-                color: buttonColor,
+                color: Colors.black,
                 width: width / items.length,
                 height: INDICATOR_HEIGHT,
               ),
@@ -130,7 +130,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
 
   Widget _buildItemWidget(Item item, bool isSelected) {
     return Container(
-      color: Colors.black,
+      color: Colors.white,
       height: BAR_HEIGHT,
       width: width / items.length,
       child: Stack(
@@ -142,14 +142,14 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
               curve: Curves.linear,
               child: Text(
                 item.title,
-                style: textStyle.copyWith(color: buttonColor.withOpacity(0.6)),
+                style: textStyle,
               )),
           AnimatedAlign(
             duration: duration,
             alignment: isSelected ? Alignment.center : Alignment(0, 2.6),
             child: Icon(
               item.icon,
-              color: buttonColor,
+              color: Colors.black,
             ),
           ),
         ],

@@ -31,13 +31,6 @@ class _LivreurStState extends State<LivreurSt> {
         key: _scaffoldKey,
         backgroundColor: Colors.white,
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: buttonColor,
-            ),
-            onPressed: () => _scaffoldKey.currentState.openDrawer(),
-          ),
           actions: [
             IconButton(
               onPressed: () {
@@ -46,13 +39,12 @@ class _LivreurStState extends State<LivreurSt> {
               },
               icon: Icon(
                 Icons.group_add,
-                color: buttonColor,
               ),
             )
           ],
           title: Text(
             "Livreurs",
-            style: pageTitleO,
+            style: pageTitleW,
           ),
           centerTitle: true,
           backgroundColor: Colors.black,
@@ -117,7 +109,7 @@ class _LivreurStState extends State<LivreurSt> {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-                color: buttonColor.withOpacity(0.4),
+                color: Colors.black.withOpacity(0.4),
                 blurRadius: 20,
                 offset: Offset(0, 10))
           ]),
@@ -126,7 +118,7 @@ class _LivreurStState extends State<LivreurSt> {
       child: InkWell(
         onTap: () {},
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Stack(
               children: [
@@ -175,7 +167,7 @@ class _LivreurStState extends State<LivreurSt> {
                     height: 20,
                     decoration: BoxDecoration(
                         color: document['statut'] == 'inactif'
-                            ? Colors.red
+                            ? Colors.red[700]
                             : Colors.green,
                         borderRadius: BorderRadius.circular(50)),
                   ),
@@ -183,7 +175,7 @@ class _LivreurStState extends State<LivreurSt> {
               ],
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Row(
@@ -201,7 +193,7 @@ class _LivreurStState extends State<LivreurSt> {
                         child: Center(
                             child: Text(
                           'Since: ${date.day}/${date.month}/${date.year}',
-                          style: textStyle.copyWith(color: buttonColor),
+                          style: textStyle.copyWith(color: Colors.white),
                         )),
                       ),
                     ),
@@ -213,56 +205,22 @@ class _LivreurStState extends State<LivreurSt> {
                       child: Text(document['nom'] + ' ' + document['prenom'],
                           style: TextStyle(color: Colors.black, fontSize: 15))),
                 ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Container(
-                                  child: Text('email:',
-                                      style:
-                                          TextStyle(color: Colors.grey[800])),
-                                ),
-                                SizedBox(
-                                  width: 30,
-                                ),
-                                Container(
-                                  child: Text(document['email'],
-                                      style:
-                                          TextStyle(color: Colors.grey[600])),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              child: Text('${Language.mapLang['phone']}:',
-                                  style: TextStyle(color: Colors.grey[800])),
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Container(
-                              child: Text(document['tele'],
-                                  style: TextStyle(color: Colors.grey[600])),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                  ],
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: Text('Email: ${document['email']}',
+                            style: TextStyle(color: Colors.grey[600])),
+                      ),
+                      Container(
+                        child: Text(
+                            '${Language.mapLang['phone']}: +212${document['tele']}',
+                            style: TextStyle(color: Colors.grey[600])),
+                      ),
+                    ],
+                  ),
                 )
               ],
             ),

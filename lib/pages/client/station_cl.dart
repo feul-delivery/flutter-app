@@ -14,7 +14,6 @@ class StationProfilCl extends StatefulWidget {
   _StationProfilClState createState() => _StationProfilClState();
 }
 
-int _lvCount = 0;
 List<Map<dynamic, dynamic>> _imagesList;
 
 class _StationProfilClState extends State<StationProfilCl> {
@@ -29,7 +28,7 @@ class _StationProfilClState extends State<StationProfilCl> {
             .snapshots(),
         builder: (context, snapshotLv) {
           if (snapshotLv.connectionState == ConnectionState.done)
-            _lvCount = snapshotLv.data.documents.length;
+            print(snapshotLv.data.documents.length);
           return Scaffold(
             backgroundColor: scaffoldBackground,
             body: Stack(
@@ -159,9 +158,9 @@ class _StationProfilClState extends State<StationProfilCl> {
                               SizedBox(height: 10),
                               FadeAnimation(
                                   0.01,
-                                  _lvCount > 0
+                                  snapshotLv.data.documents.length > 0
                                       ? Text(
-                                          "$_lvCount ${Language.mapLang['deliverymen']}",
+                                          "${snapshotLv.data.documents.length} ${Language.mapLang['deliverymen']}",
                                           style: smallTileGray)
                                       : Text("${Language.mapLang['stnolv']}",
                                           style: smallTileGray)),
@@ -251,7 +250,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                     )
                   ],
                 ),
-                _lvCount > 0
+                snapshotLv.data.documents.length > 0
                     ? Positioned(
                         bottom: 20,
                         left: MediaQuery.of(context).size.width -

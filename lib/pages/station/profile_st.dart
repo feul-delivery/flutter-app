@@ -20,7 +20,7 @@ class ProfilSt extends StatefulWidget {
 List<Map<dynamic, dynamic>> _imagesList;
 
 class _ProfilStState extends State<ProfilSt> {
-  void _editInfoDialog(
+  void _modifierInfoDialog(
       String uid, String field, String fieldName, BuildContext context) {
     String _value;
     showDialog(
@@ -28,7 +28,7 @@ class _ProfilStState extends State<ProfilSt> {
         builder: (BuildContext context) {
           return CustomAlertDialog(
             title: Text(
-              'Edit $fieldName',
+              'modifier $fieldName',
               style: pageTitle.copyWith(color: buttonColor),
             ),
             content: Container(
@@ -88,7 +88,7 @@ class _ProfilStState extends State<ProfilSt> {
   Widget build(BuildContext context) {
     User _user = Provider.of<User>(context, listen: true);
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: StreamBuilder<DocumentSnapshot>(
           stream: Firestore.instance
               .collection('entreprise')
@@ -144,6 +144,9 @@ class _ProfilStState extends State<ProfilSt> {
                     CustomScrollView(
                       slivers: <Widget>[
                         SliverAppBar(
+                          leading: IconButton(
+                              icon: Icon(Icons.west, color: buttonColor),
+                              onPressed: () => Navigator.pop(context)),
                           expandedHeight: 200,
                           backgroundColor:
                               Theme.of(context).scaffoldBackgroundColor,
@@ -278,7 +281,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                     ),
                                                     InkWell(
                                                       onTap: () {
-                                                        _editInfoDialog(
+                                                        _modifierInfoDialog(
                                                             _user.uid,
                                                             'titre',
                                                             'Title',
@@ -295,7 +298,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                             width: 4,
                                                           ),
                                                           Text(
-                                                            "Edit",
+                                                            "modifier",
                                                             style: hintStyle
                                                                 .copyWith(
                                                                     color:
@@ -331,13 +334,13 @@ class _ProfilStState extends State<ProfilSt> {
                                             ),
                                             Text(
                                               "Description",
-                                              style: tileTitleStyleW,
+                                              style: tileTitleStyle,
                                             ),
                                           ],
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            _editInfoDialog(
+                                            _modifierInfoDialog(
                                                 _user.uid,
                                                 'description',
                                                 'Description',
@@ -354,7 +357,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                 width: 4,
                                               ),
                                               Text(
-                                                "Edit",
+                                                "modifier",
                                                 style: hintStyle.copyWith(
                                                     color: buttonColor),
                                               ),
@@ -402,13 +405,13 @@ class _ProfilStState extends State<ProfilSt> {
                                             ),
                                             Text(
                                               "Address",
-                                              style: tileTitleStyleW,
+                                              style: tileTitleStyle,
                                             ),
                                           ],
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            _editInfoDialog(_user.uid,
+                                            _modifierInfoDialog(_user.uid,
                                                 'adresse', 'Address', context);
                                           },
                                           child: Row(
@@ -422,7 +425,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                 width: 4,
                                               ),
                                               Text(
-                                                "Edit",
+                                                "modifier",
                                                 style: hintStyle.copyWith(
                                                     color: buttonColor),
                                               ),
@@ -466,15 +469,15 @@ class _ProfilStState extends State<ProfilSt> {
                                               width: 8,
                                             ),
                                             Text(
-                                              "Phone",
-                                              style: tileTitleStyleW,
+                                              "Télephone",
+                                              style: tileTitleStyle,
                                             ),
                                           ],
                                         ),
                                         InkWell(
                                           onTap: () {
-                                            _editInfoDialog(_user.uid, 'tele',
-                                                'phone', context);
+                                            _modifierInfoDialog(_user.uid,
+                                                'tele', 'phone', context);
                                           },
                                           child: Row(
                                             children: [
@@ -487,7 +490,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                 width: 4,
                                               ),
                                               Text(
-                                                "Edit",
+                                                "modifier",
                                                 style: hintStyle.copyWith(
                                                     color: buttonColor),
                                               ),
@@ -508,7 +511,7 @@ class _ProfilStState extends State<ProfilSt> {
                                   FadeAnimation(
                                       1.2,
                                       Text(
-                                        '${snapshot.data['tele']}',
+                                        '+212${snapshot.data['tele']}',
                                         style: TextStyle(
                                             color: Colors.grey, height: 1.4),
                                       )),
@@ -532,7 +535,7 @@ class _ProfilStState extends State<ProfilSt> {
                                             ),
                                             Text(
                                               "Images",
-                                              style: tileTitleStyleW,
+                                              style: tileTitleStyle,
                                             ),
                                           ],
                                         ),
@@ -559,7 +562,7 @@ class _ProfilStState extends State<ProfilSt> {
                                                 width: 4,
                                               ),
                                               Text(
-                                                "Edit Images",
+                                                "modifier Images",
                                                 style: hintStyle.copyWith(
                                                     color: buttonColor),
                                               ),

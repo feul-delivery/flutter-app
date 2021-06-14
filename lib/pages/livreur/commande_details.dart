@@ -81,7 +81,7 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                       width: 15,
                     ),
                     Text(
-                      "Date de commande:",
+                      "Date/Heure de commande:",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -120,7 +120,7 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                       width: 15,
                     ),
                     Text(
-                      "${Language.mapLang['matricule']}",
+                      "${Language.mapLang['matricule']}:",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -133,7 +133,7 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                 ),
                 Center(
                   child: Text(
-                    widget.document['matricule'],
+                    widget.document['matricule'].toString(),
                     style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
                   ),
                 ),
@@ -160,7 +160,7 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                       width: 15,
                     ),
                     Text(
-                      "Color:",
+                      "Couleur:",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -200,7 +200,7 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                       width: 15,
                     ),
                     Text(
-                      "Fuel type:",
+                      "Type de carburant:",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -239,7 +239,7 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                       width: 15,
                     ),
                     Text(
-                      "Address",
+                      "Adresse:",
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
@@ -264,6 +264,16 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          print('commande accepter');
+        },
+        label: Text('Accepter la commande',
+            style: pageTitleW.copyWith(fontSize: 14)),
+        icon: Icon(Icons.done),
+        backgroundColor: buttonColor,
+        elevation: 0,
       ),
     );
   }
@@ -345,9 +355,12 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                                         SizedBox(
                                           width: 15,
                                         ),
-                                        Container(
+                                        GestureDetector(
+                                          onTap: () {
+                                            print('launch tele');
+                                          },
                                           child: Text(
-                                              '${snapshot.data['tele']}',
+                                              '+212${snapshot.data['tele']}',
                                               style: TextStyle(
                                                   color: Colors.grey[800],
                                                   fontSize: 22)),

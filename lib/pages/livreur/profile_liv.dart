@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'dart:math' as math;
 import 'bbar_liv.dart';
 import 'index_lv.dart';
 import 'drawer_liv.dart';
@@ -29,21 +30,9 @@ class _ProfileLivState extends State<ProfileLiv> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             title: Text(
-              "My profile",
+              "Mon profil",
               style: pageTitleO,
             ),
-            actions: <Widget>[
-              IconButton(
-                  icon: Icon(
-                    Icons.edit,
-                    color: buttonColor,
-                  ),
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            ProfileLivModifier()));
-                  })
-            ],
             leading: Builder(
               builder: (context) => IconButton(
                 icon: Icon(
@@ -66,153 +55,220 @@ class _ProfileLivState extends State<ProfileLiv> {
                   .get()
                   .asStream(),
               builder: (context, snapshot) {
-                return Container(
-                  padding: EdgeInsets.only(left: 16, top: 25, right: 16),
-                  child: ListView(children: [
-                    Center(
-                      child: Stack(
-                        children: [
-                          CachedNetworkImage(
-                            imageUrl: snapshot?.data['photoURL'] == null
-                                ? ''
-                                : snapshot?.data['photoURL'],
-                            imageBuilder: (context, imageProvider) => Container(
-                              width: 140,
-                              height: 140,
-                              decoration: BoxDecoration(
-                                  border: Border.all(
-                                      width: 1,
-                                      color: Theme.of(context)
-                                          .scaffoldBackgroundColor),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        spreadRadius: 2,
-                                        blurRadius: 10,
-                                        color: Colors.black.withOpacity(0.1),
-                                        offset: Offset(0, 7))
-                                  ],
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
-                                      fit: BoxFit.cover, image: imageProvider)),
-                            ),
-                            placeholder: (context, url) =>
-                                CircularProgressIndicator(),
-                            errorWidget: (context, url, error) =>
-                                Icon(Icons.error),
+                if (snapshot.hasError) {
+                  return Center(child: Icon(Icons.cancel, color: buttonColor));
+                }
+
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return Center(child: customeCircularProgress);
+                  case ConnectionState.none:
+                    return Center(
+                        child:
+                            Icon(Icons.error_outline, color: Colors.white54));
+
+                  default:
+                    return Container(
+                      padding: EdgeInsets.only(left: 16, top: 25, right: 16),
+                      child: ListView(children: [
+                        Center(
+                          child: Stack(
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: snapshot?.data['photoURL'] == null
+                                    ? ''
+                                    : snapshot?.data['photoURL'],
+                                imageBuilder: (context, imageProvider) =>
+                                    Container(
+                                  width: 140,
+                                  height: 140,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(
+                                          width: 1,
+                                          color: buttonColor.withOpacity(0.7)),
+                                      boxShadow: [
+                                        BoxShadow(
+                                            spreadRadius: 2,
+                                            blurRadius: 10,
+                                            color:
+                                                Colors.black.withOpacity(0.1),
+                                            offset: Offset(0, 7))
+                                      ],
+                                      shape: BoxShape.circle,
+                                      image: DecorationImage(
+                                          fit: BoxFit.cover,
+                                          image: imageProvider)),
+                                ),
+                                placeholder: (context, url) =>
+                                    CircularProgressIndicator(),
+                                errorWidget: (context, url, error) =>
+                                    Icon(Icons.error),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    FadeAnimation(
-                      1.2,
-                      Row(
-                        children: [
-                          Text(
-                            "First name : ",
-                            style: textStyle,
-                          ),
-                          Container(
-                            child: Text(
-                              '${snapshot.data['prenom']}',
-                              style: strongTextStyle,
+                        ),
+                        Container(
+                          margin: EdgeInsets.symmetric(horizontal: 85),
+                          child: Container(
+                            decoration: BoxDecoration(
+                                color: buttonColor,
+                                borderRadius: BorderRadius.circular(50)),
+                            margin: EdgeInsets.all(20),
+                            child: Material(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.transparent,
+                              child: InkWell(
+                                borderRadius: BorderRadius.circular(50),
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                      builder: (BuildContext context) =>
+                                          ProfileLivModifier()));
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: Container(
+                                    width: MediaQuery.of(context).size.width *
+                                        0.20,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'Modifier le profil',
+                                          style: tileTitleStyleW,
+                                        ),
+                                        Transform.rotate(
+                                            angle: 180 * math.pi / 180,
+                                            child: Icon(
+                                              Icons.arrow_back_ios_rounded,
+                                              color: Colors.white,
+                                              size: 20,
+                                            ))
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      height: 30,
-                      thickness: 1,
-                    ),
-                    FadeAnimation(
-                      1.2,
-                      Row(
-                        children: [
-                          Text(
-                            "Last name : ",
-                            style: textStyle,
                           ),
-                          Container(
-                            child: Text(
-                              '${snapshot.data['nom']}',
-                              style: strongTextStyle,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      height: 30,
-                      thickness: 1,
-                    ),
-                    FadeAnimation(
-                      1.2,
-                      Row(
-                        children: [
-                          Text(
-                            "Phone : ",
-                            style: textStyle,
+                        ),
+                        FadeAnimation(
+                          1.2,
+                          Row(
+                            children: [
+                              Container(
+                                width: 70,
+                                child: Text("Prénom: ",
+                                    style: smallTileGray.copyWith(
+                                        color: buttonColor,
+                                        fontWeight: FontWeight.w500)),
+                              ),
+                              Text(
+                                '${snapshot.data['prenom']}',
+                                style: strongTextStyle,
+                              )
+                            ],
                           ),
-                          Container(
-                            child: Text(
-                              '${snapshot.data['tele']}',
-                              style: strongTextStyle,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      height: 30,
-                      thickness: 1,
-                    ),
-                    FadeAnimation(
-                      1.2,
-                      Row(
-                        children: [
-                          Text(
-                            "Email : ",
-                            style: textStyle,
+                        ),
+                        Divider(
+                          height: 30,
+                          thickness: 1,
+                        ),
+                        FadeAnimation(
+                          1.2,
+                          Row(
+                            children: [
+                              Container(
+                                width: 70,
+                                child: Text("Nom: ",
+                                    style: smallTileGray.copyWith(
+                                        color: buttonColor,
+                                        fontWeight: FontWeight.w500)),
+                              ),
+                              Text(
+                                '${snapshot.data['nom']}',
+                                style: strongTextStyle,
+                              )
+                            ],
                           ),
-                          Container(
-                            child: Text(
-                              '${snapshot.data['email']}',
-                              style: strongTextStyle,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      height: 30,
-                      thickness: 1,
-                    ),
-                    FadeAnimation(
-                      1.2,
-                      Row(
-                        children: [
-                          Text(
-                            "CIN : ",
-                            style: textStyle,
+                        ),
+                        Divider(
+                          height: 30,
+                          thickness: 1,
+                        ),
+                        FadeAnimation(
+                          1.2,
+                          Row(
+                            children: [
+                              Container(
+                                width: 70,
+                                child: Text("Tél: ",
+                                    style: smallTileGray.copyWith(
+                                        color: buttonColor,
+                                        fontWeight: FontWeight.w500)),
+                              ),
+                              Text(
+                                '+212${snapshot.data['tele']}',
+                                style: strongTextStyle,
+                              )
+                            ],
                           ),
-                          Container(
-                            child: Text(
-                              '${snapshot.data['cin']}',
-                              style: strongTextStyle,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Divider(
-                      height: 30,
-                      thickness: 1,
-                    ),
-                  ]),
-                );
+                        ),
+                        Divider(
+                          height: 30,
+                          thickness: 1,
+                        ),
+                        FadeAnimation(
+                          1.2,
+                          Row(
+                            children: [
+                              Container(
+                                width: 70,
+                                child: Text("Email: ",
+                                    style: smallTileGray.copyWith(
+                                        color: buttonColor,
+                                        fontWeight: FontWeight.w500)),
+                              ),
+                              Text(
+                                '${snapshot.data['email']}',
+                                style: strongTextStyle,
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 30,
+                          thickness: 1,
+                        ),
+                        FadeAnimation(
+                          1.2,
+                          Row(
+                            children: [
+                              Container(
+                                width: 70,
+                                child: Text(
+                                  "Cin: ",
+                                  style: smallTileGray.copyWith(
+                                      color: buttonColor,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                              Text(
+                                '${snapshot.data['cin']}',
+                                style: strongTextStyle,
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(
+                          height: 30,
+                          thickness: 1,
+                        ),
+                      ]),
+                    );
+                }
               })),
     );
   }

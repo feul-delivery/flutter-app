@@ -14,20 +14,20 @@ class AddLivreur extends StatefulWidget {
 class _AddLivreurState extends State<AddLivreur> {
   TextEditingController searchController = TextEditingController();
   String searchTerm;
-  String message = '';
   @override
   Widget build(BuildContext context) {
     final User _user = Provider.of<User>(context);
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color(0xFFEFF0F5),
+        elevation: 0,
+        backgroundColor: Colors.black,
         title: Text(
-          "New Deliveryman",
-          style: pageTitleX,
+          "Nouveau Livreur",
+          style: pageTitleX.copyWith(color: Colors.white),
         ),
         leading: IconButton(
-          icon: Icon(Icons.west, color: Colors.black),
+          icon: Icon(Icons.west, color: Colors.white),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -35,6 +35,25 @@ class _AddLivreurState extends State<AddLivreur> {
       ),
       body: Column(
         children: [
+          Container(
+            margin: EdgeInsets.all(5),
+            decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(Icons.info),
+                SizedBox(width: 10),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.75,
+                  child: Text(
+                      "pour ajouter un livreur demandez-lui de créer un compte client, retrouvez-le avec l'email ci-dessous puis invitez-le à rejoindre votre équipe",
+                      style: TextStyle(fontSize: 18)),
+                ),
+              ],
+            ),
+          ),
           Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
@@ -47,7 +66,7 @@ class _AddLivreurState extends State<AddLivreur> {
                 },
                 decoration: InputDecoration(
                     border: const UnderlineInputBorder(),
-                    labelText: "Type an email",
+                    labelText: "Tapez un Email",
                     labelStyle: hintStyleB,
                     suffixIcon: IconButton(
                       onPressed: () => searchController.clear(),
@@ -92,25 +111,13 @@ class _AddLivreurState extends State<AddLivreur> {
                             style: textStyle,
                           ),
                           subtitle: Text(
-                            '${document['tele']}'.toLowerCase(),
+                            '+212${document['tele']}'.toLowerCase(),
                             style: moreStyle,
                           ),
                           trailing: IconButton(
                             icon: Icon(Icons.add),
                             onPressed: () {
                               _showModalDialogConfAdd(document, _user.uid);
-                              if (message != '') {
-                                Scaffold.of(context).showSnackBar(SnackBar(
-                                  duration: Duration(seconds: 1),
-                                  content: Text(
-                                    message,
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                  backgroundColor: Colors.black,
-                                ));
-                              } else {
-                                message = '';
-                              }
                             },
                           ));
                     }).toList());
@@ -135,8 +142,8 @@ class _AddLivreurState extends State<AddLivreur> {
             padding: EdgeInsets.only(
                 bottom: MediaQuery.of(context).viewInsets.bottom),
             child: Container(
-              height: MediaQuery.of(context).size.height * 1 / 4,
               color: Colors.white,
+              padding: EdgeInsets.all(10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -145,26 +152,15 @@ class _AddLivreurState extends State<AddLivreur> {
                     children: [
                       Container(
                         margin: EdgeInsets.only(left: 10),
-                        child: TextButton(
-                          child: Text(
-                            'Cancel',
-                            style: hintStyle,
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            setState(() {
-                              message = 'Canceled';
-                            });
-                          },
+                        child: Text(
+                          'Confirmation',
+                          style: pageTitleW.copyWith(color: Colors.black),
                         ),
                       ),
                       InkWell(
                         onTap: () {
                           _addClToLv(document, uid);
                           Navigator.of(context).pop();
-                          setState(() {
-                            message = 'Done';
-                          });
                         },
                         child: Container(
                           height: 30,
@@ -175,7 +171,7 @@ class _AddLivreurState extends State<AddLivreur> {
                               color: Colors.black),
                           child: Center(
                             child: Text(
-                              'Confirm',
+                              'Confirmer',
                               style: buttonStyle,
                             ),
                           ),
@@ -183,12 +179,14 @@ class _AddLivreurState extends State<AddLivreur> {
                       ),
                     ],
                   ),
-                  Text(
-                    'Confirmation',
-                    style: titleStyle,
-                  ),
-                  Text('${document['nom']} ${document['prenom']} will '),
-                  Text('work for you?'),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      'êtes-vous sûr de vouloir ajouter ${document['nom']} ${document['prenom']} à votre personnel ?',
+                      style:
+                          textStyle.copyWith(color: Colors.black, fontSize: 18),
+                    ),
+                  )
                 ],
               ),
             ),

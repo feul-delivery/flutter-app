@@ -61,7 +61,7 @@ class _IndexStState extends State<IndexSt> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Home", style: pageTitle),
+          title: Text("Accueil", style: pageTitleW),
           backgroundColor: Colors.black,
           centerTitle: true,
         ),
@@ -87,7 +87,7 @@ class _IndexStState extends State<IndexSt> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          'Orders',
+                          'Commandes',
                           style: subTitleStyle,
                         ),
                         Container(
@@ -97,7 +97,7 @@ class _IndexStState extends State<IndexSt> {
                             color: Colors.green,
                           ),
                           child: Text(
-                            'Live',
+                            'en direct',
                             style: moreStyleWhite,
                           ),
                         )

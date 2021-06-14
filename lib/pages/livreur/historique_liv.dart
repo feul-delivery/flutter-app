@@ -61,31 +61,73 @@ class _HistoriqueLivState extends State<HistoriqueLiv> {
                     return SizedBox(
                         child: Center(child: customeCircularProgress));
                   case ConnectionState.none:
-                    return Icon(Icons.error_outline, color: Colors.black);
+                    return Center(
+                        child: Icon(Icons.error_outline, color: Colors.black));
 
                   default:
                     return snapshot.data.documents.length == 0
                         ? Center(
-                            child: Text('Aucun commande'),
+                            child: Text('Aucun commande',
+                                style: tileTitleStyleW.copyWith(
+                                    color: Colors.black)),
                           )
                         : ListView.builder(
                             itemCount: snapshot.data.documents.length,
                             itemBuilder: (BuildContext context, int index) {
-                              return ListTile(
-                                leading: Text(snapshot
-                                        .data.documents[index]['volume']
-                                        .toString() +
-                                    "L"),
-                                title: Text(snapshot
-                                    .data.documents[index]['idtype']
-                                    .toString()),
-                                subtitle: Text(snapshot
-                                    .data.documents[index]['adresse']
-                                    .toString()),
-                                trailing: Text(timeago.format(
-                                    snapshot.data.documents[index]['dateheurel']
-                                        as DateTime,
-                                    locale: 'fr')),
+                              return Column(
+                                children: [
+                                  ListTile(
+                                    leading: Container(
+                                      alignment: Alignment.center,
+                                      padding: EdgeInsets.only(top: 5),
+                                      width: 40,
+                                      height: 30,
+                                      child: Text(
+                                        snapshot.data.documents[index]['volume']
+                                                .toString() +
+                                            "L",
+                                        style: moreStyleWhite.copyWith(
+                                            color: buttonColor),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ),
+                                    title: Text(
+                                      snapshot.data.documents[index]['idtype']
+                                          .toString(),
+                                      style: tileTitleStyleW.copyWith(
+                                          color: Colors.black),
+                                    ),
+                                    subtitle: Text(
+                                      snapshot.data.documents[index]['adresse']
+                                          .toString(),
+                                      style: smallTileGray.copyWith(
+                                          color: Colors.black87),
+                                    ),
+                                    trailing: Text(
+                                      timeago
+                                          .format(
+                                              DateTime.tryParse(
+                                                  snapshot.data.documents[index]
+                                                      ['dateheurel']),
+                                              locale: 'fr')
+                                          .toString(),
+                                      style: TextStyle(
+                                          color: Colors.orange[600],
+                                          fontFamily: 'Quarion'),
+                                    ),
+                                  ),
+                                  snapshot.data.documents.length == index + 1
+                                      ? SizedBox.shrink()
+                                      : Container(
+                                          padding: EdgeInsets.symmetric(
+                                              horizontal: 40),
+                                          child: Divider(
+                                            color: Colors.black54,
+                                            thickness: 1,
+                                            height: 4,
+                                          ),
+                                        ),
+                                ],
                               );
                             },
                           );

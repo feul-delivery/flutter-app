@@ -286,6 +286,10 @@ class _ClientOrderState extends State<ClientOrder> {
                       border:
                           Border(bottom: BorderSide(color: Colors.grey[200]))),
                   child: DropdownButtonFormField(
+                    hint: Text(
+                      '${Language.mapLang['ftype']}',
+                      style: hintStyle,
+                    ),
                     value: _type,
                     dropdownColor: scaffoldBackground,
                     decoration: InputDecoration(border: InputBorder.none),
@@ -349,16 +353,19 @@ class _ClientOrderState extends State<ClientOrder> {
                   ),
                 ),
                 Container(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(15),
                   decoration: BoxDecoration(
                       border:
                           Border(bottom: BorderSide(color: Colors.grey[200]))),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        '${Language.mapLang['carcolor']}',
-                        style: hintStyle,
+                      Container(
+                        margin: EdgeInsets.only(left: 5),
+                        child: Text(
+                          '${Language.mapLang['carcolor']}',
+                          style: hintStyle,
+                        ),
                       ),
                       Container(
                         width: 40,

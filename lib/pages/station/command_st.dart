@@ -64,9 +64,10 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
   Widget build(BuildContext context) {
     if (widget.document['statut'] == 'done') {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            "Details",
+            "Détails",
             style: TextStyle(),
           ),
           centerTitle: true,
@@ -77,9 +78,10 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
       );
     } else {
       return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            "Details",
+            "Détails",
             style: TextStyle(),
           ),
           centerTitle: true,
@@ -105,49 +107,8 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
   Widget getBodyDone() {
     DateTime dateC = DateTime.parse(widget.document['dateheurec'].toString());
     DateTime dateL = DateTime.parse(widget.document['dateheurel'].toString());
-    int colorV = int.tryParse(widget.document['color'].toString());
-    Color myColor = Color(colorV);
     return ListView(
       children: <Widget>[
-        SizedBox(
-          height: 10,
-        ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20, right: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  Icon(
-                    Icons.format_list_numbered_sharp,
-                    color: Colors.black54,
-                    size: 18,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Text(
-                    "Ref:",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black54),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Center(
-                child: Text(
-                  widget.document.reference.documentID,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                ),
-              ),
-            ],
-          ),
-        ),
         SizedBox(
           height: 20,
         ),
@@ -167,7 +128,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
                     width: 15,
                   ),
                   Text(
-                    "Date de commande:",
+                    "Date/Heure de commande:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -206,7 +167,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
                     width: 15,
                   ),
                   Text(
-                    "Date de livrisent:",
+                    "Date/Heure de livraison",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -245,7 +206,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
                     width: 15,
                   ),
                   Text(
-                    "livreur de commande:",
+                    "Livreur:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -284,7 +245,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
                     width: 15,
                   ),
                   Text(
-                    "Registration number de client:",
+                    "Matricule:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -324,7 +285,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
                     width: 15,
                   ),
                   Text(
-                    "Color:",
+                    "Couleur:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -333,10 +294,11 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
                   SizedBox(
                     width: 60,
                   ),
-                  Container(
-                    width: 60,
-                    height: 20,
-                    color: myColor,
+                  Center(
+                    child: Icon(
+                      Icons.airport_shuttle_rounded,
+                      color: Color(widget.document['color']),
+                    ),
                   ),
                 ],
               ),
@@ -362,7 +324,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
                     width: 15,
                   ),
                   Text(
-                    "Fuel type:",
+                    "Type de carburant:",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -401,7 +363,7 @@ class _CommandeDetailStState extends State<CommandeDetailSt> {
                     width: 15,
                   ),
                   Text(
-                    "Address",
+                    "Adresse",
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,

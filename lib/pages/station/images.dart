@@ -31,18 +31,18 @@ class _ImagesStState extends State<ImagesSt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.black,
         elevation: 1,
         leading: IconButton(
-            icon: Icon(AntDesign.arrowleft, color: buttonColor),
+            icon: Icon(AntDesign.arrowleft, color: Colors.white),
             onPressed: () {
               Navigator.of(context).pop();
             }),
         actions: [
           IconButton(
-            icon: Icon(OMIcons.addAPhoto, color: buttonColor),
+            icon: Icon(OMIcons.addAPhoto, color: Colors.white),
             onPressed: () {
               Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => ImageCapture(
@@ -57,17 +57,14 @@ class _ImagesStState extends State<ImagesSt> {
             width: 10,
           ),
           IconButton(
-            icon: Icon(
-              OMIcons.done,
-              color: buttonColor,
-            ),
+            icon: Icon(OMIcons.done, color: Colors.white),
             onPressed: () {
               Navigator.of(context).pushReplacement(MaterialPageRoute(
                   builder: (BuildContext context) => Wrapper()));
             },
           )
         ],
-        title: Text('Images', style: pageTitleO),
+        title: Text('Images', style: pageTitleW),
       ),
       body: StreamBuilder<DocumentSnapshot>(
         stream: Firestore.instance

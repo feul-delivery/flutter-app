@@ -35,7 +35,7 @@ class _initialProfileStState extends State<InitialProfileSt>
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        backgroundColor: scaffoldBackground,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           leading: IconButton(
               icon: Icon(Icons.west),
@@ -81,119 +81,130 @@ class _initialProfileStState extends State<InitialProfileSt>
           backgroundColor: Colors.black,
           elevation: 1,
         ),
-        body: new Container(
-          color: Colors.white,
-          child: new ListView(
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  new Container(
-                    color: Color(0xffFFFFFF),
-                    child: Padding(
-                      padding: EdgeInsets.only(bottom: 25.0),
-                      child: Form(
-                        key: _formKey,
-                        child: new Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
+        body: new Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            new Container(
+              padding: EdgeInsets.symmetric(vertical: 30, horizontal: 15),
+              child: Form(
+                key: _formKey,
+                child: new Column(
+                  children: <Widget>[
+                    Padding(
+                        padding: EdgeInsets.only(top: 15.0),
+                        child: new Row(
+                          mainAxisSize: MainAxisSize.max,
                           children: <Widget>[
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: 17.0, right: 17.0, top: 15.0),
-                                child: new Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
-                                    new Flexible(
-                                      child: new TextFormField(
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          labelText:
-                                              '${Language.mapLang['title']}',
-                                        ),
-                                        validator: (val) => val.isEmpty
-                                            ? '${Language.mapLang['required']}'
-                                            : null,
-                                        onChanged: (val) {
-                                          setState(() => titre = val);
-                                        },
-                                      ),
+                            new Flexible(
+                              child: new TextFormField(
+                                cursorColor: grayColor,
+                                cursorHeight: 25,
+                                cursorWidth: 1,
+                                style: hintStyleB,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 10.0, vertical: 15.0),
+                                    border: OutlineInputBorder(),
+                                    prefixIcon: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 10.0, top: 15.0, bottom: 10.0),
+                                      child: Text('+212', style: hintStyleB),
                                     ),
-                                  ],
-                                )),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: 17.0, right: 17.0, top: 15.0),
-                                child: new Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
-                                    new Flexible(
-                                      child: new TextFormField(
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          labelText:
-                                              "${Language.mapLang['phone']}",
-                                        ),
-                                        validator: (val) => val.isEmpty
-                                            ? '${Language.mapLang['required']}'
-                                            : null,
-                                        onChanged: (val) {
-                                          setState(() => tele = val);
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: 17.0, right: 17.0, top: 15.0),
-                                child: new Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
-                                    new Flexible(
-                                      child: new TextFormField(
-                                        decoration: InputDecoration(
-                                            border: OutlineInputBorder(),
-                                            labelText:
-                                                "${Language.mapLang['address']}"),
-                                        validator: (val) => val.isEmpty
-                                            ? '${Language.mapLang['required']}'
-                                            : null,
-                                        onChanged: (val) {
-                                          setState(() => address = val);
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: 17.0, right: 17.0, top: 15.0),
-                                child: new Row(
-                                  mainAxisSize: MainAxisSize.max,
-                                  children: <Widget>[
-                                    new Flexible(
-                                      child: new TextFormField(
-                                        maxLines: 3,
-                                        decoration: InputDecoration(
-                                          border: OutlineInputBorder(),
-                                          labelText: "Description",
-                                        ),
-                                        onChanged: (val) {
-                                          setState(() => description = val);
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                )),
+                                    hintText: "${Language.mapLang['phone']}",
+                                    hintStyle: hintStyleB),
+                                validator: (val) => _validateNumber(val),
+                                onChanged: (val) {
+                                  setState(() => tele = val);
+                                },
+                              ),
+                            ),
                           ],
-                        ),
-                      ),
-                    ),
-                  )
-                ],
+                        )),
+                    Padding(
+                        padding: EdgeInsets.only(top: 15.0),
+                        child: new Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            new Flexible(
+                              child: new TextFormField(
+                                cursorColor: grayColor,
+                                cursorHeight: 25,
+                                cursorWidth: 1,
+                                style: hintStyleB,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 10.0, vertical: 15.0),
+                                    border: OutlineInputBorder(),
+                                    hintText: '${Language.mapLang['title']}',
+                                    hintStyle: hintStyleB),
+                                validator: (val) => val.isEmpty
+                                    ? '${Language.mapLang['required']}'
+                                    : null,
+                                onChanged: (val) {
+                                  setState(() => titre = val);
+                                },
+                              ),
+                            ),
+                          ],
+                        )),
+                    Padding(
+                        padding: EdgeInsets.only(top: 15.0),
+                        child: new Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            new Flexible(
+                              child: new TextFormField(
+                                cursorColor: grayColor,
+                                cursorHeight: 25,
+                                cursorWidth: 1,
+                                style: hintStyleB,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 10.0, vertical: 15.0),
+                                    border: OutlineInputBorder(),
+                                    hintStyle: hintStyleB,
+                                    hintText: "${Language.mapLang['address']}"),
+                                validator: (val) => val.isEmpty
+                                    ? '${Language.mapLang['required']}'
+                                    : null,
+                                onChanged: (val) {
+                                  setState(() => address = val);
+                                },
+                              ),
+                            ),
+                          ],
+                        )),
+                    Padding(
+                        padding: EdgeInsets.only(top: 15.0),
+                        child: new Row(
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            new Flexible(
+                              child: new TextFormField(
+                                maxLines: 3,
+                                cursorColor: grayColor,
+                                cursorHeight: 25,
+                                cursorWidth: 1,
+                                style: hintStyleB,
+                                decoration: InputDecoration(
+                                    contentPadding: EdgeInsets.symmetric(
+                                        horizontal: 10.0, vertical: 15.0),
+                                    border: OutlineInputBorder(),
+                                    hintText: "Description",
+                                    hintStyle: hintStyleB),
+                                onChanged: (val) {
+                                  setState(() => description = val);
+                                },
+                              ),
+                            ),
+                          ],
+                        )),
+                  ],
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ));
   }
 
@@ -202,5 +213,30 @@ class _initialProfileStState extends State<InitialProfileSt>
     // Clean up the controller when the Widget is disposed
     myFocusNode.dispose();
     super.dispose();
+  }
+}
+
+String _validateNumber(String val) {
+  if (val.isEmpty) return "${Language.mapLang['required']}";
+  if (val.length != 9) return "${Language.mapLang['invalidnumber']}";
+  if (RegExp("[0-9]").hasMatch(val)) {
+    switch (val.substring(0, 1)) {
+      case '6':
+        return null;
+        break;
+      case '7':
+        return null;
+        break;
+      case '5':
+        return null;
+        break;
+      case '8':
+        return null;
+        break;
+      default:
+        return "${Language.mapLang['invalidnumber']}";
+    }
+  } else {
+    return "${Language.mapLang['invalidnumber']}";
   }
 }

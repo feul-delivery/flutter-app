@@ -181,7 +181,7 @@ class _IndexLvState extends State<IndexLv> {
                 ),
                 Container(
                   alignment: Alignment.centerLeft,
-                  child: Text('Disponible commandes:', style: tileTitleStyle),
+                  child: Text('Commandes disponibles:', style: tileTitleStyle),
                 ),
                 Divider(
                   height: 5,

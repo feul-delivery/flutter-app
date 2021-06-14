@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/livreur/commande_details.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
+// ignore: must_be_immutable
 class CommandeWidget extends StatefulWidget {
   DocumentSnapshot commande;
   CommandeWidget({@required this.commande});
@@ -23,7 +24,7 @@ class _CommandeWidgetState extends State<CommandeWidget> {
           borderRadius: BorderRadius.circular(20),
           boxShadow: [
             BoxShadow(
-                color: buttonColor.withOpacity(0.4),
+                color: Colors.black.withOpacity(0.2),
                 blurRadius: 20,
                 offset: Offset(0, 10))
           ]),
@@ -47,6 +48,7 @@ class _CommandeWidgetState extends State<CommandeWidget> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        SizedBox(height: 10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -54,61 +56,69 @@ class _CommandeWidgetState extends State<CommandeWidget> {
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
+                                  width: 70,
+                                  alignment: Alignment.centerRight,
                                   child: Text('Volume:',
-                                      style:
-                                          TextStyle(color: Colors.grey[800])),
+                                      style: smallTileGray.copyWith(
+                                          color: buttonColor,
+                                          fontWeight: FontWeight.w500)),
                                 ),
                                 SizedBox(
-                                  width: 20,
+                                  width: 5,
                                 ),
-                                Container(
-                                  child: Text(
-                                      widget.commande['volume'].toString() +
-                                          "L",
-                                      style:
-                                          TextStyle(color: Colors.grey[600])),
-                                ),
+                                Text(widget.commande['volume'].toString() + "L",
+                                    style: TextStyle(color: Colors.grey[600])),
                               ],
                             ),
-                            Container(
-                              child: Text(
-                                  timeago.format(
-                                      DateTime.parse(
-                                          widget.commande['dateheurec']),
-                                      locale: 'fr'),
-                                  style: TextStyle(color: Colors.orange[600])),
-                            ),
+                            Text(
+                                timeago.format(
+                                    DateTime.parse(
+                                        widget.commande['dateheurec']),
+                                    locale: 'fr'),
+                                style: TextStyle(
+                                    color: Colors.orange[600],
+                                    fontFamily: 'Quarion')),
                           ],
                         ),
+                        SizedBox(height: 10),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
+                              width: 70,
+                              alignment: Alignment.centerRight,
                               child: Text('Type:',
-                                  style: TextStyle(color: Colors.grey[800])),
+                                  style: smallTileGray.copyWith(
+                                      color: buttonColor,
+                                      fontWeight: FontWeight.w500)),
                             ),
                             SizedBox(
-                              width: 20,
+                              width: 5,
                             ),
-                            Container(
-                              child: Text(widget.commande['idtype'].toString(),
-                                  style: TextStyle(color: Colors.grey[600])),
-                            ),
+                            Text(widget.commande['idtype'].toString(),
+                                style: TextStyle(color: Colors.grey[600])),
                           ],
                         ),
+                        SizedBox(height: 10),
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Container(
-                              child: Text('Address:',
-                                  style: TextStyle(color: Colors.grey[800])),
+                              width: 70,
+                              alignment: Alignment.centerRight,
+                              child: Text('Adresse:',
+                                  style: smallTileGray.copyWith(
+                                      color: buttonColor,
+                                      fontWeight: FontWeight.w500)),
                             ),
-                            Container(
-                              child: Text(widget.commande['adresse'].toString(),
-                                  style: TextStyle(color: Colors.grey[600])),
+                            SizedBox(
+                              width: 5,
                             ),
+                            Text(widget.commande['adresse'].toString(),
+                                style: TextStyle(color: Colors.grey[600])),
                           ],
                         ),
+                        SizedBox(height: 10),
                       ],
                     ),
                   )

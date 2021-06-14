@@ -5,8 +5,6 @@ import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class SettingsLiv extends StatefulWidget {
-  SettingsLiv({Key key}) : super(key: key);
-
   @override
   _SettingsLivState createState() => _SettingsLivState();
 }
@@ -15,14 +13,18 @@ class _SettingsLivState extends State<SettingsLiv> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: AppBar(
+          leading: IconButton(
+              icon: Icon(Icons.west, color: buttonColor),
+              onPressed: () => Navigator.of(context).pop()),
           title: Text(
-            "Settings",
-            style: pageTitle,
+            "Paramètres",
+            style: pageTitleO,
           ),
           actions: <Widget>[
             IconButton(
-                icon: Icon(Icons.home),
+                icon: Icon(Icons.home, color: buttonColor),
                 onPressed: () {
                   ButtomBarLiv.selectedIndex = 0;
                   Navigator.of(context).push(MaterialPageRoute(
@@ -30,8 +32,8 @@ class _SettingsLivState extends State<SettingsLiv> {
                 })
           ],
           centerTitle: true,
-          backgroundColor: Colors.black,
-          elevation: 1,
+          backgroundColor: Colors.white,
+          elevation: 0.5,
         ),
         body: Container(
           padding: EdgeInsets.only(left: 16, top: 25, right: 16),
@@ -44,14 +46,14 @@ class _SettingsLivState extends State<SettingsLiv> {
                 children: [
                   Icon(
                     Icons.person,
-                    color: Colors.black,
+                    color: buttonColor,
                   ),
                   SizedBox(
                     width: 8,
                   ),
                   Text(
                     "Account",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: subTitleStyle,
                   ),
                 ],
               ),
@@ -59,20 +61,20 @@ class _SettingsLivState extends State<SettingsLiv> {
                 height: 15,
                 thickness: 1,
               ),
-              buildChangePasswordRow(context, " Change Password"),
-              buildAccountOptionRow(context, " Delete your account"),
+              buildChangerPasswordRow(context, " Changer Password"),
+              buildAccountOptionRow(context, " Supprimer votre compte"),
               Row(
                 children: [
                   Icon(
                     Icons.phone_iphone,
-                    color: Colors.black,
+                    color: buttonColor,
                   ),
                   SizedBox(
                     width: 8,
                   ),
                   Text(
                     "Application",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: subTitleStyle,
                   ),
                 ],
               ),
@@ -80,20 +82,20 @@ class _SettingsLivState extends State<SettingsLiv> {
                 height: 15,
                 thickness: 1,
               ),
-              buildRateUsRow(context, " Rate us"),
-              buildAboutUsRow(context, " About Us"),
+              buildRateUsRow(context, " Évaluez nous"),
+              buildAboutUsRow(context, " À propos de nous"),
               Row(
                 children: [
                   Icon(
                     Icons.security,
-                    color: Colors.black,
+                    color: buttonColor,
                   ),
                   SizedBox(
                     width: 8,
                   ),
                   Text(
                     "Droits",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    style: subTitleStyle,
                   ),
                 ],
               ),
@@ -101,7 +103,7 @@ class _SettingsLivState extends State<SettingsLiv> {
                 height: 15,
                 thickness: 1,
               ),
-              buildAccountOptionRow(context, " Privacy and Security"),
+              buildAccountOptionRow(context, " Confidentialité et sécurité"),
               SizedBox(
                 height: 40,
               ),
@@ -111,7 +113,7 @@ class _SettingsLivState extends State<SettingsLiv> {
   }
 }
 
-InkWell buildChangePasswordRow(BuildContext context, String title) {
+InkWell buildChangerPasswordRow(BuildContext context, String title) {
   return InkWell(
     borderRadius: BorderRadius.circular(5.0),
     onTap: () {
@@ -135,7 +137,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                               bottom: BorderSide(color: Colors.grey[200]))),
                       child: TextField(
                         decoration: InputDecoration(
-                            hintText: "Old Password",
+                            hintText: "ancien mot de passe",
                             hintStyle: TextStyle(color: Colors.grey),
                             border: InputBorder.none),
                       ),
@@ -148,7 +150,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                       child: TextField(
                         obscureText: true,
                         decoration: InputDecoration(
-                            hintText: "New Password",
+                            hintText: "nouveau mot de passe",
                             hintStyle: TextStyle(color: Colors.grey),
                             border: InputBorder.none),
                       ),
@@ -174,14 +176,14 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
                   children: [
                     FlatButton(
                         onPressed: () {},
-                        child: Text("Change",
-                            style: TextStyle(color: Colors.black))),
+                        child: Text("Changer",
+                            style: TextStyle(color: buttonColor))),
                     FlatButton(
                         onPressed: () {
                           Navigator.of(context).pop();
                         },
-                        child: Text("Cancel",
-                            style: TextStyle(color: Colors.black))),
+                        child: Text("Annuler",
+                            style: TextStyle(color: buttonColor))),
                   ],
                 ),
               ],
@@ -203,7 +205,7 @@ InkWell buildChangePasswordRow(BuildContext context, String title) {
           ),
           Icon(
             Icons.arrow_forward_ios,
-            color: Colors.grey[100],
+            color: Colors.grey[500],
           ),
         ],
       ),
@@ -234,7 +236,7 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
                           BoxShadow(
                               spreadRadius: 2,
                               blurRadius: 10,
-                              color: Colors.black.withOpacity(0.1),
+                              color: buttonColor.withOpacity(0.1),
                               offset: Offset(0, 10))
                         ],
                         shape: BoxShape.circle,
@@ -274,7 +276,7 @@ InkWell buildAboutUsRow(BuildContext context, String title) {
                     },
                     child: Text(
                       "Fermer",
-                      style: TextStyle(color: Colors.black),
+                      style: TextStyle(color: buttonColor),
                     )),
               ],
             );
@@ -335,11 +337,11 @@ InkWell buildRateUsRow(BuildContext context, String title) {
                           Navigator.of(context).pop();
                         },
                         child: Text("Annuler",
-                            style: TextStyle(color: Colors.black))),
+                            style: TextStyle(color: buttonColor))),
                     FlatButton(
                         onPressed: () {},
                         child: Text("Envoyer",
-                            style: TextStyle(color: Colors.black))),
+                            style: TextStyle(color: buttonColor))),
                   ],
                 ),
               ],

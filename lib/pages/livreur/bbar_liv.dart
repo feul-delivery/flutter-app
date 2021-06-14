@@ -17,7 +17,7 @@ class _ButtomBarLivState extends State<ButtomBarLiv> {
   final List<Item> items = [
     Item('Home', Icons.home),
     Item('Historique', Icons.history),
-    Item('Profile', Icons.account_circle),
+    Item('Profil', Icons.account_circle),
   ];
 
   @override
@@ -61,7 +61,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
       height: BAR_HEIGHT,
       width: width,
       decoration: BoxDecoration(
-        color: buttonColor,
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
             color: Colors.black12,
@@ -113,7 +113,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
               curve: Curves.linear,
               duration: duration,
               child: Container(
-                color: Colors.black,
+                color: buttonColor,
                 width: width / items.length,
                 height: INDICATOR_HEIGHT,
               ),
@@ -131,7 +131,7 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
 
   Widget _buildItemWidget(Item item, bool isSelected) {
     return Container(
-      color: buttonColor,
+      color: Colors.white,
       height: BAR_HEIGHT,
       width: width / items.length,
       child: Stack(
@@ -142,15 +142,12 @@ class _TitledBottomNavigationBarState extends State<TitledBottomNavigationBar>
             duration: duration,
             curve: Curves.linear,
             child: Text(item.title,
-                style: textStyle.copyWith(color: Colors.white)),
+                style: textStyle.copyWith(color: Colors.black54)),
           ),
           AnimatedAlign(
             duration: duration,
             alignment: isSelected ? Alignment.center : Alignment(0, 2.6),
-            child: Icon(
-              item.icon,
-              color: Colors.black,
-            ),
+            child: Icon(item.icon, color: buttonColor),
           ),
         ],
       ),

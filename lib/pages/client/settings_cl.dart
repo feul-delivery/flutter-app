@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/services/auth.dart';
-import 'package:FD_flutter/shared/map_api.dart';
+// import 'package:FD_flutter/shared/map_api.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
@@ -38,18 +38,18 @@ class _SettingsClState extends State<SettingsCl> {
             onPressed: () {
               Navigator.pop(context);
             }),
-        actions: [
-          InkWell(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => Maps(
-                          title: "Google Maps",
-                        )));
-              },
-              child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-                  child: Icon(OMIcons.myLocation, color: buttonColor)))
-        ],
+        // actions: [
+        //   InkWell(
+        //       onTap: () {
+        //         Navigator.of(context).push(MaterialPageRoute(
+        //             builder: (context) => Maps(
+        //                   title: "Google Maps",
+        //                 )));
+        //       },
+        //       child: Padding(
+        //           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
+        //           child: Icon(OMIcons.myLocation, color: buttonColor)))
+        // ],
         backgroundColor: scaffoldBackground,
         elevation: 0,
       ),

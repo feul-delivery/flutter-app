@@ -25,15 +25,13 @@ class _OrderDoneState extends State<OrderDone> {
     return Scaffold(
       backgroundColor: scaffoldBackground,
       appBar: AppBar(
+        leading: SizedBox.shrink(),
         elevation: 0,
         backgroundColor: scaffoldBackground,
         actions: [
           _isdone == true
               ? IconButton(
-                  icon: Icon(
-                    Icons.play_arrow_sharp,
-                    color: Colors.black,
-                  ),
+                  icon: Icon(Icons.play_arrow_sharp, color: Colors.white),
                   onPressed: () {
                     Navigator.of(context).pushReplacement(PageTransition(
                         type: PageTransitionType.leftToRight,
@@ -72,7 +70,7 @@ class _OrderDoneState extends State<OrderDone> {
                     child: Text(
                       'Order finished',
                       style: TextStyle(
-                        color: Colors.black54,
+                        color: Colors.white,
                         fontFamily: 'Gotham',
                         fontSize: 35,
                         fontWeight: FontWeight.w500,
@@ -82,7 +80,7 @@ class _OrderDoneState extends State<OrderDone> {
                   Text(
                     "${Language.mapLang['deliveredASAP']}",
                     style: TextStyle(
-                        color: Colors.black26,
+                        color: Colors.white54,
                         fontFamily: 'Gotham',
                         fontWeight: FontWeight.w200,
                         fontSize: 17),
@@ -100,22 +98,24 @@ class _OrderDoneState extends State<OrderDone> {
                 ],
               ),
             if (!_isdone)
-              SizedBox(
-                width: double.infinity,
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        margin: EdgeInsets.all(10),
-                        child: Text(
-                          '${Language.mapLang['orderdetail']}',
-                          style: smallTileGray,
-                        ),
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(10),
+                      margin: EdgeInsets.all(10),
+                      child: Text(
+                        '${Language.mapLang['orderdetail']}',
+                        style: subTitleStyleW,
                       ),
-                      Container(
+                    ),
+                    Center(
+                      child: Container(
                         margin: EdgeInsets.all(10),
+                        padding: EdgeInsets.only(left: 40),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
@@ -126,8 +126,7 @@ class _OrderDoneState extends State<OrderDone> {
                                 children: [
                                   Container(
                                     width: MediaQuery.of(context).size.width *
-                                        1 /
-                                        3,
+                                        0.45,
                                     child: Row(
                                       children: [
                                         Icon(
@@ -164,8 +163,7 @@ class _OrderDoneState extends State<OrderDone> {
                                 children: [
                                   Container(
                                     width: MediaQuery.of(context).size.width *
-                                        1 /
-                                        3,
+                                        0.45,
                                     child: Row(
                                       children: [
                                         Icon(
@@ -202,8 +200,7 @@ class _OrderDoneState extends State<OrderDone> {
                                 children: [
                                   Container(
                                     width: MediaQuery.of(context).size.width *
-                                        1 /
-                                        3,
+                                        0.45,
                                     child: Row(
                                       children: [
                                         Icon(
@@ -241,8 +238,7 @@ class _OrderDoneState extends State<OrderDone> {
                                 children: [
                                   Container(
                                     width: MediaQuery.of(context).size.width *
-                                        1 /
-                                        3,
+                                        0.45,
                                     child: Row(
                                       children: [
                                         Icon(
@@ -280,8 +276,7 @@ class _OrderDoneState extends State<OrderDone> {
                                 children: [
                                   Container(
                                     width: MediaQuery.of(context).size.width *
-                                        1 /
-                                        3,
+                                        0.45,
                                     child: Row(
                                       children: [
                                         Icon(
@@ -311,102 +306,102 @@ class _OrderDoneState extends State<OrderDone> {
                           ],
                         ),
                       ),
-                      Container(
-                        height: 50,
-                        width: MediaQuery.of(context).size.width * 1 / 2,
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10)),
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Text(
-                              "Total:",
-                              style: tileTitleStyle,
+                    ),
+                    Container(
+                      height: 50,
+                      width: MediaQuery.of(context).size.width * 1 / 2,
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10)),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Total:",
+                            style: tileTitleStyle,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Center(
+                            child: Text(
+                              '${widget.order.prixtotal.toStringAsFixed(2)} Dh',
+                              style: smallTileB,
                             ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Center(
-                              child: Text(
-                                '${widget.order.prixtotal.toStringAsFixed(2)} Dh',
-                                style: smallTileB,
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      InkWell(
-                          radius: 50.0,
-                          onTap: () async {
-                            Firestore.instance
-                                .collection('orders')
-                                .document()
-                                .setData({
-                              'ordernum': widget.order.idorder,
-                              'volume': widget.order.volume,
-                              'adresse': widget.order.adresse,
-                              'dateheurec': DateTime.now().toString(),
-                              'dateheurel': DateTime(0000, 0, 0).toString(),
-                              'matricule': widget.order.matricule,
-                              'color': widget.order.color,
-                              'prixtotal': widget.order.prixtotal,
-                              'statut': 'waiting',
-                              'methode': widget.order.methode,
-                              'uidclient': widget.order.uidclient,
-                              'uidstation': widget.order.uidentreprise,
-                              'uidlivreur': '',
-                              'idtype': widget.order.idtype,
-                              'coordinates': widget.order.coordinates
-                            });
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                        radius: 50.0,
+                        onTap: () async {
+                          Firestore.instance
+                              .collection('orders')
+                              .document()
+                              .setData({
+                            'ordernum': widget.order.idorder,
+                            'volume': widget.order.volume,
+                            'adresse': widget.order.adresse,
+                            'dateheurec': DateTime.now().toString(),
+                            'dateheurel': DateTime(0000, 0, 0).toString(),
+                            'matricule': widget.order.matricule,
+                            'color': widget.order.color,
+                            'prixtotal': widget.order.prixtotal,
+                            'statut': 'waiting',
+                            'methode': widget.order.methode,
+                            'uidclient': widget.order.uidclient,
+                            'uidstation': widget.order.uidentreprise,
+                            'uidlivreur': '',
+                            'idtype': widget.order.idtype,
+                            'coordinates': widget.order.coordinates
+                          });
 
-                            // await _databaseService.newOrderData(
-                            //     widget.order.idorder,
-                            //     widget.order.volume,
-                            //     widget.order.adresse,
-                            //     DateTime.now().toString(),
-                            //     DateTime(0000, 0, 0).toString(),
-                            //     widget.order.matricule,
-                            //     widget.order.color,
-                            //     widget.order.prixtotal,
-                            //     'Waiting',
-                            //     widget.order.methode,
-                            //     widget.order.uidclient,
-                            //     widget.order.uidentreprise,
-                            //     '',
-                            //     widget.order.idtype);
-                            // ignore: missing_return
-                            // snapshot.documents.firstWhere((element) {
-                            //   if (element.data['ordernum'] ==
-                            //           widget.order.idorder &&
-                            //       element.data['uidclient'] ==
-                            //           widget.order.uidclient)
-                            //     qrData = element.documentID;
-                            // });
-                            setState(() {
-                              _isdone = true;
-                            });
-                          },
-                          child: Container(
-                            height: 40,
-                            width: MediaQuery.of(context).size.width * 1 / 4,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: buttonColor),
-                            child: Center(
-                              child: Text(
-                                "${Language.mapLang['confirm']}",
-                                style: buttonStyle,
-                              ),
+                          // await _databaseService.newOrderData(
+                          //     widget.order.idorder,
+                          //     widget.order.volume,
+                          //     widget.order.adresse,
+                          //     DateTime.now().toString(),
+                          //     DateTime(0000, 0, 0).toString(),
+                          //     widget.order.matricule,
+                          //     widget.order.color,
+                          //     widget.order.prixtotal,
+                          //     'Waiting',
+                          //     widget.order.methode,
+                          //     widget.order.uidclient,
+                          //     widget.order.uidentreprise,
+                          //     '',
+                          //     widget.order.idtype);
+                          // ignore: missing_return
+                          // snapshot.documents.firstWhere((element) {
+                          //   if (element.data['ordernum'] ==
+                          //           widget.order.idorder &&
+                          //       element.data['uidclient'] ==
+                          //           widget.order.uidclient)
+                          //     qrData = element.documentID;
+                          // });
+                          setState(() {
+                            _isdone = true;
+                          });
+                        },
+                        child: Container(
+                          height: 40,
+                          width: MediaQuery.of(context).size.width * 1 / 4,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: buttonColor),
+                          child: Center(
+                            child: Text(
+                              "${Language.mapLang['confirm']}",
+                              style: buttonStyle,
                             ),
-                          )),
-                    ]),
-              )
+                          ),
+                        )),
+                  ])
           ],
         ),
       ),

@@ -89,22 +89,18 @@ class DatabaseService {
   Future<void> updateLivreurData(
     String nom,
     String prenom,
-    String email,
     String cin,
     String sexe,
     String tele,
-    String statut,
-    String uidentreprise,
+    String ville,
   ) async {
     return await livreurCollection.document(uid).setData({
       'nom': nom,
       'prenom': prenom,
-      'email': email,
       'cin': cin,
       'sexe': sexe,
       'tele': tele,
-      'statut': statut,
-      'uidentreprise': uidentreprise,
+      'ville': ville,
     });
   }
 

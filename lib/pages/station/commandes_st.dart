@@ -27,7 +27,10 @@ class _ToutCommandesStState extends State<ToutCommandesSt> {
       child: Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
-          title: Text("Orders"),
+          title: Text(
+            "Commandes",
+            style: pageTitleW,
+          ),
           backgroundColor: Colors.black,
           centerTitle: true,
         ),

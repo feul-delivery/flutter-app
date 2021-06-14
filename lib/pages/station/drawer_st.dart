@@ -63,10 +63,11 @@ class DrawerSt extends StatelessWidget {
                       height: 10.0,
                     ),
                     Text(
-                      '${IndexSt.entreprise?.titre?.toUpperCase()}',
+                      '${IndexSt.entreprise?.titre}',
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.black,
-                        fontFamily: 'Gotham',
+                        fontFamily: 'Quarion',
                         fontWeight: FontWeight.w500,
                         fontSize: 20,
                       ),
@@ -79,7 +80,7 @@ class DrawerSt extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 12,
                         color: Colors.black,
-                        fontFamily: 'Gotham',
+                        fontFamily: 'Quarion',
                         fontWeight: FontWeight.w200,
                       ),
                     ),
@@ -107,7 +108,7 @@ class DrawerSt extends StatelessWidget {
             color: Colors.black,
           ),
           title: Text(
-            "Profile",
+            "Profil",
             style: textStyle,
           ),
         ),
@@ -124,7 +125,7 @@ class DrawerSt extends StatelessWidget {
             color: Colors.black,
           ),
           title: Text(
-            "Orders",
+            "Commandes",
             style: textStyle,
           ),
         ),
@@ -139,50 +140,48 @@ class DrawerSt extends StatelessWidget {
             color: Colors.black,
           ),
           title: Text(
-            "Fuel types",
+            "Types de carburant",
+            style: textStyle,
+          ),
+        ),
+        ListTile(
+          onTap: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.fade, child: SettingsSt()));
+          },
+          leading: Icon(
+            Icons.settings,
+            color: Colors.black,
+          ),
+          title: Text(
+            "Paramètres",
             style: textStyle,
           ),
         ),
         Expanded(
             child: Align(
           alignment: Alignment.bottomCenter,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              InkWell(
-                onTap: () async {
-                  _auth.signOut();
-                  Navigator.of(context).pushReplacement(MaterialPageRoute(
-                      builder: (BuildContext context) => Wrapper()));
-                },
-                child: Container(
-                  height: 30,
-                  margin: EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  width: MediaQuery.of(context).size.width * 1 / 4,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.black),
-                  child: Center(
-                    child: Text(
-                      "Sign out",
-                      style: buttonStyle,
-                    ),
-                  ),
+          child: InkWell(
+            onTap: () async {
+              _auth.signOut();
+              Navigator.of(context).pushReplacement(MaterialPageRoute(
+                  builder: (BuildContext context) => Wrapper()));
+            },
+            child: Container(
+              height: 40,
+              margin: EdgeInsets.fromLTRB(10, 0, 10, 10),
+              width: MediaQuery.of(context).size.width * 0.3,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(50), color: Colors.black),
+              child: Center(
+                child: Text(
+                  "Sign out",
+                  style: buttonStyle,
                 ),
               ),
-              IconButton(
-                icon: Icon(
-                  Icons.settings,
-                  color: Colors.black,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      PageTransition(
-                          type: PageTransitionType.fade, child: SettingsSt()));
-                },
-              )
-            ],
+            ),
           ),
         ))
       ]),

@@ -171,7 +171,7 @@ class _ToutCommandesState extends State<ToutCommandes> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    child: Text('Address: ',
+                                    child: Text('Adresse: ',
                                         style:
                                             TextStyle(color: Colors.grey[800])),
                                   ),
