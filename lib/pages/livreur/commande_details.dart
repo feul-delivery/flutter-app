@@ -317,7 +317,23 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                                     child: CircularProgressIndicator()),
                                 errorWidget: (context, url, error) =>
                                     CircleAvatar(
-                                        radius: 30.0, child: Icon(Icons.error)),
+                                        radius: 30.0,
+                                        child: Container(
+                                          margin: EdgeInsets.only(top: 5),
+                                          child: Text(
+                                              '${snapshot.data['prenom']}'
+                                                      .substring(0, 1)
+                                                      .toUpperCase() +
+                                                  '${snapshot.data['nom']}'
+                                                      .substring(0, 1)
+                                                      .toUpperCase(),
+                                              textAlign: TextAlign.center,
+                                              style: TextStyle(
+                                                  fontSize: 24,
+                                                  color: Colors.white,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontFamily: 'Quarion')),
+                                        )),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(20.0),
