@@ -7,7 +7,12 @@ import 'package:timeago/timeago.dart' as timeago;
 // ignore: must_be_immutable
 class CommandeWidget extends StatefulWidget {
   DocumentSnapshot commande;
-  CommandeWidget({@required this.commande});
+  bool havingCommande;
+  GlobalKey<ScaffoldState> scaffoldKey;
+  CommandeWidget(
+      {@required this.commande,
+      @required this.scaffoldKey,
+      @required this.havingCommande});
 
   @override
   _CommandeWidgetState createState() => _CommandeWidgetState();
@@ -33,9 +38,14 @@ class _CommandeWidgetState extends State<CommandeWidget> {
         color: Colors.transparent,
         child: InkWell(
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => CommandeDetailLv(widget.commande),
-            ));
+            if (!widget.havingCommande) {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => CommandeDetailLv(widget.commande, false),
+              ));
+            } else {
+              showInSnackBar(
+                  'vous ne pouvez pas livrer trop de commandes en même temps');
+            }
           },
           borderRadius: BorderRadius.circular(20),
           child: Padding(
@@ -127,5 +137,13 @@ class _CommandeWidgetState extends State<CommandeWidget> {
         ),
       ),
     );
+  }
+
+  void showInSnackBar(String value) {
+    SnackBar snackBar = new SnackBar(
+        backgroundColor: scaffoldBackground,
+        content:
+            new Text(value, style: textStyle.copyWith(color: Colors.white)));
+    widget.scaffoldKey.currentState.showSnackBar(snackBar);
   }
 }

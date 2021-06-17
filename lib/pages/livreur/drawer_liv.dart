@@ -24,7 +24,7 @@ class _DrawerLivState extends State<DrawerLiv> {
         Container(
           child: Padding(
             padding: EdgeInsets.only(top: 50.0),
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -73,7 +73,7 @@ class _DrawerLivState extends State<DrawerLiv> {
             color: buttonColor,
           ),
           title: Text(
-            "Home",
+            "Accueil",
             style: textStyle,
           ),
         ),
@@ -87,7 +87,7 @@ class _DrawerLivState extends State<DrawerLiv> {
             color: buttonColor,
           ),
           title: Text(
-            "My profile",
+            "Profil",
             style: textStyle,
           ),
         ),
@@ -115,7 +115,7 @@ class _DrawerLivState extends State<DrawerLiv> {
             color: buttonColor,
           ),
           title: Text(
-            "Settings",
+            "Paramètres",
             style: textStyle,
           ),
         ),

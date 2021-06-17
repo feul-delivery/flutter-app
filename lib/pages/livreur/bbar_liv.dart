@@ -15,7 +15,7 @@ class ButtomBarLiv extends StatefulWidget {
 
 class _ButtomBarLivState extends State<ButtomBarLiv> {
   final List<Item> items = [
-    Item('Home', Icons.home),
+    Item('Accueil', Icons.home),
     Item('Historique', Icons.history),
     Item('Profil', Icons.account_circle),
   ];

@@ -1,19 +1,28 @@
+import 'package:FD_flutter/modules/user.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
+import 'dart:io';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../../wrapper.dart';
 
 class CommandeDetailLv extends StatefulWidget {
   final DocumentSnapshot document;
-  CommandeDetailLv(
-    this.document,
-  );
+  final bool isDelivering;
+  CommandeDetailLv(this.document, this.isDelivering);
   @override
   _CommandeDetailLvState createState() => _CommandeDetailLvState();
 }
+
+String qrCode;
+final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
 class _CommandeDetailLvState extends State<CommandeDetailLv> {
   @override
@@ -22,6 +31,7 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
     int colorV = int.parse(widget.document['color'].toString());
     Color myColor = Color(colorV);
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(
           "Details",
@@ -265,16 +275,39 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          print('commande accepter');
-        },
-        label: Text('Accepter la commande',
-            style: pageTitleW.copyWith(fontSize: 14)),
-        icon: Icon(Icons.done),
-        backgroundColor: buttonColor,
-        elevation: 0,
-      ),
+      floatingActionButton: widget.isDelivering
+          ? FloatingActionButton.extended(
+              onPressed: () {
+                scanToConfirm(widget.document.documentID);
+                // Firestore.instance
+                //     .collection('orders')
+                //     .document(widget.document.documentID)
+                //     .setData({'uidlivreur': Provider.of<User>(context).uid},
+                //         merge: true);
+              },
+              label: Padding(
+                padding: const EdgeInsets.only(top: 4.0),
+                child: Text('confirmer la livraison',
+                    style: pageTitleW.copyWith(fontSize: 14)),
+              ),
+              icon: Icon(CupertinoIcons.text_badge_checkmark),
+              backgroundColor: buttonColor,
+              elevation: 0,
+            )
+          : FloatingActionButton.extended(
+              onPressed: () {
+                Firestore.instance
+                    .collection('orders')
+                    .document(widget.document.documentID)
+                    .setData({'uidlivreur': Provider.of<User>(context).uid},
+                        merge: true);
+              },
+              label: Text('Accepter la commande',
+                  style: pageTitleW.copyWith(fontSize: 14)),
+              icon: Icon(Icons.done),
+              backgroundColor: buttonColor,
+              elevation: 0,
+            ),
     );
   }
 
@@ -393,5 +426,62 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                     }));
           });
         });
+  }
+
+  Future<void> scanToConfirm(String id) async {
+    try {
+      final qr = await FlutterBarcodeScanner.scanBarcode(
+        '#ff6666',
+        'Cancel',
+        true,
+        ScanMode.QR,
+      );
+
+      if (!mounted) return;
+      if (qr == id) {
+        Firestore.instance
+            .collection('orders')
+            .document(id)
+            .setData({'statut': 'done'}, merge: true).then((value) {
+          showInSnackBar('le code QR ne correspond pas à la commande en cours',
+              null, Colors.green[300]);
+          Future.delayed(Duration(seconds: 5)).then((value) {
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(builder: (context) => Wrapper()));
+          });
+        });
+      } else {
+        showInSnackBar('le code QR ne correspond pas à la commande en cours',
+            null, Colors.deepOrangeAccent);
+      }
+    } on PlatformException {
+      showInSnackBar('n’a pas réussi à analyser le qr, réessayez attentivement',
+          null, Colors.deepOrangeAccent);
+    }
+  }
+  // Future<void> scanQRCode() async {
+  //   try {
+  //     final qr = await FlutterBarcodeScanner.scanBarcode(
+  //       '#ff6666',
+  //       'Cancel',
+  //       true,
+  //       ScanMode.QR,
+  //     );
+
+  //     if (!mounted) return;
+  //     print(qr);
+
+  //   } on PlatformException {
+  //     qrCode = 'Failed to get platform version.';
+  //   }
+  // }
+  void showInSnackBar(String value, Color textcolor, Color backColor) {
+    SnackBar snackBar = new SnackBar(
+        duration: Duration(seconds: 3),
+        backgroundColor: backColor == null ? scaffoldBackground : backColor,
+        content: new Text(value,
+            style: textStyle.copyWith(
+                color: textcolor == null ? Colors.white : textcolor)));
+    _scaffoldKey.currentState.showSnackBar(snackBar);
   }
 }

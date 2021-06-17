@@ -52,7 +52,7 @@ class _SettingsLivState extends State<SettingsLiv> {
                     width: 8,
                   ),
                   Text(
-                    "Account",
+                    "Compte",
                     style: subTitleStyle,
                   ),
                 ],
@@ -61,7 +61,7 @@ class _SettingsLivState extends State<SettingsLiv> {
                 height: 15,
                 thickness: 1,
               ),
-              buildChangerPasswordRow(context, " Changer Password"),
+              buildChangerPasswordRow(context, " Changer Mot de passe"),
               buildAccountOptionRow(context, " Supprimer votre compte"),
               Row(
                 children: [
