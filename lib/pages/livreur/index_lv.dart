@@ -24,32 +24,15 @@ class IndexLv extends StatefulWidget {
 
 class _IndexLvState extends State<IndexLv> {
   get child => null;
-  var statut = 'N/A';
+  String statut;
   bool showStatut = false;
   @override
   void initState() {
     super.initState();
-    getStatut();
   }
 
   bool havingCommande = false;
   DocumentSnapshot currentCommande;
-  getStatut() async {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final FirebaseUser user = await auth.currentUser();
-    await Firestore.instance
-        .collection('livreur')
-        .document(user.uid)
-        ?.get()
-        ?.then((value) async {
-      if (value.exists) {
-        var key1 = await value.data['statut'];
-        setState(() {
-          statut = key1;
-        });
-      }
-    });
-  }
 
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
 
@@ -96,8 +79,7 @@ class _IndexLvState extends State<IndexLv> {
                 .collection('orders')
                 .where('uidlivreur', isEqualTo: Provider.of<User>(context).uid)
                 .where('statut', isEqualTo: 'waiting')
-                .getDocuments()
-                .asStream(),
+                .snapshots(),
             builder: (context, commandes) {
               if (commandes.hasError) {
                 return Icon(Icons.cancel, color: Colors.black);
@@ -158,66 +140,101 @@ class _IndexLvState extends State<IndexLv> {
                             const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 0.0),
                         child: Column(children: <Widget>[
                           showStatut
-                              ? Container(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 0, horizontal: 7),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          Text('Statut: ',
-                                              style: TextStyle(fontSize: 18)),
-                                          Container(
-                                              width: 10,
-                                              height: 10,
-                                              decoration: BoxDecoration(
-                                                  color: statut == 'inactif'
-                                                      ? Colors.red
-                                                      : Colors.green,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          50)))
-                                        ],
-                                      ),
-                                      Container(
-                                        decoration: BoxDecoration(
-                                            color: Colors.white70,
-                                            borderRadius:
-                                                BorderRadius.circular(50)),
-                                        child: IconButton(
-                                            icon: Icon(Icons.sync_outlined,
-                                                color: buttonColor),
-                                            onPressed: () async {
-                                              final FirebaseAuth auth =
-                                                  FirebaseAuth.instance;
-                                              final FirebaseUser user =
-                                                  await auth.currentUser();
-                                              if (statut == 'actif') {
-                                                await Firestore.instance
-                                                    .collection('livreur')
-                                                    .document(user.uid)
-                                                    .updateData({
-                                                  'statut': 'inactif',
-                                                });
-                                                statut = 'inactif';
-                                              } else if (statut == 'inactif') {
-                                                await Firestore.instance
-                                                    .collection('livreur')
-                                                    .document(user.uid)
-                                                    .updateData({
-                                                  'statut': 'actif',
-                                                });
-                                                statut = 'actif';
-                                              }
+                              ? StreamBuilder<DocumentSnapshot>(
+                                  stream: Firestore.instance
+                                      .collection('livreur')
+                                      .document(Provider.of<User>(context).uid)
+                                      .snapshots(),
+                                  builder: (context, livreurDoc) {
+                                    if (livreurDoc.hasError) {
+                                      return Icon(Icons.cancel,
+                                          color: Colors.black);
+                                    }
+                                    switch (livreurDoc.connectionState) {
+                                      case ConnectionState.waiting:
+                                        return SizedBox(
+                                            child: Center(
+                                                child: Text(
+                                          'chargement...',
+                                          style: hintStyle,
+                                        )));
+                                      case ConnectionState.none:
+                                        return Icon(Icons.error_outline,
+                                            color: Colors.black);
 
-                                              setState(() {});
-                                            }),
-                                      )
-                                    ],
-                                  ),
-                                )
+                                      default:
+                                        return Container(
+                                          padding: EdgeInsets.symmetric(
+                                              vertical: 0, horizontal: 7),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Text('Statut: ',
+                                                      style: TextStyle(
+                                                          fontSize: 18)),
+                                                  Container(
+                                                      width: 10,
+                                                      height: 10,
+                                                      decoration: BoxDecoration(
+                                                          color: livreurDoc
+                                                                          .data[
+                                                                      'statut'] ==
+                                                                  'inactif'
+                                                              ? Colors.red
+                                                              : Colors.green,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      50)))
+                                                ],
+                                              ),
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white70,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            50)),
+                                                child: IconButton(
+                                                    icon: Icon(
+                                                        Icons.sync_outlined,
+                                                        color: buttonColor),
+                                                    onPressed: () async {
+                                                      final FirebaseAuth auth =
+                                                          FirebaseAuth.instance;
+                                                      final FirebaseUser user =
+                                                          await auth
+                                                              .currentUser();
+                                                      if (livreurDoc
+                                                              .data['statut'] ==
+                                                          'actif') {
+                                                        await Firestore.instance
+                                                            .collection(
+                                                                'livreur')
+                                                            .document(user.uid)
+                                                            .updateData({
+                                                          'statut': 'inactif',
+                                                        });
+                                                      } else if (livreurDoc
+                                                              .data['statut'] ==
+                                                          'inactif') {
+                                                        await Firestore.instance
+                                                            .collection(
+                                                                'livreur')
+                                                            .document(user.uid)
+                                                            .updateData({
+                                                          'statut': 'actif',
+                                                        });
+                                                      }
+                                                    }),
+                                              )
+                                            ],
+                                          ),
+                                        );
+                                    }
+                                  })
                               : SizedBox.shrink(),
                           SizedBox(
                             height: 10,
@@ -259,11 +276,13 @@ class _IndexLvState extends State<IndexLv> {
                                     return Column(children: [
                                       for (DocumentSnapshot document
                                           in snapshot.data.documents)
-                                        CommandeWidget(
-                                          commande: document,
-                                          scaffoldKey: _scaffoldKey,
-                                          havingCommande: havingCommande,
-                                        )
+                                        if (document.documentID !=
+                                            currentCommande?.documentID)
+                                          CommandeWidget(
+                                            commande: document,
+                                            scaffoldKey: _scaffoldKey,
+                                            havingCommande: havingCommande,
+                                          )
                                     ]);
                                 }
                               })
@@ -277,7 +296,7 @@ class _IndexLvState extends State<IndexLv> {
                             onPressed: () {
                               Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) =>
-                                    CommandeDetailLv(currentCommande,true),
+                                    CommandeDetailLv(currentCommande, true),
                               ));
                             },
                             label: Text('livrez..',

@@ -117,6 +117,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                               FadeAnimation(
                                   0.01,
                                   Text(doc['description'],
+                                      textAlign: TextAlign.justify,
                                       style: smallTileGray)),
                               FadeAnimation(
                                 0.01,
@@ -129,6 +130,7 @@ class _StationProfilClState extends State<StationProfilCl> {
                                       Icon(Icons.business, color: buttonColor),
                                       SizedBox(width: 8),
                                       Text("${Language.mapLang['address']}",
+                                          textAlign: TextAlign.justify,
                                           style: tileTitleStyleW),
                                     ],
                                   )),

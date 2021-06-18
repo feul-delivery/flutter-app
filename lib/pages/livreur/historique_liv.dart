@@ -46,7 +46,8 @@ class _HistoriqueLivState extends State<HistoriqueLiv> {
           body: StreamBuilder<QuerySnapshot>(
               stream: Firestore.instance
                   .collection('orders')
-                  .where('uidstation', isEqualTo: IndexLv.livreur.uidentreprise)
+                  .where('uidstation',
+                      isEqualTo: IndexLv.livreur?.uidentreprise)
                   .where('statut', isEqualTo: 'done')
                   .where('uidlivreur',
                       isEqualTo: Provider.of<User>(context).uid)
