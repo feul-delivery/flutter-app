@@ -3,11 +3,11 @@ import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:flutter/material.dart';
 import 'package:FD_flutter/pages/station/drawer_st.dart';
 import 'package:FD_flutter/pages/station/bbar_st.dart';
+import 'package:intl/intl.dart';
 
 import 'index_st.dart';
 
@@ -192,7 +192,7 @@ class _LivreurStState extends State<LivreurSt> {
                         padding: const EdgeInsets.only(left: 5.0, right: 5.0),
                         child: Center(
                             child: Text(
-                          'Since: ${date.day}/${date.month}/${date.year}',
+                          'Depuis: ${date.day}/${date.month}/${date.year}',
                           style: textStyle.copyWith(color: Colors.white),
                         )),
                       ),
@@ -202,21 +202,24 @@ class _LivreurStState extends State<LivreurSt> {
                 Container(
                   child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(document['nom'] + ' ' + document['prenom'],
+                      child: Text(
+                          toBeginningOfSentenceCase(
+                                  '${document['prenom']}'.toLowerCase()) +
+                              ' ' +
+                              '${document['nom']}'.toUpperCase(),
                           style: TextStyle(color: Colors.black, fontSize: 15))),
                 ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.45,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        child: Text('Email: ${document['email']}',
+                        child: Text('${document['email']}',
                             style: TextStyle(color: Colors.grey[600])),
                       ),
                       Container(
-                        child: Text(
-                            '${Language.mapLang['phone']}: +212${document['tele']}',
+                        child: Text('+212${document['tele']}',
                             style: TextStyle(color: Colors.grey[600])),
                       ),
                     ],

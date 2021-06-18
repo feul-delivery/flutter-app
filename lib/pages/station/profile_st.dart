@@ -379,6 +379,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       1.2,
                                       Text(
                                         '${snapshot.data['description']}',
+                                        textAlign: TextAlign.justify,
                                         style: TextStyle(
                                             color: Colors.grey, height: 1.4),
                                       )),
@@ -447,6 +448,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       1.2,
                                       Text(
                                         '${snapshot.data['adresse']}',
+                                        textAlign: TextAlign.justify,
                                         style: TextStyle(
                                             color: Colors.grey, height: 1.4),
                                       )),
@@ -512,6 +514,7 @@ class _ProfilStState extends State<ProfilSt> {
                                       1.2,
                                       Text(
                                         '+212${snapshot.data['tele']}',
+                                        textAlign: TextAlign.justify,
                                         style: TextStyle(
                                             color: Colors.grey, height: 1.4),
                                       )),

@@ -128,4 +128,54 @@ class AuthService {
     final FirebaseUser user = await _auth.currentUser();
     return user.uid;
   }
+
+  Future<bool> changeClientToLivreur(
+      DocumentSnapshot document, String uidEntreprise) async {
+    String _clientUID = document.documentID;
+    String _nom = await document['nom'];
+    String _prenom = await document['prenom'];
+    String _email = await document['email'];
+    String _cin = await document['cin'];
+    String _sexe = await document['sexe'];
+    String _tele = document['tele'];
+    String _photoURL = await document['photoURL'];
+
+    await Firestore.instance
+        .collection('livreur')
+        .document(_clientUID)
+        .setData({
+      'nom': _nom.toLowerCase(),
+      'prenom': _prenom.toLowerCase(),
+      'email': _email.toLowerCase(),
+      'cin': _cin.toLowerCase(),
+      'sexe': _sexe.toLowerCase(),
+      'tele': _tele.toLowerCase(),
+      'photoURL': _photoURL.toLowerCase(),
+      'dateajoute': DateTime.now().toString(),
+      'statut': 'inactif',
+      'uidentreprise': uidEntreprise,
+    }).whenComplete(() async => await _clientRemoval(_email, _clientUID));
+
+    return true;
+  }
+
+  _clientRemoval(String email, String uid) async {
+    await Firestore.instance
+        .collection('user')
+        .document(email)
+        .updateData({'account': 'livreur'});
+    await Firestore.instance.collection('client').document(uid).delete();
+    await Firestore.instance
+        .collection('order')
+        .where('uidclient', isEqualTo: uid)
+        .getDocuments()
+        .then((value) async {
+      for (DocumentSnapshot doc in value.documents) {
+        await Firestore.instance
+            .collection('order')
+            .document(doc.documentID)
+            .delete();
+      }
+    });
+  }
 }

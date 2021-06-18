@@ -300,7 +300,14 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
                     .collection('orders')
                     .document(widget.document.documentID)
                     .setData({'uidlivreur': Provider.of<User>(context).uid},
-                        merge: true);
+                        merge: true).then((value) {
+                  showInSnackBar(
+                      'accepté avec succès', null, Colors.green[300]);
+                  Future.delayed(Duration(seconds: 5)).then((value) {
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => Wrapper()));
+                  });
+                });
               },
               label: Text('Accepter la commande',
                   style: pageTitleW.copyWith(fontSize: 14)),

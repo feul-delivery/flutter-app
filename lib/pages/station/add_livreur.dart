@@ -3,10 +3,9 @@ import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 
 class AddLivreur extends StatefulWidget {
-  const AddLivreur({Key key}) : super(key: key);
-
   @override
   _AddLivreurState createState() => _AddLivreurState();
 }
@@ -14,6 +13,7 @@ class AddLivreur extends StatefulWidget {
 class _AddLivreurState extends State<AddLivreur> {
   TextEditingController searchController = TextEditingController();
   String searchTerm;
+
   @override
   Widget build(BuildContext context) {
     final User _user = Provider.of<User>(context);
@@ -48,8 +48,10 @@ class _AddLivreurState extends State<AddLivreur> {
                 Container(
                   width: MediaQuery.of(context).size.width * 0.75,
                   child: Text(
-                      "pour ajouter un livreur demandez-lui de créer un compte client, retrouvez-le avec l'email ci-dessous puis invitez-le à rejoindre votre équipe",
-                      style: TextStyle(fontSize: 18)),
+                    "pour ajouter un livreur demandez-lui de créer un compte client, retrouvez-le avec l'email ci-dessous puis invitez-le à rejoindre votre équipe",
+                    style: TextStyle(fontSize: 18),
+                    textAlign: TextAlign.justify,
+                  ),
                 ),
               ],
             ),
@@ -106,20 +108,34 @@ class _AddLivreurState extends State<AddLivreur> {
                             .map((DocumentSnapshot document) {
                       return new ListTile(
                           title: Text(
-                            "${document['nom']} ${document['prenom']}"
-                                .toUpperCase(),
+                            "${document['nom']}".toUpperCase() +
+                                " " +
+                                toBeginningOfSentenceCase(
+                                    "${document['prenom']}".toLowerCase()),
                             style: textStyle,
                           ),
                           subtitle: Text(
                             '+212${document['tele']}'.toLowerCase(),
                             style: moreStyle,
                           ),
-                          trailing: IconButton(
-                            icon: Icon(Icons.add),
-                            onPressed: () {
-                              _showModalDialogConfAdd(document, _user.uid);
-                            },
-                          ));
+                          trailing: List.from(document?.data['requests'] == null
+                                      ? []
+                                      : document?.data['requests'])
+                                  .contains(_user.uid)
+                              ? IconButton(
+                                  icon: Icon(Icons.done),
+                                  onPressed: () {
+                                    _showModalDialogDeleteRequest(
+                                        document, _user.uid);
+                                  },
+                                )
+                              : IconButton(
+                                  icon: Icon(Icons.add),
+                                  onPressed: () {
+                                    _showModalDialogConfRequest(
+                                        document, _user.uid);
+                                  },
+                                ));
                     }).toList());
                 }
               },
@@ -130,7 +146,7 @@ class _AddLivreurState extends State<AddLivreur> {
     );
   }
 
-  Future<void> _showModalDialogConfAdd(
+  Future<void> _showModalDialogConfRequest(
       DocumentSnapshot document, String uid) async {
     return showModalBottomSheet(
       backgroundColor: Colors.transparent,
@@ -159,7 +175,8 @@ class _AddLivreurState extends State<AddLivreur> {
                       ),
                       InkWell(
                         onTap: () {
-                          _addClToLv(document, uid);
+                          _sendRequest(document.documentID, uid);
+                          setState(() {});
                           Navigator.of(context).pop();
                         },
                         child: Container(
@@ -182,7 +199,10 @@ class _AddLivreurState extends State<AddLivreur> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Text(
-                      'êtes-vous sûr de vouloir ajouter ${document['nom']} ${document['prenom']} à votre personnel ?',
+                      'êtes-vous sûr de vouloir envoyer une invitation à travailler à ${toBeginningOfSentenceCase(document['prenom'])}' +
+                          '${document['nom']}'.toUpperCase() +
+                          '?',
+                      textAlign: TextAlign.justify,
                       style:
                           textStyle.copyWith(color: Colors.black, fontSize: 18),
                     ),
@@ -195,50 +215,94 @@ class _AddLivreurState extends State<AddLivreur> {
       },
     );
   }
-}
 
-Future<bool> _addClToLv(DocumentSnapshot document, String uid) async {
-  String _clientUID = document.documentID;
-  String _nom = await document['nom'];
-  String _prenom = await document['prenom'];
-  String _email = await document['email'];
-  String _cin = await document['cin'];
-  String _sexe = await document['sexe'];
-  String _tele = document['tele'];
-  String _photoURL = await document['photoURL'];
+  Future<void> _showModalDialogDeleteRequest(
+      DocumentSnapshot document, String uid) async {
+    return showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).viewInsets.bottom),
+            child: Container(
+              color: Colors.white,
+              padding: EdgeInsets.all(10),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(left: 10),
+                        child: Text(
+                          'Confirmation',
+                          style: pageTitleW.copyWith(color: Colors.black),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          _deleteRequest(document.documentID, uid);
+                          setState(() {});
+                          Navigator.of(context).pop();
+                        },
+                        child: Container(
+                          height: 30,
+                          width: MediaQuery.of(context).size.width * 1 / 5,
+                          margin: EdgeInsets.only(right: 10),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(50),
+                              color: Colors.black),
+                          child: Center(
+                            child: Text(
+                              'Confirmer',
+                              style: buttonStyle,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Text(
+                      "êtes-vous sûr de vouloir supprimer l'invitation à travailler que vous avez envoyée à ${toBeginningOfSentenceCase(document['prenom'])} " +
+                          '${document['prenom']}'.toUpperCase() +
+                          " ?",
+                      textAlign: TextAlign.justify,
+                      style:
+                          textStyle.copyWith(color: Colors.black, fontSize: 18),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
 
-  await Firestore.instance.collection('livreur').document(_clientUID).setData({
-    'nom': _nom.toLowerCase(),
-    'prenom': _prenom.toLowerCase(),
-    'email': _email.toLowerCase(),
-    'cin': _cin.toLowerCase(),
-    'sexe': _sexe.toLowerCase(),
-    'tele': _tele.toLowerCase(),
-    'photoURL': _photoURL.toLowerCase(),
-    'dateajoute': DateTime.now().toString(),
-    'statut': 'inactif',
-    'uidentreprise': uid,
-  }).whenComplete(() async => await _clientRemoval(_email, _clientUID));
+  Future<bool> _sendRequest(String documentID, String uid) {
+    Firestore.instance.collection('client').document(documentID).setData({
+      'requests': FieldValue.arrayUnion([uid])
+    }, merge: true).then((value) {
+      return true;
+    }).catchError((onError) {
+      return false;
+    });
+  }
 
-  return true;
-}
-
-_clientRemoval(String email, String uid) async {
-  await Firestore.instance
-      .collection('user')
-      .document(email)
-      .updateData({'account': 'livreur'});
-  await Firestore.instance.collection('client').document(uid).delete();
-  await Firestore.instance
-      .collection('order')
-      .where('uidclient', isEqualTo: uid)
-      .getDocuments()
-      .then((value) async {
-    for (DocumentSnapshot doc in value.documents) {
-      await Firestore.instance
-          .collection('order')
-          .document(doc.documentID)
-          .delete();
-    }
-  });
+  Future<bool> _deleteRequest(String documentID, String uid) {
+    Firestore.instance.collection('client').document(documentID).setData({
+      'requests': FieldValue.arrayRemove([uid])
+    }, merge: true).then((value) {
+      return true;
+    }).catchError((onError) {
+      return false;
+    });
+  }
 }

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:intl/intl.dart';
 
 class ToutCommandes extends StatefulWidget {
   final DocumentSnapshot document;
@@ -28,8 +29,9 @@ class _ToutCommandesState extends State<ToutCommandes> {
         .get()
         .then((value) async {
       if (value.exists) {
-        var key1 = await value.data['prenom'];
-        var key2 = await value.data['nom'];
+        var key1 =
+            toBeginningOfSentenceCase('${value.data['prenom']}'.toLowerCase());
+        var key2 = '${value.data['nom']}'.toUpperCase();
         setState(() {
           pnom = key1 + ' ' + key2;
           print(pnom);
@@ -71,7 +73,7 @@ class _ToutCommandesState extends State<ToutCommandes> {
                             height: 25,
                             margin: EdgeInsets.symmetric(horizontal: 5),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                               color: Colors.black,
                             ),
                             child: Padding(
@@ -88,7 +90,7 @@ class _ToutCommandesState extends State<ToutCommandes> {
                             height: 25,
                             margin: EdgeInsets.symmetric(horizontal: 5),
                             decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(20),
                               color: Colors.black,
                             ),
                             child: Padding(
@@ -111,89 +113,81 @@ class _ToutCommandesState extends State<ToutCommandes> {
                                 style: TextStyle(
                                     color: Colors.black, fontSize: 18))),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: <Widget>[
-                                  Row(
-                                    children: [
-                                      Container(
-                                        child: Text('Volume: ',
-                                            style: TextStyle(
-                                                color: Colors.grey[800])),
-                                      ),
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      Container(
-                                        child: Text('${document['volume']}L',
-                                            style: TextStyle(
-                                                color: Colors.grey[600])),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width: 40,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  Container(
-                                    child: Text('Type:',
-                                        style:
-                                            TextStyle(color: Colors.grey[800])),
-                                  ),
-                                  SizedBox(
-                                    width: 15,
-                                  ),
-                                  Container(
-                                    child: Text(document['idtype'],
-                                        textAlign: TextAlign.center,
-                                        style:
-                                            TextStyle(color: Colors.grey[600])),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    child: Text('Adresse: ',
-                                        style:
-                                            TextStyle(color: Colors.grey[800])),
-                                  ),
-                                  Container(
-                                    width: MediaQuery.of(context).size.width *
-                                        3 /
-                                        5,
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(document['adresse'],
-                                        textAlign: TextAlign.center,
-                                        maxLines: 2,
-                                        style:
-                                            TextStyle(color: Colors.grey[600])),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                        ],
+                      Center(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Row(
+                                  children: [
+                                    Container(
+                                      child: Text('Volume: ',
+                                          style: TextStyle(
+                                              color: Colors.grey[800])),
+                                    ),
+                                    SizedBox(
+                                      width: 15,
+                                    ),
+                                    Container(
+                                      child: Text('${document['volume']}L',
+                                          style: TextStyle(
+                                              color: Colors.grey[600])),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: 40,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                  child: Text('Type:',
+                                      style:
+                                          TextStyle(color: Colors.grey[800])),
+                                ),
+                                SizedBox(
+                                  width: 15,
+                                ),
+                                Container(
+                                  child: Text(document['idtype'],
+                                      textAlign: TextAlign.center,
+                                      style:
+                                          TextStyle(color: Colors.grey[600])),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Text('Adresse: ',
+                                      style:
+                                          TextStyle(color: Colors.grey[800])),
+                                ),
+                                Container(
+                                  width:
+                                      MediaQuery.of(context).size.width * 3 / 5,
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(document['adresse'],
+                                      textAlign: TextAlign.center,
+                                      maxLines: 2,
+                                      style:
+                                          TextStyle(color: Colors.grey[600])),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       )
                     ],
                   ),
