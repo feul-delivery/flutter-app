@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
+import 'package:FD_flutter/pages/client/notfications/CommandeNotifications.dart';
+
 import 'ClientProvider.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -24,6 +26,7 @@ import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'commanderPages/cmd_client.dart';
+import 'notfications/RequestNotifications.dart';
 
 class IndexCl extends StatefulWidget {
   @override
@@ -134,52 +137,31 @@ class _IndexClState extends State<IndexCl> {
                     alignment: Alignment.center,
                     margin: EdgeInsets.only(
                         top: MediaQuery.of(context).padding.top),
-                    padding: EdgeInsets.all(15),
-                    child:
-                        Text('${Language.mapLang['home']}', style: pageTitleO)),
-                // Container(
-                //   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                //   width: MediaQuery.of(context).size.width,
-                //   decoration: BoxDecoration(color: Colors.red[700]),
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       Text(
-                //         'you have a working request',
-                //         style: textStyle.copyWith(color: Colors.white),
-                //       ),
-                //       Row(
-                //         children: [
-                //           Container(
-                //             padding: EdgeInsets.fromLTRB(5, 4, 5, 4),
-                //             decoration: BoxDecoration(
-                //                 color: Colors.white,
-                //                 borderRadius: BorderRadius.circular(20)),
-                //             child: Material(
-                //               borderRadius: BorderRadius.circular(20),
-                //               color: Colors.transparent,
-                //               child: InkWell(
-                //                 borderRadius: BorderRadius.circular(20),
-                //                 child: Text(
-                //                   'accept',
-                //                   style:
-                //                       buttonStyle.copyWith(color: Colors.black),
-                //                 ),
-                //                 onTap: () {
-                //                   print("accepted");
-                //                 },
-                //               ),
-                //             ),
-                //           ),
-                //           SizedBox(width: 7),
-                //           InkWell(
-                //               child: Icon(Icons.clear, color: Colors.white),
-                //               onTap: () => null),
-                //         ],
-                //       )
-                //     ],
-                //   ),
-                // ),
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 15),
+                          child: Text('${Language.mapLang['home']}',
+                              style: pageTitleO),
+                        ),
+                        Material(
+                          borderRadius: BorderRadius.circular(50),
+                          color: Colors.transparent,
+                          child: InkWell(
+                              borderRadius: BorderRadius.circular(50),
+                              child: Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Icon(Icons.notifications_active_rounded,
+                                    color: Colors.yellow.shade600),
+                              ),
+                              onTap: () =>
+                                  _showModalBottomNotifications(context)),
+                        )
+                      ],
+                    )),
+
                 Container(
                   color: buttonColor,
                   width: double.infinity,
@@ -589,4 +571,40 @@ void _addStToFav(String documentID, String uid) async {
   } catch (e) {
     print(e);
   }
+}
+
+Future<void> _showModalBottomNotifications(BuildContext context) {
+  return showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(builder: (BuildContext context, setState) {
+          return Container(
+            height: MediaQuery.of(context).size.height - 24,
+            child: DefaultTabController(
+              length: 2,
+              child: Scaffold(
+                appBar: AppBar(
+                  title: Text(
+                    'Notifications',
+                    style: pageTitle,
+                  ),
+                  bottom: TabBar(
+                    tabs: [
+                      Tab(icon: Icon(Icons.work)),
+                      Tab(icon: Icon(Icons.list))
+                    ],
+                  ),
+                ),
+                body: TabBarView(
+                  children: [
+                    RequestNotifications(),
+                    CommandeNotifications(),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+      });
 }
