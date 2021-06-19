@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'merci.dart';
 
 class CommandeDetail extends StatefulWidget {
   final DocumentSnapshot document;
@@ -12,7 +13,15 @@ class CommandeDetail extends StatefulWidget {
   _CommandeDetailState createState() => _CommandeDetailState();
 }
 
+String statutOld;
+
 class _CommandeDetailState extends State<CommandeDetail> {
+  @override
+  void initState() {
+    super.initState();
+    statutOld = widget.document.data['statut'];
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -320,27 +329,92 @@ class _CommandeDetailState extends State<CommandeDetail> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 30,
-                ),
-                Center(
-                  child: Container(
-                    height: MediaQuery.of(context).size.width * 2 / 3,
-                    width: MediaQuery.of(context).size.width * 2 / 3,
-                    child: QrImage(
-                      foregroundColor: Colors.white,
-                      data: '${widget.document.documentID}',
-                      //   embeddedImage: AssetImage('assets/profile.png'),
-                      //   embeddedImageStyle:
-                      //       QrEmbeddedImageStyle(size: Size(50, 50)),
-                    ),
-                  ),
-                ),
               ],
             ),
           ),
         ],
       ),
+      floatingActionButton: _checkstatut(widget.document.data['statut'],
+              widget.document?.data['uidlivreur'])
+          ? SizedBox.shrink()
+          : FloatingActionButton.extended(
+              onPressed: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        backgroundColor: darkGray,
+                        content: Container(
+                          color: darkGray,
+                          height:
+                              MediaQuery.of(context).size.width * 2 / 3 + 15,
+                          width: MediaQuery.of(context).size.width * 2 / 3,
+                          child: Column(
+                            children: [
+                              QrImage(
+                                foregroundColor: Colors.white,
+                                data: '${widget.document.documentID}',
+                              ),
+                              Container(
+                                child: Text(
+                                  "${Language.mapLang['deliveryqr']}",
+                                  style: hintStyle.copyWith(
+                                      color: Colors.white, fontSize: 12),
+                                  textAlign: TextAlign.justify,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      );
+                    });
+                Firestore.instance
+                    .collection('orders')
+                    .document(widget.document.documentID)
+                    .snapshots()
+                    .listen((event) {
+                  String statutNew = event.data['statut'];
+                  if (statutNew == 'done' && statutOld == 'waiting') {
+                    Navigator.pop(context);
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (context) => CommandeCompleted()));
+                    // showDialog(
+                    //     context: context,
+                    //     builder: (BuildContext context) {
+                    //       return AlertDialog(
+                    //         backgroundColor: darkGray,
+                    //         content: Container(
+                    //           margin: EdgeInsets.all(5),
+                    //           decoration: BoxDecoration(
+                    //               border: Border.all(color: Colors.white)),
+                    //           padding: EdgeInsets.symmetric(
+                    //               vertical: 10, horizontal: 20),
+                    //           child: Container(
+                    //             child: Text(
+                    //               "merci d'être patient, dans l'attente de la prochaine commande",
+                    //               style: TextStyle(
+                    //                   fontSize: 18, color: Colors.white),
+                    //               textAlign: TextAlign.justify,
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       );
+                    //     });
+                  }
+                });
+              },
+              label: Text('livrez..', style: pageTitleW.copyWith(fontSize: 14)),
+              icon: CircularProgressIndicator(
+                  valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                  backgroundColor: buttonColor),
+              backgroundColor: buttonColor,
+              elevation: 0,
+            ),
     );
   }
+}
+
+bool _checkstatut(String statut, String livreur) {
+  if (statut == 'waiting' && livreur != null) return false;
+  return true;
 }

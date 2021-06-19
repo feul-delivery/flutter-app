@@ -34,7 +34,7 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    // return either the index or Authenticate widget
+
     if (user == null) {
       return Authenticate();
     } else {

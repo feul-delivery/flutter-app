@@ -207,7 +207,7 @@ class _ExploreClState extends State<ExploreCl> {
                         ],
                         onSelected: (route) {
                           print(route);
-                          // Note You must create respective pages for navigation
+
                           Navigator.pushNamed(context, route);
                         },
                       ),
@@ -345,7 +345,6 @@ class _ExploreClState extends State<ExploreCl> {
     } catch (e) {
       print(e);
     }
-    setState(() {});
   }
 
   void _removeStFromFav(String documentID, String uid) async {
@@ -358,8 +357,6 @@ class _ExploreClState extends State<ExploreCl> {
     } catch (e) {
       print(e);
     }
-
-    setState(() {});
   }
 
   _shimmerExplore() {

@@ -204,7 +204,6 @@ class _ClientOrderState extends State<ClientOrder> {
           IconButton(
             icon:
                 Icon(CupertinoIcons.text_badge_checkmark, color: Colors.white),
-            // Text('${Language.mapLang['next']}', style: tileTitleStyle),
             onPressed: () async {
               if (_methode == null) {
                 _showModalSheetPayment(context);

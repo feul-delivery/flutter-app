@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/services/auth.dart';
+import 'package:qr_flutter/qr_flutter.dart';
+import 'package:FD_flutter/wrapper.dart';
 
 // ignore: must_be_immutable
 class StationWidget extends StatefulWidget {
@@ -55,21 +57,48 @@ class _StationWidgetState extends State<StationWidget> {
                                 color: Colors.greenAccent,
                               )),
                           onTap: () {
-                            // Firestore.instance
-                            //     .collection('client')
-                            //     .document(Provider.of<User>(context).uid)
-                            //     .get()
-                            //     .then((value) {
-                            //   AuthService auth = AuthService();
-                            //   auth.changeClientToLivreur(value, widget.id);
-                            //   AuthService.type = "livreur";
-
-                            // });
-                            Navigator.pop(context);
-                            showInSnackBar(
-                                "${Language.mapLang['redirectClToLv']}");
-                            Future.delayed(Duration(seconds: 5))
-                                .then((value) {});
+                            showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    content: Container(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              2 /
+                                              3,
+                                      width: MediaQuery.of(context).size.width *
+                                          2 /
+                                          3,
+                                      child: QrImage(
+                                        foregroundColor: Colors.black,
+                                        data: '${widget.id}' +
+                                            '${Provider.of<User>(context).uid}',
+                                        //   embeddedImage: AssetImage('assets/profile.png'),
+                                        //   embeddedImageStyle:
+                                        //       QrEmbeddedImageStyle(size: Size(50, 50)),
+                                      ),
+                                    ),
+                                  );
+                                });
+                            Firestore.instance
+                                .collection('user')
+                                .document(Provider.of<User>(context).email)
+                                .snapshots()
+                                .listen((event) {
+                              String accType = event.data['type'];
+                              if (accType == 'livreur') {
+                                Navigator.pop(context);
+                                AuthService.type = "livreur";
+                                showInSnackBar(
+                                    "${Language.mapLang['redirectClToLv']}");
+                                Future.delayed(Duration(seconds: 2))
+                                    .then((value) {
+                                  Navigator.of(context).pushReplacement(
+                                      MaterialPageRoute(
+                                          builder: (context) => Wrapper()));
+                                });
+                              }
+                            });
                           },
                         ),
                       ),
@@ -105,6 +134,7 @@ class _StationWidgetState extends State<StationWidget> {
   }
 }
 
+// ignore: missing_return
 Future<bool> _deleteRequest(String documentID, String uid) {
   Firestore.instance.collection('client').document(documentID).setData({
     'requests': FieldValue.arrayRemove([uid])
