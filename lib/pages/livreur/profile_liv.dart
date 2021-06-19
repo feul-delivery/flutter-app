@@ -52,8 +52,7 @@ class _ProfileLivState extends State<ProfileLiv> {
               stream: Firestore.instance
                   .collection('livreur')
                   .document(Provider.of<User>(context).uid)
-                  .get()
-                  .asStream(),
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Center(child: Icon(Icons.cancel, color: buttonColor));

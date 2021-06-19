@@ -93,8 +93,7 @@ class _ProfilStState extends State<ProfilSt> {
           stream: Firestore.instance
               .collection('entreprise')
               .document(_user.uid)
-              .get()
-              .asStream(),
+              .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Container(
@@ -127,14 +126,7 @@ class _ProfilStState extends State<ProfilSt> {
                     child: customeCircularProgress,
                   ),
                 );
-              case ConnectionState.active:
-                return Container(
-                  height: MediaQuery.of(context).size.height * 1 / 5,
-                  width: MediaQuery.of(context).size.width,
-                  child: Center(
-                    child: customeCircularProgress,
-                  ),
-                );
+
               default:
                 _imagesList =
                     List<Map<dynamic, dynamic>>.from(snapshot.data['images'])

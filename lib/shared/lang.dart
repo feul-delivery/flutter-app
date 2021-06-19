@@ -2,7 +2,7 @@ class Language {
   static Map<String, String> mapLang;
   static String lang;
   static Map<String, String> mapFR = {
-    'yep':'oui',
+    'yep': 'oui',
     'home': 'Accueil',
     'hello': 'Bonjour',
     'explore': 'Explorer',
@@ -78,6 +78,8 @@ class Language {
     'next': 'Suivant',
     'required': 'Champs obligatoires',
     'carcolor': 'Couleur de la voiture',
+    'redirectClToLv':
+        "chargement..., vous serez bientôt redirigé vers l'espace livreur",
     'pickcolor': 'Choisissez une couleur',
     'matricule': 'Matricule',
     'choose': 'Choisir',
@@ -204,6 +206,8 @@ class Language {
     'ftype': 'Fuel type',
     'show': 'Show',
     'areyousure': 'are you sure?',
+    'redirectClToLv':
+        "chargement..., vous serez bientôt redirigé vers l'espace livreur",
     'usedlang': 'you are already using this language',
     'accesslocation': 'we need access to your location',
     'locateme': 'Locate me',

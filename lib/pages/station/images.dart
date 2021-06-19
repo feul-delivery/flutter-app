@@ -70,8 +70,7 @@ class _ImagesStState extends State<ImagesSt> {
         stream: Firestore.instance
             .collection('entreprise')
             .document(widget.userUID)
-            .get()
-            .asStream(),
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Container(
@@ -104,14 +103,7 @@ class _ImagesStState extends State<ImagesSt> {
                   child: customeCircularProgress,
                 ),
               );
-            case ConnectionState.active:
-              return Container(
-                height: MediaQuery.of(context).size.height * 1 / 5,
-                width: MediaQuery.of(context).size.width,
-                child: Center(
-                  child: customeCircularProgress,
-                ),
-              );
+
             default:
               _imagesList =
                   List<Map<dynamic, dynamic>>.from(snapshot.data['images'])
