@@ -9,13 +9,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:FD_flutter/wrapper.dart';
 
-// ignore: camel_case_types
 class InitialProfilecl extends StatefulWidget {
   @override
   _initialProfileclState createState() => _initialProfileclState();
 }
 
-// ignore: camel_case_types
 class _initialProfileclState extends State<InitialProfilecl>
     with SingleTickerProviderStateMixin {
   final FocusNode myFocusNode = FocusNode();

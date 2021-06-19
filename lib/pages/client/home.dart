@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'ClientProvider.dart';
 import 'package:provider/provider.dart';
 
-// ignore: must_be_immutable
 class HomeCl extends StatefulWidget {
   int index;
   HomeCl({@required this.index});
@@ -35,20 +34,6 @@ class _HomeClState extends State<HomeCl> {
       create: (_) => ClientProvider(),
       child: Scaffold(
         body: _pages[_currentIndex],
-        // body: Stack(
-        //     children: _pages
-        //         .asMap()
-        //         .map(
-        //           (i, page) => MapEntry(
-        //             i,
-        //             Offstage(
-        //               offstage: _currentIndex != i,
-        //               child: page,
-        //             ),
-        //           ),
-        //         )
-        //         .values
-        //         .toList()),
         bottomNavigationBar: BottomNavigationBar(
             elevation: 2,
             type: BottomNavigationBarType.fixed,
@@ -59,7 +44,6 @@ class _HomeClState extends State<HomeCl> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.home_outlined, color: Color(0xFFB9BAC3)),
                   activeIcon: Icon(Icons.home, color: buttonColor),
-                  // ignore: deprecated_member_use
                   title: Text('${Language.mapLang['home']}',
                       style: TextStyle(
                           color: _currentIndex == 0
@@ -68,7 +52,6 @@ class _HomeClState extends State<HomeCl> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.explore_outlined, color: Color(0xFFB9BAC3)),
                   activeIcon: Icon(Icons.explore, color: buttonColor),
-                  // ignore: deprecated_member_use
                   title: Text('${Language.mapLang['explore']}',
                       style: TextStyle(
                           color: _currentIndex == 1
@@ -77,7 +60,6 @@ class _HomeClState extends State<HomeCl> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.person_outline, color: Color(0xFFB9BAC3)),
                   activeIcon: Icon(Icons.person, color: buttonColor),
-                  // ignore: deprecated_member_use
                   title: Text('${Language.mapLang['profile']}',
                       style: TextStyle(
                           color: _currentIndex == 2

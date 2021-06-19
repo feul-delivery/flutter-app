@@ -2,8 +2,11 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
+import 'package:flutter/cupertino.dart';
+
 import 'widgets/StationWidget.dart';
 import 'ClientProvider.dart';
+import 'package:latlng/latlng.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,8 +61,6 @@ Future<Coordinates> _getCurrentLocation(BuildContext ctx) async {
     _locationSubscription =
         _locationTracker.onLocationChanged().listen((newLocalData) {
       _location = newLocalData;
-      // Provider.of<ClientProvider>(ctx, listen: false).setCoordinates(
-      //     new Coordinates(_location.latitude, _location.longitude));
     });
 
     return new Coordinates(_location.latitude, _location.longitude);
@@ -123,12 +124,8 @@ class _IndexClState extends State<IndexCl> {
           });
         },
         child: Scaffold(
-          backgroundColor: scaffoldBackground, key: _mScaffoldState,
-          // appBar: AppBar(
-          //   title: ,
-          //   backgroundColor: scaffoldBackground,
-          //   elevation: 0,
-          // ),
+          backgroundColor: scaffoldBackground,
+          key: _mScaffoldState,
           body: SingleChildScrollView(
             child: Column(
               children: [
@@ -213,7 +210,6 @@ class _IndexClState extends State<IndexCl> {
                             })
                       ],
                     )),
-
                 Container(
                   color: buttonColor,
                   width: double.infinity,
@@ -226,7 +222,6 @@ class _IndexClState extends State<IndexCl> {
                     ),
                   ),
                 ),
-
                 Stack(
                   children: [
                     Container(
@@ -249,19 +244,12 @@ class _IndexClState extends State<IndexCl> {
                         decoration: BoxDecoration(
                             gradient: LinearGradient(
                           begin: Alignment.topCenter,
-                          end: Alignment(-0.02,
-                              .8), // 10% of the width, so there are ten blinds.
-                          colors: <Color>[
-                            Colors.transparent,
-                            buttonColor
-                          ], // red to yellow
-                          // tileMode: TileMode
-                          //     .repeated, // repeats the gradient over the canvas
+                          end: Alignment(-0.02, .8),
+                          colors: <Color>[Colors.transparent, buttonColor],
                         )),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            //'${document['titre']}',
                             Text('Total Maroc',
                                 style: TextStyle(
                                   color: Colors.white,
@@ -271,7 +259,6 @@ class _IndexClState extends State<IndexCl> {
                                 )),
                             SizedBox(height: 5),
                             Text(
-                              // '${document['adresse']}',
                               'Route sefrou, marjane 30000',
                               style: TextStyle(
                                 color: Colors.white,
@@ -285,12 +272,7 @@ class _IndexClState extends State<IndexCl> {
                       ),
                     )
                   ],
-                ), // decoration: BoxDecoration(
-                //     color: Colors.white,
-                //     border: Border(
-                //       bottom: BorderSide(width: 1, color: Colors.grey[300]),
-                //       top: BorderSide(width: 1, color: Colors.grey[300]),
-                //     )),
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -416,18 +398,6 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
             color: Colors.transparent,
           ),
           child: FocusedMenuHolder(
-            // radius: 20,
-            // menuWidth: MediaQuery.of(context).size.width,
-            // blurSize: 5.0,
-            // menuItemExtent: 45,
-            // menuBoxDecoration: BoxDecoration(
-            //     color: Colors.grey,
-            //     borderRadius: BorderRadius.all(Radius.circular(15.0))),
-            // duration: Duration(milliseconds: 100),
-            // animateMenuItems: true,
-            // blurBackgroundColor: Colors.black54,
-            // bottomOffsetHeight: 100,
-            // openWithTap: true,
             menuItems: <FocusedMenuItem>[
               FocusedMenuItem(
                   title: Text('${Language.mapLang['order']}',
@@ -454,30 +424,10 @@ Widget _createSmallCard(DocumentSnapshot document, BuildContext context) {
                     });
                   }),
               FocusedMenuItem(
-                  title: Text("${Language.mapLang['open']}"),
-                  trailingIcon: Icon(Icons.open_in_new),
-                  onPressed: () {
-                    // Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenTwo()));
-                  }),
-              // FocusedMenuItem(
-              //     title: Text("Share"),
-              //     trailingIcon: Icon(Icons.share),
-              //     onPressed: () {}),
-              FocusedMenuItem(
                   title: Text("${Language.mapLang['favorite']}"),
                   trailingIcon: Icon(Icons.favorite_border),
                   onPressed: () => _addStToFav(
                       document.documentID, Provider.of<User>(context).uid)),
-              // FocusedMenuItem(
-              //     title: Text(
-              //       "Delete",
-              //       style: TextStyle(color: Colors.redAccent),
-              //     ),
-              //     trailingIcon: Icon(
-              //       Icons.delete,
-              //       color: Colors.redAccent,
-              //     ),
-              //     onPressed: () {}),
             ],
             onPressed: () {
               Navigator.push(
@@ -628,24 +578,93 @@ void _addStToFav(String documentID, String uid) async {
 }
 
 Future<void> _showModalBottomNotifications(BuildContext context, List reqList) {
-  inspect(reqList);
   return showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (context) {
         return StatefulBuilder(builder: (BuildContext context, setState) {
-          return Container(
-              color: scaffoldBackground,
-              height: MediaQuery.of(context).size.width,
-              child: ListView.builder(
-                itemCount: reqList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return StationWidget(
-                    id: reqList[index],
-                    scaffoldKey: _mScaffoldState,
-                  );
-                },
-              ));
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  color: buttonColor,
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.all(15),
+                        child: Text(
+                          '${Language.mapLang['workrequest']}',
+                          style: pageTitleX.copyWith(color: Colors.white),
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.info,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) => new AlertDialog(
+                              title: Wrap(
+                                children: [
+                                  Icon(Icons.info),
+                                  SizedBox(width: 10),
+                                  Container(
+                                    margin: EdgeInsets.only(top: 3),
+                                    child: Text('Info',
+                                        style: pageTitle.copyWith(
+                                            color: Colors.black)),
+                                  ),
+                                ],
+                              ),
+                              content: Container(
+                                width: MediaQuery.of(context).size.width * 0.75,
+                                child: Text(
+                                  "ces demandes de travaux sont envoyées par l'entreprise si elle ne vous concerne pas ou vous sont envoyées par erreur les refuser",
+                                  style:
+                                      textStyle.copyWith(color: Colors.black),
+                                  textAlign: TextAlign.justify,
+                                ),
+                              ),
+                              actions: <Widget>[
+                                new GestureDetector(
+                                  onTap: () => Navigator.pop(context),
+                                  child: Container(
+                                    padding: EdgeInsets.all(10),
+                                    child: Text(
+                                      'Ok',
+                                      style: buttonStyle.copyWith(
+                                          color: buttonColor),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          );
+                        },
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                    color: scaffoldBackground,
+                    child: ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemCount: reqList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return StationWidget(
+                          id: reqList[index],
+                          scaffoldKey: _mScaffoldState,
+                        );
+                      },
+                    )),
+              ],
+            ),
+          );
         });
       });
 }
