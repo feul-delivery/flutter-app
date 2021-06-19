@@ -37,15 +37,6 @@ class FuelDeliveryApp extends StatelessWidget {
               border: const OutlineInputBorder(),
             )),
         home: SplashScreen(),
-        // routes: {
-        //   '/': (context) => ,
-        //   '/wrapper': (context) => Wrapper(),
-        //   // '/wrapper/authenticate': (context) => Authenticate(),
-        //   // '/wrapper/cl': (context) => IndexCl(),
-        //   // '/wrapper/lv': (context) => IndexLv(),
-        //   // '/wrapper/st': (context) => IndexSt(),
-        //   // '/wrapper/typecpt': (context) => TypeCompte(),
-        // },
       ),
     );
   }

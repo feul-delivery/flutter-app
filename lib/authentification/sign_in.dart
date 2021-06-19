@@ -19,7 +19,7 @@ class _SignInState extends State<SignIn> {
   bool loading = false;
   final GlobalKey<ScaffoldState> _mScaffoldState =
       new GlobalKey<ScaffoldState>();
-  // text field state
+
   String email = '';
   String password = '';
   String errorMessage = '';

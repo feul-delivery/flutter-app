@@ -4,19 +4,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'drawer_admin.dart';
 
-// ignore: camel_case_types
 class ProfileAdmin extends StatefulWidget {
   @override
   _ProfileAdminState createState() => _ProfileAdminState();
 }
 
-// ignore: camel_case_types
 class _ProfileAdminState extends State<ProfileAdmin> {
   bool showPassword = false;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      // ignore: missing_return
       onWillPop: () {
         Navigator.of(context).push(
             MaterialPageRoute(builder: (BuildContext context) => IndexAdmin()));

@@ -37,8 +37,6 @@ class _AuthenticateState extends State<Authenticate> {
                   Navigator.of(context).push(PageTransition(
                       type: PageTransitionType.fade, child: SplashScreen()));
                 },
-                // child: BackdropFilter(
-                //   filter: ImageFilter.blur(sigmaX: 0.5, sigmaY: 0.5),
                 child: Container(
                   margin: EdgeInsets.all(2),
                   padding: EdgeInsets.all(5),
@@ -59,7 +57,6 @@ class _AuthenticateState extends State<Authenticate> {
                       ]),
                 ),
               )),
-          // )
         ],
       ),
       body: WillPopScope(
@@ -87,12 +84,6 @@ class _AuthenticateState extends State<Authenticate> {
                           fit: BoxFit.fill,
                         ),
                       ),
-
-                      // Text('Fuel Delivery',
-                      //     style: GoogleFonts.aBeeZee(
-                      //         color: Colors.white,
-                      //         fontWeight: FontWeight.w800,
-                      //         fontSize: 50))
                     )),
               ),
               Expanded(

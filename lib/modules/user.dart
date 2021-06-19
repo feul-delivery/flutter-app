@@ -3,6 +3,4 @@ class User {
   final String account;
   final String email;
   User({this.uid, this.account, this.email});
-  // ignore: non_constant_identifier_names
-
 }
