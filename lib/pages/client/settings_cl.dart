@@ -2,7 +2,7 @@ import 'dart:developer';
 import 'package:FD_flutter/modules/user.dart';
 import 'package:FD_flutter/pages/client/profile_mdf.dart';
 import 'package:FD_flutter/services/auth.dart';
-// import 'package:FD_flutter/shared/map_api.dart';
+
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:FD_flutter/wrapper.dart';
@@ -38,26 +38,12 @@ class _SettingsClState extends State<SettingsCl> {
             onPressed: () {
               Navigator.pop(context);
             }),
-        // actions: [
-        //   InkWell(
-        //       onTap: () {
-        //         Navigator.of(context).push(MaterialPageRoute(
-        //             builder: (context) => Maps(
-        //                   title: "Google Maps",
-        //                 )));
-        //       },
-        //       child: Padding(
-        //           padding: EdgeInsets.symmetric(vertical: 5, horizontal: 15),
-        //           child: Icon(OMIcons.myLocation, color: buttonColor)))
-        // ],
         backgroundColor: scaffoldBackground,
         elevation: 0,
       ),
       body: ListView(scrollDirection: Axis.vertical, children: [
         Container(
           margin: EdgeInsets.only(bottom: 10),
-          // decoration: BoxDecoration(
-          //     border: Border(bottom: BorderSide(width: 2, color: buttonColor))),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -134,8 +120,6 @@ class _SettingsClState extends State<SettingsCl> {
         ),
         Container(
           margin: EdgeInsets.only(bottom: 10),
-          // decoration: BoxDecoration(
-          //     border: Border(bottom: BorderSide(width: 2, color: buttonColor))),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -247,10 +231,6 @@ Future<void> _showModalBottomRateUs(BuildContext context) {
                     child: Container(
                       height: 5,
                       width: MediaQuery.of(context).size.width * 0.3,
-                      // margin: EdgeInsets.symmetric(
-                      //     vertical: 0,
-                      //     horizontal:
-                      //         MediaQuery.of(context).size.width * 0.3),
                       decoration: BoxDecoration(
                           color: Colors.grey,
                           borderRadius: BorderRadius.circular(50)),
@@ -345,10 +325,6 @@ Future<void> _modalChangePasswordRow(BuildContext context) {
                         child: Container(
                           height: 5,
                           width: MediaQuery.of(context).size.width * 0.3,
-                          // margin: EdgeInsets.symmetric(
-                          //     vertical: 0,
-                          //     horizontal:
-                          //         MediaQuery.of(context).size.width * 0.3),
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(50)),
@@ -558,10 +534,6 @@ Future<void> _modalChangeEmailRow(BuildContext context) {
                         child: Container(
                           height: 5,
                           width: MediaQuery.of(context).size.width * 0.3,
-                          // margin: EdgeInsets.symmetric(
-                          //     vertical: 0,
-                          //     horizontal:
-                          //         MediaQuery.of(context).size.width * 0.3),
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               borderRadius: BorderRadius.circular(50)),
@@ -773,41 +745,6 @@ Future<void> _buildModalAboutUsRow(BuildContext context) {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-                        //     Container(
-                        //       width: 60,
-                        //       height: 60,
-                        //       decoration: BoxDecoration(
-                        //           border: Border.all(
-                        //               width: 0,
-                        //               color: Theme.of(context)
-                        //                   .scaffoldBackgroundColor),
-                        //           boxShadow: [],
-                        //           shape: BoxShape.circle,
-                        //           image: DecorationImage(
-                        //               fit: BoxFit.cover,
-                        //               image: AssetImage(
-                        //                   'assets/Fueldelivery.png'))),
-                        //     ),
-                        //     Column(
-                        //       children: [
-                        //         Text("Fuel Delivery"),
-                        //         SizedBox(
-                        //           height: 12,
-                        //         ),
-                        //         Text(
-                        //           'Build by the Flutter framework.',
-                        //           style: textStyle.copyWith(color: Colors.white),
-                        //         ),
-                        //       ],
-                        //     )
-                        //   ],
-                        // ),
-                        // SizedBox(
-                        //   height: 7,
-                        // ),
                         Text(
                           'Developped by:',
                           style: textStyle.copyWith(color: Colors.white),
@@ -882,7 +819,6 @@ Future<void> _buildModalChangeLang(BuildContext context) {
                                           builder: (context) =>
                                               SplashScreen()));
                                 } else {
-                                  // Navigator.of(context).pop();
                                   setState(() {
                                     _isUsed = true;
                                   });
@@ -909,7 +845,6 @@ Future<void> _buildModalChangeLang(BuildContext context) {
                                           builder: (context) =>
                                               SplashScreen()));
                                 } else {
-                                  // Navigator.of(context).pop();
                                   setState(() {
                                     _isUsed = true;
                                   });
@@ -934,13 +869,6 @@ Future<void> _buildModalChangeLang(BuildContext context) {
         });
       });
 }
-
-// void showInSnackBar(String value, BuildContext context) {
-//   SnackBar snackBar = new SnackBar(
-//       backgroundColor: Colors.white,
-//       content: new Text(value, style: textStyle.copyWith(color: Colors.white)));
-//   _mScaffoldState.currentState.showSnackBar(snackBar);
-// }
 
 Future<void> _langChangeState(String lang) async {
   final prefs = await SharedPreferences.getInstance();

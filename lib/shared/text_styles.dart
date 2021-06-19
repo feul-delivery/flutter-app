@@ -1,3 +1,4 @@
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 
@@ -166,12 +167,14 @@ const smallTileB = TextStyle(
     color: Colors.black54);
 Widget customeCircularProgress = Container(
     padding: EdgeInsets.all(5),
+    width: 70,
+    height: 70,
     decoration: BoxDecoration(
         color: Colors.transparent, borderRadius: BorderRadius.circular(50)),
-    child: CircularProgressIndicator(
-        strokeWidth: 3,
-        valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
-        backgroundColor: buttonColor));
+    child: LoadingIndicator(
+      indicatorType: Indicator.ballRotateChase,
+      color: Colors.white,
+    ));
 Widget customErrorWidget = Center(
     child: Container(
   padding: EdgeInsets.all(5),

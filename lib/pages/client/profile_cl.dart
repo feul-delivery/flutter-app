@@ -16,7 +16,6 @@ import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
-// ignore: camel_case_types
 class ProfileCl extends StatefulWidget {
   @override
   _ProfileClState createState() => _ProfileClState();
@@ -36,19 +35,6 @@ class _ProfileClState extends State<ProfileCl> {
       },
       child: Scaffold(
           backgroundColor: darkGray,
-          // appBar: AppBar(
-          //   actions: <Widget>[
-          //     IconButton(
-          //         icon: Icon(AntDesign.setting, color: buttonColor),
-          //         onPressed: () {
-          //           Navigator.of(context).push(PageTransition(
-          //               type: PageTransitionType.bottomToTop,
-          //               child: SettingsCl()));
-          //         })
-          //   ],
-          //   backgroundColor: Color(0xFFe5e5e5),
-          //   elevation: 0,
-          // ),
           body: StreamBuilder<DocumentSnapshot>(
               stream: Firestore.instance
                   .collection('client')
@@ -355,11 +341,7 @@ class _ProfileClState extends State<ProfileCl> {
                                   }
                                 }),
                             Container(
-                              decoration: BoxDecoration(
-                                  border: Border(
-                                      // top: BorderSide(
-                                      //     width: 1, color: Colors.grey[300]),
-                                      )),
+                              decoration: BoxDecoration(border: Border()),
                               child: SingleChildScrollView(
                                 child: ListView(
                                   shrinkWrap: true,
@@ -553,14 +535,11 @@ class _ProfileClState extends State<ProfileCl> {
                 decoration: BoxDecoration(
                     gradient: LinearGradient(
                   begin: Alignment.topCenter,
-                  end: Alignment(
-                      -0.02, 1.0), // 10% of the width, so there are ten blinds.
+                  end: Alignment(-0.02, 1.0),
                   colors: <Color>[
                     darkGray,
                     Colors.transparent,
-                  ], // red to yellow
-                  // tileMode: TileMode
-                  //     .repeated, // repeats the gradient over the canvas
+                  ],
                 )),
                 child: Padding(
                     padding: const EdgeInsets.only(

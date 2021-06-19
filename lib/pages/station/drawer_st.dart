@@ -28,7 +28,7 @@ class DrawerSt extends StatelessWidget {
               Container(
                 decoration:
                     BoxDecoration(borderRadius: BorderRadius.circular(50)),
-                child: IndexSt.entreprise?.photoURL == null
+                child: IndexSt?.entreprise?.photoURL == null
                     ? Image.asset(
                         'assets/total.png',
                       )

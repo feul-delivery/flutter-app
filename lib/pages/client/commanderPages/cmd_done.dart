@@ -68,7 +68,7 @@ class _OrderDoneState extends State<OrderDone> {
                   Container(
                     margin: EdgeInsets.all(20),
                     child: Text(
-                      'Order finished',
+                      "${Language.mapLang['orderdone']}",
                       style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Gotham',
@@ -88,13 +88,6 @@ class _OrderDoneState extends State<OrderDone> {
                   SizedBox(
                     height: 30,
                   ),
-                  // Container(
-                  //   height: MediaQuery.of(context).size.width * 2 / 3,
-                  //   width: MediaQuery.of(context).size.width * 2 / 3,
-                  //   child: QrImage(
-                  //     data: qrData,
-                  //   ),
-                  // ),
                 ],
               ),
             if (!_isdone)

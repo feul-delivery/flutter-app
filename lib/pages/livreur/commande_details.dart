@@ -438,7 +438,7 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
   Future<void> scanToConfirm(String id) async {
     try {
       final qr = await FlutterBarcodeScanner.scanBarcode(
-        '#ff6666',
+        '#EC4E20',
         'Cancel',
         true,
         ScanMode.QR,

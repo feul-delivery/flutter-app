@@ -1,7 +1,10 @@
 import 'package:FD_flutter/modules/user.dart';
+import 'package:FD_flutter/services/auth.dart';
 import 'package:FD_flutter/shared/text_styles.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:provider/provider.dart';
 import 'package:intl/intl.dart';
 
@@ -13,11 +16,13 @@ class AddLivreur extends StatefulWidget {
 class _AddLivreurState extends State<AddLivreur> {
   TextEditingController searchController = TextEditingController();
   String searchTerm;
+  GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
     final User _user = Provider.of<User>(context);
     return Scaffold(
+      key: scaffoldKey,
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
@@ -122,12 +127,23 @@ class _AddLivreurState extends State<AddLivreur> {
                                       ? []
                                       : document?.data['requests'])
                                   .contains(_user.uid)
-                              ? IconButton(
-                                  icon: Icon(Icons.done),
-                                  onPressed: () {
-                                    _showModalDialogDeleteRequest(
-                                        document, _user.uid);
-                                  },
+                              ? Wrap(
+                                  children: [
+                                    IconButton(
+                                      icon: Icon(Icons.camera),
+                                      onPressed: () => scanToConfirmRequest(
+                                          _user.uid,
+                                          document?.documentID,
+                                          document),
+                                    ),
+                                    IconButton(
+                                      icon: Icon(Icons.clear),
+                                      onPressed: () {
+                                        _showModalDialogDeleteRequest(
+                                            document, _user.uid);
+                                      },
+                                    ),
+                                  ],
                                 )
                               : IconButton(
                                   icon: Icon(Icons.add),
@@ -269,7 +285,7 @@ class _AddLivreurState extends State<AddLivreur> {
                   Padding(
                     padding: const EdgeInsets.all(20.0),
                     child: Text(
-                      "êtes-vous sûr de vouloir supprimer l'invitation à travailler que vous avez envoyée à ${toBeginningOfSentenceCase(document['prenom'])} " +
+                      "êtes-vous sûr de vouloir annuler l'invitation à travailler que vous avez envoyée à ${toBeginningOfSentenceCase(document['prenom'])} " +
                           '${document['prenom']}'.toUpperCase() +
                           " ?",
                       textAlign: TextAlign.justify,
@@ -304,5 +320,39 @@ class _AddLivreurState extends State<AddLivreur> {
     }).catchError((onError) {
       return false;
     });
+  }
+
+  Future<void> scanToConfirmRequest(
+      String uidStation, String uidClient, DocumentSnapshot doc) async {
+    try {
+      final qr = await FlutterBarcodeScanner.scanBarcode(
+        '#EC4E20',
+        'Annuler',
+        true,
+        ScanMode.QR,
+      );
+
+      if (!mounted) return;
+      if (qr == "${uidStation + uidClient}") {
+        AuthService auth = AuthService();
+        auth.changeClientToLivreur(doc, uidStation);
+      } else {
+        showInSnackBar('le code QR ne correspond pas à la commande en cours',
+            null, Colors.deepOrangeAccent);
+      }
+    } on PlatformException {
+      showInSnackBar('n’a pas réussi à analyser le qr, réessayez attentivement',
+          null, Colors.deepOrangeAccent);
+    }
+  }
+
+  void showInSnackBar(String value, Color textcolor, Color backColor) {
+    SnackBar snackBar = new SnackBar(
+        duration: Duration(seconds: 3),
+        backgroundColor: backColor == null ? scaffoldBackground : backColor,
+        content: new Text(value,
+            style: textStyle.copyWith(
+                color: textcolor == null ? Colors.white : textcolor)));
+    scaffoldKey.currentState.showSnackBar(snackBar);
   }
 }
