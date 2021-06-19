@@ -53,8 +53,7 @@ class _ProfileClState extends State<ProfileCl> {
               stream: Firestore.instance
                   .collection('client')
                   .document(Provider.of<User>(context).uid)
-                  .get()
-                  .asStream(),
+                  .snapshots(),
               builder: (context, snapshotClient) {
                 if (snapshotClient.hasError) {
                   return Container(
@@ -83,13 +82,7 @@ class _ProfileClState extends State<ProfileCl> {
                         child: customeCircularProgress,
                       ),
                     );
-                  case ConnectionState.active:
-                    return Container(
-                      color: darkGray,
-                      child: Center(
-                        child: customeCircularProgress,
-                      ),
-                    );
+
                   default:
                     _favList = List.from(snapshotClient.data['favorite']);
                     return ListView(shrinkWrap: true, children: [
@@ -289,8 +282,7 @@ class _ProfileClState extends State<ProfileCl> {
                             StreamBuilder<QuerySnapshot>(
                                 stream: Firestore.instance
                                     .collection('entreprise')
-                                    .getDocuments()
-                                    .asStream(),
+                                    .snapshots(),
                                 builder: (context, snapshotFavoris) {
                                   if (snapshotFavoris.hasError) {
                                     return Container(
@@ -379,8 +371,7 @@ class _ProfileClState extends State<ProfileCl> {
                                                 isEqualTo:
                                                     Provider.of<User>(context)
                                                         .uid)
-                                            .getDocuments()
-                                            .asStream(),
+                                            .snapshots(),
                                         builder: (context, snapshotOrders) {
                                           if (snapshotOrders.hasError) {
                                             return customErrorWidget;
@@ -390,8 +381,6 @@ class _ProfileClState extends State<ProfileCl> {
                                             case ConnectionState.none:
                                               return Container();
                                             case ConnectionState.waiting:
-                                              return Container();
-                                            case ConnectionState.active:
                                               return Container();
 
                                             default:

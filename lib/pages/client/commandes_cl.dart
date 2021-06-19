@@ -49,8 +49,7 @@ class _CommandeClState extends State<CommandeCl> {
                   .collection('orders')
                   .where('uidclient', isEqualTo: Provider.of<User>(context).uid)
                   .orderBy('ordernum')
-                  .getDocuments()
-                  .asStream(),
+                  .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.hasError) {
                   return Center(child: Icon(Icons.cancel, color: buttonColor));
@@ -63,7 +62,6 @@ class _CommandeClState extends State<CommandeCl> {
                     return Center(
                         child:
                             Icon(Icons.error_outline, color: Colors.white54));
-
                   default:
                     return ListView(
                       padding: EdgeInsets.only(left: 0, right: 0),

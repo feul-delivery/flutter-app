@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'ClientProvider.dart';
 import 'package:provider/provider.dart';
 
+// ignore: must_be_immutable
 class HomeCl extends StatefulWidget {
-  HomeCl({Key key}) : super(key: key);
+  int index;
+  HomeCl({@required this.index});
 
   @override
   _HomeClState createState() => _HomeClState();
@@ -18,6 +20,15 @@ int _currentIndex = 0;
 final _pages = [IndexCl(), new ExploreCl(), new ProfileCl()];
 
 class _HomeClState extends State<HomeCl> {
+  @override
+  void initState() {
+    super.initState();
+    if (widget.index == null)
+      _currentIndex = 0;
+    else
+      _currentIndex = widget.index;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<ClientProvider>(

@@ -59,8 +59,7 @@ class _ExploreClState extends State<ExploreCl> {
           stream: Firestore.instance
               .collection('client')
               .document(Provider.of<User>(context).uid)
-              .get()
-              .asStream(),
+              .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
               return Center(child: Icon(Icons.cancel, color: buttonColor));

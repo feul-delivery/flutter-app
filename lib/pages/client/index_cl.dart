@@ -2,8 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
 import 'dart:ui';
-import 'package:FD_flutter/pages/client/notfications/CommandeNotifications.dart';
-
+import 'widgets/StationWidget.dart';
 import 'ClientProvider.dart';
 import 'package:FD_flutter/shared/lang.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -19,14 +18,13 @@ import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:shimmer/shimmer.dart';
-import 'explore_cl.dart';
+import 'home.dart';
 import 'package:FD_flutter/shared/custom_alert_dialog.dart';
 
 import 'package:provider/provider.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:FD_flutter/modules/user.dart';
 import 'commanderPages/cmd_client.dart';
-import 'notfications/RequestNotifications.dart';
 
 class IndexCl extends StatefulWidget {
   @override
@@ -47,8 +45,8 @@ Future<String> _getDistance(
 
 StreamSubscription _locationSubscription;
 Location _locationTracker = Location();
-// ignore: missing_return
-Future<Coordinates> _getCurrentLocation() async {
+
+Future<Coordinates> _getCurrentLocation(BuildContext ctx) async {
   var _location;
   try {
     _location = await _locationTracker.getLocation();
@@ -60,6 +58,8 @@ Future<Coordinates> _getCurrentLocation() async {
     _locationSubscription =
         _locationTracker.onLocationChanged().listen((newLocalData) {
       _location = newLocalData;
+      // Provider.of<ClientProvider>(ctx, listen: false).setCoordinates(
+      //     new Coordinates(_location.latitude, _location.longitude));
     });
 
     return new Coordinates(_location.latitude, _location.longitude);
@@ -146,19 +146,71 @@ class _IndexClState extends State<IndexCl> {
                           child: Text('${Language.mapLang['home']}',
                               style: pageTitleO),
                         ),
-                        Material(
-                          borderRadius: BorderRadius.circular(50),
-                          color: Colors.transparent,
-                          child: InkWell(
-                              borderRadius: BorderRadius.circular(50),
-                              child: Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Icon(Icons.notifications_active_rounded,
-                                    color: Colors.yellow.shade600),
-                              ),
-                              onTap: () =>
-                                  _showModalBottomNotifications(context)),
-                        )
+                        StreamBuilder<DocumentSnapshot>(
+                            stream: Firestore.instance
+                                .collection('client')
+                                .document(Provider.of<User>(context).uid)
+                                .snapshots(),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasError) {
+                                return SizedBox.shrink();
+                              }
+                              switch (snapshot.connectionState) {
+                                case ConnectionState.none:
+                                  return SizedBox.shrink();
+
+                                case ConnectionState.waiting:
+                                  return SizedBox.shrink();
+                                default:
+                                  List requestList = List.from(
+                                      snapshot?.data['requests'] == null
+                                          ? []
+                                          : snapshot?.data['requests']);
+                                  if (requestList.length == 0)
+                                    return SizedBox.shrink();
+                                  else
+                                    return Material(
+                                      borderRadius: BorderRadius.circular(50),
+                                      color: Colors.transparent,
+                                      child: InkWell(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          child: Padding(
+                                            padding: const EdgeInsets.all(4.0),
+                                            child: Stack(
+                                              children: [
+                                                Icon(
+                                                    Icons
+                                                        .notifications_active_rounded,
+                                                    color:
+                                                        Colors.yellow.shade600),
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2,
+                                                      horizontal: 4),
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              50),
+                                                      color: Colors.red),
+                                                  child: Center(
+                                                    child: Text(
+                                                      '${requestList.length}',
+                                                      style: textStyle.copyWith(
+                                                          fontSize: 10,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          onTap: () =>
+                                              _showModalBottomNotifications(
+                                                  context, requestList)),
+                                    );
+                              }
+                            })
                       ],
                     )),
 
@@ -249,10 +301,11 @@ class _IndexClState extends State<IndexCl> {
                         color: Colors.transparent,
                         child: InkWell(
                           onTap: () {
-                            Navigator.of(context).pushReplacement(
-                                MaterialPageRoute(
-                                    builder: (BuildContext context) =>
-                                        ExploreCl()));
+                            Navigator.of(context)
+                                .pushReplacement(MaterialPageRoute(
+                                    builder: (BuildContext context) => HomeCl(
+                                          index: 1,
+                                        )));
                           },
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -307,7 +360,8 @@ class _IndexClState extends State<IndexCl> {
                                         Provider.of<ClientProvider>(context,
                                                 listen: false)
                                             .setCoordinates(
-                                                await _getCurrentLocation());
+                                                await _getCurrentLocation(
+                                                    context));
                                       },
                                       icon: Icon(OMIcons.myLocation,
                                           color: buttonColor),
@@ -573,38 +627,25 @@ void _addStToFav(String documentID, String uid) async {
   }
 }
 
-Future<void> _showModalBottomNotifications(BuildContext context) {
+Future<void> _showModalBottomNotifications(BuildContext context, List reqList) {
+  inspect(reqList);
   return showModalBottomSheet(
       isScrollControlled: true,
       context: context,
       builder: (context) {
         return StatefulBuilder(builder: (BuildContext context, setState) {
           return Container(
-            height: MediaQuery.of(context).size.height - 24,
-            child: DefaultTabController(
-              length: 2,
-              child: Scaffold(
-                appBar: AppBar(
-                  title: Text(
-                    'Notifications',
-                    style: pageTitle,
-                  ),
-                  bottom: TabBar(
-                    tabs: [
-                      Tab(icon: Icon(Icons.work)),
-                      Tab(icon: Icon(Icons.list))
-                    ],
-                  ),
-                ),
-                body: TabBarView(
-                  children: [
-                    RequestNotifications(),
-                    CommandeNotifications(),
-                  ],
-                ),
-              ),
-            ),
-          );
+              color: scaffoldBackground,
+              height: MediaQuery.of(context).size.width,
+              child: ListView.builder(
+                itemCount: reqList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return StationWidget(
+                    id: reqList[index],
+                    scaffoldKey: _mScaffoldState,
+                  );
+                },
+              ));
         });
       });
 }
