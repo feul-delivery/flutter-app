@@ -35,11 +35,47 @@ class _CommandeClState extends State<CommandeCl> {
             actions: <Widget>[
               IconButton(
                   icon: new Icon(
-                    Icons.refresh,
-                    color: buttonColor,
+                    Icons.info_outline,
+                    color: Colors.white,
                   ),
                   onPressed: () {
-                    setState(() {});
+                    showDialog(
+                      context: context,
+                      builder: (context) => new AlertDialog(
+                        title: Wrap(
+                          children: [
+                            Icon(Icons.info),
+                            SizedBox(width: 10),
+                            Container(
+                              margin: EdgeInsets.only(top: 3),
+                              child: Text('règlements',
+                                  style:
+                                      pageTitle.copyWith(color: Colors.black)),
+                            ),
+                          ],
+                        ),
+                        content: Container(
+                          width: MediaQuery.of(context).size.width * 0.75,
+                          child: Text(
+                            " - faites glisser vers la gauche pour afficher plus d'informations sur la commande.\n - faites glisser vers la droite pour annuler la commande.\nnb: vous ne pouvez pas annuler la commande d'un livreur est en route pour commander ou si vous l'avez payé en ligne.",
+                            style: textStyle.copyWith(color: Colors.black),
+                            textAlign: TextAlign.justify,
+                          ),
+                        ),
+                        actions: <Widget>[
+                          new GestureDetector(
+                            onTap: () => Navigator.pop(context),
+                            child: Container(
+                              padding: EdgeInsets.all(10),
+                              child: Text(
+                                'Ok',
+                                style: buttonStyle.copyWith(color: buttonColor),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    );
                   }),
             ],
             backgroundColor: buttonColor),
@@ -97,7 +133,9 @@ class _CommandeClState extends State<CommandeCl> {
         ),
       ],
       secondaryActions: [
-        if (snapshot['statut'] == 'waiting' && snapshot['uidlivreur'] == '')
+        if (snapshot['statut'] == 'waiting' &&
+            snapshot['uidlivreur'] == '' &&
+            snapshot['methode'] == 'COD')
           IconSlideAction(
             caption: '${Language.mapLang['cancel']}',
             color: Colors.red,

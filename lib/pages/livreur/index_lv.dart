@@ -253,7 +253,8 @@ class _IndexLvState extends State<IndexLv> {
                               stream: Firestore.instance
                                   .collection('orders')
                                   .where('uidstation',
-                                      isEqualTo: IndexLv.livreur?.uidentreprise)
+                                      isEqualTo:
+                                          IndexLv?.livreur?.uidentreprise)
                                   .where('uidlivreur', isEqualTo: null)
                                   .where('statut', isEqualTo: 'waiting')
                                   .orderBy('dateheurec', descending: true)

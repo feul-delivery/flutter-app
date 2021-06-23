@@ -85,14 +85,6 @@ class _ProfileLivState extends State<ProfileLiv> {
                                       border: Border.all(
                                           width: 1,
                                           color: buttonColor.withOpacity(0.7)),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            spreadRadius: 2,
-                                            blurRadius: 10,
-                                            color:
-                                                Colors.black.withOpacity(0.1),
-                                            offset: Offset(0, 7))
-                                      ],
                                       shape: BoxShape.circle,
                                       image: DecorationImage(
                                           fit: BoxFit.cover,
@@ -100,8 +92,31 @@ class _ProfileLivState extends State<ProfileLiv> {
                                 ),
                                 placeholder: (context, url) =>
                                     CircularProgressIndicator(),
-                                errorWidget: (context, url, error) =>
-                                    Icon(Icons.error),
+                                errorWidget: (context, url, error) => Container(
+                                  width: 150.0,
+                                  height: 150.0,
+                                  decoration: BoxDecoration(
+                                      color: darkGray,
+                                      borderRadius: BorderRadius.circular(75)),
+                                  child: Center(
+                                    child: Container(
+                                      margin: EdgeInsets.only(top: 7),
+                                      child: Text(
+                                          snapshot.data['prenom']
+                                                  .substring(0, 1)
+                                                  .toUpperCase() +
+                                              snapshot.data['nom']
+                                                  .substring(0, 1)
+                                                  .toUpperCase(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 70,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: 'Quarion')),
+                                    ),
+                                  ),
+                                ),
                               ),
                             ],
                           ),

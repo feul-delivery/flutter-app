@@ -64,6 +64,7 @@ class _AddLivreurState extends State<AddLivreur> {
           Container(
               margin: EdgeInsets.all(10),
               child: TextFormField(
+                style: textStyle.copyWith(color: Colors.black),
                 controller: searchController,
                 textInputAction: TextInputAction.search,
                 onChanged: (value) {
@@ -192,7 +193,6 @@ class _AddLivreurState extends State<AddLivreur> {
                       InkWell(
                         onTap: () {
                           _sendRequest(document.documentID, uid);
-                          setState(() {});
                           Navigator.of(context).pop();
                         },
                         child: Container(
@@ -262,7 +262,7 @@ class _AddLivreurState extends State<AddLivreur> {
                       InkWell(
                         onTap: () {
                           _deleteRequest(document.documentID, uid);
-                          setState(() {});
+
                           Navigator.of(context).pop();
                         },
                         child: Container(
@@ -334,11 +334,17 @@ class _AddLivreurState extends State<AddLivreur> {
 
       if (!mounted) return;
       if (qr == "${uidStation + uidClient}") {
+        showInSnackBar(
+            "le code QR a été scanné avec succès. votre employé sera redirigé vers l'espace de livraison",
+            null,
+            Colors.greenAccent);
         AuthService auth = AuthService();
         auth.changeClientToLivreur(doc, uidStation);
       } else {
-        showInSnackBar('le code QR ne correspond pas à la commande en cours',
-            null, Colors.deepOrangeAccent);
+        showInSnackBar(
+            "le code QR scanné ne correspond pas à celui qui apparaît à l'employé",
+            null,
+            Colors.deepOrangeAccent);
       }
     } on PlatformException {
       showInSnackBar('n’a pas réussi à analyser le qr, réessayez attentivement',

@@ -154,6 +154,7 @@ class _TypeCompteState extends State<TypeCompte> {
                                 ),
                               ))),
                           Shimmer.fromColors(
+                            direction: ShimmerDirection.rtl,
                             baseColor: scaffoldBackground,
                             highlightColor: Colors.white,
                             child: Row(

@@ -23,7 +23,9 @@ enum pmethode { livraison, google }
 
 class ClientOrder extends StatefulWidget {
   final DocumentSnapshot doc;
-  ClientOrder({@required this.doc});
+  ClientOrder({@required this.doc}) {
+    WidgetsFlutterBinding.ensureInitialized();
+  }
   @override
   _ClientOrderState createState() => _ClientOrderState();
 }
@@ -169,14 +171,28 @@ class _ClientOrderState extends State<ClientOrder> {
     _pickerColor = color;
   }
 
+  List<Map<dynamic, dynamic>> _types;
+
   @override
   Widget build(
     BuildContext context,
   ) {
+    @override
+    void initState() {
+      super.initState();
+      _types = new List();
+      _type = null;
+    }
+
+    deactivate() {
+      super.deactivate();
+      _types = new List();
+      _type = null;
+    }
+
     final _formKey = GlobalKey<FormState>();
     var doc = widget.doc;
-    List<Map<dynamic, dynamic>> _types =
-        List<Map<dynamic, dynamic>>.from(doc['type']).toList();
+    _types = List<Map<dynamic, dynamic>>.from(doc['type']).toList();
     final user = Provider.of<User>(context);
     int _orderNum = 1;
     DatabaseService _auth = DatabaseService();
@@ -289,7 +305,7 @@ class _ClientOrderState extends State<ClientOrder> {
                       '${Language.mapLang['ftype']}',
                       style: hintStyle,
                     ),
-                    value: _type,
+                    value: null,
                     dropdownColor: scaffoldBackground,
                     decoration: InputDecoration(border: InputBorder.none),
                     items: _types.map((type) {
@@ -480,5 +496,10 @@ class _ClientOrderState extends State<ClientOrder> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 }

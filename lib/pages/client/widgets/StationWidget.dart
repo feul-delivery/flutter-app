@@ -85,7 +85,7 @@ class _StationWidgetState extends State<StationWidget> {
                                 .document(Provider.of<User>(context).email)
                                 .snapshots()
                                 .listen((event) {
-                              String accType = event.data['type'];
+                              String accType = event.data['account'];
                               if (accType == 'livreur') {
                                 Navigator.pop(context);
                                 AuthService.type = "livreur";

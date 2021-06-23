@@ -29,25 +29,48 @@ class _DrawerLivState extends State<DrawerLiv> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CachedNetworkImage(
-                  imageUrl: IndexLv.livreur?.photoURL == null
+                  imageUrl: IndexLv?.livreur?.photoURL == null
                       ? ''
-                      : IndexLv.livreur?.photoURL,
+                      : IndexLv?.livreur?.photoURL,
                   imageBuilder: (context, imageProvider) => CircleAvatar(
                       radius: 35.0, backgroundImage: imageProvider),
                   placeholder: (context, url) => CircularProgressIndicator(),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+                  errorWidget: (context, url, error) => Container(
+                    width: 70,
+                    height: 70,
+                    child: Center(
+                        child: CircleAvatar(
+                            radius: 35.0,
+                            backgroundColor: darkGray,
+                            child: Container(
+                              margin: EdgeInsets.only(top: 5),
+                              child: Text(
+                                  '${IndexLv?.livreur?.nom}'
+                                          .substring(0, 1)
+                                          .toUpperCase() +
+                                      '${IndexLv?.livreur?.prenom}'
+                                          .substring(0, 1)
+                                          .toUpperCase(),
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontSize: 35,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontFamily: 'Quarion')),
+                            ))),
+                  ),
                 ),
                 Column(
                   children: [
                     Text(
-                      "${IndexLv.livreur?.nom} ${IndexLv.livreur?.prenom}",
+                      "${IndexLv?.livreur?.nom} ${IndexLv?.livreur?.prenom}",
                       style: subTitleStyle,
                     ),
                     SizedBox(
                       height: 5.0,
                     ),
                     Text(
-                      "${IndexLv.livreur?.email}",
+                      "${IndexLv?.livreur?.email}",
                       style: TextStyle(
                         fontSize: 12.0,
                         fontWeight: FontWeight.w400,

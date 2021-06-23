@@ -212,10 +212,12 @@ class _OrderDoneState extends State<OrderDone> {
                                     ),
                                   ),
                                   Center(
-                                    child: Text(
-                                      '${widget.order.idtype}',
-                                      textAlign: TextAlign.start,
-                                      style: tileTitleStyleW,
+                                    child: Container(
+                                      child: Text(
+                                        '${widget.order.idtype}',
+                                        textAlign: TextAlign.start,
+                                        style: tileTitleStyleW,
+                                      ),
                                     ),
                                   ),
                                 ],

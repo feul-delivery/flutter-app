@@ -2,7 +2,6 @@ import 'package:FD_flutter/shared/FadeAnimation.dart';
 import 'package:FD_flutter/pages/admin/index_admin.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'drawer_admin.dart';
 
 class ProfileAdmin extends StatefulWidget {
   @override
@@ -33,7 +32,6 @@ class _ProfileAdminState extends State<ProfileAdmin> {
             backgroundColor: Colors.black,
             elevation: 1,
           ),
-          drawer: DrawerAdmin(),
           body: Container(
             padding: EdgeInsets.only(left: 16, top: 25, right: 16),
             child: ListView(children: [

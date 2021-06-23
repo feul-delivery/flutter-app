@@ -450,9 +450,9 @@ class _CommandeDetailLvState extends State<CommandeDetailLv> {
             .collection('orders')
             .document(id)
             .setData({'statut': 'done'}, merge: true).then((value) {
-          showInSnackBar('le code QR ne correspond pas à la commande en cours',
-              null, Colors.green[300]);
-          Future.delayed(Duration(seconds: 5)).then((value) {
+          showInSnackBar('vous avez livré la commande avec succès', null,
+              Colors.green[300]);
+          Future.delayed(Duration(seconds: 2)).then((value) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => Wrapper()));
           });

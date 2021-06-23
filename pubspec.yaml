@@ -53,7 +53,7 @@ dependencies:
   firebase_storage:
   cached_network_image: ^2.5.1
   flutter_colorpicker:
-  square_in_app_payments: ^1.2.3
+  square_in_app_payments: ^1.1.1
   # barcode_scan:
   flutter_barcode_scanner: ^1.0.1
   loading_indicator:

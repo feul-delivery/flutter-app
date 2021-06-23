@@ -264,6 +264,8 @@ class _ProfileLivModifierState extends State<ProfileLivModifier>
                                             new Flexible(
                                               child: new TextField(
                                                 controller: _controller1,
+                                                style: textStyle.copyWith(
+                                                    color: Colors.black),
                                                 decoration: InputDecoration(
                                                     hintText:
                                                         '${snapshot.data['nom']}',

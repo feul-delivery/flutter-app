@@ -12,8 +12,6 @@ class OnlinePayments extends StatefulWidget {
   final Order order;
   OnlinePayments({@required this.order}) {
     WidgetsFlutterBinding.ensureInitialized();
-    InAppPayments.setSquareApplicationId(
-        'sandbox-sq0idb-WYzQeRGhjsAlGsWKeZCkRA');
   }
 
   @override
@@ -32,199 +30,195 @@ class _OnlinePaymentsState extends State<OnlinePayments> {
               padding: EdgeInsets.all(10),
               margin: EdgeInsets.all(10),
               child: Text(
-                "${Language.mapLang['orderdetail']}",
-                style: titleStyle,
+                '${Language.mapLang['orderdetail']}',
+                style: subTitleStyleW,
               ),
             ),
-            Container(
-              margin: EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 1 / 3,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.date_range_sharp,
-                                color: Colors.black45,
-                                size: 18,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Date :",
-                                style: smallTileGray,
-                              ),
-                            ],
+            Center(
+              child: Container(
+                margin: EdgeInsets.all(10),
+                padding: EdgeInsets.only(left: 40),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.date_range_sharp,
+                                  color: Colors.black45,
+                                  size: 18,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Date:",
+                                  style: smallTileGray,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Center(
-                          child: Text(
-                            '${widget.order.dateheurec.day}/${widget.order.dateheurec.month}/${widget.order.dateheurec.year}',
-                            style: tileTitleStyle,
+                          Center(
+                            child: Text(
+                              '${widget.order.dateheurec.day}/${widget.order.dateheurec.month}/${widget.order.dateheurec.year}',
+                              style: tileTitleStyleW,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 1 / 3,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.offline_bolt,
-                                color: Colors.black45,
-                                size: 18,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "Volume :",
-                                style: smallTileGray,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            '${widget.order.volume}',
-                            style: tileTitleStyle,
-                          ),
-                        ),
-                      ],
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 1 / 3,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.list_alt,
-                                color: Colors.black45,
-                                size: 18,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "${Language.mapLang['ftype']} :",
-                                style: smallTileGray,
-                              ),
-                            ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.offline_bolt,
+                                  color: Colors.black45,
+                                  size: 18,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "Volume:",
+                                  style: smallTileGray,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Center(
-                          child: Text(
-                            '${widget.order.idtype}',
-                            textAlign: TextAlign.start,
-                            style: tileTitleStyle,
+                          Center(
+                            child: Text(
+                              '${widget.order.volume}',
+                              style: tileTitleStyleW,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 1 / 3,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.aspect_ratio_sharp,
-                                color: Colors.black45,
-                                size: 18,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "${Language.mapLang['matricule']} :",
-                                style: smallTileGray,
-                              ),
-                            ],
-                          ),
-                        ),
-                        Center(
-                          child: Text(
-                            '${widget.order.matricule}',
-                            style: tileTitleStyle,
-                          ),
-                        ),
-                      ],
+                    SizedBox(
+                      height: 10,
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          width: MediaQuery.of(context).size.width * 1 / 3,
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.color_lens,
-                                color: Colors.black45,
-                                size: 18,
-                              ),
-                              SizedBox(
-                                width: 10,
-                              ),
-                              Text(
-                                "${Language.mapLang['carcolor']} :",
-                                style: smallTileGray,
-                              ),
-                            ],
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.list_alt,
+                                  color: Colors.black45,
+                                  size: 18,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "${Language.mapLang['ftype']}:",
+                                  style: smallTileGray,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Center(
-                          child: Icon(
-                            Icons.airport_shuttle,
-                            color: Color(widget.order.color),
+                          Center(
+                            child: Text(
+                              '${widget.order.idtype}',
+                              textAlign: TextAlign.start,
+                              style: tileTitleStyleW,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.aspect_ratio_sharp,
+                                  color: Colors.black45,
+                                  size: 18,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "${Language.mapLang['matricule']}:",
+                                  style: smallTileGray,
+                                  overflow: TextOverflow.fade,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              '${widget.order.matricule}',
+                              style: tileTitleStyleW,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.color_lens,
+                                  color: Colors.black45,
+                                  size: 18,
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text(
+                                  "${Language.mapLang['carcolor']}:",
+                                  style: smallTileGray,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Center(
+                            child: Icon(
+                              Icons.airport_shuttle,
+                              color: Color(widget.order.color),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Container(
@@ -232,34 +226,33 @@ class _OnlinePaymentsState extends State<OnlinePayments> {
               width: MediaQuery.of(context).size.width * 1 / 2,
               decoration: BoxDecoration(
                   color: Colors.white, borderRadius: BorderRadius.circular(10)),
-              margin: EdgeInsets.only(left: 10, right: 10, bottom: 10),
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Total : ",
-                    style: smallTileGray,
+                    "Total:",
+                    style: tileTitleStyle,
                   ),
                   SizedBox(
-                    width: 10,
+                    width: 5,
                   ),
                   Center(
                     child: Text(
-                      '${widget.order.prixtotal} Dh',
-                      style: tileTitleStyle,
+                      '${widget.order.prixtotal.toStringAsFixed(2)} Dh',
+                      style: smallTileB,
                     ),
                   ),
                 ],
               ),
             ),
             SizedBox(
-              height: 10,
+              height: 20,
             ),
             InkWell(
                 onTap: () async {
-                  _paymentHandler();
+                  _pay();
                 },
                 child: Container(
                   padding: EdgeInsets.all(5),
@@ -289,15 +282,26 @@ class _OnlinePaymentsState extends State<OnlinePayments> {
     );
   }
 
-  void _paymentHandler() {
+  void _pay() {
+    InAppPayments.setSquareApplicationId(
+        'sandbox-sq0idb-WYzQeRGhjsAlGsWKeZCkRA');
     InAppPayments.startCardEntryFlow(
-      onCardNonceRequestSuccess: (cardDetails) => _cardNonceRequestSuccess,
-      onCardEntryCancel: () => _cardEntryCancel,
+      onCardEntryCancel: _cardEntryCancel,
+      onCardNonceRequestSuccess: _cardNonceRequestSuccess,
     );
   }
 
-  void _cardNonceRequestSuccess(CardDetails cardDetails) {
-    print(cardDetails.nonce);
+  void _cardNonceRequestSuccess(CardDetails result) {
+    // Use this nonce from your backend to pay via Square API
+    print(result.nonce);
+
+    final bool _invalidZipCode = false;
+
+    if (_invalidZipCode) {
+      // Stay in the card flow and show an error:
+      InAppPayments.showCardNonceProcessingError('Invalid ZipCode');
+    }
+
     InAppPayments.completeCardEntry(
       onCardEntryComplete: _cardEntryComplete,
     );
