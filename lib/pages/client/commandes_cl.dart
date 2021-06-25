@@ -57,7 +57,7 @@ class _CommandeClState extends State<CommandeCl> {
                         content: Container(
                           width: MediaQuery.of(context).size.width * 0.75,
                           child: Text(
-                            " - faites glisser vers la gauche pour afficher plus d'informations sur la commande.\n - faites glisser vers la droite pour annuler la commande.\nnb: vous ne pouvez pas annuler la commande d'un livreur est en route pour commander ou si vous l'avez payé en ligne.",
+                            " - faites glisser vers la gauche pour afficher plus d'informations sur la commande.\n - faites glisser vers la droite pour annuler la commande.\nnb: vous ne pouvez pas annuler une commande si un livreur est en route pour la livrer ou si vous l'avez payé en ligne.",
                             style: textStyle.copyWith(color: Colors.black),
                             textAlign: TextAlign.justify,
                           ),

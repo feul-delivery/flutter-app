@@ -16,7 +16,7 @@ class HomeCl extends StatefulWidget {
 }
 
 int _currentIndex = 0;
-final _pages = [IndexCl(), new ExploreCl(), new ProfileCl()];
+final _pages = [new IndexCl(), new ExploreCl(), new ProfileCl()];
 
 class _HomeClState extends State<HomeCl> {
   @override
